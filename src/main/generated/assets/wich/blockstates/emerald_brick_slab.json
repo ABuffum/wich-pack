@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/emerald_brick_slab"
+    },
+    "type=double": {
+      "model": "wich:block/emerald_bricks"
+    },
+    "type=top": {
+      "model": "wich:block/emerald_brick_slab_top"
+    }
+  }
+}

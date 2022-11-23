@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "wich:block/amethyst_crystal_block",
+    "top": "wich:block/amethyst_crystal_block",
+    "side": "wich:block/amethyst_crystal_block"
+  }
+}

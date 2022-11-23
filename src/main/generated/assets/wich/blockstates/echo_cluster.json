@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "wich:block/echo_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "wich:block/echo_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wich:block/echo_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "wich:block/echo_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "wich:block/echo_cluster"
+    },
+    "facing=west": {
+      "model": "wich:block/echo_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

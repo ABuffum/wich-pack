@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/echo_slab"
+    },
+    "type=double": {
+      "model": "wich:block/echo_block"
+    },
+    "type=top": {
+      "model": "wich:block/echo_slab_top"
+    }
+  }
+}

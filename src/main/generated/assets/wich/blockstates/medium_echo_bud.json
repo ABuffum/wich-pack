@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "wich:block/medium_echo_bud",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "wich:block/medium_echo_bud",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wich:block/medium_echo_bud",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "wich:block/medium_echo_bud",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "wich:block/medium_echo_bud"
+    },
+    "facing=west": {
+      "model": "wich:block/medium_echo_bud",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

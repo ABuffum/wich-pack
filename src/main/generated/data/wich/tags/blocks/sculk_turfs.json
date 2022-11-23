@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wich:calcite_sculk_turf",
+    "wich:deepslate_sculk_turf",
+    "wich:dripstone_sculk_turf",
+    "wich:smooth_basalt_sculk_turf",
+    "wich:tuff_sculk_turf"
+  ]
+}
