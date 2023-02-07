@@ -26,6 +26,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -310,7 +311,9 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 	}
 
 	public static void addDarknessToClosePlayers(ServerWorld world, Vec3d pos, @Nullable Entity entity, int range) {
-		StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModBase.DARKNESS_EFFECT, 260, 0, false, false);
+		//StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModBase.DARKNESS_EFFECT, 260, 0, false, false);
+		//TODO: Iris disables fog effects which darkness and flashbanged rely on
+		StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.BLINDNESS, 260, 0, false, false);
 		StatusEffectUtils.addEffectToPlayersWithinDistance(world, entity, pos, range, statusEffectInstance, 200);
 	}
 

@@ -496,11 +496,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		for (DyeColor color : COLORS) Recipes.MakeSlab(WOOL_SLABS.get(color), Util.GetWoolItem(color));
 		Recipes.MakeSlab(RAINBOW_WOOL_SLAB, RAINBOW_WOOL).offerTo(exporter);
 		Recipes.MakeCarpet(RAINBOW_CARPET, RAINBOW_WOOL).offerTo(exporter);
-		Recipes.MakeBed(RAINBOW_BED, Ingredient.ofItems(RAINBOW_WOOL, RAINBOW_FLEECE)).offerTo(exporter);
+		//Recipes.MakeBed(RAINBOW_BED, Ingredient.ofItems(RAINBOW_WOOL, RAINBOW_FLEECE)).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="More Moss">
 		Recipes.MakeSlab(MOSS_SLAB, Items.MOSS_BLOCK).offerTo(exporter);
-		Recipes.MakeBed(MOSS_BED, Items.MOSS_BLOCK).offerTo(exporter);
+		//Recipes.MakeBed(MOSS_BED, Items.MOSS_BLOCK).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Extended Goat">
 		offerSmeltingRecipe(exporter, COOKED_CHEVON, CHEVON, 200, 0.35);

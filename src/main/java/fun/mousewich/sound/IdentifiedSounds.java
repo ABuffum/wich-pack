@@ -229,8 +229,8 @@ public class IdentifiedSounds {
 		Register("bed", Blocks.BLACK_BED, Blocks.BLUE_BED, Blocks.BROWN_BED, Blocks.CYAN_BED,
 				Blocks.GRAY_BED, Blocks.GREEN_BED, Blocks.LIGHT_BLUE_BED, Blocks.LIGHT_GRAY_BED,
 				Blocks.LIME_BED, Blocks.MAGENTA_BED, Blocks.ORANGE_BED, Blocks.PINK_BED,
-				Blocks.PURPLE_BED, Blocks.RED_BED, Blocks.WHITE_BED, Blocks.YELLOW_BED,
-				/* Mod */ RAINBOW_BED.asBlock());
+				Blocks.PURPLE_BED, Blocks.RED_BED, Blocks.WHITE_BED, Blocks.YELLOW_BED);//,
+				///* Mod */ RAINBOW_BED.asBlock());
 		Register("bedrock", Blocks.BEDROCK);
 		Register("bee_nest", Blocks.BEE_NEST);
 		Register("beehive", Blocks.BEEHIVE);
@@ -370,7 +370,7 @@ public class IdentifiedSounds {
 		Register("loom", Blocks.LOOM);
 		Register("magma", Blocks.MAGMA_BLOCK);
 		Register("melon", Blocks.MELON);
-		Register("moss_bed", /* Mod */ MOSS_BED.asBlock());
+		//Register("moss_bed", /* Mod */ MOSS_BED.asBlock());
 		Register("mushroom", Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK);
 		Register("mushroom_plant", Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM);
 		Register("mycelium", Blocks.MYCELIUM);

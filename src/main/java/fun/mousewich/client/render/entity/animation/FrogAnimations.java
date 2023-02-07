@@ -21,7 +21,7 @@ public class FrogAnimations {
                             new ModKeyframe(0.4583F, AnimationUtils.method_41823(0.0F, 1.0F, 0.0F), Interpolations.field_37884),
                             new ModKeyframe(2.9583F, AnimationUtils.method_41823(0.0F, 1.0F, 0.0F), Interpolations.field_37884),
                             new ModKeyframe(3.0F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
+            )/*
             .addBoneAnimation(
                     ModEntityModelPartNames.CROAKING_BODY,
                     new ModTransformation(
@@ -42,7 +42,7 @@ public class FrogAnimations {
                             new ModKeyframe(2.875F, AnimationUtils.method_41822(1.3F, 2.1F, 1.6F), Interpolations.field_37884),
                             new ModKeyframe(2.9583F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
                             new ModKeyframe(3.0F, AnimationUtils.method_41822(0.0, 0.0, 0.0), Interpolations.field_37884))
-            )
+            )*/
             .build();
     public static final ModAnimation WALKING = Builder.create(1.25F)
             .looping()
@@ -222,7 +222,7 @@ public class FrogAnimations {
                             new ModKeyframe(0.0833F, AnimationUtils.method_41829(-60.0F, 0.0F, 0.0F), Interpolations.field_37884),
                             new ModKeyframe(0.4167F, AnimationUtils.method_41829(-60.0F, 0.0F, 0.0F), Interpolations.field_37884),
                             new ModKeyframe(0.5F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
+            )/*
             .addBoneAnimation(
                     EntityModelPartNames.HEAD,
                     new ModTransformation(
@@ -231,7 +231,7 @@ public class FrogAnimations {
                             new ModKeyframe(0.0833F, AnimationUtils.method_41829(0.998F, 1.0F, 1.0F), Interpolations.field_37884),
                             new ModKeyframe(0.4167F, AnimationUtils.method_41829(0.998F, 1.0F, 1.0F), Interpolations.field_37884),
                             new ModKeyframe(0.5F, AnimationUtils.method_41829(1.0F, 1.0F, 1.0F), Interpolations.field_37884))
-            )
+            )*/
             .addBoneAnimation(
                     ModEntityModelPartNames.TONGUE,
                     new ModTransformation(
@@ -240,7 +240,7 @@ public class FrogAnimations {
                             new ModKeyframe(0.0833F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
                             new ModKeyframe(0.4167F, AnimationUtils.method_41829(-18.0F, 0.0F, 0.0F), Interpolations.field_37884),
                             new ModKeyframe(0.5F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
+            )/*
             .addBoneAnimation(
                     ModEntityModelPartNames.TONGUE,
                     new ModTransformation(
@@ -248,7 +248,7 @@ public class FrogAnimations {
                             new ModKeyframe(0.0833F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
                             new ModKeyframe(0.1667F, AnimationUtils.method_41822(0.5, 1.0, 5.0), Interpolations.field_37884),
                             new ModKeyframe(0.4167F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884))
-            )
+            )*/
             .build();
     public static final ModAnimation SWIMMING = Builder.create(1.04167F)
             .looping()

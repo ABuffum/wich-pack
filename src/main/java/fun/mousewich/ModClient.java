@@ -175,9 +175,9 @@ public class ModClient implements ClientModInitializer {
 		PARTICLES.register(SHRIEK_PARTICLE, ShriekParticle.Factory::new);
 		PARTICLES.register(SONIC_BOOM_PARTICLE, SonicBoomParticle.Factory::new);
 		//Custom Beds
-		ClientSpriteRegistryCallback.event(TexturedRenderLayers.BEDS_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-			for (BedContainer bed : BEDS) registry.register(bed.GetTexture());
-		}));
+		//ClientSpriteRegistryCallback.event(TexturedRenderLayers.BEDS_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
+		//	for (BedContainer bed : BEDS) registry.register(bed.GetTexture());
+		//}));
 		//Woodcutter
 		ScreenRegistry.register(WOODCUTTER_SCREEN_HANDLER, WoodcutterScreen::new);
 		//Keybinds

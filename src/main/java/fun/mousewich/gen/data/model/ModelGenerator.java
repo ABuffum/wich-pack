@@ -712,7 +712,7 @@ public class ModelGenerator extends FabricModelProvider {
 		rainbowBlockModel(bsmg, RAINBOW_WOOL);
 		rainbowSlabModel(bsmg, RAINBOW_WOOL_SLAB, RAINBOW_WOOL.asBlock());
 		rainbowCarpetModel(bsmg, RAINBOW_CARPET, RAINBOW_WOOL.asBlock());
-		bedModel(bsmg, RAINBOW_BED, ID("block/rainbow_wool_particle"));
+		//bedModel(bsmg, RAINBOW_BED, ID("block/rainbow_wool_particle"));
 		//Extended Goat
 		for (DyeColor color : COLORS) {
 			BlockContainer fleece = FLEECE.get(color), slab = FLEECE_SLABS.get(color), carpet = FLEECE_CARPETS.get(color);
@@ -727,7 +727,7 @@ public class ModelGenerator extends FabricModelProvider {
 		rainbowCarpetModel(bsmg, RAINBOW_FLEECE_CARPET, RAINBOW_FLEECE.asBlock());
 		//Moss
 		slabModel(bsmg, MOSS_SLAB, Blocks.MOSS_BLOCK);
-		bedModel(bsmg, MOSS_BED, Blocks.MOSS_BLOCK);
+		//bedModel(bsmg, MOSS_BED, Blocks.MOSS_BLOCK);
 		//Sculk & Deep Dark
 		cubeAllModel(bsmg, SCULK);
 		singletonModel(bsmg, SCULK_CATALYST, TexturedModel.CUBE_BOTTOM_TOP);

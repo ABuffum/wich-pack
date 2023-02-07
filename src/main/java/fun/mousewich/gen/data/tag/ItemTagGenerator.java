@@ -24,7 +24,7 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 
 	@Override
 	protected void generateTags() {
-		getOrCreateTagBuilder(ItemTags.BEDS).add(MOSS_BED.asItem(), RAINBOW_BED.asItem());
+		//getOrCreateTagBuilder(ItemTags.BEDS).add(MOSS_BED.asItem(), RAINBOW_BED.asItem());
 		getOrCreateTagBuilder(ItemTags.BOATS)
 				.add(CHARRED_BOAT.asItem())
 				.add(MANGROVE_BOAT.asItem());

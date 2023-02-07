@@ -5,7 +5,7 @@
   "duration_per_stack": 20,
   "effects": [
 	{
-	  "effect": "wich:flashbanged",
+	  "effect": "minecraft:blindness",
 	  "is_ambient": true,
 	  "show_particles": false,
 	  "show_icon": true
@@ -42,4 +42,4 @@
   },
   "name": "Sun Blind",
   "description": "You cannot see in bright sunlight."
-}
+}//"wich:flashbanged"

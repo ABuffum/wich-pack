@@ -1,6 +1,5 @@
 package fun.mousewich.client.render.entity.animation;
 
-import fun.mousewich.client.render.entity.model.ExpandedModelPart;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
@@ -43,9 +42,9 @@ public final class ModTransformation {
 
 	@Environment(value = EnvType.CLIENT)
 	public static class Targets {
-		public static final Target TRANSLATE = (part, vec) -> ((ExpandedModelPart)part).translate(vec);
-		public static final Target ROTATE = (part, vec) -> ((ExpandedModelPart)part).rotate(vec);
-		public static final Target SCALE = (part, vec) -> ((ExpandedModelPart)part).scale(vec);
+		public static final Target TRANSLATE = (part, vec) -> part.setPivot(vec.getX(), vec.getY(), vec.getZ());
+		public static final Target ROTATE = (part, vec) -> part.setAngles(vec.getX(), vec.getY(), vec.getZ());
+		//public static final Target SCALE = (part, vec) -> ((ExpandedModelPart)part).scale(vec);
 	}
 
 	@Environment(value = EnvType.CLIENT)

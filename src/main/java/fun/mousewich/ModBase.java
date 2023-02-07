@@ -330,7 +330,7 @@ public class ModBase implements ModInitializer {
 	//</editor-fold>
 	//<editor-fold desc="More Moss">
 	public static final BlockContainer MOSS_SLAB = new BlockContainer(new MossSlabBlock(Blocks.MOSS_BLOCK)).dropSlabs();
-	public static final BedContainer MOSS_BED = ModFactory.MakeBed("moss");
+	//public static final BedContainer MOSS_BED = ModFactory.MakeBed("moss");
 	//</editor-fold>
 	//<editor-fold desc="Goat">
 	public static final Item GOAT_HORN = new GoatHornItem(ItemSettings(ItemGroup.MISC).maxCount(1));
@@ -343,6 +343,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer RAINBOW_FLEECE = new BlockContainer(new ModFacingBlock(Blocks.WHITE_WOOL)).flammable(30, 60).fuel(100).dropSelf();
 	public static final BlockContainer RAINBOW_FLEECE_SLAB = new BlockContainer(new HorizontalFacingSlabBlock(RAINBOW_FLEECE.asBlock())).flammable(40, 40).fuel(50).dropSlabs();
 	public static final BlockContainer RAINBOW_FLEECE_CARPET = new BlockContainer(new HorziontalFacingCarpetBlock(RAINBOW_FLEECE.asBlock())).flammable(60, 20).fuel(67).dropSelf();
+	//public static final BedContainer RAINBOW_BED = ModFactory.MakeBed("rainbow");
 	public static final Item FLEECE_HELMET = new ModDyeableArmorItem(ModArmorMaterials.FLEECE, EquipmentSlot.HEAD);
 	public static final Item FLEECE_CHESTPLATE = new ModDyeableArmorItem(ModArmorMaterials.FLEECE, EquipmentSlot.CHEST);
 	public static final Item FLEECE_LEGGINGS = new ModDyeableArmorItem(ModArmorMaterials.FLEECE, EquipmentSlot.LEGS);
@@ -600,7 +601,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer SEED_BLOCK = new BlockContainer(new Block(Block.Settings.of(Material.SOLID_ORGANIC, MapColor.DARK_GREEN).strength(0.8F).sounds(BlockSoundGroup.GRASS))).compostable(1f).dropSelf();
 	public static final BlockContainer WAX_BLOCK = new BlockContainer(new Block(Block.Settings.copy(Blocks.HONEYCOMB_BLOCK))).dropSelf();
 	public static final Item LAVA_BOTTLE = new LavaBottleItem(ItemSettings().maxCount(16).recipeRemainder(Items.GLASS_BOTTLE));
-	public static final BedContainer RAINBOW_BED = ModFactory.MakeBed("rainbow");
 	//</editor-fold>
 	//<editor-fold desc="Woodcutting">
 	public static final RecipeType<WoodcuttingRecipe> WOODCUTTING_RECIPE_TYPE = RegisterRecipeType("woodcutting");
@@ -1028,10 +1028,10 @@ public class ModBase implements ModInitializer {
 		Register("rainbow_wool", RAINBOW_WOOL);
 		Register("rainbow_wool_slab", RAINBOW_WOOL_SLAB);
 		Register("rainbow_carpet", RAINBOW_CARPET);
-		Register("rainbow_bed", RAINBOW_BED);
+		//Register("rainbow_bed", RAINBOW_BED);
 		//</editor-fold>
 		Register("moss_slab", MOSS_SLAB);
-		Register("moss_bed", MOSS_BED);
+		//Register("moss_bed", MOSS_BED);
 		//<editor-fold desc="Goat">
 		Register("minecraft:goat_horn", GOAT_HORN);
 		//Extended
@@ -1271,7 +1271,7 @@ public class ModBase implements ModInitializer {
 	//TODO: Soul & Ender Fire: Jack O' Lantern
 	//TODO: Carved Melons (and fire, soul, ender lanterns)
 
-	public static final Set<BedContainer> BEDS = new HashSet<>(Set.of( MOSS_BED, RAINBOW_BED ));
+	//public static final Set<BedContainer> BEDS = new HashSet<>(Set.of( MOSS_BED, RAINBOW_BED ));
 	public static final List<SignType> SIGN_TYPES = new ArrayList<>(List.of(
 			CHARRED_SIGN.getType(), BAMBOO_SIGN.getType(), MANGROVE_SIGN.getType()
 	));
