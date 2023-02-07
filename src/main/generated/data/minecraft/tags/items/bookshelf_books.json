@@ -1,7 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:book",
+    "#wich:books",
+    "wich:unreadable_book",
     "minecraft:enchanted_book",
     "minecraft:writable_book",
     "minecraft:written_book"

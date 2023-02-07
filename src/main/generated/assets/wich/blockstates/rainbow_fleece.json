@@ -1,7 +1,22 @@
 {
   "variants": {
-    "": {
-      "model": "wich:block/rainbow_fleece"
+    "facing=down": {
+      "model": "wich:block/rainbow_fleece_up"
+    },
+    "facing=east": {
+      "model": "wich:block/rainbow_fleece_south"
+    },
+    "facing=north": {
+      "model": "wich:block/rainbow_fleece_north"
+    },
+    "facing=south": {
+      "model": "wich:block/rainbow_fleece_east"
+    },
+    "facing=up": {
+      "model": "wich:block/rainbow_fleece_down"
+    },
+    "facing=west": {
+      "model": "wich:block/rainbow_fleece_west"
     }
   }
 }

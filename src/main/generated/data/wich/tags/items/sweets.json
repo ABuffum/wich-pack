@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cake",
+    "minecraft:cookie",
+    "minecraft:pumpkin_pie",
+    "farmersdelight:chocolate_pie",
+    "farmersdelight:chocolate_pie_slice",
+    "farmersdelight:honey_cookie",
+    "farmersdelight:pie_crust",
+    "farmersdelight:cake_slice",
+    "farmersdelight:melon_popsicle",
+    "farmersdelight:apple_pie",
+    "farmersdelight:apple_pie_slice",
+    "farmersdelight:sweet_berry_cookie",
+    "farmersdelight:sweet_berry_cheesecake",
+    "farmersdelight:sweet_berry_cheesecake_slice",
+    {
+      "id": "betterend:cave_pumpkin_pie",
+      "required": false
+    },
+    "#nourish:sweets"
+  ]
+}

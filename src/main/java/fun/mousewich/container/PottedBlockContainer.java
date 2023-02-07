@@ -9,9 +9,9 @@ import net.minecraft.item.Item;
 
 public class PottedBlockContainer implements IBlockItemContainer {
 	private final Block block;
-	public Block getBlock() { return block; }
+	public Block asBlock() { return block; }
 	private final Item item;
-	public Item getItem() { return item; }
+	public Item asItem() { return item; }
 	private final Block potted;
 	public Block getPottedBlock() { return potted; }
 

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "wich:charred_button",
+    "minecraft:mangrove_button",
+    "minecraft:bamboo_button"
+  ]
+}

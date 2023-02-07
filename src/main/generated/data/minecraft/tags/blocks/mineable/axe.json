@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bamboo_block",
+    "minecraft:stripped_bamboo_block",
+    "minecraft:mangrove_roots",
+    "wich:ender_campfire"
+  ]
+}

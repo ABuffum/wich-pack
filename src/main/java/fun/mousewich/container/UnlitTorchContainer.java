@@ -1,19 +1,29 @@
 package fun.mousewich.container;
 
-import fun.mousewich.ModDatagen;
+import fun.mousewich.block.BlockConvertible;
+import fun.mousewich.block.torch.UnlitTorchBlock;
+import fun.mousewich.block.torch.UnlitWallTorchBlock;
+import fun.mousewich.gen.data.loot.DropTable;
+import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import net.minecraft.block.Block;
+import net.minecraft.block.TorchBlock;
+import net.minecraft.block.WallTorchBlock;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UnlitTorchContainer implements IContainer {
-	private final Block block;
-	public Block getBlock() { return block; }
-	private final Block wallBlock;
-	public Block getWallBlock() { return wallBlock; }
+public class UnlitTorchContainer implements IContainer, BlockConvertible {
+	private final UnlitTorchBlock block;
+	public UnlitTorchBlock asBlock() { return block; }
+	private final UnlitWallTorchBlock wallBlock;
+	public UnlitWallTorchBlock getWallBlock() { return wallBlock; }
 
-	public UnlitTorchContainer(Block block, Block wallBlock) {
+	public UnlitTorchContainer(TorchContainer torch) {
+		this(new UnlitTorchBlock((TorchBlock)torch.asBlock()), new UnlitWallTorchBlock((WallTorchBlock)torch.getWallBlock()));
+	}
+	public UnlitTorchContainer(UnlitTorchBlock block, UnlitWallTorchBlock wallBlock) {
 		this.block = block;
 		this.wallBlock = wallBlock;
 	}
@@ -21,17 +31,12 @@ public class UnlitTorchContainer implements IContainer {
 	public boolean contains(Block block) { return block == this.block || block == this.wallBlock; }
 	public boolean contains(Item item) { return false; }
 
-	public static Map<Block, Block> UNLIT_TORCHES = new HashMap<Block, Block>();
-	public static Map<Block, Block> UNLIT_WALL_TORCHES = new HashMap<Block, Block>();
+	public static Map<Block, Block> UNLIT_TO_LIT_TORCHES = new HashMap<Block, Block>();
+	public static Map<Block, Block> UNLIT_TO_LIT_WALL_TORCHES = new HashMap<Block, Block>();
 
-	public UnlitTorchContainer drops(Item item) {
-		ModDatagen.BlockLootGenerator.Drops.put(this.block, item);
-		ModDatagen.BlockLootGenerator.Drops.put(this.wallBlock, item);
-		return this;
-	}
-	public UnlitTorchContainer dropNothing() {
-		ModDatagen.BlockLootGenerator.DropNothing.add(this.block);
-		ModDatagen.BlockLootGenerator.DropNothing.add(this.wallBlock);
+	public UnlitTorchContainer drops(ItemConvertible item) {
+		BlockLootGenerator.Drops.put(this.block, DropTable.Drops(item));
+		BlockLootGenerator.Drops.put(this.wallBlock, DropTable.Drops(item));
 		return this;
 	}
 }

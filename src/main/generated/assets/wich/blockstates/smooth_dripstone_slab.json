@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/smooth_dripstone_slab"
+    },
+    "type=double": {
+      "model": "wich:block/smooth_dripstone"
+    },
+    "type=top": {
+      "model": "wich:block/smooth_dripstone_slab_top"
+    }
+  }
+}

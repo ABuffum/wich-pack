@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "#wich:golden_vegetables",
+    "minecraft:carrot",
+    "minecraft:potato",
+    "minecraft:baked_potato",
+    "minecraft:poisonous_potato",
+    "minecraft:beetroot",
+    "minecraft:dried_kelp",
+    "farmersdelight:cabbage",
+    "farmersdelight:cabbage_leaf",
+    "farmersdelight:onion",
+    "farmersdelight:rice",
+    "minecraft:beetroot_soup",
+    "farmersdelight:vegetable_soup",
+    "farmersdelight:vegetable_noodles",
+    "farmersdelight:ratatouille",
+    "farmersdelight:horse_feed",
+    {
+      "id": "betterend:amber_root_raw",
+      "required": false
+    },
+    "#forge:vegetables",
+    "#nourish:vegetables"
+  ]
+}

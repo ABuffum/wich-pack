@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_bone_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/underwater_bone_torch"
+    }
+  }
+}

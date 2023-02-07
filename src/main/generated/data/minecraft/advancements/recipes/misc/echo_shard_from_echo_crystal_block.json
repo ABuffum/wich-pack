@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:echo_shard_from_echo_crystal_block"
+    ]
+  },
+  "criteria": {
+    "automatic": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stick"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:echo_shard_from_echo_crystal_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "automatic",
+      "has_the_recipe"
+    ]
+  ]
+}

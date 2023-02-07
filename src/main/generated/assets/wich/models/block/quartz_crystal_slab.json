@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "wich:block/quartz_crystal_block",
+    "top": "wich:block/quartz_crystal_block",
+    "side": "wich:block/quartz_crystal_block"
+  }
+}

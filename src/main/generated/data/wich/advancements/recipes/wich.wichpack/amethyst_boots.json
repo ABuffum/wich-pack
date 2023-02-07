@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:amethyst_boots"
+    ]
+  },
+  "criteria": {
+    "automatic": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stick"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:amethyst_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "automatic",
+      "has_the_recipe"
+    ]
+  ]
+}

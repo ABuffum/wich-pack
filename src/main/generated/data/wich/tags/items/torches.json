@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:torch",
+    "wich:bamboo_torch",
+    "wich:bone_torch",
+    "wich:netherite_torch"
+  ]
+}

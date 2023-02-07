@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#T#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_nugget"
+    },
+    "T": {
+      "tag": "wich:ender_torches"
+    }
+  },
+  "result": {
+    "item": "wich:ender_lantern"
+  }
+}

@@ -7,6 +7,9 @@
     "minecraft:golden_shovel",
     "minecraft:diamond_shovel",
     "minecraft:netherite_shovel",
-    "wich:echo_shovel"
+    "wich:amethyst_shovel",
+    "wich:echo_shovel",
+    "wich:emerald_shovel",
+    "wich:quartz_shovel"
   ]
 }

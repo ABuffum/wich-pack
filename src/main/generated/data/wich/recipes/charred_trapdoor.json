@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:charred_planks"
+    }
+  },
+  "result": {
+    "item": "wich:charred_trapdoor",
+    "count": 3
+  }
+}

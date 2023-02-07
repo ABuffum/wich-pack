@@ -1,41 +1,61 @@
 package fun.mousewich.block;
 
-import fun.mousewich.container.BlockContainer;
-
+import fun.mousewich.container.IBlockItemContainer;
+import fun.mousewich.gen.data.loot.BlockLootGenerator;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LanternBlock;
 import net.minecraft.block.Material;
-import net.minecraft.item.Item;
+import net.minecraft.data.server.BlockLootTableGenerator;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-
-import java.util.function.Supplier;
+import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 public class UnlitLanternBlock extends LanternBlock {
-	private LanternSupplier getPickStack;
-	public UnlitLanternBlock(Supplier<BlockContainer> getBlock) {
-		this(getBlock, BlockSettings());
-	}
-	public UnlitLanternBlock(Supplier<BlockContainer> getBlock, Settings settings) {
-		this(() -> getBlock.get().getItem(), settings);
-	}
-	public UnlitLanternBlock(LanternSupplier getPickStack) {
-		this(getPickStack, BlockSettings());
-	}
-	public UnlitLanternBlock(LanternSupplier getPickStack, Settings settings) {
+	protected Block lit;
+	public Block getLitBlock() { return this.lit; }
+	protected final ItemConvertible getPickStack;
+
+	public UnlitLanternBlock(IBlockItemContainer lit) { this(lit, BlockSettings()); }
+	public UnlitLanternBlock(IBlockItemContainer lit, Settings settings) { this(lit.asBlock(), lit, settings); }
+	public UnlitLanternBlock(Block lit, ItemConvertible getPickStack) { this(lit, getPickStack, BlockSettings()); }
+	public UnlitLanternBlock(Block lit, ItemConvertible getPickStack, Settings settings) {
 		super(settings);
+		this.lit = lit;
 		this.getPickStack = getPickStack;
 	}
-	public UnlitLanternBlock(Item pickStack, Settings settings) { this(() -> pickStack, settings); }
 
-	public static interface LanternSupplier{
-		public Item get();
+	public UnlitLanternBlock dropsLantern() {
+		BlockLootGenerator.Drops.put(this, (block) -> BlockLootTableGenerator.drops(Items.LANTERN));
+		return this;
+	}
+
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		ItemStack itemStack = player.getStackInHand(hand);
+		if (itemStack.isOf(Items.FLINT_AND_STEEL)) {
+			world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+			world.setBlockState(pos, lit.getDefaultState().with(LanternBlock.HANGING, state.get(LanternBlock.HANGING)).with(LanternBlock.WATERLOGGED, state.get(LanternBlock.WATERLOGGED)));
+			world.emitGameEvent(player, GameEvent.BLOCK_PLACE, pos);
+			itemStack.damage(1, (LivingEntity)player, (p) -> p.sendToolBreakStatus(hand));
+			return ActionResult.SUCCESS;
+		}
+		return ActionResult.PASS;
 	}
 
 	@Override
-	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) { return getPickStack.get().getDefaultStack(); }
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) { return getPickStack.asItem().getDefaultStack(); }
 
 	public static Settings BlockSettings() {
 		return Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).nonOpaque();

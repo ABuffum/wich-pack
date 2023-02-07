@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:jungle_stairs_from_jungle_planks_woodcutting"
+    ]
+  },
+  "criteria": {
+    "automatic": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stick"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:jungle_stairs_from_jungle_planks_woodcutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "automatic",
+      "has_the_recipe"
+    ]
+  ]
+}

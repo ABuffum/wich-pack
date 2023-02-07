@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:charred_planks"
+  },
+  "result": "wich:charred_stairs",
+  "count": 1
+}

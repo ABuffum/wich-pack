@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "wich:polished_gilded_blackstone",
+    "wich:polished_gilded_blackstone_bricks",
+    "wich:chiseled_polished_gilded_blackstone",
+    "wich:cracked_polished_gilded_blackstone_bricks",
+    "wich:gilded_blackstone_slab",
+    "wich:polished_gilded_blackstone_slab",
+    "wich:polished_gilded_blackstone_brick_slab",
+    "wich:gilded_blackstone_stairs",
+    "wich:polished_gilded_blackstone_stairs",
+    "wich:polished_gilded_blackstone_brick_stairs",
+    "wich:gilded_blackstone_wall",
+    "wich:polished_gilded_blackstone_wall",
+    "wich:polished_gilded_blackstone_brick_wall"
+  ]
+}

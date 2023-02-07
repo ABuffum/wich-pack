@@ -7,6 +7,9 @@
     "minecraft:golden_pickaxe",
     "minecraft:diamond_pickaxe",
     "minecraft:netherite_pickaxe",
-    "wich:echo_pickaxe"
+    "wich:amethyst_pickaxe",
+    "wich:echo_pickaxe",
+    "wich:emerald_pickaxe",
+    "wich:quartz_pickaxe"
   ]
 }

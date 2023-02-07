@@ -7,6 +7,9 @@
     "minecraft:golden_hoe",
     "minecraft:diamond_hoe",
     "minecraft:netherite_hoe",
-    "wich:echo_hoe"
+    "wich:amethyst_hoe",
+    "wich:echo_hoe",
+    "wich:emerald_hoe",
+    "wich:quartz_hoe"
   ]
 }

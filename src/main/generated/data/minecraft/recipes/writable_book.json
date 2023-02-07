@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "tag": "wich:books"
+    },
+    {
+      "tag": "wich:feathers"
+    }
+  ],
+  "result": {
+    "item": "minecraft:writable_book"
+  }
+}

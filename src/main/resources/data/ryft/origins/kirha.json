@@ -1,0 +1,20 @@
+{
+  "powers": [
+	"origins:arthropod",
+	"origins:climbing",
+	"origins:fragile",
+	"origins:master_of_webs",
+	"origins:fall_immunity",
+	"origins:sprint_jump",
+	"wich:hunger_immunity",
+	"ryft:spider_diet",
+	"ryft:eat_dog_food",
+	"wich:soft_steps",
+	"ryft:golem_hated",
+	"ryft:villager_hated",
+	"ryft:kirha_identified_sounds"
+  ],
+  "name": "Jumping Spider(?)",
+  "description": "Not actually a spider.  Not at all. No way.",
+  "icon": "minecraft:cobweb"
+}

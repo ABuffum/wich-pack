@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:sculk_stone_brick_stairs"
+    ]
+  },
+  "criteria": {
+    "automatic": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stick"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:sculk_stone_brick_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "automatic",
+      "has_the_recipe"
+    ]
+  ]
+}

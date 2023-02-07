@@ -1,0 +1,14 @@
+{
+  "powers": [
+	"ryft:pocket_dimension",
+	"origins:natural_armor",
+	"origins:strong_arms",
+	"origins:strong_arms_break_speed",
+	"origins:no_shield",
+	"origins:more_exhaustion",
+	"ryft:oracle_identified_sounds"
+  ],
+  "name": "The Oracle",
+  "description": "God of Protection",
+  "icon": "minecraft:shield"
+}

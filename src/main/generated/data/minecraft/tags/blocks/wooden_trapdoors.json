@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "wich:charred_trapdoor",
+    "minecraft:mangrove_trapdoor",
+    "minecraft:bamboo_trapdoor"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "*",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bamboo"
+    },
+    "*": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "result": {
+    "item": "wich:underwater_bamboo_torch",
+    "count": 4
+  }
+}

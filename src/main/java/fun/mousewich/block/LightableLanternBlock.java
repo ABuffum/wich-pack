@@ -7,6 +7,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -35,7 +37,21 @@ public class LightableLanternBlock extends LanternBlock {
 				world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
 				world.setBlockState(pos, state.with(Properties.LIT, true));
 				world.emitGameEvent(player, GameEvent.BLOCK_PLACE, pos);
-				itemStack.damage(1, (LivingEntity)player, (p) -> p.sendToolBreakStatus(hand));
+				itemStack.damage(1, player, p -> p.sendToolBreakStatus(hand));
+				return ActionResult.SUCCESS;
+			}
+		}
+		else if (itemStack.isOf(Items.POTION)) {
+			if (state.get(Properties.LIT)) {
+				world.playSound(player, pos, SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT, SoundCategory.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+				world.setBlockState(pos, state.with(Properties.LIT, false));
+				world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+				if (!world.isClient) {
+					ServerWorld serverWorld = (ServerWorld)world;
+					for (int i = 0; i < 5; ++i) {
+						serverWorld.spawnParticles(ParticleTypes.SPLASH, pos.getX() + world.random.nextDouble(), pos.getY() + 1, pos.getZ() + world.random.nextDouble(), 1, 0.0, 0.0, 0.0, 1.0);
+					}
+				}
 				return ActionResult.SUCCESS;
 			}
 		}

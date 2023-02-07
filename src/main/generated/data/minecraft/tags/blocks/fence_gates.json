@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "wich:charred_fence_gate",
+    "minecraft:mangrove_fence_gate",
+    "minecraft:bamboo_fence_gate"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:piglin_head",
+    "#wich:carved_melons",
+    "#wich:carved_pumpkins"
+  ]
+}

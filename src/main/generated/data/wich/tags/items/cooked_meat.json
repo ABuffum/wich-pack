@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#wich:cooked_beef",
+    "#wich:cooked_bird",
+    "#wich:cooked_fish",
+    "#wich:cooked_pork",
+    "#wich:cooked_rabbit",
+    "#wich:cooked_seafood",
+    "#wich:cooked_sheep"
+  ]
+}

@@ -11,6 +11,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -21,11 +22,9 @@ import net.minecraft.world.World;
 
 public class ModBoatEntity extends BoatEntity {
 	private static final TrackedData<Integer> BOAT_TYPE;
-
 	public ModBoatEntity(EntityType<? extends BoatEntity> type, World world) {
 		super(type, world);
 	}
-
 	public ModBoatEntity(World worldIn, double x, double y, double z) {
 		this(ModBase.BOAT_ENTITY, worldIn);
 		this.setPosition(x, y, z);
@@ -33,7 +32,6 @@ public class ModBoatEntity extends BoatEntity {
 		this.prevY = y;
 		this.prevZ = z;
 	}
-
 	@Override
 	protected void initDataTracker() {
 		super.initDataTracker();
@@ -42,7 +40,7 @@ public class ModBoatEntity extends BoatEntity {
 	@Override
 	protected void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
-		nbt.putString("HavenType", this.getHavenBoatType().getName());
+		nbt.putString("HavenType", this.getModBoatType().getName());
 	}
 	@Override
 	protected void readCustomDataFromNbt(NbtCompound nbt) {
@@ -51,15 +49,8 @@ public class ModBoatEntity extends BoatEntity {
 			this.setHavenBoatType(ModBoatType.getType(nbt.getString("HavenType")));
 		}
 	}
-
-	public void setHavenBoatType(ModBoatType type) {
-		this.dataTracker.set(BOAT_TYPE, type.ordinal());
-	}
-
-	public ModBoatType getHavenBoatType() {
-		return ModBoatType.getType(this.dataTracker.get(BOAT_TYPE));
-	}
-
+	public void setHavenBoatType(ModBoatType type) { this.dataTracker.set(BOAT_TYPE, type.ordinal()); }
+	public ModBoatType getModBoatType() { return ModBoatType.getType(this.dataTracker.get(BOAT_TYPE)); }
 	@Override
 	protected void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition) {
 		((BoatEntityAccessor)this).setFallVelocity(this.getVelocity().y);
@@ -70,34 +61,29 @@ public class ModBoatEntity extends BoatEntity {
 						this.fallDistance = 0.0F;
 						return;
 					}
-
 					this.handleFallDamage(this.fallDistance, 1.0F, DamageSource.FALL);
 					if (!this.world.isClient && !this.isRemoved()) {
 						this.kill();
 						if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-							int j;
-							for(j = 0; j < 3; ++j) {
-								this.dropItem(this.getHavenBoatType().getBaseBlock());
-							}
-
-							for(j = 0; j < 2; ++j) {
-								this.dropItem(Items.STICK);
-							}
+							for(int j = 0; j < 3; ++j) this.dropItem(this.getModBoatType().getBaseBlock());
+							for(int j = 0; j < 2; ++j) this.dropItem(Items.STICK);
 						}
 					}
 				}
-
 				this.fallDistance = 0.0F;
-			} else if (!this.world.getFluidState(this.getBlockPos().down()).isIn(FluidTags.WATER) && heightDifference < 0.0D) {
-				if (!this.world.getFluidState(this.getBlockPos().down()).isIn(FluidTags.LAVA)) {
-					this.fallDistance = (float)((double)this.fallDistance - heightDifference);
+			}
+			else {
+				FluidState state = this.world.getFluidState(this.getBlockPos().down());
+				if (!state.isIn(FluidTags.WATER) && heightDifference < 0.0D) {
+					if (!state.isIn(FluidTags.LAVA)) {
+						this.fallDistance = (float)((double)this.fallDistance - heightDifference);
+					}
 				}
 			}
-
 		}
 	}
 
-	public boolean floatsOnLava() { return getHavenBoatType().floatsOnLava; }
+	public boolean floatsOnLava() { return getModBoatType().floatsOnLava; }
 
 	@Override
 	public boolean isInvulnerableTo(DamageSource damageSource) {
@@ -114,7 +100,7 @@ public class ModBoatEntity extends BoatEntity {
 
 	@Override
 	public Item asItem() {
-		return getHavenBoatType().GetItem();
+		return getModBoatType().GetItem();
 	}
 
 	@Override

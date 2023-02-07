@@ -65,13 +65,13 @@ public class OxidationScale {
 		Register(container.getUnaffected(), container.getExposed(), container.getWeathered(), container.getOxidized());
 	}
 	public static OxidationScale Register(OxidizableBlockContainer container) {
-		return Register(container.getUnaffected().getBlock(), container.getExposed().getBlock(), container.getWeathered().getBlock(), container.getOxidized().getBlock());
+		return Register(container.getUnaffected().asBlock(), container.getExposed().asBlock(), container.getWeathered().asBlock(), container.getOxidized().asBlock());
 	}
 	public static OxidationScale Register(BlockContainer unaffected, BlockContainer exposed, BlockContainer weathered, BlockContainer oxidized) {
-		return Register(unaffected.getBlock(), exposed.getBlock(), weathered.getBlock(), oxidized.getBlock());
+		return Register(unaffected.asBlock(), exposed.asBlock(), weathered.asBlock(), oxidized.asBlock());
 	}
 	public static void Register(TorchContainer unaffected, TorchContainer exposed, TorchContainer weathered, TorchContainer oxidized) {
-		Register(unaffected.getBlock(), exposed.getBlock(), weathered.getBlock(), oxidized.getBlock());
+		Register(unaffected.asBlock(), exposed.asBlock(), weathered.asBlock(), oxidized.asBlock());
 		Register(unaffected.getWallBlock(), exposed.getWallBlock(), weathered.getWallBlock(), oxidized.getWallBlock());
 	}
 	public static OxidationScale Register(Block unaffected, Block exposed, Block weathered, Block oxidized) {

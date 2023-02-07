@@ -7,6 +7,9 @@
     "minecraft:golden_sword",
     "minecraft:diamond_sword",
     "minecraft:netherite_sword",
-    "wich:echo_sword"
+    "wich:amethyst_sword",
+    "wich:echo_sword",
+    "wich:emerald_sword",
+    "wich:quartz_sword"
   ]
 }

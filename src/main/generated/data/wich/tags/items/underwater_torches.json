@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "wich:underwater_torch",
+    "wich:underwater_bamboo_torch",
+    "wich:underwater_bone_torch",
+    "wich:underwater_netherite_torch"
+  ]
+}

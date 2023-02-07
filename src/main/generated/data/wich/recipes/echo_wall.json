@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:echo_block"
+    }
+  },
+  "result": {
+    "item": "wich:echo_wall",
+    "count": 6
+  }
+}

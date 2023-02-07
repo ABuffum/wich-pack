@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "wich:calcite_stairs",
+    "wich:smooth_calcite_stairs",
+    "wich:calcite_brick_stairs",
+    "wich:dripstone_stairs",
+    "wich:smooth_dripstone_stairs",
+    "wich:dripstone_brick_stairs",
+    "wich:tuff_stairs",
+    "wich:smooth_tuff_stairs",
+    "wich:tuff_brick_stairs",
+    "wich:amethyst_stairs",
+    "wich:amethyst_brick_stairs",
+    "wich:amethyst_crystal_stairs",
+    "wich:emerald_brick_stairs",
+    "wich:cut_emerald_stairs",
+    "wich:diamond_stairs",
+    "wich:diamond_brick_stairs",
+    "wich:quartz_brick_stairs",
+    "wich:quartz_crystal_stairs",
+    "wich:netherite_brick_stairs",
+    "wich:cut_netherite_stairs",
+    "wich:echo_stairs",
+    "wich:echo_crystal_stairs",
+    "wich:gilded_blackstone_stairs",
+    "wich:polished_gilded_blackstone_stairs",
+    "wich:polished_gilded_blackstone_brick_stairs",
+    "wich:sculk_stone_stairs",
+    "wich:sculk_stone_brick_stairs",
+    "minecraft:mud_brick_stairs"
+  ]
+}

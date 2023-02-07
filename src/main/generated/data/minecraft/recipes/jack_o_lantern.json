@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "T"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:carved_pumpkin"
+    },
+    "T": {
+      "tag": "wich:torches"
+    }
+  },
+  "result": {
+    "item": "minecraft:jack_o_lantern"
+  }
+}

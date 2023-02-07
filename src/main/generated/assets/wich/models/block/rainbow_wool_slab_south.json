@@ -1,0 +1,12 @@
+{
+  "parent": "wich:block/_template_multi_texture_slab",
+  "textures": {
+    "particle": "wich:block/rainbow_wool_particle",
+    "north": "wich:block/rainbow_wool_horiz_p_r",
+    "south": "wich:block/rainbow_wool_horiz_r_p",
+    "east": "wich:block/rainbow_wool_p",
+    "west": "wich:block/rainbow_wool_r",
+    "up": "wich:block/rainbow_wool_horiz_r_p",
+    "down": "wich:block/rainbow_wool_horiz_r_p"
+  }
+}

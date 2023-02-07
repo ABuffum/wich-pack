@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:echo_block"
+  },
+  "result": "wich:echo_wall",
+  "count": 1
+}

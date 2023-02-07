@@ -1,0 +1,23 @@
+{
+  "powers": [
+	"ryft:sun_blind",
+	"ryft:sun_weak",
+	"ryft:deep_pockets",
+	"ryft:warden_lungs",
+	"origins:aqua_affinity",
+	"ryft:darkvision",
+	"origins:strong_arms",
+	"origins:strong_arms_break_speed",
+	"ryft:tough_body",
+	"wich:blindness_immunity",
+	"wich:darkness_immunity",
+	"wich:soft_steps",
+	"wich:identified_sounds",
+	"wich:warden_heartbeat",
+	"wich:warden_neutral",
+	"ryft:gubby_identified_sounds"
+  ],
+  "name": "Warden",
+  "description": "The ultimate denizen of the Deep Dark.",
+  "icon": "minecraft:echo_shard"
+}

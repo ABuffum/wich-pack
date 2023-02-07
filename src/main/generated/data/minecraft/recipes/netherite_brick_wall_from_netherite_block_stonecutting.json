@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:netherite_block"
+  },
+  "result": "wich:netherite_brick_wall",
+  "count": 1
+}

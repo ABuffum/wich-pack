@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_ladder",
+  "textures": {
+    "texture": "wich:block/birch_ladder"
+  }
+}

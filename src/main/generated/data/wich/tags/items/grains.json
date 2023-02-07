@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bread",
+    "farmersdelight:rice",
+    "farmersdelight:wheat_dough",
+    "farmersdelight:raw_pasta",
+    "farmersdelight:cooked_rice",
+    "farmersdelight:fried_rice"
+  ]
+}

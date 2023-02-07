@@ -6,6 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -18,6 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+
+import java.util.Random;
 
 public class LightableWallTorchBlock extends WallTorchBlock {
 	public LightableWallTorchBlock(Settings settings, ParticleEffect particleEffect) {
@@ -37,6 +41,11 @@ public class LightableWallTorchBlock extends WallTorchBlock {
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(FACING, Properties.LIT); }
 
 	@Override
+	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+		if (state.get(Properties.LIT)) super.randomDisplayTick(state, world, pos, random);
+	}
+
+	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack itemStack = player.getStackInHand(hand);
 		if (itemStack.isOf(Items.FLINT_AND_STEEL)) {
@@ -45,6 +54,20 @@ public class LightableWallTorchBlock extends WallTorchBlock {
 				world.setBlockState(pos, state.with(Properties.LIT, true));
 				world.emitGameEvent(player, GameEvent.BLOCK_PLACE, pos);
 				itemStack.damage(1, (LivingEntity)player, (p) -> p.sendToolBreakStatus(hand));
+				return ActionResult.SUCCESS;
+			}
+		}
+		else if (itemStack.isOf(Items.POTION)) {
+			if (state.get(Properties.LIT)) {
+				world.playSound(player, pos, SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT, SoundCategory.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+				world.setBlockState(pos, state.with(Properties.LIT, false));
+				world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+				if (!world.isClient) {
+					ServerWorld serverWorld = (ServerWorld)world;
+					for (int i = 0; i < 5; ++i) {
+						serverWorld.spawnParticles(ParticleTypes.SPLASH, pos.getX() + world.random.nextDouble(), pos.getY() + 1, pos.getZ() + world.random.nextDouble(), 1, 0.0, 0.0, 0.0, 1.0);
+					}
+				}
 				return ActionResult.SUCCESS;
 			}
 		}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "wich:block/charred_planks",
+    "top": "wich:block/charred_planks",
+    "side": "wich:block/charred_planks"
+  }
+}

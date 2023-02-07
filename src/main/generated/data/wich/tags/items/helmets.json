@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:leather_helmet",
+    "minecraft:chainmail_helmet",
+    "minecraft:iron_helmet",
+    "minecraft:golden_helmet",
+    "minecraft:diamond_helmet",
+    "minecraft:netherite_helmet",
+    "wich:amethyst_helmet",
+    "wich:emerald_helmet",
+    "wich:fleece_helmet",
+    "wich:quartz_helmet",
+    "wich:studded_leather_helmet"
+  ]
+}

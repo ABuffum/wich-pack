@@ -1,9 +1,6 @@
 package fun.mousewich.container;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import fun.mousewich.block.BlockConvertible;
+import net.minecraft.item.ItemConvertible;
 
-public interface IBlockItemContainer extends IContainer {
-	public Block getBlock();
-	public Item getItem();
-}
+public interface IBlockItemContainer extends IContainer, BlockConvertible, ItemConvertible { }

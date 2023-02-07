@@ -1,0 +1,15 @@
+{
+  "type": "origins:multiple",
+  "modify_size": {
+	"type": "extraorigins:modify_size",
+	"scale_types": "pehkui:base",
+	"scale": 1.25
+  },
+  "modify_speed": {
+	"type": "extraorigins:modify_size",
+	"scale_types": "pehkui:motion",
+	"scale": 1.3
+  },
+  "name": "Warden Sized",
+  "description": "Humans are short"
+}

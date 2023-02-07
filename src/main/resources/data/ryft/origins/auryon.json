@@ -1,0 +1,13 @@
+{
+  "powers": [
+	"origins:elytra",
+	"origins:launch_into_air",
+	"origins:aerial_combatant",
+	"origins:claustrophobia",
+	"origins:more_kinetic_damage",
+	"ryft:auryon_identified_sounds"
+  ],
+  "name": "Angel of Love",
+  "description": "You're a general in general. Kick some ass!",
+  "icon": "minecraft:iron_sword"
+}

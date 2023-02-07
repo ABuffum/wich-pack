@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "wich:netherite_bricks",
+    "wich:cut_netherite",
+    "wich:cut_netherite_pillar",
+    "wich:cut_emerald",
+    "wich:emerald_bricks"
+  ]
+}

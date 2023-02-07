@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:smooth_calcite"
+  },
+  "result": "wich:smooth_calcite_wall",
+  "count": 1
+}

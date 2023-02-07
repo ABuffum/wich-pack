@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_candle",
+  "textures": {
+    "all": "wich:block/ender_candle",
+    "particle": "wich:block/ender_candle"
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "block/campfire_off",
+    "textures": {
+        "particle": "#log"
+    }
+}

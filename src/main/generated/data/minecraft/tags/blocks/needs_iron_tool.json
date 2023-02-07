@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "wich:diamond_bricks",
+    "wich:diamond_brick_slab",
+    "wich:diamond_brick_stairs",
+    "wich:diamond_brick_wall",
+    "wich:diamond_slab",
+    "wich:diamond_stairs",
+    "wich:diamond_wall",
+    "wich:emerald_bricks",
+    "wich:emerald_brick_slab",
+    "wich:emerald_brick_stairs",
+    "wich:emerald_brick_wall",
+    "wich:cut_emerald",
+    "wich:cut_emerald_slab",
+    "wich:cut_emerald_stairs",
+    "wich:cut_emerald_wall"
+  ]
+}

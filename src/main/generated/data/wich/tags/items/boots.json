@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:leather_boots",
+    "minecraft:chainmail_boots",
+    "minecraft:iron_boots",
+    "minecraft:golden_boots",
+    "minecraft:diamond_boots",
+    "minecraft:netherite_boots",
+    "wich:amethyst_boots",
+    "wich:emerald_boots",
+    "wich:fleece_boots",
+    "wich:quartz_boots",
+    "wich:studded_leather_boots"
+  ]
+}

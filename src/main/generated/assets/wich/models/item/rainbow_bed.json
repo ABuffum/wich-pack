@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/template_bed",
+  "textures": {
+    "particle": "wich:block/rainbow_wool_particle"
+  }
+}

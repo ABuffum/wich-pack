@@ -1,0 +1,9 @@
+{
+  "type": "extraorigins:mob_neutrality",
+  "entity_types": [
+	"minecraft:warden"
+  ],
+  "inverted": true,
+  "name": "Nonhostile Mobs",
+  "description": "Hostile mobs will not attack you"
+}

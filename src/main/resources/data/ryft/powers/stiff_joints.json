@@ -1,0 +1,26 @@
+{
+  "type": "origins:restrict_armor",
+  "chest": {
+	"type": "origins:ingredient",
+	"ingredient": [
+	  { "item": "minecraft:leather_chestplate" },
+	  { "item": "minecraft:chainmail_chestplate" },
+	  { "item": "wich:studded_leather_chestplate" },
+	  { "item": "wich:fleece_chestplate" },
+	  { "tag": "wich:elytra" }
+	],
+	"inverted": true
+  },
+  "legs": {
+	"type": "origins:ingredient",
+	"ingredient": [
+	  { "item": "minecraft:leather_leggings" },
+	  { "item": "minecraft:chainmail_leggings" },
+	  { "item": "wich:studded_leather_leggings" },
+	  { "item": "wich:fleece_leggings" }
+	],
+	"inverted": true
+  },
+  "name": "Stiff Joints",
+  "description": "Most armor options are not flexible enough to accommodate your unique joint structure. You can only wear chainmail and lighter armors."
+}

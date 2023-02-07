@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:diamond_bricks"
+  },
+  "result": "wich:diamond_brick_stairs",
+  "count": 1
+}

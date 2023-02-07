@@ -1,6 +1,6 @@
 package fun.mousewich.item.goat;
 
-import fun.mousewich.sounds.ModSoundEvents;
+import fun.mousewich.sound.ModSoundEvents;
 
 import java.util.ArrayList;
 import java.util.List;

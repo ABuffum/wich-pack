@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:mangrove_leaves",
+    "minecraft:sculk",
+    "minecraft:sculk_shrieker",
+    "minecraft:sculk_vein",
+    "wich:hedge_block",
+    "wich:blue_shroomlight"
+  ]
+}

@@ -7,6 +7,9 @@
     "minecraft:golden_axe",
     "minecraft:diamond_axe",
     "minecraft:netherite_axe",
-    "wich:echo_axe"
+    "wich:amethyst_axe",
+    "wich:echo_axe",
+    "wich:emerald_axe",
+    "wich:quartz_axe"
   ]
 }

@@ -1,11 +1,11 @@
 package fun.mousewich.util;
 
 import fun.mousewich.ModBase;
-import fun.mousewich.ModTags;
+import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.item.goat.GoatHornInstrument;
 import fun.mousewich.item.goat.GoatHornInstruments;
 import fun.mousewich.item.goat.GoatHornItem;
-import fun.mousewich.sounds.ModSoundEvents;
+import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
@@ -26,7 +26,9 @@ public class GoatUtils {
 	public static final TrackedData<Boolean> LEFT_HORN = DataTracker.registerData(GoatEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 	public static final TrackedData<Boolean> RIGHT_HORN = DataTracker.registerData(GoatEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-	public static boolean hasLeftHorn(LivingEntity goat) { return goat.getDataTracker().get(LEFT_HORN); }
+	public static boolean hasLeftHorn(LivingEntity goat) {
+		return goat.getDataTracker().get(LEFT_HORN);
+	}
 
 	public static boolean hasRightHorn(LivingEntity goat) { return goat.getDataTracker().get(RIGHT_HORN); }
 
@@ -68,7 +70,7 @@ public class GoatUtils {
 	public static boolean shouldSnapHorn(ServerWorld world, LivingEntity goat) {
 		Vec3d vec3d = goat.getVelocity().multiply(1.0, 0.0, 1.0).normalize();
 		BlockPos blockPos = new BlockPos(goat.getPos().add(vec3d));
-		return world.getBlockState(blockPos).isIn(ModTags.Blocks.SNAPS_GOAT_HORN) || world.getBlockState(blockPos.up()).isIn(ModTags.Blocks.SNAPS_GOAT_HORN);
+		return world.getBlockState(blockPos).isIn(ModBlockTags.SNAPS_GOAT_HORN) || world.getBlockState(blockPos.up()).isIn(ModBlockTags.SNAPS_GOAT_HORN);
 	}
 
 	public static void addHorns(LivingEntity goat) {

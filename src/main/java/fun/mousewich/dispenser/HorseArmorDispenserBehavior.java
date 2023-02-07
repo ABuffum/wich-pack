@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class HorseArmorDispenserBehavior extends FallibleItemDispenserBehavior {
+	@Override
 	public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
 		BlockPos blockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
 		List<HorseBaseEntity> list = pointer.getWorld().getEntitiesByClass(HorseBaseEntity.class, new Box(blockPos),
@@ -29,7 +30,7 @@ public class HorseArmorDispenserBehavior extends FallibleItemDispenserBehavior {
 	}
 
 	public static HorseArmorItem Dispensible(HorseArmorItem item) {
-		DispenserBlock.registerBehavior(item, new HorseArmorDispenserBehavior()::dispenseSilently);
+		DispenserBlock.registerBehavior(item, new HorseArmorDispenserBehavior());
 		return item;
 	}
 }

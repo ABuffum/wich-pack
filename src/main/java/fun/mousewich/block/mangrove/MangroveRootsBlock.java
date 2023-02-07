@@ -25,7 +25,7 @@ public class MangroveRootsBlock extends Block implements Waterloggable {
 
 	@Override
 	public boolean isSideInvisible(BlockState state, BlockState stateFrom, Direction direction) {
-		return stateFrom.isOf(ModBase.MANGROVE_ROOTS.getBlock()) && direction.getAxis() == Direction.Axis.Y;
+		return stateFrom.isOf(ModBase.MANGROVE_ROOTS.asBlock()) && direction.getAxis() == Direction.Axis.Y;
 	}
 
 	@Override

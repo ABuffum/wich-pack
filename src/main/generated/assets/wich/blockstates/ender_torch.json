@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/ender_torch"
+    }
+  }
+}

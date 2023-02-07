@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:soul_torch",
+    "wich:bamboo_soul_torch",
+    "wich:bone_soul_torch",
+    "wich:netherite_soul_torch"
+  ]
+}

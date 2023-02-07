@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "wich:budding_echo",
+    "wich:echo_block",
+    "wich:echo_slab",
+    "wich:echo_stairs",
+    "wich:echo_wall",
+    "wich:echo_crystal_block",
+    "wich:echo_crystal_slab",
+    "wich:echo_crystal_stairs",
+    "wich:echo_crystal_wall"
+  ]
+}

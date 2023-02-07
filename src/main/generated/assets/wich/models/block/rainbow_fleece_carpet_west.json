@@ -1,0 +1,12 @@
+{
+  "parent": "wich:block/_template_multi_texture_carpet",
+  "textures": {
+    "particle": "wich:block/rainbow_fleece_particle",
+    "north": "wich:block/rainbow_fleece_horiz_r_p",
+    "south": "wich:block/rainbow_fleece_horiz_p_r",
+    "east": "wich:block/rainbow_fleece_r",
+    "west": "wich:block/rainbow_fleece_p",
+    "up": "wich:block/rainbow_fleece_horiz_p_r",
+    "down": "wich:block/rainbow_fleece_horiz_p_r"
+  }
+}

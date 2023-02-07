@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "*",
+    "#",
+    "I"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "*": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "I": {
+      "item": "wich:netherite_nugget"
+    }
+  },
+  "result": {
+    "item": "wich:underwater_netherite_torch",
+    "count": 4
+  }
+}

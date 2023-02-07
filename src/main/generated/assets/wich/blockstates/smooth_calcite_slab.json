@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/smooth_calcite_slab"
+    },
+    "type=double": {
+      "model": "wich:block/smooth_calcite"
+    },
+    "type=top": {
+      "model": "wich:block/smooth_calcite_slab_top"
+    }
+  }
+}

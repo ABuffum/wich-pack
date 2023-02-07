@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:leather_leggings",
+    "minecraft:chainmail_leggings",
+    "minecraft:iron_leggings",
+    "minecraft:golden_leggings",
+    "minecraft:diamond_leggings",
+    "minecraft:netherite_leggings",
+    "wich:amethyst_leggings",
+    "wich:emerald_leggings",
+    "wich:fleece_leggings",
+    "wich:quartz_leggings",
+    "wich:studded_leather_leggings"
+  ]
+}

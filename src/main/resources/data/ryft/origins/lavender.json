@@ -1,0 +1,13 @@
+{
+  "powers": [
+	"ryft:breathe_in_water",
+	"ryft:small_doll_sized",
+	"wich:suffocation_immunity",
+	"ryft:stiff_joints",
+	"ryft:porcelain_skin",
+	"ryft:lavender_identified_sounds"
+  ],
+  "name": "Doll",
+  "description": "The shorter one",
+  "icon": "minecraft:pink_wool"
+}

@@ -12,8 +12,9 @@
     "sources": ""
   },
   
-  "license": "gpl-3.0",
   "icon": "assets/wich/icon.png",
+  
+  "accessWidener" : "wich.accesswidener",
 
   "environment": "*",
   "entrypoints": {
@@ -24,7 +25,7 @@
       "fun.mousewich.ModClient"
     ],
     "fabric-datagen": [
-      "fun.mousewich.ModDatagen"
+	  "fun.mousewich.gen.data.ModDatagen"
     ]
   },
   "mixins": [

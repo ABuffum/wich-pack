@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#T#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:netherite_nugget"
+    },
+    "T": {
+      "tag": "wich:torches"
+    }
+  },
+  "result": {
+    "item": "wich:netherite_lantern"
+  }
+}

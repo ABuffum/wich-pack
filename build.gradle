@@ -3,6 +3,10 @@ plugins {
 	id 'maven-publish'
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/wich.accesswidener")
+}
+
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
@@ -57,7 +61,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	// Farmers Delight
+	//Farmers Delight
 	modImplementation "curse.maven:farmers-delight-fabric-482834:${project.farmers_delight_version}"
 	//Origins
 	modImplementation "com.github.apace100:origins-fabric:${project.origins_version}"
@@ -81,6 +85,7 @@ loom {
 			name "Data Generation"
 			vmArg "-Dfabric-api.datagen"
 			vmArg "-Dfabric-api.datagen.output-dir=${file(dataOutput)}"
+			vmArg "-Dgeckolib.disable_examples=true"
 
 			runDir "build/datagen"
 		}

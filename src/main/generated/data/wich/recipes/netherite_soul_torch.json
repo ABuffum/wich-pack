@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "I"
+  ],
+  "key": {
+    "#": {
+      "tag": "wich:soul_torches"
+    },
+    "I": {
+      "item": "wich:netherite_nugget"
+    }
+  },
+  "result": {
+    "item": "wich:netherite_soul_torch",
+    "count": 4
+  }
+}

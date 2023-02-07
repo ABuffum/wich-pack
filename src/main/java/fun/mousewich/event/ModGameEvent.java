@@ -25,4 +25,11 @@ public class ModGameEvent {
 	public static GameEvent RegisterGameEvent(String id, int range) {
 		return Registry.register(Registry.GAME_EVENT, ModBase.ID(id), new GameEvent(id, range));
 	}
+	public static void RegisterAll() {
+		GameEvent[] events = new GameEvent[] {
+				BLOCK_ACTIVATE, BLOCK_DEACTIVATE, DRINK, ELYTRA_GLIDE, ENTITY_DAMAGE, ENTITY_DIE, ENTITY_INTERACT,
+				ENTITY_ROAR, ENTITY_SHAKE, INSTRUMENT_PLAY, ITEM_INTERACT_FINISH, ITEM_INTERACT_START, NOTE_BLOCK_PLAY,
+				SCULK_SENSOR_TENDRILS_CLICKING, SHRIEK, TELEPORT
+		};
+	}
 }

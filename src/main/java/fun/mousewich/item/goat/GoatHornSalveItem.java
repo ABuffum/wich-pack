@@ -1,6 +1,6 @@
 package fun.mousewich.item.goat;
 
-import fun.mousewich.sounds.ModSoundEvents;
+import fun.mousewich.sound.ModSoundEvents;
 import fun.mousewich.util.GoatUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.GoatEntity;

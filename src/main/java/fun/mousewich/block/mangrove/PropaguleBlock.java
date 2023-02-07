@@ -1,7 +1,7 @@
 package fun.mousewich.block.mangrove;
 
 import fun.mousewich.ModBase;
-import fun.mousewich.gen.features.MangroveSaplingGenerator;
+import fun.mousewich.gen.feature.MangroveSaplingGenerator;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -27,7 +27,13 @@ public class PropaguleBlock extends PlantBlock implements Fertilizable, Waterlog
 	public static final IntProperty STAGE = Properties.STAGE;
 	private final MangroveSaplingGenerator generator;
 	public static final IntProperty AGE = IntProperty.of("age", 0, 4);
-	private static final VoxelShape[] SHAPES = new VoxelShape[]{Block.createCuboidShape(7.0, 13.0, 7.0, 9.0, 16.0, 9.0), Block.createCuboidShape(7.0, 10.0, 7.0, 9.0, 16.0, 9.0), Block.createCuboidShape(7.0, 7.0, 7.0, 9.0, 16.0, 9.0), Block.createCuboidShape(7.0, 3.0, 7.0, 9.0, 16.0, 9.0), Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 16.0, 9.0)};
+	private static final VoxelShape[] SHAPES = new VoxelShape[] {
+			Block.createCuboidShape(7.0, 13.0, 7.0, 9.0, 16.0, 9.0),
+			Block.createCuboidShape(7.0, 10.0, 7.0, 9.0, 16.0, 9.0),
+			Block.createCuboidShape(7.0, 7.0, 7.0, 9.0, 16.0, 9.0),
+			Block.createCuboidShape(7.0, 3.0, 7.0, 9.0, 16.0, 9.0),
+			Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 16.0, 9.0)
+	};
 	private static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	public static final BooleanProperty HANGING = Properties.HANGING;
 
@@ -69,7 +75,7 @@ public class PropaguleBlock extends PlantBlock implements Fertilizable, Waterlog
 
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		if (PropaguleBlock.isHanging(state)) return world.getBlockState(pos.up()).isOf(ModBase.MANGROVE_LEAVES.getBlock());
+		if (PropaguleBlock.isHanging(state)) return world.getBlockState(pos.up()).isOf(ModBase.MANGROVE_LEAVES.asBlock());
 		return super.canPlaceAt(state, world, pos);
 	}
 
@@ -92,32 +98,32 @@ public class PropaguleBlock extends PlantBlock implements Fertilizable, Waterlog
 			if (random.nextInt(7) == 0) this.generate(world, pos, state, random);
 			return;
 		}
-		if (!PropaguleBlock.isFullyGrown(state)) world.setBlockState(pos, state.cycle(AGE), Block.NOTIFY_LISTENERS);
+		if (PropaguleBlock.isNotFullyGrown(state)) world.setBlockState(pos, state.cycle(AGE), Block.NOTIFY_LISTENERS);
 	}
 
 	@Override
 	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-		return !PropaguleBlock.isHanging(state) || !PropaguleBlock.isFullyGrown(state);
+		return !PropaguleBlock.isHanging(state) || PropaguleBlock.isNotFullyGrown(state);
 	}
 
 	@Override
 	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-		return PropaguleBlock.isHanging(state) ? !PropaguleBlock.isFullyGrown(state) : (double)world.random.nextFloat() < 0.45D;
+		return PropaguleBlock.isHanging(state) ? PropaguleBlock.isNotFullyGrown(state) : (double)world.random.nextFloat() < 0.45D;
 	}
 
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		if (PropaguleBlock.isHanging(state) && !PropaguleBlock.isFullyGrown(state)) {
+		if (PropaguleBlock.isHanging(state) && PropaguleBlock.isNotFullyGrown(state)) {
 			world.setBlockState(pos, state.cycle(AGE), Block.NOTIFY_LISTENERS);
 		}
 		else this.generate(world, pos, state, random);
 	}
 	private static boolean isHanging(BlockState state) { return state.get(HANGING); }
-	private static boolean isFullyGrown(BlockState state) { return state.get(AGE) == 4; }
+	private static boolean isNotFullyGrown(BlockState state) { return state.get(AGE) < 4; }
 	public static BlockState getDefaultHangingState() { return PropaguleBlock.getHangingState(0); }
 
 	public static BlockState getHangingState(int age) {
-		return ModBase.MANGROVE_PROPAGULE.getBlock().getDefaultState().with(HANGING, true).with(AGE, age);
+		return ModBase.MANGROVE_PROPAGULE.asBlock().getDefaultState().with(HANGING, true).with(AGE, age);
 	}
 }
 

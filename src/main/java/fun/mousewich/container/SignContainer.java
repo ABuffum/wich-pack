@@ -1,7 +1,7 @@
 package fun.mousewich.container;
 
-import fun.mousewich.ModBase;
-import fun.mousewich.ModDatagen;
+import fun.mousewich.gen.data.loot.DropTable;
+import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import fun.mousewich.mixins.SignTypeAccessor;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -14,12 +14,9 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.SignType;
 
 public class SignContainer extends WallBlockContainer {
-	private final SignType type;
+	protected final SignType type;
 	public SignType getType() { return type; }
 
-	public SignContainer(String name, Material material, BlockSoundGroup blockSoundGroup) {
-		this(name, material, blockSoundGroup, SignSettings());
-	}
 	public SignContainer(String name, Material material, BlockSoundGroup blockSoundGroup, Item.Settings itemSettings) {
 		this(SignTypeAccessor.registerNew(SignTypeAccessor.newSignType(name)), material, blockSoundGroup, itemSettings);
 	}
@@ -37,39 +34,31 @@ public class SignContainer extends WallBlockContainer {
 		this.type = type;
 	}
 
-	public static Item.Settings SignSettings() { return new Item.Settings().maxCount(16).group(ModBase.ITEM_GROUP); }
-
 	@Override
 	public SignContainer flammable(int burn, int spread) {
-		FlammableBlockRegistry.getDefaultInstance().add(getBlock(), burn, spread);
+		FlammableBlockRegistry.getDefaultInstance().add(asBlock(), burn, spread);
 		FlammableBlockRegistry.getDefaultInstance().add(getWallBlock(), burn, spread);
 		return this;
 	}
 	@Override
 	public SignContainer fuel(int fuelTime) {
-		FuelRegistry.INSTANCE.add(getItem(), fuelTime);
+		FuelRegistry.INSTANCE.add(this.item, fuelTime);
 		return this;
 	}
 	@Override
 	public SignContainer compostable(float chance) {
-		CompostingChanceRegistry.INSTANCE.add(getItem(), chance);
+		CompostingChanceRegistry.INSTANCE.add(this.item, chance);
 		return this;
 	}
 	@Override
 	public SignContainer dispenser(DispenserBehavior behavior) {
-		DispenserBlock.registerBehavior(getItem(), behavior);
+		DispenserBlock.registerBehavior(this.item, behavior);
 		return this;
 	}
 
-	public SignContainer drops(Item item) {
-		ModDatagen.BlockLootGenerator.Drops.put(this.getBlock(), item);
-		ModDatagen.BlockLootGenerator.Drops.put(this.getWallBlock(), item);
-		return this;
-	}
-	public SignContainer dropSelf() { return drops(this.getItem()); }
-	public SignContainer dropNothing() {
-		ModDatagen.BlockLootGenerator.DropNothing.add(this.getBlock());
-		ModDatagen.BlockLootGenerator.DropNothing.add(this.getWallBlock());
+	public SignContainer dropSelf() {
+		BlockLootGenerator.Drops.put(this.block, DropTable.Drops(this.item));
+		BlockLootGenerator.Drops.put(this.wallBlock, DropTable.Drops(this.item));
 		return this;
 	}
 }

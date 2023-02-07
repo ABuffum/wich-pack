@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:rainbow_fleece"
+    }
+  },
+  "result": {
+    "item": "wich:rainbow_fleece_slab",
+    "count": 6
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/sculk_stone_brick_slab"
+    },
+    "type=double": {
+      "model": "wich:block/sculk_stone_bricks"
+    },
+    "type=top": {
+      "model": "wich:block/sculk_stone_brick_slab_top"
+    }
+  }
+}

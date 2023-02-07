@@ -1,0 +1,12 @@
+{
+  "powers": [
+	"ryft:tougher_body",
+	"ryft:golem_hated",
+	"ryft:villager_hated",
+	"ryft:hostile_mobs_neutral",
+	"ryft:arsene_identified_sounds"
+  ],
+  "name": "Arsene",
+  "description": "Awfully arrogant of you to check your stats in your own mind.",
+  "icon": "betternether:nether_ruby"
+}

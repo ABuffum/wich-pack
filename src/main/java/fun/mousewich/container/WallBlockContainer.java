@@ -1,6 +1,7 @@
 package fun.mousewich.container;
 
-import fun.mousewich.ModDatagen;
+import fun.mousewich.gen.data.loot.DropTable;
+import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -10,12 +11,12 @@ import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.item.Item;
 
 public class WallBlockContainer implements IBlockItemContainer {
-	private final Block block;
-	public Block getBlock() { return block; }
-	private final Block wallBlock;
+	protected final Block block;
+	public Block asBlock() { return block; }
+	protected final Block wallBlock;
 	public Block getWallBlock() { return wallBlock; }
-	private final Item item;
-	public Item getItem() { return item; }
+	protected final Item item;
+	public Item asItem() { return item; }
 
 	public WallBlockContainer(Block block, Block wallBlock, Item item) {
 		this.block = block;
@@ -32,27 +33,21 @@ public class WallBlockContainer implements IBlockItemContainer {
 		return this;
 	}
 	public WallBlockContainer fuel(int fuelTime) {
-		FuelRegistry.INSTANCE.add(getItem(), fuelTime);
+		FuelRegistry.INSTANCE.add(this.item, fuelTime);
 		return this;
 	}
 	public WallBlockContainer compostable(float chance) {
-		CompostingChanceRegistry.INSTANCE.add(getItem(), chance);
+		CompostingChanceRegistry.INSTANCE.add(this.item, chance);
 		return this;
 	}
 	public WallBlockContainer dispenser(DispenserBehavior behavior) {
-		DispenserBlock.registerBehavior(getItem(), behavior);
+		DispenserBlock.registerBehavior(this.item, behavior);
 		return this;
 	}
 
-	public WallBlockContainer drops(Item item) {
-		ModDatagen.BlockLootGenerator.Drops.put(this.block, item);
-		ModDatagen.BlockLootGenerator.Drops.put(this.wallBlock, item);
-		return this;
-	}
-	public WallBlockContainer dropSelf() { return drops(this.item); }
-	public WallBlockContainer dropNothing() {
-		ModDatagen.BlockLootGenerator.DropNothing.add(this.block);
-		ModDatagen.BlockLootGenerator.DropNothing.add(this.wallBlock);
+	public WallBlockContainer dropSelf() {
+		BlockLootGenerator.Drops.put(this.block, DropTable.Drops(this.item));
+		BlockLootGenerator.Drops.put(this.wallBlock, DropTable.Drops(this.item));
 		return this;
 	}
 }

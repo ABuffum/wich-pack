@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:charred_planks"
+    }
+  ],
+  "result": {
+    "item": "wich:charred_button"
+  }
+}

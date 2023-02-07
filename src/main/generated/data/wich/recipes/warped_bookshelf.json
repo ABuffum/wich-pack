@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "XXX",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_planks"
+    },
+    "X": {
+      "tag": "wich:books"
+    }
+  },
+  "result": {
+    "item": "wich:warped_bookshelf"
+  }
+}

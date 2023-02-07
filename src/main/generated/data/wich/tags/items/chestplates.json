@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:leather_chestplate",
+    "minecraft:chainmail_chestplate",
+    "minecraft:iron_chestplate",
+    "minecraft:golden_chestplate",
+    "minecraft:diamond_chestplate",
+    "minecraft:netherite_chestplate",
+    "wich:amethyst_chestplate",
+    "wich:emerald_chestplate",
+    "wich:fleece_chestplate",
+    "wich:quartz_chestplate",
+    "wich:studded_leather_chestplate"
+  ]
+}

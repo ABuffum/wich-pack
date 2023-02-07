@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "wich:block/stripped_charred_log_top",
+    "side": "wich:block/stripped_charred_log"
+  }
+}
