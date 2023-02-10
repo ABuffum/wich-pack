@@ -1,7 +1,7 @@
 package fun.mousewich.container;
 
-import fun.mousewich.ModBase;
 import fun.mousewich.dispenser.ModBoatDispenserBehavior;
+import fun.mousewich.item.basic.ChestBoatItem;
 import fun.mousewich.item.basic.ModBoatItem;
 import fun.mousewich.entity.vehicle.ModBoatType;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -16,13 +16,16 @@ public class BoatContainer implements IContainer, ItemConvertible {
 	protected final Item item;
 	@Override
 	public Item asItem() { return this.item; }
+	protected final Item chest;
+	public Item getChestBoat() { return this.chest; }
 
 	public BoatContainer(String name, IBlockItemContainer baseBlock, boolean floatsOnLava, Item.Settings itemSettings) {
 		this(name, baseBlock.asBlock(), floatsOnLava, itemSettings);
 	}
 	public BoatContainer(String name, Block baseBlock, boolean floatsOnLava, Item.Settings itemSettings) {
-		type = ModBoatType.Register(new ModBoatType(baseBlock, name, this::asItem, floatsOnLava));
+		type = ModBoatType.Register(new ModBoatType(baseBlock, name, this::asItem, this::getChestBoat, floatsOnLava));
 		item = new ModBoatItem(type, itemSettings);
+		chest = new ChestBoatItem(type, itemSettings);
 	}
 
 	@Override

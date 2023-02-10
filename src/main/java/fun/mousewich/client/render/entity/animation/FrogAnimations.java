@@ -3,429 +3,63 @@ package fun.mousewich.client.render.entity.animation;
 import fun.mousewich.client.render.entity.model.ModEntityModelPartNames;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import fun.mousewich.client.render.entity.animation.ModAnimation.Builder;
-import fun.mousewich.client.render.entity.animation.ModTransformation.Interpolations;
-import fun.mousewich.client.render.entity.animation.ModTransformation.Targets;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 
-@Environment(EnvType.CLIENT)
+@Environment(value=EnvType.CLIENT)
 public class FrogAnimations {
-    public static final ModAnimation CROAKING = Builder.create(3.0F)
-            .addBoneAnimation(
-                    ModEntityModelPartNames.CROAKING_BODY,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.375F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.4167F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41823(0.0F, 1.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(2.9583F, AnimationUtils.method_41823(0.0F, 1.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )/*
-            .addBoneAnimation(
-                    ModEntityModelPartNames.CROAKING_BODY,
-                    new ModTransformation(
-                            Targets.SCALE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41822(0.0, 0.0, 0.0), Interpolations.field_37884),
-                            new ModKeyframe(0.375F, AnimationUtils.method_41822(0.0, 0.0, 0.0), Interpolations.field_37884),
-                            new ModKeyframe(0.4167F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
-                            new ModKeyframe(0.5417F, AnimationUtils.method_41822(1.3F, 2.1F, 1.6F), Interpolations.field_37884),
-                            new ModKeyframe(0.625F, AnimationUtils.method_41822(1.3F, 2.1F, 1.6F), Interpolations.field_37884),
-                            new ModKeyframe(0.7083F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
-                            new ModKeyframe(2.25F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
-                            new ModKeyframe(2.3333F, AnimationUtils.method_41822(1.3F, 2.1F, 1.6F), Interpolations.field_37884),
-                            new ModKeyframe(2.4167F, AnimationUtils.method_41822(1.3F, 2.1F, 1.6F), Interpolations.field_37884),
-                            new ModKeyframe(2.5F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
-                            new ModKeyframe(2.5833F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
-                            new ModKeyframe(2.6667F, AnimationUtils.method_41822(1.3F, 2.1F, 1.6F), Interpolations.field_37884),
-                            new ModKeyframe(2.875F, AnimationUtils.method_41822(1.3F, 2.1F, 1.6F), Interpolations.field_37884),
-                            new ModKeyframe(2.9583F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41822(0.0, 0.0, 0.0), Interpolations.field_37884))
-            )*/
-            .build();
-    public static final ModAnimation WALKING = Builder.create(1.25F)
-            .looping()
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_ARM,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, -5.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.2917F, AnimationUtils.method_41829(7.5F, -2.67F, -7.5F), Interpolations.field_37884),
-                            new ModKeyframe(0.625F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41829(22.5F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(1.125F, AnimationUtils.method_41829(-45.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41829(0.0F, -5.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_ARM,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 0.1F, -2.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.2917F, AnimationUtils.method_41823(-0.5F, -0.25F, -0.13F), Interpolations.field_37884),
-                            new ModKeyframe(0.625F, AnimationUtils.method_41823(-0.5F, 0.1F, 2.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41823(0.5F, 1.0F, -0.11F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41823(0.0F, 0.1F, -2.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_ARM,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.125F, AnimationUtils.method_41829(22.5F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41829(-45.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.625F, AnimationUtils.method_41829(0.0F, 5.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41829(7.5F, 2.33F, 7.5F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_ARM,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.5F, 0.1F, 2.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.2917F, AnimationUtils.method_41823(-0.5F, 1.0F, 0.12F), Interpolations.field_37884),
-                            new ModKeyframe(0.625F, AnimationUtils.method_41823(0.0F, 0.1F, -2.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41823(0.5F, -0.25F, -0.13F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41823(0.5F, 0.1F, 2.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_LEG,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.1667F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.2917F, AnimationUtils.method_41829(45.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.625F, AnimationUtils.method_41829(-45.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_LEG,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 0.1F, 1.2F), Interpolations.field_37884),
-                            new ModKeyframe(0.1667F, AnimationUtils.method_41823(0.0F, 0.1F, 2.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41823(0.0F, 2.0F, 1.06F), Interpolations.field_37884),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41823(0.0F, 0.1F, -1.0F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41823(0.0F, 0.1F, 1.2F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_LEG,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(-33.75F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.0417F, AnimationUtils.method_41829(-45.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.1667F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41829(45.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41829(-33.75F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_LEG,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 1.14F, 0.11F), Interpolations.field_37884),
-                            new ModKeyframe(0.1667F, AnimationUtils.method_41823(0.0F, 0.1F, -1.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41823(0.0F, 0.1F, 2.0F), Interpolations.field_37884),
-                            new ModKeyframe(1.125F, AnimationUtils.method_41823(0.0F, 2.0F, 0.95F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41823(0.0F, 1.14F, 0.11F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.BODY,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 5.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.2917F, AnimationUtils.method_41829(-7.5F, 0.33F, 7.5F), Interpolations.field_37884),
-                            new ModKeyframe(0.625F, AnimationUtils.method_41829(0.0F, -5.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41829(-7.5F, 0.33F, -7.5F), Interpolations.field_37884),
-                            new ModKeyframe(1.25F, AnimationUtils.method_41829(0.0F, 5.0F, 0.0F), Interpolations.field_37884))
-            )
-            .build();
-    public static final ModAnimation LONG_JUMPING = Builder.create(0.5F)
-            .addBoneAnimation(
-                    EntityModelPartNames.BODY,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(-22.5F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41829(-22.5F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.BODY,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_ARM,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(-56.14F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41829(-56.14F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_ARM,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 1.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41823(0.0F, 1.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_ARM,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(-56.14F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41829(-56.14F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_ARM,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 1.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41823(0.0F, 1.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_LEG,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(45.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41829(45.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_LEG,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_LEG,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(45.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41829(45.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_LEG,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )
-            .build();
-    public static final ModAnimation USING_TONGUE = Builder.create(0.5F)
-            .addBoneAnimation(
-                    EntityModelPartNames.HEAD,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.0833F, AnimationUtils.method_41829(-60.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.4167F, AnimationUtils.method_41829(-60.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )/*
-            .addBoneAnimation(
-                    EntityModelPartNames.HEAD,
-                    new ModTransformation(
-                            Targets.SCALE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(1.0F, 1.0F, 1.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.0833F, AnimationUtils.method_41829(0.998F, 1.0F, 1.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.4167F, AnimationUtils.method_41829(0.998F, 1.0F, 1.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41829(1.0F, 1.0F, 1.0F), Interpolations.field_37884))
-            )*/
-            .addBoneAnimation(
-                    ModEntityModelPartNames.TONGUE,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.0833F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.4167F, AnimationUtils.method_41829(-18.0F, 0.0F, 0.0F), Interpolations.field_37884),
-                            new ModKeyframe(0.5F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37884))
-            )/*
-            .addBoneAnimation(
-                    ModEntityModelPartNames.TONGUE,
-                    new ModTransformation(
-                            Targets.SCALE,
-                            new ModKeyframe(0.0833F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884),
-                            new ModKeyframe(0.1667F, AnimationUtils.method_41822(0.5, 1.0, 5.0), Interpolations.field_37884),
-                            new ModKeyframe(0.4167F, AnimationUtils.method_41822(1.0, 1.0, 1.0), Interpolations.field_37884))
-            )*/
-            .build();
-    public static final ModAnimation SWIMMING = Builder.create(1.04167F)
-            .looping()
-            .addBoneAnimation(
-                    EntityModelPartNames.BODY,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.3333F, AnimationUtils.method_41829(10.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.6667F, AnimationUtils.method_41829(-10.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_ARM,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(90.0F, 22.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41829(45.0F, 22.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.6667F, AnimationUtils.method_41829(-22.5F, -22.5F, -22.5F), Interpolations.field_37885),
-                            new ModKeyframe(0.875F, AnimationUtils.method_41829(-45.0F, -22.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41829(22.5F, 0.0F, 22.5F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41829(90.0F, 22.5F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_ARM,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, -0.64F, 2.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41823(0.0F, -0.64F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.6667F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.875F, AnimationUtils.method_41823(0.0F, -0.27F, -1.14F), Interpolations.field_37885),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41823(0.0F, -1.45F, 0.43F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41823(0.0F, -0.64F, 2.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_ARM,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(90.0F, -22.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41829(45.0F, -22.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.6667F, AnimationUtils.method_41829(-22.5F, 22.5F, 22.5F), Interpolations.field_37885),
-                            new ModKeyframe(0.875F, AnimationUtils.method_41829(-45.0F, 22.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41829(22.5F, 0.0F, -22.5F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41829(90.0F, -22.5F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_ARM,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, -0.64F, 2.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41823(0.0F, -0.64F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.6667F, AnimationUtils.method_41823(0.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.875F, AnimationUtils.method_41823(0.0F, -0.27F, -1.14F), Interpolations.field_37885),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41823(0.0F, -1.45F, 0.43F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41823(0.0F, -0.64F, 2.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_LEG,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(90.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.25F, AnimationUtils.method_41829(90.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41829(67.5F, -45.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41829(90.0F, 45.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41829(90.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41829(90.0F, 0.0F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_LEG,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(-2.5F, 0.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.25F, AnimationUtils.method_41823(-2.0F, 0.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41823(1.0F, -2.0F, -1.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41823(0.58F, 0.0F, -2.83F), Interpolations.field_37885),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41823(-2.5F, 0.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41823(-2.5F, 0.0F, 1.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_LEG,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(90.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.25F, AnimationUtils.method_41829(90.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41829(67.5F, 45.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41829(90.0F, -45.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41829(90.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41829(90.0F, 0.0F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_LEG,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(2.5F, 0.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.25F, AnimationUtils.method_41823(2.0F, 0.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.4583F, AnimationUtils.method_41823(-1.0F, -2.0F, -1.0F), Interpolations.field_37885),
-                            new ModKeyframe(0.7917F, AnimationUtils.method_41823(-0.58F, 0.0F, -2.83F), Interpolations.field_37885),
-                            new ModKeyframe(0.9583F, AnimationUtils.method_41823(2.5F, 0.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0417F, AnimationUtils.method_41823(2.5F, 0.0F, 1.0F), Interpolations.field_37885))
-            )
-            .build();
-    public static final ModAnimation IDLING_IN_WATER = Builder.create(3.0F)
-            .looping()
-            .addBoneAnimation(
-                    EntityModelPartNames.BODY,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.625F, AnimationUtils.method_41829(-10.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41829(0.0F, 0.0F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_ARM,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 0.0F, -22.5F), Interpolations.field_37885),
-                            new ModKeyframe(2.2083F, AnimationUtils.method_41829(0.0F, 0.0F, -45.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41829(0.0F, 0.0F, -22.5F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_ARM,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(-1.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(2.2083F, AnimationUtils.method_41823(-1.0F, -0.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41823(-1.0F, 0.0F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_ARM,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(0.0F, 0.0F, 22.5F), Interpolations.field_37885),
-                            new ModKeyframe(2.2083F, AnimationUtils.method_41829(0.0F, 0.0F, 45.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41829(0.0F, 0.0F, 22.5F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_ARM,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(1.0F, 0.0F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(2.2083F, AnimationUtils.method_41823(1.0F, -0.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41823(1.0F, 0.0F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_LEG,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(22.5F, -22.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0F, AnimationUtils.method_41829(22.5F, -22.5F, -45.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41829(22.5F, -22.5F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.LEFT_LEG,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 0.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0F, AnimationUtils.method_41823(0.0F, -1.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41823(0.0F, 0.0F, 1.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_LEG,
-                    new ModTransformation(
-                            Targets.ROTATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41829(22.5F, 22.5F, 0.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0F, AnimationUtils.method_41829(22.5F, 22.5F, 45.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41829(22.5F, 22.5F, 0.0F), Interpolations.field_37885))
-            )
-            .addBoneAnimation(
-                    EntityModelPartNames.RIGHT_LEG,
-                    new ModTransformation(
-                            Targets.TRANSLATE,
-                            new ModKeyframe(0.0F, AnimationUtils.method_41823(0.0F, 0.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(1.0F, AnimationUtils.method_41823(0.0F, -1.0F, 1.0F), Interpolations.field_37885),
-                            new ModKeyframe(3.0F, AnimationUtils.method_41823(0.0F, 0.0F, 1.0F), Interpolations.field_37885))
-            )
-            .build();
-
-    public FrogAnimations() {
-    }
+        public static final Animation CROAKING = Animation.Builder.create(3.0f)
+                .addBoneAnimation(ModEntityModelPartNames.CROAKING_BODY, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.375f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.4167f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.4583f, AnimationHelper.createTranslationalVector(0.0f, 1.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(2.9583f, AnimationHelper.createTranslationalVector(0.0f, 1.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(3.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                //.addBoneAnimation(ModEntityModelPartNames.CROAKING_BODY, new ModTransformation(ModTransformation.Targets.SCALE, new ModKeyframe(0.0f, AnimationHelper.createScalingVector(0.0, 0.0, 0.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.375f, AnimationHelper.createScalingVector(0.0, 0.0, 0.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.4167f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.4583f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.5417f, AnimationHelper.createScalingVector(1.3f, 2.1f, 1.6f), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.625f, AnimationHelper.createScalingVector(1.3f, 2.1f, 1.6f), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.7083f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(2.25f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(2.3333f, AnimationHelper.createScalingVector(1.3f, 2.1f, 1.6f), ModTransformation.Interpolations.field_37884), new ModKeyframe(2.4167f, AnimationHelper.createScalingVector(1.3f, 2.1f, 1.6f), ModTransformation.Interpolations.field_37884), new ModKeyframe(2.5f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(2.5833f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(2.6667f, AnimationHelper.createScalingVector(1.3f, 2.1f, 1.6f), ModTransformation.Interpolations.field_37884), new ModKeyframe(2.875f, AnimationHelper.createScalingVector(1.3f, 2.1f, 1.6f), ModTransformation.Interpolations.field_37884), new ModKeyframe(2.9583f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(3.0f, AnimationHelper.createScalingVector(0.0, 0.0, 0.0), ModTransformation.Interpolations.field_37884)))
+                .build();
+        public static final Animation WALKING = Animation.Builder.create(1.25f).looping()
+                .addBoneAnimation(EntityModelPartNames.LEFT_ARM, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, -5.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.2917f, AnimationHelper.createRotationalVector(7.5f, -2.67f, -7.5f), Transformation.Interpolations.LINEAR), new Keyframe(0.625f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.7917f, AnimationHelper.createRotationalVector(22.5f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(1.125f, AnimationHelper.createRotationalVector(-45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createRotationalVector(0.0f, -5.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_ARM, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, -2.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.2917f, AnimationHelper.createTranslationalVector(-0.5f, -0.25f, -0.13f), Transformation.Interpolations.LINEAR), new Keyframe(0.625f, AnimationHelper.createTranslationalVector(-0.5f, 0.1f, 2.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.9583f, AnimationHelper.createTranslationalVector(0.5f, 1.0f, -0.11f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, -2.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_ARM, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.125f, AnimationHelper.createRotationalVector(22.5f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.4583f, AnimationHelper.createRotationalVector(-45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.625f, AnimationHelper.createRotationalVector(0.0f, 5.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.9583f, AnimationHelper.createRotationalVector(7.5f, 2.33f, 7.5f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_ARM, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.5f, 0.1f, 2.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.2917f, AnimationHelper.createTranslationalVector(-0.5f, 1.0f, 0.12f), Transformation.Interpolations.LINEAR), new Keyframe(0.625f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, -2.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.9583f, AnimationHelper.createTranslationalVector(0.5f, -0.25f, -0.13f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createTranslationalVector(0.5f, 0.1f, 2.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_LEG, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.1667f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.2917f, AnimationHelper.createRotationalVector(45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.625f, AnimationHelper.createRotationalVector(-45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.7917f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_LEG, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, 1.2f), Transformation.Interpolations.LINEAR), new Keyframe(0.1667f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, 2.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.4583f, AnimationHelper.createTranslationalVector(0.0f, 2.0f, 1.06f), Transformation.Interpolations.LINEAR), new Keyframe(0.7917f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, -1.0f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, 1.2f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_LEG, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(-33.75f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.0417f, AnimationHelper.createRotationalVector(-45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.1667f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.7917f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.9583f, AnimationHelper.createRotationalVector(45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createRotationalVector(-33.75f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_LEG, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 1.14f, 0.11f), Transformation.Interpolations.LINEAR), new Keyframe(0.1667f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, -1.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.7917f, AnimationHelper.createTranslationalVector(0.0f, 0.1f, 2.0f), Transformation.Interpolations.LINEAR), new Keyframe(1.125f, AnimationHelper.createTranslationalVector(0.0f, 2.0f, 0.95f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createTranslationalVector(0.0f, 1.14f, 0.11f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.BODY, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 5.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.2917f, AnimationHelper.createRotationalVector(-7.5f, 0.33f, 7.5f), Transformation.Interpolations.LINEAR), new Keyframe(0.625f, AnimationHelper.createRotationalVector(0.0f, -5.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.9583f, AnimationHelper.createRotationalVector(-7.5f, 0.33f, -7.5f), Transformation.Interpolations.LINEAR), new Keyframe(1.25f, AnimationHelper.createRotationalVector(0.0f, 5.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .build();
+        public static final Animation LONG_JUMPING = Animation.Builder.create(0.5f)
+                .addBoneAnimation(EntityModelPartNames.BODY, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(-22.5f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createRotationalVector(-22.5f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.BODY, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_ARM, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(-56.14f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createRotationalVector(-56.14f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_ARM, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 1.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createTranslationalVector(0.0f, 1.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_ARM, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(-56.14f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createRotationalVector(-56.14f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_ARM, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 1.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createTranslationalVector(0.0f, 1.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_LEG, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createRotationalVector(45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_LEG, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_LEG, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createRotationalVector(45.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_LEG, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                .build();
+        public static final Animation USING_TONGUE = Animation.Builder.create(0.5f)
+                .addBoneAnimation(EntityModelPartNames.HEAD, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.0833f, AnimationHelper.createRotationalVector(-60.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.4167f, AnimationHelper.createRotationalVector(-60.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                //.addBoneAnimation(EntityModelPartNames.HEAD, new ModTransformation(ModTransformation.Targets.SCALE, new ModKeyframe(0.0f, AnimationHelper.createRotationalVector(1.0f, 1.0f, 1.0f), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.0833f, AnimationHelper.createRotationalVector(0.998f, 1.0f, 1.0f), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.4167f, AnimationHelper.createRotationalVector(0.998f, 1.0f, 1.0f), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.5f, AnimationHelper.createRotationalVector(1.0f, 1.0f, 1.0f), ModTransformation.Interpolations.field_37884)))
+                .addBoneAnimation(ModEntityModelPartNames.TONGUE, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.0833f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.4167f, AnimationHelper.createRotationalVector(-18.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR), new Keyframe(0.5f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.LINEAR)))
+                //.addBoneAnimation(ModEntityModelPartNames.TONGUE, new ModTransformation(ModTransformation.Targets.SCALE, new ModKeyframe(0.0833f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.1667f, AnimationHelper.createScalingVector(0.5, 1.0, 5.0), ModTransformation.Interpolations.field_37884), new ModKeyframe(0.4167f, AnimationHelper.createScalingVector(1.0, 1.0, 1.0), ModTransformation.Interpolations.field_37884)))
+                .build();
+        public static final Animation SWIMMING = Animation.Builder.create(1.04167f).looping()
+                .addBoneAnimation(EntityModelPartNames.BODY, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.3333f, AnimationHelper.createRotationalVector(10.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.6667f, AnimationHelper.createRotationalVector(-10.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_ARM, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(90.0f, 22.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.4583f, AnimationHelper.createRotationalVector(45.0f, 22.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.6667f, AnimationHelper.createRotationalVector(-22.5f, -22.5f, -22.5f), Transformation.Interpolations.CUBIC), new Keyframe(0.875f, AnimationHelper.createRotationalVector(-45.0f, -22.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.9583f, AnimationHelper.createRotationalVector(22.5f, 0.0f, 22.5f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createRotationalVector(90.0f, 22.5f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_ARM, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, -0.64f, 2.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.4583f, AnimationHelper.createTranslationalVector(0.0f, -0.64f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.6667f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.875f, AnimationHelper.createTranslationalVector(0.0f, -0.27f, -1.14f), Transformation.Interpolations.CUBIC), new Keyframe(0.9583f, AnimationHelper.createTranslationalVector(0.0f, -1.45f, 0.43f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createTranslationalVector(0.0f, -0.64f, 2.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_ARM, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(90.0f, -22.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.4583f, AnimationHelper.createRotationalVector(45.0f, -22.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.6667f, AnimationHelper.createRotationalVector(-22.5f, 22.5f, 22.5f), Transformation.Interpolations.CUBIC), new Keyframe(0.875f, AnimationHelper.createRotationalVector(-45.0f, 22.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.9583f, AnimationHelper.createRotationalVector(22.5f, 0.0f, -22.5f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createRotationalVector(90.0f, -22.5f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_ARM, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, -0.64f, 2.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.4583f, AnimationHelper.createTranslationalVector(0.0f, -0.64f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.6667f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.875f, AnimationHelper.createTranslationalVector(0.0f, -0.27f, -1.14f), Transformation.Interpolations.CUBIC), new Keyframe(0.9583f, AnimationHelper.createTranslationalVector(0.0f, -1.45f, 0.43f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createTranslationalVector(0.0f, -0.64f, 2.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_LEG, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(90.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.25f, AnimationHelper.createRotationalVector(90.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.4583f, AnimationHelper.createRotationalVector(67.5f, -45.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.7917f, AnimationHelper.createRotationalVector(90.0f, 45.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.9583f, AnimationHelper.createRotationalVector(90.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createRotationalVector(90.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_LEG, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(-2.5f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.25f, AnimationHelper.createTranslationalVector(-2.0f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.4583f, AnimationHelper.createTranslationalVector(1.0f, -2.0f, -1.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.7917f, AnimationHelper.createTranslationalVector(0.58f, 0.0f, -2.83f), Transformation.Interpolations.CUBIC), new Keyframe(0.9583f, AnimationHelper.createTranslationalVector(-2.5f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createTranslationalVector(-2.5f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_LEG, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(90.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.25f, AnimationHelper.createRotationalVector(90.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.4583f, AnimationHelper.createRotationalVector(67.5f, 45.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.7917f, AnimationHelper.createRotationalVector(90.0f, -45.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.9583f, AnimationHelper.createRotationalVector(90.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createRotationalVector(90.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_LEG, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(2.5f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.25f, AnimationHelper.createTranslationalVector(2.0f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.4583f, AnimationHelper.createTranslationalVector(-1.0f, -2.0f, -1.0f), Transformation.Interpolations.CUBIC), new Keyframe(0.7917f, AnimationHelper.createTranslationalVector(-0.58f, 0.0f, -2.83f), Transformation.Interpolations.CUBIC), new Keyframe(0.9583f, AnimationHelper.createTranslationalVector(2.5f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0417f, AnimationHelper.createTranslationalVector(2.5f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC)))
+                .build();
+        public static final Animation IDLING_IN_WATER = Animation.Builder.create(3.0f).looping()
+                .addBoneAnimation(EntityModelPartNames.BODY, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.625f, AnimationHelper.createRotationalVector(-10.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_ARM, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, -22.5f), Transformation.Interpolations.CUBIC), new Keyframe(2.2083f, AnimationHelper.createRotationalVector(0.0f, 0.0f, -45.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, -22.5f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_ARM, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(-1.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(2.2083f, AnimationHelper.createTranslationalVector(-1.0f, -0.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createTranslationalVector(-1.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_ARM, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 22.5f), Transformation.Interpolations.CUBIC), new Keyframe(2.2083f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 45.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createRotationalVector(0.0f, 0.0f, 22.5f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_ARM, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(1.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(2.2083f, AnimationHelper.createTranslationalVector(1.0f, -0.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createTranslationalVector(1.0f, 0.0f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_LEG, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(22.5f, -22.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0f, AnimationHelper.createRotationalVector(22.5f, -22.5f, -45.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createRotationalVector(22.5f, -22.5f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.LEFT_LEG, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0f, AnimationHelper.createTranslationalVector(0.0f, -1.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_LEG, new Transformation(Transformation.Targets.ROTATE, new Keyframe(0.0f, AnimationHelper.createRotationalVector(22.5f, 22.5f, 0.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0f, AnimationHelper.createRotationalVector(22.5f, 22.5f, 45.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createRotationalVector(22.5f, 22.5f, 0.0f), Transformation.Interpolations.CUBIC)))
+                .addBoneAnimation(EntityModelPartNames.RIGHT_LEG, new Transformation(Transformation.Targets.TRANSLATE, new Keyframe(0.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(1.0f, AnimationHelper.createTranslationalVector(0.0f, -1.0f, 1.0f), Transformation.Interpolations.CUBIC), new Keyframe(3.0f, AnimationHelper.createTranslationalVector(0.0f, 0.0f, 1.0f), Transformation.Interpolations.CUBIC)))
+                .build();
 }

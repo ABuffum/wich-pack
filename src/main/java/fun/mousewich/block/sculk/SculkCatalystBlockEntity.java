@@ -1,14 +1,18 @@
 package fun.mousewich.block.sculk;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.advancement.ModCriteria;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.mixins.entity.LivingEntityAccessor;
 import fun.mousewich.util.VectorUtils;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -42,8 +46,8 @@ public class SculkCatalystBlockEntity extends BlockEntity implements GameEventLi
 			if (lea.ShouldDropXp()) {
 				int i = lea.GetXpToDrop(null);
 				if (lea.ShouldDropXp() && i > 0) {
-					Vec3d vec3d = Vec3d.ofCenter(pos);
-					this.spreadManager.spread(new BlockPos(VectorUtils.withBias(vec3d, Direction.UP, 0.5)), i);
+					this.spreadManager.spread(new BlockPos(VectorUtils.withBias(Vec3d.ofCenter(pos), Direction.UP, 0.5)), i);
+					this.triggerCriteria(livingEntity);
 				}
 				//livingEntity.disableExperienceDropping();
 				if (world instanceof ServerWorld serverWorld) SculkCatalystBlock.bloom(serverWorld, this.pos, this.getCachedState(), world.getRandom());
@@ -51,6 +55,13 @@ public class SculkCatalystBlockEntity extends BlockEntity implements GameEventLi
 			return true;
 		}
 		return false;
+	}
+	private void triggerCriteria(LivingEntity deadEntity) {
+		LivingEntity livingEntity = deadEntity.getAttacker();
+		if (livingEntity instanceof ServerPlayerEntity serverPlayerEntity) {
+			DamageSource damageSource = deadEntity.getRecentDamageSource() == null ? DamageSource.player(serverPlayerEntity) : deadEntity.getRecentDamageSource();
+			ModCriteria.KILL_MOB_NEAR_SCULK_CATALYST.trigger(serverPlayerEntity, deadEntity, damageSource);
+		}
 	}
 	public static void tick(World world, BlockPos pos, BlockState state, SculkCatalystBlockEntity blockEntity) {
 		blockEntity.spreadManager.tick(world, pos, world.getRandom(), true);

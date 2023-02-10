@@ -3,6 +3,6 @@
 	"effects": [
 		"minecraft:hunger"
 	],
-	"name": "Hardy stomache",
-	"description": "You have a resiliant digestive system, allowing you to consume without fear of food poisoning."
+	"name": "Hardy stomach",
+	"description": "You have a resiliant digestive system, allowing you to consume food without fear of food poisoning."
 }

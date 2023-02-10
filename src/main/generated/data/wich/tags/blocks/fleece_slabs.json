@@ -1,22 +1,22 @@
 {
   "replace": false,
   "values": [
-    "wich:black_fleece_slab",
-    "wich:pink_fleece_slab",
-    "wich:yellow_fleece_slab",
     "wich:gray_fleece_slab",
-    "wich:light_gray_fleece_slab",
     "wich:brown_fleece_slab",
-    "wich:purple_fleece_slab",
+    "wich:blue_fleece_slab",
+    "wich:black_fleece_slab",
+    "wich:light_gray_fleece_slab",
     "wich:white_fleece_slab",
-    "wich:orange_fleece_slab",
+    "wich:yellow_fleece_slab",
+    "wich:magenta_fleece_slab",
     "wich:green_fleece_slab",
     "wich:lime_fleece_slab",
-    "wich:red_fleece_slab",
-    "wich:blue_fleece_slab",
-    "wich:magenta_fleece_slab",
-    "wich:cyan_fleece_slab",
+    "wich:pink_fleece_slab",
     "wich:light_blue_fleece_slab",
+    "wich:red_fleece_slab",
+    "wich:purple_fleece_slab",
+    "wich:orange_fleece_slab",
+    "wich:cyan_fleece_slab",
     "wich:rainbow_fleece_slab"
   ]
 }

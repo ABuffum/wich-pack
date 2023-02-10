@@ -7,7 +7,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Dynamic;
 import fun.mousewich.ModBase;
 import fun.mousewich.entity.ModActivities;
-import fun.mousewich.entity.ai.DismountVehicleTask;
+import fun.mousewich.entity.ai.task.DismountVehicleTask;
 import fun.mousewich.entity.ai.ModMemoryModules;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.*;
@@ -62,13 +62,24 @@ public class WardenBrain {
 		brain.setTaskList(ModActivities.EMERGE, 5, ImmutableList.of(new EmergeTask<>(EMERGE_DURATION)), ModMemoryModules.IS_EMERGING);
 	}
 	private static void addDigActivities(Brain<WardenEntity> brain) {
-		brain.setTaskList(ModActivities.DIG, ImmutableList.of(Pair.of(0, new DismountVehicleTask()), Pair.of(1, new DigTask<>(DIG_DURATION))), ImmutableSet.of(Pair.of(ModMemoryModules.ROAR_TARGET, MemoryModuleState.VALUE_ABSENT), Pair.of(ModMemoryModules.DIG_COOLDOWN, MemoryModuleState.VALUE_ABSENT)));
+		brain.setTaskList(ModActivities.DIG, ImmutableList.of(
+				Pair.of(0, new DismountVehicleTask()),
+				Pair.of(1, new DigTask<>(DIG_DURATION))),
+				ImmutableSet.of(
+						Pair.of(ModMemoryModules.ROAR_TARGET, MemoryModuleState.VALUE_ABSENT),
+						Pair.of(ModMemoryModules.DIG_COOLDOWN, MemoryModuleState.VALUE_ABSENT)));
 	}
 	private static void addIdleActivities(Brain<WardenEntity> brain) {
-		brain.setTaskList(Activity.IDLE, 10, ImmutableList.of(new FindRoarTargetTask<>(WardenEntity::getPrimeSuspect), new StartSniffingTask(), new RandomTask<>(ImmutableMap.of(ModMemoryModules.IS_SNIFFING, MemoryModuleState.VALUE_ABSENT), ImmutableList.of(Pair.of(new StrollTask(0.5f), 2), Pair.of(new WaitTask(30, 60), 1)))));
+		brain.setTaskList(Activity.IDLE, 10, ImmutableList.of(
+				new FindRoarTargetTask<>(WardenEntity::getPrimeSuspect),
+				new StartSniffingTask(),
+				new RandomTask<>(ImmutableMap.of(ModMemoryModules.IS_SNIFFING, MemoryModuleState.VALUE_ABSENT),
+						ImmutableList.of(Pair.of(new StrollTask(0.5f), 2), Pair.of(new WaitTask(30, 60), 1)))));
 	}
 	private static void addInvestigateActivities(Brain<WardenEntity> brain) {
-		brain.setTaskList(ModActivities.INVESTIGATE, 5, ImmutableList.of(new FindRoarTargetTask<>(WardenEntity::getPrimeSuspect), new WardenGoToCelebrateTask<>(ModMemoryModules.DISTURBANCE_LOCATION, 2, 0.7f)), ModMemoryModules.DISTURBANCE_LOCATION);
+		brain.setTaskList(ModActivities.INVESTIGATE, 5, ImmutableList.of(
+				new FindRoarTargetTask<>(WardenEntity::getPrimeSuspect),
+				new WardenGoToCelebrateTask<>(ModMemoryModules.DISTURBANCE_LOCATION, 2, 0.7f)), ModMemoryModules.DISTURBANCE_LOCATION);
 	}
 	private static void addSniffActivities(Brain<WardenEntity> brain) {
 		brain.setTaskList(ModActivities.SNIFF, 5, ImmutableList.of(new FindRoarTargetTask<>(WardenEntity::getPrimeSuspect), new SniffTask<>(SNIFF_DURATION)), ModMemoryModules.IS_SNIFFING);

@@ -4,6 +4,8 @@
     "wich:ender_torch",
     "wich:bamboo_ender_torch",
     "wich:bone_ender_torch",
+    "wich:iron_ender_torch",
+    "wich:gold_ender_torch",
     "wich:netherite_ender_torch"
   ]
 }

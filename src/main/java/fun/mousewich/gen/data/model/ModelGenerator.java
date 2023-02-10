@@ -18,7 +18,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 
 import static fun.mousewich.ModBase.*;
-import static fun.mousewich.ModBase.WARPED_BOOKSHELF;
 
 public class ModelGenerator extends FabricModelProvider {
 	public ModelGenerator(FabricDataGenerator dataGenerator) { super(dataGenerator); }
@@ -86,6 +85,28 @@ public class ModelGenerator extends FabricModelProvider {
 		Block block = container.asBlock();
 		bsmg.registerItemModel(block);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, ModelIds.getBlockModelId(block)));
+	}
+	public static void tallFlowerModel(BlockStateModelGenerator bsmg, TallBlockContainer flower) {
+		Block doubleBlock = flower.asBlock();
+		bsmg.registerItemModel(doubleBlock, "_top");
+		Identifier identifier = bsmg.createSubModel(doubleBlock, "_top", Models.CROSS, TextureMap::cross);
+		Identifier identifier2 = bsmg.createSubModel(doubleBlock, "_bottom", Models.CROSS, TextureMap::cross);
+		bsmg.registerDoubleBlock(doubleBlock, identifier, identifier2);
+	}
+	public static void tallFlowerModel(BlockStateModelGenerator bsmg, TallBlockContainer flower, Block topModel, Identifier bottomModel) {
+		generatedItemModel(bsmg, flower.asItem(), topModel);
+		Block doubleBlock = flower.asBlock();
+		Identifier identifier = Models.CROSS.upload(doubleBlock, "_top", TextureMap.cross(topModel), bsmg.modelCollector);
+		Identifier identifier2 = Models.CROSS.upload(doubleBlock, "_bottom", TextureMap.cross(bottomModel), bsmg.modelCollector);
+		bsmg.registerDoubleBlock(doubleBlock, identifier, identifier2);
+	}
+	public static void flowerPotPlantModel(BlockStateModelGenerator bsmg, PottedBlockContainer potted) {
+		Block plantBlock = potted.asBlock(), flowerPotBlock = potted.getPottedBlock();
+		bsmg.registerItemModel(plantBlock);
+		Identifier identifier = Models.CROSS.upload(plantBlock, TextureMap.cross(plantBlock), bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(plantBlock, identifier));
+		Identifier identifier2 = Models.FLOWER_POT_CROSS.upload(flowerPotBlock, TextureMap.plant(plantBlock), bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(flowerPotBlock, identifier2));
 	}
 	public static void paneModel(BlockStateModelGenerator bsmg, IBlockItemContainer pane, Block baseBlock) {
 		Block paneBlock = pane.asBlock();
@@ -212,14 +233,24 @@ public class ModelGenerator extends FabricModelProvider {
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateModelGenerator.createValueFencedModelMap(Properties.POWER, 1, identifier2, identifier)));
 		bsmg.registerParentedItemModel(container.asItem(), identifier);
 	}
-	public static void signModel(BlockStateModelGenerator bsmg, SignContainer container, IBlockItemContainer baseBlock) { signModel(bsmg, container, baseBlock.asBlock()); }
-	public static void signModel(BlockStateModelGenerator bsmg, SignContainer container, Block baseBlock) {
+	public static void signModel(BlockStateModelGenerator bsmg, SignContainer container, IBlockItemContainer baseBlock, Block hangingSignParticle) { signModel(bsmg, container, baseBlock.asBlock(), hangingSignParticle); }
+	public static void signModel(BlockStateModelGenerator bsmg, SignContainer container, Block baseBlock, Block hangingSignParticle) {
 		Block block = container.asBlock(), wallBlock = container.getWallBlock();
 		Identifier identifier = Models.PARTICLE.upload(block, TextureMap.all(baseBlock), bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier));
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(wallBlock, identifier));
 		bsmg.excludeFromSimpleItemModelGeneration(wallBlock);
 		generatedItemModel(bsmg, container.asItem());
+		hangingSignModel(bsmg, hangingSignParticle, container.getHanging());
+	}
+
+	public static void hangingSignModel(BlockStateModelGenerator bsmg, Block particle, WallBlockContainer hangingSign) {
+		TextureMap textureMap = TextureMap.particle(particle);
+		Identifier identifier = Models.PARTICLE.upload(hangingSign.asBlock(), textureMap, bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(hangingSign.asBlock(), identifier));
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(hangingSign.getWallBlock(), identifier));
+		bsmg.excludeFromSimpleItemModelGeneration(hangingSign.getWallBlock());
+		generatedItemModel(bsmg, hangingSign.asItem());
 	}
 
 	private static void torchModelCommon(BlockStateModelGenerator bsmg, TorchContainer container, Identifier unlit, Identifier unlitWall, Model template, Model templateWall) {
@@ -655,7 +686,46 @@ public class ModelGenerator extends FabricModelProvider {
 		stairsModel(bsmg, QUARTZ_BRICK_STAIRS, Blocks.QUARTZ_BRICKS);
 		wallModel(bsmg, QUARTZ_BRICK_WALL, Blocks.QUARTZ_BRICKS);
 		//Extended Iron
+		torchModel(bsmg, IRON_TORCH);
+		torchModel(bsmg, IRON_SOUL_TORCH, IRON_TORCH);
+		torchModel(bsmg, IRON_ENDER_TORCH, IRON_TORCH);
+		torchModel(bsmg, UNDERWATER_IRON_TORCH, IRON_TORCH);
+		lanternModel(bsmg, WHITE_IRON_LANTERN);
+		lanternModel(bsmg, WHITE_IRON_SOUL_LANTERN, WHITE_IRON_LANTERN);
+		lanternModel(bsmg, WHITE_IRON_ENDER_LANTERN, WHITE_IRON_LANTERN);
+		chainModel(bsmg, WHITE_IRON_CHAIN);
+		wallModel(bsmg, IRON_WALL, Blocks.IRON_BLOCK);
+		cubeAllModel(bsmg, IRON_BRICKS);
+		slabModel(bsmg, IRON_BRICK_SLAB, IRON_BRICKS);
+		stairsModel(bsmg, IRON_BRICK_STAIRS, IRON_BRICKS);
+		wallModel(bsmg, IRON_BRICK_WALL, IRON_BRICKS);
+		cubeAllModel(bsmg, CUT_IRON);
+		metalPillarModel(bsmg, CUT_IRON_PILLAR, CUT_IRON);
+		slabModel(bsmg, CUT_IRON_SLAB, CUT_IRON);
+		stairsModel(bsmg, CUT_IRON_STAIRS, CUT_IRON);
+		wallModel(bsmg, CUT_IRON_WALL, IRON_BRICKS);
 		buttonModel(bsmg, IRON_BUTTON, Blocks.IRON_BLOCK);
+		//Extended Gold
+		torchModel(bsmg, GOLD_TORCH);
+		torchModel(bsmg, GOLD_SOUL_TORCH, GOLD_TORCH);
+		torchModel(bsmg, GOLD_ENDER_TORCH, GOLD_TORCH);
+		torchModel(bsmg, UNDERWATER_GOLD_TORCH, GOLD_TORCH);
+		lanternModel(bsmg, GOLD_LANTERN);
+		lanternModel(bsmg, GOLD_SOUL_LANTERN, GOLD_LANTERN);
+		lanternModel(bsmg, GOLD_ENDER_LANTERN, GOLD_LANTERN);
+		barsModel(bsmg, GOLD_BARS);
+		chainModel(bsmg, GOLD_CHAIN);
+		wallModel(bsmg, GOLD_WALL, Blocks.GOLD_BLOCK);
+		cubeAllModel(bsmg, GOLD_BRICKS);
+		slabModel(bsmg, GOLD_BRICK_SLAB, GOLD_BRICKS);
+		stairsModel(bsmg, GOLD_BRICK_STAIRS, GOLD_BRICKS);
+		wallModel(bsmg, GOLD_BRICK_WALL, GOLD_BRICKS);
+		cubeAllModel(bsmg, CUT_GOLD);
+		metalPillarModel(bsmg, CUT_GOLD_PILLAR, CUT_GOLD);
+		slabModel(bsmg, CUT_GOLD_SLAB, CUT_GOLD);
+		stairsModel(bsmg, CUT_GOLD_STAIRS, CUT_GOLD);
+		wallModel(bsmg, CUT_GOLD_WALL, GOLD_BRICKS);
+		buttonModel(bsmg, GOLD_BUTTON, Blocks.GOLD_BLOCK);
 		//Extended Netherite
 		torchModel(bsmg, NETHERITE_TORCH);
 		torchModel(bsmg, NETHERITE_SOUL_TORCH, NETHERITE_TORCH);
@@ -778,7 +848,7 @@ public class ModelGenerator extends FabricModelProvider {
 		fenceModel(bsmg, CHARRED_FENCE, CHARRED_PLANKS);
 		fenceGateModel(bsmg, CHARRED_FENCE_GATE, CHARRED_PLANKS);
 		pressurePlateModel(bsmg, CHARRED_PRESSURE_PLATE, CHARRED_PLANKS);
-		signModel(bsmg, CHARRED_SIGN, CHARRED_PLANKS);
+		signModel(bsmg, CHARRED_SIGN, CHARRED_PLANKS, STRIPPED_CHARRED_LOG.asBlock());
 		bookshelfModel(bsmg, CHARRED_BOOKSHELF, CHARRED_PLANKS);
 		ladderModel(bsmg, CHARRED_LADDER);
 		woodcutterModel(bsmg, CHARRED_WOODCUTTER, CHARRED_PLANKS);
@@ -802,7 +872,7 @@ public class ModelGenerator extends FabricModelProvider {
 		fenceModel(bsmg, MANGROVE_FENCE, MANGROVE_PLANKS);
 		fenceGateModel(bsmg, MANGROVE_FENCE_GATE, MANGROVE_PLANKS);
 		pressurePlateModel(bsmg, MANGROVE_PRESSURE_PLATE, MANGROVE_PLANKS);
-		signModel(bsmg, MANGROVE_SIGN, MANGROVE_PLANKS);
+		signModel(bsmg, MANGROVE_SIGN, MANGROVE_PLANKS, STRIPPED_MANGROVE_LOG.asBlock());
 		explicitModel(bsmg, MANGROVE_ROOTS);
 		uprightPillarModel(bsmg, MUDDY_MANGROVE_ROOTS);
 		bsmg.registerSimpleState(MANGROVE_PROPAGULE.getPottedBlock());
@@ -823,7 +893,7 @@ public class ModelGenerator extends FabricModelProvider {
 		bsmg.registerParentedItemModel(BAMBOO_FENCE.asItem(), TextureMap.getSubId(BAMBOO_FENCE.asBlock(), "_inventory"));
 		parentedItem(bsmg, BAMBOO_FENCE_GATE);
 		pressurePlateModel(bsmg, BAMBOO_PRESSURE_PLATE, BAMBOO_PLANKS);
-		signModel(bsmg, BAMBOO_SIGN, BAMBOO_PLANKS);
+		signModel(bsmg, BAMBOO_SIGN, BAMBOO_PLANKS, STRIPPED_BAMBOO_BLOCK.asBlock());
 		//Bamboo Mosaic
 		cubeAllModel(bsmg, BAMBOO_MOSAIC);
 		slabModel(bsmg, BAMBOO_MOSAIC_SLAB, BAMBOO_MOSAIC);
@@ -841,6 +911,39 @@ public class ModelGenerator extends FabricModelProvider {
 		pillarModel(bsmg, VERDANT_FROGLIGHT);
 		pillarModel(bsmg, PEARLESCENT_FROGLIGHT);
 		frogspawnModel(bsmg, FROGSPAWN);
+		//Tall Flowers
+		tallFlowerModel(bsmg, AMARANTH);
+		tallFlowerModel(bsmg, BLUE_ROSE_BUSH);
+		tallFlowerModel(bsmg, TALL_ALLIUM, Blocks.ALLIUM, ID("block/allium_stalk"));
+		tallFlowerModel(bsmg, TALL_PINK_ALLIUM, PINK_ALLIUM.asBlock(), ID("block/allium_stalk"));
+		//Flowers
+		flowerPotPlantModel(bsmg, BUTTERCUP);
+		flowerPotPlantModel(bsmg, PINK_DAISY);
+		flowerPotPlantModel(bsmg, ROSE);
+		flowerPotPlantModel(bsmg, BLUE_ROSE);
+		flowerPotPlantModel(bsmg, MAGENTA_TULIP);
+		flowerPotPlantModel(bsmg, MARIGOLD);
+		flowerPotPlantModel(bsmg, INDIGO_ORCHID);
+		flowerPotPlantModel(bsmg, MAGENTA_ORCHID);
+		flowerPotPlantModel(bsmg, ORANGE_ORCHID);
+		flowerPotPlantModel(bsmg, PURPLE_ORCHID);
+		flowerPotPlantModel(bsmg, RED_ORCHID);
+		flowerPotPlantModel(bsmg, WHITE_ORCHID);
+		flowerPotPlantModel(bsmg, YELLOW_ORCHID);
+		flowerPotPlantModel(bsmg, PINK_ALLIUM);
+		flowerPotPlantModel(bsmg, LAVENDER);
+		flowerPotPlantModel(bsmg, HYDRANGEA);
+		flowerPotPlantModel(bsmg, PAEONIA);
+		flowerPotPlantModel(bsmg, ASTER);
+		//Hanging Signs
+		hangingSignModel(bsmg, Blocks.STRIPPED_ACACIA_LOG, ACACIA_HANGING_SIGN);
+		hangingSignModel(bsmg, Blocks.STRIPPED_BIRCH_LOG, BIRCH_HANGING_SIGN);
+		hangingSignModel(bsmg, Blocks.STRIPPED_DARK_OAK_LOG, DARK_OAK_HANGING_SIGN);
+		hangingSignModel(bsmg, Blocks.STRIPPED_JUNGLE_LOG, JUNGLE_HANGING_SIGN);
+		hangingSignModel(bsmg, Blocks.STRIPPED_OAK_LOG, OAK_HANGING_SIGN);
+		hangingSignModel(bsmg, Blocks.STRIPPED_SPRUCE_LOG, SPRUCE_HANGING_SIGN);
+		hangingSignModel(bsmg, Blocks.STRIPPED_CRIMSON_STEM, CRIMSON_HANGING_SIGN);
+		hangingSignModel(bsmg, Blocks.STRIPPED_WARPED_STEM, WARPED_HANGING_SIGN);
 		//Ladders
 		ladderModel(bsmg, ACACIA_LADDER);
 		ladderModel(bsmg, BIRCH_LADDER);
@@ -912,9 +1015,21 @@ public class ModelGenerator extends FabricModelProvider {
 		generatedItemModel(img, ECHO_AXE, ECHO_HOE, ECHO_PICKAXE, ECHO_SHOVEL, ECHO_SWORD, ECHO_KNIFE);
 		//Music Discs
 		generatedItemModel(img, MUSIC_DISC_5, DISC_FRAGMENT_5);
+		//Chest Boats
+		generatedItemModel(img, ACACIA_CHEST_BOAT);
+		generatedItemModel(img, BIRCH_CHEST_BOAT);
+		generatedItemModel(img, DARK_OAK_CHEST_BOAT);
+		generatedItemModel(img, JUNGLE_CHEST_BOAT);
+		generatedItemModel(img, OAK_CHEST_BOAT);
+		generatedItemModel(img, SPRUCE_CHEST_BOAT);
 		//Charred Wood
 		generatedItemModel(img, CHARRED_BOAT);
+		generatedItemModel(img, CHARRED_BOAT.getChestBoat());
 		//Mangrove
 		generatedItemModel(img, MANGROVE_BOAT);
+		generatedItemModel(img, MANGROVE_BOAT.getChestBoat());
+		//Bamboo
+		generatedItemModel(img, BAMBOO_RAFT);
+		generatedItemModel(img, BAMBOO_RAFT.getChestBoat());
 	}
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "wich:block/gold_bricks",
+    "top": "wich:block/gold_bricks",
+    "side": "wich:block/gold_bricks"
+  }
+}

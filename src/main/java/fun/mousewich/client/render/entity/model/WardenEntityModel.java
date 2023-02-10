@@ -1,11 +1,7 @@
 package fun.mousewich.client.render.entity.model;
 
 import com.google.common.collect.ImmutableList;
-import fun.mousewich.client.render.entity.animation.AnimationUtils;
-import fun.mousewich.client.render.entity.animation.ModAnimation;
-import fun.mousewich.client.render.entity.animation.ModAnimationState;
-import fun.mousewich.client.render.entity.animation.WardenAnimations;
-import fun.mousewich.client.render.entity.model.ModEntityModelPartNames;
+import fun.mousewich.client.render.entity.animation.*;
 import fun.mousewich.entity.warden.WardenEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -56,17 +52,17 @@ public class WardenEntityModel<T extends WardenEntity> extends SinglePartEntityM
 		this.bodyHeadAndLimbs = ImmutableList.of(this.body, this.head, this.leftArm, this.rightArm, this.leftLeg, this.rightLeg);
 	}
 
-	private static final ModelTransform boneTransform = ModelTransform.pivot(0, 24, 0);//ModelTransform.NONE;
-	private static final ModelTransform rightLegTransform = ModelTransform.pivot(-5.9f, -13, 0);//ModelTransform.pivot(6, 13, -1);
-	private static final ModelTransform leftLegTransform = ModelTransform.pivot(5.9f, -13, 0);//ModelTransform.pivot(-6, 13, -1);
-	private static final ModelTransform bodyTransform = ModelTransform.pivot(0, -21, 0);//ModelTransform.pivot(0, 21, -1);
-	private static final ModelTransform rightRibcageTransform = ModelTransform.pivot(-7, -2, -4);//ModelTransform.pivot(-7, -23, -5);
-	private static final ModelTransform leftRibcageTransform = ModelTransform.pivot(7, -2, -4);//ModelTransform.pivot(7, -23, -5);
-	private static final ModelTransform rightArmTransform = ModelTransform.pivot(-13, -13, 1);//ModelTransform.pivot(-9, -32, 0);
-	private static final ModelTransform leftArmTransform = ModelTransform.pivot(13, -13, 1);//ModelTransform.pivot(9, -32, 0);
-	private static final ModelTransform headTransform = ModelTransform.pivot(0, -13, 0);//ModelTransform.pivot(0, -34, -1);
-	private static final ModelTransform rightTendrilTransform = ModelTransform.pivot(-8, -12, 0);//ModelTransform.pivot(0, -0, 0);
-	private static final ModelTransform leftTendrilTransform = ModelTransform.pivot(8, -12, 0);//ModelTransform.pivot(0, -0, 0);
+	private static final ModelTransform boneTransform = ModelTransform.pivot(0, 24, 0);
+	private static final ModelTransform rightLegTransform = ModelTransform.pivot(-5.9f, -13, 0);
+	private static final ModelTransform leftLegTransform = ModelTransform.pivot(5.9f, -13, 0);
+	private static final ModelTransform bodyTransform = ModelTransform.pivot(0, -21, 0);
+	private static final ModelTransform rightRibcageTransform = ModelTransform.pivot(-7, -2, -4);
+	private static final ModelTransform leftRibcageTransform = ModelTransform.pivot(7, -2, -4);
+	private static final ModelTransform rightArmTransform = ModelTransform.pivot(-13, -13, 1);
+	private static final ModelTransform leftArmTransform = ModelTransform.pivot(13, -13, 1);
+	private static final ModelTransform headTransform = ModelTransform.pivot(0, -13, 0);
+	private static final ModelTransform rightTendrilTransform = ModelTransform.pivot(-8, -12, 0);
+	private static final ModelTransform leftTendrilTransform = ModelTransform.pivot(8, -12, 0);
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();ModelPartData modelPartData = modelData.getRoot();
 		ModelPartData modelPartData2 = modelPartData.addChild(ModEntityModelPartNames.BONE, ModelPartBuilder.create(), boneTransform);
@@ -93,8 +89,13 @@ public class WardenEntityModel<T extends WardenEntity> extends SinglePartEntityM
 		return TexturedModelData.of(modelData, 128, 128);
 	}
 
+	private boolean equal(ModelTransform a, ModelTransform b) {
+		return a.pivotX == b.pivotX && a.pivotY == b.pivotY && a.pivotZ == b.pivotZ;
+	}
+
 	public ModelTransform getDefaultTransform(ModelPart part) {
-		if (part == this.bone) return boneTransform;
+		if (part == this.root) return ModelTransform.NONE;
+		else if (part == this.bone) return boneTransform;
 		else if (part == this.rightLeg) return rightLegTransform;
 		else if (part == this.leftLeg) return leftLegTransform;
 		else if (part == this.body) return bodyTransform;
@@ -102,7 +103,14 @@ public class WardenEntityModel<T extends WardenEntity> extends SinglePartEntityM
 		else if (part == this.leftRibcage) return leftRibcageTransform;
 		else if (part == this.rightArm) return rightArmTransform;
 		else if (part == this.leftArm) return leftArmTransform;
-		else if (part == this.head) return headTransform;
+		else if (part == this.head) {
+			if (!equal(part.getTransform(), headTransform)) {
+				String pt = part.getTransform().pivotX + " " + part.getTransform().pivotY + " " + part.getTransform().pivotZ;
+				String ht = headTransform.pivotX + " " + headTransform.pivotY + " " + headTransform.pivotZ;
+				System.out.println("(" + pt + ") (" + ht + ")");
+			}
+			return headTransform;
+		}
 		else if (part == this.rightTendril) return rightTendrilTransform;
 		else if (part == this.leftTendril) return leftTendrilTransform;
 		return ModelTransform.NONE;
@@ -123,9 +131,9 @@ public class WardenEntityModel<T extends WardenEntity> extends SinglePartEntityM
 		this.updateAnimation(wardenEntity.roaringAnimationState, WardenAnimations.ROARING, h);
 		this.updateAnimation(wardenEntity.sniffingAnimationState, WardenAnimations.SNIFFING, h);
 	}
-	protected void updateAnimation(ModAnimationState animationState, ModAnimation animation, float animationProgress) {
+	protected void updateAnimation(AnimationState animationState, Animation animation, float animationProgress) {
 		animationState.update(animationProgress, 1);
-		animationState.run(state -> AnimationUtils.animate(this, animation, state.getTimeRunning(), 1, new Vec3f()));
+		animationState.run(state -> AnimationHelper.animate(this, animation, state.getTimeRunning(), 1, new Vec3f()));
 	}
 	private void setHeadAngle(float yaw, float pitch) {
 		this.head.pitch = pitch * ((float)Math.PI / 180);

@@ -1,5 +1,6 @@
 package fun.mousewich.util;
 
+import fun.mousewich.entity.allay.AllayEntity;
 import fun.mousewich.entity.warden.WardenEntity;
 import fun.mousewich.event.ModEntityGameEventHandler;
 import fun.mousewich.mixins.server.ServerWorldAccessor;
@@ -48,6 +49,9 @@ public class ServerEntityHandler implements EntityHandler<Entity> {
 		if (entity instanceof WardenEntity wardenEntity) {
 			wardenEntity.updateEventHandler(ModEntityGameEventHandler::onEntitySetPos);
 		}
+		if (entity instanceof AllayEntity allayEntity) {
+			allayEntity.updateEventHandler(ModEntityGameEventHandler::onEntitySetPosCallback);
+		}
 	}
 
 	@Override
@@ -66,12 +70,18 @@ public class ServerEntityHandler implements EntityHandler<Entity> {
 		if (entity instanceof WardenEntity wardenEntity) {
 			wardenEntity.updateEventHandler(ModEntityGameEventHandler::onEntityRemoval);
 		}
+		if (entity instanceof AllayEntity allayEntity) {
+			allayEntity.updateEventHandler(ModEntityGameEventHandler::onEntityRemoval);
+		}
 	}
 
 	//@Override
 	public void updateLoadStatus(Entity entity) {
 		if (entity instanceof WardenEntity wardenEntity) {
 			wardenEntity.updateEventHandler(ModEntityGameEventHandler::onEntitySetPos);
+		}
+		if (entity instanceof AllayEntity allayEntity) {
+			allayEntity.updateEventHandler(ModEntityGameEventHandler::onEntitySetPos);
 		}
 	}
 }

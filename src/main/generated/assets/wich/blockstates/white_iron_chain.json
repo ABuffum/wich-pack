@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "wich:block/white_iron_chain",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "wich:block/white_iron_chain"
+    },
+    "axis=z": {
+      "model": "wich:block/white_iron_chain",
+      "x": 90
+    }
+  }
+}

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "#wich:soul_torches",
+    "wich:white_iron_soul_lantern",
+    "wich:gold_soul_lantern",
     "wich:netherite_soul_lantern"
   ]
 }

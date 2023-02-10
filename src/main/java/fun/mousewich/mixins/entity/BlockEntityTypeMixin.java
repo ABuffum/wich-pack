@@ -2,6 +2,8 @@ package fun.mousewich.mixins.entity;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.block.basic.ModBedBlock;
+import fun.mousewich.block.sign.HangingSignBlock;
+import fun.mousewich.block.sign.WallHangingSignBlock;
 import fun.mousewich.container.BedContainer;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
@@ -16,11 +18,10 @@ public class BlockEntityTypeMixin {
 	private void supports(BlockState state, CallbackInfoReturnable<Boolean> cir) {
 		Block block = state.getBlock();
 		if (BlockEntityType.SIGN.equals(this)) {
-			if (block instanceof SignBlock sign) {
+			if (block instanceof AbstractSignBlock sign) {
 				if (ModBase.SIGN_TYPES.contains(sign.getSignType())) cir.setReturnValue(true);
-			}
-			else if (block instanceof WallSignBlock sign) {
-				if (ModBase.SIGN_TYPES.contains(sign.getSignType())) cir.setReturnValue(true);
+				if (block instanceof HangingSignBlock) cir.setReturnValue(true);
+				if (block instanceof WallHangingSignBlock) cir.setReturnValue(true);
 			}
 		}
 		else if (BlockEntityType.BED.equals(this)) {

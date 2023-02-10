@@ -5,7 +5,7 @@ import fun.mousewich.ModBase;
 import fun.mousewich.container.BlockContainer;
 import fun.mousewich.entity.ModBoatEntity;
 import fun.mousewich.gen.data.tag.ModBlockTags;
-import fun.mousewich.mixins.entity.BoatEntityAccessor;
+import fun.mousewich.mixins.entity.vehicle.BoatEntityAccessor;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
 import net.minecraft.block.*;
@@ -167,6 +167,7 @@ public class IdentifiedSounds {
 			boatSounds.put(name, new BoatSounds(name));
 		}
 		boatSounds.put(MANGROVE_BOAT.getType().getName(), new BoatSounds("mangrove"));
+		boatSounds.put(BAMBOO_RAFT.getType().getName(), new BoatSounds("bamboo"));
 		boatSounds.put(CHARRED_BOAT.getType().getName(), new BoatSounds("charred"));
 		//Blocks
 		RegisterBlockSounds();
@@ -324,7 +325,12 @@ public class IdentifiedSounds {
 		Register("fletching_table", Blocks.FLETCHING_TABLE);
 		Register("flower", Blocks.ALLIUM, Blocks.AZURE_BLUET, Blocks.CORNFLOWER, Blocks.DANDELION,
 				Blocks.LILAC, Blocks.LILY_OF_THE_VALLEY, Blocks.ORANGE_TULIP, Blocks.OXEYE_DAISY, Blocks.PEONY,
-				Blocks.PINK_TULIP, Blocks.POPPY, Blocks.RED_TULIP, Blocks.SUNFLOWER, Blocks.WHITE_TULIP, Blocks.WITHER_ROSE);
+				Blocks.PINK_TULIP, Blocks.POPPY, Blocks.RED_TULIP, Blocks.SUNFLOWER, Blocks.WHITE_TULIP, Blocks.WITHER_ROSE,
+				/* Mod */ AMARANTH.asBlock(), BLUE_ROSE_BUSH.asBlock(), TALL_ALLIUM.asBlock(), TALL_PINK_ALLIUM.asBlock(),
+				BUTTERCUP.asBlock(), PINK_DAISY.asBlock(), ROSE.asBlock(), BLUE_ROSE.asBlock(), MAGENTA_TULIP.asBlock(),
+				MARIGOLD.asBlock(), INDIGO_ORCHID.asBlock(), MAGENTA_ORCHID.asBlock(), ORANGE_ORCHID.asBlock(),
+				PURPLE_ORCHID.asBlock(), RED_ORCHID.asBlock(), WHITE_ORCHID.asBlock(), YELLOW_ORCHID.asBlock(),
+				PINK_ALLIUM.asBlock(), LAVENDER.asBlock(), HYDRANGEA.asBlock(), PAEONIA.asBlock(), ASTER.asBlock());
 		Register("furnace", Blocks.FURNACE, Blocks.BLAST_FURNACE, Blocks.SMOKER);
 		Register("glass_pane", Blocks.BLACK_STAINED_GLASS_PANE, Blocks.BLUE_STAINED_GLASS_PANE, Blocks.BROWN_STAINED_GLASS_PANE, Blocks.CYAN_STAINED_GLASS_PANE,
 				Blocks.GRAY_STAINED_GLASS_PANE, Blocks.GREEN_STAINED_GLASS_PANE, Blocks.LIGHT_BLUE_STAINED_GLASS_PANE, Blocks.LIGHT_GRAY_STAINED_GLASS_PANE,
@@ -337,7 +343,12 @@ public class IdentifiedSounds {
 				Blocks.PURPLE_GLAZED_TERRACOTTA, Blocks.RED_GLAZED_TERRACOTTA, Blocks.WHITE_GLAZED_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA);
 		Register("glow_lichen", Blocks.GLOW_LICHEN);
 		Register("glowstone", Blocks.GLOWSTONE);
-		Register("gold", Blocks.GOLD_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE);
+		Register("gold", Blocks.GOLD_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE,
+				/* Mod */ GOLD_TORCH.asBlock(), GOLD_SOUL_TORCH.asBlock(), GOLD_ENDER_TORCH.asBlock(), UNDERWATER_GOLD_TORCH.asBlock(),
+				GOLD_LANTERN.asBlock(), GOLD_SOUL_LANTERN.asBlock(), GOLD_ENDER_LANTERN.asBlock(),
+				GOLD_BUTTON.asBlock(), GOLD_BARS.asBlock(), GOLD_WALL.asBlock(),
+				GOLD_BRICKS.asBlock(), GOLD_BRICK_STAIRS.asBlock(), GOLD_BRICK_SLAB.asBlock(), GOLD_BRICK_WALL.asBlock(),
+				CUT_GOLD.asBlock(), CUT_GOLD_PILLAR.asBlock(), CUT_GOLD_STAIRS.asBlock(), CUT_GOLD_SLAB.asBlock(), CUT_GOLD_WALL.asBlock());
 		Register("granite", Blocks.GRANITE, Blocks.GRANITE_STAIRS, Blocks.GRANITE_SLAB, Blocks.GRANITE_WALL,
 				Blocks.POLISHED_GRANITE, Blocks.POLISHED_GRANITE_STAIRS, Blocks.POLISHED_GRANITE_SLAB,
 				/* Mod */ POLISHED_GRANITE_WALL.asBlock());
@@ -355,7 +366,11 @@ public class IdentifiedSounds {
 		Register("infested_stone", Blocks.INFESTED_CHISELED_STONE_BRICKS, Blocks.INFESTED_CRACKED_STONE_BRICKS,
 				Blocks.INFESTED_MOSSY_STONE_BRICKS, Blocks.INFESTED_STONE, Blocks.INFESTED_STONE_BRICKS);
 		Register("iron", Blocks.IRON_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE,
-				/* Mod */ IRON_BUTTON.asBlock());
+				/* Mod */ IRON_TORCH.asBlock(), IRON_SOUL_TORCH.asBlock(), IRON_ENDER_TORCH.asBlock(), UNDERWATER_IRON_TORCH.asBlock(),
+				WHITE_IRON_LANTERN.asBlock(), WHITE_IRON_SOUL_LANTERN.asBlock(), WHITE_IRON_ENDER_LANTERN.asBlock(),
+				IRON_BUTTON.asBlock(), IRON_WALL.asBlock(),
+				IRON_BRICKS.asBlock(), IRON_BRICK_STAIRS.asBlock(), IRON_BRICK_SLAB.asBlock(), IRON_BRICK_WALL.asBlock(),
+				CUT_IRON.asBlock(), CUT_IRON_PILLAR.asBlock(), CUT_IRON_STAIRS.asBlock(), CUT_IRON_SLAB.asBlock(), CUT_IRON_WALL.asBlock());
 		Register("iron_bars", Blocks.IRON_BARS);
 		Register("iron_door", Blocks.IRON_DOOR);
 		Register("iron_trapdoor", Blocks.IRON_TRAPDOOR);
@@ -404,7 +419,13 @@ public class IdentifiedSounds {
 				Blocks.POTTED_OXEYE_DAISY, Blocks.POTTED_PINK_TULIP, Blocks.POTTED_POPPY, Blocks.POTTED_RED_TULIP,
 				Blocks.POTTED_WHITE_TULIP, Blocks.POTTED_WITHER_ROSE, Blocks.POTTED_AZALEA_BUSH, Blocks.POTTED_FLOWERING_AZALEA_BUSH,
 				Blocks.POTTED_CRIMSON_FUNGUS, Blocks.POTTED_CRIMSON_ROOTS, Blocks.POTTED_WARPED_FUNGUS, Blocks.POTTED_WARPED_ROOTS,
-				Blocks.POTTED_RED_MUSHROOM, Blocks.POTTED_BROWN_MUSHROOM);
+				Blocks.POTTED_RED_MUSHROOM, Blocks.POTTED_BROWN_MUSHROOM,
+				/* Mod */ BUTTERCUP.getPottedBlock(), PINK_DAISY.getPottedBlock(), ROSE.getPottedBlock(),
+				BLUE_ROSE.getPottedBlock(), MAGENTA_TULIP.getPottedBlock(), MARIGOLD.getPottedBlock(),
+				INDIGO_ORCHID.getPottedBlock(), MAGENTA_ORCHID.getPottedBlock(), ORANGE_ORCHID.getPottedBlock(),
+				PURPLE_ORCHID.getPottedBlock(), RED_ORCHID.getPottedBlock(), WHITE_ORCHID.getPottedBlock(),
+				YELLOW_ORCHID.getPottedBlock(), PINK_ALLIUM.getPottedBlock(), LAVENDER.getPottedBlock(),
+				HYDRANGEA.getPottedBlock(), PAEONIA.getPottedBlock(), ASTER.getPottedBlock());
 		Register("prismarine", Blocks.PRISMARINE, Blocks.PRISMARINE_STAIRS, Blocks.PRISMARINE_SLAB, Blocks.PRISMARINE_WALL,
 				Blocks.PRISMARINE_BRICKS, Blocks.PRISMARINE_BRICK_STAIRS, Blocks.PRISMARINE_BRICK_SLAB,
 				Blocks.DARK_PRISMARINE, Blocks.DARK_PRISMARINE_STAIRS, Blocks.DARK_PRISMARINE_SLAB,

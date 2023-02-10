@@ -133,11 +133,13 @@ public class Recipes {
 	public static CraftingRecipeJsonBuilder MakeShovel(ItemConvertible output, ItemConvertible ingredient) {
 		return MakeShaped(output, ingredient).input('|', Items.STICK).pattern("#").pattern("|").pattern("|");
 	}
-	public static CraftingRecipeJsonBuilder MakeSign(ItemConvertible output, ItemConvertible ingredient) {
-		return MakeSign(output, Ingredient.ofItems(ingredient));
-	}
+	public static CraftingRecipeJsonBuilder MakeSign(ItemConvertible output, ItemConvertible ingredient) { return MakeSign(output, Ingredient.ofItems(ingredient)); }
 	public static CraftingRecipeJsonBuilder MakeSign(ItemConvertible output, Ingredient ingredient) {
 		return Make3x2(output, ingredient).input('|', Items.STICK).pattern(" | ");
+	}
+	public static CraftingRecipeJsonBuilder MakeHangingSign(ItemConvertible output, ItemConvertible ingredient) { return MakeHangingSign(output, Ingredient.ofItems(ingredient)); }
+	public static CraftingRecipeJsonBuilder MakeHangingSign(ItemConvertible output, Ingredient ingredient) {
+		return MakeShaped(output, ingredient).input('|', Items.CHAIN).pattern("| |").pattern("###").pattern("###");
 	}
 	public static CraftingRecipeJsonBuilder MakeSlab(ItemConvertible output, ItemConvertible ingredient) { return Make3x1(output, ingredient, 6); }
 	public static CraftingRecipeJsonBuilder MakeStairs(ItemConvertible output, ItemConvertible ingredient) {

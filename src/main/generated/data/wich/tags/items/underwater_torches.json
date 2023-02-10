@@ -4,6 +4,8 @@
     "wich:underwater_torch",
     "wich:underwater_bamboo_torch",
     "wich:underwater_bone_torch",
+    "wich:underwater_iron_torch",
+    "wich:underwater_gold_torch",
     "wich:underwater_netherite_torch"
   ]
 }

@@ -1,14 +1,19 @@
 package fun.mousewich.mixins.entity.vehicle;
 
+import fun.mousewich.entity.ChestBoatEntity;
 import fun.mousewich.event.ModGameEvent;
+import fun.mousewich.sound.IdentifiedSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BoatEntity.class)
@@ -19,5 +24,10 @@ public abstract class BoatEntityMixin extends Entity {
 	public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		if (this.isInvulnerableTo(source) || this.world.isClient || this.isRemoved()) return;
 		this.emitGameEvent(ModGameEvent.ENTITY_DAMAGE, source.getAttacker());
+	}
+	@Inject(method="getPaddleSoundEvent", at = @At("HEAD"), cancellable = true)
+	protected void GetPaddleSoundEvent(CallbackInfoReturnable<SoundEvent> cir) {
+		SoundEvent paddleSound = IdentifiedSounds.getPaddleSound((BoatEntity)(Object)this);
+		if (paddleSound != null) cir.setReturnValue(paddleSound);
 	}
 }

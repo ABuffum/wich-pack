@@ -55,7 +55,7 @@ public class ModBoatItem extends Item {
 
 			if (hitResult.getType() == HitResult.Type.BLOCK) {
 				ModBoatEntity boatEntity = new ModBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
-				boatEntity.setHavenBoatType(this.type);
+				boatEntity.setModBoatType(this.type);
 				boatEntity.setYaw(user.getYaw());
 				if (!world.isSpaceEmpty(boatEntity, boatEntity.getBoundingBox().expand(-0.1D))) {
 					return TypedActionResult.fail(itemStack);

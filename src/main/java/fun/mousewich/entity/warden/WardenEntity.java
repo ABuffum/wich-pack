@@ -2,6 +2,7 @@ package fun.mousewich.entity.warden;
 
 import com.mojang.serialization.Dynamic;
 import fun.mousewich.ModBase;
+import fun.mousewich.entity.ModDataHandlers;
 import fun.mousewich.entity.ModEntityStatuses;
 import fun.mousewich.entity.ModEntityPose;
 import fun.mousewich.entity.ai.ModMemoryModules;
@@ -9,10 +10,8 @@ import fun.mousewich.event.ModEntityGameEventHandler;
 import fun.mousewich.event.ModEntityPositionSource;
 import fun.mousewich.event.ModVibrationListener;
 import fun.mousewich.gen.data.tag.ModEventTags;
-import fun.mousewich.client.render.entity.animation.ModAnimationState;
+import fun.mousewich.client.render.entity.animation.AnimationState;
 import fun.mousewich.sound.ModSoundEvents;
-import fun.mousewich.sound.SoundUtil;
-import fun.mousewich.util.StatusEffectUtils;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.Brain;
@@ -25,6 +24,7 @@ import net.minecraft.entity.damage.ProjectileDamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
@@ -38,6 +38,7 @@ import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.network.DebugInfoSender;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.BlockTags;
@@ -61,12 +62,12 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 	private int lastTendrilPitch;
 	private int heartbeatCooldown;
 	private int lastHeartbeatCooldown;
-	public ModAnimationState roaringAnimationState = new ModAnimationState();
-	public ModAnimationState sniffingAnimationState = new ModAnimationState();
-	public ModAnimationState emergingAnimationState = new ModAnimationState();
-	public ModAnimationState diggingAnimationState = new ModAnimationState();
-	public ModAnimationState attackingAnimationState = new ModAnimationState();
-	public ModAnimationState chargingSonicBoomAnimationState = new ModAnimationState();
+	public AnimationState roaringAnimationState = new AnimationState();
+	public AnimationState sniffingAnimationState = new AnimationState();
+	public AnimationState emergingAnimationState = new AnimationState();
+	public AnimationState diggingAnimationState = new AnimationState();
+	public AnimationState attackingAnimationState = new AnimationState();
+	public AnimationState chargingSonicBoomAnimationState = new AnimationState();
 	private final ModEntityGameEventHandler<ModVibrationListener> gameEventHandler;
 	private WardenAngerManager angerManager = new WardenAngerManager(this::isValidTarget, Collections.emptyList());
 
@@ -93,7 +94,7 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 		super.onSpawnPacket(packet);
 		if (packet.getEntityData() == 1) this.SetPose(ModEntityPose.EMERGING);
 	}
-	protected static final TrackedData<ModEntityPose> NEW_POSE = DataTracker.registerData(WardenEntity.class, ModBase.NEW_ENTITY_POSE);
+	protected static final TrackedData<ModEntityPose> NEW_POSE = DataTracker.registerData(WardenEntity.class, ModDataHandlers.NEW_ENTITY_POSE);
 	@Override
 	public void setPose(EntityPose pose) {
 		this.dataTracker.set(NEW_POSE, ModEntityPose.valueOf(pose.name()));
@@ -131,6 +132,10 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 	protected float calculateNextStepSoundDistance() { return this.distanceTraveled + 0.55f; }
 	public static DefaultAttributeContainer.Builder addAttributes() {
 		return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 500.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.5).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 30.0);
+	}
+	@Override
+	public boolean shouldRender(double distance) {
+		return true;
 	}
 	@Override
 	public boolean occludeVibrationSignals() { return true; }
@@ -235,7 +240,7 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 	public float getHeartPitch(float tickDelta) {
 		return MathHelper.lerp(tickDelta, this.lastHeartbeatCooldown, this.heartbeatCooldown) / 10.0f;
 	}
-	private void addDigParticles(ModAnimationState animationState) {
+	private void addDigParticles(AnimationState animationState) {
 		if ((float)animationState.getTimeRunning() < 4500.0f) {
 			Random random = this.getRandom();
 			BlockState blockState = this.getSteppingBlockState();
@@ -314,7 +319,19 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 		//StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModBase.DARKNESS_EFFECT, 260, 0, false, false);
 		//TODO: Iris disables fog effects which darkness and flashbanged rely on
 		StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.BLINDNESS, 260, 0, false, false);
-		StatusEffectUtils.addEffectToPlayersWithinDistance(world, entity, pos, range, statusEffectInstance, 200);
+		addEffectToPlayersWithinDistance(world, entity, pos, range, statusEffectInstance, 200);
+	}
+	private static List<ServerPlayerEntity> addEffectToPlayersWithinDistance(ServerWorld world, @Nullable Entity entity, Vec3d origin, double range, StatusEffectInstance statusEffectInstance, int duration) {
+		StatusEffect statusEffect = statusEffectInstance.getEffectType();
+		List<ServerPlayerEntity> list = world.getPlayers(player ->
+						!ModBase.WARDEN_NEUTRAL_POWER.isActive(player) &&
+						!(!player.interactionManager.isSurvivalLike()
+								|| entity != null && entity.isTeammate(player)
+								|| !origin.isInRange(player.getPos(), range)
+								|| player.hasStatusEffect(statusEffect) && player.getStatusEffect(statusEffect).getAmplifier()
+								>= statusEffectInstance.getAmplifier() && player.getStatusEffect(statusEffect).getDuration() >= duration));
+		list.forEach(player -> player.addStatusEffect(new StatusEffectInstance(statusEffectInstance), entity));
+		return list;
 	}
 
 	@Override

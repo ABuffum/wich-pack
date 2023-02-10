@@ -67,20 +67,34 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
 				.add(NETHERITE_BARS.asBlock(), NETHERITE_CHAIN.asBlock())
 				.add(NETHERITE_LANTERN.asBlock(), NETHERITE_SOUL_LANTERN.asBlock(), NETHERITE_ENDER_LANTERN.asBlock())
-				.add(NETHERITE_BUTTON.asBlock(), CRUSHING_WEIGHTED_PRESSURE_PLATE.asBlock())
+				.add(NETHERITE_BUTTON.asBlock())
 				.add(NETHERITE_WALL.asBlock(), NETHERITE_BRICKS.asBlock(), NETHERITE_BRICK_SLAB.asBlock())
 				.add(NETHERITE_BRICK_STAIRS.asBlock(), NETHERITE_BRICK_WALL.asBlock(), CUT_NETHERITE.asBlock())
 				.add(CUT_NETHERITE_PILLAR.asBlock(), CUT_NETHERITE_SLAB.asBlock(), CUT_NETHERITE_STAIRS.asBlock())
-				.add(CUT_NETHERITE_WALL.asBlock());
+				.add(CUT_NETHERITE_WALL.asBlock(), CRUSHING_WEIGHTED_PRESSURE_PLATE.asBlock());
 		getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
 				.add(DIAMOND_BRICKS.asBlock(), DIAMOND_BRICK_SLAB.asBlock(), DIAMOND_BRICK_STAIRS.asBlock())
 				.add(DIAMOND_BRICK_WALL.asBlock(), DIAMOND_SLAB.asBlock(), DIAMOND_STAIRS.asBlock())
 				.add(DIAMOND_WALL.asBlock())
 				.add(EMERALD_BRICKS.asBlock(), EMERALD_BRICK_SLAB.asBlock(), EMERALD_BRICK_STAIRS.asBlock())
 				.add(EMERALD_BRICK_WALL.asBlock(), CUT_EMERALD.asBlock(), CUT_EMERALD_SLAB.asBlock())
-				.add(CUT_EMERALD_STAIRS.asBlock(), CUT_EMERALD_WALL.asBlock());
+				.add(CUT_EMERALD_STAIRS.asBlock(), CUT_EMERALD_WALL.asBlock())
+				.add(GOLD_BARS.asBlock(), GOLD_CHAIN.asBlock())
+				.add(GOLD_LANTERN.asBlock(), GOLD_SOUL_LANTERN.asBlock(), GOLD_ENDER_LANTERN.asBlock())
+				.add(GOLD_BUTTON.asBlock())
+				.add(GOLD_WALL.asBlock(), GOLD_BRICKS.asBlock(), GOLD_BRICK_SLAB.asBlock())
+				.add(GOLD_BRICK_STAIRS.asBlock(), GOLD_BRICK_WALL.asBlock(), CUT_GOLD.asBlock())
+				.add(CUT_GOLD_PILLAR.asBlock(), CUT_GOLD_SLAB.asBlock(), CUT_GOLD_STAIRS.asBlock())
+				.add(CUT_GOLD_WALL.asBlock());
 		getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
-				.add(ENDER_LANTERN.asBlock(), UNLIT_LANTERN, UNLIT_SOUL_LANTERN);
+				.add(ENDER_LANTERN.asBlock(), UNLIT_LANTERN, UNLIT_SOUL_LANTERN)
+				.add( WHITE_IRON_CHAIN.asBlock())
+				.add(WHITE_IRON_LANTERN.asBlock(), WHITE_IRON_SOUL_LANTERN.asBlock(), WHITE_IRON_ENDER_LANTERN.asBlock())
+				.add(IRON_BUTTON.asBlock())
+				.add(IRON_WALL.asBlock(), IRON_BRICKS.asBlock(), IRON_BRICK_SLAB.asBlock())
+				.add(IRON_BRICK_STAIRS.asBlock(), IRON_BRICK_WALL.asBlock(), CUT_IRON.asBlock())
+				.add(CUT_IRON_PILLAR.asBlock(), CUT_IRON_SLAB.asBlock(), CUT_IRON_STAIRS.asBlock())
+				.add(CUT_IRON_WALL.asBlock());
 		getOrCreateTagBuilder(BlockTags.NYLIUM).add(Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM);
 		getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
 				.add(MUD_BRICKS.asBlock(), MUD_BRICK_SLAB.asBlock(), MUD_BRICK_STAIRS.asBlock(), MUD_BRICK_WALL.asBlock(), PACKED_MUD.asBlock())
@@ -110,6 +124,18 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(DIAMOND_BRICK_SLAB.asBlock(), DIAMOND_BRICK_STAIRS.asBlock(), DIAMOND_BRICK_WALL.asBlock())
 				.add(DIAMOND_SLAB.asBlock(), DIAMOND_STAIRS.asBlock(), DIAMOND_WALL.asBlock())
 				.add(UNLIT_LANTERN, UNLIT_SOUL_LANTERN)
+				.add(WHITE_IRON_LANTERN.asBlock(), WHITE_IRON_SOUL_LANTERN.asBlock(), WHITE_IRON_ENDER_LANTERN.asBlock())
+				.add(IRON_BUTTON.asBlock())
+				.add(WHITE_IRON_CHAIN.asBlock(), IRON_WALL.asBlock(), IRON_BRICKS.asBlock())
+				.add(IRON_BRICK_SLAB.asBlock(), IRON_BRICK_STAIRS.asBlock(), IRON_BRICK_WALL.asBlock())
+				.add(CUT_IRON.asBlock(), CUT_IRON_PILLAR.asBlock(), CUT_IRON_SLAB.asBlock())
+				.add(CUT_IRON_STAIRS.asBlock(), CUT_IRON_WALL.asBlock())
+				.add(GOLD_LANTERN.asBlock(), GOLD_SOUL_LANTERN.asBlock(), GOLD_ENDER_LANTERN.asBlock())
+				.add(GOLD_BUTTON.asBlock(), GOLD_BARS.asBlock())
+				.add(GOLD_CHAIN.asBlock(), GOLD_WALL.asBlock(), GOLD_BRICKS.asBlock())
+				.add(GOLD_BRICK_SLAB.asBlock(), GOLD_BRICK_STAIRS.asBlock(), GOLD_BRICK_WALL.asBlock())
+				.add(CUT_GOLD.asBlock(), CUT_GOLD_PILLAR.asBlock(), CUT_GOLD_SLAB.asBlock())
+				.add(CUT_GOLD_STAIRS.asBlock(), CUT_GOLD_WALL.asBlock())
 				.add(QUARTZ_BRICK_SLAB.asBlock(), QUARTZ_BRICK_STAIRS.asBlock(), QUARTZ_BRICK_WALL.asBlock())
 				.add(SMOOTH_QUARTZ_WALL.asBlock(), QUARTZ_CRYSTAL_BLOCK.asBlock(), QUARTZ_CRYSTAL_SLAB.asBlock())
 				.add(QUARTZ_CRYSTAL_STAIRS.asBlock(), QUARTZ_CRYSTAL_WALL.asBlock(), QUARTZ_WALL.asBlock())
@@ -135,8 +161,17 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(CHISELED_POLISHED_GILDED_BLACKSTONE.asBlock(), CRACKED_POLISHED_GILDED_BLACKSTONE_BRICKS.asBlock())
 				.add(GILDED_BLACKSTONE_SLAB.asBlock(), POLISHED_GILDED_BLACKSTONE_SLAB.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICK_SLAB.asBlock())
 				.add(GILDED_BLACKSTONE_STAIRS.asBlock(), POLISHED_GILDED_BLACKSTONE_STAIRS.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICK_STAIRS.asBlock())
-				.add(GILDED_BLACKSTONE_WALL.asBlock(), POLISHED_GILDED_BLACKSTONE_WALL.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICK_WALL.asBlock());
+				.add(GILDED_BLACKSTONE_WALL.asBlock(), POLISHED_GILDED_BLACKSTONE_WALL.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICK_WALL.asBlock())
+				.add(GOLD_BARS.asBlock(), GOLD_CHAIN.asBlock())
+				.add(GOLD_LANTERN.asBlock(), GOLD_SOUL_LANTERN.asBlock(), GOLD_ENDER_LANTERN.asBlock())
+				.add(GOLD_BUTTON.asBlock())
+				.add(GOLD_WALL.asBlock(), GOLD_BRICKS.asBlock(), GOLD_BRICK_SLAB.asBlock())
+				.add(GOLD_BRICK_STAIRS.asBlock(), GOLD_BRICK_WALL.asBlock(), CUT_GOLD.asBlock())
+				.add(CUT_GOLD_PILLAR.asBlock(), CUT_GOLD_SLAB.asBlock(), CUT_GOLD_STAIRS.asBlock())
+				.add(CUT_GOLD_WALL.asBlock());
 		getOrCreateTagBuilder(BlockTags.PIGLIN_REPELLENTS)
+				.add(WHITE_IRON_SOUL_LANTERN.asBlock(), IRON_SOUL_TORCH.asBlock())
+				.add(GOLD_SOUL_LANTERN.asBlock(), GOLD_SOUL_TORCH.asBlock())
 				.add(NETHERITE_SOUL_LANTERN.asBlock(), NETHERITE_SOUL_TORCH.asBlock())
 				.add(BONE_SOUL_TORCH.asBlock(), BAMBOO_SOUL_TORCH.asBlock());
 		getOrCreateTagBuilder(BlockTags.PLANKS)
@@ -144,10 +179,20 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(MANGROVE_PLANKS.asBlock(), BAMBOO_PLANKS.asBlock());
 		getOrCreateTagBuilder(BlockTags.PRESSURE_PLATES).add(CRUSHING_WEIGHTED_PRESSURE_PLATE.asBlock());
 		getOrCreateTagBuilder(BlockTags.SAND).add(Blocks.SAND, Blocks.RED_SAND);
+		getOrCreateTagBuilder(BlockTags.SIGNS).addTag(BlockTags.STANDING_SIGNS).addTag(BlockTags.WALL_SIGNS);
 		getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(MUD.asBlock(), MUDDY_MANGROVE_ROOTS.asBlock());
+		getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS)
+				.add(BUTTERCUP.asBlock(), PINK_DAISY.asBlock(), ROSE.asBlock(), BLUE_ROSE.asBlock())
+				.add(MAGENTA_TULIP.asBlock(), MARIGOLD.asBlock(), INDIGO_ORCHID.asBlock(), MAGENTA_ORCHID.asBlock())
+				.add(ORANGE_ORCHID.asBlock(), PURPLE_ORCHID.asBlock(), RED_ORCHID.asBlock(), WHITE_ORCHID.asBlock())
+				.add(YELLOW_ORCHID.asBlock(), PINK_ALLIUM.asBlock(), LAVENDER.asBlock(), HYDRANGEA.asBlock())
+				.add(PAEONIA.asBlock(), ASTER.asBlock());
 		getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
-				.add(CHARRED_SIGN.asBlock())
-				.add(MANGROVE_SIGN.asBlock(), BAMBOO_SIGN.asBlock());
+				.add(Blocks.ACACIA_SIGN, Blocks.BIRCH_SIGN, Blocks.DARK_OAK_SIGN)
+				.add(Blocks.JUNGLE_SIGN, Blocks.OAK_SIGN, Blocks.SPRUCE_SIGN)
+				.add(Blocks.CRIMSON_SIGN, Blocks.WARPED_SIGN)
+				.add(MANGROVE_SIGN.asBlock(), BAMBOO_SIGN.asBlock())
+				.add(CHARRED_SIGN.asBlock());
 		getOrCreateTagBuilder(BlockTags.SLABS)
 				.add(CALCITE_SLAB.asBlock(), SMOOTH_CALCITE_SLAB.asBlock(), CALCITE_BRICK_SLAB.asBlock())
 				.add(DRIPSTONE_SLAB.asBlock(), SMOOTH_DRIPSTONE_SLAB.asBlock(), DRIPSTONE_BRICK_SLAB.asBlock())
@@ -159,6 +204,8 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(EMERALD_BRICK_SLAB.asBlock(), CUT_EMERALD_SLAB.asBlock())
 				.add(DIAMOND_SLAB.asBlock(), DIAMOND_BRICK_SLAB.asBlock())
 				.add(QUARTZ_BRICK_SLAB.asBlock(), QUARTZ_CRYSTAL_SLAB.asBlock())
+				.add(IRON_BRICK_SLAB.asBlock(), CUT_IRON_SLAB.asBlock())
+				.add(GOLD_BRICK_SLAB.asBlock(), CUT_GOLD_SLAB.asBlock())
 				.add(NETHERITE_BRICK_SLAB.asBlock(), CUT_NETHERITE_SLAB.asBlock())
 				.add(ECHO_SLAB.asBlock(), ECHO_CRYSTAL_SLAB.asBlock())
 				.add(GILDED_BLACKSTONE_SLAB.asBlock(), POLISHED_GILDED_BLACKSTONE_SLAB.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICK_SLAB.asBlock())
@@ -175,11 +222,15 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(EMERALD_BRICK_STAIRS.asBlock(), CUT_EMERALD_STAIRS.asBlock())
 				.add(DIAMOND_STAIRS.asBlock(), DIAMOND_BRICK_STAIRS.asBlock())
 				.add(QUARTZ_BRICK_STAIRS.asBlock(), QUARTZ_CRYSTAL_STAIRS.asBlock())
+				.add(IRON_BRICK_STAIRS.asBlock(), CUT_IRON_STAIRS.asBlock())
+				.add(GOLD_BRICK_STAIRS.asBlock(), CUT_GOLD_STAIRS.asBlock())
 				.add(NETHERITE_BRICK_STAIRS.asBlock(), CUT_NETHERITE_STAIRS.asBlock())
 				.add(ECHO_STAIRS.asBlock(), ECHO_CRYSTAL_STAIRS.asBlock())
 				.add(GILDED_BLACKSTONE_STAIRS.asBlock(), POLISHED_GILDED_BLACKSTONE_STAIRS.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICK_STAIRS.asBlock())
 				.add(SCULK_STONE_STAIRS.asBlock(), SCULK_STONE_BRICK_STAIRS.asBlock())
 				.add(MUD_BRICK_STAIRS.asBlock());
+		getOrCreateTagBuilder(BlockTags.TALL_FLOWERS)
+				.add(AMARANTH.asBlock(), BLUE_ROSE_BUSH.asBlock(), TALL_ALLIUM.asBlock(), TALL_PINK_ALLIUM.asBlock());
 		getOrCreateTagBuilder(BlockTags.TERRACOTTA)
 				.add(Blocks.TERRACOTTA, Blocks.WHITE_TERRACOTTA, Blocks.ORANGE_TERRACOTTA)
 				.add(Blocks.MAGENTA_TERRACOTTA, Blocks.LIGHT_BLUE_TERRACOTTA, Blocks.YELLOW_TERRACOTTA)
@@ -188,8 +239,11 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(Blocks.BLUE_TERRACOTTA, Blocks.BROWN_TERRACOTTA, Blocks.GREEN_TERRACOTTA)
 				.add(Blocks.RED_TERRACOTTA, Blocks.BLACK_TERRACOTTA);
 		getOrCreateTagBuilder(BlockTags.WALL_SIGNS)
-				.add(CHARRED_SIGN.getWallBlock())
-				.add(MANGROVE_SIGN.getWallBlock(), BAMBOO_SIGN.getWallBlock());
+				.add(Blocks.ACACIA_WALL_SIGN, Blocks.BIRCH_WALL_SIGN, Blocks.DARK_OAK_WALL_SIGN)
+				.add(Blocks.JUNGLE_WALL_SIGN, Blocks.OAK_WALL_SIGN, Blocks.SPRUCE_WALL_SIGN)
+				.add(Blocks.CRIMSON_WALL_SIGN, Blocks.WARPED_WALL_SIGN)
+				.add(MANGROVE_SIGN.getWallBlock(), BAMBOO_SIGN.getWallBlock())
+				.add(CHARRED_SIGN.getWallBlock());
 		getOrCreateTagBuilder(BlockTags.WALLS)
 				.add(POLISHED_ANDESITE_WALL.asBlock(), POLISHED_DIORITE_WALL.asBlock(), POLISHED_GRANITE_WALL.asBlock())
 				.add(SMOOTH_SANDSTONE_WALL.asBlock(), SMOOTH_RED_SANDSTONE_WALL.asBlock())
@@ -201,6 +255,8 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(EMERALD_BRICK_WALL.asBlock(), CUT_EMERALD_WALL.asBlock())
 				.add(DIAMOND_WALL.asBlock(), DIAMOND_BRICK_WALL.asBlock())
 				.add(SMOOTH_QUARTZ_WALL.asBlock(), QUARTZ_BRICK_WALL.asBlock(), QUARTZ_WALL.asBlock(), QUARTZ_CRYSTAL_WALL.asBlock())
+				.add(IRON_WALL.asBlock(), IRON_BRICK_WALL.asBlock(), CUT_IRON_WALL.asBlock())
+				.add(GOLD_WALL.asBlock(), GOLD_BRICK_WALL.asBlock(), CUT_GOLD_WALL.asBlock())
 				.add(NETHERITE_WALL.asBlock(), NETHERITE_BRICK_WALL.asBlock(), CUT_NETHERITE_WALL.asBlock())
 				.add(ECHO_WALL.asBlock(), ECHO_CRYSTAL_WALL.asBlock())
 				.add(GILDED_BLACKSTONE_WALL.asBlock(), POLISHED_GILDED_BLACKSTONE_WALL.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICK_WALL.asBlock())
@@ -230,6 +286,9 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(MANGROVE_TRAPDOOR.asBlock(), BAMBOO_TRAPDOOR.asBlock());
 		getOrCreateTagBuilder(BlockTags.WOOL).add(RAINBOW_WOOL.asBlock());
 
+
+		getOrCreateTagBuilder(ModBlockTags.ALL_HANGING_SIGNS).addTag(ModBlockTags.CEILING_HANGING_SIGNS).addTag(ModBlockTags.WALL_HANGING_SIGNS);
+		getOrCreateTagBuilder(ModBlockTags.ALL_SIGNS).addTag(BlockTags.SIGNS).addTag(ModBlockTags.ALL_HANGING_SIGNS);
 		getOrCreateTagBuilder(ModBlockTags.ANCIENT_CITY_REPLACEABLE)
 				.add(Blocks.DEEPSLATE, Blocks.DEEPSLATE_BRICKS, Blocks.DEEPSLATE_TILES, Blocks.DEEPSLATE_BRICK_SLAB,
 						Blocks.DEEPSLATE_TILE_SLAB, Blocks.DEEPSLATE_BRICK_STAIRS, Blocks.DEEPSLATE_TILE_WALL,
@@ -241,6 +300,18 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 						JUNGLE_BOOKSHELF.asBlock(), SPRUCE_BOOKSHELF.asBlock(), WARPED_BOOKSHELF.asBlock(),
 						BAMBOO_BOOKSHELF.asBlock(), MANGROVE_BOOKSHELF.asBlock(), CHARRED_BOOKSHELF.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.CARVED_GOURDS).add(Blocks.CARVED_PUMPKIN);
+		getOrCreateTagBuilder(ModBlockTags.CEILING_HANGING_SIGNS)
+				.add(OAK_HANGING_SIGN.asBlock(), SPRUCE_HANGING_SIGN.asBlock(), BIRCH_HANGING_SIGN.asBlock())
+				.add(ACACIA_HANGING_SIGN.asBlock(), JUNGLE_HANGING_SIGN.asBlock(), DARK_OAK_HANGING_SIGN.asBlock())
+				.add(CRIMSON_HANGING_SIGN.asBlock(), WARPED_HANGING_SIGN.asBlock())
+				.add(MANGROVE_SIGN.getHanging().asBlock(), BAMBOO_SIGN.getHanging().asBlock())
+				.add(CHARRED_SIGN.getHanging().asBlock());
+		getOrCreateTagBuilder(ModBlockTags.WALL_HANGING_SIGNS)
+				.add(OAK_HANGING_SIGN.getWallBlock(), SPRUCE_HANGING_SIGN.getWallBlock(), BIRCH_HANGING_SIGN.getWallBlock())
+				.add(ACACIA_HANGING_SIGN.getWallBlock(), JUNGLE_HANGING_SIGN.getWallBlock(), DARK_OAK_HANGING_SIGN.getWallBlock())
+				.add(CRIMSON_HANGING_SIGN.getWallBlock(), WARPED_HANGING_SIGN.getWallBlock())
+				.add(MANGROVE_SIGN.getHanging().getWallBlock(), BAMBOO_SIGN.getHanging().getWallBlock())
+				.add(CHARRED_SIGN.getHanging().getWallBlock());
 		getOrCreateTagBuilder(ModBlockTags.CHARRED_LOGS).add(CHARRED_LOG.asBlock(), CHARRED_WOOD.asBlock(), STRIPPED_CHARRED_LOG.asBlock(), STRIPPED_CHARRED_WOOD.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.CONVERTIBLE_TO_MUD).add(Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.ROOTED_DIRT);
 		getOrCreateTagBuilder(ModBlockTags.DAMPENS_VIBRATIONS)

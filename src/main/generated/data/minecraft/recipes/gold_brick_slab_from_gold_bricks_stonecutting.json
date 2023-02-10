@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:gold_bricks"
+  },
+  "result": "wich:gold_brick_slab",
+  "count": 2
+}

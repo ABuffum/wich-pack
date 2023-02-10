@@ -2,6 +2,7 @@ package fun.mousewich;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
+import fun.mousewich.advancement.ModCriteria;
 import fun.mousewich.block.*;
 import fun.mousewich.block.basic.*;
 import fun.mousewich.block.mangrove.*;
@@ -22,9 +23,11 @@ import fun.mousewich.entity.ai.sensor.FrogAttackablesSensor;
 import fun.mousewich.entity.ai.sensor.IsInWaterSensor;
 import fun.mousewich.entity.ai.sensor.ModSensorType;
 import fun.mousewich.entity.ai.sensor.WardenAttackablesSensor;
+import fun.mousewich.entity.allay.AllayEntity;
+import fun.mousewich.entity.camel.CamelBrain;
+import fun.mousewich.entity.camel.CamelEntity;
 import fun.mousewich.entity.frog.FrogBrain;
 import fun.mousewich.entity.frog.FrogEntity;
-import fun.mousewich.entity.frog.FrogVariant;
 import fun.mousewich.entity.frog.TadpoleEntity;
 import fun.mousewich.entity.warden.WardenEntity;
 import fun.mousewich.event.*;
@@ -54,11 +57,13 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.fabricmc.fabric.mixin.gamerule.GameRulesAccessor;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
@@ -66,12 +71,11 @@ import net.minecraft.block.enums.SculkSensorPhase;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.sensor.TemptationsSensor;
-import net.minecraft.entity.data.TrackedDataHandler;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.*;
 import net.minecraft.recipe.*;
 import net.minecraft.sound.BlockSoundGroup;
@@ -90,6 +94,7 @@ import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
@@ -104,7 +109,6 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 import static fun.mousewich.ModRegistry.*;
-import static fun.mousewich.ModRegistry.Register;
 
 public class ModBase implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Wich Pack");
@@ -129,7 +133,17 @@ public class ModBase implements ModInitializer {
 	}
 
 	//<editor-fold desc="Boats">
-	public static final EntityType<ModBoatEntity> BOAT_ENTITY = FabricEntityTypeBuilder.<ModBoatEntity>create(SpawnGroup.MISC, ModBoatEntity::new).dimensions(EntityDimensions.fixed(1.375F, 0.5625F)).trackRangeBlocks(10).build();
+	public static final EntityType<ModBoatEntity> MOD_BOAT_ENTITY = FabricEntityTypeBuilder.<ModBoatEntity>create(SpawnGroup.MISC, ModBoatEntity::new).dimensions(EntityDimensions.fixed(1.375F, 0.5625F)).trackRangeBlocks(10).build();
+
+	public static final EntityType<ChestBoatEntity> CHEST_BOAT_ENTITY = FabricEntityTypeBuilder.<ChestBoatEntity>create(SpawnGroup.MISC, ChestBoatEntity::new).dimensions(EntityDimensions.fixed(1.375f, 0.5625f)).trackRangeBlocks(10).build();
+	public static final EntityType<ModChestBoatEntity> MOD_CHEST_BOAT_ENTITY = FabricEntityTypeBuilder.<ModChestBoatEntity>create(SpawnGroup.MISC, ModChestBoatEntity::new).dimensions(EntityDimensions.fixed(1.375f, 0.5625f)).trackRangeBlocks(10).build();
+
+	public static final Item OAK_CHEST_BOAT = ModFactory.MakeChestBoat(BoatEntity.Type.OAK, ItemGroup.TRANSPORTATION);
+	public static final Item SPRUCE_CHEST_BOAT = ModFactory.MakeChestBoat(BoatEntity.Type.SPRUCE, ItemGroup.TRANSPORTATION);
+	public static final Item BIRCH_CHEST_BOAT = ModFactory.MakeChestBoat(BoatEntity.Type.BIRCH, ItemGroup.TRANSPORTATION);
+	public static final Item JUNGLE_CHEST_BOAT = ModFactory.MakeChestBoat(BoatEntity.Type.JUNGLE, ItemGroup.TRANSPORTATION);
+	public static final Item ACACIA_CHEST_BOAT = ModFactory.MakeChestBoat(BoatEntity.Type.ACACIA, ItemGroup.TRANSPORTATION);
+	public static final Item DARK_OAK_CHEST_BOAT = ModFactory.MakeChestBoat(BoatEntity.Type.DARK_OAK, ItemGroup.TRANSPORTATION);
 	//</editor-fold>
 	//<editor-fold desc="Light Sources">
 	public static final DefaultParticleType UNDERWATER_TORCH_GLOW = FabricParticleTypes.simple(false);
@@ -283,7 +297,49 @@ public class ModBase implements ModInitializer {
 	public static final Item QUARTZ_HORSE_ARMOR = new ModHorseArmorItem(8, "quartz", ItemSettings().maxCount(1)).dispenseSilently();
 	//</editor-fold>
 	//<editor-fold desc="Extended Iron">
+	public static final DefaultParticleType IRON_FLAME_PARTICLE = FabricParticleTypes.simple(false);
+	public static final TorchContainer IRON_TORCH = ModFactory.MakeTorch(14, BlockSoundGroup.METAL, IRON_FLAME_PARTICLE);
+	public static final TorchContainer IRON_SOUL_TORCH = ModFactory.MakeSoulTorch(BlockSoundGroup.METAL);
+	public static final TorchContainer IRON_ENDER_TORCH = ModFactory.MakeEnderTorch(BlockSoundGroup.METAL);
+	public static final TorchContainer UNDERWATER_IRON_TORCH = ModFactory.MakeUnderwaterTorch(BlockSoundGroup.METAL);
+	public static final BlockContainer WHITE_IRON_LANTERN = ModFactory.MakeLantern(15);
+	public static final BlockContainer WHITE_IRON_SOUL_LANTERN = ModFactory.MakeLantern(10);
+	public static final BlockContainer WHITE_IRON_ENDER_LANTERN = ModFactory.MakeLantern(10);
 	public static final BlockContainer IRON_BUTTON = new BlockContainer(new MetalButtonBlock(Block.Settings.of(Material.DECORATION).noCollision().strength(10.0F).sounds(BlockSoundGroup.METAL))).dropSelf();
+	public static final BlockContainer WHITE_IRON_CHAIN = ModFactory.MakeChain();
+	public static final BlockContainer IRON_WALL = ModFactory.MakeWall(Blocks.IRON_BLOCK);
+	public static final BlockContainer IRON_BRICKS = new BlockContainer(new Block(Block.Settings.copy(Blocks.IRON_BLOCK))).dropSelf();
+	public static final BlockContainer IRON_BRICK_SLAB = ModFactory.MakeSlab(IRON_BRICKS);
+	public static final BlockContainer IRON_BRICK_STAIRS = ModFactory.MakeStairs(IRON_BRICKS);
+	public static final BlockContainer IRON_BRICK_WALL = ModFactory.MakeWall(IRON_BRICKS);
+	public static final BlockContainer CUT_IRON = new BlockContainer(new Block(Block.Settings.copy(Blocks.IRON_BLOCK))).dropSelf();
+	public static final BlockContainer CUT_IRON_PILLAR = new BlockContainer(new PillarBlock(Block.Settings.copy(CUT_IRON.asBlock()))).dropSelf();
+	public static final BlockContainer CUT_IRON_SLAB = ModFactory.MakeSlab(CUT_IRON);
+	public static final BlockContainer CUT_IRON_STAIRS = ModFactory.MakeStairs(CUT_IRON);
+	public static final BlockContainer CUT_IRON_WALL = ModFactory.MakeWall(CUT_IRON);
+	//</editor-fold>
+	//<editor-fold desc="Extended Gold">
+	public static final DefaultParticleType GOLD_FLAME_PARTICLE = FabricParticleTypes.simple(false);
+	public static final TorchContainer GOLD_TORCH = ModFactory.MakeTorch(14, BlockSoundGroup.METAL, GOLD_FLAME_PARTICLE);
+	public static final TorchContainer GOLD_SOUL_TORCH = ModFactory.MakeSoulTorch(BlockSoundGroup.METAL);
+	public static final TorchContainer GOLD_ENDER_TORCH = ModFactory.MakeEnderTorch(BlockSoundGroup.METAL);
+	public static final TorchContainer UNDERWATER_GOLD_TORCH = ModFactory.MakeUnderwaterTorch(BlockSoundGroup.METAL);
+	public static final BlockContainer GOLD_LANTERN = ModFactory.MakeLantern(15);
+	public static final BlockContainer GOLD_SOUL_LANTERN = ModFactory.MakeLantern(10);
+	public static final BlockContainer GOLD_ENDER_LANTERN = ModFactory.MakeLantern(10);
+	public static final BlockContainer GOLD_BUTTON = new BlockContainer(new MetalButtonBlock(Block.Settings.of(Material.DECORATION).noCollision().strength(10.0F).sounds(BlockSoundGroup.METAL))).dropSelf();
+	public static final BlockContainer GOLD_CHAIN = ModFactory.MakeChain();
+	public static final BlockContainer GOLD_BARS = new BlockContainer(new ModPaneBlock(Block.Settings.of(Material.METAL, MapColor.CLEAR).requiresTool().strength(5.0F, 6.0F).sounds(BlockSoundGroup.METAL).nonOpaque())).dropSelf();
+	public static final BlockContainer GOLD_WALL = ModFactory.MakeWall(Blocks.GOLD_BLOCK);
+	public static final BlockContainer GOLD_BRICKS = new BlockContainer(new Block(Block.Settings.copy(Blocks.GOLD_BLOCK))).dropSelf();
+	public static final BlockContainer GOLD_BRICK_SLAB = ModFactory.MakeSlab(GOLD_BRICKS);
+	public static final BlockContainer GOLD_BRICK_STAIRS = ModFactory.MakeStairs(GOLD_BRICKS);
+	public static final BlockContainer GOLD_BRICK_WALL = ModFactory.MakeWall(GOLD_BRICKS);
+	public static final BlockContainer CUT_GOLD = new BlockContainer(new Block(Block.Settings.copy(Blocks.GOLD_BLOCK))).dropSelf();
+	public static final BlockContainer CUT_GOLD_PILLAR = new BlockContainer(new PillarBlock(Block.Settings.copy(CUT_GOLD.asBlock()))).dropSelf();
+	public static final BlockContainer CUT_GOLD_SLAB = ModFactory.MakeSlab(CUT_GOLD);
+	public static final BlockContainer CUT_GOLD_STAIRS = ModFactory.MakeStairs(CUT_GOLD);
+	public static final BlockContainer CUT_GOLD_WALL = ModFactory.MakeWall(CUT_GOLD);
 	//</editor-fold>
 	//<editor-fold desc="Extended Netherite">
 	public static final DefaultParticleType NETHERITE_FLAME_PARTICLE = FabricParticleTypes.simple(false);
@@ -296,7 +352,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer NETHERITE_SOUL_LANTERN = ModFactory.MakeLantern(10);
 	public static final BlockContainer NETHERITE_ENDER_LANTERN = ModFactory.MakeLantern(10);
 	public static final BlockContainer NETHERITE_BUTTON = new BlockContainer(new MetalButtonBlock(Block.Settings.of(Material.DECORATION).noCollision().strength(10.0F).sounds(BlockSoundGroup.NETHERITE))).dropSelf();
-	public static final BlockContainer NETHERITE_CHAIN = new BlockContainer(new ChainBlock(Block.Settings.of(Material.METAL, MapColor.CLEAR).requiresTool().strength(5.0F, 6.0F).sounds(BlockSoundGroup.CHAIN).nonOpaque())).dropSelf();
+	public static final BlockContainer NETHERITE_CHAIN = ModFactory.MakeChain();
 	public static final BlockContainer NETHERITE_BARS = new BlockContainer(new ModPaneBlock(Block.Settings.of(Material.METAL, MapColor.CLEAR).requiresTool().strength(5.0F, 6.0F).sounds(BlockSoundGroup.NETHERITE).nonOpaque())).dropSelf();
 	public static final BlockContainer NETHERITE_WALL = ModFactory.MakeWall(Blocks.NETHERITE_BLOCK);
 	public static final BlockContainer NETHERITE_BRICKS = new BlockContainer(new Block(Block.Settings.copy(Blocks.NETHERITE_BLOCK))).dropSelf();
@@ -384,7 +440,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer CHARRED_TRAPDOOR = ModFactory.MakeWoodTrapdoor(CHARRED_PLANKS);
 	public static final BlockContainer CHARRED_PRESSURE_PLATE = ModFactory.MakeWoodPressurePlate(CHARRED_PLANKS);
 	public static final BlockContainer CHARRED_BUTTON = ModFactory.MakeWoodButton();
-	public static final SignContainer CHARRED_SIGN = ModFactory.MakeWoodSign("charred");
+	public static final SignContainer CHARRED_SIGN = ModFactory.MakeWoodSign("charred", MapColor.BLACK);
 	public static final BoatContainer CHARRED_BOAT = ModFactory.MakeBoat("charred", CHARRED_PLANKS);
 	public static final BlockContainer CHARRED_BOOKSHELF = ModFactory.MakeBookshelf(MapColor.BLACK);
 	public static final BlockContainer CHARRED_LADDER = ModFactory.MakeLadder();
@@ -407,8 +463,8 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer MANGROVE_BUTTON = ModFactory.MakeWoodButton(ItemGroup.REDSTONE).fuel(100);
 	public static final BlockContainer MANGROVE_ROOTS = new BlockContainer(new MangroveRootsBlock(Block.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(0.7f).ticksRandomly().sounds(ModBlockSoundGroups.MANGROVE_ROOTS).nonOpaque().suffocates(ModFactory::never).blockVision(ModFactory::never).nonOpaque()), ItemGroup.BUILDING_BLOCKS).flammable(5, 20).fuel(300).dropSelf();
 	public static final BlockContainer MUDDY_MANGROVE_ROOTS = new BlockContainer(new PillarBlock(Block.Settings.of(Material.SOIL, MapColor.SPRUCE_BROWN).strength(0.7f).sounds(ModBlockSoundGroups.MUDDY_MANGROVE_ROOTS)), ItemGroup.BUILDING_BLOCKS).dropSelf();
-	public static final SignContainer MANGROVE_SIGN = ModFactory.MakeWoodSign("minecraft:mangrove", ItemGroup.DECORATIONS).fuel(200);
-	public static final BoatContainer MANGROVE_BOAT = ModFactory.MakeBoat("mincraft:mangrove", MANGROVE_PLANKS, ItemGroup.TRANSPORTATION).fuel(1200);
+	public static final SignContainer MANGROVE_SIGN = ModFactory.MakeWoodSign("minecraft:mangrove", ItemGroup.DECORATIONS, MapColor.RED).fuel(200);
+	public static final BoatContainer MANGROVE_BOAT = ModFactory.MakeBoat("minecraft:mangrove", MANGROVE_PLANKS, ItemGroup.TRANSPORTATION).fuel(1200);
 	public static final PottedBlockContainer MANGROVE_PROPAGULE = new PottedBlockContainer(new PropaguleBlock(Block.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)), ItemSettings(ItemGroup.DECORATIONS));
 	//Extended
 	public static final BlockContainer MANGROVE_BOOKSHELF = ModFactory.MakeBookshelf(MapColor.RED).flammable(30, 20).fuel(300);
@@ -427,7 +483,8 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer BAMBOO_TRAPDOOR = ModFactory.MakeWoodTrapdoor(BAMBOO_PLANKS, ItemGroup.REDSTONE, ModBlockSoundGroups.BAMBOO_WOOD, ModSoundEvents.BLOCK_BAMBOO_WOOD_TRAPDOOR_CLOSE, ModSoundEvents.BLOCK_BAMBOO_WOOD_TRAPDOOR_OPEN).fuel(300);
 	public static final BlockContainer BAMBOO_PRESSURE_PLATE = ModFactory.MakeWoodPressurePlate(BAMBOO_PLANKS, ItemGroup.REDSTONE, ModBlockSoundGroups.BAMBOO_WOOD, ModSoundEvents.BLOCK_BAMBOO_WOOD_PRESSURE_PLATE_CLICK_ON, ModSoundEvents.BLOCK_BAMBOO_WOOD_PRESSURE_PLATE_CLICK_OFF).fuel(300);
 	public static final BlockContainer BAMBOO_BUTTON = ModFactory.MakeWoodButton(ItemGroup.REDSTONE, ModBlockSoundGroups.BAMBOO_WOOD, ModSoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_ON, ModSoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_OFF).fuel(100);
-	public static final SignContainer BAMBOO_SIGN = ModFactory.MakeWoodSign("minecraft:bamboo", ItemGroup.DECORATIONS).fuel(200);
+	public static final SignContainer BAMBOO_SIGN = ModFactory.MakeWoodSign("minecraft:bamboo", ItemGroup.DECORATIONS, MapColor.YELLOW).fuel(200);
+	public static final BoatContainer BAMBOO_RAFT = ModFactory.MakeBoat("minecraft:bamboo", BAMBOO_PLANKS, ItemGroup.TRANSPORTATION).fuel(1200);
 	//Mosaic
 	public static final BlockContainer BAMBOO_MOSAIC = new BlockContainer(new Block(Block.Settings.copy(BAMBOO_PLANKS.asBlock())), ItemGroup.BUILDING_BLOCKS).flammable(5, 20).dropSelf();
 	public static final BlockContainer BAMBOO_MOSAIC_SLAB = ModFactory.MakeSlab(BAMBOO_MOSAIC, ItemGroup.BUILDING_BLOCKS).flammable(5, 20).fuel(150);
@@ -447,11 +504,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer VERDANT_FROGLIGHT = ModFactory.MakeFroglight(MapColor.LICHEN_GREEN);
 	public static final BlockContainer PEARLESCENT_FROGLIGHT = ModFactory.MakeFroglight(MapColor.PINK);
 
-	public static final TrackedDataHandler<FrogVariant> FROG_VARIANT = new TrackedDataHandler<>(){
-		@Override public void write(PacketByteBuf packetByteBuf, FrogVariant variant) { packetByteBuf.writeEnumConstant(variant); }
-		@Override public FrogVariant read(PacketByteBuf packetByteBuf) { return packetByteBuf.readEnumConstant(FrogVariant.class); }
-		@Override public FrogVariant copy(FrogVariant variant) { return variant; }
-	};
 	public static final ModSensorType<TemptationsSensor> FROG_TEMPTATIONS_SENSOR = new ModSensorType<>("frog_temptations", () -> new TemptationsSensor(FrogBrain.getTemptItems()));
 	public static final ModSensorType<FrogAttackablesSensor> FROG_ATTACKABLES_SENSOR = new ModSensorType<>("frog_attackables", FrogAttackablesSensor::new);
 	public static final ModSensorType<IsInWaterSensor> IS_IN_WATER_SENSOR = new ModSensorType<>("is_in_water", IsInWaterSensor::new);
@@ -463,19 +515,33 @@ public class ModBase implements ModInitializer {
 	public static final Item TADPOLE_BUCKET = new EntityBucketItem(TADPOLE_ENTITY, Fluids.WATER, ModSoundEvents.ITEM_BUCKET_EMPTY_TADPOLE, ItemSettings(ItemGroup.MISC).maxCount(1));
 	public static final Item TADPOLE_SPAWN_EGG = new SpawnEggItem(TADPOLE_ENTITY, 7164733, 1444352, ItemSettings(ItemGroup.MISC));
 	//</editor-fold>
-	//TODO: Allays (1.19)
-	//TODO: Chest Boats (1.19)
-	//TODO: Advancements (1.19, 1.20)
-	//TODO: Replace vex model with allay model & new texture (1.20)
-	//TODO: Camels (1.20)
-	//TODO: Bamboo Raft (1.20)
 	//TODO: Chiseled Bookshelves (1.20)
-	//TODO: Hanging Signs (1.20)
-	//TODO: Piglin Heads (1.20)
+	//TODO: Armor Trims (1.20)
+	//TODO: Recovery Compass
+	public static final WallBlockContainer ACACIA_HANGING_SIGN = ModFactory.MakeHangingSign(SignType.ACACIA, MapColor.STONE_GRAY, ItemGroup.DECORATIONS);
+	public static final WallBlockContainer BIRCH_HANGING_SIGN = ModFactory.MakeHangingSign(SignType.BIRCH, MapColor.OFF_WHITE, ItemGroup.DECORATIONS);
+	public static final WallBlockContainer DARK_OAK_HANGING_SIGN = ModFactory.MakeHangingSign(SignType.DARK_OAK, MapColor.BROWN, ItemGroup.DECORATIONS);
+	public static final WallBlockContainer JUNGLE_HANGING_SIGN = ModFactory.MakeHangingSign(SignType.JUNGLE, MapColor.SPRUCE_BROWN, ItemGroup.DECORATIONS);
+	public static final WallBlockContainer OAK_HANGING_SIGN = ModFactory.MakeHangingSign(SignType.OAK, MapColor.SPRUCE_BROWN, ItemGroup.DECORATIONS);
+	public static final WallBlockContainer SPRUCE_HANGING_SIGN = ModFactory.MakeHangingSign(SignType.SPRUCE, MapColor.BROWN, ItemGroup.DECORATIONS);
+	public static final WallBlockContainer CRIMSON_HANGING_SIGN = ModFactory.MakeHangingSign(SignType.CRIMSON, MapColor.DULL_PINK, ItemGroup.DECORATIONS);
+	public static final WallBlockContainer WARPED_HANGING_SIGN = ModFactory.MakeHangingSign(SignType.WARPED, MapColor.DARK_AQUA, ItemGroup.DECORATIONS);
+
+	public static final ModSensorType<TemptationsSensor> CAMEL_TEMPTATIONS_SENSOR = new ModSensorType<>("camel_temptations", () -> new TemptationsSensor(CamelBrain.getBreedingIngredient()));
+	public static final EntityType<CamelEntity> CAMEL_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CamelEntity::new).dimensions(EntityDimensions.fixed(1.7f, 2.375f)).trackRangeBlocks(10).build();
+	public static final Item CAMEL_SPAWN_EGG = new SpawnEggItem(CAMEL_ENTITY, 16565097, 13341495, ItemSettings(ItemGroup.MISC));
+
+
 	private static final Block PIGLIN_HEAD_BLOCK = new PiglinHeadBlock(Block.Settings.of(Material.DECORATION).strength(1.0f));
 	private static final Block PIGLIN_WALL_HEAD = new WallPiglinHeadBlock(Block.Settings.of(Material.DECORATION).strength(1.0f));
 	public static final WallBlockContainer PIGLIN_HEAD = new WallBlockContainer(PIGLIN_HEAD_BLOCK, PIGLIN_WALL_HEAD, new VerticallyAttachableBlockItem(PIGLIN_HEAD_BLOCK, PIGLIN_WALL_HEAD, ItemSettings(ItemGroup.DECORATIONS).rarity(Rarity.UNCOMMON), Direction.DOWN)).dropSelf();
 	public static final BlockEntityType<PiglinHeadEntity> PIGLIN_HEAD_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(PiglinHeadEntity::new, PIGLIN_HEAD.asBlock(), PIGLIN_HEAD.getWallBlock()).build();
+
+
+
+	public static final EntityType<AllayEntity> ALLAY_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AllayEntity::new).dimensions(EntityDimensions.fixed(0.35f, 0.6f)).trackRangeBlocks(8).trackedUpdateRate(2).build();
+	public static final Item ALLAY_SPAWN_EGG = new SpawnEggItem(ALLAY_ENTITY, 56063, 44543, ItemSettings(ItemGroup.MISC));
+
 
 
 	//<editor-fold desc="Sculk">
@@ -514,27 +580,12 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer TUFF_SCULK_TURF = new BlockContainer(new SculkTurfBlock(Blocks.TUFF, Block.Settings.of(Material.STONE, MapColor.BLACK).requiresTool().strength(1.5F, 6.0F).sounds(ModBlockSoundGroups.SCULK).ticksRandomly())).requireSilkTouchOrDrop(Items.TUFF);
 	//</editor-fold>
 	public static final BlockContainer REINFORCED_DEEPSLATE = new BlockContainer(new Block(Block.Settings.of(Material.STONE, MapColor.DEEPSLATE_GRAY).sounds(BlockSoundGroup.DEEPSLATE).strength(55.0f, 1200.0f))).drops(DropTable.NOTHING);
-
-	public static final TrackedDataHandler<ModEntityPose> NEW_ENTITY_POSE = new TrackedDataHandler<>(){
-		@Override public void write(PacketByteBuf packetByteBuf, ModEntityPose entityPose) { packetByteBuf.writeEnumConstant(entityPose); }
-		@Override public ModEntityPose read(PacketByteBuf packetByteBuf) { return packetByteBuf.readEnumConstant(ModEntityPose.class); }
-		@Override public ModEntityPose copy(ModEntityPose entityPose) { return entityPose; }
-	};
-	public static final TrackedDataHandler<OptionalInt> OPTIONAL_INT = new TrackedDataHandler<>() {
-		@Override public void write(PacketByteBuf packetByteBuf, OptionalInt optionalInt) {
-			packetByteBuf.writeVarInt(optionalInt.orElse(-1) + 1);
-		}
-		@Override public OptionalInt read(PacketByteBuf packetByteBuf) {
-			int i = packetByteBuf.readVarInt();
-			return i == 0 ? OptionalInt.empty() : OptionalInt.of(i - 1);
-		}
-		@Override public OptionalInt copy(OptionalInt optionalInt) { return optionalInt; }
-	};
 	//<editor-fold desc="Warden">
 	public static final DefaultParticleType SONIC_BOOM_PARTICLE = FabricParticleTypes.simple(true);
 	public static final ModSensorType<WardenAttackablesSensor> WARDEN_ENTITY_SENSOR = new ModSensorType<>("minecraft:warden_entity_sensor", WardenAttackablesSensor::new);
 	public static final EntityType<WardenEntity> WARDEN_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WardenEntity::new).dimensions(EntityDimensions.fixed(0.9f, 2.9f)).trackRangeBlocks(16).fireImmune().build();
 	public static final Item WARDEN_SPAWN_EGG = new SpawnEggItem(WARDEN_ENTITY, 1001033, 3790560, ItemSettings(ItemGroup.MISC));
+	public static final GameRules.Key<GameRules.BooleanRule> DO_WARDEN_SPAWNING = GameRulesAccessor.callRegister("doWardenSpawning", GameRules.Category.SPAWNING, GameRuleFactory.createBooleanRule(true));
 	//</editor-fold>
 	//<editor-fold desc="Echo">
 	public static final Item ECHO_SHARD = new Item(ItemSettings(ItemGroup.MISC));
@@ -630,7 +681,34 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer WARPED_LADDER = ModFactory.MakeLadder();
 	public static final BlockContainer WARPED_WOODCUTTER = ModFactory.MakeWoodcutter(MapColor.DARK_AQUA);
 	//</editor-fold>
-
+	//<editor-fold desc="Flowers">
+	//Minecraft Earth Flowers
+	public static final FlowerContainer BUTTERCUP = ModFactory.MakeFlower(StatusEffects.BLINDNESS, 11);
+	public static final FlowerContainer PINK_DAISY = ModFactory.MakeFlower(StatusEffects.REGENERATION, 8);
+	//Other Flowers
+	public static final FlowerContainer ROSE = new FlowerContainer(new GrowableFlowerBlock(StatusEffects.WEAKNESS, 9, FlowerContainer.Settings(), () -> (TallFlowerBlock)Blocks.ROSE_BUSH));
+	private static TallFlowerBlock getBlueRoseBush() { return (TallFlowerBlock) BLUE_ROSE_BUSH.asBlock(); }
+	public static final FlowerContainer BLUE_ROSE = new FlowerContainer(new GrowableFlowerBlock(StatusEffects.WEAKNESS, 9, FlowerContainer.Settings(), ModBase::getBlueRoseBush));
+	public static final FlowerContainer MAGENTA_TULIP = ModFactory.MakeFlower(StatusEffects.FIRE_RESISTANCE, 4);
+	public static final FlowerContainer MARIGOLD = ModFactory.MakeFlower(StatusEffects.WITHER, 5);
+	public static final FlowerContainer INDIGO_ORCHID = ModFactory.MakeFlower(StatusEffects.SATURATION, 7);
+	public static final FlowerContainer MAGENTA_ORCHID = ModFactory.MakeFlower(StatusEffects.SATURATION, 7);
+	public static final FlowerContainer ORANGE_ORCHID = ModFactory.MakeFlower(StatusEffects.SATURATION, 7);
+	public static final FlowerContainer PURPLE_ORCHID = ModFactory.MakeFlower(StatusEffects.SATURATION, 7);
+	public static final FlowerContainer RED_ORCHID = ModFactory.MakeFlower(StatusEffects.SATURATION, 7);
+	public static final FlowerContainer WHITE_ORCHID = ModFactory.MakeFlower(StatusEffects.SATURATION, 7);
+	public static final FlowerContainer YELLOW_ORCHID = ModFactory.MakeFlower(StatusEffects.SATURATION, 7);
+	private static TallFlowerBlock getTallPinkAlliumBlock() { return (TallFlowerBlock) TALL_PINK_ALLIUM.asBlock(); }
+	public static final FlowerContainer PINK_ALLIUM = new FlowerContainer(new GrowableFlowerBlock(StatusEffects.FIRE_RESISTANCE, 4, FlowerContainer.Settings(), ModBase::getTallPinkAlliumBlock));
+	public static final FlowerContainer LAVENDER = ModFactory.MakeFlower(StatusEffects.INVISIBILITY, 8);
+	public static final FlowerContainer HYDRANGEA = ModFactory.MakeFlower(StatusEffects.JUMP_BOOST, 7);
+	public static final FlowerContainer PAEONIA = ModFactory.MakeFlower(StatusEffects.STRENGTH, 6);
+	public static final FlowerContainer ASTER = ModFactory.MakeFlower(StatusEffects.INSTANT_DAMAGE, 1);
+	public static final TallBlockContainer AMARANTH = ModFactory.MakeTallFlower();
+	public static final TallBlockContainer BLUE_ROSE_BUSH = ModFactory.MakeCuttableFlower(() -> (FlowerBlock)BLUE_ROSE.asBlock());
+	public static final TallBlockContainer TALL_ALLIUM = ModFactory.MakeCuttableFlower(() -> (FlowerBlock)Blocks.ALLIUM);
+	public static final TallBlockContainer TALL_PINK_ALLIUM = ModFactory.MakeCuttableFlower(() -> (FlowerBlock) PINK_ALLIUM.asBlock());
+	//</editor-fold>
 	//<editor-fold desc="Biomes">
 	public static final Feature<DefaultFeatureConfig> DISK_GRASS_FEATURE = new DiskGrassFeature(DefaultFeatureConfig.CODEC);
 	public static final ModConfiguredFeature<DefaultFeatureConfig, ?> DISK_GRASS_CONFIGURED = new ModConfiguredFeature<>("disk_grass", new ConfiguredFeature<>(DISK_GRASS_FEATURE, FeatureConfig.DEFAULT));
@@ -726,7 +804,7 @@ public class ModBase implements ModInitializer {
 			new ModPoolPair("ancient_city/city_center/city_center_3", ANCIENT_CITY_START_DEGRADATION, 1)
 	));
 	public static final ModStructureFeature ANCIENT_CITY_POOL = new ModStructureFeature("ancient_city", new JigsawFeature(StructurePoolFeatureConfig.CODEC, -51, true, false, context -> true));
-	public static final RegistryKey<ConfiguredStructureFeature<?, ?>> ANCIENT_CITY_CONFIGURED_KEY = RegistryKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, ID("ancient_city"));;
+	public static final RegistryKey<ConfiguredStructureFeature<?, ?>> ANCIENT_CITY_CONFIGURED_KEY = RegistryKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, ID("ancient_city"));
 	public static final ModConfiguredStructure ANCIENT_CITY_CONFIGURED = new ModConfiguredStructure(ANCIENT_CITY_CONFIGURED_KEY, ANCIENT_CITY_POOL, new ModStructurePoolConfig(CITY_CENTER, 7), ModBiomeTags.ANCIENT_CITY_HAS_STRUCTURE);
 	public static final RegistryKey<StructureSet> ANCIENT_CITIES_KEY = RegistryKey.of(Registry.STRUCTURE_SET_KEY, ID("ancient_cities"));
 	public static final ModStructureSet ANCIENT_CITIES = new ModStructureSet(ANCIENT_CITIES_KEY, ANCIENT_CITY_CONFIGURED, new RandomSpreadStructurePlacement(24, 8, SpreadType.LINEAR, 20083232));
@@ -773,31 +851,49 @@ public class ModBase implements ModInitializer {
 	private static void RegisterAll() {
 		if (registered) return;
 		registered = true;
-		Register("mod_boat", BOAT_ENTITY);
+		//<editor-fold desc="Boats">
+		Register("mod_boat", MOD_BOAT_ENTITY);
+		Register("minecraft:chest_boat", CHEST_BOAT_ENTITY);
+		Register("mod_chest_boat", MOD_CHEST_BOAT_ENTITY);
+		Register("minecraft:oak_chest_boat", OAK_CHEST_BOAT);
+		Register("minecraft:spruce_chest_boat", SPRUCE_CHEST_BOAT);
+		Register("minecraft:birch_chest_boat", BIRCH_CHEST_BOAT);
+		Register("minecraft:jungle_chest_boat", JUNGLE_CHEST_BOAT);
+		Register("minecraft:acacia_chest_boat", ACACIA_CHEST_BOAT);
+		Register("minecraft:dark_oak_chest_boat", DARK_OAK_CHEST_BOAT);
+		//</editor-fold>
 		Register("woodcutting", WOODCUTTING_RECIPE_SERIALIZER);
 		//<editor-fold desc="Extended Wood">
 		Register("acacia_bookshelf", ACACIA_BOOKSHELF);
 		Register("acacia_ladder", ACACIA_LADDER);
 		Register("acacia_woodcutter", ACACIA_WOODCUTTER);
+		Register("minecraft:acacia_hanging_sign", "minecraft:acacia_wall_hanging_sign", ACACIA_HANGING_SIGN);
 		Register("birch_bookshelf", BIRCH_BOOKSHELF);
 		Register("birch_ladder", BIRCH_LADDER);
 		Register("birch_woodcutter", BIRCH_WOODCUTTER);
+		Register("minecraft:birch_hanging_sign", "minecraft:birch_wall_hanging_sign", BIRCH_HANGING_SIGN);
 		Register("dark_oak_bookshelf", DARK_OAK_BOOKSHELF);
 		Register("dark_oak_ladder", DARK_OAK_LADDER);
 		Register("dark_oak_woodcutter", DARK_OAK_WOODCUTTER);
+		Register("minecraft:dark_oak_hanging_sign", "minecraft:dark_oak_wall_hanging_sign", DARK_OAK_HANGING_SIGN);
 		Register("jungle_bookshelf", JUNGLE_BOOKSHELF);
 		Register("jungle_ladder", JUNGLE_LADDER);
 		Register("jungle_woodcutter", JUNGLE_WOODCUTTER);
+		Register("minecraft:jungle_hanging_sign", "minecraft:jungle_wall_hanging_sign", JUNGLE_HANGING_SIGN);
 		Register("woodcutter", WOODCUTTER);
+		Register("minecraft:oak_hanging_sign", "minecraft:oak_wall_hanging_sign", OAK_HANGING_SIGN);
 		Register("spruce_bookshelf", SPRUCE_BOOKSHELF);
 		Register("spruce_ladder", SPRUCE_LADDER);
 		Register("spruce_woodcutter", SPRUCE_WOODCUTTER);
+		Register("minecraft:spruce_hanging_sign", "minecraft:spruce_wall_hanging_sign", SPRUCE_HANGING_SIGN);
 		Register("crimson_bookshelf", CRIMSON_BOOKSHELF);
 		Register("crimson_ladder", CRIMSON_LADDER);
 		Register("crimson_woodcutter", CRIMSON_WOODCUTTER);
+		Register("minecraft:crimson_hanging_sign", "minecraft:crimson_wall_hanging_sign", CRIMSON_HANGING_SIGN);
 		Register("warped_bookshelf", WARPED_BOOKSHELF);
 		Register("warped_ladder", WARPED_LADDER);
 		Register("warped_woodcutter", WARPED_WOODCUTTER);
+		Register("minecraft:warped_hanging_sign", "minecraft:warped_wall_hanging_sign", WARPED_HANGING_SIGN);
 		//</editor-fold>
 		//<editor-fold desc="Light Sources">
 		Register("glow_flame", UNDERWATER_TORCH_GLOW);
@@ -951,7 +1047,49 @@ public class ModBase implements ModInitializer {
 		Register("quartz_horse_armor", QUARTZ_HORSE_ARMOR);
 		//</editor-fold>
 		//<editor-fold desc="Extended Iron">
+		Register("iron_flame", IRON_FLAME_PARTICLE);
+		Register("iron_torch", "iron_wall_torch", IRON_TORCH);
+		Register("iron_soul_torch", "iron_soul_wall_torch", IRON_SOUL_TORCH);
+		Register("iron_ender_torch", "iron_ender_wall_torch", IRON_ENDER_TORCH);
+		Register("underwater_iron_torch", "underwater_iron_wall_torch", UNDERWATER_IRON_TORCH);
+		Register("white_iron_lantern", WHITE_IRON_LANTERN);
+		Register("white_iron_soul_lantern", WHITE_IRON_SOUL_LANTERN);
+		Register("white_iron_ender_lantern", WHITE_IRON_ENDER_LANTERN);
 		Register("iron_button", IRON_BUTTON);
+		Register("white_iron_chain", WHITE_IRON_CHAIN);
+		Register("iron_wall", IRON_WALL);
+		Register("iron_bricks", IRON_BRICKS);
+		Register("iron_brick_stairs", IRON_BRICK_STAIRS);
+		Register("iron_brick_slab", IRON_BRICK_SLAB);
+		Register("iron_brick_wall", IRON_BRICK_WALL);
+		Register("cut_iron", CUT_IRON);
+		Register("cut_iron_pillar", CUT_IRON_PILLAR);
+		Register("cut_iron_stairs", CUT_IRON_STAIRS);
+		Register("cut_iron_slab", CUT_IRON_SLAB);
+		Register("cut_iron_wall", CUT_IRON_WALL);
+		//</editor-fold>
+		//<editor-fold desc="Extended Gold">
+		Register("gold_flame", GOLD_FLAME_PARTICLE);
+		Register("gold_torch", "gold_wall_torch", GOLD_TORCH);
+		Register("gold_soul_torch", "gold_soul_wall_torch", GOLD_SOUL_TORCH);
+		Register("gold_ender_torch", "gold_ender_wall_torch", GOLD_ENDER_TORCH);
+		Register("underwater_gold_torch", "underwater_gold_wall_torch", UNDERWATER_GOLD_TORCH);
+		Register("gold_lantern", GOLD_LANTERN);
+		Register("gold_soul_lantern", GOLD_SOUL_LANTERN);
+		Register("gold_ender_lantern", GOLD_ENDER_LANTERN);
+		Register("gold_button", GOLD_BUTTON);
+		Register("gold_chain", GOLD_CHAIN);
+		Register("gold_bars", GOLD_BARS);
+		Register("gold_wall", GOLD_WALL);
+		Register("gold_bricks", GOLD_BRICKS);
+		Register("gold_brick_stairs", GOLD_BRICK_STAIRS);
+		Register("gold_brick_slab", GOLD_BRICK_SLAB);
+		Register("gold_brick_wall", GOLD_BRICK_WALL);
+		Register("cut_gold", CUT_GOLD);
+		Register("cut_gold_pillar", CUT_GOLD_PILLAR);
+		Register("cut_gold_stairs", CUT_GOLD_STAIRS);
+		Register("cut_gold_slab", CUT_GOLD_SLAB);
+		Register("cut_gold_wall", CUT_GOLD_WALL);
 		//</editor-fold>
 		//<editor-fold desc="Extended Netherite">
 		Register("netherite_flame", NETHERITE_FLAME_PARTICLE);
@@ -1071,8 +1209,8 @@ public class ModBase implements ModInitializer {
 		Register("charred_trapdoor", CHARRED_TRAPDOOR);
 		Register("charred_pressure_plate", CHARRED_PRESSURE_PLATE);
 		Register("charred_button", CHARRED_BUTTON);
-		Register("charred_sign", "charred_wall_sign", CHARRED_SIGN);
-		Register("charred_boat", CHARRED_BOAT);
+		Register("charred", CHARRED_SIGN);
+		Register("charred_boat", "charred_chest_boat", CHARRED_BOAT);
 		Register("charred_bookshelf", CHARRED_BOOKSHELF);
 		Register("charred_ladder", CHARRED_LADDER);
 		Register("charred_woodcutter", CHARRED_WOODCUTTER);
@@ -1104,8 +1242,8 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:mangrove_button", MANGROVE_BUTTON);
 		Register("minecraft:mangrove_roots", MANGROVE_ROOTS);
 		Register("minecraft:muddy_mangrove_roots", MUDDY_MANGROVE_ROOTS);
-		Register("minecraft:mangrove_sign", "minecraft:mangrove_wall_sign", MANGROVE_SIGN);
-		Register("minecraft:mangrove_boat", MANGROVE_BOAT);
+		Register("minecraft:mangrove", MANGROVE_SIGN);
+		Register("minecraft:mangrove_boat", "minecraft:mangrove_chest_boat", MANGROVE_BOAT);
 		Register("minecraft:mangrove_propagule", "minecraft:potted_mangrove_propagule", MANGROVE_PROPAGULE);
 		//Extended
 		Register("mangrove_bookshelf", MANGROVE_BOOKSHELF);
@@ -1124,7 +1262,8 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:bamboo_trapdoor", BAMBOO_TRAPDOOR);
 		Register("minecraft:bamboo_pressure_plate", BAMBOO_PRESSURE_PLATE);
 		Register("minecraft:bamboo_button", BAMBOO_BUTTON);
-		Register("minecraft:bamboo_sign", "minecraft:bamboo_wall_sign", BAMBOO_SIGN);
+		Register("minecraft:bamboo", BAMBOO_SIGN);
+		Register("minecraft:bamboo_raft", "minecraft:bamboo_chest_raft", BAMBOO_RAFT);
 		//Bamboo Mosaic
 		Register("minecraft:bamboo_mosaic", BAMBOO_MOSAIC);
 		Register("minecraft:bamboo_mosaic_stairs", BAMBOO_MOSAIC_STAIRS);
@@ -1143,13 +1282,16 @@ public class ModBase implements ModInitializer {
 		DispenserBlock.registerBehavior(PIGLIN_HEAD, new WearableDispenserBehavior());
 		//Mobs
 		ModActivities.Initialize();
-		TrackedDataHandlerRegistry.register(NEW_ENTITY_POSE);
-		TrackedDataHandlerRegistry.register(OPTIONAL_INT);
-		//Frogs
+		ModDataHandlers.Initialize();
+		//<editor-fold desc="Allays">
+		Register("minecraft:allay", ALLAY_ENTITY);
+		FabricDefaultAttributeRegistry.register(ALLAY_ENTITY, AllayEntity.createAllayAttributes());
+		Register("minecraft:allay_spawn_egg", ALLAY_SPAWN_EGG);
+		//</editor-fold>
+		//<editor-fold desc="Frogs">
 		Register("minecraft:ochre_froglight", OCHRE_FROGLIGHT);
 		Register("minecraft:verdant_froglight", VERDANT_FROGLIGHT);
 		Register("minecraft:pearlescent_froglight", PEARLESCENT_FROGLIGHT);
-		TrackedDataHandlerRegistry.register(FROG_VARIANT);
 		FROG_TEMPTATIONS_SENSOR.Initialize();
 		FROG_ATTACKABLES_SENSOR.Initialize();
 		IS_IN_WATER_SENSOR.Initialize();
@@ -1162,6 +1304,7 @@ public class ModBase implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(TADPOLE_ENTITY, TadpoleEntity.createTadpoleAttributes());
 		Register("minecraft:tadpole_bucket", TADPOLE_BUCKET);
 		Register("minecraft:tadpole_spawn_egg", TADPOLE_SPAWN_EGG);
+		//</editor-fold>
 		//<editor-fold desc="Sculk">
 		Register("sculk_sensor", SCULK_SENSOR, SCULK_SENSOR_ENTITY);
 		Register("minecraft:sculk", SCULK);
@@ -1174,7 +1317,7 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:shriek", SHRIEK_PARTICLE);
 		//</editor-fold>
 		Register("minecraft:reinforced_deepslate", REINFORCED_DEEPSLATE);
-		//Wardens
+		//<editor-fold desc="Wardens">
 		WARDEN_ENTITY_SENSOR.Initialize();
 		Register("minecraft:warden", WARDEN_ENTITY);
 		Register("minecraft:sonic_boom", SONIC_BOOM_PARTICLE);
@@ -1185,6 +1328,7 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:darkness", DARKNESS_EFFECT);
 		Register("minecraft:swift_sneak", SWIFT_SNEAK_ENCHANTMENT);
 		Register("recovery_compass", RECOVERY_COMPASS);
+		//</editor-fold>
 		//<editor-fold desc="Echo">
 		Register("minecraft:echo_shard", ECHO_SHARD);
 		//Extended
@@ -1224,15 +1368,43 @@ public class ModBase implements ModInitializer {
 		Register("smooth_basalt_sculk_turf", SMOOTH_BASALT_SCULK_TURF);
 		Register("tuff_sculk_turf", TUFF_SCULK_TURF);
 		//</editor-fold>
-		Register("flashbanged", FLASHBANGED_EFFECT);
-		Register("bleeding", BLEEDING_EFFECT);
-		Register("tinted_goggles", TINTED_GOGGLES_EFFECT);
-		//Biomes
+		//<editor-fold desc="Camels">
+		CAMEL_TEMPTATIONS_SENSOR.Initialize();
+		Register("minecraft:camel", CAMEL_ENTITY);
+		FabricDefaultAttributeRegistry.register(CAMEL_ENTITY, CamelEntity.createCamelAttributes());
+		Register("minecraft:camel_spawn_egg", CAMEL_SPAWN_EGG);
+		//</editor-fold>
+		//<editor-fold desc="Flowers">
+		//Minecraft Earth Flowers
+		Register("buttercup", BUTTERCUP);
+		Register("pink_daisy", PINK_DAISY);
+		//Other Flowers
+		Register("rose", ROSE);
+		Register("blue_rose", BLUE_ROSE);
+		Register("magenta_tulip", MAGENTA_TULIP);
+		Register("marigold", MARIGOLD);
+		Register("pink_allium", PINK_ALLIUM);
+		Register("lavender", LAVENDER);
+		Register("hydrangea", HYDRANGEA);
+		Register("indigo_orchid", INDIGO_ORCHID);
+		Register("magenta_orchid", MAGENTA_ORCHID);
+		Register("orange_orchid", ORANGE_ORCHID);
+		Register("purple_orchid", PURPLE_ORCHID);
+		Register("red_orchid", RED_ORCHID);
+		Register("white_orchid", WHITE_ORCHID);
+		Register("yellow_orchid", YELLOW_ORCHID);
+		Register("paeonia", PAEONIA);
+		Register("aster", ASTER);
+		Register("amaranth", AMARANTH);
+		Register("blue_rose_bush", BLUE_ROSE_BUSH);
+		Register("tall_allium", TALL_ALLIUM);
+		Register("tall_pink_allium", TALL_PINK_ALLIUM);
+		//</editor-fold>
+		//<editor-fold desc="Biomes">
 		Register("disk_grass", DISK_GRASS_FEATURE);
 		DISK_GRASS_CONFIGURED.Initialize();
 		DISK_GRASS_PLACED.Initialize();
 		Register("mangrove_tree", MANGROVE_TREE_FEATURE);
-		//TODO: Vines on mangrove trees are backwards, leaves are breaking too close to the tree
 		MANGROVE_CONFIGURED.Initialize();
 		MANGROVE_CHECKED_PLACED.Initialize();
 		TALL_MANGROVE_CONFIGURED.Initialize();
@@ -1258,12 +1430,19 @@ public class ModBase implements ModInitializer {
 		AncientCityOutskirtsGenerator.Initialize();
 		/*MANGROVE_SWAMP*/ BuiltinBiomesInvoker.Register(MANGROVE_SWAMP, ModBiomeCreator.createMangroveSwamp());
 		/*DEEP_DARK*/ BuiltinBiomesInvoker.Register(DEEP_DARK, ModBiomeCreator.createDeepDark());
+		//</editor-fold>
+		//<editor-fold desc="Effects">
+		Register("flashbanged", FLASHBANGED_EFFECT);
+		Register("bleeding", BLEEDING_EFFECT);
+		Register("tinted_goggles", TINTED_GOGGLES_EFFECT);
+		//</editor-fold>
 		RegisterOriginsPowers();
 		RegisterCommands();
 		ModGameEvent.RegisterAll();
 		ModMemoryModules.Initialize();
 		ModPositionSourceTypes.Initialize();
 		IdentifiedSounds.RegisterAll();
+		ModCriteria.Register();
 		//Ryft Modpack
 		IdentifiedSounds.RegisterPowers("ryft", "angel", "arsene", "auryon", "dj", "faerie", "gubby",
 				"kaden", "kirha", "lavender", "navn", "oracle", "quincy", "rose", "zofia");

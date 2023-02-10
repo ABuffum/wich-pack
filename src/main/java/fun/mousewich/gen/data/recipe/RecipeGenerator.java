@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.function.Consumer;
 
 import static fun.mousewich.ModBase.*;
+import static fun.mousewich.ModBase.DARK_OAK_CHEST_BOAT;
 
 public class RecipeGenerator extends FabricRecipeProvider {
 	public RecipeGenerator(FabricDataGenerator dataGenerator) { super(dataGenerator); }
@@ -98,26 +99,40 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeBookshelf(ACACIA_BOOKSHELF, Items.ACACIA_PLANKS).offerTo(exporter);
 		Recipes.MakePlanksLadder(ACACIA_LADDER, Items.ACACIA_PLANKS).offerTo(exporter);
 		Recipes.MakeWoodcutter(ACACIA_WOODCUTTER, Items.ACACIA_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(ACACIA_HANGING_SIGN, Items.STRIPPED_ACACIA_LOG).offerTo(exporter);
+		Recipes.MakeShapeless(ACACIA_CHEST_BOAT, Items.ACACIA_BOAT).input(Items.CHEST).offerTo(exporter);
 		Recipes.MakeBookshelf(BIRCH_BOOKSHELF, Items.BIRCH_PLANKS).offerTo(exporter);
 		Recipes.MakePlanksLadder(BIRCH_LADDER, Items.BIRCH_PLANKS).offerTo(exporter);
 		Recipes.MakeWoodcutter(BIRCH_WOODCUTTER, Items.BIRCH_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(BIRCH_HANGING_SIGN, Items.STRIPPED_BIRCH_LOG).offerTo(exporter);
+		Recipes.MakeShapeless(BIRCH_CHEST_BOAT, Items.BIRCH_BOAT).input(Items.CHEST).offerTo(exporter);
 		Recipes.MakeBookshelf(DARK_OAK_BOOKSHELF, Items.DARK_OAK_PLANKS).offerTo(exporter);
 		Recipes.MakePlanksLadder(DARK_OAK_LADDER, Items.DARK_OAK_PLANKS).offerTo(exporter);
 		Recipes.MakeWoodcutter(DARK_OAK_WOODCUTTER, Items.DARK_OAK_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(DARK_OAK_HANGING_SIGN, Items.STRIPPED_DARK_OAK_LOG).offerTo(exporter);
+		Recipes.MakeShapeless(DARK_OAK_CHEST_BOAT, Items.DARK_OAK_BOAT).input(Items.CHEST).offerTo(exporter);
 		Recipes.MakeBookshelf(JUNGLE_BOOKSHELF, Items.JUNGLE_PLANKS).offerTo(exporter);
 		Recipes.MakePlanksLadder(JUNGLE_LADDER, Items.JUNGLE_PLANKS).offerTo(exporter);
 		Recipes.MakeWoodcutter(JUNGLE_WOODCUTTER, Items.JUNGLE_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(JUNGLE_HANGING_SIGN, Items.STRIPPED_JUNGLE_LOG).offerTo(exporter);
+		Recipes.MakeShapeless(JUNGLE_CHEST_BOAT, Items.JUNGLE_BOAT).input(Items.CHEST).offerTo(exporter);
 		Recipes.MakeBookshelf(Blocks.BOOKSHELF, Items.OAK_PLANKS).offerTo(exporter); //Override
 		Recipes.MakeWoodcutter(WOODCUTTER, Items.OAK_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(OAK_HANGING_SIGN, Items.STRIPPED_OAK_LOG).offerTo(exporter);
+		Recipes.MakeShapeless(OAK_CHEST_BOAT, Items.OAK_BOAT).input(Items.CHEST).offerTo(exporter);
 		Recipes.MakeBookshelf(SPRUCE_BOOKSHELF, Items.SPRUCE_PLANKS).offerTo(exporter);
 		Recipes.MakePlanksLadder(SPRUCE_LADDER, Items.SPRUCE_PLANKS).offerTo(exporter);
 		Recipes.MakeWoodcutter(SPRUCE_WOODCUTTER, Items.SPRUCE_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(SPRUCE_HANGING_SIGN, Items.STRIPPED_SPRUCE_LOG).offerTo(exporter);
+		Recipes.MakeShapeless(SPRUCE_CHEST_BOAT, Items.SPRUCE_BOAT).input(Items.CHEST).offerTo(exporter);
 		Recipes.MakeBookshelf(CRIMSON_BOOKSHELF, Items.CRIMSON_PLANKS).offerTo(exporter);
 		Recipes.MakePlanksLadder(CRIMSON_LADDER, Items.CRIMSON_PLANKS).offerTo(exporter);
 		Recipes.MakeWoodcutter(CRIMSON_WOODCUTTER, Items.CRIMSON_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(CRIMSON_HANGING_SIGN, Items.STRIPPED_CRIMSON_STEM).offerTo(exporter);
 		Recipes.MakeBookshelf(WARPED_BOOKSHELF, Items.WARPED_PLANKS).offerTo(exporter);
 		Recipes.MakePlanksLadder(WARPED_LADDER, Items.WARPED_PLANKS).offerTo(exporter);
 		Recipes.MakeWoodcutter(WARPED_WOODCUTTER, Items.WARPED_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(WARPED_HANGING_SIGN, Items.STRIPPED_WARPED_STEM).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Light Sources">
 		Recipes.MakeShaped(UNDERWATER_TORCH, Items.STICK, 4).input('*', Items.GLOW_INK_SAC).pattern("*").pattern("#").offerTo(exporter);
@@ -376,7 +391,85 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeHorseArmor(QUARTZ_HORSE_ARMOR, Items.QUARTZ).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Extended Iron">
+		Recipes.MakeShaped(IRON_TORCH, Items.STICK, 4).input('*', ItemTags.COALS).input('I', Items.IRON_NUGGET).pattern("*").pattern("#").pattern("I").offerTo(exporter);
+		Recipes.MakeShaped(IRON_SOUL_TORCH, Ingredient.fromTag(ModItemTags.SOUL_TORCHES), 4).input('I', Items.IRON_NUGGET).pattern("#").pattern("I").offerTo(exporter);
+		Recipes.MakeShaped(IRON_ENDER_TORCH, Ingredient.fromTag(ModItemTags.ENDER_TORCHES), 4).input('I', Items.IRON_NUGGET).pattern("#").pattern("I").offerTo(exporter);
+		Recipes.MakeShaped(UNDERWATER_IRON_TORCH, Items.STICK, 4).input('*', Items.GLOW_INK_SAC).input('I', Items.IRON_NUGGET).pattern("*").pattern("#").pattern("I").offerTo(exporter);
+		Recipes.MakeShapeless(WHITE_IRON_LANTERN, Items.LANTERN).input(Items.WHITE_DYE).offerTo(exporter, ID("white_iron_lantern_from_lantern"));
+		Recipes.MakeShapeless(Items.LANTERN, WHITE_IRON_LANTERN).input(Items.BLACK_DYE).offerTo(exporter, ID("lantern_from_white_iron_lantern"));
+		Recipes.MakeShapeless(WHITE_IRON_SOUL_LANTERN, Items.SOUL_LANTERN).input(Items.WHITE_DYE).offerTo(exporter, ID("white_iron_soul_lantern_from_soul_lantern"));
+		Recipes.MakeShapeless(Items.SOUL_LANTERN, WHITE_IRON_SOUL_LANTERN).input(Items.BLACK_DYE).offerTo(exporter, ID("soul_lantern_from_white_iron_soul_lantern"));
+		Recipes.MakeShapeless(WHITE_IRON_ENDER_LANTERN, ENDER_LANTERN).input(Items.WHITE_DYE).offerTo(exporter, ID("white_iron_ender_lantern_from_ender_lantern"));
+		Recipes.MakeShapeless(ENDER_LANTERN, WHITE_IRON_ENDER_LANTERN).input(Items.BLACK_DYE).offerTo(exporter, ID("ender_lantern_from_white_iron_ender_lantern"));
 		Recipes.MakeShapeless(IRON_BUTTON, Items.IRON_INGOT).offerTo(exporter);
+		Recipes.MakeShapeless(WHITE_IRON_CHAIN, Items.CHAIN).input(Items.WHITE_DYE).offerTo(exporter, ID("white_iron_chain_from_chain"));
+		Recipes.MakeShapeless(Items.CHAIN, WHITE_IRON_CHAIN).input(Items.BLACK_DYE).offerTo(exporter, ID("chain_from_white_iron_chain"));
+		Recipes.MakeWall(IRON_WALL, Items.IRON_BLOCK).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, IRON_WALL, Items.IRON_BLOCK);
+		//Bricks
+		Recipes.Make2x2(IRON_BRICKS, Items.IRON_BLOCK, 4).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, IRON_BRICKS, Items.IRON_BLOCK);
+		Recipes.MakeSlab(IRON_BRICK_SLAB, IRON_BRICKS).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, IRON_BRICK_SLAB, Items.IRON_BLOCK, 2);
+		offerStonecuttingRecipe(exporter, IRON_BRICK_SLAB, IRON_BRICKS, 2);
+		Recipes.MakeStairs(IRON_BRICK_STAIRS, IRON_BRICKS).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, IRON_BRICK_STAIRS, Items.IRON_BLOCK);
+		offerStonecuttingRecipe(exporter, IRON_BRICK_STAIRS, IRON_BRICKS);
+		Recipes.MakeWall(IRON_BRICK_WALL, IRON_BRICKS).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, IRON_BRICK_WALL, Items.IRON_BLOCK);
+		offerStonecuttingRecipe(exporter, IRON_BRICK_WALL, IRON_BRICKS);
+		Recipes.Make2x2(CUT_IRON, Items.IRON_BLOCK, 4).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_IRON, Items.IRON_BLOCK, 4);
+		Recipes.Make2x2(CUT_IRON_PILLAR, CUT_IRON, 4).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_IRON_PILLAR, CUT_IRON);
+		Recipes.MakeSlab(CUT_IRON_SLAB, CUT_IRON).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_IRON_SLAB, CUT_IRON, 2);
+		offerStonecuttingRecipe(exporter, CUT_IRON_SLAB, Items.IRON_BLOCK, 8);
+		Recipes.MakeStairs(CUT_IRON_STAIRS, CUT_IRON).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_IRON_STAIRS, CUT_IRON);
+		offerStonecuttingRecipe(exporter, CUT_IRON_STAIRS, Items.IRON_BLOCK, 4);
+		Recipes.MakeWall(CUT_IRON_WALL, CUT_IRON).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_IRON_WALL, CUT_IRON);
+		offerStonecuttingRecipe(exporter, CUT_IRON_WALL, Items.IRON_BLOCK, 4);
+		//</editor-fold>
+		//<editor-fold desc="Extended Gold">
+		Recipes.MakeShaped(GOLD_TORCH, Items.STICK, 4).input('*', ItemTags.COALS).input('I', Items.GOLD_NUGGET).pattern("*").pattern("#").pattern("I").offerTo(exporter);
+		Recipes.MakeShaped(GOLD_SOUL_TORCH, Ingredient.fromTag(ModItemTags.SOUL_TORCHES), 4).input('I', Items.GOLD_NUGGET).pattern("#").pattern("I").offerTo(exporter);
+		Recipes.MakeShaped(GOLD_ENDER_TORCH, Ingredient.fromTag(ModItemTags.ENDER_TORCHES), 4).input('I', Items.GOLD_NUGGET).pattern("#").pattern("I").offerTo(exporter);
+		Recipes.MakeShaped(UNDERWATER_GOLD_TORCH, Items.STICK, 4).input('*', Items.GLOW_INK_SAC).input('I', Items.GOLD_NUGGET).pattern("*").pattern("#").pattern("I").offerTo(exporter);
+		Recipes.MakeLantern(GOLD_LANTERN, Items.GOLD_NUGGET, ModItemTags.TORCHES).offerTo(exporter);
+		Recipes.MakeLantern(GOLD_SOUL_LANTERN, Items.GOLD_NUGGET, ModItemTags.SOUL_TORCHES).offerTo(exporter);
+		Recipes.MakeLantern(GOLD_ENDER_LANTERN, Items.GOLD_NUGGET, ModItemTags.ENDER_TORCHES).offerTo(exporter);
+		Recipes.MakeShapeless(GOLD_BUTTON, Items.GOLD_INGOT).offerTo(exporter);
+		Recipes.MakeShaped(GOLD_CHAIN, Items.GOLD_INGOT).input('N', Items.GOLD_NUGGET).pattern("N").pattern("#").pattern("N").offerTo(exporter);
+		Recipes.Make3x2(GOLD_BARS, Items.GOLD_INGOT).offerTo(exporter);
+		Recipes.MakeWall(GOLD_WALL, Items.GOLD_BLOCK).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, GOLD_WALL, Items.GOLD_BLOCK);
+		//Bricks
+		Recipes.Make2x2(GOLD_BRICKS, Items.GOLD_BLOCK, 4).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, GOLD_BRICKS, Items.GOLD_BLOCK);
+		Recipes.MakeSlab(GOLD_BRICK_SLAB, GOLD_BRICKS).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, GOLD_BRICK_SLAB, Items.GOLD_BLOCK, 2);
+		offerStonecuttingRecipe(exporter, GOLD_BRICK_SLAB, GOLD_BRICKS, 2);
+		Recipes.MakeStairs(GOLD_BRICK_STAIRS, GOLD_BRICKS).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, GOLD_BRICK_STAIRS, Items.GOLD_BLOCK);
+		offerStonecuttingRecipe(exporter, GOLD_BRICK_STAIRS, GOLD_BRICKS);
+		Recipes.MakeWall(GOLD_BRICK_WALL, GOLD_BRICKS).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, GOLD_BRICK_WALL, Items.GOLD_BLOCK);
+		offerStonecuttingRecipe(exporter, GOLD_BRICK_WALL, GOLD_BRICKS);
+		Recipes.Make2x2(CUT_GOLD, Items.GOLD_BLOCK, 4).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_GOLD, Items.GOLD_BLOCK, 4);
+		Recipes.Make2x2(CUT_GOLD_PILLAR, CUT_GOLD, 4).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_GOLD_PILLAR, CUT_GOLD);
+		Recipes.MakeSlab(CUT_GOLD_SLAB, CUT_GOLD).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_GOLD_SLAB, CUT_GOLD, 2);
+		offerStonecuttingRecipe(exporter, CUT_GOLD_SLAB, Items.GOLD_BLOCK, 8);
+		Recipes.MakeStairs(CUT_GOLD_STAIRS, CUT_GOLD).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_GOLD_STAIRS, CUT_GOLD);
+		offerStonecuttingRecipe(exporter, CUT_GOLD_STAIRS, Items.GOLD_BLOCK, 4);
+		Recipes.MakeWall(CUT_GOLD_WALL, CUT_GOLD).offerTo(exporter);
+		offerStonecuttingRecipe(exporter, CUT_GOLD_WALL, CUT_GOLD);
+		offerStonecuttingRecipe(exporter, CUT_GOLD_WALL, Items.GOLD_BLOCK, 4);
 		//</editor-fold>
 		//<editor-fold desc="Extended Netherite">
 		Recipes.MakeShaped(NETHERITE_TORCH, Items.STICK, 4).input('*', ItemTags.COALS).input('I', NETHERITE_NUGGET).pattern("*").pattern("#").pattern("I").offerTo(exporter);
@@ -539,7 +632,9 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakePressurePlate(CHARRED_PRESSURE_PLATE, CHARRED_PLANKS).offerTo(exporter);
 		Recipes.MakeShapeless(CHARRED_BUTTON, CHARRED_PLANKS).offerTo(exporter);
 		Recipes.MakeSign(CHARRED_SIGN, CHARRED_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(CHARRED_SIGN.getHanging(), STRIPPED_CHARRED_LOG).offerTo(exporter);
 		Recipes.MakeBoat(CHARRED_BOAT, CHARRED_PLANKS).offerTo(exporter);
+		Recipes.MakeShapeless(CHARRED_BOAT.getChestBoat(), CHARRED_BOAT).input(Items.CHEST).offerTo(exporter);
 		Recipes.MakeBookshelf(CHARRED_BOOKSHELF, CHARRED_PLANKS).offerTo(exporter);
 		Recipes.MakePlanksLadder(CHARRED_LADDER, CHARRED_PLANKS).offerTo(exporter);
 		Recipes.MakeWoodcutter(CHARRED_WOODCUTTER, CHARRED_PLANKS).offerTo(exporter);
@@ -571,8 +666,10 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeWoodenTrapdoor(MANGROVE_TRAPDOOR, MANGROVE_PLANKS).offerTo(exporter);
 		Recipes.MakePressurePlate(MANGROVE_PRESSURE_PLATE, MANGROVE_PLANKS).offerTo(exporter);
 		Recipes.MakeShapeless(MANGROVE_BUTTON, MANGROVE_PLANKS).offerTo(exporter);
-		Recipes.MakeSign(MANGROVE_SIGN, MANGROVE_PLANKS).offerTo(exporter);
+		Recipes.MakeSign(MANGROVE_SIGN.getHanging(), MANGROVE_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(MANGROVE_SIGN, STRIPPED_MANGROVE_LOG).offerTo(exporter);
 		Recipes.MakeBoat(MANGROVE_BOAT, MANGROVE_PLANKS).offerTo(exporter);
+		Recipes.MakeShapeless(MANGROVE_BOAT.getChestBoat(), MANGROVE_BOAT).input(Items.CHEST).offerTo(exporter);
 		Recipes.MakeShapeless(MUDDY_MANGROVE_ROOTS, MUD).input(MANGROVE_ROOTS).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Extended Mangrove">
@@ -594,7 +691,10 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeWoodenTrapdoor(BAMBOO_TRAPDOOR, BAMBOO_PLANKS).offerTo(exporter);
 		Recipes.MakePressurePlate(BAMBOO_PRESSURE_PLATE, BAMBOO_PLANKS).offerTo(exporter);
 		Recipes.MakeShapeless(BAMBOO_BUTTON, BAMBOO_PLANKS).offerTo(exporter);
-		Recipes.MakeSign(BAMBOO_SIGN, BAMBOO_PLANKS).offerTo(exporter);
+		Recipes.MakeSign(BAMBOO_SIGN.getHanging(), BAMBOO_PLANKS).offerTo(exporter);
+		Recipes.MakeHangingSign(BAMBOO_SIGN, STRIPPED_BAMBOO_BLOCK).offerTo(exporter);
+		Recipes.MakeBoat(BAMBOO_RAFT, BAMBOO_PLANKS).offerTo(exporter);
+		Recipes.MakeShapeless(BAMBOO_RAFT.getChestBoat(), BAMBOO_RAFT).input(Items.CHEST).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Bamboo Mosaic">
 		Recipes.Make2x1(BAMBOO_MOSAIC, BAMBOO_SLAB, 1).offerTo(exporter);
@@ -660,6 +760,29 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeWall(SCULK_STONE_BRICK_WALL, SCULK_STONE_BRICKS).offerTo(exporter);
 		offerStonecuttingRecipe(exporter, SCULK_STONE_BRICK_WALL, SCULK_STONE);
 		offerStonecuttingRecipe(exporter, SCULK_STONE_BRICK_WALL, SCULK_STONE_BRICKS);
+		//</editor-fold>
+		//<editor-fold desc="Flowers">
+		Recipes.MakeShapeless(Items.MAGENTA_DYE, AMARANTH, 2).offerTo(exporter, ID("amaranth"));
+		Recipes.MakeShapeless(Items.LIGHT_BLUE_DYE, BLUE_ROSE_BUSH, 2).offerTo(exporter, ID("blue_rose_bush"));
+		Recipes.MakeShapeless(Items.MAGENTA_DYE, TALL_ALLIUM, 2).offerTo(exporter, ID("tall_allium"));
+		Recipes.MakeShapeless(Items.PINK_DYE, TALL_PINK_ALLIUM, 2).offerTo(exporter, ID("tall_pink_allium"));
+		Recipes.MakeShapeless(Items.YELLOW_DYE, BUTTERCUP).offerTo(exporter, ID("buttercup"));
+		Recipes.MakeShapeless(Items.PINK_DYE, PINK_DAISY).offerTo(exporter, ID("pink_daisy"));
+		Recipes.MakeShapeless(Items.RED_DYE, ROSE).offerTo(exporter, ID("rose"));
+		Recipes.MakeShapeless(Items.LIGHT_BLUE_DYE, BLUE_ROSE).offerTo(exporter, ID("blue_rose"));
+		Recipes.MakeShapeless(Items.MAGENTA_DYE, MAGENTA_TULIP).offerTo(exporter, ID("magenta_tulip"));
+		Recipes.MakeShapeless(Items.ORANGE_DYE, MARIGOLD).offerTo(exporter, ID("marigold"));
+		Recipes.MakeShapeless(Items.MAGENTA_DYE, INDIGO_ORCHID).offerTo(exporter, ID("indigo_orchid"));
+		Recipes.MakeShapeless(Items.MAGENTA_DYE, MAGENTA_ORCHID).offerTo(exporter, ID("magenta_orchid"));
+		Recipes.MakeShapeless(Items.ORANGE_DYE, ORANGE_ORCHID).offerTo(exporter, ID("orange_orchid"));
+		Recipes.MakeShapeless(Items.PURPLE_DYE, PURPLE_ORCHID).offerTo(exporter, ID("purple_orchid"));
+		Recipes.MakeShapeless(Items.WHITE_DYE, WHITE_ORCHID).offerTo(exporter, ID("white_orchid"));
+		Recipes.MakeShapeless(Items.YELLOW_DYE, YELLOW_ORCHID).offerTo(exporter, ID("yellow_orchid"));
+		Recipes.MakeShapeless(Items.PINK_DYE, PINK_ALLIUM).offerTo(exporter, ID("pink_allium"));
+		Recipes.MakeShapeless(Items.MAGENTA_DYE, HYDRANGEA).offerTo(exporter, ID("hydrangea"));
+		Recipes.MakeShapeless(Items.PURPLE_DYE, LAVENDER).offerTo(exporter, ID("lavender"));
+		Recipes.MakeShapeless(Items.PINK_DYE, PAEONIA).offerTo(exporter, ID("paeonia"));
+		Recipes.MakeShapeless(Items.PINK_DYE, ASTER).offerTo(exporter, ID("aster"));
 		//</editor-fold>
 	}
 }

@@ -36,8 +36,19 @@ public class BoneMealItemMixin {
 		if (state.isOf(Blocks.SPORE_BLOSSOM)) {
 			world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, new ItemStack(Items.SPORE_BLOSSOM, 1)));
 			world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, pos, 0);
-			if (!context.getPlayer().getAbilities().creativeMode) context.getStack().decrement(1);
+			if (context.getPlayer() != null && !context.getPlayer().getAbilities().creativeMode) context.getStack().decrement(1);
 			cir.setReturnValue(ActionResult.SUCCESS);
+		}
+		//Try growing a tall allium flower
+		else if (state.isOf(Blocks.ALLIUM)) {
+			if (world.getBlockState(pos.up()).isAir()) {
+				world.setBlockState(pos, ModBase.TALL_ALLIUM.asBlock().getDefaultState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+				world.setBlockState(pos.up(), ModBase.TALL_ALLIUM.asBlock().getDefaultState().with(TallPlantBlock.HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
+				world.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, pos, 0);
+				if (context.getPlayer() != null && !context.getPlayer().getAbilities().creativeMode) context.getStack().decrement(1);
+				cir.setReturnValue(ActionResult.SUCCESS);
+			}
 		}
 		//Try spreading sculk turf
 		else if (world.getBlockState(pos.up()).isTranslucent(world, pos)) {

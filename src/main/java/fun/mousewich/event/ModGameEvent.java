@@ -17,6 +17,8 @@ public class ModGameEvent {
 	public static final GameEvent INSTRUMENT_PLAY = RegisterGameEvent("minecraft:instrument_play");
 	public static final GameEvent ITEM_INTERACT_FINISH = RegisterGameEvent("minecraft:item_interact_finish");
 	public static final GameEvent ITEM_INTERACT_START = RegisterGameEvent("minecraft:item_interact_start");
+	public static final GameEvent JUKEBOX_PLAY = RegisterGameEvent("minecraft:jukebox_play", 10);
+	public static final GameEvent JUKEBOX_STOP_PLAY = RegisterGameEvent("minecraft:jukebox_stop_play", 10);
 	public static final GameEvent NOTE_BLOCK_PLAY = RegisterGameEvent("minecraft:note_block_play");
 	public static final GameEvent SCULK_SENSOR_TENDRILS_CLICKING = RegisterGameEvent("minecraft:sculk_sensor_tendrils_clicking");
 	public static final GameEvent SHRIEK = RegisterGameEvent("minecraft:shriek", 32);
@@ -28,8 +30,8 @@ public class ModGameEvent {
 	public static void RegisterAll() {
 		GameEvent[] events = new GameEvent[] {
 				BLOCK_ACTIVATE, BLOCK_DEACTIVATE, DRINK, ELYTRA_GLIDE, ENTITY_DAMAGE, ENTITY_DIE, ENTITY_INTERACT,
-				ENTITY_ROAR, ENTITY_SHAKE, INSTRUMENT_PLAY, ITEM_INTERACT_FINISH, ITEM_INTERACT_START, NOTE_BLOCK_PLAY,
-				SCULK_SENSOR_TENDRILS_CLICKING, SHRIEK, TELEPORT
+				ENTITY_ROAR, ENTITY_SHAKE, INSTRUMENT_PLAY, ITEM_INTERACT_FINISH, ITEM_INTERACT_START, JUKEBOX_PLAY,
+				JUKEBOX_STOP_PLAY, NOTE_BLOCK_PLAY, SCULK_SENSOR_TENDRILS_CLICKING, SHRIEK, TELEPORT
 		};
 	}
 }

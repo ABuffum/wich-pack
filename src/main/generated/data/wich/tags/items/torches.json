@@ -4,6 +4,8 @@
     "minecraft:torch",
     "wich:bamboo_torch",
     "wich:bone_torch",
+    "wich:iron_torch",
+    "wich:gold_torch",
     "wich:netherite_torch"
   ]
 }

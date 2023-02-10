@@ -21,11 +21,12 @@
       {
         "type": "origins:ingredient",
         "ingredient": [
+          { "tag": "wich:edible_mushrooms" },
           { "tag": "wich:fruits" },
           { "tag": "wich:grains" },
+          { "tag": "wich:sweets" },
           { "tag": "wich:vegetables" },
-          { "tag": "croptopia:nuts" },
-          { "tag": "nourish:sweets"}
+          { "tag": "croptopia:nuts" }
         ]
       },
       {

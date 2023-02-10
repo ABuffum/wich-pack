@@ -7,7 +7,6 @@
     "wich:netherite_soul_lantern",
     "wich:netherite_ender_lantern",
     "wich:netherite_button",
-    "wich:crushing_weighted_pressure_plate",
     "wich:netherite_wall",
     "wich:netherite_bricks",
     "wich:netherite_brick_slab",
@@ -17,6 +16,7 @@
     "wich:cut_netherite_pillar",
     "wich:cut_netherite_slab",
     "wich:cut_netherite_stairs",
-    "wich:cut_netherite_wall"
+    "wich:cut_netherite_wall",
+    "wich:crushing_weighted_pressure_plate"
   ]
 }

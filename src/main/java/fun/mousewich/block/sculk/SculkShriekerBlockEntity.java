@@ -29,6 +29,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.event.BlockPositionSource;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.listener.GameEventListener;
@@ -118,7 +119,7 @@ public class SculkShriekerBlockEntity extends BlockEntity implements ModVibratio
 	}
 
 	private boolean canWarn(ServerWorld world) {
-		return this.getCachedState().get(SculkShriekerBlock.CAN_SUMMON) && world.getDifficulty() != Difficulty.PEACEFUL;
+		return this.getCachedState().get(SculkShriekerBlock.CAN_SUMMON) && world.getDifficulty() != Difficulty.PEACEFUL && world.getGameRules().getBoolean(ModBase.DO_WARDEN_SPAWNING);
 	}
 
 	public void warn(ServerWorld world) {

@@ -3,7 +3,8 @@ package fun.mousewich.entity.frog;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
 import fun.mousewich.ModBase;
-import fun.mousewich.client.render.entity.animation.ModAnimationState;
+import fun.mousewich.client.render.entity.animation.AnimationState;
+import fun.mousewich.entity.ModDataHandlers;
 import fun.mousewich.entity.ModEntityPose;
 import fun.mousewich.entity.ai.AxolotlSwimNavigation;
 import fun.mousewich.entity.ai.ModMemoryModules;
@@ -56,15 +57,15 @@ import java.util.Random;
 public class FrogEntity extends AnimalEntity {
 	public static final Ingredient SLIME_BALL = Ingredient.ofItems(Items.SLIME_BALL);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_MODULES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.MOBS, MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.PATH, MemoryModuleType.BREED_TARGET, MemoryModuleType.LONG_JUMP_COOLING_DOWN, MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.IS_TEMPTED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_ATTACKABLE, ModMemoryModules.IS_IN_WATER, ModMemoryModules.IS_PREGNANT, ModMemoryModules.IS_PANICKING, ModMemoryModules.UNREACHABLE_TONGUE_TARGETS);
-	private static final TrackedData<FrogVariant> VARIANT = DataTracker.registerData(FrogEntity.class, ModBase.FROG_VARIANT);
-	private static final TrackedData<OptionalInt> TARGET = DataTracker.registerData(FrogEntity.class, ModBase.OPTIONAL_INT);
+	private static final TrackedData<FrogVariant> VARIANT = DataTracker.registerData(FrogEntity.class, ModDataHandlers.FROG_VARIANT);
+	private static final TrackedData<OptionalInt> TARGET = DataTracker.registerData(FrogEntity.class, ModDataHandlers.OPTIONAL_INT);
 	public static final String VARIANT_KEY = "variant";
-	public final ModAnimationState longJumpingAnimationState = new ModAnimationState();
-	public final ModAnimationState croakingAnimationState = new ModAnimationState();
-	public final ModAnimationState usingTongueAnimationState = new ModAnimationState();
-	public final ModAnimationState walkingAnimationState = new ModAnimationState();
-	public final ModAnimationState swimmingAnimationState = new ModAnimationState();
-	public final ModAnimationState idlingInWaterAnimationState = new ModAnimationState();
+	public final AnimationState longJumpingAnimationState = new AnimationState();
+	public final AnimationState croakingAnimationState = new AnimationState();
+	public final AnimationState usingTongueAnimationState = new AnimationState();
+	public final AnimationState walkingAnimationState = new AnimationState();
+	public final AnimationState swimmingAnimationState = new AnimationState();
+	public final AnimationState idlingInWaterAnimationState = new AnimationState();
 
 	public FrogEntity(EntityType<? extends AnimalEntity> entityType, World world) {
 		super(entityType, world);
@@ -154,7 +155,7 @@ public class FrogEntity extends AnimalEntity {
 		}
 		super.tick();
 	}
-	protected static final TrackedData<ModEntityPose> NEW_POSE = DataTracker.registerData(FrogEntity.class, ModBase.NEW_ENTITY_POSE);
+	protected static final TrackedData<ModEntityPose> NEW_POSE = DataTracker.registerData(FrogEntity.class, ModDataHandlers.NEW_ENTITY_POSE);
 	@Override
 	public void setPose(EntityPose pose) {
 		this.dataTracker.set(NEW_POSE, ModEntityPose.valueOf(pose.name()));

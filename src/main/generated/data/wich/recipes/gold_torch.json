@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "*",
+    "#",
+    "I"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "*": {
+      "tag": "minecraft:coals"
+    },
+    "I": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "wich:gold_torch",
+    "count": 4
+  }
+}

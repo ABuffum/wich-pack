@@ -14,8 +14,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class ModMemoryModules {
+	public static final MemoryModuleType<Integer> GAZE_COOLDOWN_TICKS = MemoryModuleTypeCodecInvoker.Register("gaze_cooldown_ticks", Codec.INT);
 	public static final MemoryModuleType<UUID> LIKED_PLAYER = MemoryModuleTypeCodecInvoker.Register("liked_player", DynamicSerializableUuid.CODEC);
 	public static final MemoryModuleType<GlobalPos> LIKED_NOTEBLOCK = MemoryModuleTypeCodecInvoker.Register("liked_noteblock", GlobalPos.CODEC);
+	public static final MemoryModuleType<Integer> LIKED_NOTEBLOCK_COOLDOWN_TICKS = MemoryModuleTypeCodecInvoker.Register("liked_noteblock_cooldown_ticks", Codec.INT);
 	public static final MemoryModuleType<Integer> ITEM_PICKUP_COOLDOWN_TICKS = MemoryModuleTypeCodecInvoker.Register("item_pickup_cooldown_ticks", Codec.INT);
 	public static final MemoryModuleType<Unit> IS_IN_WATER = MemoryModuleTypeCodecInvoker.Register("is_in_water", Codec.unit(Unit.INSTANCE));
 	public static final MemoryModuleType<Unit> IS_PREGNANT = MemoryModuleTypeCodecInvoker.Register("is_pregnant", Codec.unit(Unit.INSTANCE));

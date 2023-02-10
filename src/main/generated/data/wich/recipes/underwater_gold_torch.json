@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "*",
+    "#",
+    "I"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "*": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "I": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "wich:underwater_gold_torch",
+    "count": 4
+  }
+}

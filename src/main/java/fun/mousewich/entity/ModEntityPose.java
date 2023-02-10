@@ -11,6 +11,7 @@ public enum ModEntityPose {
 	DYING,
 	CROAKING,
 	USING_TONGUE,
+	SITTING,
 	ROARING,
 	SNIFFING,
 	EMERGING,

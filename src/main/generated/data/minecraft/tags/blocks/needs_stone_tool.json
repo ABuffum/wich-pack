@@ -3,6 +3,21 @@
   "values": [
     "wich:ender_lantern",
     "wich:unlit_lantern",
-    "wich:unlit_soul_lantern"
+    "wich:unlit_soul_lantern",
+    "wich:white_iron_chain",
+    "wich:white_iron_lantern",
+    "wich:white_iron_soul_lantern",
+    "wich:white_iron_ender_lantern",
+    "wich:iron_button",
+    "wich:iron_wall",
+    "wich:iron_bricks",
+    "wich:iron_brick_slab",
+    "wich:iron_brick_stairs",
+    "wich:iron_brick_wall",
+    "wich:cut_iron",
+    "wich:cut_iron_pillar",
+    "wich:cut_iron_slab",
+    "wich:cut_iron_stairs",
+    "wich:cut_iron_wall"
   ]
 }

@@ -64,10 +64,16 @@ public class ModRegistry {
 		Registry.register(Registry.BLOCK, ID(wallPath), container.getWallBlock());
 		return container;
 	}
-	public static SignContainer Register(String path, String wallPath, SignContainer sign) {
-		return (SignContainer)Register(path, wallPath, (WallBlockContainer)sign);
+	public static SignContainer Register(String name, SignContainer sign) {
+		Register(name + "_sign", name + "_wall_sign", (WallBlockContainer)sign);
+		Register(name + "_hanging_sign", name + "_wall_hanging_sign", sign.getHanging());
+		return sign;
 	}
-	public static BoatContainer Register(String path, BoatContainer boat) { Register(path, boat.asItem()); return boat; }
+	public static BoatContainer Register(String path, String chestPath, BoatContainer boat) {
+		Register(path, boat.asItem());
+		Register(chestPath, boat.getChestBoat());
+		return boat;
+	}
 	public static PottedBlockContainer Register(String path, String pottedPath, PottedBlockContainer potted) {
 		Identifier id = ID(path);
 		Registry.register(Registry.BLOCK, id, potted.asBlock());
@@ -129,6 +135,14 @@ public class ModRegistry {
 	}
 	public static <T extends Power> void Register(PowerFactory<T> powerFactory) { Registry.register(ApoliRegistries.POWER_FACTORY, powerFactory.getSerializerId(), powerFactory); }
 	public static <T extends Power> void Register(PowerFactorySupplier<T> factorySupplier) { Register(factorySupplier.createFactory()); }
+
+	public static void Register(String path, PottedBlockContainer potted) {
+		Identifier id = ID(path);
+		Registry.register(Registry.BLOCK, id, potted.asBlock());
+		Registry.register(Registry.ITEM, id, potted.asItem());
+		String registryName = path.startsWith("minecraft:") ? ("minecraft:potted_" + path.substring("minecraft:".length())) : ("potted_" + path);
+		Registry.register(Registry.BLOCK, ID(registryName), potted.getPottedBlock());
+	}
 
 	public static ModFactory Register(String name, ModFactory material) {
 		FlammableBlockRegistry FLAMMABLE = FlammableBlockRegistry.getDefaultInstance();

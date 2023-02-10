@@ -180,7 +180,8 @@ public class SubtitleOverrides {
 		Register(ModSoundEvents.ENTITY_CAVE_SPIDER_DEATH, "entity.cave_spider.death");
 		Register(ModSoundEvents.ENTITY_CAVE_SPIDER_HURT, "entity.cave_spider.hurt");
 		Register(ModSoundEvents.ENTITY_CAVE_SPIDER_STEP, "entity.cave_spider.step");
-		Register(ModSoundEvents.ENTITY_FROG_STEP, "entity.frog.step");
+		Register(ModSoundEvents.ENTITY_CAMEL_LAND, "entity.camel.land");
+		Register(ModSoundEvents.ENTITY_CAMEL_SADDLE, "entity.camel.saddle");
 		Register(ModSoundEvents.ENTITY_DONKEY_GALLOP, "entity.donkey.gallop");
 		Register(ModSoundEvents.ENTITY_DONKEY_JUMP, "entity.donkey.jump");
 		Register(ModSoundEvents.ENTITY_DONKEY_LAND, "entity.donkey.land");
@@ -188,6 +189,7 @@ public class SubtitleOverrides {
 		Register(ModSoundEvents.ENTITY_DONKEY_STEP, "entity.donkey.step");
 		Register(ModSoundEvents.ENTITY_DONKEY_STEP_WOOD, "entity.donkey.step");
 		Register(ModSoundEvents.ENTITY_ELDER_GUARDIAN_ATTACK, "entity.edler_guardian.attack");
+		Register(ModSoundEvents.ENTITY_FROG_STEP, "entity.frog.step");
 		Register(ModSoundEvents.ENTITY_MULE_GALLOP, "entity.mule.gallop");
 		Register(ModSoundEvents.ENTITY_MULE_JUMP, "entity.mule.jump");
 		Register(ModSoundEvents.ENTITY_MULE_LAND, "entity.mule.land");

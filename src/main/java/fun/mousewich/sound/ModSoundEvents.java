@@ -189,6 +189,20 @@ public class ModSoundEvents {
 	public static final SoundEvent BLOCK_NETHER_WOOD_FENCE_GATE_CLOSE = registerSoundEvent("block.nether_wood_fence_gate.close");
 	public static final SoundEvent BLOCK_NETHER_WOOD_FENCE_GATE_OPEN = registerSoundEvent("block.nether_wood_fence_gate.open");
 	//</editor-fold>
+	//<editor-fold desc="Camels">
+	public static final SoundEvent ENTITY_CAMEL_AMBIENT = registerSoundEvent("entity.camel.ambient");
+	public static final SoundEvent ENTITY_CAMEL_DASH = registerSoundEvent("entity.camel.dash");
+	public static final SoundEvent ENTITY_CAMEL_DASH_READY = registerSoundEvent("entity.camel.dash_ready");
+	public static final SoundEvent ENTITY_CAMEL_DEATH = registerSoundEvent("entity.camel.death");
+	public static final SoundEvent ENTITY_CAMEL_EAT = registerSoundEvent("entity.camel.eat");
+	public static final SoundEvent ENTITY_CAMEL_HURT = registerSoundEvent("entity.camel.hurt");
+	public static final SoundEvent ENTITY_CAMEL_LAND = registerSoundEvent("entity.donkey.land");
+	public static final SoundEvent ENTITY_CAMEL_SADDLE = registerSoundEvent("entity.camel.saddle");
+	public static final SoundEvent ENTITY_CAMEL_SIT = registerSoundEvent("entity.camel.sit");
+	public static final SoundEvent ENTITY_CAMEL_STAND = registerSoundEvent("entity.camel.stand");
+	public static final SoundEvent ENTITY_CAMEL_STEP = registerSoundEvent("entity.camel.step");
+	public static final SoundEvent ENTITY_CAMEL_STEP_SAND = registerSoundEvent("entity.camel.step_sand");
+	//</editor-fold>
 	//Hedgehogs
 	public static final SoundEvent ENTITY_HEDGEHOG_SNIFF = registerSoundEvent("entity.hedgehog.sniff");
 	//<editor-fold desc="Juicer">

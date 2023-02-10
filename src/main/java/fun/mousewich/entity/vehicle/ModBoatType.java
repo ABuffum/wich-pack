@@ -10,15 +10,17 @@ public class ModBoatType {
 	private final String name;
 	private final Block baseBlock;
 	private final GetBoatItem item;
+	private final GetBoatItem chest;
 	private final int ordinal;
 	private static int ORDINAL_CTR = 0;
 
 	public final boolean floatsOnLava;
 
-	public ModBoatType(Block baseBlock, String name, GetBoatItem item, boolean floatsOnLava) {
+	public ModBoatType(Block baseBlock, String name, GetBoatItem item, GetBoatItem chest, boolean floatsOnLava) {
 		this.name = name;
 		this.baseBlock = baseBlock;
 		this.item = item;
+		this.chest = chest;
 		this.floatsOnLava = floatsOnLava;
 		ordinal = ORDINAL_CTR++;
 	}
@@ -26,6 +28,7 @@ public class ModBoatType {
 
 	public int ordinal() { return ordinal; }
 	public Item GetItem() { return item.op(); }
+	public Item GetChestBoatItem() { return chest.op(); }
 
 	private static final ArrayList<ModBoatType> BOAT_TYPES = new ArrayList<>();
 
@@ -50,9 +53,5 @@ public class ModBoatType {
 		return BOAT_TYPES.get(0);
 	}
 
-	public static List<ModBoatType> getTypes() {
-		List<ModBoatType> output = new ArrayList<>();
-		output.addAll(BOAT_TYPES);
-		return output;
-	}
+	public static List<ModBoatType> getTypes() { return new ArrayList<>(BOAT_TYPES); }
 }

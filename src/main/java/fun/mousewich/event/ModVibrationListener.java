@@ -3,14 +3,17 @@ package fun.mousewich.event;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fun.mousewich.ModBase;
+import fun.mousewich.advancement.ModCriteria;
 import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.origins.powers.PowersUtil;
 import fun.mousewich.origins.powers.SoftStepsPower;
 import fun.mousewich.util.SculkUtils;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.particle.VibrationParticleEffect;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.GameEventTags;
 import net.minecraft.tag.TagKey;
@@ -48,6 +51,9 @@ public class ModVibrationListener implements GameEventListener {
 				Codecs.NONNEGATIVE_INT.fieldOf("event_delay").orElse(0).forGetter(listener -> listener.delay))
 				.apply(instance, (positionSource, range, vibration, distance, delay) ->
 						new ModVibrationListener(positionSource, range, callback, vibration.orElse(null), distance, delay)));
+	}
+	public ModVibrationListener(PositionSource positionSource, int range, Callback callback) {
+		this(positionSource, range, callback, null, 0, 0);
 	}
 	public ModVibrationListener(PositionSource positionSource, int range, Callback callback, @Nullable Vibration vibration, float distance, int delay) {
 		this.positionSource = positionSource;
@@ -105,6 +111,9 @@ public class ModVibrationListener implements GameEventListener {
 			if (entity != null) {
 				if (entity.isSpectator()) return false;
 				if (entity.bypassesSteppingEffects() && gameEvent.isIn(GameEventTags.IGNORE_VIBRATIONS_SNEAKING)) {
+					if (this.triggersAvoidCriterion() && entity instanceof ServerPlayerEntity serverPlayerEntity) {
+						ModCriteria.AVOID_VIBRATION.trigger(serverPlayerEntity);
+					}
 					return false;
 				}
 				if (entity.occludeVibrationSignals()) return false;

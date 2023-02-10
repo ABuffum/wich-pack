@@ -35,7 +35,7 @@ public class ModBoatDispenserBehavior extends ItemDispenserBehavior {
 		}
 
 		ModBoatEntity boatEntity = new ModBoatEntity(world, d, e + i, f);
-		boatEntity.setHavenBoatType(this.boatType);
+		boatEntity.setModBoatType(this.boatType);
 		boatEntity.setYaw(direction.asRotation());
 		world.spawnEntity(boatEntity);
 		stack.decrement(1);
