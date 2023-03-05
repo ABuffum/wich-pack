@@ -19,5 +19,6 @@ public class InstrumentMixin {
 		if (state.isIn(ModBlockTags.FLEECE)) cir.setReturnValue(Instrument.GUITAR);
 		else if (state.isIn(ModBlockTags.PUMPKINS)) cir.setReturnValue(Instrument.DIDGERIDOO);
 		else if (state.isOf(ModBase.BAMBOO_BLOCK.asBlock()) || state.isOf(ModBase.STRIPPED_BAMBOO_BLOCK.asBlock())) cir.setReturnValue(Instrument.BASS);
+		//TODO: Other instruments (gold -> bell, iron -> iron xylophone, emerald -> bit, bales -> banjo, bone -> xylophone, etc.
 	}
 }

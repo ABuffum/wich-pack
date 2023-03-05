@@ -49,7 +49,7 @@ public class SculkBlock extends Block implements SculkSpreadable {
 		return Math.max(1, (int)((float)charge * g * 0.5f));
 	}
 	private BlockState getExtraBlockState(WorldAccess world, BlockPos pos, Random random, boolean allowShrieker) {
-		BlockState blockState = random.nextInt(11) == 0 ? ModBase.SCULK_SHRIEKER.asBlock().getDefaultState().with(SculkShriekerBlock.CAN_SUMMON, allowShrieker) : ModBase.SCULK_SENSOR.asBlock().getDefaultState();
+		BlockState blockState = random.nextInt(11) == 0 ? ModBase.SCULK_SHRIEKER.asBlock().getDefaultState().with(SculkShriekerBlock.CAN_SUMMON, allowShrieker) : Blocks.SCULK_SENSOR.getDefaultState();
 		if (blockState.contains(Properties.WATERLOGGED) && !world.getFluidState(pos).isEmpty()) {
 			return blockState.with(Properties.WATERLOGGED, true);
 		}
@@ -61,7 +61,7 @@ public class SculkBlock extends Block implements SculkSpreadable {
 		int i = 0;
 		for (BlockPos blockPos : BlockPos.iterate(pos.add(-4, 0, -4), pos.add(4, 2, 4))) {
 			BlockState blockState2 = world.getBlockState(blockPos);
-			if (blockState2.isOf(ModBase.SCULK_SHRIEKER.asBlock()) || blockState2.isOf(Blocks.SCULK_SENSOR) || blockState2.isOf(ModBase.SCULK_SENSOR.asBlock())) ++i;
+			if (blockState2.isOf(ModBase.SCULK_SHRIEKER.asBlock()) || blockState2.isOf(Blocks.SCULK_SENSOR) || blockState2.isOf(Blocks.SCULK_SENSOR)) ++i;
 			if (i <= 2) continue;
 			return false;
 		}

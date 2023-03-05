@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_book": {
+    "automatic": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:book"
+              "minecraft:stick"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_book",
+      "automatic",
       "has_the_recipe"
     ]
   ]

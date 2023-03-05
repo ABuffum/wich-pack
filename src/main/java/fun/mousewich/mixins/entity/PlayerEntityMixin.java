@@ -3,8 +3,10 @@ package fun.mousewich.mixins.entity;
 import fun.mousewich.ModBase;
 import fun.mousewich.block.sculk.SculkShriekerWarningManager;
 import fun.mousewich.entity.warden.WardenEntity;
+import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.item.RecoveryCompassItem;
 import fun.mousewich.sound.IdentifiedSounds;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -14,8 +16,12 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -86,5 +92,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		else if (!this.world.isClient && this.hasStatusEffect(ModBase.TINTED_GOGGLES_EFFECT)) {
 			this.removeStatusEffect(ModBase.TINTED_GOGGLES_EFFECT);
 		}
+	}
+
+	@Inject(method="interact", at = @At(value="INVOKE", shift=At.Shift.AFTER, target="Lnet/minecraft/item/ItemStack;useOnEntity(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"))
+	public void InjectEntityInteractEvent(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+		this.world.emitGameEvent(ModGameEvent.ENTITY_INTERACT, entity.getBlockPos());
 	}
 }

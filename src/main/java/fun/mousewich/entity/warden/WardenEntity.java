@@ -2,6 +2,7 @@ package fun.mousewich.entity.warden;
 
 import com.mojang.serialization.Dynamic;
 import fun.mousewich.ModBase;
+import fun.mousewich.ModGameRules;
 import fun.mousewich.entity.ModDataHandlers;
 import fun.mousewich.entity.ModEntityStatuses;
 import fun.mousewich.entity.ModEntityPose;
@@ -132,10 +133,6 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 	protected float calculateNextStepSoundDistance() { return this.distanceTraveled + 0.55f; }
 	public static DefaultAttributeContainer.Builder addAttributes() {
 		return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 500.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.5).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 30.0);
-	}
-	@Override
-	public boolean shouldRender(double distance) {
-		return true;
 	}
 	@Override
 	public boolean occludeVibrationSignals() { return true; }
@@ -285,6 +282,7 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 	public boolean isImmuneToExplosion() { return this.isDiggingOrEmerging(); }
 	@Override
 	protected Brain<?> deserializeBrain(Dynamic<?> dynamic) { return WardenBrain.create(this, dynamic); }
+	@SuppressWarnings("unchecked")
 	public Brain<WardenEntity> getBrain() { return (Brain<WardenEntity>)super.getBrain(); }
 	@Override
 	protected void sendAiDebugData() {
@@ -314,24 +312,36 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 		if (livingEntity.isDead()) return false;
 		return this.world.getWorldBorder().contains(livingEntity.getBoundingBox());
 	}
-
+	private static final int DARKNESS_DURATION = 200;
 	public static void addDarknessToClosePlayers(ServerWorld world, Vec3d pos, @Nullable Entity entity, int range) {
-		//StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModBase.DARKNESS_EFFECT, 260, 0, false, false);
-		//TODO: Iris disables fog effects which darkness and flashbanged rely on
-		StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.BLINDNESS, 260, 0, false, false);
-		addEffectToPlayersWithinDistance(world, entity, pos, range, statusEffectInstance, 200);
+		GameRules rules = world.getGameRules();
+		if (rules.get(ModGameRules.DO_WARDEN_DARKNESS).get()) {
+			StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModBase.DARKNESS_EFFECT, 260, 0, false, false);
+			addEffectToPlayersWithinDistance(world, entity, pos, range, statusEffectInstance);
+		}
+		//TODO: Iris disables the fog effects minecraft:darkness and flashbanged rely on so the warden can apply blindness instead
+		if (rules.get(ModGameRules.DO_WARDEN_BLINDNESS).get()) {
+			StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.BLINDNESS, 260, 0, false, false);
+			addEffectToPlayersWithinDistance(world, entity, pos, range, statusEffectInstance);
+		}
 	}
-	private static List<ServerPlayerEntity> addEffectToPlayersWithinDistance(ServerWorld world, @Nullable Entity entity, Vec3d origin, double range, StatusEffectInstance statusEffectInstance, int duration) {
+	private static void addEffectToPlayersWithinDistance(ServerWorld world, @Nullable Entity entity, Vec3d origin, double range, StatusEffectInstance statusEffectInstance) {
 		StatusEffect statusEffect = statusEffectInstance.getEffectType();
-		List<ServerPlayerEntity> list = world.getPlayers(player ->
-						!ModBase.WARDEN_NEUTRAL_POWER.isActive(player) &&
-						!(!player.interactionManager.isSurvivalLike()
-								|| entity != null && entity.isTeammate(player)
-								|| !origin.isInRange(player.getPos(), range)
-								|| player.hasStatusEffect(statusEffect) && player.getStatusEffect(statusEffect).getAmplifier()
-								>= statusEffectInstance.getAmplifier() && player.getStatusEffect(statusEffect).getDuration() >= duration));
+		List<ServerPlayerEntity> list = world.getPlayers(player -> {
+			if (ModBase.WARDEN_NEUTRAL_POWER.isActive(player)) return false;    //Don't apply to players wardens are neutral to
+			if (!player.interactionManager.isSurvivalLike()) return false;      //Don't apply to players outside of survival
+			if (entity != null && entity.isTeammate(player)) return false;      //Don't apply to players on the same team as the warden
+			if (!origin.isInRange(player.getPos(), range)) return false;        //Don't apply to players out of range
+			if (player.hasStatusEffect(statusEffect)) {
+				StatusEffectInstance inst = player.getStatusEffect(statusEffect);
+				if (inst != null) {
+					if (inst.getAmplifier() >= statusEffectInstance.getAmplifier()) return false;   //Don't apply a lesser effect
+					if (inst.getDuration() >= DARKNESS_DURATION) return false;                      //Don't apply a shorter duration
+				}
+			}
+			return true;
+		});
 		list.forEach(player -> player.addStatusEffect(new StatusEffectInstance(statusEffectInstance), entity));
-		return list;
 	}
 
 	@Override
@@ -471,8 +481,7 @@ public class WardenEntity extends HostileEntity implements ModVibrationListener.
 			if (sourceEntity != null || optional.isEmpty() || optional.get() == entity) WardenBrain.lookAtDisturbance(this, blockPos);
 		}
 	}
-	public ModVibrationListener getEventListener() { return gameEventHandler.getListener(); }
-	public WardenAngerManager getAngerManager() { return this.angerManager; }
+	public ModVibrationListener getModEventListener() { return gameEventHandler.getListener(); }
 	@Override
 	protected EntityNavigation createNavigation(World world) {
 		return new MobNavigation(this, world){

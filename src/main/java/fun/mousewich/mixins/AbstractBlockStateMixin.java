@@ -23,7 +23,7 @@ public abstract class AbstractBlockStateMixin extends State<Block, BlockState> {
 	public void isOf(Block block, CallbackInfoReturnable<Boolean> cir) {
 		//TODO: Decorative Blocks
 		/*
-		else if (block == Blocks.ACACIA_SAPLING) {
+		if (block == Blocks.ACACIA_SAPLING) {
 			if (ModBase.DECORATIVE_ACACIA_SAPLING.contains(getBlock())) cir.setReturnValue(true);
 		}
 		else if (block == Blocks.BEETROOTS) {

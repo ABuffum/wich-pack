@@ -20,6 +20,7 @@ public class BiomeTagGenerator extends FabricTagProvider.DynamicRegistryTagProvi
 		getOrCreateTagBuilder(BiomeTags.IS_NETHER)
 				.add(BiomeKeys.NETHER_WASTES, BiomeKeys.BASALT_DELTAS, BiomeKeys.SOUL_SAND_VALLEY)
 				.add(BiomeKeys.CRIMSON_FOREST, BiomeKeys.WARPED_FOREST);
+		getOrCreateTagBuilder(BiomeTags.IS_MOUNTAIN).add(ModBase.CHERRY_GROVE);
 		getOrCreateTagBuilder(BiomeTags.MINESHAFT_HAS_STRUCTURE).add(ModBase.MANGROVE_SWAMP);
 		getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_SWAMP_HAS_STRUCTURE).add(ModBase.MANGROVE_SWAMP);
 

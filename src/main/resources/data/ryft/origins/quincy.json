@@ -3,12 +3,10 @@
     "origins:elytra",
     "origins:launch_into_air",
     "origins:aerial_combatant",
-    "origins:light_armor",
-    "origins:claustrophobia",
-    "origins:more_kinetic_damage",
+    "origins:tailwind",
     "ryft:quincy_identified_sounds"
   ],
   "name": "Quincy",
-  "description": "...",
+  "description": "Fairly small, highly dedicated",
   "icon": "minecraft:player_head"
 }

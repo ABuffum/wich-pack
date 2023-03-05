@@ -19,6 +19,10 @@ public class ModEntityModelPartNames {
 	public static final String LEFT_FOOT = "left_foot";
 	/** The key of a right foot model part, whose value is {@value}. */
 	public static final String RIGHT_FOOT = "right_foot";
+	/** The key of a left mid leg model part, whose value is {@value}. */
+	public static final String LEFT_MID_LEG = "left_mid_leg";
+	/** The key of a right mid leg model part, whose value is {@value}. */
+	public static final String RIGHT_MID_LEG = "right_mid_leg";
 	/** The key of a right tendril model part, whose value is {@value}. */
 	public static final String RIGHT_TENDRIL = "right_tendril";
 	/** The key of a left tendril model part, whose value is {@value}. */
@@ -29,6 +33,8 @@ public class ModEntityModelPartNames {
 	public static final String LEFT_RIBCAGE = "left_ribcage";
 	/** The key of a hump model part, whose value is {@value}. */
 	public static final String HUMP = "hump";
+	/** The key of a lower beak model part, whose value is {@value}. */
+	public static final String LOWER_BEAK = "lower_beak";
 	/** The key of a bone model part, whose value is {@value}. */
 	public static final String BONE = "bone";
 }

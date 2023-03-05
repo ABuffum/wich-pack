@@ -6,6 +6,7 @@
 	"value": 20.0,
 	"operation": "addition"
   },
+  "update_health": true,
   "name": "Tough Body",
   "description": "You have twice the health of a typical human."
 }

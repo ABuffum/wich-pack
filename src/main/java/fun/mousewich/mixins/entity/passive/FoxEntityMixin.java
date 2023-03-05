@@ -5,6 +5,7 @@ import fun.mousewich.entity.ai.MoveToHuntGoal;
 import fun.mousewich.mixins.entity.LivingEntityAccessor;
 import fun.mousewich.origins.powers.MobHostilityPower;
 import fun.mousewich.origins.powers.ScareFoxesPower;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
@@ -13,17 +14,17 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FoxEntity.class)
 public abstract class FoxEntityMixin extends AnimalEntity {
-	protected FoxEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
-		super(entityType, world);
-	}
+	protected FoxEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method = "initGoals", at = @At("TAIL"))
 	private void addGoals(CallbackInfo info) {

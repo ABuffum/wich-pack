@@ -20,7 +20,11 @@ public class ModModels {
 	public static final Model TEMPLATE_CAMPFIRE_OFF = Make("block/_template_campfire_off", ModTextureKeys.LOG);
 	public static final Model TEMPLATE_CHAIN = Make("block/_template_chain", TextureKey.ALL);
 	public static final Model TEMPLATE_CUSTOM_FENCE_GATE = Make("minecraft:block/template_custom_fence_gate", TextureKey.PARTICLE, TextureKey.TEXTURE);
+	public static final Model TEMPLATE_GLASS_TRAPDOOR_BOTTOM = Make("block/_template_glass_trapdoor_bottom", "_bottom", TextureKey.TOP, TextureKey.SIDE);
+	public static final Model TEMPLATE_GLASS_TRAPDOOR_OPEN = Make("block/_template_glass_trapdoor_open", "_open", TextureKey.TOP, TextureKey.SIDE);
+	public static final Model TEMPLATE_GLASS_TRAPDOOR_TOP = Make("block/_template_glass_trapdoor_top", "_top", TextureKey.TOP, TextureKey.SIDE);
 	public static final Model TEMPLATE_LADDER = Make("block/_template_ladder", TextureKey.TEXTURE);
+	public static final Model TEMPLATE_LECTERN = Make("block/_template_lectern", TextureKey.BOTTOM, ModTextureKeys.BASE, TextureKey.FRONT, ModTextureKeys.SIDES, TextureKey.TOP);
 	public static final Model TEMPLATE_MULTI_TEXTURE_CARPET = Make("block/_template_multi_texture_carpet", TextureKey.PARTICLE, TextureKey.NORTH, TextureKey.SOUTH, TextureKey.EAST, TextureKey.WEST, TextureKey.UP, TextureKey.DOWN);
 	public static final Model TEMPLATE_MULTI_TEXTURE_SLAB = Make("block/_template_multi_texture_slab", TextureKey.PARTICLE, TextureKey.NORTH, TextureKey.SOUTH, TextureKey.EAST, TextureKey.WEST, TextureKey.UP, TextureKey.DOWN);
 	public static final Model TEMPLATE_MULTI_TEXTURE_SLAB_TOP = Make("block/_template_multi_texture_slab_top", "_top", TextureKey.PARTICLE, TextureKey.NORTH, TextureKey.SOUTH, TextureKey.EAST, TextureKey.WEST, TextureKey.UP, TextureKey.DOWN);

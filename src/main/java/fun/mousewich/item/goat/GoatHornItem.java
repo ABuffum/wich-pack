@@ -2,6 +2,7 @@ package fun.mousewich.item.goat;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.event.ModGameEvent;
+import fun.mousewich.util.CollectionUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -21,6 +22,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 public class GoatHornItem extends Item {
 	private static final String INSTRUMENT_KEY = "instrument";
@@ -50,6 +53,15 @@ public class GoatHornItem extends Item {
 		ItemStack stack = new ItemStack(item);
 		stack.getOrCreateNbt().putString(INSTRUMENT_KEY, instrument.getName());
 		return stack;
+	}
+
+	public static void setRandomInstrumentFromRegular(ItemStack stack, Random random) {
+		List<GoatHornInstrument> instruments = CollectionUtil.copyShuffled(GoatHornInstruments.INSTRUMENTS.toArray(new GoatHornInstrument[0]), random);
+		setInstrument(stack, instruments.get(0));
+	}
+	private static void setInstrument(ItemStack stack, GoatHornInstrument instrument) {
+		NbtCompound nbtCompound = stack.getOrCreateNbt();
+		nbtCompound.putString(INSTRUMENT_KEY, instrument.getName());
 	}
 
 	@Override

@@ -10,6 +10,14 @@
     "wich:amethyst_axe",
     "wich:echo_axe",
     "wich:emerald_axe",
-    "wich:quartz_axe"
+    "wich:quartz_axe",
+    "wich:copper_axe",
+    "wich:exposed_copper_axe",
+    "wich:weathered_copper_axe",
+    "wich:oxidized_copper_axe",
+    "wich:waxed_copper_axe",
+    "wich:waxed_exposed_copper_axe",
+    "wich:waxed_weathered_copper_axe",
+    "wich:waxed_oxidized_copper_axe"
   ]
 }

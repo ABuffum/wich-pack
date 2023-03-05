@@ -1,5 +1,6 @@
 package fun.mousewich.block.basic;
 
+import fun.mousewich.block.BlockConvertible;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -11,6 +12,7 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
 
 public class ModFacingBlock extends Block {
+	public ModFacingBlock(BlockConvertible block) { this(block.asBlock()); }
 	public ModFacingBlock(Block block) { this(Settings.copy(block)); }
 	public ModFacingBlock(Settings settings) {
 		super(settings);

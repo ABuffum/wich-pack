@@ -10,4 +10,7 @@ public class ModEntityDamageSource extends EntityDamageSource {
 	public static DamageSource sonicBoom(Entity attacker) {
 		return new ModEntityDamageSource("sonic_boom", attacker).setBypassesArmor().setUsesMagic();//.setBypassesProtection();
 	}
+	public static DamageSource quills(Entity attacker) {
+		return new ModEntityDamageSource("quillls", attacker).setBypassesArmor();
+	}
 }

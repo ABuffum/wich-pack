@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_chain",
+  "textures": {
+    "all": "wich:block/weathered_copper_chain"
+  }
+}

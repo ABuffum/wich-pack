@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_hanging_lantern",
   "textures": {
-    "lantern": "wich:block/gold_lantern"
+    "lantern": "wich:block/unlit_gold_lantern"
   }
 }

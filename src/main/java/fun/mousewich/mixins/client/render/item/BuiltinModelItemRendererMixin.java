@@ -2,8 +2,8 @@ package fun.mousewich.mixins.client.render.item;
 
 import fun.mousewich.block.basic.ModBedBlock;
 import fun.mousewich.block.piglin.PiglinHeadBlock;
-import fun.mousewich.block.piglin.PiglinHeadEntityModel;
-import fun.mousewich.block.piglin.PiglinHeadEntityRenderer;
+import fun.mousewich.client.render.block.model.PiglinHeadEntityModel;
+import fun.mousewich.client.render.block.renderer.PiglinHeadEntityRenderer;
 import fun.mousewich.block.piglin.WallPiglinHeadBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -1,6 +1,6 @@
 package fun.mousewich.block.torch;
 
-import fun.mousewich.util.Util;
+import fun.mousewich.ModFactory;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
@@ -27,7 +27,7 @@ public class UnlitTorchBlock extends Block {
 	protected final TorchBlock lit;
 	public TorchBlock getLitBlock() { return lit; }
 	public UnlitTorchBlock(TorchBlock lit) {
-		super(Settings.copy(lit).luminance(Util.LUMINANCE_0));
+		super(Settings.copy(lit).luminance(ModFactory.LUMINANCE_0));
 		this.lit = lit;
 	}
 

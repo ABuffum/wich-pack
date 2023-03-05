@@ -25,6 +25,8 @@ import net.minecraft.util.Nameable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.entity.EntityLike;
+import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,13 +39,26 @@ import java.util.Random;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput {
-	@Inject(method="kill", at = @At("TAIL"))
-	public void Kill(CallbackInfo ci) { ((Entity)(Object)this).emitGameEvent(ModGameEvent.ENTITY_DIE); }
 
+	@Shadow @Final protected Random random;
+	@Shadow public int age;
+	@Shadow public World world;
+	@Shadow private int lastChimeAge;
+	@Shadow private float lastChimeIntensity;
+
+	@Shadow public abstract void emitGameEvent(GameEvent event, @Nullable Entity entity, BlockPos pos);
+	@Shadow public abstract void emitGameEvent(GameEvent event, @Nullable Entity entity);
+	@Shadow public abstract void emitGameEvent(GameEvent event, BlockPos pos);
+	@Shadow public abstract void emitGameEvent(GameEvent event);
+	@Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
+	@Shadow public abstract BlockPos getBlockPos();
+
+	@Inject(method="kill", at = @At("TAIL"))
+	public void Kill(CallbackInfo ci) { this.emitGameEvent(ModGameEvent.ENTITY_DIE); }
 	@Inject(method="playStepSound", at = @At("HEAD"), cancellable = true)
 	protected void PlayStepSound(BlockPos pos, BlockState state, CallbackInfo ci) {
 		if (state.getMaterial().isLiquid()) return;
-		BlockState blockState = ((Entity)(Object)this).world.getBlockState(pos.up());
+		BlockState blockState = this.world.getBlockState(pos.up());
 		blockState = blockState.isIn(BlockTags.INSIDE_STEP_SOUND_BLOCKS) ? blockState : state;
 		if (blockState.isOf(Blocks.BARRIER) || blockState.isOf(Blocks.STRUCTURE_VOID)) { ci.cancel(); return; }
 		SoundUtil.playIdentifiedStepSound((Entity)(Object)this);
@@ -53,36 +68,29 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 			ci.cancel();
 		}
 	}
-
 	@Inject(method="getSwimSound", at = @At("HEAD"), cancellable = true)
 	protected void GetSwimSound(CallbackInfoReturnable<SoundEvent> cir) {
 		SoundEvent swimSound = IdentifiedSounds.getSwimSound((Entity)(Object)this);
 		if (swimSound != null) cir.setReturnValue(swimSound);
 	}
-
 	@Inject(method="getSplashSound", at = @At("HEAD"), cancellable = true)
 	protected void GetSplashSound(CallbackInfoReturnable<SoundEvent> cir) {
 		SoundEvent sound = IdentifiedSounds.getSplashSound((Entity)(Object)this);
 		if (sound != null) cir.setReturnValue(sound);
 	}
-
 	@Inject(method="getHighSpeedSplashSound", at = @At("HEAD"), cancellable = true)
 	protected void GetHighSpeedSplashSound(CallbackInfoReturnable<SoundEvent> cir) {
 		SoundEvent sound = IdentifiedSounds.getHighSpeedSplashSound((Entity)(Object)this);
 		if (sound != null) cir.setReturnValue(sound);
 	}
-
-	@Shadow public int age;
-	@Shadow private float lastChimeIntensity;
-	@Shadow private int lastChimeAge;
-	@Shadow @Final protected Random random;
-	@Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
-
-	@Shadow public abstract SoundCategory getSoundCategory();
-
-	@Shadow public abstract BlockPos getBlockPos();
-
-	@Shadow public abstract World getEntityWorld();
+	@Inject(method="addPassenger", at = @At("TAIL"))
+	protected void AddPassenger(Entity passenger, CallbackInfo ci) {
+		this.emitGameEvent(ModGameEvent.ENTITY_MOUNT, passenger);
+	}
+	@Inject(method="removePassenger", at = @At("TAIL"))
+	protected void RemovePassenger(Entity passenger, CallbackInfo ci) {
+		this.emitGameEvent(ModGameEvent.ENTITY_DISMOUNT, passenger);
+	}
 
 	@Inject(method="playAmethystChimeSound", at = @At("HEAD"))
 	private void playEchoChimeSound(BlockState state, CallbackInfo ci) {
@@ -100,7 +108,7 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 	public void IsSubmergedIn(TagKey<Fluid> fluidTag, CallbackInfoReturnable<Boolean> cir) {
 		if (fluidTag == FluidTags.WATER) {
 			if (OriginsPowerTypes.WATER_BREATHING.isActive((Entity)(Object)this)) {
-				BlockState state = this.getEntityWorld().getBlockState(this.getBlockPos());
+				BlockState state = this.world.getBlockState(this.getBlockPos());
 				if (state.isOf(Blocks.WATER_CAULDRON)) cir.setReturnValue(true);
 			}
 		}

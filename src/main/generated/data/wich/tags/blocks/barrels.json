@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:barrel",
+    "wich:acacia_barrel",
+    "wich:birch_barrel",
+    "wich:crimson_barrel",
+    "wich:dark_oak_barrel",
+    "wich:jungle_barrel",
+    "wich:oak_barrel",
+    "wich:warped_barrel",
+    "wich:bamboo_barrel",
+    "wich:mangrove_barrel",
+    "wich:cherry_barrel",
+    "wich:charred_barrel"
+  ]
+}

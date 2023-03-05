@@ -13,7 +13,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -30,6 +29,7 @@ public abstract class HorseBaseEntityMixin extends AnimalEntity implements Inven
 
 	@Inject(method="updateAnger", at = @At("HEAD"), cancellable = true)
 	private void updateAnger(CallbackInfo ci) {
+		//noinspection ConstantConditions
 		if ((Object)this instanceof CamelEntity camel) {
 			if (this.canMoveVoluntarily()) {
 				this.angryTicks = 1;
@@ -40,6 +40,7 @@ public abstract class HorseBaseEntityMixin extends AnimalEntity implements Inven
 	}
 	@Inject(method="travel", at = @At("HEAD"), cancellable = true)
 	public void travel(Vec3d movementInput, CallbackInfo ci) {
+		//noinspection ConstantConditions
 		if (!((Object)this instanceof CamelEntity camel)) return;
 		if (!this.isAlive()) {
 			ci.cancel();
@@ -66,7 +67,7 @@ public abstract class HorseBaseEntityMixin extends AnimalEntity implements Inven
 			g = 0.0f;
 		}
 		if (this.jumpStrength > 0.0f && !camel.isInAir() && this.onGround) {
-			camel.jump(this.jumpStrength, f, g);
+			camel.jump(this.jumpStrength);
 			this.jumpStrength = 0.0f;
 		}
 		this.airStrafingSpeed = this.getMovementSpeed() * 0.1f;

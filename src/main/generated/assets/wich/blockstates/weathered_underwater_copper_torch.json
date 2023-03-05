@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_weathered_copper_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/weathered_underwater_copper_torch"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_copper_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/copper_ender_torch"
+    }
+  }
+}

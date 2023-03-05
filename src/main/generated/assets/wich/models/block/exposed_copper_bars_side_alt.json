@@ -1,0 +1,8 @@
+{
+  "parent": "wich:block/_template_bars_side_alt",
+  "textures": {
+    "particle": "wich:block/exposed_copper_bars",
+    "bars": "wich:block/exposed_copper_bars",
+    "edge": "wich:block/exposed_copper_bars"
+  }
+}

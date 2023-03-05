@@ -29,8 +29,8 @@ import java.util.Random;
 public class ChorusCommand {
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
 		dispatcher.register(CommandManager.literal("chorus")
-				.requires((source) -> source.hasPermissionLevel(2))
-				.executes((context) -> execute(ImmutableList.of(context.getSource().getEntityOrThrow())))
+				.requires(source -> source.hasPermissionLevel(2))
+				.executes(context -> execute(ImmutableList.of(context.getSource().getEntityOrThrow())))
 				.then(CommandManager.argument("targets", EntityArgumentType.entities())
 						.executes(context -> execute(EntityArgumentType.getEntities(context, "targets")))
 						.then(CommandManager.argument("chance", FloatArgumentType.floatArg(0, 1))

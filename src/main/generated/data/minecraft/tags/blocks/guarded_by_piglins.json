@@ -29,6 +29,7 @@
     "wich:cut_gold_pillar",
     "wich:cut_gold_slab",
     "wich:cut_gold_stairs",
-    "wich:cut_gold_wall"
+    "wich:cut_gold_wall",
+    "#wich:barrels"
   ]
 }

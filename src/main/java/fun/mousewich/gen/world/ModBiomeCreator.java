@@ -8,13 +8,11 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.BiomeMoodSound;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.carver.ConfiguredCarvers;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.OceanPlacedFeatures;
-import net.minecraft.world.gen.feature.PlacedFeature;
 import org.jetbrains.annotations.Nullable;
 
 public class ModBiomeCreator {
@@ -46,6 +44,23 @@ public class ModBiomeCreator {
 						.skyColor(getSkyColor(temperature))
 						.moodSound(BiomeMoodSound.CAVE)
 						.music(music)
+						.build())
+				.spawnSettings(spawnSettings.build())
+				.generationSettings(generationSettings.build()).build();
+	}
+	private static Biome createBiome(SpawnSettings.Builder spawnSettings, GenerationSettings.Builder generationSettings, @Nullable MusicSound music) {
+		return new Biome.Builder()
+				.precipitation(Biome.Precipitation.RAIN)
+				.temperature(0.5f)
+				.downfall(0.8f)
+				.effects(new BiomeEffects.Builder()
+						.grassColor(11983713)
+						.foliageColor(11983713)
+						.waterColor(6141935)
+						.waterFogColor(6141935)
+						.fogColor(12638463)
+						.skyColor(getSkyColor(0.5f))
+						.moodSound(BiomeMoodSound.CAVE).music(music)
 						.build())
 				.spawnSettings(spawnSettings.build())
 				.generationSettings(generationSettings.build()).build();
@@ -98,5 +113,28 @@ public class ModBiomeCreator {
 						.waterColor(4159204).waterFogColor(329011).fogColor(12638463).skyColor(7972863)
 						.moodSound(BiomeMoodSound.CAVE).music(musicSound).build())
 				.spawnSettings(builder.build()).generationSettings(builder2.build()).build();
+	}
+
+	public static Biome createCherryGrove() {
+		GenerationSettings.Builder lookupBackedBuilder = new GenerationSettings.Builder();
+		SpawnSettings.Builder builder = new SpawnSettings.Builder();
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.DONKEY, 1, 1, 2)).spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 2, 2, 6)).spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 2, 2, 4));
+		DefaultBiomeFeatures.addBatsAndMonsters(builder);
+		addBasicFeatures(lookupBackedBuilder);
+		DefaultBiomeFeatures.addPlainsTallGrass(lookupBackedBuilder);
+		DefaultBiomeFeatures.addDefaultOres(lookupBackedBuilder);
+		DefaultBiomeFeatures.addDefaultDisks(lookupBackedBuilder);
+		ModBiomeFeatures.addCherryGroveFeatures(lookupBackedBuilder);
+		DefaultBiomeFeatures.addEmeraldOre(lookupBackedBuilder);
+		DefaultBiomeFeatures.addInfestedStone(lookupBackedBuilder);
+		MusicSound musicSound = MusicType.createIngameMusic(ModSoundEvents.MUSIC_OVERWORLD_CHERRY_GROVE);
+		return new Biome.Builder()
+				.precipitation(Biome.Precipitation.RAIN).temperature(0.5f).downfall(0.8f)
+				.category(Biome.Category.MOUNTAIN).effects(new BiomeEffects.Builder()
+						.grassColor(11983713).foliageColor(11983713)
+						.waterColor(6141935).waterFogColor(6141935).fogColor(12638463)
+						.skyColor(MathHelper.hsvToRgb(0.6138889f, 0.51666665f, 1.0f))
+						.moodSound(BiomeMoodSound.CAVE).music(musicSound).build())
+				.spawnSettings(builder.build()).generationSettings(lookupBackedBuilder.build()).build();
 	}
 }

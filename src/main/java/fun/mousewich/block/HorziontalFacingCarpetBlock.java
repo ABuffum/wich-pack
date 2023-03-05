@@ -12,6 +12,7 @@ import net.minecraft.world.WorldView;
 
 public class HorziontalFacingCarpetBlock extends HorizontalFacingBlock {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+	public HorziontalFacingCarpetBlock(BlockConvertible block) { this(block.asBlock()); }
 	public HorziontalFacingCarpetBlock(Block block) { this(Settings.copy(block)); }
 	public HorziontalFacingCarpetBlock(Settings settings) { super(settings); }
 

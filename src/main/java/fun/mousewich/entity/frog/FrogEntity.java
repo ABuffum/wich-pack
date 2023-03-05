@@ -80,9 +80,8 @@ public class FrogEntity extends AnimalEntity {
 		return Brain.createProfile(MEMORY_MODULES, SENSORS);
 	}
 	@Override
-	protected Brain<?> deserializeBrain(Dynamic<?> dynamic) {
-		return FrogBrain.create(this.createBrainProfile().deserialize(dynamic));
-	}
+	protected Brain<?> deserializeBrain(Dynamic<?> dynamic) { return FrogBrain.create(this.createBrainProfile().deserialize(dynamic)); }
+	@SuppressWarnings("unchecked")
 	public Brain<FrogEntity> getBrain() { return (Brain<FrogEntity>)super.getBrain(); }
 	@Override
 	protected void initDataTracker() {
@@ -273,7 +272,7 @@ public class FrogEntity extends AnimalEntity {
 	protected EntityNavigation createNavigation(World world) { return new FrogSwimNavigation(this, world); }
 	@Override
 	public boolean isBreedingItem(ItemStack stack) { return SLIME_BALL.test(stack); }
-	public static boolean canSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<? extends AnimalEntity> ignoredType, WorldAccess world, SpawnReason ignoredReason, BlockPos pos, Random ignoredRandom) {
 		return world.getBlockState(pos.down()).isIn(ModBlockTags.FROGS_SPAWNABLE_ON) && FrogEntity.isLightLevelValidForNaturalSpawn(world, pos);
 	}
 	class FrogLookControl extends LookControl {

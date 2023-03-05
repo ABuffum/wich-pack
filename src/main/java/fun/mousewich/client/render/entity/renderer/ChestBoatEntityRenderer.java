@@ -15,16 +15,12 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.model.CompositeEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3f;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class ChestBoatEntityRenderer extends EntityRenderer<ChestBoatEntity> {
@@ -34,8 +30,8 @@ public class ChestBoatEntityRenderer extends EntityRenderer<ChestBoatEntity> {
 	public ChestBoatEntityRenderer(EntityRendererFactory.Context context) {
 		super(context);
 		this.shadowRadius = 0.8F;
-		boat = new ChestBoatEntityModel(context.getPart(ModClient.CHEST_BOAT_ENTITY_MODEL_LAYER));
-		raft = new ChestRaftEntityModel(context.getPart(ModClient.CHEST_RAFT_ENTITY_MODEL_LAYER));
+		boat = new ChestBoatEntityModel(context.getPart(ModClient.CHEST_BOAT_MODEL_LAYER));
+		raft = new ChestRaftEntityModel(context.getPart(ModClient.CHEST_RAFT_MODEL_LAYER));
 	}
 
 	public void render(ChestBoatEntity boatEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {

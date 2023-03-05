@@ -16,6 +16,15 @@
     "wich:cut_netherite_pillar",
     "wich:cut_netherite_slab",
     "wich:cut_netherite_stairs",
+    "wich:obsidian_slab",
+    "wich:obsidian_stairs",
+    "wich:obsidian_wall",
+    "wich:crying_obsidian_slab",
+    "wich:crying_obsidian_stairs",
+    "wich:crying_obsidian_wall",
+    "wich:bleeding_obsidian_slab",
+    "wich:bleeding_obsidian_stairs",
+    "wich:bleeding_obsidian_wall",
     "wich:cut_netherite_wall",
     "wich:crushing_weighted_pressure_plate"
   ]

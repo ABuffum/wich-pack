@@ -1,6 +1,14 @@
 {
   "replace": false,
   "values": [
+    "wich:medium_weighted_pressure_plate",
+    "wich:exposed_medium_weighted_pressure_plate",
+    "wich:weathered_medium_weighted_pressure_plate",
+    "wich:oxidized_medium_weighted_pressure_plate",
+    "wich:waxed_medium_weighted_pressure_plate",
+    "wich:waxed_exposed_medium_weighted_pressure_plate",
+    "wich:waxed_weathered_medium_weighted_pressure_plate",
+    "wich:waxed_oxidized_medium_weighted_pressure_plate",
     "wich:crushing_weighted_pressure_plate"
   ]
 }

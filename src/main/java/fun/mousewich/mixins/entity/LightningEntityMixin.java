@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -39,7 +38,7 @@ public class LightningEntityMixin {
 			blockState3 = blockState;
 		}
 		if (blockState3.getBlock() instanceof Oxidizable) {
-			world.setBlockState(blockPos2, OxidationScale.getUnaffectedOxidationState(world.getBlockState(blockPos2)));
+			world.setBlockState(blockPos2, OxidationScale.getUnaffectedState(world.getBlockState(blockPos2)));
 			BlockPos.Mutable mutable = pos.mutableCopy();
 			int i = world.random.nextInt(3) + 3;
 			for(int j = 0; j < i; ++j) {
@@ -61,7 +60,7 @@ public class LightningEntityMixin {
 			blockState = world.getBlockState(blockPos);
 		} while(!(blockState.getBlock() instanceof Oxidizable));
 		BlockPos finalBlockPos = blockPos;
-		OxidationScale.getDecreasedOxidationState(blockState).ifPresent(state -> world.setBlockState(finalBlockPos, state));
+		OxidationScale.getDecreasedState(blockState).ifPresent(state -> world.setBlockState(finalBlockPos, state));
 		world.syncWorldEvent(WorldEvents.ELECTRICITY_SPARKS, blockPos, -1);
 		cir.setReturnValue(Optional.of(blockPos));
 	}

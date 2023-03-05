@@ -8,9 +8,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 
 public class SwiftSneakEnchantment extends Enchantment {
-	public SwiftSneakEnchantment(Rarity rarity, EquipmentSlot... slots) {
-		super(rarity, EnchantmentTarget.ARMOR_LEGS, slots);
-	}
+	public SwiftSneakEnchantment(Rarity rarity, EquipmentSlot... slots) { super(rarity, EnchantmentTarget.ARMOR_LEGS, slots); }
 	@Override
 	public int getMinPower(int level) { return level * 25; }
 	@Override
@@ -23,7 +21,6 @@ public class SwiftSneakEnchantment extends Enchantment {
 	public boolean isAvailableForRandomSelection() { return false; }
 	@Override
 	public int getMaxLevel() { return 3; }
-
 	public static float getSpeedBoost(LivingEntity livingEntity) {
 		return (float) EnchantmentHelper.getEquipmentLevel(ModBase.SWIFT_SNEAK_ENCHANTMENT, livingEntity) * 0.15f;
 	}

@@ -1,6 +1,7 @@
 package fun.mousewich.entity;
 
 import fun.mousewich.entity.frog.FrogVariant;
+import fun.mousewich.entity.sniffer.SnifferEntity;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.network.PacketByteBuf;
@@ -32,11 +33,16 @@ public class ModDataHandlers {
 		}
 		@Override public OptionalInt copy(OptionalInt optionalInt) { return optionalInt; }
 	};
-
+	public static final TrackedDataHandler<SnifferEntity.State> SNIFFER_STATE = new TrackedDataHandler<>(){
+		@Override public void write(PacketByteBuf packetByteBuf, SnifferEntity.State state) { packetByteBuf.writeEnumConstant(state); }
+		@Override public SnifferEntity.State read(PacketByteBuf packetByteBuf) { return packetByteBuf.readEnumConstant(SnifferEntity.State.class); }
+		@Override public SnifferEntity.State copy(SnifferEntity.State state) { return state; }
+	};
 	public static void Initialize() {
 		TrackedDataHandlerRegistry.register(LONG);
 		TrackedDataHandlerRegistry.register(FROG_VARIANT);
 		TrackedDataHandlerRegistry.register(NEW_ENTITY_POSE);
 		TrackedDataHandlerRegistry.register(OPTIONAL_INT);
+		TrackedDataHandlerRegistry.register(SNIFFER_STATE);
 	}
 }

@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
+    "#minecraft:all_hanging_signs",
+    "#wich:barrels",
+    "minecraft:bamboo_mosaic",
+    "minecraft:bamboo_mosaic_stairs",
+    "minecraft:bamboo_mosaic_slab",
     "minecraft:bamboo_block",
     "minecraft:stripped_bamboo_block",
     "minecraft:mangrove_roots",

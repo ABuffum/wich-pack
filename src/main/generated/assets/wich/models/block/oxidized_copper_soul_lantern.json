@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_lantern",
+  "textures": {
+    "lantern": "wich:block/oxidized_copper_soul_lantern"
+  }
+}

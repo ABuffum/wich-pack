@@ -64,18 +64,6 @@ public class OxidizableBlockContainer implements IContainer {
 		waxed_oxidized = new WaxedBlockContainer(o, wo, itemSettings);
 	}
 
-	public static OxidizableBlockContainer Stairs(Function<OxidationLevel, Block> baseBlock, Function<OxidationLevel, Block> waxed, Item.Settings itemSettings) {
-		BlockContainer u = new BlockContainer(baseBlock.apply(OxidationLevel.UNAFFECTED), itemSettings);
-		BlockContainer e = new BlockContainer(baseBlock.apply(OxidationLevel.EXPOSED), itemSettings);
-		BlockContainer w = new BlockContainer(baseBlock.apply(OxidationLevel.WEATHERED), itemSettings);
-		BlockContainer o = new BlockContainer(baseBlock.apply(OxidationLevel.OXIDIZED), itemSettings);
-		return new OxidizableBlockContainer(u, e, w, o,
-				waxed.apply(OxidationLevel.UNAFFECTED),
-				waxed.apply(OxidationLevel.EXPOSED),
-				waxed.apply(OxidationLevel.WEATHERED),
-				waxed.apply(OxidationLevel.OXIDIZED), itemSettings);
-	}
-
 	public boolean contains(Block block) {
 		return unaffected.contains(block) || exposed.contains(block) || weathered.contains(block) || oxidized.contains(block)
 				|| waxed_unaffected.contains(block) || waxed_exposed.contains(block) || waxed_weathered.contains(block) || waxed_oxidized.contains(block);

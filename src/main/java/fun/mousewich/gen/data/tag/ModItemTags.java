@@ -14,7 +14,12 @@ public class ModItemTags {
 	public static final TagKey<Item> BOOTS = createTag("boots");
 	public static final TagKey<Item> CARVED_MELONS = createTag("carved_melons");
 	public static final TagKey<Item> CARVED_PUMPKINS = createTag("carved_pumpkins");
+	public static final TagKey<Item> CHARRABLE_LOGS = createTag("charrable_logs");
+	public static final TagKey<Item> CHARRABLE_STRIPPED_LOGS = createTag("charrable_stripped_logs");
+	public static final TagKey<Item> CHARRABLE_STRIPPED_WOODS = createTag("charrable_stripped_woods");
+	public static final TagKey<Item> CHARRABLE_WOODS = createTag("charrable_woods");
 	public static final TagKey<Item> CHARRED_LOGS = createTag("charred_logs");
+	public static final TagKey<Item> CHERRY_LOGS = createMinecraftTag("cherry_logs");
 	public static final TagKey<Item> CHESTPLATES = createTag("chestplates");
 	public static final TagKey<Item> COMPASSES = createMinecraftTag("compasses");
 	public static final TagKey<Item> COOKED_BEEF = createTag("cooked_beef");
@@ -52,6 +57,7 @@ public class ModItemTags {
 	public static final TagKey<Item> HOES = createCommonTag("tools/hoes");
 	public static final TagKey<Item> KNIVES = createCommonTag("tools/knives");
 	public static final TagKey<Item> LEGGINGS = createTag("leggings");
+	public static final TagKey<Item> LIGHTS_FLINT = createTag("lights_flint");
 	public static final TagKey<Item> MANGROVE_LOGS = createMinecraftTag("mangrove_logs");
 	public static final TagKey<Item> PICKAXES = createCommonTag("tools/pickaxes");
 	public static final TagKey<Item> RAW_BEEF = createTag("raw_beef");
@@ -65,10 +71,14 @@ public class ModItemTags {
 	public static final TagKey<Item> SEEDS = createTag("seeds");
 	public static final TagKey<Item> SHEARS = createCommonTag("tools/shears");
 	public static final TagKey<Item> SHOVELS = createCommonTag("tools/shovels");
+	public static final TagKey<Item> SNIFFER_FOOD = createMinecraftTag("sniffer_food");
 	public static final TagKey<Item> SOUL_TORCHES = createTag("soul_torches");
 	public static final TagKey<Item> SWEETS = createTag("sweets");
 	public static final TagKey<Item> SWORDS = createCommonTag("tools/swords");
 	public static final TagKey<Item> TORCHES = createTag("torches");
+	public static final TagKey<Item> TRIMMABLE_ARMOR = createMinecraftTag("trimmable_armor");
+	public static final TagKey<Item> TRIM_MATERIALS = createMinecraftTag("trim_materials");
+	public static final TagKey<Item> TRIM_TEMPLATES = createMinecraftTag("trim_templates");
 	public static final TagKey<Item> UNDERWATER_TORCHES = createTag("underwater_torches");
 	public static final TagKey<Item> VEGETABLES = createTag("vegetables");
 	public static final TagKey<Item> WEAPON = createTag("weapons");

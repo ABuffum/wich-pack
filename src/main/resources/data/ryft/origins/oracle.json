@@ -5,6 +5,8 @@
 	"origins:strong_arms",
 	"origins:strong_arms_break_speed",
 	"origins:more_exhaustion",
+	"ryft:base_armor",
+	"ryft:thick_skin",
 	"ryft:oracle_identified_sounds"
   ],
   "name": "The Oracle",

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_lantern",
   "textures": {
-    "lantern": "wich:block/netherite_lantern"
+    "lantern": "wich:block/unlit_netherite_lantern"
   }
 }

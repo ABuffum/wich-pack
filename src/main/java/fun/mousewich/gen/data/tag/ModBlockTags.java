@@ -13,6 +13,7 @@ public class ModBlockTags {
 	public static final TagKey<Block> ALL_HANGING_SIGNS = createMinecraftTag("all_hanging_signs");
 	public static final TagKey<Block> ANCIENT_CITY_REPLACEABLE = createMinecraftTag("ancient_city_replaceable");
 	public static final TagKey<Block> CEILING_HANGING_SIGNS = createMinecraftTag("ceiling_hanging_signs");
+	public static final TagKey<Block> CHERRY_LOGS = createMinecraftTag("cherry_logs");
 	public static final TagKey<Block> CONVERTIBLE_TO_MUD = createMinecraftTag("convertible_to_mud");
 	public static final TagKey<Block> DAMPENS_VIBRATIONS = createMinecraftTag("dampens_vibrations");
 	public static final TagKey<Block> FROG_PREFER_JUMP_TO = createMinecraftTag("frog_prefer_jump_to");
@@ -23,9 +24,11 @@ public class ModBlockTags {
 	public static final TagKey<Block> OCCLUDES_VIBRATION_SIGNALS = createMinecraftTag("occludes_vibration_signals");
 	public static final TagKey<Block> SCULK_REPLACEABLE = createMinecraftTag("sculk_replaceable");
 	public static final TagKey<Block> SCULK_REPLACEABLE_WORLD_GEN = createMinecraftTag("sculk_replaceable_world_gen");
+	public static final TagKey<Block> SNIFFER_DIGGABLE_BLOCK = createMinecraftTag("sniffer_diggable_block");
 	public static final TagKey<Block> WALL_HANGING_SIGNS = createMinecraftTag("wall_hanging_signs");
 	public static final TagKey<Block> WOOL_CARPETS = createMinecraftTag("wool_carpets");
 
+	public static final TagKey<Block> BARRELS = createTag("barrels");
 	public static final TagKey<Block> BOOKSHELVES = createTag("bookshelves");
 	public static final TagKey<Block> CARVED_GOURDS = createTag("carved_gourds");
 	public static final TagKey<Block> CHARRED_LOGS = createTag("charred_logs");

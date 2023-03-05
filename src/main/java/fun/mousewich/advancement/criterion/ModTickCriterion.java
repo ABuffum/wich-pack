@@ -20,14 +20,10 @@ public class ModTickCriterion extends AbstractCriterion<ModTickCriterion.Conditi
 		return new Conditions(this.id, extended);
 	}
 
-	public void trigger(ServerPlayerEntity player) {
-		this.trigger(player, conditions -> true);
-	}
+	public void trigger(ServerPlayerEntity player) { this.trigger(player, conditions -> true); }
 
 	public static class Conditions extends AbstractCriterionConditions {
-		public Conditions(Identifier identifier, EntityPredicate.Extended extended) {
-			super(identifier, extended);
-		}
+		public Conditions(Identifier identifier, EntityPredicate.Extended extended) { super(identifier, extended); }
 		public static Conditions createAvoidVibration() {
 			return new Conditions(ModCriteria.AVOID_VIBRATION.getId(), EntityPredicate.Extended.EMPTY);
 		}

@@ -4,8 +4,11 @@
 	"enabled": true,
 	"origins": [
 	  "origins:human",
+	  "ryft:angel",
+	  "ryft:arsene",
 	  "ryft:auryon",
 	  "ryft:dj",
+	  "ryft:faerie",
 	  "ryft:gubby",
 	  "ryft:kaden",
 	  "ryft:kirha",

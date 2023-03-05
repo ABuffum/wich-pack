@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_oxidized_copper_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/oxidized_copper_soul_torch"
+    }
+  }
+}

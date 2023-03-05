@@ -1,6 +1,6 @@
 package fun.mousewich.container;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModFactory;
 import fun.mousewich.block.basic.ModBedBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Blocks;
@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
 public class BedContainer extends BlockContainer {
-	public BedContainer(String name) { this(name, ModBase.ItemSettings().maxCount(1)); }
+	public BedContainer(String name) { this(name, ModFactory.ItemSettings().maxCount(1)); }
 	public BedContainer(String name, Item.Settings itemSettings) {
 		this(name, AbstractBlock.Settings.copy(Blocks.WHITE_BED), itemSettings);
 	}

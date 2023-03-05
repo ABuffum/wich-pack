@@ -17,7 +17,7 @@
 		"item_condition": {
 		  "type": "origins:ingredient",
 		  "ingredient": {
-			"item": "minecraft:gold_ingot"
+			"item": "minecraft:gold_nugget"
 		  }
 		}
 	  },
@@ -35,7 +35,7 @@
 		"type": "origins:delay",
 		"action": {
 		  "type": "origins:execute_command",
-		  "command": "clear @s gold_ingot 1"
+		  "command": "clear @s gold_nugget 1"
 		},
 		"ticks": 26
 	  },

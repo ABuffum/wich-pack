@@ -19,6 +19,12 @@ public class ModBiomeFeatures {
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_WATERLILY);
 	}
 
+	public static void addCherryGroveFeatures(GenerationSettings.Builder builder) {
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_GRASS_PLAIN);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModBase.FLOWER_CHERRY_PLACED.getRegistryEntry());
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModBase.TREES_CHERRY_PLACED.getRegistryEntry());
+	}
+
 	public static void addSculk(GenerationSettings.Builder builder) {
 		builder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ModBase.SCULK_VEIN_PLACED.getRegistryEntry());
 		builder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ModBase.SCULK_PATCH_DEEP_DARK_PLACED.getRegistryEntry());

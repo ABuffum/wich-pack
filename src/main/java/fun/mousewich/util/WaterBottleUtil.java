@@ -32,20 +32,22 @@ public class WaterBottleUtil {
 		if (PotionUtil.getPotion(itemStack) == Potions.WATER) {
 			Block block = blockState.getBlock();
 			BlockState outState = blockState;
-			boolean bl = true, consume = false;
+			boolean bl = true, consume = false, first;
 			SoundEvent sound = SoundEvents.ENTITY_GENERIC_SPLASH;
-			if (ModBase.UNLIT_TO_LIT_TORCHES.containsKey(block)) {
-				outState = ModBase.UNLIT_TO_LIT_TORCHES.get(block).getDefaultState();
+			if ((first = block == Blocks.TORCH) || block == Blocks.SOUL_TORCH) {
+				outState = (first ? ModBase.UNLIT_TORCH : ModBase.UNLIT_SOUL_TORCH).asBlock().getDefaultState();
 				sound = SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT;
 				if (block instanceof Waterloggable) outState = outState.with(Properties.WATERLOGGED, blockState.get(Properties.WATERLOGGED));
 			}
-			if (ModBase.UNLIT_TO_LIT_WALL_TORCHES.containsKey(block)) {
-				outState = ModBase.UNLIT_TO_LIT_TORCHES.get(block).getDefaultState().with(WallTorchBlock.FACING, blockState.get(WallTorchBlock.FACING));
+			else if ((first = block == Blocks.WALL_TORCH) || block == Blocks.SOUL_WALL_TORCH) {
+				outState = (first ? ModBase.UNLIT_TORCH : ModBase.UNLIT_SOUL_TORCH).getWallBlock().getDefaultState()
+						.with(WallTorchBlock.FACING, blockState.get(WallTorchBlock.FACING));
 				sound = SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT;
 				if (block instanceof Waterloggable) outState = outState.with(Properties.WATERLOGGED, blockState.get(Properties.WATERLOGGED));
 			}
-			else if (ModBase.UNLIT_TO_LIT_LANTERNS.containsKey(block)) {
-				outState = ModBase.UNLIT_TO_LIT_LANTERNS.get(block).getDefaultState().with(LanternBlock.HANGING, blockState.get(LanternBlock.HANGING)).with(LanternBlock.WATERLOGGED, blockState.get(LanternBlock.WATERLOGGED));
+			else if ((first = block == Blocks.LANTERN) || block == Blocks.SOUL_LANTERN) {
+				outState = (first ? ModBase.UNLIT_LANTERN : ModBase.UNLIT_SOUL_LANTERN).getDefaultState()
+						.with(LanternBlock.HANGING, blockState.get(LanternBlock.HANGING)).with(LanternBlock.WATERLOGGED, blockState.get(LanternBlock.WATERLOGGED));
 			}
 			else if (block instanceof AbstractCandleBlock && blockState.get(AbstractCandleBlock.LIT)) {
 				AbstractCandleBlock.extinguish(playerEntity, blockState, world, blockPos);

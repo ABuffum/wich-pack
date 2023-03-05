@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:charred_planks"
+    },
+    "S": {
+      "item": "wich:charred_slab"
+    }
+  },
+  "result": {
+    "item": "wich:charred_barrel"
+  }
+}

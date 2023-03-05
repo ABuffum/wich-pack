@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "I"
+  ],
+  "key": {
+    "#": {
+      "tag": "wich:ender_torches"
+    },
+    "I": {
+      "item": "wich:copper_nugget"
+    }
+  },
+  "result": {
+    "item": "wich:copper_ender_torch",
+    "count": 4
+  }
+}

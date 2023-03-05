@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N",
+    "#",
+    "N"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:copper_ingot"
+    },
+    "N": {
+      "item": "wich:copper_nugget"
+    }
+  },
+  "result": {
+    "item": "wich:copper_chain"
+  }
+}

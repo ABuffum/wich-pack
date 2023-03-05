@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:bleeding_obsidian"
+  },
+  "result": "wich:bleeding_obsidian_wall",
+  "count": 1
+}

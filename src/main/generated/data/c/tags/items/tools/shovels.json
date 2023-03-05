@@ -10,6 +10,14 @@
     "wich:amethyst_shovel",
     "wich:echo_shovel",
     "wich:emerald_shovel",
-    "wich:quartz_shovel"
+    "wich:quartz_shovel",
+    "wich:copper_shovel",
+    "wich:exposed_copper_shovel",
+    "wich:weathered_copper_shovel",
+    "wich:oxidized_copper_shovel",
+    "wich:waxed_copper_shovel",
+    "wich:waxed_exposed_copper_shovel",
+    "wich:waxed_weathered_copper_shovel",
+    "wich:waxed_oxidized_copper_shovel"
   ]
 }

@@ -8,8 +8,6 @@ import fun.mousewich.entity.ModDataHandlers;
 import fun.mousewich.entity.ModEntityPose;
 import fun.mousewich.entity.ai.ModMemoryModules;
 import fun.mousewich.entity.ai.ModMobNavigation;
-import fun.mousewich.entity.allay.AllayEntity;
-import fun.mousewich.entity.frog.FrogVariant;
 import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -47,8 +45,6 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.OptionalInt;
 
 public class CamelEntity extends HorseBaseEntity implements JumpingMount, Saddleable {
 	public static final Ingredient BREEDING_INGREDIENT = Ingredient.ofItems(Items.CACTUS);
@@ -125,6 +121,7 @@ public class CamelEntity extends HorseBaseEntity implements JumpingMount, Saddle
 	}
 
 	protected Brain.Profile<CamelEntity> createBrainProfile() { return CamelBrain.createProfile(); }
+	@SuppressWarnings("unchecked")
 	public Brain<CamelEntity> getBrain() { return (Brain<CamelEntity>)super.getBrain(); }
 
 	@Override
@@ -226,7 +223,7 @@ public class CamelEntity extends HorseBaseEntity implements JumpingMount, Saddle
 		if (!this.isSaddled() || this.dashCooldown > 0 || !this.isOnGround()) return;
 		super.setJumpStrength(strength);
 	}
-	public void jump(float strength, float sidewaysSpeed, float forwardSpeed) {
+	public void jump(float strength) {
 		double d = this.getAttributeValue(EntityAttributes.HORSE_JUMP_STRENGTH) * (double)this.getJumpVelocityMultiplier() + this.getJumpBoostVelocityModifier();
 		Vec3d add = this.getRotationVector().multiply(1.0, 0.0, 1.0).normalize().multiply((double)(22.2222f * strength) * this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * (double)this.getVelocityMultiplier()).add(0.0, (double)(1.4285f * strength) * d, 0.0);
 		this.addVelocity(add.x, add.y, add.z);

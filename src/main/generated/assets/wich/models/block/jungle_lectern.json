@@ -1,0 +1,10 @@
+{
+  "parent": "wich:block/_template_lectern",
+  "textures": {
+    "bottom": "minecraft:block/jungle_planks",
+    "base": "wich:block/jungle_lectern_base",
+    "front": "wich:block/jungle_lectern_front",
+    "sides": "wich:block/jungle_lectern_sides",
+    "top": "wich:block/jungle_lectern_top"
+  }
+}

@@ -1,13 +1,13 @@
 package fun.mousewich.mixins.block;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.origins.powers.PowersUtil;
+import fun.mousewich.origins.powers.TakeHoneyPower;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,14 +19,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -37,7 +35,7 @@ public abstract class BeehiveBlockMixin extends BlockWithEntity {
 
 	@ModifyVariable(method = "angerNearbyBees", at = @At("STORE"), index = 4)
 	public List<PlayerEntity> angerNearbyBees$MobOrigins(List<PlayerEntity> list) {
-		list.removeIf(ModBase.TAKE_HONEY_POWER::isActive);
+		list.removeIf(entity -> PowersUtil.Active(entity, TakeHoneyPower.class));
 		return list;
 	}
 

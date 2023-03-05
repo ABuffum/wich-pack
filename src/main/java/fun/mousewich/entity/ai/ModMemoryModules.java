@@ -5,6 +5,8 @@ import fun.mousewich.mixins.entity.ai.MemoryModuleTypeInvoker;
 import fun.mousewich.mixins.entity.ai.MemoryModuleTypeCodecInvoker;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.passive.FishEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.util.Unit;
 import net.minecraft.util.dynamic.DynamicSerializableUuid;
 import net.minecraft.util.dynamic.GlobalPos;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ModMemoryModules {
+	public static final MemoryModuleType<FishEntity> FISH_BREED_TARGET = MemoryModuleTypeInvoker.RegisterID("fish_breed_target");
 	public static final MemoryModuleType<Integer> GAZE_COOLDOWN_TICKS = MemoryModuleTypeCodecInvoker.Register("gaze_cooldown_ticks", Codec.INT);
 	public static final MemoryModuleType<UUID> LIKED_PLAYER = MemoryModuleTypeCodecInvoker.Register("liked_player", DynamicSerializableUuid.CODEC);
 	public static final MemoryModuleType<GlobalPos> LIKED_NOTEBLOCK = MemoryModuleTypeCodecInvoker.Register("liked_noteblock", GlobalPos.CODEC);
@@ -37,5 +40,9 @@ public class ModMemoryModules {
 	public static final MemoryModuleType<Unit> SONIC_BOOM_COOLDOWN = MemoryModuleTypeCodecInvoker.Register("sonic_boom_cooldown", Codec.unit(Unit.INSTANCE));
 	public static final MemoryModuleType<Unit> SONIC_BOOM_SOUND_COOLDOWN = MemoryModuleTypeCodecInvoker.Register("sonic_boom_sound_cooldown", Codec.unit(Unit.INSTANCE));
 	public static final MemoryModuleType<Unit> SONIC_BOOM_SOUND_DELAY = MemoryModuleTypeCodecInvoker.Register("sonic_boom_sound_delay", Codec.unit(Unit.INSTANCE));
+	public static final MemoryModuleType<List<BlockPos>> SNIFFER_EXPLORED_POSITIONS = MemoryModuleTypeCodecInvoker.Register("sniffer_explored_positions", Codec.list(BlockPos.CODEC));
+	public static final MemoryModuleType<BlockPos> SNIFFER_SNIFFING_TARGET = MemoryModuleTypeInvoker.RegisterID("sniffer_sniffing_target");
+	public static final MemoryModuleType<Boolean> SNIFFER_DIGGING = MemoryModuleTypeInvoker.RegisterID("sniffer_digging");
+	public static final MemoryModuleType<Boolean> SNIFFER_HAPPY = MemoryModuleTypeInvoker.RegisterID("sniffer_happy");
 	public static void Initialize() { }
 }

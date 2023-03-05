@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SSS",
+    "###",
     " B ",
-    " S "
+    " # "
   ],
   "key": {
-    "S": {
-      "tag": "minecraft:wooden_slabs"
+    "#": {
+      "item": "minecraft:oak_slab"
     },
     "B": {
       "tag": "wich:bookshelves"

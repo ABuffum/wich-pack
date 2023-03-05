@@ -3,11 +3,13 @@ package fun.mousewich.mixins.entity;
 import fun.mousewich.ModBase;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.gen.data.tag.ModItemTags;
+import fun.mousewich.item.OxidizableItem;
 import fun.mousewich.origins.powers.*;
 import fun.mousewich.sound.IdentifiedSounds;
 import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LadderBlock;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -32,6 +34,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -136,6 +140,12 @@ public abstract class LivingEntityMixin extends Entity {
 	@Shadow
 	public abstract float getArmorVisibility();
 
+	@Shadow public abstract Hand getActiveHand();
+
+	@Shadow public abstract void setStackInHand(Hand hand, ItemStack stack);
+
+	@Shadow public abstract Random getRandom();
+
 	@Inject(method="getAttackDistanceScalingFactor", at = @At("HEAD"), cancellable = true)
 	public void GetAttackDistanceScalingFactor(Entity entity, CallbackInfoReturnable<Double> cir) {
 		if (entity != null) {
@@ -147,6 +157,33 @@ public abstract class LivingEntityMixin extends Entity {
 				EntityType<?> entityType = entity.getType();
 				if (entityType == EntityType.PIGLIN || entityType == EntityType.PIGLIN_BRUTE) cir.setReturnValue(d * 0.5);
 			}
+		}
+	}
+
+	@Inject(method="tickActiveItemStack", at=@At("TAIL"))
+	public void UpdateOxidizableItems(CallbackInfo ci) {
+		Hand hand = this.getActiveHand();
+		ItemStack stack = this.getStackInHand(hand);
+		if (stack.getItem() instanceof OxidizableItem oxidizable) {
+			Oxidizable.OxidationLevel level = oxidizable.getDegradationLevel();
+			ItemStack degraded = ItemStack.EMPTY;
+			if (stack.isDamageable()) {
+				float damage = 1 - (stack.getDamage() / (float)stack.getMaxDamage());
+				if (level == Oxidizable.OxidationLevel.UNAFFECTED) {
+					if (damage <= 0.75f) degraded = oxidizable.degrade(stack);
+				}
+				else if (level == Oxidizable.OxidationLevel.EXPOSED) {
+					if (damage <= 0.5f) degraded = oxidizable.degrade(stack);
+				}
+				else if (level == Oxidizable.OxidationLevel.WEATHERED) {
+					if (damage <= 0.25f) degraded = oxidizable.degrade(stack);
+				}
+			}
+			else {
+				float multiplier = level == Oxidizable.OxidationLevel.UNAFFECTED ? 0.75F : 1F;
+				if (random.nextFloat() < multiplier) degraded = oxidizable.degrade(stack);
+			}
+			if (!degraded.isEmpty()) this.setStackInHand(hand, degraded);
 		}
 	}
 }

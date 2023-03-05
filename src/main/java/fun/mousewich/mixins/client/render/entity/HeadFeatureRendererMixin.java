@@ -1,6 +1,8 @@
 package fun.mousewich.mixins.client.render.entity;
 
 import fun.mousewich.block.piglin.*;
+import fun.mousewich.client.render.block.model.PiglinHeadEntityModel;
+import fun.mousewich.client.render.block.renderer.PiglinHeadEntityRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;

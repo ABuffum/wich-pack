@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:bleeding_obsidian"
+    }
+  },
+  "result": {
+    "item": "wich:bleeding_obsidian_stairs",
+    "count": 4
+  }
+}

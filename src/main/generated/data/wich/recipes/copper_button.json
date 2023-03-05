@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:copper_nugget"
+    }
+  ],
+  "result": {
+    "item": "wich:copper_button"
+  }
+}

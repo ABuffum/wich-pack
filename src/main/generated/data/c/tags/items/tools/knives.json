@@ -9,6 +9,14 @@
     "wich:amethyst_knife",
     "wich:echo_knife",
     "wich:emerald_knife",
-    "wich:quartz_knife"
+    "wich:quartz_knife",
+    "wich:copper_knife",
+    "wich:exposed_copper_knife",
+    "wich:weathered_copper_knife",
+    "wich:oxidized_copper_knife",
+    "wich:waxed_copper_knife",
+    "wich:waxed_exposed_copper_knife",
+    "wich:waxed_weathered_copper_knife",
+    "wich:waxed_oxidized_copper_knife"
   ]
 }

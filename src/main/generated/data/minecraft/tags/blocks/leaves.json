@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:mangrove_leaves"
+    "minecraft:mangrove_leaves",
+    "minecraft:cherry_leaves"
   ]
 }

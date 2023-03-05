@@ -1,6 +1,25 @@
 {
   "replace": false,
   "values": [
-    "minecraft:potted_mangrove_propagule"
+    "minecraft:potted_mangrove_propagule",
+    "minecraft:potted_cherry_sapling",
+    "wich:potted_buttercup",
+    "wich:potted_pink_daisy",
+    "wich:potted_rose",
+    "wich:potted_blue_rose",
+    "wich:potted_magenta_tulip",
+    "wich:potted_marigold",
+    "wich:potted_indigo_orchid",
+    "wich:potted_magenta_orchid",
+    "wich:potted_orange_orchid",
+    "wich:potted_purple_orchid",
+    "wich:potted_red_orchid",
+    "wich:potted_white_orchid",
+    "wich:potted_yellow_orchid",
+    "wich:potted_pink_allium",
+    "wich:potted_lavender",
+    "wich:potted_hydrangea",
+    "wich:potted_paeonia",
+    "wich:potted_aster"
   ]
 }

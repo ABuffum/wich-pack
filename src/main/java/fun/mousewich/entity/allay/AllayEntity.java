@@ -59,19 +59,18 @@ import net.minecraft.world.event.listener.GameEventListener;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class AllayEntity extends PathAwareEntity implements InventoryOwner {
 	private static final Logger LOGGER = LogUtils.getLogger();
-	private static final Vec3i ITEM_PICKUP_RANGE_EXPANDER = new Vec3i(1, 1, 1);
 	private static final Ingredient DUPLICATION_INGREDIENT = Ingredient.ofItems(Items.AMETHYST_SHARD);
 	private static final int DUPLICATION_COOLDOWN = 6000;
 	private static final TrackedData<Boolean> DANCING = DataTracker.registerData(AllayEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 	private static final TrackedData<Boolean> CAN_DUPLICATE = DataTracker.registerData(AllayEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 	protected static final ImmutableList<SensorType<? extends Sensor<? super AllayEntity>>> SENSORS = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.HURT_BY, SensorType.NEAREST_ITEMS);
+	@SuppressWarnings("ConstantConditions")
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_MODULES = ImmutableList.of(MemoryModuleType.PATH, MemoryModuleType.LOOK_TARGET, MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.HURT_BY, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, ModMemoryModules.LIKED_PLAYER, ModMemoryModules.LIKED_NOTEBLOCK, ModMemoryModules.LIKED_NOTEBLOCK_COOLDOWN_TICKS, ModMemoryModules.ITEM_PICKUP_COOLDOWN_TICKS, ModMemoryModules.IS_PANICKING);
 	public static final ImmutableList<Float> THROW_SOUND_PITCHES = ImmutableList.of(0.5625f, 0.625f, 0.75f, 0.9375f, 1.0f, 1.0f, 1.125f, 1.25f, 1.5f, 1.875f, 2.0f, 2.25f, 2.5f, 3.0f, 3.75f, 4.0f);
 	private final ModEntityGameEventHandler<ModVibrationListener> gameEventHandler;
@@ -96,16 +95,11 @@ public class AllayEntity extends PathAwareEntity implements InventoryOwner {
 		this.gameEventHandler = new ModEntityGameEventHandler<>(new ModVibrationListener(positionSource, 16, this.listenerCallback));
 		this.jukeboxEventHandler = new ModEntityGameEventHandler<>(new JukeboxEventListener(positionSource, ModGameEvent.JUKEBOX_PLAY.getRange()));
 	}
-
 	protected Brain.Profile<AllayEntity> createBrainProfile() { return Brain.createProfile(MEMORY_MODULES, SENSORS); }
-
 	@Override
-	protected Brain<?> deserializeBrain(Dynamic<?> dynamic) {
-		return AllayBrain.create(this.createBrainProfile().deserialize(dynamic));
-	}
-
+	protected Brain<?> deserializeBrain(Dynamic<?> dynamic) { return AllayBrain.create(this.createBrainProfile().deserialize(dynamic)); }
+	@SuppressWarnings("unchecked")
 	public Brain<AllayEntity> getBrain() { return (Brain<AllayEntity>)super.getBrain(); }
-
 	public static DefaultAttributeContainer.Builder createAllayAttributes() {
 		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0).add(EntityAttributes.GENERIC_FLYING_SPEED, 0.1f).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0);
 	}
@@ -204,9 +198,10 @@ public class AllayEntity extends PathAwareEntity implements InventoryOwner {
 			if (this.isDancing()) {
 				this.field_39472 += 1.0f;
 				this.field_39474 = this.field_39473;
-				this.field_39473 = this.method_44360() ? (this.field_39473 += 1.0f) : (this.field_39473 -= 1.0f);
+				this.field_39473 += this.method_44360() ? 1.0f : -1.0f;
 				this.field_39473 = MathHelper.clamp(this.field_39473, 0.0f, 15.0f);
-			} else {
+			}
+			else {
 				this.field_39472 = 0.0f;
 				this.field_39473 = 0.0f;
 				this.field_39474 = 0.0f;
@@ -340,7 +335,6 @@ public class AllayEntity extends PathAwareEntity implements InventoryOwner {
 		return f < 15.0f;
 	}
 	public float method_44368(float f) { return MathHelper.lerp(f, this.field_39474, this.field_39473) / 15.0f; }
-	public boolean areItemsDifferent(ItemStack stack, ItemStack stack2) { return !this.areItemsEqual(stack, stack2); }
 	@Override
 	protected void dropInventory() {
 		super.dropInventory();
@@ -357,7 +351,7 @@ public class AllayEntity extends PathAwareEntity implements InventoryOwner {
 	public void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
 		nbt.put("Inventory", this.getInventory().toNbtList());
-		ModVibrationListener.createCodec(this.listenerCallback).encodeStart(NbtOps.INSTANCE, this.gameEventHandler.getListener()).resultOrPartial(LOGGER::error).ifPresent(nbtElement -> nbt.put("listener", (NbtElement)nbtElement));
+		ModVibrationListener.createCodec(this.listenerCallback).encodeStart(NbtOps.INSTANCE, this.gameEventHandler.getListener()).resultOrPartial(LOGGER::error).ifPresent(nbtElement -> nbt.put("listener", nbtElement));
 		nbt.putLong("DuplicationCooldown", this.duplicationCooldown);
 		nbt.putBoolean("CanDuplicate", this.canDuplicate());
 	}
@@ -441,7 +435,7 @@ public class AllayEntity extends PathAwareEntity implements InventoryOwner {
 			}
 		}
 		@Override
-		public ModVibrationListener getEventListener() { return null; }
+		public ModVibrationListener getModEventListener() { return null; }
 		@Override
 		public TagKey<GameEvent> getTag() { return ModEventTags.ALLAY_CAN_LISTEN; }
 	}

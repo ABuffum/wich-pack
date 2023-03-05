@@ -1,8 +1,14 @@
 {
   "powers": [
+    "origins:tailwind",
+    "ryft:slow_falling",
+    "wich:darkness_immunity",
+    "ryft:sun_regen",
+    "ryft:sunlight_fists",
+    "ryft:skin_glow_4",
     "ryft:dj_identified_sounds"
   ],
-  "name": "Sun God",
+  "name": "Sun Goddess",
   "description": "Light it up!",
   "icon": "minecraft:glowstone"
 }

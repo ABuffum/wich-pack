@@ -19,14 +19,10 @@ import org.jetbrains.annotations.Nullable;
 public class ModThrownItemPickedUpByEntityCriterion extends AbstractCriterion<ModThrownItemPickedUpByEntityCriterion.Conditions> {
 	private final Identifier id;
 
-	public ModThrownItemPickedUpByEntityCriterion(Identifier id) {
-		this.id = id;
-	}
+	public ModThrownItemPickedUpByEntityCriterion(Identifier id) { this.id = id; }
 
 	@Override
-	public Identifier getId() {
-		return this.id;
-	}
+	public Identifier getId() { return this.id; }
 
 	@Override
 	protected ModThrownItemPickedUpByEntityCriterion.Conditions conditionsFromJson(JsonObject jsonObject, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
@@ -40,8 +36,7 @@ public class ModThrownItemPickedUpByEntityCriterion extends AbstractCriterion<Mo
 		this.trigger(player, conditions -> conditions.test(player, stack, lootContext));
 	}
 
-	public static class Conditions
-			extends AbstractCriterionConditions {
+	public static class Conditions extends AbstractCriterionConditions {
 		private final ItemPredicate item;
 		private final EntityPredicate.Extended entity;
 
@@ -60,9 +55,7 @@ public class ModThrownItemPickedUpByEntityCriterion extends AbstractCriterion<Mo
 		}
 
 		public boolean test(ServerPlayerEntity player, ItemStack stack, LootContext entityContext) {
-			if (!this.item.test(stack)) {
-				return false;
-			}
+			if (!this.item.test(stack)) return false;
 			return this.entity.test(entityContext);
 		}
 

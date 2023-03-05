@@ -5,10 +5,8 @@ import fun.mousewich.advancement.criterion.ModThrownItemPickedUpByEntityCriterio
 import fun.mousewich.advancement.criterion.ModTickCriterion;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.advancement.criterion.OnKilledCriterion;
-import net.minecraft.advancement.criterion.ThrownItemPickedUpByEntityCriterion;
 import net.minecraft.predicate.entity.DamageSourcePredicate;
 import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.util.Identifier;
 
 public class ModCriteria {

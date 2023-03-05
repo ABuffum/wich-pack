@@ -31,7 +31,7 @@ public class ModBoatEntityRenderer extends EntityRenderer<ModBoatEntity> {
 		super(context);
 		this.shadowRadius = 0.8F;
 		this.model = new BoatEntityModel(context.getPart(ModClient.BOAT_ENTITY_MODEL_LAYER));
-		this.raft = new RaftEntityModel(context.getPart(ModClient.RAFT_ENTITY_MODEL_LAYER));
+		this.raft = new RaftEntityModel(context.getPart(ModClient.RAFT_MODEL_LAYER));
 	}
 
 	public void render(ModBoatEntity boatEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {

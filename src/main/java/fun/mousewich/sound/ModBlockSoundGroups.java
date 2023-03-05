@@ -1,6 +1,7 @@
 package fun.mousewich.sound;
 
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundEvents;
 
 public class ModBlockSoundGroups {
 	//<editor-fold desc="Echo">
@@ -27,8 +28,17 @@ public class ModBlockSoundGroups {
 	public static final BlockSoundGroup SCULK_VEIN = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.BLOCK_SCULK_VEIN_BREAK, ModSoundEvents.BLOCK_SCULK_VEIN_STEP, ModSoundEvents.BLOCK_SCULK_VEIN_PLACE, ModSoundEvents.BLOCK_SCULK_VEIN_HIT, ModSoundEvents.BLOCK_SCULK_VEIN_FALL);
 	public static final BlockSoundGroup SCULK_SHRIEKER = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.BLOCK_SCULK_SHRIEKER_BREAK, ModSoundEvents.BLOCK_SCULK_SHRIEKER_STEP, ModSoundEvents.BLOCK_SCULK_SHRIEKER_PLACE, ModSoundEvents.BLOCK_SCULK_SHRIEKER_HIT, ModSoundEvents.BLOCK_SCULK_SHRIEKER_FALL);
 	//</editor-fold>
+	//<editor-fold desc="Cherry">
+	public static final BlockSoundGroup CHERRY_WOOD = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.BLOCK_CHERRY_WOOD_BREAK, ModSoundEvents.BLOCK_CHERRY_WOOD_STEP, ModSoundEvents.BLOCK_CHERRY_WOOD_PLACE, ModSoundEvents.BLOCK_CHERRY_WOOD_HIT, ModSoundEvents.BLOCK_CHERRY_WOOD_FALL);
+	public static final BlockSoundGroup CHERRY_SAPLING = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.BLOCK_CHERRY_SAPLING_BREAK, ModSoundEvents.BLOCK_CHERRY_SAPLING_STEP, ModSoundEvents.BLOCK_CHERRY_SAPLING_PLACE, ModSoundEvents.BLOCK_CHERRY_SAPLING_HIT, ModSoundEvents.BLOCK_CHERRY_SAPLING_FALL);
+	public static final BlockSoundGroup CHERRY_LEAVES = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.BLOCK_CHERRY_LEAVES_BREAK, ModSoundEvents.BLOCK_CHERRY_LEAVES_STEP, ModSoundEvents.BLOCK_CHERRY_LEAVES_PLACE, ModSoundEvents.BLOCK_CHERRY_LEAVES_HIT, ModSoundEvents.BLOCK_CHERRY_LEAVES_FALL);
+	public static final BlockSoundGroup CHERRY_WOOD_HANGING_SIGN = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.BLOCK_CHERRY_WOOD_HANGING_SIGN_BREAK, ModSoundEvents.BLOCK_CHERRY_WOOD_HANGING_SIGN_STEP, ModSoundEvents.BLOCK_CHERRY_WOOD_HANGING_SIGN_PLACE, ModSoundEvents.BLOCK_CHERRY_WOOD_HANGING_SIGN_HIT, ModSoundEvents.BLOCK_CHERRY_WOOD_HANGING_SIGN_FALL);
+	public static final BlockSoundGroup PINK_PETALS = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.BLOCK_PINK_PETALS_BREAK, ModSoundEvents.BLOCK_PINK_PETALS_STEP, ModSoundEvents.BLOCK_PINK_PETALS_PLACE, ModSoundEvents.BLOCK_PINK_PETALS_HIT, ModSoundEvents.BLOCK_PINK_PETALS_FALL);
+	//</editor-fold>+
 	public static final BlockSoundGroup HANGING_SIGN = new BlockSoundGroup(1.0F, 1.0F, ModSoundEvents.BLOCK_HANGING_SIGN_BREAK, ModSoundEvents.BLOCK_HANGING_SIGN_STEP, ModSoundEvents.BLOCK_HANGING_SIGN_PLACE, ModSoundEvents.BLOCK_HANGING_SIGN_HIT, ModSoundEvents.BLOCK_HANGING_SIGN_FALL);
 	public static final BlockSoundGroup BAMBOO_WOOD = new BlockSoundGroup(1.0F, 1.0F, ModSoundEvents.BLOCK_BAMBOO_WOOD_BREAK, ModSoundEvents.BLOCK_BAMBOO_WOOD_STEP, ModSoundEvents.BLOCK_BAMBOO_WOOD_PLACE, ModSoundEvents.BLOCK_BAMBOO_WOOD_HIT, ModSoundEvents.BLOCK_BAMBOO_WOOD_FALL);
 	public static final BlockSoundGroup NETHER_WOOD = new BlockSoundGroup(1.0F, 1.0F, ModSoundEvents.BLOCK_NETHER_WOOD_BREAK, ModSoundEvents.BLOCK_NETHER_WOOD_STEP, ModSoundEvents.BLOCK_NETHER_WOOD_PLACE, ModSoundEvents.BLOCK_NETHER_WOOD_HIT, ModSoundEvents.BLOCK_NETHER_WOOD_FALL);
+	public static final BlockSoundGroup SUSPICIOUS_SAND = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.BLOCK_SUSPICIOUS_SAND_BREAK, ModSoundEvents.BLOCK_SUSPICIOUS_SAND_STEP, ModSoundEvents.BLOCK_SUSPICIOUS_SAND_PLACE, ModSoundEvents.BLOCK_SUSPICIOUS_SAND_HIT, ModSoundEvents.BLOCK_SUSPICIOUS_SAND_FALL);
+	public static final BlockSoundGroup DECORATED_POT = new BlockSoundGroup(1.0f, 1.0f, ModSoundEvents.INTENTIONALLY_EMPTY, ModSoundEvents.BLOCK_DECORATED_POT_STEP, ModSoundEvents.BLOCK_DECORATED_POT_PLACE, ModSoundEvents.BLOCK_DECORATED_POT_HIT, ModSoundEvents.BLOCK_DECORATED_POT_FALL);
 
 }

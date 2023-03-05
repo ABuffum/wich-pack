@@ -16,6 +16,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Final;
@@ -49,9 +50,7 @@ public class LeavesBlockMixin extends Block implements Waterloggable {
 	private static BlockState UpdateDistanceFromLogs(BlockState state, WorldAccess world, BlockPos pos) {
 		int i = 7;
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		Direction[] var5 = Direction.values();
-
-		for (Direction direction : var5) {
+		for (Direction direction : Direction.values()) {
 			mutable.set(pos, direction);
 			i = Math.min(i, GetDistanceFromLog(world.getBlockState(mutable)) + 1);
 			if (i == 1) break;

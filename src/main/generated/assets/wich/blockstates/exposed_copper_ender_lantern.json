@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "hanging=false,lit=false": {
+      "model": "wich:block/unlit_exposed_copper_lantern"
+    },
+    "hanging=false,lit=true": {
+      "model": "wich:block/exposed_copper_ender_lantern"
+    },
+    "hanging=true,lit=false": {
+      "model": "wich:block/unlit_exposed_copper_lantern_hanging"
+    },
+    "hanging=true,lit=true": {
+      "model": "wich:block/exposed_copper_ender_lantern_hanging"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "wich:block/bleeding_obsidian",
+    "top": "wich:block/bleeding_obsidian",
+    "side": "wich:block/bleeding_obsidian"
+  }
+}

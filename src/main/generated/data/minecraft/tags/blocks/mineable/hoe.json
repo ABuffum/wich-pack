@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "minecraft:mangrove_leaves",
+    "minecraft:cherry_leaves",
+    "minecraft:pink_petals",
     "minecraft:sculk",
     "minecraft:sculk_shrieker",
     "minecraft:sculk_vein",

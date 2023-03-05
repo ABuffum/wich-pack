@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import fun.mousewich.ModBase;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.biome.source.util.VanillaBiomeParameters;
 import org.spongepowered.asm.mixin.Final;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Consumer;
 
@@ -58,5 +60,19 @@ public abstract class VanillaBiomeParametersMixin {
 	@Inject(method="writeRiverBiomes", at = @At("HEAD"))
 	private void WriteRiverBiomes(Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> parameters, MultiNoiseUtil.ParameterRange weirdness, CallbackInfo ci) {
 		writeBiomeParameters(parameters, MultiNoiseUtil.ParameterRange.combine(this.temperatureParameters[3], this.temperatureParameters[4]), this.defaultParameter, MultiNoiseUtil.ParameterRange.combine(this.riverContinentalness, this.farInlandContinentalness), this.erosionParameters[6], weirdness, 0.0f, ModBase.MANGROVE_SWAMP);
+	}
+
+	private static final RegistryKey<Biome>[][] SpecialNearMountainBiomes = new RegistryKey[][]{
+			{ BiomeKeys.ICE_SPIKES, null, null, null, null },
+			{ ModBase.CHERRY_GROVE, null, BiomeKeys.MEADOW, BiomeKeys.MEADOW, BiomeKeys.OLD_GROWTH_PINE_TAIGA },
+			{ ModBase.CHERRY_GROVE, ModBase.CHERRY_GROVE, BiomeKeys.FOREST, BiomeKeys.BIRCH_FOREST, null },
+			{ null, null, null, null, null },
+			{ BiomeKeys.ERODED_BADLANDS, BiomeKeys.ERODED_BADLANDS, null, null, null }
+	};
+
+	@Inject(method="getNearMountainBiome", at=@At("HEAD"), cancellable = true)
+	private void getNearMountainBiome(int temperature, int humidity, MultiNoiseUtil.ParameterRange weirdness, CallbackInfoReturnable<RegistryKey<Biome>> cir) {
+		RegistryKey<Biome> registryKey = SpecialNearMountainBiomes[temperature][humidity];
+		if (registryKey == ModBase.CHERRY_GROVE) cir.setReturnValue(registryKey);
 	}
 }

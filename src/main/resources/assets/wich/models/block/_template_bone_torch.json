@@ -1,4 +1,8 @@
 {
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "#torch"
+	},
 	"elements": [
 		{
 			"from": [6, 6, 7],

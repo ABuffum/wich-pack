@@ -13,6 +13,7 @@ import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -23,6 +24,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
 @Mixin(BoneMealItem.class)
 public class BoneMealItemMixin {
@@ -58,6 +61,7 @@ public class BoneMealItemMixin {
 					Block b = world.getBlockState(blockPos).getBlock();
 					if (b instanceof SculkTurfBlock || b instanceof SculkBlock) {
 						world.setBlockState(pos, turf.getDefaultState(), Block.NOTIFY_ALL);
+						cir.setReturnValue(ActionResult.SUCCESS);
 						break;
 					}
 				}

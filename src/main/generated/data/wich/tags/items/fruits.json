@@ -11,6 +11,7 @@
     "minecraft:chorus_fruit",
     "minecraft:popped_chorus_fruit",
     "farmersdelight:tomato",
+    "farmersdelight:tomato_sauce",
     "farmersdelight:pumpkin_slice",
     "farmersdelight:apple_pie",
     "farmersdelight:apple_pie_slice",
@@ -43,6 +44,10 @@
     },
     {
       "id": "betterend:blossom_berry",
+      "required": false
+    },
+    {
+      "id": "croptopia:chile_pepper",
       "required": false
     },
     {

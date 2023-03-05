@@ -2,6 +2,7 @@ package fun.mousewich.block.sculk;
 
 import com.mojang.serialization.Dynamic;
 import fun.mousewich.ModBase;
+import fun.mousewich.ModGameRules;
 import fun.mousewich.entity.warden.WardenEntity;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.event.ModVibrationListener;
@@ -55,7 +56,7 @@ public class SculkShriekerBlockEntity extends BlockEntity implements ModVibratio
 	}
 
 	public ModVibrationListener getVibrationListener() { return this.vibrationListener; }
-	public ModVibrationListener getEventListener() { return this.vibrationListener; }
+	public ModVibrationListener getModEventListener() { return this.vibrationListener; }
 
 	@Override
 	public void readNbt(NbtCompound nbt) {
@@ -119,7 +120,7 @@ public class SculkShriekerBlockEntity extends BlockEntity implements ModVibratio
 	}
 
 	private boolean canWarn(ServerWorld world) {
-		return this.getCachedState().get(SculkShriekerBlock.CAN_SUMMON) && world.getDifficulty() != Difficulty.PEACEFUL && world.getGameRules().getBoolean(ModBase.DO_WARDEN_SPAWNING);
+		return this.getCachedState().get(SculkShriekerBlock.CAN_SUMMON) && world.getDifficulty() != Difficulty.PEACEFUL && world.getGameRules().getBoolean(ModGameRules.DO_WARDEN_SPAWNING);
 	}
 
 	public void warn(ServerWorld world) {

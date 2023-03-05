@@ -1,6 +1,7 @@
 package fun.mousewich.gen.data;
 
 import fun.mousewich.gen.data.advancement.AdvancementsGenerator;
+import fun.mousewich.gen.data.language.EnglishLanguageProvider;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import fun.mousewich.gen.data.model.ModelGenerator;
 import fun.mousewich.gen.data.recipe.RecipeGenerator;
@@ -20,5 +21,7 @@ public class ModDatagen implements DataGeneratorEntrypoint {
 		fabricDataGenerator.addProvider(ItemTagGenerator::new);
 		fabricDataGenerator.addProvider(RecipeGenerator::new);
 		fabricDataGenerator.addProvider(AdvancementsGenerator::new);
+		//Language
+		fabricDataGenerator.addProvider(EnglishLanguageProvider::new);
 	}
 }

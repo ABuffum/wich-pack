@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 public class HorizontalFacingSlabBlock extends ModSlabBlock {
+	public HorizontalFacingSlabBlock(BlockConvertible block) { this(block.asBlock()); }
 	public HorizontalFacingSlabBlock(Block block) { this(Settings.copy(block)); }
 	public HorizontalFacingSlabBlock(Settings settings) {
 		super(settings);

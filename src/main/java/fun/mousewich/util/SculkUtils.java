@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMaps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SculkSensorBlock;
 import net.minecraft.block.enums.SculkSensorPhase;
 import net.minecraft.entity.Entity;
@@ -37,9 +38,11 @@ public class SculkUtils {
 		map.put(ModGameEvent.ENTITY_SHAKE, 6);
 		map.put(GameEvent.BLOCK_CHANGE, 6);
 		map.put(ModGameEvent.NOTE_BLOCK_PLAY, 6);
+		map.put(ModGameEvent.ENTITY_DISMOUNT, 6);
 		map.put(GameEvent.PROJECTILE_SHOOT, 7);
 		map.put(ModGameEvent.DRINK, 7);
 		map.put(GameEvent.PRIME_FUSE, 7);
+		map.put(ModGameEvent.ENTITY_MOUNT, 7);
 		map.put(GameEvent.PROJECTILE_LAND, 8);
 		map.put(GameEvent.EAT, 8);
 		map.put(ModGameEvent.ENTITY_INTERACT, 8);
@@ -92,8 +95,8 @@ public class SculkUtils {
 	public static boolean isInactive(BlockState state) { return getPhase(state) == SculkSensorPhase.INACTIVE; }
 
 	public static void updateNeighbors(World world, BlockPos pos) {
-		world.updateNeighborsAlways(pos, ModBase.SCULK_SENSOR.asBlock());
-		world.updateNeighborsAlways(pos.offset(Direction.UP.getOpposite()), ModBase.SCULK_SENSOR.asBlock());
+		world.updateNeighborsAlways(pos, Blocks.SCULK_SENSOR);
+		world.updateNeighborsAlways(pos.offset(Direction.UP.getOpposite()), Blocks.SCULK_SENSOR);
 	}
 
 	public static void setActive(@Nullable Entity entity, World world, BlockPos pos, BlockState state, int power) {

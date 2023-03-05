@@ -11,7 +11,9 @@ public class ModGameEvent {
 	public static final GameEvent ELYTRA_GLIDE = RegisterGameEvent("minecraft:elytra_glide");
 	public static final GameEvent ENTITY_DAMAGE = RegisterGameEvent("minecraft:entity_damage");
 	public static final GameEvent ENTITY_DIE = RegisterGameEvent("minecraft:entity_die");
+	public static final GameEvent ENTITY_DISMOUNT = RegisterGameEvent("entity_dismount");
 	public static final GameEvent ENTITY_INTERACT = RegisterGameEvent("minecraft:entity_interact");
+	public static final GameEvent ENTITY_MOUNT = RegisterGameEvent("entity_mount");
 	public static final GameEvent ENTITY_ROAR = RegisterGameEvent("minecraft:entity_roar");
 	public static final GameEvent ENTITY_SHAKE = RegisterGameEvent("minecraft:entity_shake");
 	public static final GameEvent INSTRUMENT_PLAY = RegisterGameEvent("minecraft:instrument_play");

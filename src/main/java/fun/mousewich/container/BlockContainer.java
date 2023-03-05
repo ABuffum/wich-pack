@@ -1,6 +1,6 @@
 package fun.mousewich.container;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModFactory;
 import fun.mousewich.gen.data.loot.DropTable;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -11,7 +11,6 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 
 public class BlockContainer implements IBlockItemContainer {
 	protected final Block block;
@@ -19,12 +18,8 @@ public class BlockContainer implements IBlockItemContainer {
 	protected final Item item;
 	public Item asItem() { return item; }
 
-	public BlockContainer(Block block) { this(block, ModBase.ItemSettings()); }
-	public BlockContainer(Block block, ItemGroup itemGroup) { this(block, ModBase.ItemSettings(itemGroup)); }
-	public BlockContainer(Block block, Item.Settings settings) {
-		this.block = block;
-		this.item = new BlockItem(block, settings);
-	}
+	public BlockContainer(Block block) { this(block, ModFactory.ItemSettings()); }
+	public BlockContainer(Block block, Item.Settings settings) { this(block, new BlockItem(block,settings)); }
 	public BlockContainer(Block block, Item item) {
 		this.block = block;
 		this.item = item;

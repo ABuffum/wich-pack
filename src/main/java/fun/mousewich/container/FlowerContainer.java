@@ -1,12 +1,11 @@
 package fun.mousewich.container;
 
-import fun.mousewich.ModBase;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import fun.mousewich.ModFactory;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.Material;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.item.Item;
 import net.minecraft.sound.BlockSoundGroup;
 
 public class FlowerContainer extends PottedBlockContainer {
@@ -17,19 +16,13 @@ public class FlowerContainer extends PottedBlockContainer {
 		return AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS);
 	}
 
-	public FlowerContainer(StatusEffect effect, int effectDuration) { this(effect, effectDuration, Settings()); }
-	public FlowerContainer(StatusEffect effect, int effectDuration, AbstractBlock.Settings settings) {
-		this(new FlowerBlock(effect, effectDuration, settings));
+	public FlowerContainer(StatusEffect effect, int effectDuration, Item.Settings itemSettings) { this(effect, effectDuration, Settings(), itemSettings); }
+	public FlowerContainer(StatusEffect effect, int effectDuration, AbstractBlock.Settings settings, Item.Settings itemSettings) {
+		this(new FlowerBlock(effect, effectDuration, settings), itemSettings);
 	}
-	public FlowerContainer(FlowerBlock block) {
-		super(block, ModBase.ItemSettings());
-	}
-	public FlowerContainer flammable(int burn, int spread) {
-		FlammableBlockRegistry.getDefaultInstance().add(this.asBlock(), burn, spread);
-		return this;
-	}
-	public FlowerContainer compostable(float chance) {
-		CompostingChanceRegistry.INSTANCE.add(this.asItem(), chance);
-		return this;
-	}
+	public FlowerContainer(FlowerBlock block) { this(block, ModFactory.ItemSettings()); }
+	public FlowerContainer(FlowerBlock block, Item.Settings settings) { super(block, settings); }
+	public FlowerContainer flammable(int burn, int spread) { return (FlowerContainer)super.flammable(burn, spread); }
+	public FlowerContainer compostable(float chance) { return (FlowerContainer)super.compostable(chance); }
+	public FlowerContainer dropSelf() { return (FlowerContainer)super.dropSelf(); }
 }

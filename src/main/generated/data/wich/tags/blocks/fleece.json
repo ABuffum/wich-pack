@@ -1,22 +1,22 @@
 {
   "replace": false,
   "values": [
-    "wich:gray_fleece",
-    "wich:brown_fleece",
-    "wich:blue_fleece",
+    "wich:green_fleece",
+    "wich:purple_fleece",
     "wich:black_fleece",
+    "wich:light_blue_fleece",
+    "wich:orange_fleece",
     "wich:light_gray_fleece",
     "wich:white_fleece",
     "wich:yellow_fleece",
+    "wich:gray_fleece",
+    "wich:brown_fleece",
     "wich:magenta_fleece",
-    "wich:green_fleece",
+    "wich:blue_fleece",
     "wich:lime_fleece",
     "wich:pink_fleece",
-    "wich:light_blue_fleece",
-    "wich:red_fleece",
-    "wich:purple_fleece",
-    "wich:orange_fleece",
     "wich:cyan_fleece",
+    "wich:red_fleece",
     "wich:rainbow_fleece"
   ]
 }

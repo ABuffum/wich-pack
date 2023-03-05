@@ -2,13 +2,11 @@ package fun.mousewich.event;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fun.mousewich.ModBase;
 import fun.mousewich.advancement.ModCriteria;
 import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.origins.powers.PowersUtil;
 import fun.mousewich.origins.powers.SoftStepsPower;
 import fun.mousewich.util.SculkUtils;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -126,7 +124,7 @@ public class ModVibrationListener implements GameEventListener {
 		boolean accepts(ServerWorld var1, GameEventListener var2, BlockPos var3, GameEvent var4, Entity entity, BlockPos pos);
 		void accept(ServerWorld var1, GameEventListener var2, BlockPos var3, GameEvent var4, @Nullable Entity var5, @Nullable Entity var6, float var7);
 		default void onListen() { }
-		ModVibrationListener getEventListener();
+		ModVibrationListener getModEventListener();
 	}
 	public static final Codec<Vec3d> VEC3D_CODEC = Codec.DOUBLE.listOf().comapFlatMap(list2 -> Util.toArray(list2, 3).map(list -> new Vec3d(list.get(0), list.get(1), list.get(2))), vec3d -> List.of(vec3d.getX(), vec3d.getY(), vec3d.getZ()));
 	public record Vibration(GameEvent gameEvent, float distance, Vec3d pos, @Nullable UUID uuid, @Nullable UUID projectileOwnerUuid, @Nullable Entity entity) {

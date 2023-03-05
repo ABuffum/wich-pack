@@ -132,6 +132,7 @@ public class ModSoundEvents {
 	//<editor-fold desc="Music">
 	public static final SoundEvent MUSIC_OVERWORLD_SWAMP = registerSoundEvent("music.overworld.swamp");
 	public static final SoundEvent MUSIC_OVERWORLD_DEEP_DARK = registerSoundEvent("music.overworld.deep_dark");
+	public static final SoundEvent MUSIC_OVERWORLD_CHERRY_GROVE = registerSoundEvent("music.overworld.cherry_grove");
 	public static final SoundEvent MUSIC_DISC_5 = registerSoundEvent("music_disc.5");
 	//</editor-fold>
 	//<editor-fold desc="Goat Horns">
@@ -154,6 +155,45 @@ public class ModSoundEvents {
 	public static final SoundEvent BLOCK_HANGING_SIGN_FALL = registerSoundEvent("block.hanging_sign.fall");
 	public static final SoundEvent BLOCK_HANGING_SIGN_HIT = registerSoundEvent("block.hanging_sign.hit");
 	public static final SoundEvent BLOCK_HANGING_SIGN_PLACE = registerSoundEvent("block.hanging_sign.place");
+	//</editor-fold>
+	//<editor-fold desc="Cherry Wood">
+	public static final SoundEvent BLOCK_CHERRY_WOOD_BREAK = registerSoundEvent("block.cherry_wood.break");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_FALL = registerSoundEvent("block.cherry_wood.fall");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_HIT = registerSoundEvent("block.cherry_wood.hit");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_PLACE = registerSoundEvent("block.cherry_wood.place");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_STEP = registerSoundEvent("block.cherry_wood.step");
+	public static final SoundEvent BLOCK_CHERRY_SAPLING_BREAK = registerSoundEvent("block.cherry_sapling.break");
+	public static final SoundEvent BLOCK_CHERRY_SAPLING_FALL = registerSoundEvent("block.cherry_sapling.fall");
+	public static final SoundEvent BLOCK_CHERRY_SAPLING_HIT = registerSoundEvent("block.cherry_sapling.hit");
+	public static final SoundEvent BLOCK_CHERRY_SAPLING_PLACE = registerSoundEvent("block.cherry_sapling.place");
+	public static final SoundEvent BLOCK_CHERRY_SAPLING_STEP = registerSoundEvent("block.cherry_sapling.step");
+	public static final SoundEvent BLOCK_CHERRY_LEAVES_BREAK = registerSoundEvent("block.cherry_leaves.break");
+	public static final SoundEvent BLOCK_CHERRY_LEAVES_FALL = registerSoundEvent("block.cherry_leaves.fall");
+	public static final SoundEvent BLOCK_CHERRY_LEAVES_HIT = registerSoundEvent("block.cherry_leaves.hit");
+	public static final SoundEvent BLOCK_CHERRY_LEAVES_PLACE = registerSoundEvent("block.cherry_leaves.place");
+	public static final SoundEvent BLOCK_CHERRY_LEAVES_STEP = registerSoundEvent("block.cherry_leaves.step");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_HANGING_SIGN_STEP = registerSoundEvent("block.cherry_wood_hanging_sign.step");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_HANGING_SIGN_BREAK = registerSoundEvent("block.cherry_wood_hanging_sign.break");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_HANGING_SIGN_FALL = registerSoundEvent("block.cherry_wood_hanging_sign.fall");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_HANGING_SIGN_HIT = registerSoundEvent("block.cherry_wood_hanging_sign.hit");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_HANGING_SIGN_PLACE = registerSoundEvent("block.cherry_wood_hanging_sign.place");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_DOOR_CLOSE = registerSoundEvent("block.cherry_wood_door.close");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_DOOR_OPEN = registerSoundEvent("block.cherry_wood_door.open");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_TRAPDOOR_CLOSE = registerSoundEvent("block.cherry_wood_trapdoor.close");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_TRAPDOOR_OPEN = registerSoundEvent("block.cherry_wood_trapdoor.open");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_BUTTON_CLICK_OFF = registerSoundEvent("block.cherry_wood_button.click_off");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_BUTTON_CLICK_ON = registerSoundEvent("block.cherry_wood_button.click_on");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_PRESSURE_PLATE_CLICK_OFF = registerSoundEvent("block.cherry_wood_pressure_plate.click_off");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_PRESSURE_PLATE_CLICK_ON = registerSoundEvent("block.cherry_wood_pressure_plate.click_on");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_FENCE_GATE_CLOSE = registerSoundEvent("block.cherry_wood_fence_gate.close");
+	public static final SoundEvent BLOCK_CHERRY_WOOD_FENCE_GATE_OPEN = registerSoundEvent("block.cherry_wood_fence_gate.open");
+	//</editor-fold>
+	//<editor-fold desc="Pink Petals">
+	public static final SoundEvent BLOCK_PINK_PETALS_BREAK = registerSoundEvent("block.pink_petals.break");
+	public static final SoundEvent BLOCK_PINK_PETALS_FALL = registerSoundEvent("block.pink_petals.fall");
+	public static final SoundEvent BLOCK_PINK_PETALS_HIT = registerSoundEvent("block.pink_petals.hit");
+	public static final SoundEvent BLOCK_PINK_PETALS_PLACE = registerSoundEvent("block.pink_petals.place");
+	public static final SoundEvent BLOCK_PINK_PETALS_STEP = registerSoundEvent("block.pink_petals.step");
 	//</editor-fold>
 	//<editor-fold desc="Bamboo Wood">
 	public static final SoundEvent BLOCK_BAMBOO_WOOD_BREAK = registerSoundEvent("block.bamboo_wood.break");
@@ -189,6 +229,22 @@ public class ModSoundEvents {
 	public static final SoundEvent BLOCK_NETHER_WOOD_FENCE_GATE_CLOSE = registerSoundEvent("block.nether_wood_fence_gate.close");
 	public static final SoundEvent BLOCK_NETHER_WOOD_FENCE_GATE_OPEN = registerSoundEvent("block.nether_wood_fence_gate.open");
 	//</editor-fold>
+	//<editor-fold desc="Suspicious Sand">
+	public static final SoundEvent BLOCK_SUSPICIOUS_SAND_BREAK = registerSoundEvent("block.suspicious_sand.break");
+	public static final SoundEvent BLOCK_SUSPICIOUS_SAND_STEP = registerSoundEvent("block.suspicious_sand.step");
+	public static final SoundEvent BLOCK_SUSPICIOUS_SAND_PLACE = registerSoundEvent("block.suspicious_sand.place");
+	public static final SoundEvent BLOCK_SUSPICIOUS_SAND_HIT = registerSoundEvent("block.suspicious_sand.hit");
+	public static final SoundEvent BLOCK_SUSPICIOUS_SAND_FALL = registerSoundEvent("block.suspicious_sand.fall");
+	//</editor-fold>
+	//<editor-fold desc="Decorated Pot">
+	public static final SoundEvent BLOCK_DECORATED_POT_BREAK = registerSoundEvent("block.decorated_pot.break");
+	public static final SoundEvent BLOCK_DECORATED_POT_FALL = registerSoundEvent("block.decorated_pot.fall");
+	public static final SoundEvent BLOCK_DECORATED_POT_HIT = registerSoundEvent("block.decorated_pot.hit");
+	public static final SoundEvent BLOCK_DECORATED_POT_STEP = registerSoundEvent("block.decorated_pot.step");
+	public static final SoundEvent BLOCK_DECORATED_POT_PLACE = registerSoundEvent("block.decorated_pot.place");
+	public static final SoundEvent BLOCK_DECORATED_POT_SHATTER = registerSoundEvent("block.decorated_pot.shatter");
+	//</editor-fold>
+	public static final SoundEvent INTENTIONALLY_EMPTY = registerSoundEvent("minecraft:intentionally_empty");
 	//<editor-fold desc="Camels">
 	public static final SoundEvent ENTITY_CAMEL_AMBIENT = registerSoundEvent("entity.camel.ambient");
 	public static final SoundEvent ENTITY_CAMEL_DASH = registerSoundEvent("entity.camel.dash");
@@ -203,8 +259,47 @@ public class ModSoundEvents {
 	public static final SoundEvent ENTITY_CAMEL_STEP = registerSoundEvent("entity.camel.step");
 	public static final SoundEvent ENTITY_CAMEL_STEP_SAND = registerSoundEvent("entity.camel.step_sand");
 	//</editor-fold>
+	//<editor-fold desc="Sniffer">
+	public static final SoundEvent ENTITY_SNIFFER_STEP = registerSoundEvent("entity.sniffer.step");
+	public static final SoundEvent ENTITY_SNIFFER_EAT = registerSoundEvent("entity.sniffer.eat");
+	public static final SoundEvent ENTITY_SNIFFER_IDLE = registerSoundEvent("entity.sniffer.idle");
+	public static final SoundEvent ENTITY_SNIFFER_HURT = registerSoundEvent("entity.sniffer.hurt");
+	public static final SoundEvent ENTITY_SNIFFER_DEATH = registerSoundEvent("entity.sniffer.death");
+	public static final SoundEvent ENTITY_SNIFFER_DROP_SEED = registerSoundEvent("entity.sniffer.drop_seed");
+	public static final SoundEvent ENTITY_SNIFFER_SCENTING = registerSoundEvent("entity.sniffer.scenting");
+	public static final SoundEvent ENTITY_SNIFFER_SNIFFING = registerSoundEvent("entity.sniffer.sniffing");
+	public static final SoundEvent ENTITY_SNIFFER_SEARCHING = registerSoundEvent("entity.sniffer.searching");
+	public static final SoundEvent ENTITY_SNIFFER_DIGGING = registerSoundEvent("entity.sniffer.digging");
+	public static final SoundEvent ENTITY_SNIFFER_DIGGING_STOP = registerSoundEvent("entity.sniffer.digging_stop");
+	public static final SoundEvent ENTITY_SNIFFER_HAPPY = registerSoundEvent("entity.sniffer.happy");
+	//</editor-fold>
+	//<editor-fold desc="Jumping Spider">
+	public static final SoundEvent ENTITY_JUMPING_SPIDER_AMBIENT = registerSoundEvent("entity.jumping_spider.ambient");
+	public static final SoundEvent ENTITY_JUMPING_SPIDER_DEATH = registerSoundEvent("entity.jumping_spider.death");
+	public static final SoundEvent ENTITY_JUMPING_SPIDER_HURT = registerSoundEvent("entity.jumping_spider.hurt");
+	public static final SoundEvent ENTITY_JUMPING_SPIDER_STEP = registerSoundEvent("entity.jumping_spider.step");
+	public static final SoundEvent ENTITY_JUMPING_SPIDER_JUMP = registerSoundEvent("entity.jumping_spider.jump");
+	//</editor-fold>
+	//Pouch
+	public static final SoundEvent ITEM_POUCH_EMPTY = registerSoundEvent("item.pouch.empty");
+	public static final SoundEvent ITEM_POUCH_FILL = registerSoundEvent("item.pouch.fill");
+	public static final SoundEvent ITEM_POUCH_EMPTY_CHICKEN = registerSoundEvent("item.pouch.empty_chicken");
+	public static final SoundEvent ITEM_POUCH_FILL_CHICKEN = registerSoundEvent("item.pouch.fill_chicken");
+	public static final SoundEvent ITEM_POUCH_EMPTY_CHICKEN_GREG = registerSoundEvent("item.pouch.empty_chicken.greg");
+	public static final SoundEvent ITEM_POUCH_FILL_CHICKEN_GREG = registerSoundEvent("item.pouch.fill_chicken.greg");
+	public static final SoundEvent ITEM_POUCH_EMPTY_RABBIT = registerSoundEvent("item.pouch.empty_rabbit");
+	public static final SoundEvent ITEM_POUCH_FILL_RABBIT = registerSoundEvent("item.pouch.fill_rabbit");
 	//Hedgehogs
+	public static final SoundEvent ENTITY_HEDGEHOG_AMBIENT = registerSoundEvent("entity.hedgehog.ambient");
+	public static final SoundEvent ENTITY_HEDGEHOG_DEATH = registerSoundEvent("entity.hedgehog.death");
+	public static final SoundEvent ENTITY_HEDGEHOG_HURT = registerSoundEvent("entity.hedgehog.hurt");
 	public static final SoundEvent ENTITY_HEDGEHOG_SNIFF = registerSoundEvent("entity.hedgehog.sniff");
+	public static final SoundEvent ENTITY_HEDGEHOG_STEP = registerSoundEvent("entity.hedgehog.step");
+	public static final SoundEvent ITEM_POUCH_EMPTY_HEDGEHOG = registerSoundEvent("item.pouch.empty_hedgehog");
+	public static final SoundEvent ITEM_POUCH_FILL_HEDGEHOG = registerSoundEvent("item.pouch.fill_hedgehog");
+	//Glass Trapdoors
+	public static final SoundEvent BLOCK_GLASS_TRAPDOOR_OPEN = registerSoundEvent("block.glass_trapdoor.open");
+	public static final SoundEvent BLOCK_GLASS_TRAPDOOR_CLOSE = registerSoundEvent("block.glass_trapdoor.close");
 	//<editor-fold desc="Juicer">
 	public static final SoundEvent BLOCK_JUICER_LOADED = registerSoundEvent("block.juicer.loaded");
 	public static final SoundEvent BLOCK_JUICER_JUICED = registerSoundEvent("block.juicer.juiced");
@@ -275,6 +370,7 @@ public class ModSoundEvents {
 	public static final SoundEvent ENTITY_ZOMBIFIED_PIGLIN_STEP = registerSoundEvent("entity.zombified_piglin.step");
 	//</editor-fold>
 
+	public static final SoundEvent ITEM_CHUM_USED = registerSoundEvent("item.chum.used");
 	//Salves
 	public static final SoundEvent SALVE_APPLIED = registerSoundEvent("item.salve.apply");
 

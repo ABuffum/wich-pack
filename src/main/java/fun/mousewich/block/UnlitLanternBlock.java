@@ -1,18 +1,15 @@
 package fun.mousewich.block;
 
-import fun.mousewich.container.IBlockItemContainer;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LanternBlock;
-import net.minecraft.block.Material;
 import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -28,18 +25,10 @@ public class UnlitLanternBlock extends LanternBlock {
 	public Block getLitBlock() { return this.lit; }
 	protected final ItemConvertible getPickStack;
 
-	public UnlitLanternBlock(IBlockItemContainer lit) { this(lit, BlockSettings()); }
-	public UnlitLanternBlock(IBlockItemContainer lit, Settings settings) { this(lit.asBlock(), lit, settings); }
-	public UnlitLanternBlock(Block lit, ItemConvertible getPickStack) { this(lit, getPickStack, BlockSettings()); }
 	public UnlitLanternBlock(Block lit, ItemConvertible getPickStack, Settings settings) {
 		super(settings);
 		this.lit = lit;
 		this.getPickStack = getPickStack;
-	}
-
-	public UnlitLanternBlock dropsLantern() {
-		BlockLootGenerator.Drops.put(this, (block) -> BlockLootTableGenerator.drops(Items.LANTERN));
-		return this;
 	}
 
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
@@ -57,7 +46,13 @@ public class UnlitLanternBlock extends LanternBlock {
 	@Override
 	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) { return getPickStack.asItem().getDefaultStack(); }
 
-	public static Settings BlockSettings() {
-		return Settings.of(Material.METAL).requiresTool().strength(3.5F).sounds(BlockSoundGroup.LANTERN).nonOpaque();
+
+	public UnlitLanternBlock dropsLantern() {
+		BlockLootGenerator.Drops.put(this, (block) -> BlockLootTableGenerator.drops(Items.LANTERN));
+		return this;
+	}
+	public UnlitLanternBlock dropsSoulLantern() {
+		BlockLootGenerator.Drops.put(this, (block) -> BlockLootTableGenerator.drops(Items.SOUL_LANTERN));
+		return this;
 	}
 }

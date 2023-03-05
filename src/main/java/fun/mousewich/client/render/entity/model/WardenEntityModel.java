@@ -89,10 +89,6 @@ public class WardenEntityModel<T extends WardenEntity> extends SinglePartEntityM
 		return TexturedModelData.of(modelData, 128, 128);
 	}
 
-	private boolean equal(ModelTransform a, ModelTransform b) {
-		return a.pivotX == b.pivotX && a.pivotY == b.pivotY && a.pivotZ == b.pivotZ;
-	}
-
 	public ModelTransform getDefaultTransform(ModelPart part) {
 		if (part == this.root) return ModelTransform.NONE;
 		else if (part == this.bone) return boneTransform;
@@ -103,14 +99,7 @@ public class WardenEntityModel<T extends WardenEntity> extends SinglePartEntityM
 		else if (part == this.leftRibcage) return leftRibcageTransform;
 		else if (part == this.rightArm) return rightArmTransform;
 		else if (part == this.leftArm) return leftArmTransform;
-		else if (part == this.head) {
-			if (!equal(part.getTransform(), headTransform)) {
-				String pt = part.getTransform().pivotX + " " + part.getTransform().pivotY + " " + part.getTransform().pivotZ;
-				String ht = headTransform.pivotX + " " + headTransform.pivotY + " " + headTransform.pivotZ;
-				System.out.println("(" + pt + ") (" + ht + ")");
-			}
-			return headTransform;
-		}
+		else if (part == this.head) return headTransform;
 		else if (part == this.rightTendril) return rightTendrilTransform;
 		else if (part == this.leftTendril) return leftTendrilTransform;
 		return ModelTransform.NONE;

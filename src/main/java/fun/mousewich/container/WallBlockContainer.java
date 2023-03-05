@@ -10,7 +10,7 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.item.Item;
 
-public class WallBlockContainer implements IBlockItemContainer {
+public class WallBlockContainer implements IWallBlockItemContainer {
 	protected final Block block;
 	public Block asBlock() { return block; }
 	protected final Block wallBlock;

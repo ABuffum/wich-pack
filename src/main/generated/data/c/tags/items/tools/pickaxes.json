@@ -10,6 +10,14 @@
     "wich:amethyst_pickaxe",
     "wich:echo_pickaxe",
     "wich:emerald_pickaxe",
-    "wich:quartz_pickaxe"
+    "wich:quartz_pickaxe",
+    "wich:copper_pickaxe",
+    "wich:exposed_copper_pickaxe",
+    "wich:weathered_copper_pickaxe",
+    "wich:oxidized_copper_pickaxe",
+    "wich:waxed_copper_pickaxe",
+    "wich:waxed_exposed_copper_pickaxe",
+    "wich:waxed_weathered_copper_pickaxe",
+    "wich:waxed_oxidized_copper_pickaxe"
   ]
 }
