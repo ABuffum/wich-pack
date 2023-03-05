@@ -432,6 +432,7 @@ public abstract class ModLanguageCache {
 		public String Exposed() { return "Exposed"; } public String Exposed(String word) { return _add(word, Exposed()); }
 		public String ExposedCopper() { return Copper(Exposed()); } public String ExposedCopper(String word) { return Copper(Exposed(word)); }
 		public String Fan() { return "Fan"; } public String Fan(String word) { return _add(word, Fan()); }
+		public String Fancy() { return "Fancy"; } public String Fancy(String word) { return _add(word, Fancy()); }
 		public String Farmland() { return "Farmland"; } public String Farmland(String word) { return _add(word, Farmland()); }
 		public String Feather() { return "Feather"; } public String Feather(String word) { return _add(word, Feather()); }
 		public String Feathers() { return "Feathers"; } public String Feathers(String word) { return _add(word, Feathers()); }

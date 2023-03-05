@@ -86,7 +86,7 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
 				.add(MANGROVE_LEAVES.asBlock(), CHERRY_LEAVES.asBlock(), PINK_PETALS.asBlock())
 				.add(SCULK.asBlock(), SCULK_SHRIEKER.asBlock(), SCULK_VEIN.asBlock())
-				.add(HEDGE_BLOCK.asBlock(), BLUE_SHROOMLIGHT.asBlock());
+				.add(HEDGE_BLOCK.asBlock(), BLUE_SHROOMLIGHT.asBlock(), BLUE_TARGET.asBlock());
 		getOrCreateTagBuilder(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(PINK_PETALS.asBlock(), SCULK_VEIN.asBlock());
 		getOrCreateTagBuilder(BlockTags.LEAVES).add(MANGROVE_LEAVES.asBlock(), CHERRY_LEAVES.asBlock());
 		getOrCreateTagBuilder(BlockTags.LOGS).addTag(ModBlockTags.CHARRED_LOGS);

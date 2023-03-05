@@ -1078,6 +1078,7 @@ public class ModelGenerator extends FabricModelProvider {
 		slabModel(bsmg, CHARCOAL_SLAB, CHARCOAL_BLOCK);
 		slabModel(bsmg, COARSE_DIRT_SLAB, Blocks.COARSE_DIRT);
 		cubeAllModel(bsmg, BLUE_SHROOMLIGHT);
+		singletonModel(bsmg, BLUE_TARGET, TexturedModel.CUBE_COLUMN);
 		cubeAllModel(bsmg, FLINT_BLOCK);
 		slabModel(bsmg, FLINT_SLAB, FLINT_BLOCK);
 		mudBricksModel(bsmg, FLINT_BRICKS);
@@ -1360,6 +1361,10 @@ public class ModelGenerator extends FabricModelProvider {
 	public void generateItemModels(ItemModelGenerator img) {
 		//Minecraft Earth
 		generatedItemModel(img, HORN);
+		//Feathers
+		generatedItemModel(img, FANCY_FEATHER);
+		generatedItemModel(img, BLACK_FEATHER);
+		generatedItemModel(img, RED_FEATHER);
 		//Books
 		img.register(UNREADABLE_BOOK, Items.WRITTEN_BOOK, Models.GENERATED);
 		generatedItemModel(img, RED_BOOK);

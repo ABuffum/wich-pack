@@ -607,7 +607,7 @@ public class IdentifiedSounds {
 		Register("stone_redstone_ore", List.of(EN_US.StoneRedstoneOre()), Blocks.REDSTONE_ORE);
 		Register("sugar_cane", List.of(EN_US.SugarCane()), Blocks.SUGAR_CANE); //TODO: Decorative
 		Register(BlockSounds.BreakPlace("sweet_berry_bush", SoundEvents.BLOCK_SWEET_BERRY_BUSH_BREAK, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PLACE, List.of(EN_US.SweetBerryBush())), Blocks.SWEET_BERRY_BUSH);
-		Register("target", List.of(EN_US.Target()), Blocks.TARGET);
+		Register("target", List.of(EN_US.Target()), Blocks.TARGET, /* Mod */ BLUE_TARGET.asBlock());
 		Register("terracotta", List.of(EN_US.Terracotta()), Blocks.TERRACOTTA, Blocks.BLACK_TERRACOTTA,
 				Blocks.BLUE_TERRACOTTA, Blocks.BROWN_TERRACOTTA, Blocks.CYAN_TERRACOTTA, Blocks.GRAY_TERRACOTTA,
 				Blocks.GREEN_TERRACOTTA, Blocks.LIGHT_BLUE_TERRACOTTA, Blocks.LIGHT_GRAY_TERRACOTTA,

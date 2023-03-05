@@ -264,7 +264,7 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 						WAXED_COPPER_ENDER_TORCH.asItem(), WAXED_EXPOSED_COPPER_ENDER_TORCH.asItem(),
 						WAXED_WEATHERED_COPPER_ENDER_TORCH.asItem(), WAXED_OXIDIZED_COPPER_ENDER_TORCH.asItem())
 				.add(BAMBOO_ENDER_TORCH.asItem(), BONE_ENDER_TORCH.asItem(), IRON_ENDER_TORCH.asItem(), GOLD_ENDER_TORCH.asItem(), NETHERITE_ENDER_TORCH.asItem());
-		getOrCreateTagBuilder(ModItemTags.FEATHERS).add(Items.FEATHER);
+		getOrCreateTagBuilder(ModItemTags.FEATHERS).add(Items.FEATHER, FANCY_FEATHER).add(BLACK_FEATHER, RED_FEATHER);
 		getOrCreateTagBuilder(ModItemTags.FLEECE)
 				.add(FLEECE.values().stream().map(BlockContainer::asItem).toArray(Item[]::new))
 				.add(RAINBOW_FLEECE.asItem());

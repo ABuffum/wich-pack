@@ -84,7 +84,6 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.sensor.TemptationsSensor;
@@ -158,17 +157,17 @@ public class ModBase implements ModInitializer {
 	public static final Item ALLAY_SPAWN_EGG = new SpawnEggItem(ALLAY_ENTITY, 56063, 44543, ItemSettings(ItemGroup.MISC));
 	//</editor-fold>
 	//<editor-fold desc="Amethyst">
-	public static final BlockContainer AMETHYST_STAIRS = ModFactory.Stairs(new AmethystStairsBlock(Blocks.AMETHYST_BLOCK));
-	public static final BlockContainer AMETHYST_SLAB = ModFactory.Slab(new AmethystSlabBlock(Blocks.AMETHYST_BLOCK));
-	public static final BlockContainer AMETHYST_WALL = ModFactory.Wall(new AmethystWallBlock(Blocks.AMETHYST_BLOCK));
-	public static final BlockContainer AMETHYST_CRYSTAL_BLOCK = ModFactory.Block(new AmethystBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5f, 1.5f).requiresTool().luminance(ModFactory.LUMINANCE_5)));
-	public static final BlockContainer AMETHYST_CRYSTAL_STAIRS = ModFactory.Stairs(new AmethystStairsBlock(AMETHYST_CRYSTAL_BLOCK));
-	public static final BlockContainer AMETHYST_CRYSTAL_SLAB = ModFactory.Slab(new AmethystSlabBlock(AMETHYST_CRYSTAL_BLOCK));
-	public static final BlockContainer AMETHYST_CRYSTAL_WALL = ModFactory.Wall(new AmethystWallBlock(AMETHYST_CRYSTAL_BLOCK));
-	public static final BlockContainer AMETHYST_BRICKS = ModFactory.Block(new AmethystBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).sounds(BlockSoundGroup.AMETHYST_BLOCK).strength(1.5f, 1.5f).requiresTool()));
-	public static final BlockContainer AMETHYST_BRICK_STAIRS = ModFactory.Stairs(new AmethystStairsBlock(AMETHYST_BRICKS));
-	public static final BlockContainer AMETHYST_BRICK_SLAB = ModFactory.Slab(new AmethystSlabBlock(AMETHYST_BRICKS));
-	public static final BlockContainer AMETHYST_BRICK_WALL = ModFactory.Wall(new AmethystWallBlock(AMETHYST_BRICKS));
+	public static final BlockContainer AMETHYST_STAIRS = ModFactory.BuildStairs(new AmethystStairsBlock(Blocks.AMETHYST_BLOCK));
+	public static final BlockContainer AMETHYST_SLAB = ModFactory.BuildSlab(new AmethystSlabBlock(Blocks.AMETHYST_BLOCK));
+	public static final BlockContainer AMETHYST_WALL = ModFactory.BuildWall(new AmethystWallBlock(Blocks.AMETHYST_BLOCK));
+	public static final BlockContainer AMETHYST_CRYSTAL_BLOCK = ModFactory.BuildBlock(new AmethystBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(1.5f, 1.5f).requiresTool().luminance(ModFactory.LUMINANCE_5)));
+	public static final BlockContainer AMETHYST_CRYSTAL_STAIRS = ModFactory.BuildStairs(new AmethystStairsBlock(AMETHYST_CRYSTAL_BLOCK));
+	public static final BlockContainer AMETHYST_CRYSTAL_SLAB = ModFactory.BuildSlab(new AmethystSlabBlock(AMETHYST_CRYSTAL_BLOCK));
+	public static final BlockContainer AMETHYST_CRYSTAL_WALL = ModFactory.BuildWall(new AmethystWallBlock(AMETHYST_CRYSTAL_BLOCK));
+	public static final BlockContainer AMETHYST_BRICKS = ModFactory.BuildBlock(new AmethystBlock(FabricBlockSettings.of(Material.AMETHYST, MapColor.PURPLE).sounds(BlockSoundGroup.AMETHYST_BLOCK).strength(1.5f, 1.5f).requiresTool()));
+	public static final BlockContainer AMETHYST_BRICK_STAIRS = ModFactory.BuildStairs(new AmethystStairsBlock(AMETHYST_BRICKS));
+	public static final BlockContainer AMETHYST_BRICK_SLAB = ModFactory.BuildSlab(new AmethystSlabBlock(AMETHYST_BRICKS));
+	public static final BlockContainer AMETHYST_BRICK_WALL = ModFactory.BuildWall(new AmethystWallBlock(AMETHYST_BRICKS));
 	public static final Item AMETHYST_AXE = new ModAxeItem(ModToolMaterials.AMETHYST, 5, -3);
 	public static final Item AMETHYST_HOE = new ModHoeItem(ModToolMaterials.AMETHYST, -3, 0);
 	public static final Item AMETHYST_PICKAXE = new ModPickaxeItem(ModToolMaterials.AMETHYST, 1, -2.8F);
@@ -539,13 +538,13 @@ public class ModBase implements ModInitializer {
 	public static final Item ECHO_SHARD = new Item(ItemSettings(ItemGroup.MISC));
 	//Extended
 	public static final BlockContainer ECHO_BLOCK = new BlockContainer(new EchoBlock(Block.Settings.of(Material.SCULK).strength(1.5F).sounds(ModBlockSoundGroups.ECHO_BLOCK).requiresTool())).dropSelf();
-	public static final BlockContainer ECHO_STAIRS = ModFactory.Stairs(new EchoStairsBlock(ECHO_BLOCK));
-	public static final BlockContainer ECHO_SLAB = ModFactory.Slab(new EchoSlabBlock(ECHO_BLOCK));
-	public static final BlockContainer ECHO_WALL = ModFactory.Wall(new EchoWallBlock(ECHO_BLOCK));
+	public static final BlockContainer ECHO_STAIRS = ModFactory.BuildStairs(new EchoStairsBlock(ECHO_BLOCK));
+	public static final BlockContainer ECHO_SLAB = ModFactory.BuildSlab(new EchoSlabBlock(ECHO_BLOCK));
+	public static final BlockContainer ECHO_WALL = ModFactory.BuildWall(new EchoWallBlock(ECHO_BLOCK));
 	public static final BlockContainer ECHO_CRYSTAL_BLOCK = new BlockContainer(new Block(FabricBlockSettings.of(Material.SCULK).sounds(ModBlockSoundGroups.ECHO_CLUSTER).strength(1.5f, 1.5f).requiresTool().luminance(ModFactory.LUMINANCE_5))).dropSelf();
-	public static final BlockContainer ECHO_CRYSTAL_STAIRS = ModFactory.Stairs(new EchoStairsBlock(ECHO_CRYSTAL_BLOCK));
-	public static final BlockContainer ECHO_CRYSTAL_SLAB = ModFactory.Slab(new EchoSlabBlock(ECHO_CRYSTAL_BLOCK));
-	public static final BlockContainer ECHO_CRYSTAL_WALL = ModFactory.Wall(new EchoWallBlock(ECHO_CRYSTAL_BLOCK));
+	public static final BlockContainer ECHO_CRYSTAL_STAIRS = ModFactory.BuildStairs(new EchoStairsBlock(ECHO_CRYSTAL_BLOCK));
+	public static final BlockContainer ECHO_CRYSTAL_SLAB = ModFactory.BuildSlab(new EchoSlabBlock(ECHO_CRYSTAL_BLOCK));
+	public static final BlockContainer ECHO_CRYSTAL_WALL = ModFactory.BuildWall(new EchoWallBlock(ECHO_CRYSTAL_BLOCK));
 	public static final BlockContainer BUDDING_ECHO = new BlockContainer(new BuddingEchoBlock(Block.Settings.copy(ECHO_BLOCK.asBlock()).ticksRandomly())).drops(DropTable.NOTHING);
 	public static final BlockContainer ECHO_CLUSTER = new BlockContainer(new EchoClusterBlock(7, 3, Block.Settings.of(Material.SCULK).nonOpaque().ticksRandomly().sounds(ModBlockSoundGroups.ECHO_CLUSTER).strength(1.5F).luminance(ModFactory.LUMINANCE_3)));
 	public static final BlockContainer LARGE_ECHO_BUD = new BlockContainer(new EchoClusterBlock(5, 3, Block.Settings.copy(ECHO_CLUSTER.asBlock()).sounds(ModBlockSoundGroups.MEDIUM_ECHO_BUD).luminance(ModFactory.LUMINANCE_2))).requireSilkTouch();
@@ -593,6 +592,11 @@ public class ModBase implements ModInitializer {
 	public static final TorchContainer ENDER_TORCH = ModFactory.MakeTorch(12, BlockSoundGroup.WOOD, ENDER_FIRE_FLAME_PARTICLE);
 	public static final BlockContainer ENDER_LANTERN = ModFactory.MakeLantern(13);
 	public static final BlockContainer ENDER_CAMPFIRE = ModFactory.MakeCampfire(13, 3, MapColor.SPRUCE_BROWN, BlockSoundGroup.WOOD, false).drops(DropTable.ENDER_CAMPFIRE);
+	//</editor-fold>
+	//<editor-fold desc="Feathers">
+	public static final Item FANCY_FEATHER = new Item(ItemSettings());
+	public static final Item BLACK_FEATHER = new Item(ItemSettings());
+	public static final Item RED_FEATHER = new Item(ItemSettings());
 	//</editor-fold>
 	//<editor-fold desc="Flowers">
 	//Minecraft Earth Flowers
@@ -781,7 +785,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer MANGROVE_LECTERN = ModFactory.MakeLectern(MapColor.RED).flammable(30, 20).fuel(300);
 	//</editor-fold>
 	//<editor-fold desc="Moss">
-	public static final BlockContainer MOSS_SLAB = ModFactory.MakeSlab(Blocks.MOSS_BLOCK, MossSlabBlock::new);
+	public static final BlockContainer MOSS_SLAB = ModFactory.BuildSlab(new MossSlabBlock(Blocks.MOSS_BLOCK));
 	//public static final BedContainer MOSS_BED = ModFactory.MakeBed("moss");
 	//</editor-fold>
 	//<editor-fold desc="Mud">
@@ -809,15 +813,15 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer NETHERITE_BUTTON = ModFactory.MakeMetalButton(BlockSoundGroup.NETHERITE, NetheriteItemSettings());
 	public static final BlockContainer NETHERITE_CHAIN = ModFactory.MakeChain(NetheriteItemSettings());
 	public static final BlockContainer NETHERITE_BARS = ModFactory.MakeBars(BlockSoundGroup.NETHERITE, NetheriteItemSettings());
-	public static final BlockContainer NETHERITE_STAIRS = ModFactory.MakeStairs(Blocks.NETHERITE_BLOCK);
-	public static final BlockContainer NETHERITE_SLAB = ModFactory.MakeSlab(Blocks.NETHERITE_BLOCK);
+	public static final BlockContainer NETHERITE_STAIRS = ModFactory.MakeStairs(Blocks.NETHERITE_BLOCK, NetheriteItemSettings());
+	public static final BlockContainer NETHERITE_SLAB = ModFactory.MakeSlab(Blocks.NETHERITE_BLOCK, NetheriteItemSettings());
 	public static final BlockContainer NETHERITE_WALL = ModFactory.MakeWall(Blocks.NETHERITE_BLOCK, NetheriteItemSettings());
 	public static final BlockContainer NETHERITE_BRICKS = ModFactory.MakeBlock(Blocks.NETHERITE_BLOCK, NetheriteItemSettings());
 	public static final BlockContainer NETHERITE_BRICK_STAIRS = ModFactory.MakeStairs(NETHERITE_BRICKS, NetheriteItemSettings());
 	public static final BlockContainer NETHERITE_BRICK_SLAB = ModFactory.MakeSlab(NETHERITE_BRICKS, NetheriteItemSettings());
 	public static final BlockContainer NETHERITE_BRICK_WALL = ModFactory.MakeWall(NETHERITE_BRICKS, NetheriteItemSettings());
 	public static final BlockContainer CUT_NETHERITE = ModFactory.MakeBlock(Blocks.NETHERITE_BLOCK, NetheriteItemSettings());
-	public static final BlockContainer CUT_NETHERITE_PILLAR = ModFactory.Block(new ModPillarBlock(Blocks.NETHERITE_BLOCK), NetheriteItemSettings());
+	public static final BlockContainer CUT_NETHERITE_PILLAR = ModFactory.BuildBlock(new ModPillarBlock(Blocks.NETHERITE_BLOCK), NetheriteItemSettings());
 	public static final BlockContainer CUT_NETHERITE_STAIRS = ModFactory.MakeStairs(CUT_NETHERITE, NetheriteItemSettings());
 	public static final BlockContainer CUT_NETHERITE_SLAB = ModFactory.MakeSlab(CUT_NETHERITE, NetheriteItemSettings());
 	public static final BlockContainer CUT_NETHERITE_WALL = ModFactory.MakeWall(CUT_NETHERITE, NetheriteItemSettings());
@@ -854,7 +858,7 @@ public class ModBase implements ModInitializer {
 	public static final DefaultParticleType LANDING_OBSIDIAN_BLOOD = FabricParticleTypes.simple(false);
 	public static final DefaultParticleType FALLING_OBSIDIAN_BLOOD = FabricParticleTypes.simple(false);
 	public static final DefaultParticleType DRIPPING_OBSIDIAN_BLOOD = FabricParticleTypes.simple(false);
-	public static final BlockContainer BLEEDING_OBSIDIAN = ModFactory.Block(new BleedingObsidianBlock(Blocks.CRYING_OBSIDIAN));
+	public static final BlockContainer BLEEDING_OBSIDIAN = ModFactory.BuildBlock(new BleedingObsidianBlock(Blocks.CRYING_OBSIDIAN));
 	public static final BlockContainer BLEEDING_OBSIDIAN_STAIRS = new BlockContainer(new CryingObsidianStairsBlock(Blocks.OBSIDIAN, DRIPPING_OBSIDIAN_BLOOD)).dropSelf();
 	public static final BlockContainer BLEEDING_OBSIDIAN_SLAB = new BlockContainer(new CryingObsidianSlabBlock(Blocks.OBSIDIAN, DRIPPING_OBSIDIAN_BLOOD)).dropSlabs();
 	public static final BlockContainer BLEEDING_OBSIDIAN_WALL = new BlockContainer(new CryingObsidianWallBlock(Blocks.OBSIDIAN, DRIPPING_OBSIDIAN_BLOOD)).dropSelf();
@@ -1018,9 +1022,9 @@ public class ModBase implements ModInitializer {
 	//</editor-fold>
 	//<editor-fold desc="Wool">
 	public static final Map<DyeColor, BlockContainer> WOOL_SLABS = ColorUtil.Map((color) -> ModFactory.MakeSlab(ColorUtil.GetWoolBlock(color)).flammable(40, 40).fuel(50));
-	public static final BlockContainer RAINBOW_WOOL = ModFactory.Block(new ModFacingBlock(Blocks.WHITE_WOOL)).flammable(30, 60).fuel(100);
-	public static final BlockContainer RAINBOW_WOOL_SLAB = ModFactory.Slab(new HorizontalFacingSlabBlock(RAINBOW_WOOL)).flammable(40, 40).fuel(50);
-	public static final BlockContainer RAINBOW_CARPET = ModFactory.Block(new HorziontalFacingCarpetBlock(RAINBOW_WOOL)).flammable(60, 20).fuel(67);
+	public static final BlockContainer RAINBOW_WOOL = ModFactory.BuildBlock(new ModFacingBlock(Blocks.WHITE_WOOL)).flammable(30, 60).fuel(100);
+	public static final BlockContainer RAINBOW_WOOL_SLAB = ModFactory.BuildSlab(new HorizontalFacingSlabBlock(RAINBOW_WOOL)).flammable(40, 40).fuel(50);
+	public static final BlockContainer RAINBOW_CARPET = ModFactory.BuildBlock(new HorziontalFacingCarpetBlock(RAINBOW_WOOL)).flammable(60, 20).fuel(67);
 	//</editor-fold>
 
 	public static final Item HORN = new Item(ItemSettings());
@@ -1032,7 +1036,7 @@ public class ModBase implements ModInitializer {
 	public static final Item NETHERITE_UPGRADE_SMITHING_TEMPLATE = SmithingTemplateItem.createNetheriteUpgrade();
 	public static final RecipeType<TrimmingRecipe> TRIMMING_RECIPE_TYPE = RegisterRecipeType("trimming");
 	public static final RecipeSerializer<TrimmingRecipe> TRIMMING_RECIPE_SERIALIZER = new TrimmingRecipe.Serializer();
-	public static final BlockContainer TRIMMING_TABLE = ModFactory.MakeBlock(Blocks.SMITHING_TABLE, (Block b) -> new TrimmingTableBlock(b)).dropSelf();
+	public static final BlockContainer TRIMMING_TABLE = ModFactory.BuildBlock(new TrimmingTableBlock(Blocks.SMITHING_TABLE));
 
 	public static final Item POUCH = new PouchItem(ItemSettings().maxCount(16));
 	public static final Item CHICKEN_POUCH = new ChickenPouchItem(EntityType.CHICKEN, ItemSettings().maxCount(1)).dispensible();
@@ -1045,16 +1049,18 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer CHARCOAL_SLAB = ModFactory.MakeSlab(CHARCOAL_BLOCK).flammable(5, 20).fuel(8000);
 	public static final BlockContainer COARSE_DIRT_SLAB = ModFactory.MakeSlab(Blocks.COARSE_DIRT);
 	public static final BlockContainer BLUE_SHROOMLIGHT = ModFactory.MakeBlock(Block.Settings.copy(Blocks.SHROOMLIGHT).mapColor(MapColor.CYAN));
+	//TODO: Recipe for Blue Targets
+	public static final BlockContainer BLUE_TARGET = ModFactory.BuildBlock(new TargetBlock(AbstractBlock.Settings.of(Material.SOLID_ORGANIC, MapColor.OFF_WHITE).strength(0.5f).sounds(BlockSoundGroup.GRASS))).flammable(15, 20);
 	public static final BlockContainer FLINT_BLOCK = new BlockContainer(new FlintBlock(Block.Settings.of(Material.STONE, MapColor.DEEPSLATE_GRAY).strength(1.5f, 3.0f).sounds(BlockSoundGroup.METAL))).drops(DropTable.FLINT);
-	public static final BlockContainer FLINT_SLAB = ModFactory.MakeSlab(FLINT_BLOCK, FlintSlabBlock::new, DropTable.FLINT_SLAB);
-	public static final BlockContainer FLINT_BRICKS = ModFactory.MakeBlock(FLINT_BLOCK, FlintBlock::new, DropTable.FLINT);
-	public static final BlockContainer FLINT_BRICK_STAIRS = ModFactory.MakeStairs(FLINT_BRICKS, FlintStairsBlock::new, DropTable.FLINT);
-	public static final BlockContainer FLINT_BRICK_SLAB = ModFactory.MakeSlab(FLINT_BRICKS, FlintSlabBlock::new, DropTable.FLINT_SLAB);
-	public static final BlockContainer FLINT_BRICK_WALL = ModFactory.MakeWall(FLINT_BRICKS, FlintWallBlock::new, DropTable.FLINT);
+	public static final BlockContainer FLINT_SLAB = ModFactory.BuildSlab(new FlintSlabBlock(FLINT_BLOCK), DropTable.FLINT_SLAB);
+	public static final BlockContainer FLINT_BRICKS = ModFactory.BuildBlock(new FlintBlock(FLINT_BLOCK), DropTable.FLINT);
+	public static final BlockContainer FLINT_BRICK_STAIRS = ModFactory.BuildStairs(new FlintStairsBlock(FLINT_BRICKS), DropTable.FLINT);
+	public static final BlockContainer FLINT_BRICK_SLAB = ModFactory.BuildSlab(new FlintSlabBlock(FLINT_BRICKS), DropTable.FLINT_SLAB);
+	public static final BlockContainer FLINT_BRICK_WALL = ModFactory.BuildWall(new FlintWallBlock(FLINT_BRICKS), DropTable.FLINT);
 	public static final BlockContainer HEDGE_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.LEAVES).strength(0.2F).sounds(BlockSoundGroup.GRASS).nonOpaque()).flammable(5, 20);
 	public static final BlockContainer COCOA_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.SOLID_ORGANIC, MapColor.BROWN).strength(0.8F).sounds(BlockSoundGroup.WOOD)).compostable(0.65f);
 	public static final BlockContainer SEED_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.SOLID_ORGANIC, MapColor.DARK_GREEN).strength(0.8F).sounds(BlockSoundGroup.GRASS)).compostable(1f);
-	public static final BlockContainer WAX_BLOCK = ModFactory.Block(new WaxBlock(Blocks.HONEYCOMB_BLOCK));
+	public static final BlockContainer WAX_BLOCK = ModFactory.BuildBlock(new WaxBlock(Blocks.HONEYCOMB_BLOCK));
 	public static final BlockContainer GLAZED_TERRACOTTA = new BlockContainer(new GlazedTerracottaBlock(Block.Settings.of(Material.STONE, MapColor.ORANGE).requiresTool().strength(1.4f))).dropSelf();
 	public static final Item LAVA_BOTTLE = new LavaBottleItem(ItemSettings().maxCount(16).recipeRemainder(Items.GLASS_BOTTLE));
 	//</editor-fold>
@@ -1857,6 +1863,7 @@ public class ModBase implements ModInitializer {
 		Register("charcoal_slab", CHARCOAL_SLAB, List.of(EN_US.Slab(EN_US.Charcoal())));
 		Register("coarse_dirt_slab", COARSE_DIRT_SLAB, List.of(EN_US.Slab(EN_US.CoarseDirt())));
 		Register("blue_shroomlight", BLUE_SHROOMLIGHT, List.of(EN_US.BlueShroomlight()));
+		Register("blue_target", BLUE_TARGET, List.of(EN_US.Target(EN_US.Blue())));
 		Register("flint_block", FLINT_BLOCK, List.of(EN_US.Block(EN_US.Flint())));
 		Register("flint_slab", FLINT_SLAB, List.of(EN_US.Slab(EN_US.Flint())));
 		Register("flint_bricks", FLINT_BRICKS, List.of(EN_US.Bricks(EN_US.Flint())));
@@ -1871,6 +1878,11 @@ public class ModBase implements ModInitializer {
 		Register("lava_bottle", LAVA_BOTTLE, List.of(EN_US.Bottle(EN_US.Lava())));
 		//</editor-fold>
 		Register("horn", HORN, List.of(EN_US.Horn()));
+		//<editor-fold desc="Feathers">
+		Register("fancy_feather", FANCY_FEATHER, List.of(EN_US.Feather(EN_US.Fancy())));
+		Register("black_feather", BLACK_FEATHER, List.of(EN_US.Feather(EN_US.Black())));
+		Register("red_feather", RED_FEATHER, List.of(EN_US.Feather(EN_US.Red())));
+		//</editor-fold>
 		//<editor-fold desc="Books">
 		Register("unreadable_book", UNREADABLE_BOOK, List.of(EN_US.Literal("Unreadable Book")));
 		Register("red_book", RED_BOOK, List.of(EN_US.Book(EN_US.Red())));

@@ -239,9 +239,6 @@ public class ModFactory {
 		return new BoatContainer(name, base, false, settings).dispensable();
 	}
 
-	public interface BlockConvertibleFactory { Block create(BlockConvertible block); }
-	public interface BlockFactory { Block create(Block block); }
-
 	public static BlockContainer MakeCandle(MapColor mapColor, double luminance) {
 		return new BlockContainer(new CandleBlock(Block.Settings.of(Material.DECORATION, mapColor).nonOpaque().strength(0.1F).sounds(BlockSoundGroup.CANDLE)
 				.luminance((state) -> (int)(state.get(CandleBlock.LIT) ? luminance * state.get(CandleBlock.CANDLES) : 0)))).drops(DropTable.CANDLE);
@@ -357,74 +354,52 @@ public class ModFactory {
 		return new BlockContainer(new ModPillarBlock(blockSettings), settings).dropSelf();
 	}
 
-	public static BlockContainer MakeSlab(BlockConvertible base) { return Slab(new ModSlabBlock(base)); }
-	public static BlockContainer MakeSlab(BlockConvertible base, DropTable dropTable) { return Slab(new ModSlabBlock(base), dropTable); }
-	public static BlockContainer MakeSlab(BlockConvertible base, BlockConvertibleFactory factory) { return Slab(factory.create(base)); }
-	public static BlockContainer MakeSlab(BlockConvertible base, BlockConvertibleFactory factory, DropTable dropTable) { return Slab(factory.create(base), dropTable); }
-	public static BlockContainer MakeSlab(BlockConvertible base, Item.Settings settings) { return Slab(new ModSlabBlock(base), settings); }
-	public static BlockContainer MakeSlab(BlockConvertible base, DropTable dropTable, Item.Settings settings) { return Slab(new ModSlabBlock(base), dropTable, settings); }
-	public static BlockContainer MakeSlab(BlockConvertible base, BlockConvertibleFactory factory, Item.Settings settings) { return Slab(factory.create(base), settings); }
-	public static BlockContainer MakeSlab(BlockConvertible base, BlockConvertibleFactory factory, DropTable dropTable, Item.Settings settings) { return Slab(factory.create(base), dropTable, settings); }
-	public static BlockContainer MakeSlab(Block base) { return Slab(new ModSlabBlock(base)); }
-	public static BlockContainer MakeSlab(Block base, DropTable dropTable) { return Slab(new ModSlabBlock(base), dropTable); }
-	public static BlockContainer MakeSlab(Block base, BlockFactory factory) { return Slab(factory.create(base)); }
-	public static BlockContainer MakeSlab(Block base, BlockFactory factory, DropTable dropTable) { return Slab(factory.create(base), dropTable); }
-	public static BlockContainer MakeSlab(Block base, Item.Settings settings) { return Slab(new ModSlabBlock(base), settings); }
-	public static BlockContainer MakeSlab(Block base, DropTable dropTable, Item.Settings settings) { return Slab(new ModSlabBlock(base), dropTable, settings); }
-	public static BlockContainer MakeSlab(Block base, BlockFactory factory, Item.Settings settings) { return Slab(factory.create(base), settings); }
-	public static BlockContainer MakeSlab(Block base, BlockFactory factory, DropTable dropTable, Item.Settings settings) { return Slab(factory.create(base), dropTable, settings); }
-	public static BlockContainer Slab(Block slab) { return Slab(slab, ItemSettings()); }
-	public static BlockContainer Slab(Block slab, Item.Settings settings) { return Slab(slab, null, settings); }
-	public static BlockContainer Slab(Block slab, DropTable dropTable) { return Slab(slab, dropTable, ItemSettings()); }
-	public static BlockContainer Slab(Block slab, DropTable dropTable, Item.Settings settings) {
+	public static BlockContainer MakeBlock(Block.Settings blockSettings) { return MakeBlock(blockSettings, ItemSettings()); }
+	public static BlockContainer MakeBlock(Block.Settings blockSettings, Item.Settings itemSettings) { return BuildBlock(new Block(blockSettings), itemSettings); }
+	public static BlockContainer MakeBlock(BlockConvertible base) { return MakeBlock(base, ItemSettings()); }
+	public static BlockContainer MakeBlock(BlockConvertible base, Item.Settings settings) { return BuildBlock(new Block(Block.Settings.copy(base.asBlock())), settings); }
+	public static BlockContainer MakeBlock(Block base) { return MakeBlock(base, ItemSettings()); }
+	public static BlockContainer MakeBlock(Block base, Item.Settings settings) { return BuildBlock(new Block(Block.Settings.copy(base)), settings); }
+	public static BlockContainer BuildBlock(Block block) { return BuildBlock(block, ItemSettings()); }
+	public static BlockContainer BuildBlock(Block block, Item.Settings settings) { return BuildBlock(block, null, settings); }
+	public static BlockContainer BuildBlock(Block block, DropTable dropTable) { return BuildBlock(block, dropTable, ItemSettings()); }
+	public static BlockContainer BuildBlock(Block block, DropTable dropTable, Item.Settings settings) {
+		BlockContainer container = new BlockContainer(block, settings);
+		return dropTable == null ? container.dropSelf() : container.drops(dropTable);
+	}
+
+	public static BlockContainer MakeSlab(BlockConvertible base) { return MakeSlab(base, ItemSettings()); }
+	public static BlockContainer MakeSlab(BlockConvertible base, Item.Settings settings) { return BuildSlab(new ModSlabBlock(base), settings); }
+	public static BlockContainer MakeSlab(Block base) { return MakeSlab(base, ItemSettings()); }
+	public static BlockContainer MakeSlab(Block base, Item.Settings settings) { return BuildSlab(new ModSlabBlock(base), settings); }
+	public static BlockContainer BuildSlab(Block slab) { return BuildSlab(slab, ItemSettings()); }
+	public static BlockContainer BuildSlab(Block slab, Item.Settings settings) { return BuildSlab(slab, null, settings); }
+	public static BlockContainer BuildSlab(Block slab, DropTable dropTable) { return BuildSlab(slab, dropTable, ItemSettings()); }
+	public static BlockContainer BuildSlab(Block slab, DropTable dropTable, Item.Settings settings) {
 		BlockContainer container = new BlockContainer(slab, settings);
 		return dropTable == null ? container.dropSlabs() : container.drops(dropTable);
 	}
 
-	public static BlockContainer MakeStairs(BlockConvertible base) { return Stairs(new ModStairsBlock(base)); }
-	public static BlockContainer MakeStairs(BlockConvertible base, DropTable dropTable) { return Stairs(new ModStairsBlock(base), dropTable); }
-	public static BlockContainer MakeStairs(BlockConvertible base, BlockConvertibleFactory factory) { return Stairs(factory.create(base)); }
-	public static BlockContainer MakeStairs(BlockConvertible base, BlockConvertibleFactory factory, DropTable dropTable) { return Stairs(factory.create(base), dropTable); }
-	public static BlockContainer MakeStairs(BlockConvertible base, Item.Settings settings) { return Stairs(new ModStairsBlock(base), settings); }
-	public static BlockContainer MakeStairs(BlockConvertible base, DropTable dropTable, Item.Settings settings) { return Stairs(new ModStairsBlock(base), dropTable, settings); }
-	public static BlockContainer MakeStairs(BlockConvertible base, BlockConvertibleFactory factory, Item.Settings settings) { return Stairs(factory.create(base), settings); }
-	public static BlockContainer MakeStairs(BlockConvertible base, BlockConvertibleFactory factory, DropTable dropTable, Item.Settings settings) { return Stairs(factory.create(base), dropTable, settings); }
-	public static BlockContainer MakeStairs(Block base) { return Stairs(new ModStairsBlock(base)); }
-	public static BlockContainer MakeStairs(Block base, DropTable dropTable) { return Stairs(new ModStairsBlock(base), dropTable); }
-	public static BlockContainer MakeStairs(Block base, BlockFactory factory) { return Stairs(factory.create(base)); }
-	public static BlockContainer MakeStairs(Block base, BlockFactory factory, DropTable dropTable) { return Stairs(factory.create(base), dropTable); }
-	public static BlockContainer MakeStairs(Block base, Item.Settings settings) { return Stairs(new ModStairsBlock(base), settings); }
-	public static BlockContainer MakeStairs(Block base, DropTable dropTable, Item.Settings settings) { return Stairs(new ModStairsBlock(base), dropTable, settings); }
-	public static BlockContainer MakeStairs(Block base, BlockFactory factory, Item.Settings settings) { return Stairs(factory.create(base), settings); }
-	public static BlockContainer MakeStairs(Block base, BlockFactory factory, DropTable dropTable, Item.Settings settings) { return Stairs(factory.create(base), dropTable, settings); }
-	public static BlockContainer Stairs(Block stairs) { return Stairs(stairs, ItemSettings()); }
-	public static BlockContainer Stairs(Block stairs, Item.Settings settings) { return Stairs(stairs, null, settings); }
-	public static BlockContainer Stairs(Block stairs, DropTable dropTable) { return Stairs(stairs, dropTable, ItemSettings()); }
-	public static BlockContainer Stairs(Block stairs, DropTable dropTable, Item.Settings settings) {
+	public static BlockContainer MakeStairs(BlockConvertible base) { return MakeStairs(base, ItemSettings()); }
+	public static BlockContainer MakeStairs(BlockConvertible base, Item.Settings settings) { return BuildStairs(new ModStairsBlock(base), settings); }
+	public static BlockContainer MakeStairs(Block base) { return MakeStairs(base, ItemSettings()); }
+	public static BlockContainer MakeStairs(Block base, Item.Settings settings) { return BuildStairs(new ModStairsBlock(base), settings); }
+	public static BlockContainer BuildStairs(Block stairs) { return BuildStairs(stairs, ItemSettings()); }
+	public static BlockContainer BuildStairs(Block stairs, Item.Settings settings) { return BuildStairs(stairs, null, settings); }
+	public static BlockContainer BuildStairs(Block stairs, DropTable dropTable) { return BuildStairs(stairs, dropTable, ItemSettings()); }
+	public static BlockContainer BuildStairs(Block stairs, DropTable dropTable, Item.Settings settings) {
 		BlockContainer container = new BlockContainer(stairs, settings);
 		return dropTable == null ? container.dropSelf() : container.drops(dropTable);
 	}
 
-	public static BlockContainer MakeWall(BlockConvertible base) { return Wall(new ModWallBlock(base)); }
-	public static BlockContainer MakeWall(BlockConvertible base, DropTable dropTable) { return Wall(new ModWallBlock(base), dropTable); }
-	public static BlockContainer MakeWall(BlockConvertible base, BlockConvertibleFactory factory) { return Wall(factory.create(base)); }
-	public static BlockContainer MakeWall(BlockConvertible base, BlockConvertibleFactory factory, DropTable dropTable) { return Wall(factory.create(base), dropTable); }
-	public static BlockContainer MakeWall(BlockConvertible base, Item.Settings settings) { return Wall(new ModWallBlock(base), settings); }
-	public static BlockContainer MakeWall(BlockConvertible base, DropTable dropTable, Item.Settings settings) { return Wall(new ModWallBlock(base), dropTable, settings); }
-	public static BlockContainer MakeWall(BlockConvertible base, BlockConvertibleFactory factory, Item.Settings settings) { return Wall(factory.create(base), settings); }
-	public static BlockContainer MakeWall(BlockConvertible base, BlockConvertibleFactory factory, DropTable dropTable, Item.Settings settings) { return Wall(factory.create(base), dropTable, settings); }
-	public static BlockContainer MakeWall(Block base) { return Wall(new ModWallBlock(base)); }
-	public static BlockContainer MakeWall(Block base, DropTable dropTable) { return Wall(new ModWallBlock(base), dropTable); }
-	public static BlockContainer MakeWall(Block base, BlockFactory factory) { return Wall(factory.create(base)); }
-	public static BlockContainer MakeWall(Block base, BlockFactory factory, DropTable dropTable) { return Wall(factory.create(base), dropTable); }
-	public static BlockContainer MakeWall(Block base, Item.Settings settings) { return Wall(new ModWallBlock(base), settings); }
-	public static BlockContainer MakeWall(Block base, DropTable dropTable, Item.Settings settings) { return Wall(new ModWallBlock(base), dropTable, settings); }
-	public static BlockContainer MakeWall(Block base, BlockFactory factory, Item.Settings settings) { return Wall(factory.create(base), settings); }
-	public static BlockContainer MakeWall(Block base, BlockFactory factory, DropTable dropTable, Item.Settings settings) { return Wall(factory.create(base), dropTable, settings); }
-	public static BlockContainer Wall(Block wall) { return Wall(wall, ItemSettings()); }
-	public static BlockContainer Wall(Block wall, Item.Settings settings) { return Wall(wall, null, settings); }
-	public static BlockContainer Wall(Block wall, DropTable dropTable) { return Wall(wall, dropTable, ItemSettings()); }
-	public static BlockContainer Wall(Block wall, DropTable dropTable, Item.Settings settings) {
+	public static BlockContainer MakeWall(BlockConvertible base) { return MakeWall(base, ItemSettings()); }
+	public static BlockContainer MakeWall(BlockConvertible base, Item.Settings settings) { return BuildWall(new ModWallBlock(base), settings); }
+	public static BlockContainer MakeWall(Block base) { return MakeWall(base, ItemSettings()); }
+	public static BlockContainer MakeWall(Block base, Item.Settings settings) { return BuildWall(new ModWallBlock(base), settings); }
+	public static BlockContainer BuildWall(Block wall) { return BuildWall(wall, ItemSettings()); }
+	public static BlockContainer BuildWall(Block wall, Item.Settings settings) { return BuildWall(wall, null, settings); }
+	public static BlockContainer BuildWall(Block wall, DropTable dropTable) { return BuildWall(wall, dropTable, ItemSettings()); }
+	public static BlockContainer BuildWall(Block wall, DropTable dropTable, Item.Settings settings) {
 		BlockContainer container = new BlockContainer(wall, settings);
 		return dropTable == null ? container.dropSelf() : container.drops(dropTable);
 	}
@@ -468,35 +443,6 @@ public class ModFactory {
 	public static BlockContainer MakeBarrel(MapColor color, BlockSoundGroup soundGroup) {
 		return new BlockContainer(new ModBarrelBlock(Block.Settings.of(Material.WOOD).mapColor(color).strength(2.5f).sounds(soundGroup)))
 				.drops(BlockLootTableGenerator::nameableContainerDrops);
-	}
-
-	private static final BlockConvertibleFactory copyBlockConvertibleFactory = block -> new Block(Block.Settings.copy(block.asBlock()));
-	private static final BlockFactory copyBlockFactory = block -> new Block(Block.Settings.copy(block));
-
-	public static BlockContainer MakeBlock(Block.Settings blockSettings) { return Block(new Block(blockSettings)); }
-	public static BlockContainer MakeBlock(Block.Settings blockSettings, Item.Settings itemSettings) { return Block(new Block(blockSettings), itemSettings); }
-	public static BlockContainer MakeBlock(BlockConvertible base) { return Block(new Block(Block.Settings.copy(base.asBlock()))); }
-	public static BlockContainer MakeBlock(BlockConvertible base, DropTable dropTable) { return Block(new Block(Block.Settings.copy(base.asBlock())), dropTable); }
-	public static BlockContainer MakeBlock(BlockConvertible base, BlockConvertibleFactory factory) { return Block(factory.create(base)); }
-	public static BlockContainer MakeBlock(BlockConvertible base, BlockConvertibleFactory factory, DropTable dropTable) { return Block(factory.create(base), dropTable); }
-	public static BlockContainer MakeBlock(BlockConvertible base, Item.Settings settings) { return Block(new Block(Block.Settings.copy(base.asBlock())), settings); }
-	public static BlockContainer MakeBlock(BlockConvertible base, DropTable dropTable, Item.Settings settings) { return Block(new Block(Block.Settings.copy(base.asBlock())), dropTable, settings); }
-	public static BlockContainer MakeBlock(BlockConvertible base, BlockConvertibleFactory factory, Item.Settings settings) { return Block(factory.create(base), settings); }
-	public static BlockContainer MakeBlock(BlockConvertible base, BlockConvertibleFactory factory, DropTable dropTable, Item.Settings settings) { return Block(factory.create(base), dropTable, settings); }
-	public static BlockContainer MakeBlock(Block base) { return Block(new Block(Block.Settings.copy(base))); }
-	public static BlockContainer MakeBlock(Block base, DropTable dropTable) { return Block(new Block(Block.Settings.copy(base)), dropTable); }
-	public static BlockContainer MakeBlock(Block base, BlockFactory factory) { return Block(factory.create(base)); }
-	public static BlockContainer MakeBlock(Block base, BlockFactory factory, DropTable dropTable) { return Block(factory.create(base), dropTable); }
-	public static BlockContainer MakeBlock(Block base, Item.Settings settings) { return Block(new Block(Block.Settings.copy(base)), settings); }
-	public static BlockContainer MakeBlock(Block base, DropTable dropTable, Item.Settings settings) { return Block(new Block(Block.Settings.copy(base)), dropTable, settings); }
-	public static BlockContainer MakeBlock(Block base, BlockFactory factory, Item.Settings settings) { return Block(factory.create(base), settings); }
-	public static BlockContainer MakeBlock(Block base, BlockFactory factory, DropTable dropTable, Item.Settings settings) { return Block(factory.create(base), dropTable, settings); }
-	public static BlockContainer Block(Block block) { return Block(block, ItemSettings()); }
-	public static BlockContainer Block(Block block, Item.Settings settings) { return Block(block, null, settings); }
-	public static BlockContainer Block(Block block, DropTable dropTable) { return Block(block, dropTable, ItemSettings()); }
-	public static BlockContainer Block(Block block, DropTable dropTable, Item.Settings settings) {
-		BlockContainer container = new BlockContainer(block, settings);
-		return dropTable == null ? container.dropSelf() : container.drops(dropTable);
 	}
 
 	public static BlockContainer MakeLectern(MapColor color) { return MakeLectern(color, BlockSoundGroup.WOOD); }

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:feather"
+    "minecraft:feather",
+    "wich:fancy_feather",
+    "wich:black_feather",
+    "wich:red_feather"
   ]
 }

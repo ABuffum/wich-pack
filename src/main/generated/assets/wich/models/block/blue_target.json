@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "wich:block/blue_target_top",
+    "side": "wich:block/blue_target_side"
+  }
+}
