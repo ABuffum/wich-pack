@@ -220,8 +220,16 @@ public class ModFactory {
 		return new BlockContainer(new OxidizableChainBlock(level, ChainSettings())).dropSelf();
 	}
 
-	public static BedContainer MakeBed(String name) {
-		BedContainer bed = new BedContainer(name);
+	public static Block.Settings BedSettings(MapColor color, BlockSoundGroup sounds, ToIntFunction<BlockState> luminance) {
+		Block.Settings output = AbstractBlock.Settings.copy(Blocks.WHITE_BED).mapColor(color).sounds(sounds);
+		return luminance == null ? output : output.luminance(luminance);
+	}
+
+	public static BedContainer MakeBed(String name) { return MakeBed(name, MapColor.WHITE); }
+	public static BedContainer MakeBed(String name, MapColor color) { return MakeBed(name, color, BlockSoundGroup.WOOD); }
+	public static BedContainer MakeBed(String name, MapColor color, BlockSoundGroup sounds) { return MakeBed(name, color, sounds, null); }
+	public static BedContainer MakeBed(String name, MapColor color, BlockSoundGroup sounds, ToIntFunction<BlockState> luminance) {
+		BedContainer bed = new BedContainer(name, BedSettings(color, sounds, luminance), ItemSettings().maxCount(1));
 		BlockLootGenerator.Drops.put(bed.asBlock(), DropTable.BED);
 		return bed;
 	}

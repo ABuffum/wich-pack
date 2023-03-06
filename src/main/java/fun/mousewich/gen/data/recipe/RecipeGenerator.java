@@ -761,7 +761,14 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeCarpet(RAINBOW_CARPET, RAINBOW_WOOL).offerTo(exporter);
 		//Recipes.MakeBed(RAINBOW_BED, Ingredient.ofItems(RAINBOW_WOOL, RAINBOW_FLEECE)).offerTo(exporter);
 		//</editor-fold>
-		//<editor-fold desc="More Moss">
+		//<editor-fold desc="Glow Lichen">
+		Recipes.Make3x3(GLOW_LICHEN_BLOCK, Items.GLOW_LICHEN).offerTo(exporter);
+		Recipes.MakeShapeless(Items.GLOW_LICHEN, GLOW_LICHEN_BLOCK, 9).offerTo(exporter, ID("glow_lichen_from_glow_lichen_block"));
+		Recipes.MakeSlab(GLOW_LICHEN_SLAB, GLOW_LICHEN_BLOCK).offerTo(exporter);
+		Recipes.MakeCarpet(GLOW_LICHEN_CARPET, GLOW_LICHEN_BLOCK).offerTo(exporter);
+		//Recipes.MakeBed(GLOW_LICHEN_BED, GLOW_LICHEN_BLOCK).offerTo(exporter);
+		//</editor-fold>
+		//<editor-fold desc="Moss">
 		Recipes.MakeSlab(MOSS_SLAB, Items.MOSS_BLOCK).offerTo(exporter);
 		//Recipes.MakeBed(MOSS_BED, Items.MOSS_BLOCK).offerTo(exporter);
 		//</editor-fold>

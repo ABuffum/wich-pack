@@ -14,7 +14,9 @@ import net.minecraft.world.gen.feature.UndergroundConfiguredFeatures;
 import java.util.Random;
 
 public class MossSlabBlock extends ModSlabBlock implements Fertilizable {
+	public MossSlabBlock(BlockConvertible block) { super(block); }
 	public MossSlabBlock(Block block) { super(block); }
+	public MossSlabBlock(Settings settings) { super(settings); }
 
 	@Override
 	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {

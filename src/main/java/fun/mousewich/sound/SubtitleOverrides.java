@@ -185,7 +185,7 @@ public class SubtitleOverrides {
 		Register(SoundEvents.ENTITY_WITHER_SKELETON_STEP, "entity.wither_skeleton.step", EN_US.steps(EN_US.WitherSkeleton()));
 		Register(SoundEvents.ENTITY_WOLF_HOWL, "entity.wolf.howl", EN_US.howls(EN_US.Wolf()));
 		Register(SoundEvents.ENTITY_WOLF_STEP, "entity.wolf.step", EN_US.steps(EN_US.Wolf()));
-		Register(SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, "entity.zombie.attack_iron_door", EN_US.DoorClangs());
+		Register(SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, "entity.zombie.attack_iron_door", EN_US.clangs(EN_US.Door()));
 		Register(SoundEvents.ENTITY_ZOMBIE_STEP, "entity.zombie.step", EN_US.steps(EN_US.Zombie()));
 		Register(SoundEvents.ENTITY_ZOMBIE_VILLAGER_STEP, "entity.zombie_villager.step", EN_US.steps(EN_US.ZombieVillager()));
 		//</editor-fold>

@@ -152,6 +152,8 @@ public class ModClient implements ClientModInitializer {
 		setLayer(layer, BUTTERCUP, PINK_DAISY, ROSE, BLUE_ROSE, MAGENTA_TULIP, MARIGOLD, INDIGO_ORCHID, MAGENTA_ORCHID);
 		setLayer(layer, ORANGE_ORCHID, PURPLE_ORCHID, RED_ORCHID, WHITE_ORCHID, YELLOW_ORCHID, PINK_ALLIUM, LAVENDER);
 		setLayer(layer, HYDRANGEA, PAEONIA, ASTER);
+		//Misc
+		setLayer(layer, BLUE_MUSHROOM, MYCELIUM_ROOTS);
 	}
 	private static void InitializeTranslucent() {
 		RenderLayer Translucent = RenderLayer.getTranslucent();

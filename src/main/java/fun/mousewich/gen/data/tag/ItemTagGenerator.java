@@ -238,6 +238,8 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.add(Items.COOKED_MUTTON).add(COOKED_CHEVON)
 				.add(ItemsRegistry.COOKED_MUTTON_CHOPS.get(), ItemsRegistry.ROASTED_MUTTON_CHOPS.get())
 				.add(ItemsRegistry.MUTTON_WRAP.get(), ItemsRegistry.PASTA_WITH_MUTTON_CHOP.get());
+		getOrCreateTagBuilder(ModItemTags.DECORATED_POT_SHARDS).add(Items.BRICK)
+				.add(POTTERY_SHARD_ARCHER, POTTERY_SHARD_PRIZE, POTTERY_SHARD_ARMS_UP, POTTERY_SHARD_SKULL);
 		getOrCreateTagBuilder(ModItemTags.EDIBLE_BEEF).addTag(ModItemTags.RAW_BEEF).addTag(ModItemTags.COOKED_BEEF);
 		getOrCreateTagBuilder(ModItemTags.EDIBLE_BIRD).addTag(ModItemTags.RAW_BIRD).addTag(ModItemTags.COOKED_BIRD);
 		getOrCreateTagBuilder(ModItemTags.EDIBLE_EGG)

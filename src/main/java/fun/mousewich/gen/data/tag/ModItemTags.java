@@ -30,6 +30,7 @@ public class ModItemTags {
 	public static final TagKey<Item> COOKED_RABBIT = createTag("cooked_rabbit");
 	public static final TagKey<Item> COOKED_SEAFOOD = createTag("cooked_seafood");
 	public static final TagKey<Item> COOKED_SHEEP = createTag("cooked_sheep");
+	public static final TagKey<Item> DECORATED_POT_SHARDS = createTag("decorated_pot_shards");
 	public static final TagKey<Item> EDIBLE_BEEF = createTag("edible_beef");
 	public static final TagKey<Item> EDIBLE_BIRD = createTag("edible_bird");
 	public static final TagKey<Item> EDIBLE_EGG = createTag("edible_egg");

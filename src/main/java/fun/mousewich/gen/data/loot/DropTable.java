@@ -3,6 +3,7 @@ package fun.mousewich.gen.data.loot;
 import fun.mousewich.gen.data.tag.ModItemTags;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.enums.BedPart;
 import net.minecraft.block.enums.SlabType;
@@ -41,6 +42,7 @@ public interface DropTable {
 
 	static DropTable Drops(ItemConvertible item) { return (block) -> BlockLootTableGenerator.drops(item); }
 	static DropTable CandleCake(Block candle) { return (block) -> BlockLootTableGenerator.candleCakeDrops(candle); }
+	static DropTable Mushroom(ItemConvertible mushroom) { return (block) -> BlockLootTableGenerator.mushroomBlockDrops(block, mushroom); }
 	static DropTable Potted(ItemConvertible plant) { return (block) -> BlockLootTableGenerator.pottedPlantDrops(plant); }
 	static DropTable WithSilkTouch(ItemConvertible item) { return (block) -> BlockLootTableGenerator.dropsWithSilkTouch(item); }
 

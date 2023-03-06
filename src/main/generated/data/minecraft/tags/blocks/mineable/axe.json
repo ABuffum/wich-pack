@@ -9,6 +9,8 @@
     "minecraft:bamboo_block",
     "minecraft:stripped_bamboo_block",
     "minecraft:mangrove_roots",
-    "wich:ender_campfire"
+    "wich:ender_campfire",
+    "wich:blue_mushroom",
+    "wich:blue_mushroom_block"
   ]
 }

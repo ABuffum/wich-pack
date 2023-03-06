@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/glow_lichen_slab"
+    },
+    "type=double": {
+      "model": "wich:block/glow_lichen_block"
+    },
+    "type=top": {
+      "model": "wich:block/glow_lichen_slab_top"
+    }
+  }
+}

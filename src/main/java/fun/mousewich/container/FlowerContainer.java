@@ -20,7 +20,7 @@ public class FlowerContainer extends PottedBlockContainer {
 	public FlowerContainer(StatusEffect effect, int effectDuration, AbstractBlock.Settings settings, Item.Settings itemSettings) {
 		this(new FlowerBlock(effect, effectDuration, settings), itemSettings);
 	}
-	public FlowerContainer(FlowerBlock block) { this(block, ModFactory.ItemSettings()); }
+	public FlowerContainer(FlowerBlock block) { super(block); }
 	public FlowerContainer(FlowerBlock block, Item.Settings settings) { super(block, settings); }
 	public FlowerContainer flammable(int burn, int spread) { return (FlowerContainer)super.flammable(burn, spread); }
 	public FlowerContainer compostable(float chance) { return (FlowerContainer)super.compostable(chance); }

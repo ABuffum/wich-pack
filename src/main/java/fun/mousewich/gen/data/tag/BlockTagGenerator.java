@@ -27,7 +27,8 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(BAMBOO_MOSAIC.asBlock(), BAMBOO_MOSAIC_STAIRS.asBlock(), BAMBOO_MOSAIC_SLAB.asBlock())
 				.add(BAMBOO_BLOCK.asBlock(), STRIPPED_BAMBOO_BLOCK.asBlock())
 				.add(MANGROVE_ROOTS.asBlock())
-				.add(ENDER_CAMPFIRE.asBlock());
+				.add(ENDER_CAMPFIRE.asBlock())
+				.add(BLUE_MUSHROOM.asBlock(), BLUE_MUSHROOM_BLOCK.asBlock());
 		getOrCreateTagBuilder(BlockTags.BASE_STONE_NETHER).add(Blocks.NETHERRACK, Blocks.BASALT, Blocks.BLACKSTONE);
 		getOrCreateTagBuilder(BlockTags.BASE_STONE_OVERWORLD)
 				.add(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.TUFF, Blocks.DEEPSLATE);
@@ -42,7 +43,8 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(BlockTags.CARPETS)
 				.add(RAINBOW_CARPET.asBlock())
 				.add(FLEECE_CARPETS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(RAINBOW_FLEECE_CARPET.asBlock());
+				.add(RAINBOW_FLEECE_CARPET.asBlock())
+				.add(GLOW_LICHEN_CARPET.asBlock());
 		getOrCreateTagBuilder(BlockTags.CLIMBABLE).add(BONE_LADDER.asBlock())
 				.add(ACACIA_LADDER.asBlock(), BIRCH_LADDER.asBlock(), DARK_OAK_LADDER.asBlock())
 				.add(JUNGLE_LADDER.asBlock(), Blocks.LADDER, SPRUCE_LADDER.asBlock())
@@ -57,6 +59,7 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(AMETHYST_BRICK_STAIRS.asBlock(), AMETHYST_BRICK_WALL.asBlock());
 		getOrCreateTagBuilder(BlockTags.DIRT).add(MUD.asBlock(), MUDDY_MANGROVE_ROOTS.asBlock());
 		getOrCreateTagBuilder(BlockTags.DRAGON_IMMUNE).add(REINFORCED_DEEPSLATE.asBlock());
+		getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE).add(BLUE_MUSHROOM.asBlock(), MYCELIUM_ROOTS.asBlock());
 		getOrCreateTagBuilder(BlockTags.FEATURES_CANNOT_REPLACE).add(REINFORCED_DEEPSLATE.asBlock());
 		getOrCreateTagBuilder(BlockTags.FENCE_GATES)
 				.add(CHARRED_FENCE_GATE.asBlock())
@@ -67,7 +70,8 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(MAGENTA_TULIP.getPottedBlock(), MARIGOLD.getPottedBlock(), INDIGO_ORCHID.getPottedBlock(), MAGENTA_ORCHID.getPottedBlock())
 				.add(ORANGE_ORCHID.getPottedBlock(), PURPLE_ORCHID.getPottedBlock(), RED_ORCHID.getPottedBlock(), WHITE_ORCHID.getPottedBlock())
 				.add(YELLOW_ORCHID.getPottedBlock(), PINK_ALLIUM.getPottedBlock(), LAVENDER.getPottedBlock(), HYDRANGEA.getPottedBlock())
-				.add(PAEONIA.getPottedBlock(), ASTER.getPottedBlock());
+				.add(PAEONIA.getPottedBlock(), ASTER.getPottedBlock())
+				.add(BLUE_MUSHROOM.getPottedBlock(), MYCELIUM_ROOTS.getPottedBlock());
 		getOrCreateTagBuilder(BlockTags.FLOWERS).add(CHERRY_LEAVES.asBlock(), PINK_PETALS.asBlock());
 		getOrCreateTagBuilder(BlockTags.GUARDED_BY_PIGLINS)
 				.add(POLISHED_GILDED_BLACKSTONE.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICKS.asBlock())

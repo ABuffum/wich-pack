@@ -1,5 +1,6 @@
 package fun.mousewich.container;
 
+import fun.mousewich.ModFactory;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import fun.mousewich.gen.data.loot.DropTable;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -19,6 +20,7 @@ public class PottedBlockContainer implements IBlockItemContainer {
 	private final Block potted;
 	public Block getPottedBlock() { return potted; }
 
+	public PottedBlockContainer(Block block) { this(block, ModFactory.ItemSettings()); }
 	public PottedBlockContainer(Block block, Item.Settings itemSettings) {
 		this.block = block;
 		item = new BlockItem(this.block, itemSettings);
@@ -33,6 +35,11 @@ public class PottedBlockContainer implements IBlockItemContainer {
 	}
 	public PottedBlockContainer compostable(float chance) {
 		CompostingChanceRegistry.INSTANCE.add(this.asItem(), chance);
+		return this;
+	}
+	public PottedBlockContainer requireSilkTouch() {
+		BlockLootGenerator.Drops.put(this.asBlock(), DropTable.WithSilkTouch(this.asItem()));
+		BlockLootGenerator.Drops.put(this.getPottedBlock(), DropTable.Potted(this.asItem()));
 		return this;
 	}
 	public PottedBlockContainer dropSelf() {

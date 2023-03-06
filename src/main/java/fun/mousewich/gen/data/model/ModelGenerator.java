@@ -34,9 +34,13 @@ public class ModelGenerator extends FabricModelProvider {
 		Block block = container.asBlock();
 		bsmg.registerSimpleState(block);
 	}
-	public static void explicitModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+	public static void explicitBlockParentedItem(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
 		explicitModelCommon(bsmg, container);
-		parentedItem(bsmg, container.asItem(), container.asBlock());
+		parentedItem(bsmg, container);
+	}
+	public static void explicitBlockGeneratedItem(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+		explicitModelCommon(bsmg, container);
+		generatedItemModel(bsmg, container);
 	}
 	public static void singletonModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, TexturedModel.Factory factory) {
 		parentedItem(bsmg, (b) -> bsmg.registerSingleton(b, factory), container);
@@ -52,6 +56,7 @@ public class ModelGenerator extends FabricModelProvider {
 		blockModel.apply(block);
 		parentedItem(bsmg, item, block);
 	}
+	public static void generatedItemModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) { generatedItemModel(bsmg, container.asItem(), container.asBlock()); }
 	public static void generatedItemModel(BlockStateModelGenerator bsmg, Item item, Block block) {
 		Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(block), bsmg.modelCollector);
 	}
@@ -108,13 +113,33 @@ public class ModelGenerator extends FabricModelProvider {
 		Identifier identifier2 = Models.CROSS.upload(doubleBlock, "_bottom", TextureMap.cross(bottomModel), bsmg.modelCollector);
 		bsmg.registerDoubleBlock(doubleBlock, identifier, identifier2);
 	}
-	public static void flowerPotPlantModel(BlockStateModelGenerator bsmg, PottedBlockContainer potted) {
-		Block plantBlock = potted.asBlock(), flowerPotBlock = potted.getPottedBlock();
-		bsmg.registerItemModel(plantBlock);
-		Identifier identifier = Models.CROSS.upload(plantBlock, TextureMap.cross(plantBlock), bsmg.modelCollector);
-		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(plantBlock, identifier));
-		Identifier identifier2 = Models.FLOWER_POT_CROSS.upload(flowerPotBlock, TextureMap.plant(plantBlock), bsmg.modelCollector);
-		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(flowerPotBlock, identifier2));
+	public static void amethystModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+		Block block = container.asBlock();
+		bsmg.registerAmethyst(block);
+		generatedItemModel(bsmg, container.asItem(), block);
+	}
+	public static void crossModel(BlockStateModelGenerator bsmg, Block block) { crossModel(bsmg, TextureMap.cross(block), block); }
+	public static void crossModel(BlockStateModelGenerator bsmg, TextureMap cross, Block block) {
+		bsmg.registerItemModel(block);
+		Identifier identifier = Models.CROSS.upload(block, cross, bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier));
+	}
+	public static void potModel(BlockStateModelGenerator bsmg, PottedBlockContainer container) { potModel(bsmg, TextureMap.plant(container.asBlock()), container.getPottedBlock()); }
+	public static void potModel(BlockStateModelGenerator bsmg, TextureMap pottedCross, Block potted) {
+		Identifier identifier2 = Models.FLOWER_POT_CROSS.upload(potted, pottedCross, bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(potted, identifier2));
+	}
+	private static void pottedModelCommon(BlockStateModelGenerator bsmg, TextureMap cross, TextureMap pottedCross, PottedBlockContainer container) {
+		crossModel(bsmg, cross, container.asBlock());
+		potModel(bsmg, pottedCross, container.getPottedBlock());
+	}
+	public static void pottedModel(BlockStateModelGenerator bsmg, PottedBlockContainer container) {
+		Block block = container.asBlock();
+		pottedModelCommon(bsmg, TextureMap.cross(block), TextureMap.plant(block), container);
+	}
+	public static void rootsModel(BlockStateModelGenerator bsmg, PottedBlockContainer container) {
+		Block block = container.asBlock();
+		pottedModelCommon(bsmg, TextureMap.cross(block), TextureMap.plant(TextureMap.getSubId(block, "_pot")), container);
 	}
 	public static void paneModel(BlockStateModelGenerator bsmg, IBlockItemContainer pane, Block baseBlock) {
 		Block paneBlock = pane.asBlock();
@@ -177,6 +202,7 @@ public class ModelGenerator extends FabricModelProvider {
 		Identifier inventory = postfixPath(id, "_inventory");
 		wallModelCommon(bsmg, container, post, side, sideTall, inventory);
 	}
+	public static void mushroomBlockModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) { bsmg.registerMushroomBlock(container.asBlock()); }
 	public static void doorModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
 		Block block = container.asBlock();
 		TextureMap textureMap = TextureMap.topBottom(block);
@@ -1072,11 +1098,16 @@ public class ModelGenerator extends FabricModelProvider {
 		wallModel(bsmg, POLISHED_GILDED_BLACKSTONE_BRICK_WALL, POLISHED_GILDED_BLACKSTONE_BRICKS);
 		cubeAllModel(bsmg, CHISELED_POLISHED_GILDED_BLACKSTONE);
 		cubeAllModel(bsmg, CRACKED_POLISHED_GILDED_BLACKSTONE_BRICKS);
+		//Blue Mushroom
+		mushroomBlockModel(bsmg, BLUE_MUSHROOM_BLOCK);
+		explicitBlockGeneratedItem(bsmg, BLUE_MUSHROOM);
+		potModel(bsmg, BLUE_MUSHROOM);
 		//Misc
 		slabModel(bsmg, COAL_SLAB, Blocks.COAL_BLOCK);
 		cubeAllModel(bsmg, CHARCOAL_BLOCK);
 		slabModel(bsmg, CHARCOAL_SLAB, CHARCOAL_BLOCK);
 		slabModel(bsmg, COARSE_DIRT_SLAB, Blocks.COARSE_DIRT);
+		cubeAllModel(bsmg, COCOA_BLOCK);
 		cubeAllModel(bsmg, BLUE_SHROOMLIGHT);
 		singletonModel(bsmg, BLUE_TARGET, TexturedModel.CUBE_COLUMN);
 		cubeAllModel(bsmg, FLINT_BLOCK);
@@ -1085,8 +1116,8 @@ public class ModelGenerator extends FabricModelProvider {
 		slabModel(bsmg, FLINT_BRICK_SLAB, FLINT_BRICKS);
 		stairsModel(bsmg, FLINT_BRICK_STAIRS, FLINT_BRICKS);
 		wallModel(bsmg, FLINT_BRICK_WALL, FLINT_BRICKS);
-		explicitModel(bsmg, HEDGE_BLOCK);
-		cubeAllModel(bsmg, COCOA_BLOCK);
+		explicitBlockParentedItem(bsmg, HEDGE_BLOCK);
+		rootsModel(bsmg, MYCELIUM_ROOTS);
 		cubeAllModel(bsmg, SEED_BLOCK);
 		glazedTerracottaModel(bsmg, GLAZED_TERRACOTTA);
 		cubeAllModel(bsmg, WAX_BLOCK);
@@ -1109,6 +1140,11 @@ public class ModelGenerator extends FabricModelProvider {
 		rainbowSlabModel(bsmg, RAINBOW_FLEECE_SLAB, RAINBOW_FLEECE.asBlock());
 		rainbowCarpetModel(bsmg, RAINBOW_FLEECE_CARPET, RAINBOW_FLEECE.asBlock());
 		generatedItemModels(bsmg, FLEECE_HELMET, FLEECE_CHESTPLATE, FLEECE_LEGGINGS, FLEECE_BOOTS, FLEECE_HORSE_ARMOR);
+		//Glow Lichen
+		slabModel(bsmg, GLOW_LICHEN_SLAB, GLOW_LICHEN_BLOCK);
+		bsmg.registerWoolAndCarpet(GLOW_LICHEN_BLOCK.asBlock(), GLOW_LICHEN_CARPET.asBlock());
+		parentedItem(bsmg, GLOW_LICHEN_BLOCK);
+		parentedItem(bsmg, GLOW_LICHEN_CARPET);
 		//Moss
 		slabModel(bsmg, MOSS_SLAB, Blocks.MOSS_BLOCK);
 		//bedModel(bsmg, MOSS_BED, Blocks.MOSS_BLOCK);
@@ -1116,7 +1152,7 @@ public class ModelGenerator extends FabricModelProvider {
 		cubeAllModel(bsmg, SCULK);
 		singletonModel(bsmg, SCULK_CATALYST, TexturedModel.CUBE_BOTTOM_TOP);
 		parentedItem(bsmg, SCULK_SHRIEKER);
-		generatedItemModel(bsmg, SCULK_VEIN.asItem(), SCULK_VEIN.asBlock());
+		generatedItemModel(bsmg, SCULK_VEIN);
 		singletonModel(bsmg, REINFORCED_DEEPSLATE, TexturedModel.CUBE_BOTTOM_TOP);
 		//Extended Echo
 		cubeAllModel(bsmg, ECHO_BLOCK);
@@ -1128,14 +1164,10 @@ public class ModelGenerator extends FabricModelProvider {
 		stairsModel(bsmg, ECHO_CRYSTAL_STAIRS, ECHO_CRYSTAL_BLOCK);
 		wallModel(bsmg, ECHO_CRYSTAL_WALL, ECHO_CRYSTAL_BLOCK);
 		cubeAllModel(bsmg, BUDDING_ECHO);
-		bsmg.registerAmethyst(ECHO_CLUSTER.asBlock());
-		generatedItemModel(bsmg, ECHO_CLUSTER.asItem(), ECHO_CLUSTER.asBlock());
-		bsmg.registerAmethyst(LARGE_ECHO_BUD.asBlock());
-		generatedItemModel(bsmg, LARGE_ECHO_BUD.asItem(), LARGE_ECHO_BUD.asBlock());
-		bsmg.registerAmethyst(MEDIUM_ECHO_BUD.asBlock());
-		generatedItemModel(bsmg, MEDIUM_ECHO_BUD.asItem(), MEDIUM_ECHO_BUD.asBlock());
-		bsmg.registerAmethyst(SMALL_ECHO_BUD.asBlock());
-		generatedItemModel(bsmg, SMALL_ECHO_BUD.asItem(), SMALL_ECHO_BUD.asBlock());
+		amethystModel(bsmg, ECHO_CLUSTER);
+		amethystModel(bsmg, LARGE_ECHO_BUD);
+		amethystModel(bsmg, MEDIUM_ECHO_BUD);
+		amethystModel(bsmg, SMALL_ECHO_BUD);
 		cubeAllModel(bsmg, SCULK_STONE);
 		slabModel(bsmg, SCULK_STONE_SLAB, SCULK_STONE);
 		stairsModel(bsmg, SCULK_STONE_STAIRS, SCULK_STONE);
@@ -1191,7 +1223,7 @@ public class ModelGenerator extends FabricModelProvider {
 		fenceGateModel(bsmg, MANGROVE_FENCE_GATE, MANGROVE_PLANKS);
 		pressurePlateModel(bsmg, MANGROVE_PRESSURE_PLATE, MANGROVE_PLANKS);
 		signModel(bsmg, MANGROVE_SIGN, MANGROVE_PLANKS, STRIPPED_MANGROVE_LOG.asBlock());
-		explicitModel(bsmg, MANGROVE_ROOTS);
+		explicitBlockParentedItem(bsmg, MANGROVE_ROOTS);
 		uprightPillarModel(bsmg, MUDDY_MANGROVE_ROOTS);
 		bsmg.registerSimpleState(MANGROVE_PROPAGULE.getPottedBlock());
 		generatedItemModel(bsmg, MANGROVE_PROPAGULE.asItem());
@@ -1216,7 +1248,7 @@ public class ModelGenerator extends FabricModelProvider {
 		fenceGateModel(bsmg, CHERRY_FENCE_GATE, CHERRY_PLANKS);
 		pressurePlateModel(bsmg, CHERRY_PRESSURE_PLATE, CHERRY_PLANKS);
 		signModel(bsmg, CHERRY_SIGN, CHERRY_PLANKS, STRIPPED_CHERRY_LOG.asBlock());
-		flowerPotPlantModel(bsmg, CHERRY_SAPLING);
+		pottedModel(bsmg, CHERRY_SAPLING);
 		//Extended Cherry
 		bookshelfModel(bsmg, CHERRY_BOOKSHELF, CHERRY_PLANKS);
 		ladderModel(bsmg, CHERRY_LADDER);
@@ -1225,9 +1257,9 @@ public class ModelGenerator extends FabricModelProvider {
 		lecternModel(bsmg, CHERRY_LECTERN, CHERRY_PLANKS);
 		generatedItemModels(bsmg, CHERRY_BOAT, CHERRY_BOAT.getChestBoat());
 		//Pink Petals
-		generatedItemModel(bsmg, PINK_PETALS.asItem(), PINK_PETALS.asBlock());
+		generatedItemModel(bsmg, PINK_PETALS);
 		//Torchflower
-		flowerPotPlantModel(bsmg, TORCHFLOWER);
+		pottedModel(bsmg, TORCHFLOWER);
 		generatedItemModel(bsmg, TORCHFLOWER_CROP.asItem());
 		//Vanilla Bamboo
 		parentedItem(bsmg, BAMBOO_BLOCK);
@@ -1268,24 +1300,24 @@ public class ModelGenerator extends FabricModelProvider {
 		tallFlowerModel(bsmg, TALL_ALLIUM, Blocks.ALLIUM, ID("block/allium_stalk"));
 		tallFlowerModel(bsmg, TALL_PINK_ALLIUM, PINK_ALLIUM.asBlock(), ID("block/allium_stalk"));
 		//Flowers
-		flowerPotPlantModel(bsmg, BUTTERCUP);
-		flowerPotPlantModel(bsmg, PINK_DAISY);
-		flowerPotPlantModel(bsmg, ROSE);
-		flowerPotPlantModel(bsmg, BLUE_ROSE);
-		flowerPotPlantModel(bsmg, MAGENTA_TULIP);
-		flowerPotPlantModel(bsmg, MARIGOLD);
-		flowerPotPlantModel(bsmg, INDIGO_ORCHID);
-		flowerPotPlantModel(bsmg, MAGENTA_ORCHID);
-		flowerPotPlantModel(bsmg, ORANGE_ORCHID);
-		flowerPotPlantModel(bsmg, PURPLE_ORCHID);
-		flowerPotPlantModel(bsmg, RED_ORCHID);
-		flowerPotPlantModel(bsmg, WHITE_ORCHID);
-		flowerPotPlantModel(bsmg, YELLOW_ORCHID);
-		flowerPotPlantModel(bsmg, PINK_ALLIUM);
-		flowerPotPlantModel(bsmg, LAVENDER);
-		flowerPotPlantModel(bsmg, HYDRANGEA);
-		flowerPotPlantModel(bsmg, PAEONIA);
-		flowerPotPlantModel(bsmg, ASTER);
+		pottedModel(bsmg, BUTTERCUP);
+		pottedModel(bsmg, PINK_DAISY);
+		pottedModel(bsmg, ROSE);
+		pottedModel(bsmg, BLUE_ROSE);
+		pottedModel(bsmg, MAGENTA_TULIP);
+		pottedModel(bsmg, MARIGOLD);
+		pottedModel(bsmg, INDIGO_ORCHID);
+		pottedModel(bsmg, MAGENTA_ORCHID);
+		pottedModel(bsmg, ORANGE_ORCHID);
+		pottedModel(bsmg, PURPLE_ORCHID);
+		pottedModel(bsmg, RED_ORCHID);
+		pottedModel(bsmg, WHITE_ORCHID);
+		pottedModel(bsmg, YELLOW_ORCHID);
+		pottedModel(bsmg, PINK_ALLIUM);
+		pottedModel(bsmg, LAVENDER);
+		pottedModel(bsmg, HYDRANGEA);
+		pottedModel(bsmg, PAEONIA);
+		pottedModel(bsmg, ASTER);
 		//Trimming
 		generatedItemModel(bsmg, NETHERITE_UPGRADE_SMITHING_TEMPLATE);
 		for (ArmorTrimPattern pattern : ArmorTrimPattern.values()) generatedItemModel(bsmg, pattern.asItem());
@@ -1391,5 +1423,7 @@ public class ModelGenerator extends FabricModelProvider {
 		generatedItemModels(img, ECHO_AXE, ECHO_HOE, ECHO_PICKAXE, ECHO_SHOVEL, ECHO_SWORD, ECHO_KNIFE);
 		//Music Discs
 		generatedItemModels(img, MUSIC_DISC_5, DISC_FRAGMENT_5);
+		//Pottery Shards
+		generatedItemModels(img, POTTERY_SHARD_ARCHER, POTTERY_SHARD_ARMS_UP, POTTERY_SHARD_PRIZE, POTTERY_SHARD_SKULL);
 	}
 }

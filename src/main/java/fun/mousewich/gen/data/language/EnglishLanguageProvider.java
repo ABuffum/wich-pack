@@ -45,21 +45,21 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("item.minecraft.music_disc_5.desc", "Samuel Åberg - 5");
 		builder.add("item.minecraft.disc_fragment_5.desc", "Music Disc - 5");
 		//Goat Horn
-		builder.add("instrument.minecraft.ponder_goat_horn", "Ponder");
+		builder.add("instrument.minecraft.ponder_goat_horn", EN_US.Ponder());
 		builder.add("instrument.minecraft.sing_goat_horn", "Sing");
 		builder.add("instrument.minecraft.seek_goat_horn", "Seek");
 		builder.add("instrument.minecraft.feel_goat_horn", "Feel");
-		builder.add("instrument.minecraft.admire_goat_horn", "Admire");
-		builder.add("instrument.minecraft.call_goat_horn", "Call");
+		builder.add("instrument.minecraft.admire_goat_horn", EN_US.Admire());
+		builder.add("instrument.minecraft.call_goat_horn", EN_US.Call());
 		builder.add("instrument.minecraft.yearn_goat_horn", "Yearn");
-		builder.add("instrument.minecraft.dream_goat_horn", "Dream");
+		builder.add("instrument.minecraft.dream_goat_horn", EN_US.Dream());
 		builder.add("subtitles.item.goat_horn.play", EN_US.plays(EN_US.GoatHorn()));
 		//Keybinds
 		builder.add("key.wich.tertiary_active", "Active Origins Power (Tertiary)");
 		//Biomes
-		builder.add(DEEP_DARK, "Deep Dark");
-		builder.add(MANGROVE_SWAMP, "Mangrove Swamp");
-		builder.add(CHERRY_GROVE, "Cherry Grove");
+		builder.add(DEEP_DARK, EN_US.DeepDark());
+		builder.add(MANGROVE_SWAMP, EN_US.MangroveSwamp());
+		builder.add(CHERRY_GROVE, EN_US.CherryGrove());
 		//Subtitles
 		provideSubtitles(builder);
 		//Death messages

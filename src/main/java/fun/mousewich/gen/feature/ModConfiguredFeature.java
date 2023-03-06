@@ -26,12 +26,16 @@ public class ModConfiguredFeature<FC extends FeatureConfig, F extends Feature<FC
 		this.featureSupplier = featureSupplier;
 	}
 	public RegistryEntry<ConfiguredFeature<FC, F>> getRegistryEntry() {
-		if (registryEntry == null) Initialize();
-		return registryEntry;
+		if (this.registryEntry == null) Initialize();
+		return this.registryEntry;
+	}
+	public ConfiguredFeature<FC, F> getFeature() {
+		if (this.registryEntry == null) Initialize();
+		return this.feature;
 	}
 	public void Initialize() {
-		if (registryEntry != null) return;
-		if (feature == null) feature = featureSupplier.get();
-		this.registryEntry = BuiltinRegistries.method_40360(BuiltinRegistries.CONFIGURED_FEATURE, identifier.toString(), feature);
+		if (this.registryEntry != null) return;
+		if (this.feature == null) this.feature = this.featureSupplier.get();
+		this.registryEntry = BuiltinRegistries.method_40360(BuiltinRegistries.CONFIGURED_FEATURE, this.identifier.toString(), this.feature);
 	}
 }

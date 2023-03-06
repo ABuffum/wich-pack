@@ -59,7 +59,7 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 	protected void PlayStepSound(BlockPos pos, BlockState state, CallbackInfo ci) {
 		if (state.getMaterial().isLiquid()) return;
 		BlockState blockState = this.world.getBlockState(pos.up());
-		blockState = blockState.isIn(BlockTags.INSIDE_STEP_SOUND_BLOCKS) ? blockState : state;
+		blockState = blockState.isIn(BlockTags.INSIDE_STEP_SOUND_BLOCKS) || blockState.isIn(BlockTags.CARPETS) ? blockState : state;
 		if (blockState.isOf(Blocks.BARRIER) || blockState.isOf(Blocks.STRUCTURE_VOID)) { ci.cancel(); return; }
 		SoundUtil.playIdentifiedStepSound((Entity)(Object)this);
 		SoundEvent stepSound = IdentifiedSounds.getStepSound(blockState);

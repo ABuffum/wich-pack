@@ -334,13 +334,11 @@ public class IdentifiedSounds {
 				Blocks.LIME_CANDLE_CAKE, Blocks.MAGENTA_CANDLE_CAKE, Blocks.ORANGE_CANDLE_CAKE, Blocks.PINK_CANDLE_CAKE,
 				Blocks.PURPLE_CANDLE_CAKE, Blocks.RED_CANDLE_CAKE, Blocks.WHITE_CANDLE_CAKE, Blocks.YELLOW_CANDLE_CAKE,
 				/* Mod */ SOUL_CANDLE_CAKE, ENDER_CANDLE_CAKE);
-		BlockSounds carpet = new BlockSounds("carpet", List.of(EN_US.Carpet()));
-		Register(carpet, Blocks.BLACK_CARPET, Blocks.BLUE_CARPET, Blocks.BROWN_CARPET, Blocks.CYAN_CARPET,
+		Register("carpet", List.of(EN_US.Carpet()), Blocks.BLACK_CARPET, Blocks.BLUE_CARPET, Blocks.BROWN_CARPET, Blocks.CYAN_CARPET,
 				Blocks.GRAY_CARPET, Blocks.GREEN_CARPET, Blocks.LIGHT_BLUE_CARPET, Blocks.LIGHT_GRAY_CARPET,
 				Blocks.LIME_CARPET, Blocks.MAGENTA_CARPET, Blocks.ORANGE_CARPET, Blocks.PINK_CARPET,
 				Blocks.PURPLE_CARPET, Blocks.RED_CARPET, Blocks.WHITE_CARPET, Blocks.YELLOW_CARPET,
-				/* Mod */ RAINBOW_CARPET.asBlock(), RAINBOW_FLEECE_CARPET.asBlock());
-		Register(carpet, FLEECE_CARPETS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new));
+				/* Mod */ RAINBOW_CARPET.asBlock());
 		Register("cartography_table", List.of(EN_US.CartographyTable()), Blocks.CARTOGRAPHY_TABLE);
 		Register("cauldron", List.of(EN_US.Cauldron()), Blocks.CAULDRON, Blocks.WATER_CAULDRON, Blocks.LAVA_CAULDRON, Blocks.POWDER_SNOW_CAULDRON);
 		Register("cherry_door", List.of(EN_US.CherryDoor()), /* Mod */ CHERRY_DOOR.asBlock());
@@ -426,6 +424,13 @@ public class IdentifiedSounds {
 		Register("ender_chest", List.of(EN_US.EnderChest()), Blocks.ENDER_CHEST);
 		Register("farmland", List.of(EN_US.Farmland()), Blocks.FARMLAND);
 		Register("fire", List.of(EN_US.Fire()), Blocks.FIRE, Blocks.SOUL_FIRE);
+		BlockSounds fleece = new BlockSounds("fleece", List.of(EN_US.Fleece()));
+		Register(fleece, /* Mod */ RAINBOW_FLEECE_SLAB.asBlock(), RAINBOW_FLEECE.asBlock());
+		Register(fleece, /* Mod */ FLEECE.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new));
+		Register(fleece, /* Mod */ FLEECE_SLABS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new));
+		BlockSounds fleece_carpet = new BlockSounds("fleece_carpet", List.of(EN_US.Carpet(EN_US.Fleece())));
+		Register(fleece_carpet, /* Mod */ RAINBOW_FLEECE_CARPET.asBlock());
+		Register(fleece_carpet, /* Mod */ FLEECE_CARPETS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new));
 		Register("fletching_table", List.of(EN_US.FletchingTable()), Blocks.FLETCHING_TABLE);
 		Register("flint", List.of(EN_US.Flint()), /* Mod */ FLINT_BLOCK.asBlock(), FLINT_SLAB.asBlock(),
 				FLINT_BRICKS.asBlock(), FLINT_BRICK_STAIRS.asBlock(), FLINT_BRICK_SLAB.asBlock(), FLINT_BRICK_WALL.asBlock());
@@ -448,7 +453,9 @@ public class IdentifiedSounds {
 				Blocks.LIME_GLAZED_TERRACOTTA, Blocks.MAGENTA_GLAZED_TERRACOTTA, Blocks.ORANGE_GLAZED_TERRACOTTA, Blocks.PINK_GLAZED_TERRACOTTA,
 				Blocks.PURPLE_GLAZED_TERRACOTTA, Blocks.RED_GLAZED_TERRACOTTA, Blocks.WHITE_GLAZED_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA,
 				/* Mod */ GLAZED_TERRACOTTA.asBlock());
-		Register("glow_lichen", List.of(EN_US.GlowLichen()), Blocks.GLOW_LICHEN);
+		Register("glow_lichen", List.of(EN_US.GlowLichen()), Blocks.GLOW_LICHEN, /* Mod */ GLOW_LICHEN_BLOCK.asBlock(), GLOW_LICHEN_SLAB.asBlock());
+		//Register("glow_lichen_bed", List.of(EN_US.GlowLichenBed()), /* Mod */ GLOW_LICHEN_BED.asBlock());
+		Register("glow_lichen_carpet", List.of(EN_US.Carpet(EN_US.GlowLichen())), /* Mod */ GLOW_LICHEN_CARPET.asBlock());
 		Register("glowstone", List.of(EN_US.Glowstone()), Blocks.GLOWSTONE);
 		Register("gold", List.of(EN_US.Gold()), Blocks.GOLD_BLOCK, Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE,
 				/* Mod */ GOLD_TORCH.asBlock(), GOLD_SOUL_TORCH.asBlock(), GOLD_ENDER_TORCH.asBlock(), UNDERWATER_GOLD_TORCH.asBlock(),
@@ -502,9 +509,10 @@ public class IdentifiedSounds {
 		Register("magma", List.of(EN_US.Magma()), Blocks.MAGMA_BLOCK);
 		Register("melon", List.of(EN_US.Melon()), Blocks.MELON);
 		//Register("moss_bed", List.of(EN_US.MossBed()), /* Mod */ MOSS_BED.asBlock());
-		Register("mushroom", List.of(EN_US.Mushroom()), Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK);
-		Register("mushroom_plant", List.of(EN_US.MushroomPlant()), Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM);
+		Register("mushroom", List.of(EN_US.Mushroom()), Blocks.MUSHROOM_STEM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK, /* Mod */ BLUE_MUSHROOM_BLOCK.asBlock());
+		Register("mushroom_plant", List.of(EN_US.MushroomPlant()), Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, /* Mod */ BLUE_MUSHROOM.asBlock());
 		Register("mycelium", List.of(EN_US.Mycelium()), Blocks.MYCELIUM);
+		Register("mycelium_roots", List.of(EN_US.Roots(EN_US.Mycelium())), /* Mod */ MYCELIUM_ROOTS.asBlock());
 		Register(NETHER_BARK_BLOCK, Blocks.CRIMSON_HYPHAE, Blocks.WARPED_HYPHAE);
 		Register("nether_brick_fence", List.of(EN_US.NetherBrickFence()), Blocks.NETHER_BRICK_FENCE);
 		Register(BlockSounds.BreakPlace("nether_wart", SoundEvents.BLOCK_NETHER_WART_BREAK, SoundEvents.ITEM_NETHER_WART_PLANT, List.of(EN_US.NetherWart())), Blocks.NETHER_WART);
@@ -544,7 +552,8 @@ public class IdentifiedSounds {
 				PURPLE_ORCHID.getPottedBlock(), RED_ORCHID.getPottedBlock(), WHITE_ORCHID.getPottedBlock(),
 				YELLOW_ORCHID.getPottedBlock(), PINK_ALLIUM.getPottedBlock(), LAVENDER.getPottedBlock(),
 				HYDRANGEA.getPottedBlock(), PAEONIA.getPottedBlock(), ASTER.getPottedBlock(),
-				MANGROVE_PROPAGULE.getPottedBlock(), CHERRY_SAPLING.getPottedBlock());
+				MANGROVE_PROPAGULE.getPottedBlock(), CHERRY_SAPLING.getPottedBlock(),
+				BLUE_MUSHROOM.getPottedBlock(), MYCELIUM_ROOTS.getPottedBlock());
 		Register("prismarine", List.of(EN_US.Prismarine()), Blocks.PRISMARINE, Blocks.PRISMARINE_STAIRS, Blocks.PRISMARINE_SLAB, Blocks.PRISMARINE_WALL,
 				Blocks.PRISMARINE_BRICKS, Blocks.PRISMARINE_BRICK_STAIRS, Blocks.PRISMARINE_BRICK_SLAB,
 				Blocks.DARK_PRISMARINE, Blocks.DARK_PRISMARINE_STAIRS, Blocks.DARK_PRISMARINE_SLAB,

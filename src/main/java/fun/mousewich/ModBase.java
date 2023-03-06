@@ -48,6 +48,7 @@ import fun.mousewich.gen.feature.*;
 import fun.mousewich.gen.feature.config.CherryTreeFeatureConfig;
 import fun.mousewich.gen.feature.config.MangroveTreeFeatureConfig;
 import fun.mousewich.gen.loot.SetInstrumentLootFunction;
+import fun.mousewich.gen.stateprovider.ModSimpleBlockStateProvider;
 import fun.mousewich.gen.structure.*;
 import fun.mousewich.gen.world.ModBiomeCreator;
 import fun.mousewich.item.*;
@@ -120,6 +121,7 @@ import net.minecraft.world.gen.chunk.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.gen.chunk.placement.SpreadType;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -232,6 +234,13 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer BIRCH_WOODCUTTER = ModFactory.MakeWoodcutter(MapColor.PALE_YELLOW);
 	public static final BlockContainer BIRCH_BARREL = ModFactory.MakeBarrel(MapColor.PALE_YELLOW).fuel(300);
 	public static final BlockContainer BIRCH_LECTERN = ModFactory.MakeLectern(MapColor.PALE_YELLOW).flammable(30, 20).fuel(300);
+	//</editor-fold>
+	//<editor-fold desc="Blue Mushroom">
+	private static ModConfiguredFeature<?, ?> getHugeBlueMushroomConfigured() { return HUGE_BLUE_MUSHROOM_CONFIGURED; }
+	public static final PottedBlockContainer BLUE_MUSHROOM = new PottedBlockContainer(new MushroomPlantBlock(Block.Settings.of(Material.PLANT, MapColor.LIGHT_BLUE).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).postProcess(ModFactory::always), () -> getHugeBlueMushroomConfigured().getRegistryEntry())).compostable(0.65f).dropSelf();
+	public static final BlockContainer BLUE_MUSHROOM_BLOCK = new BlockContainer(new MushroomBlock(Block.Settings.of(Material.WOOD, MapColor.LIGHT_BLUE).strength(0.2F).sounds(BlockSoundGroup.WOOD))).compostable(0.85f).drops(DropTable.Mushroom(BLUE_MUSHROOM));
+	public static final Feature<HugeMushroomFeatureConfig> HUGE_BLUE_MUSHROOM_FEATURE = new HugeBlueMushroomFeature(HugeMushroomFeatureConfig.CODEC);
+	public static final ModConfiguredFeature<?, ?> HUGE_BLUE_MUSHROOM_CONFIGURED = new ModConfiguredFeature<>("huge_blue_mushroom", new ConfiguredFeature<>(HUGE_BLUE_MUSHROOM_FEATURE, new HugeMushroomFeatureConfig(new ModSimpleBlockStateProvider(BLUE_MUSHROOM_BLOCK.asBlock().getDefaultState().with(MushroomBlock.DOWN, false)), new ModSimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState().with(MushroomBlock.UP, false).with(MushroomBlock.DOWN, false)), 3)));
 	//</editor-fold>
 	//<editor-fold desc="Boats">
 	public static final EntityType<ModBoatEntity> MOD_BOAT_ENTITY = FabricEntityTypeBuilder.<ModBoatEntity>create(SpawnGroup.MISC, ModBoatEntity::new).dimensions(EntityDimensions.fixed(1.375F, 0.5625F)).trackRangeChunks(10).build();
@@ -507,7 +516,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer DARK_OAK_LECTERN = ModFactory.MakeLectern(MapColor.BROWN).flammable(30, 20).fuel(300);
 	//</editor-fold>
 	//<editor-fold desc="Deepslate">
-	public static final BlockContainer REINFORCED_DEEPSLATE = new BlockContainer(new Block(Block.Settings.of(Material.STONE, MapColor.DEEPSLATE_GRAY).sounds(BlockSoundGroup.DEEPSLATE).strength(55.0f, 1200.0f))).drops(DropTable.NOTHING);
+	public static final BlockContainer REINFORCED_DEEPSLATE = new BlockContainer(new Block(Block.Settings.of(Material.STONE, MapColor.DEEPSLATE_GRAY).sounds(BlockSoundGroup.DEEPSLATE).strength(55.0f, 1200.0f)), ItemSettings(ItemGroup.BUILDING_BLOCKS)).drops(DropTable.NOTHING);
 	//</editor-fold>
 	//<editor-fold desc="Diamond">
 	public static final BlockContainer DIAMOND_STAIRS = ModFactory.MakeStairs(Blocks.DIAMOND_BLOCK);
@@ -668,6 +677,12 @@ public class ModBase implements ModInitializer {
 	public static final Map<DyeColor, BlockContainer> STAINED_GLASS_SLABS = ColorUtil.Map(color -> new BlockContainer(new StainedGlassSlabBlock(color, ColorUtil.GetStainedGlassBlock(color))));
 	public static final Map<DyeColor, BlockContainer> STAINED_GLASS_TRAPDOORS = ColorUtil.Map(color -> new BlockContainer(new StainedGlassTrapdoorBlock(color, STAINED_GLASS_SLABS.get(color).asBlock(), ColorUtil.GetStainedGlassBlock(color))));
 	//</editor-fold>
+	//<editor-fold desc="Glow Lichen">
+	public static final BlockContainer GLOW_LICHEN_BLOCK = ModFactory.BuildBlock(new GlowLichenFullBlock(Block.Settings.of(Material.MOSS_BLOCK, MapColor.LICHEN_GREEN).strength(0.1f).sounds(BlockSoundGroup.GLOW_LICHEN).luminance(ModFactory.LUMINANCE_7))).compostable(0.65f);
+	public static final BlockContainer GLOW_LICHEN_SLAB = ModFactory.BuildSlab(new GlowLichenSlabBlock(GLOW_LICHEN_BLOCK)).compostable(0.325f);
+	public static final BlockContainer GLOW_LICHEN_CARPET = ModFactory.BuildBlock(new CarpetBlock(Block.Settings.copy(Blocks.MOSS_CARPET).mapColor(MapColor.LICHEN_GREEN).luminance(ModFactory.LUMINANCE_7))).compostable(0.3f);
+	//public static final BedContainer GLOW_LICHEN_BED = ModFactory.MakeBed("glow_lichen", MapColor.LICHEN_GREEN, BlockSoundGroup.GOW_LICHEN, ModFactory.LUMINANCE_7);
+	//</editor-fold>
 	//<editor-fold desc="Goat">
 	public static final LootFunctionType SET_INSTRUMENT_LOOT_FUNCTION = new LootFunctionType(new SetInstrumentLootFunction.Serializer());
 	public static final Item GOAT_HORN = new GoatHornItem(ItemSettings(ItemGroup.MISC).maxCount(1));
@@ -776,7 +791,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer MUDDY_MANGROVE_ROOTS = new BlockContainer(new ModPillarBlock(Block.Settings.of(Material.SOIL, MapColor.SPRUCE_BROWN).strength(0.7f).sounds(ModBlockSoundGroups.MUDDY_MANGROVE_ROOTS)), ItemSettings(ItemGroup.BUILDING_BLOCKS)).dropSelf();
 	public static final SignContainer MANGROVE_SIGN = ModFactory.MakeWoodSign("minecraft:mangrove", ModFactory.SignItemSettings(ItemGroup.DECORATIONS), MapColor.RED).fuel(200);
 	public static final BoatContainer MANGROVE_BOAT = ModFactory.MakeBoat("minecraft:mangrove", MANGROVE_PLANKS, ModFactory.BoatSettings(ItemGroup.TRANSPORTATION)).fuel(1200);
-	public static final PottedBlockContainer MANGROVE_PROPAGULE = new PottedBlockContainer(new PropaguleBlock(Block.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)), ItemSettings(ItemGroup.DECORATIONS)).compostable(0.3f);
+	public static final PottedBlockContainer MANGROVE_PROPAGULE = new PottedBlockContainer(new PropaguleBlock(Block.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)), ItemSettings(ItemGroup.DECORATIONS)).compostable(0.3f); //Drop table omitted intentionally
 	//Extended
 	public static final BlockContainer MANGROVE_BOOKSHELF = ModFactory.MakeBookshelf(MapColor.RED).flammable(30, 20).fuel(300);
 	public static final BlockContainer MANGROVE_LADDER = ModFactory.MakeLadder();
@@ -785,8 +800,8 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer MANGROVE_LECTERN = ModFactory.MakeLectern(MapColor.RED).flammable(30, 20).fuel(300);
 	//</editor-fold>
 	//<editor-fold desc="Moss">
-	public static final BlockContainer MOSS_SLAB = ModFactory.BuildSlab(new MossSlabBlock(Blocks.MOSS_BLOCK));
-	//public static final BedContainer MOSS_BED = ModFactory.MakeBed("moss");
+	public static final BlockContainer MOSS_SLAB = ModFactory.BuildSlab(new MossSlabBlock(Blocks.MOSS_BLOCK)).compostable(0.325f);
+	//public static final BedContainer MOSS_BED = ModFactory.MakeBed("moss", MapColor.GREEN, BlockSoundGroup.MOSS);
 	//</editor-fold>
 	//<editor-fold desc="Mud">
 	public static final BlockContainer MUD = new BlockContainer(new MudBlock(Block.Settings.copy(Blocks.DIRT).mapColor(MapColor.TERRACOTTA_CYAN).allowsSpawning(ModFactory::always).solidBlock(ModFactory::always).blockVision(ModFactory::always).suffocates(ModFactory::always).sounds(ModBlockSoundGroups.MUD)), ItemSettings(ItemGroup.BUILDING_BLOCKS)).dropSelf();
@@ -869,6 +884,12 @@ public class ModBase implements ModInitializer {
 	public static final WallBlockContainer PIGLIN_HEAD = new WallBlockContainer(PIGLIN_HEAD_BLOCK, PIGLIN_WALL_HEAD, new VerticallyAttachableBlockItem(PIGLIN_HEAD_BLOCK, PIGLIN_WALL_HEAD, ItemSettings(ItemGroup.DECORATIONS).rarity(Rarity.UNCOMMON), Direction.DOWN)).dropSelf();
 	public static final BlockEntityType<PiglinHeadEntity> PIGLIN_HEAD_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(PiglinHeadEntity::new, PIGLIN_HEAD.asBlock(), PIGLIN_HEAD.getWallBlock()).build();
 	//</editor-fold>
+	//<editor-fold desc="Pottery Shards (1.20)>
+	public static final Item POTTERY_SHARD_ARCHER = new Item(ItemSettings());
+	public static final Item POTTERY_SHARD_PRIZE = new Item(ItemSettings());
+	public static final Item POTTERY_SHARD_ARMS_UP = new Item(ItemSettings());
+	public static final Item POTTERY_SHARD_SKULL = new Item(ItemSettings());
+	//</editor-fold>
 	//<editor-fold desc="Prismarine">
 	public static final BlockContainer DARK_PRISMARINE_WALL = ModFactory.MakeWall(Blocks.DARK_PRISMARINE);
 	//</editor-fold>
@@ -918,15 +939,9 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer SCULK = new BlockContainer(new SculkBlock(Block.Settings.of(Material.SCULK).strength(0.2f).sounds(ModBlockSoundGroups.SCULK)), ItemSettings(ItemGroup.DECORATIONS)).requireSilkTouch();
 	public static final BlockContainer SCULK_VEIN = new BlockContainer(new SculkVeinBlock(Block.Settings.of(Material.SCULK).noCollision().strength(0.2f).sounds(ModBlockSoundGroups.SCULK_VEIN)), ItemSettings(ItemGroup.DECORATIONS)).requireSilkTouch();
 	public static final DefaultParticleType SCULK_SOUL_PARTICLE = FabricParticleTypes.simple(false);
-	public static final ParticleType<SculkChargeParticleEffect> SCULK_CHARGE_PARTICLE = new ParticleType<>(true, SculkChargeParticleEffect.FACTORY) {
-		@Override
-		public Codec<SculkChargeParticleEffect> getCodec() { return SculkChargeParticleEffect.CODEC; }
-	};
+	public static final ParticleType<SculkChargeParticleEffect> SCULK_CHARGE_PARTICLE = new ParticleType<>(true, SculkChargeParticleEffect.FACTORY) { @Override public Codec<SculkChargeParticleEffect> getCodec() { return SculkChargeParticleEffect.CODEC; } };
 	public static final DefaultParticleType SCULK_CHARGE_POP_PARTICLE = FabricParticleTypes.simple(true);
-	public static final ParticleType<ShriekParticleEffect> SHRIEK_PARTICLE = new ParticleType<>(false, ShriekParticleEffect.FACTORY) {
-		@Override
-		public Codec<ShriekParticleEffect> getCodec() { return ShriekParticleEffect.CODEC; }
-	};
+	public static final ParticleType<ShriekParticleEffect> SHRIEK_PARTICLE = new ParticleType<>(false, ShriekParticleEffect.FACTORY) { @Override public Codec<ShriekParticleEffect> getCodec() { return ShriekParticleEffect.CODEC; } };
 	public static final BlockContainer SCULK_CATALYST = new BlockContainer(new SculkCatalystBlock(Block.Settings.of(Material.SCULK).strength(3.0f, 3.0f).sounds(ModBlockSoundGroups.SCULK_CATALYST).luminance(ModFactory.LUMINANCE_6)), ItemSettings(ItemGroup.DECORATIONS)).requireSilkTouch();
 	public static final BlockEntityType<SculkCatalystBlockEntity> SCULK_CATALYST_ENTITY = FabricBlockEntityTypeBuilder.create(SculkCatalystBlockEntity::new, SCULK_CATALYST.asBlock()).build();
 	public static final BlockContainer SCULK_SHRIEKER = new BlockContainer(new SculkShriekerBlock(Block.Settings.of(Material.SCULK, MapColor.BLACK).strength(3.0f, 3.0f).sounds(ModBlockSoundGroups.SCULK_SHRIEKER)), ItemSettings(ItemGroup.DECORATIONS)).requireSilkTouch();
@@ -974,9 +989,7 @@ public class ModBase implements ModInitializer {
 	//</editor-fold>
 	//<editor-fold desc="Torchflower">
 	private static final Block TORCHFLOWER_CROP_BLOCK = new TorchflowerBlock(AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.CROP));
-	public static final BlockContainer TORCHFLOWER_CROP = new BlockContainer(
-			TORCHFLOWER_CROP_BLOCK, new AliasedBlockItem(TORCHFLOWER_CROP_BLOCK, ItemSettings(ItemGroup.DECORATIONS))
-	).compostable(0.3f);
+	public static final BlockContainer TORCHFLOWER_CROP = new BlockContainer(TORCHFLOWER_CROP_BLOCK, new AliasedBlockItem(TORCHFLOWER_CROP_BLOCK, ItemSettings(ItemGroup.DECORATIONS))).compostable(0.3f);
 	public static final FlowerContainer TORCHFLOWER = ModFactory.MakeFlower(StatusEffects.NIGHT_VISION, 5, ItemSettings(ItemGroup.DECORATIONS));
 	//</editor-fold>
 	//<editor-fold desc="Tuff">
@@ -1051,6 +1064,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer BLUE_SHROOMLIGHT = ModFactory.MakeBlock(Block.Settings.copy(Blocks.SHROOMLIGHT).mapColor(MapColor.CYAN));
 	//TODO: Recipe for Blue Targets
 	public static final BlockContainer BLUE_TARGET = ModFactory.BuildBlock(new TargetBlock(AbstractBlock.Settings.of(Material.SOLID_ORGANIC, MapColor.OFF_WHITE).strength(0.5f).sounds(BlockSoundGroup.GRASS))).flammable(15, 20);
+	public static final BlockContainer COCOA_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.SOLID_ORGANIC, MapColor.BROWN).strength(0.8F).sounds(BlockSoundGroup.WOOD)).compostable(0.65f);
 	public static final BlockContainer FLINT_BLOCK = new BlockContainer(new FlintBlock(Block.Settings.of(Material.STONE, MapColor.DEEPSLATE_GRAY).strength(1.5f, 3.0f).sounds(BlockSoundGroup.METAL))).drops(DropTable.FLINT);
 	public static final BlockContainer FLINT_SLAB = ModFactory.BuildSlab(new FlintSlabBlock(FLINT_BLOCK), DropTable.FLINT_SLAB);
 	public static final BlockContainer FLINT_BRICKS = ModFactory.BuildBlock(new FlintBlock(FLINT_BLOCK), DropTable.FLINT);
@@ -1058,10 +1072,20 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer FLINT_BRICK_SLAB = ModFactory.BuildSlab(new FlintSlabBlock(FLINT_BRICKS), DropTable.FLINT_SLAB);
 	public static final BlockContainer FLINT_BRICK_WALL = ModFactory.BuildWall(new FlintWallBlock(FLINT_BRICKS), DropTable.FLINT);
 	public static final BlockContainer HEDGE_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.LEAVES).strength(0.2F).sounds(BlockSoundGroup.GRASS).nonOpaque()).flammable(5, 20);
-	public static final BlockContainer COCOA_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.SOLID_ORGANIC, MapColor.BROWN).strength(0.8F).sounds(BlockSoundGroup.WOOD)).compostable(0.65f);
+
+	public static final PottedBlockContainer MYCELIUM_ROOTS = new PottedBlockContainer(new MyceliumRootsBlock(Block.Settings.of(Material.REPLACEABLE_PLANT, MapColor.PURPLE).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS))).requireSilkTouch();
+	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_MYCELIUM_ROOTS = new ModConfiguredFeature<>("single_mycelium_roots", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(MYCELIUM_ROOTS.asBlock().getDefaultState()))));
+	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_BROWN_MUSHROOM = new ModConfiguredFeature<>("single_brown_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(Blocks.BROWN_MUSHROOM.getDefaultState()))));
+	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_BLUE_MUSHROOM = new ModConfiguredFeature<>("single_blue_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(BLUE_MUSHROOM.asBlock().getDefaultState()))));
+	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_RED_MUSHROOM = new ModConfiguredFeature<>("single_red_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(Blocks.RED_MUSHROOM.getDefaultState()))));
+	public static final ModPlacedFeature MYCELIUM_BONEMEAL_MYCELIUM_ROOTS = new ModPlacedFeature("mycelium_bonemeal_roots", SINGLE_MYCELIUM_ROOTS) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
+	public static final ModPlacedFeature MYCELIUM_BONEMEAL_BROWN_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_brown", SINGLE_BROWN_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
+	public static final ModPlacedFeature MYCELIUM_BONEMEAL_BLUE_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_blue", SINGLE_BLUE_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
+	public static final ModPlacedFeature MYCELIUM_BONEMEAL_RED_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_red", SINGLE_RED_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
+
 	public static final BlockContainer SEED_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.SOLID_ORGANIC, MapColor.DARK_GREEN).strength(0.8F).sounds(BlockSoundGroup.GRASS)).compostable(1f);
-	public static final BlockContainer WAX_BLOCK = ModFactory.BuildBlock(new WaxBlock(Blocks.HONEYCOMB_BLOCK));
 	public static final BlockContainer GLAZED_TERRACOTTA = new BlockContainer(new GlazedTerracottaBlock(Block.Settings.of(Material.STONE, MapColor.ORANGE).requiresTool().strength(1.4f))).dropSelf();
+	public static final BlockContainer WAX_BLOCK = ModFactory.BuildBlock(new WaxBlock(Blocks.HONEYCOMB_BLOCK));
 	public static final Item LAVA_BOTTLE = new LavaBottleItem(ItemSettings().maxCount(16).recipeRemainder(Items.GLASS_BOTTLE));
 	//</editor-fold>
 
@@ -1340,28 +1364,28 @@ public class ModBase implements ModInitializer {
 		Register("small_ender_flame", SMALL_ENDER_FLAME_PARTICLE);
 		Register("soul_candle", SOUL_CANDLE, List.of(EN_US.Candle(EN_US.Soul())));
 		Register("ender_candle", ENDER_CANDLE, List.of(EN_US.Candle(EN_US.Ender())));
-		Register("soul_candle_cake", SOUL_CANDLE_CAKE, List.of(EN_US.CandleCake(EN_US.Candle(EN_US.Soul()))));
-		Register("ender_candle_cake", ENDER_CANDLE_CAKE, List.of(EN_US.CandleCake(EN_US.Candle(EN_US.Ender()))));
+		Register("soul_candle_cake", SOUL_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Soul(EN_US.with(EN_US.Cake())))));
+		Register("ender_candle_cake", ENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Ender(EN_US.with(EN_US.Cake())))));
 		Register("ender_torch", "ender_wall_torch", ENDER_TORCH, List.of(EN_US.EnderTorch()));
 		Register("ender_lantern", ENDER_LANTERN, List.of(EN_US.EnderLantern()));
 		Register("ender_campfire", ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender())));
 		//</editor-fold>
 		//<editor-fold desc="Extended Stone">
-		Register("polished_andesite_wall", POLISHED_ANDESITE_WALL, List.of(EN_US.Polished_Wall(EN_US.Andesite())));
-		Register("polished_diorite_wall", POLISHED_DIORITE_WALL, List.of(EN_US.Polished_Wall(EN_US.Diorite())));
-		Register("polished_granite_wall", POLISHED_GRANITE_WALL, List.of(EN_US.Polished_Wall(EN_US.Granite())));
-		Register("smooth_sandstone_wall", SMOOTH_SANDSTONE_WALL, List.of(EN_US.Smooth_Wall(EN_US.Sandstone())));
-		Register("smooth_red_sandstone_wall", SMOOTH_RED_SANDSTONE_WALL, List.of(EN_US.Smooth_Wall(EN_US.RedSandstone())));
+		Register("polished_andesite_wall", POLISHED_ANDESITE_WALL, List.of(EN_US.Wall(EN_US.PolishedAndesite())));
+		Register("polished_diorite_wall", POLISHED_DIORITE_WALL, List.of(EN_US.Wall(EN_US.PolishedDiorite())));
+		Register("polished_granite_wall", POLISHED_GRANITE_WALL, List.of(EN_US.Wall(EN_US.PolishedGranite())));
+		Register("smooth_sandstone_wall", SMOOTH_SANDSTONE_WALL, List.of(EN_US.Wall(EN_US.SmoothSandstone())));
+		Register("smooth_red_sandstone_wall", SMOOTH_RED_SANDSTONE_WALL, List.of(EN_US.Wall(EN_US.SmoothRedSandstone())));
 		Register("dark_prismarine_wall", DARK_PRISMARINE_WALL, List.of(EN_US.Wall(EN_US.DarkPrismarine())));
 		//</editor-fold>
 		//<editor-fold desc="Calcite">
 		Register("calcite_stairs", CALCITE_STAIRS, List.of(EN_US.Stairs(EN_US.Calcite())));
 		Register("calcite_slab", CALCITE_SLAB, List.of(EN_US.Slab(EN_US.Calcite())));
 		Register("calcite_wall", CALCITE_WALL, List.of(EN_US.Wall(EN_US.Calcite())));
-		Register("smooth_calcite", SMOOTH_CALCITE, List.of(EN_US.Smooth_(EN_US.Calcite())));
-		Register("smooth_calcite_stairs", SMOOTH_CALCITE_STAIRS, List.of(EN_US.Smooth_Stairs(EN_US.Calcite())));
-		Register("smooth_calcite_slab", SMOOTH_CALCITE_SLAB, List.of(EN_US.Smooth_Slab(EN_US.Calcite())));
-		Register("smooth_calcite_wall", SMOOTH_CALCITE_WALL, List.of(EN_US.Smooth_Wall(EN_US.Calcite())));
+		Register("smooth_calcite", SMOOTH_CALCITE, List.of(EN_US.Calcite(EN_US.Smooth())));
+		Register("smooth_calcite_stairs", SMOOTH_CALCITE_STAIRS, List.of(EN_US.Stairs(EN_US.Calcite(EN_US.Smooth()))));
+		Register("smooth_calcite_slab", SMOOTH_CALCITE_SLAB, List.of(EN_US.Slab(EN_US.Calcite(EN_US.Smooth()))));
+		Register("smooth_calcite_wall", SMOOTH_CALCITE_WALL, List.of(EN_US.Wall(EN_US.Calcite(EN_US.Smooth()))));
 		Register("calcite_bricks", CALCITE_BRICKS, List.of(EN_US.Bricks(EN_US.Calcite())));
 		Register("calcite_brick_stairs", CALCITE_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Calcite())));
 		Register("calcite_brick_slab", CALCITE_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Calcite())));
@@ -1371,10 +1395,10 @@ public class ModBase implements ModInitializer {
 		Register("dripstone_stairs", DRIPSTONE_STAIRS, List.of(EN_US.Stairs(EN_US.Dripstone())));
 		Register("dripstone_slab", DRIPSTONE_SLAB, List.of(EN_US.Slab(EN_US.Dripstone())));
 		Register("dripstone_wall", DRIPSTONE_WALL, List.of(EN_US.Wall(EN_US.Dripstone())));
-		Register("smooth_dripstone", SMOOTH_DRIPSTONE, List.of(EN_US.Smooth_(EN_US.Dripstone())));
-		Register("smooth_dripstone_stairs", SMOOTH_DRIPSTONE_STAIRS, List.of(EN_US.Smooth_Stairs(EN_US.Dripstone())));
-		Register("smooth_dripstone_slab", SMOOTH_DRIPSTONE_SLAB, List.of(EN_US.Smooth_Slab(EN_US.Dripstone())));
-		Register("smooth_dripstone_wall", SMOOTH_DRIPSTONE_WALL, List.of(EN_US.Smooth_Wall(EN_US.Dripstone())));
+		Register("smooth_dripstone", SMOOTH_DRIPSTONE, List.of(EN_US.Dripstone(EN_US.Smooth())));
+		Register("smooth_dripstone_stairs", SMOOTH_DRIPSTONE_STAIRS, List.of(EN_US.Stairs(EN_US.Dripstone(EN_US.Smooth()))));
+		Register("smooth_dripstone_slab", SMOOTH_DRIPSTONE_SLAB, List.of(EN_US.Slab(EN_US.Dripstone(EN_US.Smooth()))));
+		Register("smooth_dripstone_wall", SMOOTH_DRIPSTONE_WALL, List.of(EN_US.Wall(EN_US.Dripstone(EN_US.Smooth()))));
 		Register("dripstone_bricks", DRIPSTONE_BRICKS, List.of(EN_US.Bricks(EN_US.Dripstone())));
 		Register("dripstone_brick_stairs", DRIPSTONE_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Dripstone())));
 		Register("dripstone_brick_slab", DRIPSTONE_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Dripstone())));
@@ -1384,10 +1408,10 @@ public class ModBase implements ModInitializer {
 		Register("tuff_stairs", TUFF_STAIRS, List.of(EN_US.Stairs(EN_US.Tuff())));
 		Register("tuff_slab", TUFF_SLAB, List.of(EN_US.Slab(EN_US.Tuff())));
 		Register("tuff_wall", TUFF_WALL, List.of(EN_US.Wall(EN_US.Tuff())));
-		Register("smooth_tuff", SMOOTH_TUFF, List.of(EN_US.Smooth_(EN_US.Tuff())));
-		Register("smooth_tuff_stairs", SMOOTH_TUFF_STAIRS, List.of(EN_US.Smooth_Stairs(EN_US.Tuff())));
-		Register("smooth_tuff_slab", SMOOTH_TUFF_SLAB, List.of(EN_US.Smooth_Slab(EN_US.Tuff())));
-		Register("smooth_tuff_wall", SMOOTH_TUFF_WALL, List.of(EN_US.Smooth_Wall(EN_US.Tuff())));
+		Register("smooth_tuff", SMOOTH_TUFF, List.of(EN_US.Tuff(EN_US.Smooth())));
+		Register("smooth_tuff_stairs", SMOOTH_TUFF_STAIRS, List.of(EN_US.Stairs(EN_US.Tuff(EN_US.Smooth()))));
+		Register("smooth_tuff_slab", SMOOTH_TUFF_SLAB, List.of(EN_US.Slab(EN_US.Tuff(EN_US.Smooth()))));
+		Register("smooth_tuff_wall", SMOOTH_TUFF_WALL, List.of(EN_US.Wall(EN_US.Tuff(EN_US.Smooth()))));
 		Register("tuff_bricks", TUFF_BRICKS, List.of(EN_US.Bricks(EN_US.Tuff())));
 		Register("tuff_brick_stairs", TUFF_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Tuff())));
 		Register("tuff_brick_slab", TUFF_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Tuff())));
@@ -1395,10 +1419,10 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="Purpur">
 		Register("purpur_wall", PURPUR_WALL, List.of(EN_US.Wall(EN_US.Purpur())));
-		Register("smooth_purpur", SMOOTH_PURPUR, List.of(EN_US.Smooth_(EN_US.Purpur())));
-		Register("smooth_purpur_stairs", SMOOTH_PURPUR_STAIRS, List.of(EN_US.Smooth_Stairs(EN_US.Purpur())));
-		Register("smooth_purpur_slab", SMOOTH_PURPUR_SLAB, List.of(EN_US.Smooth_Slab(EN_US.Purpur())));
-		Register("smooth_purpur_wall", SMOOTH_PURPUR_WALL, List.of(EN_US.Smooth_Wall(EN_US.Purpur())));
+		Register("smooth_purpur", SMOOTH_PURPUR, List.of(EN_US.Purpur(EN_US.Smooth())));
+		Register("smooth_purpur_stairs", SMOOTH_PURPUR_STAIRS, List.of(EN_US.Stairs(EN_US.Purpur(EN_US.Smooth()))));
+		Register("smooth_purpur_slab", SMOOTH_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Smooth()))));
+		Register("smooth_purpur_wall", SMOOTH_PURPUR_WALL, List.of(EN_US.Wall(EN_US.Purpur(EN_US.Smooth()))));
 		Register("purpur_bricks", PURPUR_BRICKS, List.of(EN_US.Bricks(EN_US.Purpur())));
 		Register("purpur_brick_stairs", PURPUR_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Purpur())));
 		Register("purpur_brick_slab", PURPUR_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Purpur())));
@@ -1463,10 +1487,10 @@ public class ModBase implements ModInitializer {
 		Register("emerald_brick_stairs", EMERALD_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Emerald())));
 		Register("emerald_brick_slab", EMERALD_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Emerald())));
 		Register("emerald_brick_wall", EMERALD_BRICK_WALL, List.of(EN_US.BrickWall(EN_US.Emerald())));
-		Register("cut_emerald", CUT_EMERALD, List.of(EN_US.Cut_(EN_US.Emerald())));
-		Register("cut_emerald_stairs", CUT_EMERALD_STAIRS, List.of(EN_US.Cut_Stairs(EN_US.Emerald())));
-		Register("cut_emerald_slab", CUT_EMERALD_SLAB, List.of(EN_US.Cut_Slab(EN_US.Emerald())));
-		Register("cut_emerald_wall", CUT_EMERALD_WALL, List.of(EN_US.Cut_Wall(EN_US.Emerald())));
+		Register("cut_emerald", CUT_EMERALD, List.of(EN_US.CutEmerald()));
+		Register("cut_emerald_stairs", CUT_EMERALD_STAIRS, List.of(EN_US.Stairs(EN_US.CutEmerald())));
+		Register("cut_emerald_slab", CUT_EMERALD_SLAB, List.of(EN_US.Slab(EN_US.CutEmerald())));
+		Register("cut_emerald_wall", CUT_EMERALD_WALL, List.of(EN_US.Wall(EN_US.CutEmerald())));
 		Register("emerald_shovel", EMERALD_SHOVEL, List.of(EN_US.Shovel(EN_US.Emerald())));
 		Register("emerald_pickaxe", EMERALD_PICKAXE, List.of(EN_US.Pickaxe(EN_US.Emerald())));
 		Register("emerald_axe", EMERALD_AXE, List.of(EN_US.Axe(EN_US.Emerald())));
@@ -1493,7 +1517,7 @@ public class ModBase implements ModInitializer {
 		Register("quartz_crystal_stairs", QUARTZ_CRYSTAL_STAIRS, List.of(EN_US.CrystalStairs(EN_US.Quartz())));
 		Register("quartz_crystal_slab", QUARTZ_CRYSTAL_SLAB, List.of(EN_US.CrystalSlab(EN_US.Quartz())));
 		Register("quartz_crystal_wall", QUARTZ_CRYSTAL_WALL, List.of(EN_US.CrystalWall(EN_US.Quartz())));
-		Register("smooth_quartz_wall", SMOOTH_QUARTZ_WALL, List.of(EN_US.Smooth_Wall(EN_US.Quartz())));
+		Register("smooth_quartz_wall", SMOOTH_QUARTZ_WALL, List.of(EN_US.Wall(EN_US.Quartz(EN_US.Smooth()))));
 		Register("quartz_wall", QUARTZ_WALL, List.of(EN_US.Wall(EN_US.Quartz())));
 		Register("quartz_brick_stairs", QUARTZ_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Quartz())));
 		Register("quartz_brick_slab", QUARTZ_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Quartz())));
@@ -1528,11 +1552,11 @@ public class ModBase implements ModInitializer {
 		Register("iron_brick_stairs", IRON_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Iron())));
 		Register("iron_brick_slab", IRON_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Iron())));
 		Register("iron_brick_wall", IRON_BRICK_WALL, List.of(EN_US.BrickWall(EN_US.Iron())));
-		Register("cut_iron", CUT_IRON, List.of(EN_US.Cut_(EN_US.Iron())));
-		Register("cut_iron_pillar", CUT_IRON_PILLAR, List.of(EN_US.Cut_Pillar(EN_US.Iron())));
-		Register("cut_iron_stairs", CUT_IRON_STAIRS, List.of(EN_US.Cut_Stairs(EN_US.Iron())));
-		Register("cut_iron_slab", CUT_IRON_SLAB, List.of(EN_US.Cut_Slab(EN_US.Iron())));
-		Register("cut_iron_wall", CUT_IRON_WALL, List.of(EN_US.Cut_Wall(EN_US.Iron())));
+		Register("cut_iron", CUT_IRON, List.of(EN_US.CutIron()));
+		Register("cut_iron_pillar", CUT_IRON_PILLAR, List.of(EN_US.Pillar(EN_US.CutIron())));
+		Register("cut_iron_stairs", CUT_IRON_STAIRS, List.of(EN_US.Stairs(EN_US.CutIron())));
+		Register("cut_iron_slab", CUT_IRON_SLAB, List.of(EN_US.Slab(EN_US.CutIron())));
+		Register("cut_iron_wall", CUT_IRON_WALL, List.of(EN_US.Wall(EN_US.CutIron())));
 		//</editor-fold>
 		//<editor-fold desc="Gold">
 		Register("gold_flame", GOLD_FLAME_PARTICLE);
@@ -1553,11 +1577,11 @@ public class ModBase implements ModInitializer {
 		Register("gold_brick_stairs", GOLD_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Gold())));
 		Register("gold_brick_slab", GOLD_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Gold())));
 		Register("gold_brick_wall", GOLD_BRICK_WALL, List.of(EN_US.BrickWall(EN_US.Gold())));
-		Register("cut_gold", CUT_GOLD, List.of(EN_US.Cut_(EN_US.Gold())));
-		Register("cut_gold_pillar", CUT_GOLD_PILLAR, List.of(EN_US.Cut_Pillar(EN_US.Gold())));
-		Register("cut_gold_stairs", CUT_GOLD_STAIRS, List.of(EN_US.Cut_Stairs(EN_US.Gold())));
-		Register("cut_gold_slab", CUT_GOLD_SLAB, List.of(EN_US.Cut_Slab(EN_US.Gold())));
-		Register("cut_gold_wall", CUT_GOLD_WALL, List.of(EN_US.Cut_Wall(EN_US.Gold())));
+		Register("cut_gold", CUT_GOLD, List.of(EN_US.CutGold()));
+		Register("cut_gold_pillar", CUT_GOLD_PILLAR, List.of(EN_US.Pillar(EN_US.CutGold())));
+		Register("cut_gold_stairs", CUT_GOLD_STAIRS, List.of(EN_US.Stairs(EN_US.CutGold())));
+		Register("cut_gold_slab", CUT_GOLD_SLAB, List.of(EN_US.Slab(EN_US.CutGold())));
+		Register("cut_gold_wall", CUT_GOLD_WALL, List.of(EN_US.Wall(EN_US.CutGold())));
 		//</editor-fold>
 		//<editor-fold desc="Copper">
 		Register("copper_nugget", COPPER_NUGGET, List.of(EN_US.Nugget(EN_US.Copper())));
@@ -1823,11 +1847,11 @@ public class ModBase implements ModInitializer {
 		Register("netherite_brick_stairs", NETHERITE_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Netherite())));
 		Register("netherite_brick_slab", NETHERITE_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Netherite())));
 		Register("netherite_brick_wall", NETHERITE_BRICK_WALL, List.of(EN_US.BrickWall(EN_US.Netherite())));
-		Register("cut_netherite", CUT_NETHERITE, List.of(EN_US.Cut_(EN_US.Netherite())));
-		Register("cut_netherite_pillar", CUT_NETHERITE_PILLAR, List.of(EN_US.Cut_Pillar(EN_US.Netherite())));
-		Register("cut_netherite_stairs", CUT_NETHERITE_STAIRS, List.of(EN_US.Cut_Stairs(EN_US.Netherite())));
-		Register("cut_netherite_slab", CUT_NETHERITE_SLAB, List.of(EN_US.Cut_Slab(EN_US.Netherite())));
-		Register("cut_netherite_wall", CUT_NETHERITE_WALL, List.of(EN_US.Cut_Wall(EN_US.Netherite())));
+		Register("cut_netherite", CUT_NETHERITE, List.of(EN_US.CutNetherite()));
+		Register("cut_netherite_pillar", CUT_NETHERITE_PILLAR, List.of(EN_US.Pillar(EN_US.CutNetherite())));
+		Register("cut_netherite_stairs", CUT_NETHERITE_STAIRS, List.of(EN_US.Stairs(EN_US.CutNetherite())));
+		Register("cut_netherite_slab", CUT_NETHERITE_SLAB, List.of(EN_US.Slab(EN_US.CutNetherite())));
+		Register("cut_netherite_wall", CUT_NETHERITE_WALL, List.of(EN_US.Wall(EN_US.CutNetherite())));
 		Register("netherite_horse_armor", NETHERITE_HORSE_ARMOR, List.of(EN_US.HorseArmor(EN_US.Netherite())));
 		Register("crushing_weighted_pressure_plate", CRUSHING_WEIGHTED_PRESSURE_PLATE, List.of(EN_US.WeightedPressurePlate("Crushing")));
 		//</editor-fold>
@@ -1851,7 +1875,7 @@ public class ModBase implements ModInitializer {
 		Register("polished_gilded_blackstone_brick_slab", POLISHED_GILDED_BLACKSTONE_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.PolishedGildedBlackstone())));
 		Register("polished_gilded_blackstone_brick_wall", POLISHED_GILDED_BLACKSTONE_BRICK_WALL, List.of(EN_US.BrickWall(EN_US.PolishedGildedBlackstone())));
 		Register("chiseled_polished_gilded_blackstone", CHISELED_POLISHED_GILDED_BLACKSTONE, List.of(EN_US.PolishedGildedBlackstone(EN_US.Chiseled())));
-		Register("cracked_polished_gilded_blackstone_bricks", CRACKED_POLISHED_GILDED_BLACKSTONE_BRICKS, List.of(EN_US.Cracked_Bricks(EN_US.PolishedGildedBlackstone())));
+		Register("cracked_polished_gilded_blackstone_bricks", CRACKED_POLISHED_GILDED_BLACKSTONE_BRICKS, List.of(EN_US.Bricks(EN_US.PolishedGildedBlackstone(EN_US.Cracked()))));
 		//</editor-fold>
 		//<editor-fold desc="Arrows">
 		Register("amethyst_arrow", AMETHYST_ARROW, List.of(EN_US.AmethystArrow()));
@@ -1862,6 +1886,9 @@ public class ModBase implements ModInitializer {
 		Register("charcoal_block", CHARCOAL_BLOCK, List.of(EN_US.Block(EN_US.Charcoal())));
 		Register("charcoal_slab", CHARCOAL_SLAB, List.of(EN_US.Slab(EN_US.Charcoal())));
 		Register("coarse_dirt_slab", COARSE_DIRT_SLAB, List.of(EN_US.Slab(EN_US.CoarseDirt())));
+		Register("cocoa_block", COCOA_BLOCK, List.of(EN_US.Block(EN_US.Cocoa())));
+		Register("blue_mushroom", BLUE_MUSHROOM, List.of(EN_US._Potted(EN_US.Mushroom(EN_US.Blue()))));
+		Register("blue_mushroom_block", BLUE_MUSHROOM_BLOCK, List.of(EN_US.Block(EN_US.Mushroom(EN_US.Blue()))));
 		Register("blue_shroomlight", BLUE_SHROOMLIGHT, List.of(EN_US.BlueShroomlight()));
 		Register("blue_target", BLUE_TARGET, List.of(EN_US.Target(EN_US.Blue())));
 		Register("flint_block", FLINT_BLOCK, List.of(EN_US.Block(EN_US.Flint())));
@@ -1871,7 +1898,7 @@ public class ModBase implements ModInitializer {
 		Register("flint_brick_slab", FLINT_BRICK_SLAB, List.of(EN_US.BrickSlab(EN_US.Flint())));
 		Register("flint_brick_wall", FLINT_BRICK_WALL, List.of(EN_US.BrickWall(EN_US.Flint())));
 		Register("hedge_block", HEDGE_BLOCK, List.of(EN_US.Block(EN_US.Hedge())));
-		Register("cocoa_block", COCOA_BLOCK, List.of(EN_US.Block(EN_US.Cocoa())));
+		Register("mycelium_roots", MYCELIUM_ROOTS, List.of(EN_US._Potted(EN_US.Roots(EN_US.Mycelium()))));
 		Register("seed_block", SEED_BLOCK, List.of(EN_US.Block(EN_US.Seed())));
 		Register("wax_block", WAX_BLOCK, List.of(EN_US.Block(EN_US.Wax())));
 		Register("glazed_terracotta", GLAZED_TERRACOTTA, List.of(EN_US.GlazedTerracotta()));
@@ -1884,7 +1911,7 @@ public class ModBase implements ModInitializer {
 		Register("red_feather", RED_FEATHER, List.of(EN_US.Feather(EN_US.Red())));
 		//</editor-fold>
 		//<editor-fold desc="Books">
-		Register("unreadable_book", UNREADABLE_BOOK, List.of(EN_US.Literal("Unreadable Book")));
+		Register("unreadable_book", UNREADABLE_BOOK, List.of(EN_US.Book(EN_US.Unreadable())));
 		Register("red_book", RED_BOOK, List.of(EN_US.Book(EN_US.Red())));
 		Register("orange_book", ORANGE_BOOK, List.of(EN_US.Book(EN_US.Orange())));
 		Register("yellow_book", YELLOW_BOOK, List.of(EN_US.Book(EN_US.Yellow())));
@@ -1895,35 +1922,31 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//TODO: Rainbow Bed
 		//<editor-fold desc="Wool">
-		for (DyeColor color : DyeColor.values()) {
-			Register(color.getName() + "_wool_slab", WOOL_SLABS.get(color), List.of(EN_US.Color_Slab(color, "Wool")));
-		}
-		Register("rainbow_wool", RAINBOW_WOOL, List.of(EN_US.Rainbow_("Wool")));
-		Register("rainbow_wool_slab", RAINBOW_WOOL_SLAB, List.of(EN_US.Rainbow_Slab("Wool")));
-		Register("rainbow_carpet", RAINBOW_CARPET, List.of(EN_US.Rainbow_Carpet()));
+		for (DyeColor color : DyeColor.values()) Register(color.getName() + "_wool_slab", WOOL_SLABS.get(color), List.of(EN_US.Slab(EN_US.Wool(EN_US.Color(color)))));
+		Register("rainbow_wool", RAINBOW_WOOL, List.of(EN_US.Wool(EN_US.Rainbow())));
+		Register("rainbow_wool_slab", RAINBOW_WOOL_SLAB, List.of(EN_US.Slab(EN_US.Wool(EN_US.Rainbow()))));
+		Register("rainbow_carpet", RAINBOW_CARPET, List.of(EN_US.RainbowCarpet()));
 		//Register("rainbow_bed", RAINBOW_BED, List.of(EN_US.Bed(EN_US.Rainbow())));
 		//</editor-fold>
-		//TODO: Moss Bed
+		//TODO: Moss & Glow Lichen Beds
 		Register("moss_slab", MOSS_SLAB, List.of(EN_US.Slab(EN_US.Moss())));
-		//Register("moss_bed", MOSS_BED, List.of(EN_US.Bed(EN_US.Moss())));
+		//Register("moss_bed", MOSS_BED, List.of(EN_US.MossBed()));
+		Register("glow_lichen_block", GLOW_LICHEN_BLOCK, List.of(EN_US.Block(EN_US.GlowLichen())));
+		Register("glow_lichen_slab", GLOW_LICHEN_SLAB, List.of(EN_US.Slab(EN_US.GlowLichen())));
+		Register("glow_lichen_carpet", GLOW_LICHEN_CARPET, List.of(EN_US.Carpet(EN_US.GlowLichen())));
+		//Register("glow_lichen_bed", GLOW_LICHEN_BED, List.of(EN_US.GlowLichenBed()));
 		//<editor-fold desc="Goat">
 		Register("minecraft:set_instrument", SET_INSTRUMENT_LOOT_FUNCTION);
 		Register("minecraft:goat_horn", GOAT_HORN, List.of(EN_US.GoatHorn()));
 		//Extended
 		Register("chevon", CHEVON, List.of(EN_US.Chevon()));
 		Register("cooked_chevon", COOKED_CHEVON, List.of(EN_US.Chevon(EN_US.Cooked())));
-		for (DyeColor color : DyeColor.values()) {
-			Register(color.getName() + "_fleece", FLEECE.get(color), List.of(EN_US.Color_(color, EN_US.Fleece())));
-		}
-		for (DyeColor color : DyeColor.values()) {
-			Register(color.getName() + "_fleece_slab", FLEECE_SLABS.get(color), List.of(EN_US.Color_Slab(color, EN_US.Fleece())));
-		}
-		for (DyeColor color : DyeColor.values()) {
-			Register(color.getName() + "_fleece_carpet", FLEECE_CARPETS.get(color), List.of(EN_US.Color_Carpet(color, EN_US.Fleece())));
-		}
-		Register("rainbow_fleece", RAINBOW_FLEECE, List.of(EN_US.Rainbow_(EN_US.Fleece())));
-		Register("rainbow_fleece_slab", RAINBOW_FLEECE_SLAB, List.of(EN_US.Rainbow_Slab(EN_US.Fleece())));
-		Register("rainbow_fleece_carpet", RAINBOW_FLEECE_CARPET, List.of(EN_US.Rainbow_Carpet(EN_US.Fleece())));
+		for (DyeColor color : DyeColor.values()) Register(color.getName() + "_fleece", FLEECE.get(color), List.of(EN_US.Fleece(EN_US.Color(color))));
+		for (DyeColor color : DyeColor.values()) Register(color.getName() + "_fleece_slab", FLEECE_SLABS.get(color), List.of(EN_US.Slab(EN_US.Fleece(EN_US.Color(color)))));
+		for (DyeColor color : DyeColor.values()) Register(color.getName() + "_fleece_carpet", FLEECE_CARPETS.get(color), List.of(EN_US.Carpet(EN_US.Fleece(EN_US.Color(color)))));
+		Register("rainbow_fleece", RAINBOW_FLEECE, List.of(EN_US.Fleece(EN_US.Rainbow())));
+		Register("rainbow_fleece_slab", RAINBOW_FLEECE_SLAB, List.of(EN_US.Slab(EN_US.Fleece(EN_US.Rainbow()))));
+		Register("rainbow_fleece_carpet", RAINBOW_FLEECE_CARPET, List.of(EN_US.Carpet(EN_US.Fleece(EN_US.Rainbow()))));
 		Register("fleece_helmet", FLEECE_HELMET, List.of(EN_US.Helmet(EN_US.Fleece())));
 		Register("fleece_chestplate", FLEECE_CHESTPLATE, List.of(EN_US.Chestplate(EN_US.Fleece())));
 		Register("fleece_leggings", FLEECE_LEGGINGS, List.of(EN_US.Leggings(EN_US.Fleece())));
@@ -1963,7 +1986,7 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:music_disc_5", MUSIC_DISC_5, List.of(EN_US.MusicDisc()));
 		Register("minecraft:disc_fragment_5", DISC_FRAGMENT_5, List.of(EN_US.Fragment(EN_US.Disc())));
 		//<editor-fold desc="Mud">
-		Register("minecraft:mud", MUD, List.of(EN_US.Literal(EN_US.Mud())));
+		Register("minecraft:mud", MUD, List.of(EN_US.Mud()));
 		Register("minecraft:packed_mud", PACKED_MUD, List.of(EN_US.PackedMud()));
 		Register("minecraft:mud_bricks", MUD_BRICKS, List.of(EN_US.MudBricks()));
 		Register("minecraft:mud_brick_stairs", MUD_BRICK_STAIRS, List.of(EN_US.BrickStairs(EN_US.Mud())));
@@ -2082,7 +2105,7 @@ public class ModBase implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(FROG_ENTITY, FrogEntity.createFrogAttributes());
 		SpawnRestrictionAccessor.callRegister(FROG_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FrogEntity::canSpawn);
 		Register("minecraft:frogspawn", FROGSPAWN, List.of(EN_US.Frogspawn()));
-		Register("minecraft:tadpole", TADPOLE_ENTITY, List.of(EN_US.Literal(EN_US.Tadpole())));
+		Register("minecraft:tadpole", TADPOLE_ENTITY, List.of(EN_US.Tadpole()));
 		FabricDefaultAttributeRegistry.register(TADPOLE_ENTITY, TadpoleEntity.createTadpoleAttributes());
 		Register("minecraft:tadpole_bucket", TADPOLE_BUCKET, List.of(EN_US.Tadpole(EN_US.BucketOf())));
 		//</editor-fold>
@@ -2106,9 +2129,9 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="1.19 Backport">
 		Register("minecraft:darkness", DARKNESS_EFFECT, List.of(EN_US.Darkness()));
-		Register("minecraft:swift_sneak", SWIFT_SNEAK_ENCHANTMENT, List.of(EN_US.Literal("Swift_Sneak")));
-		Register("recovery_compass", RECOVERY_COMPASS, List.of(EN_US.Literal("Recovery Compass")));
-		EN_US.TranslationKeys.put("item." + NAMESPACE + "active_recovery_compass", EN_US.Literal("Active Recovery Compass"));
+		Register("minecraft:swift_sneak", SWIFT_SNEAK_ENCHANTMENT, List.of(EN_US.SwiftSneak()));
+		Register("recovery_compass", RECOVERY_COMPASS, List.of(EN_US.RecoveryCompass()));
+		EN_US.TranslationKeys.put("item." + NAMESPACE + "active_recovery_compass", EN_US.RecoveryCompass(EN_US.Active()));
 		//</editor-fold>
 		//<editor-fold desc="Echo">
 		Register("minecraft:echo_shard", ECHO_SHARD, List.of(EN_US.Shard(EN_US.Echo())));
@@ -2160,6 +2183,12 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:sniffer", SNIFFER_ENTITY, List.of(EN_US.Sniffer()));
 		FabricDefaultAttributeRegistry.register(SNIFFER_ENTITY, SnifferEntity.createSnifferAttributes());
 		//</editor-fold>
+		//<editor-fold desc="Pottery Shards>
+		Register("minecraft:pottery_shard_archer", POTTERY_SHARD_ARCHER, List.of(EN_US.PotteryShard(EN_US.Archer())));
+		Register("minecraft:pottery_shard_prize", POTTERY_SHARD_PRIZE, List.of(EN_US.PotteryShard(EN_US.Prize())));
+		Register("minecraft:pottery_shard_arms_up", POTTERY_SHARD_ARMS_UP, List.of(EN_US.PotteryShard(EN_US.Up(EN_US.Arms()))));
+		Register("minecraft:pottery_shard_skull", POTTERY_SHARD_SKULL, List.of(EN_US.PotteryShard(EN_US.Skull())));
+		//</editor-fold>
 		//<editor-fold desc="Jumping Spider">
 		Register("jumping_spider", JUMPING_SPIDER_ENTITY, List.of(EN_US.JumpingSpider()));
 		FabricDefaultAttributeRegistry.register(JUMPING_SPIDER_ENTITY, JumpingSpiderEntity.createJumpingSpiderAttributes());
@@ -2191,15 +2220,13 @@ public class ModBase implements ModInitializer {
 		Register("aster", ASTER, List.of(EN_US._Potted(EN_US.Aster())));
 		Register("amaranth", AMARANTH, List.of(EN_US.Amaranth()));
 		Register("blue_rose_bush", BLUE_ROSE_BUSH, List.of(EN_US.BlueRose()));
-		Register("tall_allium", TALL_ALLIUM, List.of(EN_US.Tall_(EN_US.Allium())));
-		Register("tall_pink_allium", TALL_PINK_ALLIUM, List.of(EN_US.Tall_(EN_US.PinkAllium())));
+		Register("tall_allium", TALL_ALLIUM, List.of(EN_US.Allium(EN_US.Allium())));
+		Register("tall_pink_allium", TALL_PINK_ALLIUM, List.of(EN_US.PinkAllium(EN_US.Tall())));
 		//</editor-fold>
 		Register("minecraft:netherite_upgrade_smithing_template", NETHERITE_UPGRADE_SMITHING_TEMPLATE, List.of(EN_US.SmithingTemplate(EN_US.Upgrade(EN_US.Netherite()))));
 		Register("trimming", TRIMMING_RECIPE_SERIALIZER);
 		Register("trimming_table", TRIMMING_TABLE, List.of(EN_US.TrimmingTable()));
-		for (ArmorTrimPattern pattern : ArmorTrimPattern.values()) {
-			Register(pattern.getItemPath(), pattern.asItem(), pattern.getTranslations());
-		}
+		for (ArmorTrimPattern pattern : ArmorTrimPattern.values()) Register(pattern.getItemPath(), pattern.asItem(), pattern.getTranslations());
 		//<editor-fold desc="Pouches">
 		Register("pouch", POUCH, List.of(EN_US.Pouch()));
 		Register("chicken_pouch", CHICKEN_POUCH, List.of(EN_US.Chicken(EN_US.PouchOf())));
@@ -2216,7 +2243,17 @@ public class ModBase implements ModInitializer {
 		Register("jumping_spider_spawn_egg", JUMPING_SPIDER_SPAWN_EGG, List.of(EN_US.SpawnEgg(EN_US.JumpingSpider())));
 		Register("hedgehog_spawn_egg", HEDGEHOG_SPAWN_EGG, List.of(EN_US.SpawnEgg(EN_US.Hedgehog())));
 		//</editor-fold>
-		//<editor-fold desc="Biomes">
+		//<editor-fold desc="Biomes and generated features">
+		SINGLE_MYCELIUM_ROOTS.Initialize();
+		SINGLE_BROWN_MUSHROOM.Initialize();
+		SINGLE_BLUE_MUSHROOM.Initialize();
+		SINGLE_RED_MUSHROOM.Initialize();
+		MYCELIUM_BONEMEAL_MYCELIUM_ROOTS.Initialize();
+		MYCELIUM_BONEMEAL_BROWN_MUSHROOM.Initialize();
+		MYCELIUM_BONEMEAL_BLUE_MUSHROOM.Initialize();
+		MYCELIUM_BONEMEAL_RED_MUSHROOM.Initialize();
+		Register("huge_blue_mushroom", HUGE_BLUE_MUSHROOM_FEATURE);
+		HUGE_BLUE_MUSHROOM_CONFIGURED.Initialize();
 		Register("disk_grass", DISK_GRASS_FEATURE);
 		DISK_GRASS_CONFIGURED.Initialize();
 		DISK_GRASS_PLACED.Initialize();
@@ -2291,7 +2328,7 @@ public class ModBase implements ModInitializer {
 		IdentifiedSounds.RegisterPower("ryft", "oracle", List.of(EN_US.footsteps(EN_US.Aloof())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.crashes(EN_US.Someone())), List.of(EN_US.swims(EN_US.Someone())), List.of(EN_US.splashes(EN_US.Someone())), List.of(EN_US.splashes_hard(EN_US.Someone())), List.of(EN_US.dies(EN_US.Someone())));
 		IdentifiedSounds.RegisterPower("ryft", "quincy", List.of(EN_US.steps(EN_US.boot(EN_US.Light()))), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.chivalrously(EN_US.crashes(EN_US.Someone()))), List.of(EN_US.swims(EN_US.Someone())), List.of(EN_US.splashes(EN_US.Someone())), List.of(EN_US.splashes_hard(EN_US.Someone())), List.of(EN_US.dies(EN_US.Someone())));
 		IdentifiedSounds.RegisterPower("ryft", "rose", List.of(EN_US.tapping(EN_US.porcelain(EN_US.Paced()))), List.of(EN_US.trips(EN_US.medium(EN_US.Someone()))), List.of(EN_US.crunches(EN_US.Porcelain())), List.of(EN_US.crashes(EN_US.Porcelain())), List.of(EN_US.glugs(EN_US.Porcelain())), List.of(EN_US.splashes(EN_US.medium(EN_US.Something()))), List.of(EN_US.splashes_hard(EN_US.medium(EN_US.Something()))), List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower("ryft", "zofia", List.of(EN_US.Literal("Cindering footsteps")), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.Literal("Someone crashed and burned")), List.of(EN_US.sizzles(EN_US.Water())), List.of(EN_US.splashes(EN_US.hot(EN_US.Something()))), List.of(EN_US.splashes_hard(EN_US.hot(EN_US.Something()))), List.of(EN_US.dies(EN_US.Someone())));
+		IdentifiedSounds.RegisterPower("ryft", "zofia", List.of(EN_US.footsteps(EN_US.Cindering())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.burned(EN_US.and(EN_US.crashed(EN_US.Someone())))), List.of(EN_US.sizzles(EN_US.Water())), List.of(EN_US.splashes(EN_US.hot(EN_US.Something()))), List.of(EN_US.splashes_hard(EN_US.hot(EN_US.Something()))), List.of(EN_US.dies(EN_US.Someone())));
 	}
 	//TODO: Soul & Ender Fire: Jack O' Lantern
 	//TODO: Carved Melons (and fire, soul, ender lanterns)
