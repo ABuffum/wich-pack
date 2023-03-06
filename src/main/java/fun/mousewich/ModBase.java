@@ -1058,7 +1058,7 @@ public class ModBase implements ModInitializer {
 	public static final Item NETHERITE_UPGRADE_SMITHING_TEMPLATE = SmithingTemplateItem.createNetheriteUpgrade();
 	public static final RecipeType<TrimmingRecipe> TRIMMING_RECIPE_TYPE = RegisterRecipeType("trimming");
 	public static final RecipeSerializer<TrimmingRecipe> TRIMMING_RECIPE_SERIALIZER = new TrimmingRecipe.Serializer();
-	public static final BlockContainer TRIMMING_TABLE = ModFactory.BuildBlock(new TrimmingTableBlock(Blocks.SMITHING_TABLE));
+	public static final BlockContainer TRIMMING_TABLE = ModFactory.BuildBlock(new TrimmingTableBlock(Blocks.SMITHING_TABLE), new Item.Settings()); //Hide from creative menu until it works
 
 	public static final Item POUCH = new PouchItem(ItemSettings().maxCount(16));
 	public static final Item CHICKEN_POUCH = new ChickenPouchItem(EntityType.CHICKEN, ItemSettings().maxCount(1)).dispensible();

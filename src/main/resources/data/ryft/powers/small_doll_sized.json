@@ -8,7 +8,7 @@
   "modify_speed": {
 	"type": "extraorigins:modify_size",
 	"scale_types": "pehkui:motion",
-	"scale": 1.3
+	"scale": 1.425
   },
   "attribute_modifiers": {
 	"type": "origins:attribute",

@@ -503,7 +503,7 @@ public class IdentifiedSounds {
 		Register("lectern", List.of(EN_US.Lectern()), Blocks.LECTERN,
 				/* Mod */ ACACIA_LECTERN.asBlock(), BIRCH_LECTERN.asBlock(), DARK_OAK_LECTERN.asBlock(),
 				JUNGLE_LECTERN.asBlock(), SPRUCE_LECTERN.asBlock(), CRIMSON_LECTERN.asBlock(), WARPED_LECTERN.asBlock(),
-				BAMBOO_LECTERN.asBlock(), CHERRY_LECTERN.asBlock(), MANGROVE_LECTERN.asBlock(), CHARRED_LECTERN.asBlock());
+				MANGROVE_LECTERN.asBlock(), CHARRED_LECTERN.asBlock());
 		Register(BlockSounds.Place("lily_pad", SoundEvents.BLOCK_LILY_PAD_PLACE, List.of(EN_US.LilyPad())), Blocks.LILY_PAD);
 		Register("loom", List.of(EN_US.Loom()), Blocks.LOOM);
 		Register("magma", List.of(EN_US.Magma()), Blocks.MAGMA_BLOCK);
