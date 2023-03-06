@@ -695,7 +695,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer RAINBOW_FLEECE = new BlockContainer(new ModFacingBlock(Blocks.WHITE_WOOL)).flammable(30, 60).fuel(100).dropSelf();
 	public static final BlockContainer RAINBOW_FLEECE_SLAB = new BlockContainer(new HorizontalFacingSlabBlock(RAINBOW_FLEECE.asBlock())).flammable(40, 40).fuel(50).dropSlabs();
 	public static final BlockContainer RAINBOW_FLEECE_CARPET = new BlockContainer(new HorziontalFacingCarpetBlock(RAINBOW_FLEECE.asBlock())).flammable(60, 20).fuel(67).dropSelf();
-	//public static final BedContainer RAINBOW_BED = ModFactory.MakeBed("rainbow");
 	public static final Item FLEECE_HELMET = new ModDyeableArmorItem(ModArmorMaterials.FLEECE, EquipmentSlot.HEAD);
 	public static final Item FLEECE_CHESTPLATE = new ModDyeableArmorItem(ModArmorMaterials.FLEECE, EquipmentSlot.CHEST);
 	public static final Item FLEECE_LEGGINGS = new ModDyeableArmorItem(ModArmorMaterials.FLEECE, EquipmentSlot.LEGS);
@@ -815,6 +814,17 @@ public class ModBase implements ModInitializer {
 	public static final Item MUSIC_DISC_5 = new ModMusicDiscItem(15, ModSoundEvents.MUSIC_DISC_5, ItemSettings(ItemGroup.MISC).maxCount(1).rarity(Rarity.RARE));
 	public static final Item DISC_FRAGMENT_5 = new DiscFragmentItem(ItemSettings(ItemGroup.MISC));
 	//</editor-fold>
+	//<editor-fold desc="Mycelium">
+	public static final PottedBlockContainer MYCELIUM_ROOTS = new PottedBlockContainer(new MyceliumRootsBlock(Block.Settings.of(Material.REPLACEABLE_PLANT, MapColor.PURPLE).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS))).requireSilkTouch();
+	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_MYCELIUM_ROOTS = new ModConfiguredFeature<>("single_mycelium_roots", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(MYCELIUM_ROOTS.asBlock().getDefaultState()))));
+	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_BROWN_MUSHROOM = new ModConfiguredFeature<>("single_brown_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(Blocks.BROWN_MUSHROOM.getDefaultState()))));
+	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_BLUE_MUSHROOM = new ModConfiguredFeature<>("single_blue_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(BLUE_MUSHROOM.asBlock().getDefaultState()))));
+	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_RED_MUSHROOM = new ModConfiguredFeature<>("single_red_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(Blocks.RED_MUSHROOM.getDefaultState()))));
+	public static final ModPlacedFeature MYCELIUM_BONEMEAL_MYCELIUM_ROOTS = new ModPlacedFeature("mycelium_bonemeal_roots", SINGLE_MYCELIUM_ROOTS) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
+	public static final ModPlacedFeature MYCELIUM_BONEMEAL_BROWN_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_brown", SINGLE_BROWN_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
+	public static final ModPlacedFeature MYCELIUM_BONEMEAL_BLUE_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_blue", SINGLE_BLUE_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
+	public static final ModPlacedFeature MYCELIUM_BONEMEAL_RED_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_red", SINGLE_RED_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
+	//</editor-fold>
 	//<editor-fold desc="Netherite">
 	public static final DefaultParticleType NETHERITE_FLAME_PARTICLE = FabricParticleTypes.simple(false);
 	public static final Item NETHERITE_NUGGET = new Item(NetheriteItemSettings());
@@ -840,7 +850,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer CUT_NETHERITE_STAIRS = ModFactory.MakeStairs(CUT_NETHERITE, NetheriteItemSettings());
 	public static final BlockContainer CUT_NETHERITE_SLAB = ModFactory.MakeSlab(CUT_NETHERITE, NetheriteItemSettings());
 	public static final BlockContainer CUT_NETHERITE_WALL = ModFactory.MakeWall(CUT_NETHERITE, NetheriteItemSettings());
-	//TODO: Make netherite fireproof. Oops lmao
 	public static final Item NETHERITE_HORSE_ARMOR = new ModHorseArmorItem(15, "netherite", NetheriteItemSettings().maxCount(1)).dispenseSilently();
 	public static final BlockContainer CRUSHING_WEIGHTED_PRESSURE_PLATE = new BlockContainer(new ModWeightedPressurePlateBlock(300, Block.Settings.of(Material.METAL).requiresTool().noCollision().strength(0.5F).sounds(BlockSoundGroup.WOOD)), NetheriteItemSettings()).dropSelf();
 	//</editor-fold>
@@ -1038,10 +1047,10 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer RAINBOW_WOOL = ModFactory.BuildBlock(new ModFacingBlock(Blocks.WHITE_WOOL)).flammable(30, 60).fuel(100);
 	public static final BlockContainer RAINBOW_WOOL_SLAB = ModFactory.BuildSlab(new HorizontalFacingSlabBlock(RAINBOW_WOOL)).flammable(40, 40).fuel(50);
 	public static final BlockContainer RAINBOW_CARPET = ModFactory.BuildBlock(new HorziontalFacingCarpetBlock(RAINBOW_WOOL)).flammable(60, 20).fuel(67);
+	//public static final BedContainer RAINBOW_BED = ModFactory.MakeBed("rainbow");
 	//</editor-fold>
 
 	public static final Item HORN = new Item(ItemSettings());
-
 
 	//TODO: Chiseled Bookshelves (1.20)
 	//TODO: Armor Trims (1.20)
@@ -1072,17 +1081,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer FLINT_BRICK_SLAB = ModFactory.BuildSlab(new FlintSlabBlock(FLINT_BRICKS), DropTable.FLINT_SLAB);
 	public static final BlockContainer FLINT_BRICK_WALL = ModFactory.BuildWall(new FlintWallBlock(FLINT_BRICKS), DropTable.FLINT);
 	public static final BlockContainer HEDGE_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.LEAVES).strength(0.2F).sounds(BlockSoundGroup.GRASS).nonOpaque()).flammable(5, 20);
-
-	public static final PottedBlockContainer MYCELIUM_ROOTS = new PottedBlockContainer(new MyceliumRootsBlock(Block.Settings.of(Material.REPLACEABLE_PLANT, MapColor.PURPLE).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS))).requireSilkTouch();
-	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_MYCELIUM_ROOTS = new ModConfiguredFeature<>("single_mycelium_roots", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(MYCELIUM_ROOTS.asBlock().getDefaultState()))));
-	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_BROWN_MUSHROOM = new ModConfiguredFeature<>("single_brown_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(Blocks.BROWN_MUSHROOM.getDefaultState()))));
-	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_BLUE_MUSHROOM = new ModConfiguredFeature<>("single_blue_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(BLUE_MUSHROOM.asBlock().getDefaultState()))));
-	public static final ModConfiguredFeature<SimpleBlockFeatureConfig, ?> SINGLE_RED_MUSHROOM = new ModConfiguredFeature<>("single_red_mushroom", new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(Blocks.RED_MUSHROOM.getDefaultState()))));
-	public static final ModPlacedFeature MYCELIUM_BONEMEAL_MYCELIUM_ROOTS = new ModPlacedFeature("mycelium_bonemeal_roots", SINGLE_MYCELIUM_ROOTS) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
-	public static final ModPlacedFeature MYCELIUM_BONEMEAL_BROWN_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_brown", SINGLE_BROWN_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
-	public static final ModPlacedFeature MYCELIUM_BONEMEAL_BLUE_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_blue", SINGLE_BLUE_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
-	public static final ModPlacedFeature MYCELIUM_BONEMEAL_RED_MUSHROOM = new ModPlacedFeature("mycelium_bonemeal_red", SINGLE_RED_MUSHROOM) { @Override public List<PlacementModifier> getModifiers() { return List.of(PlacedFeatures.isAir()); } };
-
 	public static final BlockContainer SEED_BLOCK = ModFactory.MakeBlock(Block.Settings.of(Material.SOLID_ORGANIC, MapColor.DARK_GREEN).strength(0.8F).sounds(BlockSoundGroup.GRASS)).compostable(1f);
 	public static final BlockContainer GLAZED_TERRACOTTA = new BlockContainer(new GlazedTerracottaBlock(Block.Settings.of(Material.STONE, MapColor.ORANGE).requiresTool().strength(1.4f))).dropSelf();
 	public static final BlockContainer WAX_BLOCK = ModFactory.BuildBlock(new WaxBlock(Blocks.HONEYCOMB_BLOCK));
