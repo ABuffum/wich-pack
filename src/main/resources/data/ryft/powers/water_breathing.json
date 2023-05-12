@@ -1,0 +1,9 @@
+{
+  "type": "wich:fluid_breather",
+  "fluid": "minecraft:water",
+  "suffocate": true,
+  "dryout": false,
+  "touch": true,
+  "name": "Gills",
+  "description": "You can breathe underwater, but not on land."
+}

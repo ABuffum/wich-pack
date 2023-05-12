@@ -23,64 +23,83 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 public class WaterBottleUtil {
+	public static void useOnLightable(BlockState state, World world, BlockPos pos, PlayerEntity player, ItemStack itemStack, SoundEvent extinguishSound) {
+		if (extinguishSound != null) {
+			world.playSound(player, pos, extinguishSound, SoundCategory.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+		}
+		world.setBlockState(pos, state.with(Properties.LIT, false));
+		world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+		//Alter inventory
+		if (!player.getAbilities().creativeMode) itemStack.decrement(1);
+		player.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
+		player.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
+		//Play splash & trigger event
+		makeSplash(world, pos);
+	}
+
+	public static void makeSplash(World world, BlockPos pos) {
+		if (!world.isClient) {
+			ServerWorld serverWorld = (ServerWorld)world;
+			for (int i = 0; i < 5; ++i) {
+				serverWorld.spawnParticles(ParticleTypes.SPLASH, pos.getX() + world.random.nextDouble(), pos.getY() + 1, pos.getZ() + world.random.nextDouble(), 1, 0.0, 0.0, 0.0, 1.0);
+			}
+		}
+	}
+
 	public static ActionResult useOnBlock(ItemUsageContext context) {
 		World world = context.getWorld();
-		BlockPos blockPos = context.getBlockPos();
-		PlayerEntity playerEntity = context.getPlayer();
+		BlockPos pos = context.getBlockPos();
+		PlayerEntity player = context.getPlayer();
 		ItemStack itemStack = context.getStack();
-		BlockState blockState = world.getBlockState(blockPos);
+		BlockState state = world.getBlockState(pos);
 		if (PotionUtil.getPotion(itemStack) == Potions.WATER) {
-			Block block = blockState.getBlock();
-			BlockState outState = blockState;
-			boolean bl = true, consume = false, first;
+			Block block = state.getBlock();
+			BlockState outState = state;
+			boolean bl = true, first, playSplash = false;
 			SoundEvent sound = SoundEvents.ENTITY_GENERIC_SPLASH;
 			if ((first = block == Blocks.TORCH) || block == Blocks.SOUL_TORCH) {
 				outState = (first ? ModBase.UNLIT_TORCH : ModBase.UNLIT_SOUL_TORCH).asBlock().getDefaultState();
 				sound = SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT;
-				if (block instanceof Waterloggable) outState = outState.with(Properties.WATERLOGGED, blockState.get(Properties.WATERLOGGED));
+				if (block instanceof Waterloggable) outState = outState.with(Properties.WATERLOGGED, state.get(Properties.WATERLOGGED));
 			}
 			else if ((first = block == Blocks.WALL_TORCH) || block == Blocks.SOUL_WALL_TORCH) {
 				outState = (first ? ModBase.UNLIT_TORCH : ModBase.UNLIT_SOUL_TORCH).getWallBlock().getDefaultState()
-						.with(WallTorchBlock.FACING, blockState.get(WallTorchBlock.FACING));
+						.with(WallTorchBlock.FACING, state.get(WallTorchBlock.FACING));
 				sound = SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT;
-				if (block instanceof Waterloggable) outState = outState.with(Properties.WATERLOGGED, blockState.get(Properties.WATERLOGGED));
+				if (block instanceof Waterloggable) outState = outState.with(Properties.WATERLOGGED, state.get(Properties.WATERLOGGED));
 			}
 			else if ((first = block == Blocks.LANTERN) || block == Blocks.SOUL_LANTERN) {
 				outState = (first ? ModBase.UNLIT_LANTERN : ModBase.UNLIT_SOUL_LANTERN).getDefaultState()
-						.with(LanternBlock.HANGING, blockState.get(LanternBlock.HANGING)).with(LanternBlock.WATERLOGGED, blockState.get(LanternBlock.WATERLOGGED));
+						.with(LanternBlock.HANGING, state.get(LanternBlock.HANGING)).with(LanternBlock.WATERLOGGED, state.get(LanternBlock.WATERLOGGED));
 			}
-			else if (block instanceof AbstractCandleBlock && blockState.get(AbstractCandleBlock.LIT)) {
-				AbstractCandleBlock.extinguish(playerEntity, blockState, world, blockPos);
+			else if (block instanceof AbstractCandleBlock && state.get(AbstractCandleBlock.LIT)) {
+				AbstractCandleBlock.extinguish(player, state, world, pos);
 				return ActionResult.success(world.isClient);
 			}
-			else if (block instanceof CampfireBlock && blockState.get(CampfireBlock.LIT)) {
-				CampfireBlock.extinguish(playerEntity, world, blockPos, blockState);
-				outState = blockState.with(CampfireBlock.LIT, false);
-				consume = true;
+			else if (block instanceof CampfireBlock && state.get(CampfireBlock.LIT)) {
+				CampfireBlock.extinguish(player, world, pos, state);
+				outState = state.with(CampfireBlock.LIT, false);
+				playSplash = true;
 			}
-			else if (context.getSide() != Direction.DOWN && blockState.isIn(ModBlockTags.CONVERTIBLE_TO_MUD)) {
+			else if (context.getSide() != Direction.DOWN && state.isIn(ModBlockTags.CONVERTIBLE_TO_MUD)) {
 				outState = ModBase.MUD.asBlock().getDefaultState();
-				consume = true;
+				playSplash = true;
 			}
 			else bl = false;
 			if (bl) {
-				if (sound != null) world.playSound(null, blockPos, sound, SoundCategory.PLAYERS, 1.0f, 1.0f);
-				if (playerEntity != null) {
-					if (consume) {
-						if (!playerEntity.getAbilities().creativeMode) context.getStack().decrement(1);
-						playerEntity.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
-					}
-					playerEntity.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
+				if (sound != null) world.playSound(null, pos, sound, SoundCategory.PLAYERS, 1.0f, 1.0f);
+				if (player != null) {
+					if (!player.getAbilities().creativeMode) context.getStack().decrement(1);
+					player.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
+					player.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
 				}
-				if (!world.isClient) {
-					ServerWorld serverWorld = (ServerWorld)world;
-					for (int i = 0; i < 5; ++i) {
-						serverWorld.spawnParticles(ParticleTypes.SPLASH, blockPos.getX() + world.random.nextDouble(), blockPos.getY() + 1, blockPos.getZ() + world.random.nextDouble(), 1, 0.0, 0.0, 0.0, 1.0);
-					}
+				makeSplash(world, pos);
+				if (playSplash) {
+					world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
+					world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
 				}
-				if (consume) world.playSound(null, blockPos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0f, 1.0f);
-				world.emitGameEvent(null, GameEvent.FLUID_PLACE, blockPos);
-				world.setBlockState(blockPos, outState);
+				world.setBlockState(pos, outState);
+				world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 				return ActionResult.success(world.isClient);
 			}
 		}

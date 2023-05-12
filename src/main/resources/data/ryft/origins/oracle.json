@@ -4,10 +4,13 @@
 	"origins:natural_armor",
 	"origins:strong_arms",
 	"origins:strong_arms_break_speed",
+	"origins:pumpkin_hate",
+	"wich:pumpkin_invisibility",
+	"ryft:throw_ender_pearl",
 	"origins:more_exhaustion",
 	"ryft:base_armor",
 	"ryft:thick_skin",
-	"ryft:oracle_identified_sounds"
+	"ryft:identified_sounds/oracle"
   ],
   "name": "The Oracle",
   "description": "God of Protection",

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###",
+    "N#N",
     "# #",
     "# #"
   ],
@@ -11,9 +11,12 @@
         "item": "minecraft:chain"
       },
       {
-        "item": "wich:white_iron_chain"
+        "item": "wich:iron_chain"
       }
-    ]
+    ],
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
   },
   "result": {
     "item": "minecraft:chainmail_leggings"

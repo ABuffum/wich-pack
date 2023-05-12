@@ -11,6 +11,33 @@
     "wich:emerald_chestplate",
     "wich:fleece_chestplate",
     "wich:quartz_chestplate",
-    "wich:studded_leather_chestplate"
+    "wich:shulker_chestplate",
+    "wich:studded_leather_chestplate",
+    "wich:turtle_chestplate",
+    "#wich:copper_chestplates",
+    {
+      "id": "betternether:cincinnasite_chestplate",
+      "required": false
+    },
+    {
+      "id": "betternether:nether_ruby_chestplate",
+      "required": false
+    },
+    {
+      "id": "betterend:aeternium_chestplate",
+      "required": false
+    },
+    {
+      "id": "betterend:crystalite_chestplate",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_chestplate",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_chestplate",
+      "required": false
+    }
   ]
 }

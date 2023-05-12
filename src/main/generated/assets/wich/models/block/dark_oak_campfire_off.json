@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_campfire_off",
+  "textures": {
+    "log": "wich:block/dark_oak_campfire_log"
+  }
+}

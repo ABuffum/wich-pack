@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "wich:block/gilded_hyphae",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "wich:block/gilded_hyphae"
+    },
+    "axis=z": {
+      "model": "wich:block/gilded_hyphae",
+      "x": 90
+    }
+  }
+}

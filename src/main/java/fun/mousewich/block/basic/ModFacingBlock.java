@@ -18,19 +18,10 @@ public class ModFacingBlock extends Block {
 		super(settings);
 		this.setDefaultState(this.stateManager.getDefaultState().with(Properties.FACING, Direction.NORTH));
 	}
-
 	public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
-
-	public BlockState rotate(BlockState state, BlockRotation rotation) {
-		return state.with(Properties.FACING, rotation.rotate(state.get(Properties.FACING)));
-	}
-
-	public BlockState mirror(BlockState state, BlockMirror mirror) {
-		return state.rotate(mirror.getRotation(state.get(Properties.FACING)));
-	}
-
+	public BlockState rotate(BlockState state, BlockRotation rotation) { return state.with(Properties.FACING, rotation.rotate(state.get(Properties.FACING))); }
+	public BlockState mirror(BlockState state, BlockMirror mirror) { return state.rotate(mirror.getRotation(state.get(Properties.FACING))); }
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(Properties.FACING); }
-
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		return this.getDefaultState().with(Properties.FACING, ctx.getPlayerLookDirection().getOpposite());
 	}

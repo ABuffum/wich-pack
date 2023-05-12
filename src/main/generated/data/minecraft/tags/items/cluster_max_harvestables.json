@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#c:tools/pickaxes"
+    "#minecraft:pickaxes"
   ]
 }

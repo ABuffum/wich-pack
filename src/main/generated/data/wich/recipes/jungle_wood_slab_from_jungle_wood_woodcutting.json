@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "minecraft:jungle_wood"
+  },
+  "result": "wich:jungle_wood_slab",
+  "count": 2
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_dogwood_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/dogwood_torch"
+    }
+  }
+}

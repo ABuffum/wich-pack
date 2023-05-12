@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "wich:block/oak_powder_keg_top",
+    "bottom": "wich:block/oak_barrel_bottom",
+    "side": "wich:block/oak_powder_keg_side"
+  }
+}

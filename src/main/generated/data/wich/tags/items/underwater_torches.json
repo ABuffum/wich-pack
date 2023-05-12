@@ -11,9 +11,12 @@
     "wich:waxed_weathered_underwater_copper_torch",
     "wich:waxed_oxidized_underwater_copper_torch",
     "wich:underwater_bamboo_torch",
+    "wich:underwater_dried_bamboo_torch",
     "wich:underwater_bone_torch",
     "wich:underwater_iron_torch",
     "wich:underwater_gold_torch",
-    "wich:underwater_netherite_torch"
+    "wich:underwater_netherite_torch",
+    "wich:underwater_prismarine_torch",
+    "wich:underwater_blaze_torch"
   ]
 }

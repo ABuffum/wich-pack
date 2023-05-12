@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "wich:item/roast_marshmallow_on_stick"
+  }
+}

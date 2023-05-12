@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "wich:block/cut_dark_iron",
+    "side": "wich:block/cut_dark_iron_pillar"
+  }
+}

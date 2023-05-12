@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:cassia_planks"
+    },
+    "S": {
+      "item": "wich:cassia_slab"
+    }
+  },
+  "result": {
+    "item": "wich:cassia_barrel"
+  }
+}

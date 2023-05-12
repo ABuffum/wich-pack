@@ -17,6 +17,11 @@
     "minecraft:end_stone",
     "minecraft:sandstone",
     "minecraft:red_sandstone",
+    "wich:shale",
+    "wich:end_shale",
+    "wich:end_rock",
+    "wich:end_rock_shale",
+    "wich:end_shale_rock",
     "#wich:sculk_turfs"
   ]
 }

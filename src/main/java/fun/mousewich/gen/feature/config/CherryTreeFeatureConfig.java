@@ -14,8 +14,5 @@ public class CherryTreeFeatureConfig implements FeatureConfig {
 			Codec.BOOL.fieldOf("bees").forGetter(config -> config.bees))
 			.apply(instance, CherryTreeFeatureConfig::new));
 	public final boolean bees;
-
-	public CherryTreeFeatureConfig(boolean bees) {
-		this.bees = bees;
-	}
+	public CherryTreeFeatureConfig(boolean bees) { this.bees = bees; }
 }

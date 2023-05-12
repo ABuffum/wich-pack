@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "wich:block/cassia_log",
+    "side": "wich:block/cassia_log"
+  }
+}

@@ -8,6 +8,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModEntityTypeTags {
 	public static final TagKey<EntityType<?>> FROG_FOOD = createMinecraftTag("frog_food");
+	public static final TagKey<EntityType<?>> SPIDERS = createTag("spiders");
+	public static final TagKey<EntityType<?>> ZOMBIES = createTag("zombies");
 
 	private static TagKey<EntityType<?>> createTag(String name) { return TagKey.of(Registry.ENTITY_TYPE_KEY, ModBase.ID(name)); }
 	private static TagKey<EntityType<?>> createTag(String namespace, String path) { return TagKey.of(Registry.ENTITY_TYPE_KEY, new Identifier(namespace, path)); }

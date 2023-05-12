@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:cutting_board_tall_allium"
+    ]
+  },
+  "criteria": {
+    "has_tall_allium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wich:tall_allium"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:cutting_board_tall_allium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tall_allium",
+      "has_the_recipe"
+    ]
+  ]
+}

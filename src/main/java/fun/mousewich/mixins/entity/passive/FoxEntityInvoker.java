@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(FoxEntity.class)
 public interface FoxEntityInvoker {
 	@Invoker("setWalking")
-	public void invokeSetWalking(boolean value);
+	void invokeSetWalking(boolean value);
 }

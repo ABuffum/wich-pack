@@ -1,6 +1,6 @@
 {
   "powers": [
-	"origins:water_breathing",
+	"ryft:water_breathing",
 	"origins:water_vision",
 	"origins:aqua_affinity",
 	"origins:swim_speed",
@@ -8,7 +8,7 @@
 	"origins:aquatic",
 	"origins:conduit_power_on_land",
 	"origins:air_from_potions",
-	"ryft:navn_identified_sounds"
+	"ryft:identified_sounds/navn"
   ],
   "name": "Mer-Navn",
   "description": "LOL + LMAO + Fish Time",

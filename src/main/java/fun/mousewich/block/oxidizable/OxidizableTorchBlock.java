@@ -13,8 +13,8 @@ import java.util.Optional;
 import java.util.Random;
 
 public class OxidizableTorchBlock extends LightableTorchBlock implements Oxidizable {
-	private final Oxidizable.OxidationLevel level;
-	public OxidizableTorchBlock(Oxidizable.OxidationLevel level, Settings settings, ParticleEffect particle) {
+	private final OxidationLevel level;
+	public OxidizableTorchBlock(OxidationLevel level, Settings settings, ParticleEffect particle) {
 		super(settings, particle);
 		this.level = level;
 	}
@@ -27,7 +27,7 @@ public class OxidizableTorchBlock extends LightableTorchBlock implements Oxidiza
 		return OxidationScale.getIncreasedBlock(state.getBlock()).isPresent();
 	}
 	@Override
-	public Oxidizable.OxidationLevel getDegradationLevel() { return this.level; }
+	public OxidationLevel getDegradationLevel() { return this.level; }
 	@Override
 	public Optional<BlockState> getDegradationResult(BlockState state) {
 		return OxidationScale.getIncreasedBlock(state.getBlock()).map((block) -> block.getStateWithProperties(state));

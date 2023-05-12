@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fun.mousewich.ModBase;
+import fun.mousewich.entity.ModNbtKeys;
 import fun.mousewich.gen.data.tag.ModItemTags;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,6 @@ public class ArmorTrim {
 			Codec.STRING.fieldOf("material").forGetter(ArmorTrim::getMaterialName),
 			Codec.STRING.fieldOf("pattern").forGetter(ArmorTrim::getPatternName))
 			.apply(instance, ArmorTrim::new));
-	public static final String NBT_KEY = "Trim";
 	private static final Text UPGRADE_TEXT = new TranslatableText(Util.createTranslationKey("item", new Identifier("smithing_template.upgrade"))).formatted(Formatting.GRAY);
 	private final ArmorTrimMaterial material;
 	private final ArmorTrimPattern pattern;
@@ -73,15 +73,15 @@ public class ArmorTrim {
 
 	public static boolean apply(ItemStack stack, ArmorTrim trim) {
 		if (stack.isIn(ModItemTags.TRIMMABLE_ARMOR)) {
-			stack.getOrCreateNbt().put(NBT_KEY, CODEC.encodeStart(NbtOps.INSTANCE, trim).result().orElseThrow());
+			stack.getOrCreateNbt().put(ModNbtKeys.TRIM, CODEC.encodeStart(NbtOps.INSTANCE, trim).result().orElseThrow());
 			return true;
 		}
 		return false;
 	}
 
 	public static Optional<ArmorTrim> getTrim(ItemStack stack) {
-		if (stack.isIn(ModItemTags.TRIMMABLE_ARMOR) && stack.getNbt() != null && stack.getNbt().contains(NBT_KEY)) {
-			NbtCompound nbtCompound = stack.getSubNbt(NBT_KEY);
+		if (stack.isIn(ModItemTags.TRIMMABLE_ARMOR) && stack.getNbt() != null && stack.getNbt().contains(ModNbtKeys.TRIM)) {
+			NbtCompound nbtCompound = stack.getSubNbt(ModNbtKeys.TRIM);
 			ArmorTrim armorTrim = CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, nbtCompound)).resultOrPartial(ModBase.LOGGER::error).orElse(null);
 			return Optional.ofNullable(armorTrim);
 		}

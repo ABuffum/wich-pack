@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.client.render.entity;
 
-import fun.mousewich.entity.camel.CamelEntity;
+import fun.mousewich.entity.passive.camel.CamelEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;

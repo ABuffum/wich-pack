@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:dried_bamboo_block"
+  },
+  "result": "wich:dried_bamboo_block_slab",
+  "count": 2
+}

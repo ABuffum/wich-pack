@@ -1,0 +1,11 @@
+{
+  "type": "wich:mob_hostility",
+  "entity_types": [
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "wich:bone_spider",
+    "wich:jumping_spider"
+  ],
+  "name": "Spider-Hated",
+  "description": "Spiders take particular joy in your torment."
+}

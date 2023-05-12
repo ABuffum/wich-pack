@@ -1,6 +1,7 @@
 package fun.mousewich.block;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.block.echo.EchoBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.fluid.Fluids;

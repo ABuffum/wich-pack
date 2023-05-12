@@ -29,7 +29,7 @@ public class TrimmingScreenHandler extends ModForgingScreenHandler {
 		this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
 	}
 	public TrimmingScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-		super(ModClient.TRIMMING_SCREEN_HANDLER, syncId, playerInventory, context);
+		super(ModBase.TRIMMING_SCREEN_HANDLER, syncId, playerInventory, context);
 		this.world = playerInventory.player.world;
 		this.recipes = this.world.getRecipeManager().listAllOfType(ModBase.TRIMMING_RECIPE_TYPE);
 	}
@@ -38,7 +38,7 @@ public class TrimmingScreenHandler extends ModForgingScreenHandler {
 		return ForgingSlotsManager.create().input(0, 8, 48, stack -> this.recipes.stream().anyMatch(recipe -> recipe.testTemplate(stack))).input(1, 26, 48, stack -> this.recipes.stream().anyMatch(recipe -> recipe.testBase(stack) && recipe.testTemplate(this.slots.get(0).getStack()))).input(2, 44, 48, stack -> this.recipes.stream().anyMatch(recipe -> recipe.testAddition(stack) && recipe.testTemplate(this.slots.get(0).getStack()))).output(3, 98, 48).build();
 	}
 
-	public ScreenHandlerType<?> getType() { return ModClient.TRIMMING_SCREEN_HANDLER; }
+	public ScreenHandlerType<?> getType() { return ModBase.TRIMMING_SCREEN_HANDLER; }
 	@Override
 	protected boolean canUse(BlockState state) { return state.isOf(ModBase.TRIMMING_TABLE.asBlock()); }
 	@Override

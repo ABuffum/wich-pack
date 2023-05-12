@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "wich:item/summoning_arrow_head",
+    "layer1": "wich:item/summoning_arrow_sparkles",
+    "layer2": "wich:item/summoning_arrow_base"
+  }
+}

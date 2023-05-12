@@ -1,7 +1,7 @@
 package fun.mousewich.mixins.block;
 
-import fun.mousewich.origins.powers.PowersUtil;
-import fun.mousewich.origins.powers.TakeHoneyPower;
+import fun.mousewich.origins.power.PowersUtil;
+import fun.mousewich.origins.power.TakeHoneyPower;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;

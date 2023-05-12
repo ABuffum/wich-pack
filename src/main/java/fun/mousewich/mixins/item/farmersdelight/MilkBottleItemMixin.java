@@ -1,8 +1,8 @@
 package fun.mousewich.mixins.item.farmersdelight;
 
 import com.nhoryzon.mc.farmersdelight.item.MilkBottleItem;
-import fun.mousewich.ModBase;
-import fun.mousewich.util.MilkUtils;
+import fun.mousewich.effect.ModStatusEffect;
+import fun.mousewich.util.MilkUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.ItemStack;
@@ -21,13 +21,13 @@ public class MilkBottleItemMixin {
 	@Inject(method="affectConsumer", at = @At("HEAD"), cancellable = true)
 	public void AffectConsumer(ItemStack stack, World world, LivingEntity user, CallbackInfo ci) {
 		Collection<StatusEffect> activeStatusEffectList = user.getActiveStatusEffects().keySet()
-				.stream().filter((x) -> !ModBase.MILK_IMMUNE_EFFECTS.contains(x)).<StatusEffect>toList();
+				.stream().filter((x) -> !ModStatusEffect.MILK_IMMUNE_EFFECTS.contains(x)).toList();
 		if (!activeStatusEffectList.isEmpty()) {
 			Optional<StatusEffect> var10000 = activeStatusEffectList.stream().skip(world.getRandom().nextInt(activeStatusEffectList.size())).findFirst();
 			Objects.requireNonNull(user);
 			var10000.ifPresent(user::removeStatusEffect);
 		}
-		MilkUtils.CheckLactosIntolerance(world, user);
+		MilkUtil.CheckLactosIntolerance(world, user);
 		ci.cancel();
 	}
 }

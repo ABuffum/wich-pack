@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom",
+  "textures": {
+    "top": "wich:block/cassia_door_top",
+    "bottom": "wich:block/cassia_door_bottom"
+  }
+}

@@ -2,7 +2,7 @@ package fun.mousewich.mixins.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import fun.mousewich.ModBase;
-import fun.mousewich.entity.camel.CamelEntity;
+import fun.mousewich.entity.passive.camel.CamelEntity;
 import fun.mousewich.gen.data.tag.ModItemTags;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,9 +30,8 @@ import java.util.function.Function;
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin {
 	private static final Map<Function<ItemStack, Boolean>, Pair<Identifier, Float>> OVERLAYS = new HashMap<>(Map.ofEntries(
-			Overlay(ModItemTags.CARVED_PUMPKINS, ModBase.ID("textures/misc/pumpkinblur.png"), 1.0F),
-			Overlay(ModItemTags.CARVED_MELONS, ModBase.ID("textures/misc/melonblur.png"), 1.0F),
-			Overlay(ModBase.TINTED_GOGGLES, ModBase.ID("textures/misc/tinted_glass.png"), 0)//1.0F)
+			Overlay(ModItemTags.CARVED_PUMPKINS, new Identifier("textures/misc/pumpkinblur.png"), 1.0F),
+			Overlay(ModItemTags.CARVED_MELONS, ModBase.ID("textures/misc/melonblur.png"), 1.0F)
 	));
 	@Shadow
 	private void renderOverlay(Identifier texture, float opacity) { }

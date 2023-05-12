@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:white_tulip"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:white_tulip_petals"
+    },
+    {
+      "item": "wich:white_tulip_seeds"
+    }
+  ]
+}

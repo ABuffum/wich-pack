@@ -23,22 +23,22 @@ public class SignContainer extends WallBlockContainer {
 	private final WallBlockContainer hangingSign;
 	public WallBlockContainer getHanging() { return hangingSign; }
 
-	public SignContainer(String name, Material material, BlockSoundGroup blockSoundGroup, Item.Settings itemSettings, MapColor color, BlockSoundGroup hangingSounds) {
-		this(SignTypeAccessor.registerNew(SignTypeAccessor.newSignType(name)), material, blockSoundGroup, itemSettings, color, hangingSounds);
+	public SignContainer(String name, Material material, BlockSoundGroup blockSoundGroup, Item.Settings itemSettings, Block hangingSignBase, BlockSoundGroup hangingSounds) {
+		this(SignTypeAccessor.registerNew(SignTypeAccessor.newSignType(name)), material, blockSoundGroup, itemSettings, hangingSignBase, hangingSounds);
 	}
-	private SignContainer(SignType type, Material material, BlockSoundGroup blockSoundGroup, Item.Settings itemSettings, MapColor color, BlockSoundGroup hangingSounds) {
-		this(type,new SignBlock(AbstractBlock.Settings.of(material).noCollision().strength(1.0F).sounds(blockSoundGroup), type),material, blockSoundGroup, itemSettings, color, hangingSounds);
+	private SignContainer(SignType type, Material material, BlockSoundGroup blockSoundGroup, Item.Settings itemSettings, Block hangingSignBase, BlockSoundGroup hangingSounds) {
+		this(type,new SignBlock(AbstractBlock.Settings.of(material).noCollision().strength(1.0F).sounds(blockSoundGroup), type),material, blockSoundGroup, itemSettings, hangingSignBase, hangingSounds);
 	}
-	private SignContainer(SignType type, Block block, Material material, BlockSoundGroup blockSoundGroup, Item.Settings itemSettings, MapColor color, BlockSoundGroup hangingSounds) {
-		this (type, block, new WallSignBlock(AbstractBlock.Settings.of(material).noCollision().strength(1.0F).sounds(blockSoundGroup), type), itemSettings, color, hangingSounds);
+	private SignContainer(SignType type, Block block, Material material, BlockSoundGroup blockSoundGroup, Item.Settings itemSettings, Block hangingSignBase, BlockSoundGroup hangingSounds) {
+		this (type, block, new WallSignBlock(AbstractBlock.Settings.of(material).noCollision().strength(1.0F).sounds(blockSoundGroup), type), itemSettings, hangingSignBase, hangingSounds);
 	}
-	private SignContainer(SignType type, Block block, Block wallBlock, Item.Settings itemSettings, MapColor color, BlockSoundGroup hangingSounds) {
-		this(type, block, wallBlock, new SignItem(itemSettings, block, wallBlock), color, itemSettings, hangingSounds);
+	private SignContainer(SignType type, Block block, Block wallBlock, Item.Settings itemSettings, Block hangingSignBase, BlockSoundGroup hangingSounds) {
+		this(type, block, wallBlock, new SignItem(itemSettings, block, wallBlock), itemSettings, hangingSignBase, hangingSounds);
 	}
-	private SignContainer(SignType type, Block block, Block wallBlock, Item item, MapColor color, Item.Settings itemSettings, BlockSoundGroup hangingSounds) {
+	private SignContainer(SignType type, Block block, Block wallBlock, Item item, Item.Settings itemSettings, Block hangingSignBase, BlockSoundGroup hangingSounds) {
 		super(block, wallBlock, item);
 		this.type = type;
-		this.hangingSign = ModFactory.MakeHangingSign(type, color, itemSettings, hangingSounds);
+		this.hangingSign = ModFactory.MakeHangingSign(type, hangingSignBase, itemSettings, hangingSounds);
 	}
 
 	@Override

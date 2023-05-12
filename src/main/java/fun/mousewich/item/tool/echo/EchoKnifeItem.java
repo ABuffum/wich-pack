@@ -1,18 +1,14 @@
 package fun.mousewich.item.tool.echo;
 
+import fun.mousewich.item.tool.ExtraKnockbackItem;
 import fun.mousewich.item.tool.ModKnifeItem;
-import fun.mousewich.util.EchoUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 
-public class EchoKnifeItem extends ModKnifeItem {
-	private final float knockback;
-	public EchoKnifeItem(ToolMaterial material, float knockback) {
+public class EchoKnifeItem extends ModKnifeItem implements ExtraKnockbackItem {
+	private final int knockback;
+	public int getExtraKnockback() { return this.knockback; }
+	public EchoKnifeItem(ToolMaterial material, int knockback) {
 		super(material);
 		this.knockback = knockback;
 	}
-
-	@Override
-	public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) { return EchoUtils.postHit(stack, target, attacker, knockback); }
 }

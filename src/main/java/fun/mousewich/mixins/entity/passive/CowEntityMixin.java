@@ -1,5 +1,8 @@
 package fun.mousewich.mixins.entity.passive;
 
+import fun.mousewich.ModBase;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -16,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CowEntity.class)
-public abstract class CowEntityMixin extends AnimalEntity {
+public abstract class CowEntityMixin extends AnimalEntity implements EntityWithBloodType {
 	public CowEntityMixin(EntityType<? extends CowEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method="getAmbientSound", at = @At("HEAD"), cancellable = true)
@@ -39,4 +42,6 @@ public abstract class CowEntityMixin extends AnimalEntity {
 			ci.cancel();
 		}
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.COW_BLOOD_TYPE; }
 }

@@ -1,7 +1,7 @@
 {
   "type": "origins:attribute",
   "modifier": {
-	"name": "Fragile health reduction",
+	"name": "Tough health increase",
 	"attribute": "minecraft:generic.max_health",
 	"value": 20.0,
 	"operation": "addition"

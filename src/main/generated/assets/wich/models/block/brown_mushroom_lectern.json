@@ -1,0 +1,10 @@
+{
+  "parent": "wich:block/_template_lectern",
+  "textures": {
+    "bottom": "wich:block/brown_mushroom_planks",
+    "base": "wich:block/brown_mushroom_lectern_base",
+    "front": "wich:block/brown_mushroom_lectern_front",
+    "sides": "wich:block/brown_mushroom_lectern_sides",
+    "top": "wich:block/brown_mushroom_lectern_top"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "wich:bamboo_log_slab",
+    "wich:acacia_log_slab",
+    "wich:dried_bamboo_log_slab",
+    "wich:dark_oak_log_slab",
+    "wich:mangrove_log_slab",
+    "wich:cherry_log_slab",
+    "wich:dogwood_log_slab",
+    "wich:spruce_log_slab",
+    "wich:cassia_log_slab",
+    "wich:jungle_log_slab",
+    "wich:oak_log_slab",
+    "wich:birch_log_slab",
+    "wich:acacia_log_slab",
+    "wich:birch_log_slab",
+    "wich:dark_oak_log_slab",
+    "wich:jungle_log_slab",
+    "wich:oak_log_slab",
+    "wich:spruce_log_slab",
+    "wich:cherry_log_slab",
+    "wich:mangrove_log_slab",
+    "wich:cassia_log_slab",
+    "wich:dogwood_log_slab"
+  ]
+}

@@ -2,7 +2,7 @@ package fun.mousewich.command;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.CommandDispatcher;
-import fun.mousewich.util.MilkUtils;
+import fun.mousewich.util.MilkUtil;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -22,7 +22,7 @@ public class CleanseCommand {
 
 	private static int execute(Collection<? extends Entity> targets) {
 		for (Entity entity : targets) {
-			if (entity instanceof LivingEntity livingEntity) MilkUtils.ClearStatusEffects(livingEntity.world, livingEntity);
+			if (entity instanceof LivingEntity livingEntity) MilkUtil.ClearStatusEffects(livingEntity.world, livingEntity);
 		}
 		return targets.size();
 	}

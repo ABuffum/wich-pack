@@ -15,13 +15,13 @@ import java.util.Set;
 @Mixin(ServerWorld.class)
 public interface ServerWorldAccessor {
 	@Accessor("entityList")
-	public EntityList getEntityList();
+	EntityList getEntityList();
 	@Accessor("players")
-	public List<ServerPlayerEntity> getPlayers();
+	List<ServerPlayerEntity> getPlayers();
 	@Accessor("loadedMobs")
-	public Set<MobEntity> getLoadedMobs();
+	Set<MobEntity> getLoadedMobs();
 	@Accessor("dragonParts")
-	public Int2ObjectMap<EnderDragonPart> getDragonParts();
+	Int2ObjectMap<EnderDragonPart> getDragonParts();
 	@Accessor("idleTimeout")
-	public int getIdleTimeout();
+	int getIdleTimeout();
 }

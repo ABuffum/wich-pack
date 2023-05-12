@@ -54,11 +54,13 @@ public class WaterloggableWallTorchBlock extends LightableWallTorchBlock impleme
 
 	@Override
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-		double d = pos.getX() + 0.5D;
-		double e = pos.getY() + 0.7D;
-		double f = pos.getZ() + 0.5D;
-		Direction direction = state.get(FACING).getOpposite();
-		world.addParticle(state.get(Properties.WATERLOGGED) ? ParticleTypes.UNDERWATER : ParticleTypes.SMOKE, d + 0.27D * direction.getOffsetX(), e + 0.22D, f + 0.27D * direction.getOffsetZ(), 0.0D, 0.0D, 0.0D);
-		world.addParticle(this.particle, d + 0.27D * (double)direction.getOffsetX(), e + 0.22D, f + 0.27D * direction.getOffsetZ(), 0.0D, 0.0D, 0.0D);
+		if (state.get(Properties.LIT)) {
+			double d = pos.getX() + 0.5D;
+			double e = pos.getY() + 0.7D;
+			double f = pos.getZ() + 0.5D;
+			Direction direction = state.get(FACING).getOpposite();
+			world.addParticle(state.get(Properties.WATERLOGGED) ? ParticleTypes.UNDERWATER : ParticleTypes.SMOKE, d + 0.27D * direction.getOffsetX(), e + 0.22D, f + 0.27D * direction.getOffsetZ(), 0.0D, 0.0D, 0.0D);
+			world.addParticle(this.particle, d + 0.27D * (double) direction.getOffsetX(), e + 0.22D, f + 0.27D * direction.getOffsetZ(), 0.0D, 0.0D, 0.0D);
+		}
 	}
 }

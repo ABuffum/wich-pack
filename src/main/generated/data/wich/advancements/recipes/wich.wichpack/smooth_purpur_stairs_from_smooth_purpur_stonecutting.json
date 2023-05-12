@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:smooth_purpur_stairs_from_smooth_purpur_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_smooth_purpur": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wich:smooth_purpur"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:smooth_purpur_stairs_from_smooth_purpur_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_smooth_purpur",
+      "has_the_recipe"
+    ]
+  ]
+}

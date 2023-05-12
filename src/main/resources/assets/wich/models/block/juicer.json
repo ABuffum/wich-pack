@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "front": "wich:block/juicer",
+    "side": "wich:block/juicer_side",
+    "top": "wich:block/juicer_top",
+    "bottom": "wich:block/juicer_bottom"
+  }
+}

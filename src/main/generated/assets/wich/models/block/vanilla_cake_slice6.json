@@ -1,0 +1,10 @@
+{
+  "parent": "wich:block/_template_cake_slice6",
+  "textures": {
+    "bottom": "wich:block/vanilla_cake_bottom",
+    "side": "wich:block/vanilla_cake_side",
+    "top": "wich:block/vanilla_cake_top",
+    "inside": "wich:block/vanilla_cake_inner",
+    "particle": "wich:block/vanilla_cake_side"
+  }
+}

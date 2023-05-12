@@ -1,0 +1,13 @@
+{
+  "powers": [
+	"wich:wither_immunity",
+	"haven:spooky_move",
+	"haven:eat_poppy_seeds",
+	"haven:eat_poppy_petals",
+	"wich:is_skeleton",
+	"wich:blood_types/none"
+  ],
+  "name": "Skeleton",
+  "description": "Bones rattle in the distance.",
+  "icon": "minecraft:bone"
+}

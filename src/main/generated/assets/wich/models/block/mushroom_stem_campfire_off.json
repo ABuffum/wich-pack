@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_campfire_off",
+  "textures": {
+    "log": "wich:block/mushroom_stem_campfire_log"
+  }
+}

@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "automatic": {
+    "has_blackstone_stairs": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stick"
+              "minecraft:blackstone_stairs"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "automatic",
+      "has_blackstone_stairs",
       "has_the_recipe"
     ]
   ]

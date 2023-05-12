@@ -1,10 +1,14 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
       "item": "wich:copper_nugget"
     }
-  ],
+  },
   "result": {
     "item": "wich:copper_button"
   }

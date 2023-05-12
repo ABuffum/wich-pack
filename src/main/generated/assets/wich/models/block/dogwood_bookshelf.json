@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "wich:block/dogwood_planks",
+    "side": "wich:block/dogwood_bookshelf"
+  }
+}

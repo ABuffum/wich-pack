@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/pink_chorus_candle_cake"
+    },
+    "lit=true": {
+      "model": "wich:block/pink_chorus_candle_cake_lit"
+    }
+  }
+}

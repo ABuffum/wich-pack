@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "wich:block/dried_bamboo_crafting_table_front",
+    "north": "wich:block/dried_bamboo_crafting_table_front",
+    "south": "wich:block/dried_bamboo_crafting_table_side",
+    "east": "wich:block/dried_bamboo_crafting_table_side",
+    "west": "wich:block/dried_bamboo_crafting_table_front",
+    "up": "wich:block/dried_bamboo_crafting_table_top",
+    "down": "wich:block/dried_bamboo_planks"
+  }
+}

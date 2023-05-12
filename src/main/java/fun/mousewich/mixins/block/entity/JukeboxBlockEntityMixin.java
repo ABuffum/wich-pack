@@ -26,15 +26,13 @@ public abstract class JukeboxBlockEntityMixin extends BlockEntity implements Cle
 
 	@Inject(method="readNbt", at=@At("TAIL"))
 	public void ReadNbt(NbtCompound nbt, CallbackInfo ci) {
-		super.readNbt(nbt);
 		this.playing = nbt.getBoolean("IsPlaying");
 		this.recordStartTick = nbt.getLong("RecordStartTick");
 		this.tickCount = nbt.getLong("TickCount");
 	}
 
 	@Inject(method="writeNbt", at=@At("TAIL"))
-	protected void writeNbt(NbtCompound nbt, CallbackInfo ci) {
-		super.writeNbt(nbt);
+	protected void WriteNbt(NbtCompound nbt, CallbackInfo ci) {
 		nbt.putBoolean("IsPlaying", this.playing);
 		nbt.putLong("RecordStartTick", this.recordStartTick);
 		nbt.putLong("TickCount", this.tickCount);

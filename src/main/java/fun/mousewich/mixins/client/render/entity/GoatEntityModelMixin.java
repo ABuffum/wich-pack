@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.client.render.entity;
 
-import fun.mousewich.util.GoatUtils;
+import fun.mousewich.util.GoatUtil;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.render.entity.model.GoatEntityModel;
@@ -19,8 +19,8 @@ public abstract class GoatEntityModelMixin<T extends GoatEntity> extends Quadrup
 
 	@Inject(method="setAngles(Lnet/minecraft/entity/passive/GoatEntity;FFFFF)V", at = @At("HEAD"), cancellable = true)
 	public void setAngles(T goatEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
-		this.head.getChild(EntityModelPartNames.LEFT_HORN).visible = GoatUtils.hasLeftHorn(goatEntity);
-		this.head.getChild(EntityModelPartNames.RIGHT_HORN).visible = GoatUtils.hasRightHorn(goatEntity);
+		this.head.getChild(EntityModelPartNames.LEFT_HORN).visible = GoatUtil.hasLeftHorn(goatEntity);
+		this.head.getChild(EntityModelPartNames.RIGHT_HORN).visible = GoatUtil.hasRightHorn(goatEntity);
 		super.setAngles(goatEntity, f, g, h, i, j);
 		float k = goatEntity.getHeadPitch();
 		if (k != 0.0F) this.head.pitch = k;

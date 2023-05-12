@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/chicken",
+  "textures": {
+    "all": "wich:block/skewbald_chicken_plushie",
+    "particle": "wich:block/skewbald_chicken_plushie"
+  }
+}

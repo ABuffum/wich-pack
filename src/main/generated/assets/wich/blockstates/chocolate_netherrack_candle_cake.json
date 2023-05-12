@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/chocolate_netherrack_candle_cake"
+    },
+    "lit=true": {
+      "model": "wich:block/chocolate_netherrack_candle_cake_lit"
+    }
+  }
+}

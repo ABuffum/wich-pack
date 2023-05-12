@@ -6,6 +6,7 @@ import fun.mousewich.block.oxidizable.OxidizableWallTorchBlock;
 import fun.mousewich.block.oxidizable.WaterloggableOxidizableTorchBlock;
 import fun.mousewich.block.oxidizable.WaterloggableOxidizableWallTorchBlock;
 import fun.mousewich.block.torch.*;
+import fun.mousewich.gen.data.ModDatagen;
 import fun.mousewich.gen.data.loot.DropTable;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import fun.mousewich.util.OxidationScale;
@@ -13,6 +14,7 @@ import net.minecraft.block.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.util.Pair;
 
 public class TorchContainer implements IWallBlockItemContainer {
 	protected final LightableTorchBlock block;
@@ -67,6 +69,15 @@ public class TorchContainer implements IWallBlockItemContainer {
 		WaterloggableOxidizableTorchBlock block = new WaterloggableOxidizableTorchBlock(level, settings, particle);
 		WaterloggableOxidizableWallTorchBlock wallBlock = new WaterloggableOxidizableWallTorchBlock(level, Block.Settings.copy(block), particle);
 		return new TorchContainer(block, wallBlock, itemSettings);
+	}
+
+	public TorchContainer torchModel() {
+		ModDatagen.Cache.Model.TORCH.add(this);
+		return this;
+	}
+	public TorchContainer torchModel(TorchContainer parent) {
+		ModDatagen.Cache.Model.TORCH_CHILD.add(new Pair<>(this, parent));
+		return this;
 	}
 
 	public TorchContainer dropSelf() {

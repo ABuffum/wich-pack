@@ -2,8 +2,8 @@ package fun.mousewich.mixins.client;
 
 import com.mojang.authlib.GameProfile;
 import fun.mousewich.enchantment.SwiftSneakEnchantment;
-import fun.mousewich.entity.camel.CamelEntity;
-import fun.mousewich.origins.powers.SneakSpeedPower;
+import fun.mousewich.entity.passive.camel.CamelEntity;
+import fun.mousewich.origins.power.SneakSpeedPower;
 import fun.mousewich.util.ClientMixinStore;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -12,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.JumpingMount;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

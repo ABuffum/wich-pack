@@ -2,7 +2,7 @@ package fun.mousewich.entity.ai.sensor;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import fun.mousewich.entity.warden.WardenEntity;
+import fun.mousewich.entity.hostile.warden.WardenEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.MemoryModuleType;

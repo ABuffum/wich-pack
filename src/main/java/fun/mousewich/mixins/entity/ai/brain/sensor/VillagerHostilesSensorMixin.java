@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.entity.ai.brain.sensor;
 
-import fun.mousewich.origins.powers.VillagersFleePower;
+import fun.mousewich.origins.power.VillagersFleePower;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.sensor.VillagerHostilesSensor;

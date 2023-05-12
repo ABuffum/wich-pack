@@ -1,9 +1,11 @@
 package fun.mousewich.mixins.entity.hostile;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.gen.data.tag.ModItemTags;
-import fun.mousewich.origins.powers.MobHostilityPower;
+import fun.mousewich.origins.power.MobHostilityPower;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.EndermanEntity;
@@ -17,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EndermanEntity.class)
-public abstract class EndermanEntityMixin extends HostileEntity implements Angerable {
+public abstract class EndermanEntityMixin extends HostileEntity implements Angerable, EntityWithBloodType {
 	protected EndermanEntityMixin(EntityType<? extends HostileEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method="isPlayerStaring", at = @At("HEAD"), cancellable = true)
@@ -35,4 +37,6 @@ public abstract class EndermanEntityMixin extends HostileEntity implements Anger
 	private void TeleportTo(double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
 		this.world.emitGameEvent(this, ModGameEvent.TELEPORT, getBlockPos());
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.ENDERMAN_BLOOD_TYPE; }
 }

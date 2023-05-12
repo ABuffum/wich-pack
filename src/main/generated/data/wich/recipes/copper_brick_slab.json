@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:copper_bricks"
+    }
+  },
+  "result": {
+    "item": "wich:copper_brick_slab",
+    "count": 6
+  }
+}

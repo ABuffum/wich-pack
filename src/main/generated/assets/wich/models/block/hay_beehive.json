@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "wich:block/hay_beehive_end",
+    "bottom": "wich:block/hay_beehive_end",
+    "side": "wich:block/hay_beehive_side",
+    "front": "wich:block/hay_beehive_front",
+    "particle": "wich:block/hay_beehive_side"
+  }
+}

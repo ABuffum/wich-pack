@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:charcoal_block"
+  },
+  "result": "wich:charcoal_slab",
+  "count": 2
+}

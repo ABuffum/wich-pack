@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "*",
     "#",
-    "I"
+    "|",
+    "*"
   ],
   "key": {
     "#": {
+      "tag": "minecraft:coals"
+    },
+    "|": {
       "item": "minecraft:bamboo"
     },
     "*": {
-      "tag": "minecraft:coals"
-    },
-    "I": {
       "tag": "minecraft:soul_fire_base_blocks"
     }
   },

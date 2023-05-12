@@ -1,8 +1,13 @@
 package fun.mousewich.mixins.entity;
 
+import fun.mousewich.ModBase;
+import fun.mousewich.enchantment.CommittedEnchantment;
 import fun.mousewich.event.ModGameEvent;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;

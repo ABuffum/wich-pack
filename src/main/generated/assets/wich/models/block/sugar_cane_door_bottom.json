@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom",
+  "textures": {
+    "top": "wich:block/sugar_cane_door_top",
+    "bottom": "wich:block/sugar_cane_door_bottom"
+  }
+}

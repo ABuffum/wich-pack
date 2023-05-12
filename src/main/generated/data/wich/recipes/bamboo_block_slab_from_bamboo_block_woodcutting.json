@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "minecraft:bamboo_block"
+  },
+  "result": "wich:bamboo_block_slab",
+  "count": 2
+}

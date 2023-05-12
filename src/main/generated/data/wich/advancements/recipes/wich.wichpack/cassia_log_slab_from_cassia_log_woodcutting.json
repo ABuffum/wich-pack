@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:cassia_log_slab_from_cassia_log_woodcutting"
+    ]
+  },
+  "criteria": {
+    "has_cassia_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wich:cassia_log"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:cassia_log_slab_from_cassia_log_woodcutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cassia_log",
+      "has_the_recipe"
+    ]
+  ]
+}

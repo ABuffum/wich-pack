@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "wich:block/weathered_copper_bricks",
+    "top": "wich:block/weathered_copper_bricks",
+    "side": "wich:block/weathered_copper_bricks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_heavy_chain",
+  "textures": {
+    "all": "wich:block/heavy_iron_chain"
+  }
+}

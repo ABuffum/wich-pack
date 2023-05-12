@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "wich:lavender"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:lavender_petals"
+    },
+    {
+      "item": "wich:lavender_seeds"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/bamboo_log_slab"
+    },
+    "type=double": {
+      "model": "wich:block/bamboo_log"
+    },
+    "type=top": {
+      "model": "wich:block/bamboo_log_slab_top"
+    }
+  }
+}

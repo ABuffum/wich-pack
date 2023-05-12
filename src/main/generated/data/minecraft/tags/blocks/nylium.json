@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:crimson_nylium",
-    "minecraft:warped_nylium"
+    "minecraft:warped_nylium",
+    "wich:gilded_nylium"
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "wich:tall_pink_allium"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:pink_allium_seeds"
+    },
+    {
+      "item": "wich:pink_allium_seeds"
+    }
+  ]
+}

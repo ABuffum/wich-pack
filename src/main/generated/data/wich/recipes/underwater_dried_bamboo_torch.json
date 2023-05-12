@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "|"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:ink_sac"
+    },
+    "|": {
+      "item": "wich:dried_bamboo"
+    }
+  },
+  "result": {
+    "item": "wich:underwater_dried_bamboo_torch",
+    "count": 4
+  }
+}

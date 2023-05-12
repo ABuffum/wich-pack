@@ -1,0 +1,5 @@
+{
+  "type": "wich:mob_hostility",
+  "entity_types": [ "wich:hedgehog" ],
+  "hidden": true
+}

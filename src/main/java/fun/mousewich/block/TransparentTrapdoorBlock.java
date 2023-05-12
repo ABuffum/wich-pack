@@ -1,15 +1,12 @@
 package fun.mousewich.block;
 
-import fun.mousewich.block.basic.ModTrapdoorBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.block.enums.SlabType;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
 
-public class TransparentTrapdoorBlock extends ModTrapdoorBlock {
+public class TransparentTrapdoorBlock extends ThinTrapdoorBlock {
 	protected final Block baseBlock;
 	public Block getBaseBlock() { return baseBlock; }
 	public TransparentTrapdoorBlock(Block block, SoundEvent openSound, SoundEvent closeSound) {

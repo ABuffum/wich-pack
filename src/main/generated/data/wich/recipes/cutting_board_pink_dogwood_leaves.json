@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "wich:pink_dogwood_leaves"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:pink_dogwood_petals"
+    },
+    {
+      "item": "wich:pink_dogwood_petals"
+    }
+  ]
+}

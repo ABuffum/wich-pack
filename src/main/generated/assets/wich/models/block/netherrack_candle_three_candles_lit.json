@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_three_candles",
+  "textures": {
+    "all": "wich:block/netherrack_candle_lit",
+    "particle": "wich:block/netherrack_candle_lit"
+  }
+}

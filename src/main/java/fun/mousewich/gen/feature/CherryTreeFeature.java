@@ -23,10 +23,12 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeature;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -34,7 +36,7 @@ import java.util.function.BiConsumer;
 public class CherryTreeFeature extends Feature<CherryTreeFeatureConfig> {
 	public CherryTreeFeature(Codec<CherryTreeFeatureConfig> codec) { super(codec); }
 
-	private boolean generate(StructureWorldAccess world, Random random, BlockPos pos, BiConsumer<BlockPos, BlockState> trunkPlacerReplacer, CherryFoliagePlacer.BlockPlacer blockPlacer) {
+	private boolean generate(StructureWorldAccess world, Random random, BlockPos pos, BiConsumer<BlockPos, BlockState> rootPlacerReplacer, BiConsumer<BlockPos, BlockState> trunkPlacerReplacer, CherryFoliagePlacer.BlockPlacer blockPlacer) {
 		CherryTrunkPlacer trunkPlacer = new CherryTrunkPlacer();
 		CherryFoliagePlacer foliagePlacer = new CherryFoliagePlacer();
 		int i = trunkPlacer.getHeight(random);
@@ -83,7 +85,7 @@ public class CherryTreeFeature extends Feature<CherryTreeFeatureConfig> {
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
 		for (BlockPos blockPos : Lists.newArrayList(Sets.union(decorationPositions, set))) {
 			if (!box.contains(blockPos)) continue;
-			((VoxelSet)voxelSet).set(blockPos.getX() - box.getMinX(), blockPos.getY() - box.getMinY(), blockPos.getZ() - box.getMinZ());
+			voxelSet.set(blockPos.getX() - box.getMinX(), blockPos.getY() - box.getMinY(), blockPos.getZ() - box.getMinZ());
 		}
 		for (BlockPos blockPos : Lists.newArrayList(trunkPositions)) {
 			if (box.contains(blockPos)) {
@@ -131,6 +133,10 @@ public class CherryTreeFeature extends Feature<CherryTreeFeatureConfig> {
 		ArrayList<BlockPos> set2 = new ArrayList<>();
 		final ArrayList<BlockPos> set3 = new ArrayList<>();
 		ArrayList<BlockPos> set4 = new ArrayList<>();
+		BiConsumer<BlockPos, BlockState> biConsumer = (pos, state) -> {
+			set.add(pos.toImmutable());
+			structureWorldAccess.setBlockState(pos, state, Block.NOTIFY_ALL | Block.FORCE_STATE);
+		};
 		BiConsumer<BlockPos, BlockState> biConsumer2 = (pos, state) -> {
 			set2.add(pos.toImmutable());
 			structureWorldAccess.setBlockState(pos, state, Block.NOTIFY_ALL | Block.FORCE_STATE);
@@ -148,11 +154,11 @@ public class CherryTreeFeature extends Feature<CherryTreeFeatureConfig> {
 			set4.add(pos.toImmutable());
 			structureWorldAccess.setBlockState(pos, state, Block.NOTIFY_ALL | Block.FORCE_STATE);
 		};
-		boolean bl = this.generate(structureWorldAccess, random, blockPos, biConsumer2, blockPlacer);
+		boolean bl = this.generate(structureWorldAccess, random, blockPos, biConsumer, biConsumer2, blockPlacer);
 		if (!bl || set2.isEmpty() && set3.isEmpty()) return false;
 		//Decorators
 		if (context.getConfig().bees) {
-			new BeehiveTreeDecorator(0.05f).generate(structureWorldAccess, biConsumer3, random, set, set3);
+			new BeehiveTreeDecorator(0.05f).generate(structureWorldAccess, biConsumer3, random, set2, set3);
 		}
 		//Final
 		return BlockBox.encompassPositions(Iterables.concat(set, set2, set3, set4)).map(box -> {

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:cassia_planks"
+    }
+  },
+  "result": {
+    "item": "wich:cassia_trapdoor",
+    "count": 3
+  }
+}

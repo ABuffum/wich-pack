@@ -9,7 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
@@ -68,7 +68,7 @@ public interface StatusEffectFogModifier {
 		public StatusEffect getStatusEffect() { return ModBase.DARKNESS_EFFECT; }
 		@Override
 		public void applyStartEndModifier(FogData fogData, LivingEntity entity, StatusEffectInstance effect, float viewDistance, float tickDelta) {
-			if (effect.getEffectType() instanceof DarknessEffect) {
+			if (effect.getEffectType() == ModBase.DARKNESS_EFFECT) {
 				int duration = effect.getDuration() % 100;
 				float lerp = duration < 50 ? duration / 50F : (1 - ((duration - 50)) / 50F);
 				float f = MathHelper.lerp(lerp, viewDistance, 10.0F);
@@ -98,13 +98,15 @@ public interface StatusEffectFogModifier {
 	}
 
 	@Environment(EnvType.CLIENT)
-	class TintedGogglesFogModifier implements StatusEffectFogModifier {
-		public TintedGogglesFogModifier() { }
+	abstract class GogglesFogModifier implements StatusEffectFogModifier {
+		protected abstract StatusEffect getEffect();
+		protected abstract Item getGoggles();
+		public GogglesFogModifier() { }
 		@Override
-		public StatusEffect getStatusEffect() { return ModBase.TINTED_GOGGLES_EFFECT; }
+		public StatusEffect getStatusEffect() { return getEffect(); }
 		@Override
 		public boolean shouldApply(LivingEntity entity, float tickDelta) {
-			return entity.getEquippedStack(EquipmentSlot.HEAD).isOf(ModBase.TINTED_GOGGLES)
+			return entity.getEquippedStack(EquipmentSlot.HEAD).isOf(getGoggles())
 					|| entity.hasStatusEffect(this.getStatusEffect());
 		}
 		@Override
@@ -119,5 +121,17 @@ public interface StatusEffectFogModifier {
 				fogData.fogEnd = f * 10.0F;
 			}
 		}
+	}
+
+	@Environment(EnvType.CLIENT)
+	class TintedGogglesFogModifier extends GogglesFogModifier {
+		@Override protected StatusEffect getEffect() { return ModBase.TINTED_GOGGLES_EFFECT; }
+		@Override protected Item getGoggles() { return ModBase.TINTED_GOGGLES; }
+	}
+
+	@Environment(EnvType.CLIENT)
+	class RubyGogglesFogModifier extends GogglesFogModifier {
+		@Override protected StatusEffect getEffect() { return ModBase.RUBY_GOGGLES_EFFECT; }
+		@Override protected Item getGoggles() { return ModBase.RUBY_GOGGLES; }
 	}
 }

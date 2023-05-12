@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "wich:amaranth"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:amaranth_seeds"
+    },
+    {
+      "item": "wich:amaranth_petals"
+    }
+  ]
+}

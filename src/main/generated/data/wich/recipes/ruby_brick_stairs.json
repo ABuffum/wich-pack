@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:ruby_bricks"
+    }
+  },
+  "result": {
+    "item": "wich:ruby_brick_stairs",
+    "count": 4
+  }
+}

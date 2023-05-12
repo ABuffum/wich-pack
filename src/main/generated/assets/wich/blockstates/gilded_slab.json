@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/gilded_slab"
+    },
+    "type=double": {
+      "model": "wich:block/gilded_planks"
+    },
+    "type=top": {
+      "model": "wich:block/gilded_slab_top"
+    }
+  }
+}

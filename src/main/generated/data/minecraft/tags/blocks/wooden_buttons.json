@@ -4,6 +4,8 @@
     "wich:charred_button",
     "minecraft:mangrove_button",
     "minecraft:bamboo_button",
-    "minecraft:cherry_button"
+    "minecraft:cherry_button",
+    "wich:cassia_button",
+    "wich:dogwood_button"
   ]
 }

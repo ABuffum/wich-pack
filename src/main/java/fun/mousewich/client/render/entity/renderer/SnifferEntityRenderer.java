@@ -2,7 +2,7 @@ package fun.mousewich.client.render.entity.renderer;
 
 import fun.mousewich.ModClient;
 import fun.mousewich.client.render.entity.model.SnifferEntityModel;
-import fun.mousewich.entity.sniffer.SnifferEntity;
+import fun.mousewich.entity.passive.sniffer.SnifferEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;

@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/tadpole",
+  "textures": {
+    "all": "wich:block/tadpole_plushie",
+    "particle": "wich:block/tadpole_plushie"
+  }
+}

@@ -1,6 +1,9 @@
 package fun.mousewich.mixins.entity.passive;
 
-import fun.mousewich.entity.camel.CamelEntity;
+import fun.mousewich.ModBase;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
+import fun.mousewich.entity.passive.camel.CamelEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.JumpingMount;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HorseBaseEntity.class)
-public abstract class HorseBaseEntityMixin extends AnimalEntity implements InventoryChangedListener, JumpingMount, Saddleable {
+public abstract class HorseBaseEntityMixin extends AnimalEntity implements InventoryChangedListener, JumpingMount, Saddleable, EntityWithBloodType {
 	protected HorseBaseEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) { super(entityType, world); }
 	@Shadow
 	private int angryTicks;
@@ -84,4 +87,6 @@ public abstract class HorseBaseEntityMixin extends AnimalEntity implements Inven
 		this.tryCheckBlockCollision();
 		ci.cancel();
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.HORSE_BLOOD_TYPE; }
 }

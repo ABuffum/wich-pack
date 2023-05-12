@@ -1,4 +1,6 @@
 accessWidener v1 named
+accessible    class    net/minecraft/entity/passive/FoxEntity$MateGoal
+accessible    class    net/minecraft/entity/passive/TurtleEntity$MateGoal
 extendable    class    net/minecraft/client/model/ModelPart
 accessible    field    net/minecraft/client/model/ModelPart    cuboids    Ljava/util/List;
 accessible    field    net/minecraft/client/model/ModelPart    children    Ljava/util/Map;

@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:dogwood_log"
+  },
+  "result": "wich:dogwood_log_slab",
+  "count": 2
+}

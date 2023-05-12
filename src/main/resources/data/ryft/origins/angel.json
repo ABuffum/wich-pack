@@ -4,8 +4,8 @@
 	  "wich:hidden_elytra",
 	  "wich:wither_immunity",
 	  "ryft:withering_fists",
-	  "medievalorigins:necromancer/hellraiser",
-	  "ryft:angel_identified_sounds"
+	  "ryft:hellraiser",
+	  "ryft:identified_sounds/angel"
     ],
     "name": "Angel",
     "description": "We are looking respectfully ._.",

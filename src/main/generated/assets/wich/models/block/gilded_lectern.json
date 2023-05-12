@@ -1,0 +1,10 @@
+{
+  "parent": "wich:block/_template_lectern",
+  "textures": {
+    "bottom": "wich:block/gilded_planks",
+    "base": "wich:block/gilded_lectern_base",
+    "front": "wich:block/gilded_lectern_front",
+    "sides": "wich:block/gilded_lectern_sides",
+    "top": "wich:block/gilded_lectern_top"
+  }
+}

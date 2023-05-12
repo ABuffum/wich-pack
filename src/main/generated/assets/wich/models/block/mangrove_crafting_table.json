@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "wich:block/mangrove_crafting_table_front",
+    "north": "wich:block/mangrove_crafting_table_front",
+    "south": "wich:block/mangrove_crafting_table_side",
+    "east": "wich:block/mangrove_crafting_table_side",
+    "west": "wich:block/mangrove_crafting_table_front",
+    "up": "wich:block/mangrove_crafting_table_top",
+    "down": "minecraft:block/mangrove_planks"
+  }
+}

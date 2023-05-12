@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.client.render.entity;
 
-import fun.mousewich.origins.powers.SkinGlowPower;
+import fun.mousewich.origins.power.SkinGlowPower;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/stripped_dried_bamboo_block_slab"
+    },
+    "type=double": {
+      "model": "wich:block/stripped_dried_bamboo_block"
+    },
+    "type=top": {
+      "model": "wich:block/stripped_dried_bamboo_block_slab_top"
+    }
+  }
+}

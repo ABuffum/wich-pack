@@ -4,7 +4,9 @@
 	"ryft:golem_hated",
 	"ryft:villager_hated",
 	"ryft:hostile_mobs_neutral",
-	"ryft:arsene_identified_sounds"
+	"ryft:rationed_diet",
+	"wich:hunger_immunity",
+	"ryft:identified_sounds/arsene"
   ],
   "name": "Arsene",
   "description": "Awfully arrogant of you to check your stats in your own mind.",

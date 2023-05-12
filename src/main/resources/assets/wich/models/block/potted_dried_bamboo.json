@@ -1,0 +1,8 @@
+{
+    "parent": "block/potted_bamboo",
+    "ambientocclusion": false,
+    "textures": {
+        "bamboo": "wich:block/dried_bamboo_stalk",
+        "leaf": "wich:block/dried_bamboo_singleleaf"
+    }
+}

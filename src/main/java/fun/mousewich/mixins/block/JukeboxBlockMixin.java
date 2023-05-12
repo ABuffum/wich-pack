@@ -2,8 +2,7 @@ package fun.mousewich.mixins.block;
 
 import fun.mousewich.block.JukeboxBlockExtension;
 import fun.mousewich.event.ModGameEvent;
-import fun.mousewich.util.JukeboxUtils;
-import net.minecraft.block.Block;
+import fun.mousewich.util.JukeboxUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.JukeboxBlock;
@@ -45,17 +44,13 @@ public abstract class JukeboxBlockMixin extends BlockWithEntity {
 
 	@Inject(method="setRecord", at=@At(value="INVOKE", shift=At.Shift.AFTER, target="Lnet/minecraft/block/entity/JukeboxBlockEntity;setRecord(Lnet/minecraft/item/ItemStack;)V"))
 	private void StartPlaying(WorldAccess world, BlockPos pos, BlockState state, ItemStack stack, CallbackInfo ci) {
-		if (world.getBlockEntity(pos) instanceof JukeboxBlockExtension jukebox) {
-			jukebox.startPlaying();
-		}
+		if (world.getBlockEntity(pos) instanceof JukeboxBlockExtension jukebox) jukebox.startPlaying();
 	}
 
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		if (state.get(JukeboxBlock.HAS_RECORD)) {
-			return JukeboxBlock.checkType(type, BlockEntityType.JUKEBOX, JukeboxUtils::tick);
-		}
+		if (state.get(JukeboxBlock.HAS_RECORD)) return JukeboxBlock.checkType(type, BlockEntityType.JUKEBOX, JukeboxUtil::tick);
 		return null;
 	}
 

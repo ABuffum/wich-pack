@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:chiseled_purpur"
+  },
+  "result": "wich:chiseled_purpur_slab",
+  "count": 2
+}

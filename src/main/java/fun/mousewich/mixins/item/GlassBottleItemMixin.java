@@ -1,6 +1,8 @@
 package fun.mousewich.mixins.item;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.entity.cloud.ConfettiCloudEntity;
+import fun.mousewich.entity.cloud.DragonBreathCloudEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.FluidState;
@@ -24,6 +26,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
+
 @Mixin(GlassBottleItem.class)
 public abstract class GlassBottleItemMixin extends Item {
 	private GlassBottleItemMixin(Settings settings) { super(settings); }
@@ -33,7 +37,31 @@ public abstract class GlassBottleItemMixin extends Item {
 
 	@Inject(method = "use", at = @At("HEAD"), cancellable = true)
 	public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-		//Fill bottle with Blood
+		//Fill bottle with confetti
+		List<ConfettiCloudEntity> clist = world.getEntitiesByClass(ConfettiCloudEntity.class, user.getBoundingBox().expand(4.0D), (entity) -> entity != null && entity.isAlive());
+		ItemStack itemStack = user.getStackInHand(hand);
+		if (!clist.isEmpty()) {
+			for(ConfettiCloudEntity cloud : clist) {
+				cloud.kill();
+				world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+				world.emitGameEvent(user, GameEvent.FLUID_PICKUP, user.getBlockPos());
+				cir.setReturnValue(TypedActionResult.success(this.fill(itemStack, user, new ItemStack(ModBase.BOTTLED_CONFETTI_ITEM)), world.isClient()));
+				return;
+			}
+		}
+		//Fill bottle with dragon's breath
+		List<DragonBreathCloudEntity> dlist = world.getEntitiesByClass(DragonBreathCloudEntity.class, user.getBoundingBox().expand(4.0D), (entity) -> entity != null && entity.isAlive());
+		itemStack = user.getStackInHand(hand);
+		if (!dlist.isEmpty()) {
+			for(DragonBreathCloudEntity cloud : dlist) {
+				cloud.kill();
+				world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+				world.emitGameEvent(user, GameEvent.FLUID_PICKUP, user.getBlockPos());
+				cir.setReturnValue(TypedActionResult.success(this.fill(itemStack, user, new ItemStack(Items.DRAGON_BREATH)), world.isClient()));
+				return;
+			}
+		}
+		//Fill bottle with fluid
 		BlockHitResult hitResult = Item.raycast(world, user, RaycastContext.FluidHandling.SOURCE_ONLY);
 		BlockPos blockPos = hitResult.getBlockPos();
 		FluidState state = world.getFluidState(blockPos);
@@ -42,6 +70,14 @@ public abstract class GlassBottleItemMixin extends Item {
 		//Fill bottle with Lava
 		if (state.getFluid() == Fluids.LAVA || state.getFluid() == Fluids.FLOWING_LAVA) {
 			newStack = new ItemStack(ModBase.LAVA_BOTTLE);
+		}
+		//Fill bottle with Blood
+		else if (state.getFluid() == ModBase.STILL_BLOOD_FLUID || state.getFluid() == ModBase.FLOWING_BLOOD_FLUID) {
+			newStack = new ItemStack(ModBase.BLOOD_BOTTLE);
+		}
+		//Fill bottle with Mud
+		else if (state.getFluid() == ModBase.STILL_MUD_FLUID || state.getFluid() == ModBase.FLOWING_MUD_FLUID) {
+			newStack = new ItemStack(ModBase.MUD_BOTTLE);
 		}
 		if (newStack != null) {
 			PlayerInventory inventory = user.getInventory();

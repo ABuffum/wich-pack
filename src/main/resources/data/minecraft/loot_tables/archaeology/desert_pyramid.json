@@ -6,19 +6,23 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:pottery_shard_archer"
+          "name": "minecraft:archer_pottery_shard"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:pottery_shard_prize"
+          "name": "minecraft:miner_pottery_shard"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:pottery_shard_skull"
+          "name": "minecraft:prize_pottery_shard"
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:gunpowder"
+          "name": "minecraft:skull_pottery_shard"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond"
         },
         {
           "type": "minecraft:item",
@@ -26,7 +30,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond"
+          "name": "minecraft:gunpowder"
         },
         {
           "type": "minecraft:item",

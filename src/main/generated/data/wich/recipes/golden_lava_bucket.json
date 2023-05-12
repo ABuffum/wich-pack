@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "#B"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:lava_bottle"
+    },
+    "B": {
+      "item": "wich:golden_bucket"
+    }
+  },
+  "result": {
+    "item": "wich:golden_lava_bucket"
+  }
+}

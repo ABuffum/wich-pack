@@ -1,12 +1,17 @@
 package fun.mousewich.gen.data.tag;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.gen.data.ModDatagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.tag.BiomeTags;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+
+import java.util.Map;
+import java.util.Set;
 
 public class BiomeTagGenerator extends FabricTagProvider.DynamicRegistryTagProvider<Biome> {
 	public BiomeTagGenerator(FabricDataGenerator dataGenerator) {
@@ -15,6 +20,12 @@ public class BiomeTagGenerator extends FabricTagProvider.DynamicRegistryTagProvi
 
 	@Override
 	protected void generateTags() {
+		for (Map.Entry<TagKey<Biome>, Set<Biome>> entry : ModDatagen.Cache.Tag.BIOME_TAGS.entrySet()) {
+			getOrCreateTagBuilder(entry.getKey()).add(entry.getValue().toArray(Biome[]::new));
+			entry.getValue().clear();
+		}
+		ModDatagen.Cache.Tag.BIOME_TAGS.clear();
+
 		getOrCreateTagBuilder(BiomeTags.IS_BADLANDS).add(BiomeKeys.BADLANDS, BiomeKeys.ERODED_BADLANDS, BiomeKeys.WOODED_BADLANDS);
 		getOrCreateTagBuilder(BiomeTags.IS_JUNGLE).add(BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE);
 		getOrCreateTagBuilder(BiomeTags.IS_NETHER)
@@ -42,6 +53,10 @@ public class BiomeTagGenerator extends FabricTagProvider.DynamicRegistryTagProvi
 				.add(BiomeKeys.DESERT, BiomeKeys.WARM_OCEAN).addTag(BiomeTags.IS_JUNGLE)
 				.add(ModBase.MANGROVE_SWAMP)
 				.addTag(ModBiomeTags.IS_SAVANNA).addTag(BiomeTags.IS_NETHER).addTag(BiomeTags.IS_BADLANDS);
+		getOrCreateTagBuilder(ModBiomeTags.TRAIL_RUINS_HAS_STRUCTURE)
+				.add(BiomeKeys.TAIGA, BiomeKeys.SNOWY_TAIGA, BiomeKeys.OLD_GROWTH_PINE_TAIGA)
+				.add(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.JUNGLE);
+		getOrCreateTagBuilder(ModBiomeTags.WARM_OCEANS).add(BiomeKeys.LUKEWARM_OCEAN, BiomeKeys.WARM_OCEAN, BiomeKeys.DEEP_LUKEWARM_OCEAN);
 		getOrCreateTagBuilder(ModBiomeTags.WATER_ON_MAP_OUTLINES).add(ModBase.MANGROVE_SWAMP);
 	}
 }

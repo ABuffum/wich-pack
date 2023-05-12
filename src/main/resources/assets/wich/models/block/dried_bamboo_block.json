@@ -1,0 +1,7 @@
+{
+  "parent": "block/bamboo_block",
+  "textures": {
+    "end": "wich:block/dried_bamboo_block_top",
+    "side": "wich:block/dried_bamboo_block"
+  }
+}

@@ -1,14 +1,40 @@
 package fun.mousewich.client.render.entity.model;
 
+import net.minecraft.client.render.entity.model.EntityModelPartNames;
+
 public class ModEntityModelPartNames {
 	/** The key of a root model part, whose value is {@value}. */
 	public static final String ROOT = "root";
+	/** The key of a root model part, whose value is {@value}. */
+	public static final String BODY0 = "body0";
+	/** The key of a root model part, whose value is {@value}. */
+	public static final String BODY1 = "body1";
+	/**
+	 * The key of the right middle front leg model part, whose value is {@value}.
+	 */
+	public static final String RIGHT_MIDDLE_FRONT_LEG = "right_middle_front_leg";
+	/**
+	 * The key of the left middle front leg model part, whose value is {@value}.
+	 */
+	public static final String LEFT_MIDDLE_FRONT_LEG = "left_middle_front_leg";
+	/**
+	 * The key of the right middle hind leg model part, whose value is {@value}.
+	 */
+	public static final String RIGHT_MIDDLE_HIND_LEG = "right_middle_hind_leg";
+	/**
+	 * The key of the left middle hind leg model part, whose value is {@value}.
+	 */
+	public static final String LEFT_MIDDLE_HIND_LEG = "left_middle_hind_leg";
 	/** The key of an eyes model part, whose value is {@value}. */
 	public static final String EYES = "eyes";
 	/** The key of a tongue model part, whose value is {@value}. */
 	public static final String TONGUE = "tongue";
 	/** The key of a tongue rl model part, whose value is {@value}. */
 	public static final String TONGUE_RL = "tongue_r1";
+	/**
+	 * The key of a jaw inner model part, whose value is {@value}.
+	 */
+	public static final String JAW_INNER = "jaw_inner";
 	/** The key of a left hand model part, whose value is {@value}. */
 	public static final String LEFT_HAND = "left_hand";
 	/** The key of a right hand model part, whose value is {@value}. */
@@ -37,4 +63,8 @@ public class ModEntityModelPartNames {
 	public static final String LOWER_BEAK = "lower_beak";
 	/** The key of a bone model part, whose value is {@value}. */
 	public static final String BONE = "bone";
+	/** The key of a right fin rl model part, whose value is {@value}. */
+	public static final String RIGHT_FIN_RL = "right_fin_rl";
+	/** The key of a left fin rl model part, whose value is {@value}. */
+	public static final String LEFT_FIN_RL = "left_fin_rl";
 }

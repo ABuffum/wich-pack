@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wich:block/warped_mooshroom_plushie",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wich:block/warped_mooshroom_plushie"
+    },
+    "facing=south": {
+      "model": "wich:block/warped_mooshroom_plushie",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wich:block/warped_mooshroom_plushie",
+      "y": 270
+    }
+  }
+}

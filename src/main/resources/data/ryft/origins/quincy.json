@@ -4,7 +4,7 @@
     "origins:launch_into_air",
     "origins:aerial_combatant",
     "origins:tailwind",
-    "ryft:quincy_identified_sounds"
+    "ryft:identified_sounds/quincy"
   ],
   "name": "Quincy",
   "description": "Fairly small, highly dedicated",

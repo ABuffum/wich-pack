@@ -2,8 +2,8 @@ package fun.mousewich.client.render.entity.renderer;
 
 import fun.mousewich.ModClient;
 import fun.mousewich.client.render.entity.model.FrogEntityModel;
-import fun.mousewich.entity.frog.FrogEntity;
-import fun.mousewich.entity.frog.FrogVariant;
+import fun.mousewich.entity.passive.frog.FrogEntity;
+import fun.mousewich.entity.variants.FrogVariant;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;

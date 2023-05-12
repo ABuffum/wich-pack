@@ -7,7 +7,7 @@ import fun.mousewich.ModBase;
 import fun.mousewich.block.mangrove.PropaguleBlock;
 import fun.mousewich.gen.decorator.RandomLeavesVineTreeDecorator;
 import fun.mousewich.gen.feature.config.MangroveTreeFeatureConfig;
-import fun.mousewich.gen.stateprovider.ModSimpleBlockStateProvider;
+import fun.mousewich.gen.provider.ModSimpleBlockStateProvider;
 import fun.mousewich.util.CollectionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

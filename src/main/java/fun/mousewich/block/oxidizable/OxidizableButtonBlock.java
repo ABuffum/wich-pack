@@ -11,18 +11,15 @@ import java.util.Optional;
 import java.util.Random;
 
 public class OxidizableButtonBlock extends MetalButtonBlock implements Oxidizable {
-	private final Oxidizable.OxidationLevel level;
-	public OxidizableButtonBlock(Oxidizable.OxidationLevel level, Settings settings) {
-		super(settings);
-		this.level = level;
-	}
+	private final OxidationLevel level;
+	public OxidizableButtonBlock(OxidationLevel level, Settings settings) { super(settings); this.level = level; }
 	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		this.tickDegradation(state, world, pos, random);
 	}
 	public boolean hasRandomTicks(BlockState state) {
 		return OxidationScale.getIncreasedBlock(state.getBlock()).isPresent();
 	}
-	public Oxidizable.OxidationLevel getDegradationLevel() { return this.level; }
+	public OxidationLevel getDegradationLevel() { return this.level; }
 	@Override
 	public Optional<BlockState> getDegradationResult(BlockState state) {
 		return OxidationScale.getIncreasedBlock(state.getBlock()).map((block) -> block.getStateWithProperties(state));

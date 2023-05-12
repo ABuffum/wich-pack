@@ -1,7 +1,8 @@
 package fun.mousewich.mixins.item;
 
-import fun.mousewich.ModBase;
 import fun.mousewich.event.ModGameEvent;
+import fun.mousewich.origins.power.ChorusImmunePower;
+import fun.mousewich.origins.power.PowersUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ChorusFruitItem;
 import net.minecraft.item.Item;
@@ -18,7 +19,7 @@ public abstract class ChorusFruitItemMixin extends Item {
 
 	@Inject(method="finishUsing", at = @At("HEAD"), cancellable = true)
 	public void DontTeleportIfImmune(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
-		if (ModBase.CHORUS_IMMUNE_POWER.isActive(user)) cir.setReturnValue(super.finishUsing(stack, world, user));
+		if (PowersUtil.Active(user, ChorusImmunePower.class)) cir.setReturnValue(super.finishUsing(stack, world, user));
 	}
 
 	@Inject(method="finishUsing", at = @At(value="INVOKE", target="Lnet/minecraft/world/World;playSound(Lnet/minecraft/entity/player/PlayerEntity;DDDLnet/minecraft/sound/SoundEvent;Lnet/minecraft/sound/SoundCategory;FF)V"))

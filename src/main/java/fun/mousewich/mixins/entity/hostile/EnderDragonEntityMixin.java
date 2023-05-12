@@ -1,7 +1,10 @@
 package fun.mousewich.mixins.entity.hostile;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.event.ModGameEvent;
+import fun.mousewich.origins.power.DragonNeutralityPower;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -23,14 +26,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(EnderDragonEntity.class)
-public abstract class EnderDragonEntityMixin extends MobEntity implements Monster {
+public abstract class EnderDragonEntityMixin extends MobEntity implements Monster, EntityWithBloodType {
 	protected EnderDragonEntityMixin(EntityType<? extends MobEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method="kill", at = @At("HEAD"))
 	public void Kill(CallbackInfo ci) { this.emitGameEvent(ModGameEvent.ENTITY_DIE); }
 
 	@Inject(method="updatePostDeath", at = @At("TAIL"))
-	protected void updatePostDeath(CallbackInfo ci) {
+	protected void UpdatePostDeath(CallbackInfo ci) {
 		if (((EnderDragonEntity)(Object)this).ticksSinceDeath == 200 && this.world instanceof ServerWorld) {
 			this.emitGameEvent(ModGameEvent.ENTITY_DIE);
 		}
@@ -40,13 +43,13 @@ public abstract class EnderDragonEntityMixin extends MobEntity implements Monste
 	@Shadow @Final private PhaseManager phaseManager;
 
 	@Inject(method="launchLivingEntities", at = @At("HEAD"), cancellable = true)
-	private void launchLivingEntities(List<Entity> entities, CallbackInfo ci) {
-		if (entities.stream().anyMatch(ModBase.DRAGON_WONT_LAUNCH_POWER::isActive)) {
+	private void LaunchLivingEntities(List<Entity> entities, CallbackInfo ci) {
+		if (entities.stream().anyMatch(DragonNeutralityPower::ShouldNotLaunch)) {
 			double d = (this.body.getBoundingBox().minX + this.body.getBoundingBox().maxX) / 2.0;
 			double e = (this.body.getBoundingBox().minZ + this.body.getBoundingBox().maxZ) / 2.0;
 			for (Entity entity : entities) {
 				if (!(entity instanceof LivingEntity)) continue;
-				if (ModBase.DRAGON_WONT_LAUNCH_POWER.isActive(entity)) continue;
+				if (DragonNeutralityPower.ShouldNotLaunch(entity)) continue;
 				double f = entity.getX() - d;
 				double g = entity.getZ() - e;
 				double h = Math.max(f * f + g * g, 0.1);
@@ -60,14 +63,16 @@ public abstract class EnderDragonEntityMixin extends MobEntity implements Monste
 	}
 	@Inject(method="damageLivingEntities", at = @At("HEAD"), cancellable = true)
 	private void DamageLivingEntities(List<Entity> entities, CallbackInfo ci) {
-		if (entities.stream().anyMatch(ModBase.DRAGON_WONT_HARM_POWER::isActive)) {
+		if (entities.stream().anyMatch(DragonNeutralityPower::ShouldNotDamage)) {
 			for (Entity entity : entities) {
 				if (!(entity instanceof LivingEntity)) continue;
-				if (ModBase.DRAGON_WONT_HARM_POWER.isActive(entity)) continue;
+				if (DragonNeutralityPower.ShouldNotDamage(entity)) continue;
 				entity.damage(DamageSource.mob(this), 10.0f);
 				this.applyDamageEffects(this, entity);
 			}
 			ci.cancel();
 		}
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.ENDER_DRAGON_BLOOD_TYPE; }
 }

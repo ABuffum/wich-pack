@@ -13,7 +13,7 @@
 	"wich:soft_steps",
 	"ryft:golem_hated",
 	"ryft:villager_hated",
-	"ryft:kirha_identified_sounds"
+	"ryft:identified_sounds/kirha"
   ],
   "name": "Jumping Spider(?)",
   "description": "Not actually a spider.  Not at all. No way.",

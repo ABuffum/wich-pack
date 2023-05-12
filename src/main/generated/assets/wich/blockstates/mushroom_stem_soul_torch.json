@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_mushroom_stem_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/mushroom_stem_soul_torch"
+    }
+  }
+}

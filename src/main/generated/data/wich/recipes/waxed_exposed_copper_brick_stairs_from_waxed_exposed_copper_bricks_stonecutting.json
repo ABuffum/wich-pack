@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:waxed_exposed_copper_bricks"
+  },
+  "result": "wich:waxed_exposed_copper_brick_stairs",
+  "count": 1
+}

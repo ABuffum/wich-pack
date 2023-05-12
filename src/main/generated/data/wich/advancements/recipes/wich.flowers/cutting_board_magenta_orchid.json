@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:cutting_board_magenta_orchid"
+    ]
+  },
+  "criteria": {
+    "has_magenta_orchid": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wich:magenta_orchid"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:cutting_board_magenta_orchid"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magenta_orchid",
+      "has_the_recipe"
+    ]
+  ]
+}

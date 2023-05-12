@@ -4,7 +4,7 @@ import fun.mousewich.client.render.entity.animation.Animation;
 import fun.mousewich.client.render.entity.animation.AnimationHelper;
 import fun.mousewich.client.render.entity.animation.AnimationState;
 import fun.mousewich.client.render.entity.animation.SnifferAnimations;
-import fun.mousewich.entity.sniffer.SnifferEntity;
+import fun.mousewich.entity.passive.sniffer.SnifferEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;

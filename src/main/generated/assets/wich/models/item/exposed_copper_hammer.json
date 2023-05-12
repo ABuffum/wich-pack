@@ -1,0 +1,6 @@
+{
+  "parent": "wich:item/_template_simple_hammer",
+  "textures": {
+    "texture": "wich:item/exposed_copper_hammer"
+  }
+}

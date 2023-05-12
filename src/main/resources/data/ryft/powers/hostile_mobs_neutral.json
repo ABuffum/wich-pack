@@ -1,7 +1,9 @@
 {
   "type": "extraorigins:mob_neutrality",
   "entity_types": [
-	"minecraft:warden"
+	"minecraft:warden",
+    "minecraft:wither",
+    "minecraft:ender_dragon"
   ],
   "inverted": true,
   "name": "Nonhostile Mobs",

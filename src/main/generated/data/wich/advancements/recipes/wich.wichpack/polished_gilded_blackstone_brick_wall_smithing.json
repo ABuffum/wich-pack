@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "automatic": {
+    "has_polished_blackstone_brick_wall": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stick"
+              "minecraft:polished_blackstone_brick_wall"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "automatic",
+      "has_polished_blackstone_brick_wall",
       "has_the_recipe"
     ]
   ]

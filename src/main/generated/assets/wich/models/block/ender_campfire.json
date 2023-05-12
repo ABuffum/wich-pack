@@ -1,7 +1,8 @@
 {
-  "parent": "minecraft:block/template_campfire",
+  "parent": "wich:block/_template_campfire",
   "textures": {
-    "fire": "wich:block/ender_campfire_fire",
-    "lit_log": "wich:block/ender_campfire_log_lit"
+    "log": "minecraft:block/campfire_log",
+    "lit_log": "wich:block/ender_campfire_log_lit",
+    "fire": "wich:block/ender_campfire_fire"
   }
 }

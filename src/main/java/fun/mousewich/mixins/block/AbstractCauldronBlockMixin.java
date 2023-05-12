@@ -17,9 +17,7 @@ import java.util.Random;
 
 @Mixin(AbstractCauldronBlock.class)
 public class AbstractCauldronBlockMixin extends Block {
-	public AbstractCauldronBlockMixin(Settings settings) {
-		super(settings);
-	}
+	public AbstractCauldronBlockMixin(Settings settings) { super(settings); }
 
 	@Inject(method="scheduledTick", at = @At("HEAD"), cancellable = true)
 	public void ScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {

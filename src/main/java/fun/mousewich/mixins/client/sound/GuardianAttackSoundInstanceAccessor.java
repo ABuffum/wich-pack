@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(GuardianAttackSoundInstance.class)
 public interface GuardianAttackSoundInstanceAccessor {
 	@Accessor("guardian")
-	public GuardianEntity getGuardian();
+	GuardianEntity getGuardian();
 }

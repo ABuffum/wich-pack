@@ -1,0 +1,9 @@
+{
+  "type": "wich:fluid_breather",
+  "fluid": "wich:lava_water",
+  "suffocate": false,
+  "dryout": true,
+  "touch": true,
+  "name": "Lavaquatic",
+  "description": "You can breathe in water and lava but will slowly dry out on land."
+}

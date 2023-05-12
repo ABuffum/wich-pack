@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "wich:vanilla_flower"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:vanilla_seeds"
+    },
+    {
+      "item": "wich:vanilla"
+    }
+  ]
+}

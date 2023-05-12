@@ -5,7 +5,8 @@
 	"origins:launch_into_air",
 	"ryft:gold_ingot_eater",
 	"ryft:gold_nugget_eater",
-	"ryft:zofia_identified_sounds"
+	"ryft:clock_eater",
+	"ryft:identified_sounds/zofia"
   ],
   "name": "Żar-ptak",
   "description": "Uh oh, that bird's on fire!",

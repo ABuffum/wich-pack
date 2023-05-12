@@ -27,8 +27,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class WoodcutterBlock extends Block {
 	private static final Text TITLE = new TranslatableText("container.woodcutter");
-	public static final DirectionProperty FACING;
-	protected static final VoxelShape SHAPE;
+	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+	protected static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 9, 16);
 
 	public WoodcutterBlock(AbstractBlock.Settings settings) {
 		super(settings);
@@ -46,7 +46,7 @@ public class WoodcutterBlock extends Block {
 		}
 	}
 
-	@Nullable
+	@Override @Nullable
 	public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
 		return new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) -> new WoodcutterScreenHandler(i, playerInventory, ScreenHandlerContext.create(world, pos)), TITLE);
 	}
@@ -64,9 +64,4 @@ public class WoodcutterBlock extends Block {
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(FACING); }
 
 	public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) { return false; }
-
-	static {
-		FACING = HorizontalFacingBlock.FACING;
-		SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
-	}
 }

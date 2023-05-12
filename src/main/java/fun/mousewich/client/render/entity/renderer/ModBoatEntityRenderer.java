@@ -4,7 +4,7 @@ import fun.mousewich.ModBase;
 import fun.mousewich.ModClient;
 import fun.mousewich.client.render.entity.model.RaftEntityModel;
 import fun.mousewich.entity.vehicle.ModBoatType;
-import fun.mousewich.entity.ModBoatEntity;
+import fun.mousewich.entity.vehicle.ModBoatEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;

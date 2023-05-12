@@ -3,7 +3,7 @@ package fun.mousewich.mixins.block;
 import fun.mousewich.ModBase;
 import fun.mousewich.block.sculk.ExtendedSculkEntity;
 import fun.mousewich.event.ModVibrationListener;
-import fun.mousewich.util.SculkUtils;
+import fun.mousewich.util.SculkUtil;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -71,7 +71,7 @@ public abstract class SculkSensorBlockMixin extends BlockWithEntity implements W
 
 	@Inject(method="setActive", at = @At("HEAD"), cancellable = true)
 	private static void SetActive(World world, BlockPos pos, BlockState state, int power, CallbackInfo ci) {
-		SculkUtils.setActive(null, world, pos, state, power);
+		SculkUtil.setActive(null, world, pos, state, power);
 		ci.cancel();
 	}
 

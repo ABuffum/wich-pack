@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "wich:dogwood_logs"
+    }
+  ],
+  "result": {
+    "item": "wich:dogwood_planks",
+    "count": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "powers": [
+	"origins:climbing",
+	"origins:fall_immunity",
+	"haven:little_pusys",
+	"wich:water_breathing",
+	"extraorigins:jockey",
+	"wich:blood_types/axolotl"
+  ],
+  "icon": "minecraft:axolotl_bucket",
+  "name": "Axolotl Spirit",
+  "description": "We love you too!!!"
+}

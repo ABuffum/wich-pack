@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "wich:orange_orchid"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:orange_orchid_petals"
+    },
+    {
+      "item": "wich:orange_orchid_seeds"
+    }
+  ]
+}

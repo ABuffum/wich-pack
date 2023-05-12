@@ -4,7 +4,7 @@
 	"type": "origins:target_action",
 	"action": {
 	  "type": "origins:execute_command",
-	  "command": "chorus @p 0.1"
+	  "command": "chorus @p 0.2"
 	}
   },
   "bientity_condition": {

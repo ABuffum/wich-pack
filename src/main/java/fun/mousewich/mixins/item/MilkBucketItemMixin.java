@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.item;
 
-import fun.mousewich.util.MilkUtils;
+import fun.mousewich.util.MilkUtil;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,7 +27,7 @@ public class MilkBucketItemMixin extends Item {
 			serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
 		}
 		if (user instanceof PlayerEntity player && !player.getAbilities().creativeMode) stack.decrement(1);
-		if (!world.isClient) MilkUtils.ApplyMilk(world, user);
+		if (!world.isClient) MilkUtil.ApplyMilk(world, user);
 		cir.setReturnValue(stack.isEmpty() ? new ItemStack(Items.BUCKET) : stack);
 	}
 }

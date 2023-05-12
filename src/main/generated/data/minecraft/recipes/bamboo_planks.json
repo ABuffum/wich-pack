@@ -5,9 +5,14 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:bamboo"
-    }
+    "#": [
+      {
+        "item": "minecraft:bamboo"
+      },
+      {
+        "item": "wich:dried_bamboo"
+      }
+    ]
   },
   "result": {
     "item": "minecraft:bamboo_planks"

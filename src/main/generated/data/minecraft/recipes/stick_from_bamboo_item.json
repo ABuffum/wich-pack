@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "sticks",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:bamboo"
+      },
+      {
+        "item": "wich:dried_bamboo"
+      }
+    ]
+  },
+  "result": {
+    "item": "minecraft:stick"
+  }
+}

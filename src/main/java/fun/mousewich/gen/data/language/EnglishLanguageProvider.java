@@ -1,11 +1,12 @@
 package fun.mousewich.gen.data.language;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModConfig;
 import fun.mousewich.ModGameRules;
 import fun.mousewich.gen.data.fabric.FabricLanguageProvider;
-import fun.mousewich.sound.ModSoundEvents;
+import fun.mousewich.sound.IdentifiedSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
+import java.util.List;
 import java.util.Map;
 
 import static fun.mousewich.ModBase.*;
@@ -29,9 +30,9 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		//Containers
 		builder.add("container.woodcutter", EN_US.Woodcutter());
 		builder.add("container.trimming", EN_US.Trimming());
-		builder.add("container.upgrade.missing_template_tooltip", "Put a " + EN_US.SmithingTemplate() + " here");
+		builder.add("container.upgrade.missing_template_tooltip", "Put a " + EN_US.Template(EN_US.Smithing()) + " here");
 		//Stats
-		builder.add("stat.wich.interact_with_trimming_table", EN_US.TrimmingTable(EN_US.with("Interactions")));
+		builder.add("stat.wich.interact_with_trimming_table", EN_US.Table(EN_US.Trimming(EN_US.with("Interactions"))));
 		//Advancements
 		builder.addAdvancement("advancements.husbandry.tadpole_in_a_bucket", "Bukkit Bukkit", "Catch a Tadpole in a Bucket");
 		builder.addAdvancement("advancements.husbandry.froglights", "With Our Powers Combined!", "Have all Froglights in your inventory");
@@ -54,12 +55,26 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("instrument.minecraft.yearn_goat_horn", "Yearn");
 		builder.add("instrument.minecraft.dream_goat_horn", EN_US.Dream());
 		builder.add("subtitles.item.goat_horn.play", EN_US.plays(EN_US.GoatHorn()));
+		//Trim Patterns
+		builder.add("trim_pattern.minecraft.coast", EN_US.ArmorTrim(EN_US.Coast()));
+		builder.add("trim_pattern.minecraft.dune", EN_US.ArmorTrim(EN_US.Dune()));
+		builder.add("trim_pattern.minecraft.eye", EN_US.ArmorTrim(EN_US.Eye()));
+		builder.add("trim_pattern.minecraft.rib", EN_US.ArmorTrim(EN_US.Rib()));
+		builder.add("trim_pattern.minecraft.sentry", EN_US.ArmorTrim(EN_US.Sentry()));
+		builder.add("trim_pattern.minecraft.snout", EN_US.ArmorTrim(EN_US.Snout()));
+		builder.add("trim_pattern.minecraft.spire", EN_US.ArmorTrim(EN_US.Spire()));
+		builder.add("trim_pattern.minecraft.tide", EN_US.ArmorTrim(EN_US.Tide()));
+		builder.add("trim_pattern.minecraft.vex", EN_US.ArmorTrim(EN_US.Vex()));
+		builder.add("trim_pattern.minecraft.ward", EN_US.ArmorTrim(EN_US.Ward()));
+		builder.add("trim_pattern.minecraft.wild", EN_US.ArmorTrim(EN_US.Wild()));
+		//Wind Horn
+		builder.add("subtitles.item.wind_horn.play", EN_US.plays(EN_US.Horn(EN_US.Wind())));
 		//Keybinds
 		builder.add("key.wich.tertiary_active", "Active Origins Power (Tertiary)");
 		//Biomes
-		builder.add(DEEP_DARK, EN_US.DeepDark());
-		builder.add(MANGROVE_SWAMP, EN_US.MangroveSwamp());
-		builder.add(CHERRY_GROVE, EN_US.CherryGrove());
+		builder.add(DEEP_DARK, EN_US.Dark(EN_US.Deep()));
+		builder.add(MANGROVE_SWAMP, EN_US.Swamp(EN_US.Mangrove()));
+		builder.add(CHERRY_GROVE, EN_US.Grove(EN_US.Cherry()));
 		//Subtitles
 		provideSubtitles(builder);
 		//Death messages
@@ -88,10 +103,19 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("death.attack.deterioration.player", "%2$s added insult to %1$s's injury");
 		builder.add("death.attack.bone_rot", "%1$s succumbed to bone rot");
 		builder.add("death.attack.bone_rot.player", "%1$s's rotting bones couldn't stand up to %2$s");
+		builder.add("death.attack.bone_shard", "%1$s was spiked by %2$s");
+		builder.add("death.attack.bone_shard.item", "%1$s was spiked by %2$s using %3$s");
 		builder.add("death.attack.bleeding", "%1$s bled out");
 		builder.add("death.attack.bleeding.player", "%1$s bled out whilst fighting %2$s");
+		builder.add("death.attack.leeching", "%1$s had their lifeforce drained");
+		builder.add("death.attack.leeching.player", "%1$s had their lifeforce drained by %2$s");
 		builder.add("death.attack.melon_seeded", "%1$s was meloned to death by %2$s");
 		builder.add("death.attack.melon_seeded.item", "%1$s was meloned to death by %2$s using %3$s");
+		builder.add("death.attack.quills", "%1$s was quilled");
+		builder.add("death.attack.quills.item", "%1$s was quilled whilst trying to escape %2$s wielding %3$s");
+		builder.add("death.attack.quills.player", "%1$s was quilled whilst trying to escape %2$s");
+		builder.add("death.attack.suffocate", "%1$s suffocated");
+		builder.add("death.attack.suffocate.player", "%1$s couldn't breathe whilst fighting %2$s");
 		builder.add("death.attack.withering", "%1$s withered away");
 		builder.add("death.attack.withering.player", "%1$s withered away whilst fighting %2$s");
 		//</editor-fold>
@@ -192,7 +216,7 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("subtitles.entity.camel.sit", EN_US.down(EN_US.sits(EN_US.Camel())));
 		builder.add("subtitles.entity.camel.stand", EN_US.up(EN_US.stands(EN_US.Camel())));
 		builder.add("subtitles.entity.camel.step", EN_US.steps(EN_US.Camel()));
-		builder.add("subtitles.entity.camel.step_sand", EN_US.stands(EN_US.Camel()));
+		builder.add("subtitles.entity.camel.step_sand", EN_US.steps(EN_US.Camel()));
 		//</editor-fold>
 		//<editor-fold desc="Chiseled Bookshelf">
 		builder.add("subtitles.chiseled_bookshelf.insert", EN_US.placed(EN_US.Book()));
@@ -232,6 +256,8 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("subtitles.entity.sniffer.searching", EN_US.searches(EN_US.Sniffer()));
 		builder.add("subtitles.entity.sniffer.sniffing", EN_US.sniffs(EN_US.Sniffer()));
 		builder.add("subtitles.entity.sniffer.step", EN_US.steps(EN_US.Sniffer()));
+		builder.add("subtitles.entity.sniffer.egg_crack", EN_US.cracks(EN_US.Egg(EN_US.Sniffer())));
+		builder.add("subtitles.entity.sniffer.egg_hatch", EN_US.hatches(EN_US.Egg(EN_US.Sniffer())));
 		//</editor-fold>
 		builder.add("subtitles.block.decorated_pot.shatter", EN_US.shatters(EN_US.Pot()));
 		//<editor-fold desc="Warden">
@@ -257,43 +283,82 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("subtitles.entity.warden.sonic_charge", EN_US.charges(EN_US.Warden()));
 		builder.add("subtitles.entity.warden.sonic_boom", EN_US.booms(EN_US.Warden()));
 		//</editor-fold>
+		//<editor-fold desc="Brush">
+		builder.add("subtitles.item.brush.brushing.generic", EN_US.Brushing());
+		builder.add("subtitles.item.brush.brushing.sand", EN_US.Sand(EN_US.Brushing()));
+		builder.add("subtitles.item.brush.brushing.gravel", EN_US.Gravel(EN_US.Brushing()));
+		builder.add("subtitles.item.brush.brushing.sand.complete", EN_US.completed(EN_US.Sand(EN_US.Brushing())));
+		builder.add("subtitles.item.brush.brushing.gravel.complete", EN_US.completed(EN_US.Gravel(EN_US.Brushing())));
+		//</editor-fold>
+		builder.add("subtitles.block.amethyst_block.resonate", EN_US.resonates(EN_US.Amethyst()));
 
+		//Nethershroom
+		builder.add("subtitles.block.nethershroom.explode", EN_US.explodes(EN_US.Nethershroom()));
+		builder.add("subtitles.block.nethershroom.squeeze", EN_US.squeezed(EN_US.Nethershroom()));
+
+		//Thrown Items
+		builder.add("subtitles.entity.slime.throw", EN_US.flies(EN_US.Slime()));
+		//Pouch
 		builder.add("subtitles.item.pouch.empty", EN_US.empties(EN_US.Pouch()));
 		builder.add("subtitles.item.pouch.fill", EN_US.fills(EN_US.Pouch()));
 
-		builder.add("item.wich.chicken_pouch.greg", EN_US.Greg(EN_US.PouchOf()));
+		builder.add("item.wich.chicken_pouch.greg", EN_US.Greg(EN_US.of(EN_US.Greg())));
 		builder.add("subtitles.item.pouch.empty_chicken", EN_US.released(EN_US.Chicken()));
 		builder.add("subtitles.item.pouch.fill_chicken", EN_US.bagged(EN_US.Chicken()));
 		builder.add("subtitles.item.pouch.empty_chicken.greg", EN_US.deployed(EN_US.Greg()));
 		builder.add("subtitles.item.pouch.fill_chicken.greg", EN_US.collected(EN_US.Greg()));
 		builder.add("subtitles.item.pouch.empty_rabbit", EN_US.released(EN_US.Rabbit()));
 		builder.add("subtitles.item.pouch.fill_rabbit", EN_US.bagged(EN_US.Rabbit()));
+		//Bone Spider
+		builder.add("subtitles.entity.bone_spider.attack", EN_US.attacks(EN_US.BoneSpider()));
+		builder.add("subtitles.entity.bone_spider.spit", EN_US.spits(EN_US.BoneSpider()));
 		//Jumping Spider
 		builder.add("subtitles.entity.jumping_spider.jump", EN_US.jumps(EN_US.JumpingSpider()));
-		//Hedgehog
+		//<editor-fold desc="Hedgehog">
 		builder.add("subtitles.entity.hedgehog.ambient", EN_US.grunts(EN_US.Hedgehog()));
 		builder.add("subtitles.entity.hedgehog.death", EN_US.dies(EN_US.Hedgehog()));
 		builder.add("subtitles.entity.hedgehog.hurt", EN_US.hurts(EN_US.Hedgehog()));
 		builder.add("subtitles.entity.hedgehog.sniff", EN_US.sniffs(EN_US.Hedgehog()));
 		builder.add("subtitles.item.pouch.empty_hedgehog", EN_US.deployed(EN_US.Hedgehog()));
 		builder.add("subtitles.item.pouch.fill_hedgehog", EN_US.scooped(EN_US.Hedgehog()));
-		
+		//</editor-fold>
+		//<editor-fold desc="Mossy Skeleton">
+		builder.add("subtitles.entity.mossy_skeleton.ambient", EN_US.rattles(EN_US.Skeleton(EN_US.Mossy())));
+		builder.add("subtitles.entity.mossy_skeleton.death", EN_US.dies(EN_US.Skeleton(EN_US.Mossy())));
+		builder.add("subtitles.entity.mossy_skeleton.hurt", EN_US.hurts(EN_US.Skeleton(EN_US.Mossy())));
+		//</editor-fold>
+		//<editor-fold desc="Sunken Skeleton">
+		builder.add("subtitles.entity.skeleton.converted_to_sunken_skeleton", EN_US.Skeleton(EN_US.Sunken(EN_US.to(EN_US.converts(EN_US.Skeleton())))));
+		builder.add("subtitles.entity.stray.converted_to_skeleton", EN_US.Skeleton(EN_US.into(EN_US.melts(EN_US.Stray()))));
+		builder.add("subtitles.entity.sunken_skeleton.ambient", EN_US.rattles(EN_US.Skeleton(EN_US.Sunken())));
+		builder.add("subtitles.entity.sunken_skeleton.death", EN_US.dies(EN_US.Skeleton(EN_US.Sunken())));
+		builder.add("subtitles.entity.sunken_skeleton.hurt", EN_US.hurts(EN_US.Skeleton(EN_US.Sunken())));
+		//</editor-fold>
+		//<editor-fold desc="Piranha">
+		builder.add("subtitles.entity.piranha.death", EN_US.dies(EN_US.Piranha()));
+		builder.add("subtitles.entity.piranha.flop", EN_US.flops(EN_US.Piranha()));
+		builder.add("subtitles.entity.piranha.hurt", EN_US.hurts(EN_US.Piranha()));
+		//</editor-fold>
 		//Mod Blocks
-		builder.add("subtitles.block.echo_block.chime", EN_US.chimes(EN_US.EchoCrystal()));
+		builder.add("subtitles.block.echo_block.chime", EN_US.chimes(EN_US.Crystal(EN_US.Echo())));
+		builder.add("subtitles.block.echo_block.resonate", EN_US.resonates(EN_US.Crystal(EN_US.Echo())));
 		builder.add("subtitles.block.juicer.loaded", EN_US.loaded(EN_US.Juicer()));
 		builder.add("subtitles.block.juicer.juiced", EN_US.juiced(EN_US.Juicer()));
-		builder.add("subtitles.block.trimming_table.use", EN_US.used(EN_US.TrimmingTable()));
+		builder.add("subtitles.block.trimming_table.use", EN_US.used(EN_US.Table(EN_US.Trimming())));
 		//Mod Items
 		builder.add("subtitles.item.chum.used", EN_US.squelches(EN_US.Chum()));
 		builder.add("subtitles.item.salve.apply", EN_US.applied(EN_US.Salve()));
 		builder.add("subtitles.item.syringe.inject", EN_US.injected(EN_US.Syringe()));
 
 		//TNT Variants (Haven SMP)
-		builder.add("subtitles.entity.sharp_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Sharp())));
-		builder.add("subtitles.entity.chunkeater_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Chunkeater())));
-		builder.add("subtitles.entity.violent_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Violent())));
-		builder.add("subtitles.entity.devouring_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Devouring())));
-		builder.add("subtitles.entity.catalyzing_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Catalyzing())));
-		builder.add("subtitles.entity.soft_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Soft())));
+		if (ModConfig.REGISTER_HAVEN_MOD) {
+			builder.add("subtitles.entity.sharp_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Sharp())));
+			builder.add("subtitles.entity.chunkeater_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Chunkeater())));
+			builder.add("subtitles.entity.violent_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Violent())));
+			builder.add("subtitles.entity.devouring_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Devouring())));
+			builder.add("subtitles.entity.catalyzing_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Catalyzing())));
+			builder.add("subtitles.entity.soft_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Soft())));
+			builder.add("subtitles.ambient.miasma_coming", "She's coming");
+		}
 	}
 }

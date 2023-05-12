@@ -12,12 +12,13 @@
 	"ryft:warden_sized",
 	"wich:darkness_immunity",
 	"wich:soft_steps",
+	"ryft:sonic_boom",
 	"wich:identified_sounds",
 	"wich:warden_heartbeat",
 	"wich:warden_neutral",
 	"wich:knockback_immunity",
 	"origins-classes:more_attack_damage",
-	"ryft:gubby_identified_sounds"
+	"ryft:identified_sounds/gubby"
   ],
   "name": "Warden",
   "description": "The ultimate denizen of the Deep Dark.",

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:ruby_bricks"
+  },
+  "result": "wich:ruby_brick_wall",
+  "count": 1
+}

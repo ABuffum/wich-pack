@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_cassia_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/cassia_ender_torch"
+    }
+  }
+}

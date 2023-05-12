@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/parrot",
+  "textures": {
+    "all": "wich:block/blue_parrot_plushie",
+    "particle": "wich:block/blue_parrot_plushie"
+  }
+}

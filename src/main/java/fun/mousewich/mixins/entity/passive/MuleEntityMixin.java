@@ -1,5 +1,8 @@
 package fun.mousewich.mixins.entity.passive;
 
+import fun.mousewich.ModBase;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,10 +23,8 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(MuleEntity.class)
-public abstract class MuleEntityMixin extends AbstractDonkeyEntity {
-	protected MuleEntityMixin(EntityType<? extends AbstractDonkeyEntity> entityType, World world) {
-		super(entityType, world);
-	}
+public abstract class MuleEntityMixin extends AbstractDonkeyEntity implements EntityWithBloodType {
+	protected MuleEntityMixin(EntityType<? extends AbstractDonkeyEntity> entityType, World world) { super(entityType, world); }
 
 	@Override
 	public void saddle(@Nullable SoundCategory sound) {
@@ -72,4 +73,6 @@ public abstract class MuleEntityMixin extends AbstractDonkeyEntity {
 		else sound = ModSoundEvents.ENTITY_MULE_STEP;
 		if (sound != null) this.playSound(sound, blockSoundGroup.getVolume() * 0.15f, blockSoundGroup.getPitch());
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.MULE_BLOOD_TYPE; }
 }

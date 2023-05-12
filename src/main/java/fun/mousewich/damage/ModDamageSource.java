@@ -1,8 +1,9 @@
 package fun.mousewich.damage;
 
+import fun.mousewich.entity.blood.BloodType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.EntityDamageSource;
 
 public class ModDamageSource extends DamageSource {
 	public static final DamageSource DETERIORATION = new ModDamageSource("deterioration").setUnblockable().setBypassesArmor();
@@ -19,10 +20,17 @@ public class ModDamageSource extends DamageSource {
 	public static final DamageSource DRANK_SLUDGE = Drank("sludge");
 	public static final DamageSource DRANK_SUGAR_WATER = Drank("sugar_water");
 	public static final DamageSource DRANK_WATER = Drank("water");
+	public static final DamageSource SUFFOCATION = new ModDamageSource("suffocate").setUnblockable().setBypassesArmor();
 	public static final DamageSource ICHOR = new ModDamageSource("ichor").setUnblockable().setBypassesArmor();
 	public static final DamageSource WITHERING = new ModDamageSource("withering").setUnblockable().setBypassesArmor();
 	public static final DamageSource DIE_INSTANTLY = new ModDamageSource("die_instantly").setUnblockable().setBypassesArmor();
 
+	public static InjectedDamageSource Injected(String type, LivingEntity source) {
+		return new InjectedDamageSource(type, source).setUnblockable().setBypassesArmor();
+	}
+	public static InjectedBloodDamageSource Injected(LivingEntity source, BloodType type) {
+		return new InjectedBloodDamageSource(source, type).setUnblockable().setBypassesArmor();
+	}
 	public static ModDamageSource Drank(String name) {
 		return new DrankDamageSource(name).setUnblockable().setBypassesArmor();
 	}

@@ -1,0 +1,7 @@
+{
+	"parent": "wich:block/_template_row_noside",
+	"textures": {
+		"side": "wich:block/dried_bamboo_row",
+		"particle": "wich:block/dried_bamboo_row"
+	}
+}

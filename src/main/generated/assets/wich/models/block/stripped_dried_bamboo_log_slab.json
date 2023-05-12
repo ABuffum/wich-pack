@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "wich:block/stripped_dried_bamboo_log_top",
+    "top": "wich:block/stripped_dried_bamboo_log_top",
+    "side": "wich:block/stripped_dried_bamboo_log"
+  }
+}

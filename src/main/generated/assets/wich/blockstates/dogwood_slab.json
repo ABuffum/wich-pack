@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/dogwood_slab"
+    },
+    "type=double": {
+      "model": "wich:block/dogwood_planks"
+    },
+    "type=top": {
+      "model": "wich:block/dogwood_slab_top"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:fire",
+    "minecraft:lava",
+    "minecraft:lava_cauldron",
+    "minecraft:magma_block",
+    "wich:cooled_magma_block",
+    "wich:blaze_powder_block"
+  ]
+}

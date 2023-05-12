@@ -2,7 +2,7 @@ package fun.mousewich.client.render.entity.renderer;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.ModClient;
-import fun.mousewich.entity.hedgehog.HedgehogEntity;
+import fun.mousewich.entity.passive.HedgehogEntity;
 import fun.mousewich.client.render.entity.model.HedgehogEntityModel;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;

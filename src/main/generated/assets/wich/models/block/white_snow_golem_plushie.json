@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/snow_golem",
+  "textures": {
+    "all": "wich:block/white_snow_golem_plushie",
+    "particle": "wich:block/white_snow_golem_plushie"
+  }
+}

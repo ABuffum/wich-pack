@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "wich:block/hay_barrel_top",
+    "bottom": "wich:block/hay_barrel_bottom",
+    "side": "wich:block/hay_barrel_side"
+  }
+}

@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.client.render.entity;
 
-import fun.mousewich.origins.powers.ElytraTexturePower;
+import fun.mousewich.origins.power.ElytraTexturePower;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.client.render.entity.feature.ElytraFeatureRenderer;
 import net.minecraft.entity.LivingEntity;

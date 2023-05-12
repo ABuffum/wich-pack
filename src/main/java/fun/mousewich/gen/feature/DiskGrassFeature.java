@@ -2,7 +2,7 @@ package fun.mousewich.gen.feature;
 
 import com.mojang.serialization.Codec;
 import fun.mousewich.ModBase;
-import fun.mousewich.gen.stateprovider.PredicatedStateProvider;
+import fun.mousewich.gen.provider.PredicatedStateProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/mushroom_stem_slab"
+    },
+    "type=double": {
+      "model": "wich:block/mushroom_stem_planks"
+    },
+    "type=top": {
+      "model": "wich:block/mushroom_stem_slab_top"
+    }
+  }
+}

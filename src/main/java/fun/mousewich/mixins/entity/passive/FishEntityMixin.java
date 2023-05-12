@@ -2,8 +2,10 @@ package fun.mousewich.mixins.entity.passive;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.entity.FishBreedableEntity;
-import fun.mousewich.entity.ai.FishMateGoal;
-import fun.mousewich.entity.frog.TadpoleEntity;
+import fun.mousewich.entity.ai.goal.FishMateGoal;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
+import fun.mousewich.entity.passive.frog.TadpoleEntity;
 import fun.mousewich.sound.IdentifiedSounds;
 import net.minecraft.entity.Bucketable;
 import net.minecraft.entity.EntityStatuses;
@@ -34,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.UUID;
 
 @Mixin(FishEntity.class)
-public abstract class FishEntityMixin extends WaterCreatureEntity implements Bucketable, FishBreedableEntity {
+public abstract class FishEntityMixin extends WaterCreatureEntity implements Bucketable, FishBreedableEntity, EntityWithBloodType {
 	protected FishEntityMixin(EntityType<? extends FishEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method="getSwimSound", at = @At("HEAD"), cancellable = true)
@@ -139,4 +141,6 @@ public abstract class FishEntityMixin extends WaterCreatureEntity implements Buc
 			world.spawnEntity(new ExperienceOrbEntity(world, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(7) + 1));
 		}
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.FISH_BLOOD_TYPE; }
 }

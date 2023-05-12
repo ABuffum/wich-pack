@@ -2,25 +2,17 @@ package fun.mousewich.mixins.entity;
 
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.gen.data.tag.ModBlockTags;
+import fun.mousewich.origins.power.FireImmunePower;
+import fun.mousewich.origins.power.PowersUtil;
 import fun.mousewich.sound.IdentifiedSounds;
 import fun.mousewich.sound.ModSoundEvents;
 import fun.mousewich.sound.SoundUtil;
-import fun.mousewich.sound.SubtitleOverrides;
-import io.github.apace100.origins.power.OriginsPowerTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.SoundManager;
-import net.minecraft.client.sound.WeightedSoundSet;
 import net.minecraft.entity.Entity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.server.command.CommandOutput;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.Nameable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -52,9 +44,11 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 	@Shadow public abstract void emitGameEvent(GameEvent event);
 	@Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
 	@Shadow public abstract BlockPos getBlockPos();
+	@Shadow public abstract BlockState getBlockStateAtPos();
 
 	@Inject(method="kill", at = @At("TAIL"))
 	public void Kill(CallbackInfo ci) { this.emitGameEvent(ModGameEvent.ENTITY_DIE); }
+
 	@Inject(method="playStepSound", at = @At("HEAD"), cancellable = true)
 	protected void PlayStepSound(BlockPos pos, BlockState state, CallbackInfo ci) {
 		if (state.getMaterial().isLiquid()) return;
@@ -104,13 +98,8 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 		}
 	}
 
-	@Inject(method="isSubmergedIn", at = @At("HEAD"), cancellable = true)
-	public void IsSubmergedIn(TagKey<Fluid> fluidTag, CallbackInfoReturnable<Boolean> cir) {
-		if (fluidTag == FluidTags.WATER) {
-			if (OriginsPowerTypes.WATER_BREATHING.isActive((Entity)(Object)this)) {
-				BlockState state = this.world.getBlockState(this.getBlockPos());
-				if (state.isOf(Blocks.WATER_CAULDRON)) cir.setReturnValue(true);
-			}
-		}
+	@Inject(method="isFireImmune", at=@At("HEAD"), cancellable=true)
+	public void IsFireImmune(CallbackInfoReturnable<Boolean> cir) {
+		if (PowersUtil.Active((Entity)(Object)this, FireImmunePower.class)) cir.setReturnValue(true);
 	}
 }

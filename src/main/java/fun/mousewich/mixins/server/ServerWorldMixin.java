@@ -1,9 +1,14 @@
 package fun.mousewich.mixins.server;
 
-import fun.mousewich.origins.powers.PulsingSkinGlowPower;
+import fun.mousewich.origins.power.PulsingSkinGlowPower;
+import fun.mousewich.util.LightningUtil;
 import fun.mousewich.util.ServerEntityHandler;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
@@ -17,7 +22,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
@@ -36,5 +44,13 @@ public abstract class ServerWorldMixin extends World implements StructureWorldAc
 	public void tick(BooleanSupplier shouldKeepTicking, CallbackInfo ci) {
 		ServerWorld serverWorld = (ServerWorld)(Object)this;
 		PulsingSkinGlowPower.tick(serverWorld);
+	}
+
+	@Inject(method="getLightningRodPos", at = @At(value="HEAD"), cancellable = true)
+	private void MakeLightningRod(BlockPos pos, CallbackInfoReturnable<Optional<BlockPos>> cir) {
+		Vec3d origin = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+		List<LivingEntity> list = this.getEntitiesByClass(LivingEntity.class, Box.of(origin, 64, this.getHeight(), 64), e -> LightningUtil.ShouldLightningRod(origin, e));
+		int size = list.size();
+		if (size > 0) cir.setReturnValue(Optional.of(list.get(this.random.nextInt(size)).getBlockPos().up(1)));
 	}
 }

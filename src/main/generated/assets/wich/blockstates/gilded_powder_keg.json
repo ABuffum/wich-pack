@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "wich:block/gilded_powder_keg",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "wich:block/gilded_powder_keg",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wich:block/gilded_powder_keg",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "wich:block/gilded_powder_keg",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "wich:block/gilded_powder_keg"
+    },
+    "facing=west": {
+      "model": "wich:block/gilded_powder_keg",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

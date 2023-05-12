@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(BeehiveBlock.class)
 public interface BeehiveBlockInvoker {
 	@Invoker("hasBees")
-	public boolean InvokeHasBees(World world, BlockPos pos);
+	boolean InvokeHasBees(World world, BlockPos pos);
 	@Invoker("angerNearbyBees")
-	public void InvokeAngerNearbyBees(World world, BlockPos pos);
+	void InvokeAngerNearbyBees(World world, BlockPos pos);
 }

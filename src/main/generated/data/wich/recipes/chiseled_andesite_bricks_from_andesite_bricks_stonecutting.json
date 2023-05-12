@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:andesite_bricks"
+  },
+  "result": "wich:chiseled_andesite_bricks",
+  "count": 1
+}

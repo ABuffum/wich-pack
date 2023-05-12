@@ -1,7 +1,7 @@
 package fun.mousewich.mixins.block;
 
 import fun.mousewich.ModBase;
-import fun.mousewich.util.PointedDripstoneUtils;
+import fun.mousewich.util.PointedDripstoneUtil;
 import net.minecraft.block.*;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -30,11 +30,11 @@ public class PointedDripstoneBlockMixin extends Block implements LandingBlock, W
 			ci.cancel();
 			return;
 		}
-		if (!PointedDripstoneUtils.isHeldByPointedDripstone(state, world, pos)) {
+		if (!PointedDripstoneUtil.isHeldByPointedDripstone(state, world, pos)) {
 			ci.cancel();
 			return;
 		}
-		Optional<PointedDripstoneUtils.DrippingFluid> optional = PointedDripstoneUtils.getFluid(world, pos, state);
+		Optional<PointedDripstoneUtil.DrippingFluid> optional = PointedDripstoneUtil.getFluid(world, pos, state);
 		if (optional.isEmpty()) {
 			ci.cancel();
 			return;
@@ -50,7 +50,7 @@ public class PointedDripstoneBlockMixin extends Block implements LandingBlock, W
 			ci.cancel();
 			return;
 		}
-		BlockPos blockPos = PointedDripstoneUtils.getTipPos(state, world, pos, 11, false);
+		BlockPos blockPos = PointedDripstoneUtil.getTipPos(state, world, pos, 11, false);
 		if (blockPos == null) {
 			ci.cancel();
 			return;
@@ -64,7 +64,7 @@ public class PointedDripstoneBlockMixin extends Block implements LandingBlock, W
 			ci.cancel();
 			return;
 		}
-		BlockPos blockPos2 = PointedDripstoneUtils.getCauldronPos(world, blockPos, fluid);
+		BlockPos blockPos2 = PointedDripstoneUtil.getCauldronPos(world, blockPos, fluid);
 		if (blockPos2 == null) {
 			ci.cancel();
 			return;
@@ -80,30 +80,30 @@ public class PointedDripstoneBlockMixin extends Block implements LandingBlock, W
 		if (!PointedDripstoneBlock.canDrip(state)) return;
 		float f = random.nextFloat();
 		if (f > 0.12f) return;
-		PointedDripstoneUtils.getFluid(world, pos, state)
-				.filter(fluid -> f < 0.02f || PointedDripstoneUtils.isFluidLiquid(fluid.fluid))
-				.ifPresent(fluid -> PointedDripstoneUtils.createParticle(world, pos, state, fluid.fluid));
+		PointedDripstoneUtil.getFluid(world, pos, state)
+				.filter(fluid -> f < 0.02f || PointedDripstoneUtil.isFluidLiquid(fluid.fluid))
+				.ifPresent(fluid -> PointedDripstoneUtil.createParticle(world, pos, state, fluid.fluid));
 		ci.cancel();
 	}
 
 	@Inject(method="getDripFluid(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/fluid/Fluid;", at = @At("HEAD"), cancellable = true)
 	private static void GetDripFluid(World world, BlockPos pos, CallbackInfoReturnable<Fluid> cir) {
-		cir.setReturnValue(PointedDripstoneUtils.getFluid(world, pos, world.getBlockState(pos)).map(fluid -> fluid.fluid)
-				.filter(PointedDripstoneUtils::isFluidLiquid).orElse(Fluids.EMPTY));
+		cir.setReturnValue(PointedDripstoneUtil.getFluid(world, pos, world.getBlockState(pos)).map(fluid -> fluid.fluid)
+				.filter(PointedDripstoneUtil::isFluidLiquid).orElse(Fluids.EMPTY));
 	}
 	@Inject(method="getDripFluid(Lnet/minecraft/world/World;Lnet/minecraft/fluid/Fluid;)Lnet/minecraft/fluid/Fluid;", at = @At("HEAD"), cancellable = true)
 	private static void GetDripFluid(World world, Fluid fluid, CallbackInfoReturnable<Fluid> cir) {
-		cir.setReturnValue(PointedDripstoneUtils.getDripFluid(world, fluid));
+		cir.setReturnValue(PointedDripstoneUtil.getDripFluid(world, fluid));
 	}
 
 	@Inject(method="createParticle(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("HEAD"), cancellable = true)
 	private static void CreateParticle(World world, BlockPos pos, BlockState state, CallbackInfo ci) {
-		PointedDripstoneUtils.getFluid(world, pos, state).ifPresent(fluid -> PointedDripstoneUtils.createParticle(world, pos, state, fluid.fluid));
+		PointedDripstoneUtil.getFluid(world, pos, state).ifPresent(fluid -> PointedDripstoneUtil.createParticle(world, pos, state, fluid.fluid));
 	}
 
 	@Inject(method="createParticle(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/fluid/Fluid;)V", at = @At("HEAD"), cancellable = true)
 	private static void CreateParticle(World world, BlockPos pos, BlockState state, Fluid fluid, CallbackInfo ci) {
-		PointedDripstoneUtils.createParticle(world, pos, state, fluid);
+		PointedDripstoneUtil.createParticle(world, pos, state, fluid);
 		ci.cancel();
 	}
 }

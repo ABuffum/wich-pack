@@ -11,11 +11,8 @@ import java.util.Optional;
 import java.util.Random;
 
 public class OxidizableLightableLanternBlock extends LightableLanternBlock implements Oxidizable {
-	private final Oxidizable.OxidationLevel level;
-	public OxidizableLightableLanternBlock(Oxidizable.OxidationLevel level, Settings settings) {
-		super(settings);
-		this.level = level;
-	}
+	private final OxidationLevel level;
+	public OxidizableLightableLanternBlock(OxidationLevel level, Settings settings) { super(settings); this.level = level; }
 	@Override
 	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		this.tickDegradation(state, world, pos, random);
@@ -25,7 +22,7 @@ public class OxidizableLightableLanternBlock extends LightableLanternBlock imple
 		return OxidationScale.getIncreasedBlock(state.getBlock()).isPresent();
 	}
 	@Override
-	public Oxidizable.OxidationLevel getDegradationLevel() { return this.level; }
+	public OxidationLevel getDegradationLevel() { return this.level; }
 	@Override
 	public Optional<BlockState> getDegradationResult(BlockState state) {
 		return OxidationScale.getIncreasedBlock(state.getBlock()).map((block) -> block.getStateWithProperties(state));

@@ -4,15 +4,19 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import fun.mousewich.ModBase;
 import fun.mousewich.effect.StatusEffectFogModifier;
+import fun.mousewich.effect.GogglesEffect;
 import fun.mousewich.util.MixinStore;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.ModifyCameraSubmersionTypePower;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.CameraSubmersionType;
+import net.minecraft.client.render.FogShape;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Util;
@@ -35,7 +39,8 @@ public class BackgroundRendererMixin {
 			new StatusEffectFogModifier.BlindnessFogModifier(),
 			new StatusEffectFogModifier.DarknessFogModifier(),
 			new StatusEffectFogModifier.FlashbangedFogModifier(),
-			new StatusEffectFogModifier.TintedGogglesFogModifier()
+			new StatusEffectFogModifier.TintedGogglesFogModifier(),
+			new StatusEffectFogModifier.RubyGogglesFogModifier()
 	);
 
 	@Shadow
@@ -59,7 +64,7 @@ public class BackgroundRendererMixin {
 	}
 
 	@Inject(method = "render", at = @At("HEAD"), cancellable = true)
-	private static void render(Camera camera, float tickDelta, ClientWorld world, int viewDistance, float skyDarkness, CallbackInfo ci) {
+	private static void Render(Camera camera, float tickDelta, ClientWorld world, int viewDistance, float skyDarkness, CallbackInfo ci) {
 		CameraSubmersionType cameraSubmersionType = camera.getSubmersionType();
 		//Origins override
 		if(camera.getFocusedEntity() instanceof LivingEntity) {
@@ -164,7 +169,8 @@ public class BackgroundRendererMixin {
 			LivingEntity livingEntity = (LivingEntity)entity;
 			StatusEffectInstance statusEffectInstance = livingEntity.getStatusEffect(statusEffectFogModifier.getStatusEffect());
 			r = statusEffectFogModifier.applyColorModifier(livingEntity, statusEffectInstance, r, tickDelta);
-			if (statusEffectInstance == null || statusEffectInstance.getEffectType() != ModBase.TINTED_GOGGLES_EFFECT) {
+			StatusEffect effect;
+			if (statusEffectInstance == null || !((effect = statusEffectInstance.getEffectType()) instanceof GogglesEffect)) {
 				if (r < 1.0f && cameraSubmersionType != CameraSubmersionType.LAVA && cameraSubmersionType != CameraSubmersionType.POWDER_SNOW) {
 					if (r < 0.0f) r = 0.0f;
 					red *= r;
@@ -182,10 +188,15 @@ public class BackgroundRendererMixin {
 					blue = Math.max(blue, 1 - blue);
 				}
 			}
-			else {
+			else if (effect == ModBase.TINTED_GOGGLES_EFFECT){
 				red = (float)MathHelper.lerp(r, Math.min(red, 0.15686274509), Math.max(red, 0.15686274509));
 				green = (float)MathHelper.lerp(r, Math.min(green, 0.09411764705), Math.max(red, 0.09411764705));
 				blue = (float)MathHelper.lerp(r, Math.min(blue, 0.18039215686), Math.max(red, 0.18039215686));
+			}
+			else if (effect == ModBase.RUBY_GOGGLES_EFFECT){
+				red = (float)MathHelper.lerp(r, Math.min(red, 0.62745098039), Math.max(red, 0.62745098039));
+				green = (float)MathHelper.lerp(r, Math.min(green, 0.03921568627), Math.max(red, 0.03921568627));
+				blue = (float)MathHelper.lerp(r, Math.min(blue, 0.20392156862), Math.max(red, 0.20392156862));
 			}
 			RenderSystem.clearColor(red, green, blue, 0.0f);
 			ci.cancel();
@@ -193,21 +204,30 @@ public class BackgroundRendererMixin {
 	}
 
 	@Inject(method = "applyFog", at = @At("HEAD"), cancellable = true)
-	private static void applyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo ci) {
+	private static void ApplyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo ci) {
 		Entity entity = camera.getFocusedEntity();
 		CameraSubmersionType cameraSubmersionType = camera.getSubmersionType();
-		if (cameraSubmersionType != CameraSubmersionType.LAVA) {
-			if (cameraSubmersionType != CameraSubmersionType.POWDER_SNOW) {
-				StatusEffectFogModifier.FogData fogData = new StatusEffectFogModifier.FogData(fogType);
-				StatusEffectFogModifier statusEffectFogModifier = getFogModifier(entity, MixinStore.worldrenderer_render_tickDelta);
-				if (statusEffectFogModifier != null) {
-					LivingEntity livingEntity = (LivingEntity)entity;
-					StatusEffectInstance statusEffectInstance = livingEntity.getStatusEffect(statusEffectFogModifier.getStatusEffect());
-					if (statusEffectInstance != null) statusEffectFogModifier.applyStartEndModifier(fogData, livingEntity, statusEffectInstance, viewDistance, MixinStore.worldrenderer_render_tickDelta);
-					RenderSystem.setShaderFogStart(fogData.fogStart);
-					RenderSystem.setShaderFogEnd(fogData.fogEnd);
-					ci.cancel();
-				}
+		if (cameraSubmersionType == CameraSubmersionType.LAVA) {
+			if (entity instanceof LivingEntity living &&
+					(ModBase.SEE_IN_LAVA_POWER.isActive(living)
+							|| living.hasStatusEffect(ModBase.RUBY_GOGGLES_EFFECT)
+							|| living.getEquippedStack(EquipmentSlot.HEAD).isOf(ModBase.RUBY_GOGGLES))) {
+				RenderSystem.setShaderFogStart(-8.0f);
+				RenderSystem.setShaderFogEnd(viewDistance * 0.5f);
+				RenderSystem.setShaderFogShape(FogShape.SPHERE);
+				ci.cancel();
+			}
+		}
+		else if (cameraSubmersionType != CameraSubmersionType.POWDER_SNOW) {
+			StatusEffectFogModifier.FogData fogData = new StatusEffectFogModifier.FogData(fogType);
+			StatusEffectFogModifier statusEffectFogModifier = getFogModifier(entity, MixinStore.worldrenderer_render_tickDelta);
+			if (statusEffectFogModifier != null) {
+				LivingEntity livingEntity = (LivingEntity)entity;
+				StatusEffectInstance statusEffectInstance = livingEntity.getStatusEffect(statusEffectFogModifier.getStatusEffect());
+				if (statusEffectInstance != null) statusEffectFogModifier.applyStartEndModifier(fogData, livingEntity, statusEffectInstance, viewDistance, MixinStore.worldrenderer_render_tickDelta);
+				RenderSystem.setShaderFogStart(fogData.fogStart);
+				RenderSystem.setShaderFogEnd(fogData.fogEnd);
+				ci.cancel();
 			}
 		}
 	}

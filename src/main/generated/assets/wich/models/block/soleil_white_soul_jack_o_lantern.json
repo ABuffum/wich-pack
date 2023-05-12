@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "wich:block/white_pumpkin_top",
+    "front": "wich:block/soleil_white_soul_jack_o_lantern",
+    "side": "wich:block/white_pumpkin_side"
+  }
+}

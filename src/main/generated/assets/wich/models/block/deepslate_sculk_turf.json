@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "top": "minecraft:block/sculk",
-    "bottom": "minecraft:block/deepslate",
+    "bottom": "minecraft:block/deepslate_top",
     "side": "wich:block/deepslate_sculk_turf_side"
   }
 }

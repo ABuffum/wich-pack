@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "wich:blue_rose_bush"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:blue_rose_seeds"
+    },
+    {
+      "item": "wich:blue_rose_seeds"
+    }
+  ]
+}

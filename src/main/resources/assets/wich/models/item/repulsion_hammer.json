@@ -1,0 +1,4 @@
+{
+  "parent": "wich:item/gravity_hammer",
+  "textures": { "texture": "wich:item/repulsion_hammer" }
+}

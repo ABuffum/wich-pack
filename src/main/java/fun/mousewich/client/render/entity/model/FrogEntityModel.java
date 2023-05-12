@@ -4,7 +4,7 @@ import fun.mousewich.client.render.entity.animation.AnimationHelper;
 import fun.mousewich.client.render.entity.animation.FrogAnimations;
 import fun.mousewich.client.render.entity.animation.Animation;
 import fun.mousewich.client.render.entity.animation.AnimationState;
-import fun.mousewich.entity.frog.FrogEntity;
+import fun.mousewich.entity.passive.frog.FrogEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;

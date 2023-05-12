@@ -7,19 +7,29 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModItemTags {
-	public static final TagKey<Item> AXES = createCommonTag("tools/axes");
+	public static final TagKey<Item> AXES = createMinecraftTag("axes");
+	public static final TagKey<Item> BEEHIVES = createTag("beehives");
 	public static final TagKey<Item> BOOKS = createTag("books");
 	public static final TagKey<Item> BOOKSHELF_BOOKS = createMinecraftTag("bookshelf_books");
 	public static final TagKey<Item> BOOKSHELVES = createTag("bookshelves");
 	public static final TagKey<Item> BOOTS = createTag("boots");
+	public static final TagKey<Item> BREAKS_DECORATED_POTS = createMinecraftTag("breaks_decorated_pots");
+	public static final TagKey<Item> CANDY = createTag("candy");
+	public static final TagKey<Item> CARVED_GOURDS = createTag("carved_gourds");
 	public static final TagKey<Item> CARVED_MELONS = createTag("carved_melons");
 	public static final TagKey<Item> CARVED_PUMPKINS = createTag("carved_pumpkins");
+	public static final TagKey<Item> CASSIA_LOGS = createMinecraftTag("cassia_logs");
+	public static final TagKey<Item> CHARRABLE_LOG_SLABS = createTag("charrable_log_slabs");
 	public static final TagKey<Item> CHARRABLE_LOGS = createTag("charrable_logs");
+	public static final TagKey<Item> CHARRABLE_STRIPPED_LOG_SLABS = createTag("charrable_stripped_log_slabs");
 	public static final TagKey<Item> CHARRABLE_STRIPPED_LOGS = createTag("charrable_stripped_logs");
+	public static final TagKey<Item> CHARRABLE_STRIPPED_WOOD_SLABS = createTag("charrable_stripped_wood_slabs");
 	public static final TagKey<Item> CHARRABLE_STRIPPED_WOODS = createTag("charrable_stripped_woods");
+	public static final TagKey<Item> CHARRABLE_WOOD_SLABS = createTag("charrable_wood_slabs");
 	public static final TagKey<Item> CHARRABLE_WOODS = createTag("charrable_woods");
 	public static final TagKey<Item> CHARRED_LOGS = createTag("charred_logs");
 	public static final TagKey<Item> CHERRY_LOGS = createMinecraftTag("cherry_logs");
+	public static final TagKey<Item> CHEST_BOATS = createMinecraftTag("chest_boats");
 	public static final TagKey<Item> CHESTPLATES = createTag("chestplates");
 	public static final TagKey<Item> COMPASSES = createMinecraftTag("compasses");
 	public static final TagKey<Item> COOKED_BEEF = createTag("cooked_beef");
@@ -30,7 +40,12 @@ public class ModItemTags {
 	public static final TagKey<Item> COOKED_RABBIT = createTag("cooked_rabbit");
 	public static final TagKey<Item> COOKED_SEAFOOD = createTag("cooked_seafood");
 	public static final TagKey<Item> COOKED_SHEEP = createTag("cooked_sheep");
+	public static final TagKey<Item> COPPER_BOOTS = createTag("copper_boots");
+	public static final TagKey<Item> COPPER_CHESTPLATES = createTag("copper_chestplates");
+	public static final TagKey<Item> COPPER_HELMETS = createTag("copper_helmets");
+	public static final TagKey<Item> COPPER_LEGGINGS = createTag("copper_leggings");
 	public static final TagKey<Item> DECORATED_POT_SHARDS = createTag("decorated_pot_shards");
+	public static final TagKey<Item> DOGWOOD_LOGS = createTag("dogwood_logs");
 	public static final TagKey<Item> EDIBLE_BEEF = createTag("edible_beef");
 	public static final TagKey<Item> EDIBLE_BIRD = createTag("edible_bird");
 	public static final TagKey<Item> EDIBLE_EGG = createTag("edible_egg");
@@ -53,14 +68,16 @@ public class ModItemTags {
 	public static final TagKey<Item> GOLDEN_FRUIT = createTag("golden_fruit");
 	public static final TagKey<Item> GOLDEN_VEGETABLES = createTag("golden_vegetables");
 	public static final TagKey<Item> GRAINS = createTag("grains");
+	public static final TagKey<Item> HAMMERS = createTag("hammers");
 	public static final TagKey<Item> HEAD_WEARABLE_BLOCKS = createTag("head_wearable_blocks");
 	public static final TagKey<Item> HELMETS = createTag("helmets");
-	public static final TagKey<Item> HOES = createCommonTag("tools/hoes");
+	public static final TagKey<Item> HOES = createMinecraftTag("hoes");
 	public static final TagKey<Item> KNIVES = createCommonTag("tools/knives");
 	public static final TagKey<Item> LEGGINGS = createTag("leggings");
 	public static final TagKey<Item> LIGHTS_FLINT = createTag("lights_flint");
+	public static final TagKey<Item> LOG_SLABS = createTag("log_slabs");
 	public static final TagKey<Item> MANGROVE_LOGS = createMinecraftTag("mangrove_logs");
-	public static final TagKey<Item> PICKAXES = createCommonTag("tools/pickaxes");
+	public static final TagKey<Item> PICKAXES = createMinecraftTag("pickaxes");
 	public static final TagKey<Item> RAW_BEEF = createTag("raw_beef");
 	public static final TagKey<Item> RAW_BIRD = createTag("raw_bird");
 	public static final TagKey<Item> RAW_FISH = createTag("raw_fish");
@@ -69,20 +86,24 @@ public class ModItemTags {
 	public static final TagKey<Item> RAW_RABBIT = createTag("raw_rabbit");
 	public static final TagKey<Item> RAW_SEAFOOD = createTag("raw_seafood");
 	public static final TagKey<Item> RAW_SHEEP = createTag("raw_sheep");
+	public static final TagKey<Item> ROWS = createTag("rows");
 	public static final TagKey<Item> SEEDS = createTag("seeds");
 	public static final TagKey<Item> SHEARS = createCommonTag("tools/shears");
-	public static final TagKey<Item> SHOVELS = createCommonTag("tools/shovels");
+	public static final TagKey<Item> SHOVELS = createMinecraftTag("shovels");
 	public static final TagKey<Item> SNIFFER_FOOD = createMinecraftTag("sniffer_food");
+	public static final TagKey<Item> SOUL_CAMPFIRES = createTag("soul_campfires");
+	public static final TagKey<Item> SOUL_LANTERNS = createTag("soul_lanterns");
 	public static final TagKey<Item> SOUL_TORCHES = createTag("soul_torches");
 	public static final TagKey<Item> SWEETS = createTag("sweets");
-	public static final TagKey<Item> SWORDS = createCommonTag("tools/swords");
+	public static final TagKey<Item> SWORDS = createMinecraftTag("swords");
+	public static final TagKey<Item> TOOLS = createMinecraftTag("tools");
 	public static final TagKey<Item> TORCHES = createTag("torches");
 	public static final TagKey<Item> TRIMMABLE_ARMOR = createMinecraftTag("trimmable_armor");
 	public static final TagKey<Item> TRIM_MATERIALS = createMinecraftTag("trim_materials");
 	public static final TagKey<Item> TRIM_TEMPLATES = createMinecraftTag("trim_templates");
 	public static final TagKey<Item> UNDERWATER_TORCHES = createTag("underwater_torches");
 	public static final TagKey<Item> VEGETABLES = createTag("vegetables");
-	public static final TagKey<Item> WEAPON = createTag("weapons");
+	public static final TagKey<Item> WOOD_HAMMERS = createTag("wood_hammers");
 	public static final TagKey<Item> WOOL_SLABS = createTag("wool_slabs");
 	public static final TagKey<Item> WOOL_CARPETS = createTag("wool_carpets");
 
@@ -92,6 +113,20 @@ public class ModItemTags {
 	public static final TagKey<Item> NOURISH_SWEETS = createTag("nourish", "sweets");
 	public static final TagKey<Item> NOURISH_VEGETABLES = createTag("nourish", "vegetables");
 	public static final TagKey<Item> ORIGINS_MEAT = createTag("origins", "meat");
+
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_AXES = createTag("medievalorigins", "axes");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_BOWS = createTag("medievalorigins", "bows");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_CAKES = createTag("medievalorigins", "cakes");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_CROPS = createTag("medievalorigins", "crops");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_GOLDEN_ARMOUR = createTag("medievalorigins", "golden_armour");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_GOLDEN_TOOLS = createTag("medievalorigins", "golden_tools");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_HELMETS = createTag("medievalorigins", "helmets");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_IRON_ARMOUR = createTag("medievalorigins", "iron_armour");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_IRON_TOOLS = createTag("medievalorigins", "iron_tools");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_MEAT = createTag("medievalorigins", "meat");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_NONMEAT = createTag("medievalorigins", "nonmeat");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_OGRE_ARMOUR = createTag("medievalorigins", "ogre_armour");
+	public static final TagKey<Item> MEDIEVAL_ORIGINS_SWORDS = createTag("medievalorigins", "swords");
 
 	private static TagKey<Item> createTag(String name) { return TagKey.of(Registry.ITEM_KEY, ModBase.ID(name)); }
 	private static TagKey<Item> createTag(String namespace, String path) { return TagKey.of(Registry.ITEM_KEY, new Identifier(namespace, path)); }

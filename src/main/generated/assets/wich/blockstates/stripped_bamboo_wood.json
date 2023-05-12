@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "wich:block/stripped_bamboo_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "wich:block/stripped_bamboo_wood"
+    },
+    "axis=z": {
+      "model": "wich:block/stripped_bamboo_wood",
+      "x": 90
+    }
+  }
+}

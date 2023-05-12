@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "wich:buttercup"
+    }
+  ],
+  "tool": {
+    "tag": "c:tools/knives"
+  },
+  "result": [
+    {
+      "item": "wich:buttercup_petals"
+    },
+    {
+      "item": "wich:buttercup_seeds"
+    }
+  ]
+}

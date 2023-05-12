@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_post",
   "textures": {
-    "wall": "wich:block/emerald_bricks"
+    "wall": "wich:block/cut_emerald"
   }
 }

@@ -4,8 +4,7 @@ import fun.mousewich.ModBase;
 import fun.mousewich.advancement.ModCriteria;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.mixins.entity.LivingEntityAccessor;
-import fun.mousewich.util.VectorUtils;
-import net.minecraft.advancement.criterion.Criteria;
+import fun.mousewich.util.VectorUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
@@ -46,7 +45,7 @@ public class SculkCatalystBlockEntity extends BlockEntity implements GameEventLi
 			if (lea.ShouldDropXp()) {
 				int i = lea.GetXpToDrop(null);
 				if (lea.ShouldDropXp() && i > 0) {
-					this.spreadManager.spread(new BlockPos(VectorUtils.withBias(Vec3d.ofCenter(pos), Direction.UP, 0.5)), i);
+					this.spreadManager.spread(new BlockPos(VectorUtil.withBias(Vec3d.ofCenter(pos), Direction.UP, 0.5)), i);
 					this.triggerCriteria(livingEntity);
 				}
 				//livingEntity.disableExperienceDropping();

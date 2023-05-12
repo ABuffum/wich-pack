@@ -1,0 +1,48 @@
+{
+  "replace": false,
+  "values": [
+    "wich:copper_hoe",
+    "wich:waxed_exposed_copper_hoe",
+    "wich:amethyst_hoe",
+    "wich:waxed_oxidized_copper_hoe",
+    "wich:waxed_weathered_copper_hoe",
+    "wich:emerald_hoe",
+    "wich:exposed_copper_hoe",
+    "wich:waxed_copper_hoe",
+    "wich:quartz_hoe",
+    "wich:oxidized_copper_hoe",
+    "wich:weathered_copper_hoe",
+    "wich:obsidian_hoe",
+    "wich:echo_hoe",
+    "minecraft:wooden_hoe",
+    "minecraft:stone_hoe",
+    "minecraft:iron_hoe",
+    "minecraft:golden_hoe",
+    "minecraft:diamond_hoe",
+    "minecraft:netherite_hoe",
+    {
+      "id": "betternether:cincinnasite_hoe",
+      "required": false
+    },
+    {
+      "id": "betternether:cincinnasite_hoe_diamond",
+      "required": false
+    },
+    {
+      "id": "betternether:nether_ruby_hoe",
+      "required": false
+    },
+    {
+      "id": "betterend:aeternium_hoe",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_hoe",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_hoe",
+      "required": false
+    }
+  ]
+}

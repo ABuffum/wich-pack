@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/allay",
+  "textures": {
+    "all": "wich:block/allay_plushie",
+    "particle": "wich:block/allay_plushie"
+  }
+}

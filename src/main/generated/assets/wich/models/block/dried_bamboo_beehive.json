@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "wich:block/dried_bamboo_beehive_end",
+    "bottom": "wich:block/dried_bamboo_beehive_end",
+    "side": "wich:block/dried_bamboo_beehive_side",
+    "front": "wich:block/dried_bamboo_beehive_front",
+    "particle": "wich:block/dried_bamboo_beehive_side"
+  }
+}

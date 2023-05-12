@@ -4,8 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import fun.mousewich.ModBase;
-import fun.mousewich.ModRegistry;
-import fun.mousewich.item.goat.GoatHornItem;
+import fun.mousewich.item.horn.goat.GoatHornItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.context.LootContext;
@@ -21,9 +20,7 @@ public class SetInstrumentLootFunction extends ConditionalLootFunction {
 		GoatHornItem.setRandomInstrumentFromRegular(stack, context.getRandom());
 		return stack;
 	}
-	public static ConditionalLootFunction.Builder<?> builder() {
-		return SetInstrumentLootFunction.builder(SetInstrumentLootFunction::new);
-	}
+	public static Builder<?> builder() { return SetInstrumentLootFunction.builder(SetInstrumentLootFunction::new); }
 	public static class Serializer extends ConditionalLootFunction.Serializer<SetInstrumentLootFunction> {
 		@Override
 		public void toJson(JsonObject jsonObject, SetInstrumentLootFunction setInstrumentLootFunction, JsonSerializationContext jsonSerializationContext) {

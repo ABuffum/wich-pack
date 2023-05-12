@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "wich:block/mushroom_stem_planks",
+    "top": "wich:block/mushroom_stem_planks",
+    "side": "wich:block/mushroom_stem_planks"
+  }
+}

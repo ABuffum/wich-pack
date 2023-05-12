@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_red_mushroom_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/red_mushroom_ender_torch"
+    }
+  }
+}

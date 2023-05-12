@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:dark_oak_barrel"
+    },
+    {
+      "item": "wich:gunpowder_block"
+    }
+  ],
+  "result": {
+    "item": "wich:dark_oak_powder_keg"
+  }
+}

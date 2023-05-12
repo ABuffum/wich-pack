@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_spruce_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/spruce_soul_torch"
+    }
+  }
+}

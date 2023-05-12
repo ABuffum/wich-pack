@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.entity.ai;
 
-import fun.mousewich.util.GoatUtils;
+import fun.mousewich.util.GoatUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.brain.Brain;
@@ -64,9 +64,9 @@ public abstract class RamImpactTaskMixin<E extends PathAwareEntity> {
 			this.finishRam(serverWorld, goatEntity);
 			serverWorld.playSoundFromEntity(null, goatEntity, this.soundFactory.apply(goatEntity), SoundCategory.HOSTILE, 1.0f, 1.0f);
 		}
-		else if (GoatUtils.shouldSnapHorn(serverWorld, goatEntity)) {
+		else if (GoatUtil.shouldSnapHorn(serverWorld, goatEntity)) {
 			serverWorld.playSoundFromEntity(null, goatEntity, this.soundFactory.apply(goatEntity), SoundCategory.HOSTILE, 1.0f, 1.0f);
-			if (GoatUtils.dropHorn(goatEntity)) serverWorld.playSoundFromEntity(null, goatEntity, GoatUtils.getHornBreakSound((GoatEntity)goatEntity), SoundCategory.HOSTILE, 1.0f, 1.0f);
+			if (GoatUtil.dropHorn(goatEntity)) serverWorld.playSoundFromEntity(null, goatEntity, GoatUtil.getHornBreakSound((GoatEntity)goatEntity), SoundCategory.HOSTILE, 1.0f, 1.0f);
 			this.finishRam(serverWorld, goatEntity);
 		}
 		else {

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_custom_fence_gate_open",
+  "textures": {
+    "particle": "wich:block/sugar_cane_fence_gate_particle",
+    "texture": "wich:block/sugar_cane_fence_gate"
+  }
+}

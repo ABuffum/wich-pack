@@ -1,7 +1,7 @@
 package fun.mousewich.dispenser;
 
 import fun.mousewich.entity.vehicle.ModBoatType;
-import fun.mousewich.entity.ModBoatEntity;
+import fun.mousewich.entity.vehicle.ModBoatEntity;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.item.ItemStack;

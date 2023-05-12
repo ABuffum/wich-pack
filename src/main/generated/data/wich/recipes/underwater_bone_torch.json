@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "*",
-    "#"
+    "#",
+    "|"
   ],
   "key": {
     "#": {
-      "item": "minecraft:bone"
+      "item": "minecraft:ink_sac"
     },
-    "*": {
-      "item": "minecraft:glow_ink_sac"
+    "|": {
+      "item": "minecraft:bone"
     }
   },
   "result": {

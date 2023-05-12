@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wich:block/tadpole_plushie",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wich:block/tadpole_plushie"
+    },
+    "facing=south": {
+      "model": "wich:block/tadpole_plushie",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wich:block/tadpole_plushie",
+      "y": 270
+    }
+  }
+}

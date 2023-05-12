@@ -1,17 +1,27 @@
 {
   "replace": false,
   "values": [
-    "minecraft:bookshelf",
-    "wich:acacia_bookshelf",
-    "wich:birch_bookshelf",
-    "wich:crimson_bookshelf",
-    "wich:dark_oak_bookshelf",
-    "wich:jungle_bookshelf",
-    "wich:spruce_bookshelf",
-    "wich:warped_bookshelf",
     "wich:bamboo_bookshelf",
+    "wich:cassia_bookshelf",
+    "wich:blue_mushroom_bookshelf",
+    "wich:spruce_bookshelf",
+    "wich:charred_bookshelf",
+    "wich:brown_mushroom_bookshelf",
+    "wich:birch_bookshelf",
+    "wich:sugar_cane_bookshelf",
+    "wich:acacia_bookshelf",
+    "wich:warped_bookshelf",
+    "wich:dark_oak_bookshelf",
+    "wich:mushroom_stem_bookshelf",
     "wich:mangrove_bookshelf",
+    "wich:dried_bamboo_bookshelf",
+    "wich:red_mushroom_bookshelf",
+    "wich:hay_bookshelf",
     "wich:cherry_bookshelf",
-    "wich:charred_bookshelf"
+    "wich:crimson_bookshelf",
+    "wich:dogwood_bookshelf",
+    "wich:gilded_bookshelf",
+    "wich:jungle_bookshelf",
+    "minecraft:bookshelf"
   ]
 }

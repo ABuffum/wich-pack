@@ -2,18 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "#",
-    "I"
+    "|",
+    "*"
   ],
   "key": {
     "#": {
-      "tag": "wich:soul_torches"
+      "tag": "minecraft:coals"
     },
-    "I": {
-      "item": "wich:copper_nugget"
+    "|": {
+      "item": "wich:copper_rod"
+    },
+    "*": {
+      "tag": "minecraft:soul_fire_base_blocks"
     }
   },
   "result": {
     "item": "wich:copper_soul_torch",
-    "count": 4
+    "count": 8
   }
 }

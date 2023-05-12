@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:dripstone_tiles"
+    }
+  },
+  "result": {
+    "item": "wich:dripstone_tile_stairs",
+    "count": 4
+  }
+}

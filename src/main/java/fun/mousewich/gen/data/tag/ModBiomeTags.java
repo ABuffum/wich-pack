@@ -16,6 +16,8 @@ public class ModBiomeTags {
 	public static final TagKey<Biome> MINESHAFT_BLOCKING = createMinecraftTag("mineshaft_blocking");
 	public static final TagKey<Biome> SPAWNS_COLD_VARIANT_FROGS = createMinecraftTag("spawns_cold_variant_frogs");
 	public static final TagKey<Biome> SPAWNS_WARM_VARIANT_FROGS = createMinecraftTag("spawns_warm_variant_frogs");
+	public static final TagKey<Biome> TRAIL_RUINS_HAS_STRUCTURE = createMinecraftTag("has_structure/trail_ruins");
+	public static final TagKey<Biome> WARM_OCEANS = createTag("warm_oceans");
 	public static final TagKey<Biome> WATER_ON_MAP_OUTLINES = createMinecraftTag("water_on_map_outlines");
 
 	private static TagKey<Biome> createTag(String name) { return TagKey.of(Registry.BIOME_KEY, ModBase.ID(name)); }

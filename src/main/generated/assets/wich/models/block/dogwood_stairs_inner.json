@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "wich:block/dogwood_planks",
+    "top": "wich:block/dogwood_planks",
+    "side": "wich:block/dogwood_planks"
+  }
+}

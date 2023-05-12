@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "wich:block/chiseled_granite",
+    "top": "wich:block/chiseled_granite",
+    "side": "wich:block/chiseled_granite"
+  }
+}

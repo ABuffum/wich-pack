@@ -1,0 +1,5 @@
+{
+    "parent": "item/goat_horn",
+    "textures": { "layer0": "wich:item/wind_horn" },
+    "overrides": [ { "predicate": { "tooting": 1 }, "model": "wich:item/tooting_wind_horn" } ]
+}

@@ -88,11 +88,11 @@ public class LeavesBlockMixin extends Block implements Waterloggable {
 		}
 	}
 	@Inject(method = "appendProperties", at = @At("TAIL"))
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder, CallbackInfo ci) {
+	protected void AppendProperties(StateManager.Builder<Block, BlockState> builder, CallbackInfo ci) {
 		builder.add(Properties.WATERLOGGED);
 	}
 	@Inject(method = "getPlacementState", at = @At("RETURN"), cancellable = true)
-	public void getPlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> cir) {
+	public void GetPlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> cir) {
 		FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
 		BlockState blockState = this.getDefaultState().with(PERSISTENT, true).with(Properties.WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
 		cir.setReturnValue(UpdateDistanceFromLogs(blockState, ctx.getWorld(), ctx.getBlockPos()));

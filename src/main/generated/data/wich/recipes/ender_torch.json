@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "*",
     "#",
-    "S"
+    "|",
+    "*"
   ],
   "key": {
     "#": {
+      "tag": "minecraft:coals"
+    },
+    "|": {
       "item": "minecraft:stick"
     },
     "*": {
-      "tag": "minecraft:coals"
-    },
-    "S": {
       "item": "minecraft:popped_chorus_fruit"
     }
   },

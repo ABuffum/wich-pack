@@ -1,0 +1,11 @@
+{
+  "powers": [
+	"haven:bad_swimmer_doll",
+	"haven:pincushion",
+	"origins-classes:sneaky",
+	"wich:blood_types/none"
+  ],
+  "name": "Carnie",
+  "description": "You run the show.",
+  "icon": "wich:coffee_cake"
+}

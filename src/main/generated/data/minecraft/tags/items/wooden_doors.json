@@ -1,9 +1,19 @@
 {
   "replace": false,
   "values": [
+    "wich:blue_mushroom_door",
+    "wich:mushroom_stem_door",
+    "wich:red_mushroom_door",
+    "wich:dried_bamboo_door",
     "wich:charred_door",
-    "minecraft:mangrove_door",
+    "wich:dogwood_door",
+    "wich:sugar_cane_door",
+    "wich:cassia_door",
     "minecraft:bamboo_door",
-    "minecraft:cherry_door"
+    "wich:hay_door",
+    "minecraft:cherry_door",
+    "wich:brown_mushroom_door",
+    "minecraft:mangrove_door",
+    "wich:gilded_door"
   ]
 }

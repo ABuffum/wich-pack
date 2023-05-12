@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:jack_o_lantern"
+    "minecraft:jack_o_lantern",
+    "wich:soul_jack_o_lantern",
+    "wich:ender_jack_o_lantern"
   ]
 }

@@ -33,7 +33,7 @@ public class MangroveRootPlacer {
 		ArrayList<BlockPos> list = Lists.newArrayList();
 		BlockPos.Mutable mutable = pos.mutableCopy();
 		while (mutable.getY() < trunkPos.getY()) {
-			if (!this.canGrowThrough(world, mutable)) return false;
+			if (this.cannotGrowThrough(world, mutable)) return false;
 			mutable.move(Direction.UP);
 		}
 		list.add(trunkPos.down());
@@ -62,22 +62,22 @@ public class MangroveRootPlacer {
 		else list = random.nextBoolean() ? List.of(blockPos2) : List.of(down);
 
 		for (BlockPos blockPos : list) {
-			if (!this.canGrowThrough(world, blockPos)) continue;
+			if (this.cannotGrowThrough(world, blockPos)) continue;
 			offshootPositions.add(blockPos);
 			if (this.canGrow(world, random, blockPos, direction, origin, offshootPositions, rootLength + 1)) continue;
 			return false;
 		}
 		return true;
 	}
-	public boolean canGrowThrough(TestableWorld world, BlockPos pos) {
-		return TreeFeature.canReplace(world, pos) || world.testBlockState(pos, state -> state.isIn(ModBlockTags.MANGROVE_ROOTS_CAN_GROW_THROUGH));
+	public boolean cannotGrowThrough(TestableWorld world, BlockPos pos) {
+		return !TreeFeature.canReplace(world, pos) && !world.testBlockState(pos, state -> state.isIn(ModBlockTags.MANGROVE_ROOTS_CAN_GROW_THROUGH));
 	}
 	public void placeRoots(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, MangroveTreeFeatureConfig config) {
 		if (world.testBlockState(pos, state -> state.isOf(ModBase.MUD.asBlock()) || state.isOf(ModBase.MUDDY_MANGROVE_ROOTS.asBlock()))) {
 			replacer.accept(pos, this.applyWaterlogging(world, pos, ModBase.MUDDY_MANGROVE_ROOTS.asBlock().getDefaultState()));
 		}
 		else {
-			if (!this.canGrowThrough(world, pos)) return;
+			if (this.cannotGrowThrough(world, pos)) return;
 			replacer.accept(pos, this.applyWaterlogging(world, pos, ModBase.MANGROVE_ROOTS.asBlock().getDefaultState()));
 			BlockPos blockPos = pos.up();
 			if (random.nextFloat() < 0.5f && world.testBlockState(blockPos, AbstractBlock.AbstractBlockState::isAir)) {

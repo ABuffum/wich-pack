@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(AbstractCauldronBlock.class)
 public interface AbstractCauldronBlockInvoker {
 	@Invoker("canBeFilledByDripstone")
-	public boolean canBeFilledByDripstone(Fluid fluid);
+	boolean canBeFilledByDripstone(Fluid fluid);
 	@Invoker("fillFromDripstone")
-	public void fillFromDripstone(BlockState state, World world, BlockPos pos, Fluid fluid);
+	void fillFromDripstone(BlockState state, World world, BlockPos pos, Fluid fluid);
 }

@@ -2,7 +2,8 @@ package fun.mousewich.mixins.entity.passive;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.entity.Pouchable;
-import fun.mousewich.entity.hedgehog.HedgehogEntity;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.gen.data.tag.ModItemTags;
 import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.entity.EntityType;
@@ -21,7 +22,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,15 +30,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChickenEntity.class)
-public abstract class ChickenEntityMixin extends AnimalEntity implements Pouchable {
+public abstract class ChickenEntityMixin extends AnimalEntity implements Pouchable, EntityWithBloodType {
 	@Shadow public boolean hasJockey;
-
 	@Shadow public int eggLayTime;
 
 	protected ChickenEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method="initGoals", at = @At("HEAD"))
 	protected void initGoals(CallbackInfo ci) {
+		//noinspection ConstantConditions, EqualsBetweenInconvertibleTypes
 		if (getClass().equals(ChickenEntity.class) || getClass().equals(ChickenEntityMixin.class)) {
 			this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D, ChickenEntity.class));
 			this.goalSelector.add(3, new TemptGoal(this, 1.0D, Ingredient.fromTag(ModItemTags.SEEDS), false));
@@ -99,11 +99,9 @@ public abstract class ChickenEntityMixin extends AnimalEntity implements Pouchab
 		if (this.isFromPouch()) cir.setReturnValue(false);
 	}
 	@Inject(method="writeCustomDataToNbt", at=@At("TAIL"))
-	public void WriteCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-		nbt.putBoolean("FromPouch", this.isFromPouch());
-	}
+	public void WriteCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) { nbt.putBoolean("FromPouch", this.isFromPouch()); }
 	@Inject(method="readCustomDataFromNbt", at=@At("TAIL"))
-	public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-		this.setFromPouch(nbt.getBoolean("FromPouch"));
-	}
+	public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) { this.setFromPouch(nbt.getBoolean("FromPouch")); }
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.CHICKEN_BLOOD_TYPE; }
 }

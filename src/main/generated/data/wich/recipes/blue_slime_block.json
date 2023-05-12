@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:blue_slime_ball"
+    }
+  },
+  "result": {
+    "item": "wich:blue_slime_block"
+  }
+}

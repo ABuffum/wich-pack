@@ -1,0 +1,16 @@
+{
+  "powers": [
+    "ryft:lavaquatic",
+    "wich:see_in_lava",
+    "wich:nonflammable",
+    "wich:fire_immunity",
+    "wich:burn_immunity",
+    "wich:easy_freeze",
+    "ryft:amphibious_lungs",
+    "wich:damage_from_snowballs",
+    "ryft:identified_sounds/olm"
+  ],
+  "name": "Scorching Salamander",
+  "description": "A wetted beast if you count submersion in lava as being wet",
+  "icon": "minecraft:magma_block"
+}

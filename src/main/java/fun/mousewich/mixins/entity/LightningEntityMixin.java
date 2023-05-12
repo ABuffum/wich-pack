@@ -31,7 +31,7 @@ public class LightningEntityMixin {
 		BlockPos blockPos2;
 		BlockState blockState3;
 		if (blockState.isOf(Blocks.LIGHTNING_ROD)) {
-			blockPos2 = pos.offset(((Direction)blockState.get(LightningRodBlock.FACING)).getOpposite());
+			blockPos2 = pos.offset(blockState.get(LightningRodBlock.FACING).getOpposite());
 			blockState3 = world.getBlockState(blockPos2);
 		} else {
 			blockPos2 = pos;

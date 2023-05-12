@@ -3,11 +3,12 @@ package fun.mousewich.block.sculk;
 import com.mojang.serialization.Dynamic;
 import fun.mousewich.ModBase;
 import fun.mousewich.ModGameRules;
-import fun.mousewich.entity.warden.WardenEntity;
+import fun.mousewich.entity.ModNbtKeys;
+import fun.mousewich.entity.hostile.warden.WardenEntity;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.event.ModVibrationListener;
 import fun.mousewich.event.ModWorldEvents;
-import fun.mousewich.gen.data.tag.ModEventTags;
+import fun.mousewich.gen.data.tag.ModGameEventTags;
 import fun.mousewich.sound.ModSoundEvents;
 import fun.mousewich.util.CollectionUtil;
 import net.minecraft.block.Block;
@@ -30,7 +31,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.event.BlockPositionSource;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.listener.GameEventListener;
@@ -61,20 +61,20 @@ public class SculkShriekerBlockEntity extends BlockEntity implements ModVibratio
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		super.readNbt(nbt);
-		if (nbt.contains("warning_level", NbtElement.NUMBER_TYPE)) this.warningLevel = nbt.getInt("warning_level");
-		if (nbt.contains("listener", NbtElement.COMPOUND_TYPE)) {
-			ModVibrationListener.createCodec(this).parse(new Dynamic<>(NbtOps.INSTANCE, nbt.getCompound("listener"))).resultOrPartial(ModBase.LOGGER::error).ifPresent(vibrationListener -> this.vibrationListener = vibrationListener);
+		if (nbt.contains(ModNbtKeys.WARNING_LEVEL, NbtElement.NUMBER_TYPE)) this.warningLevel = nbt.getInt(ModNbtKeys.WARNING_LEVEL);
+		if (nbt.contains(ModNbtKeys.LISTENER, NbtElement.COMPOUND_TYPE)) {
+			ModVibrationListener.createCodec(this).parse(new Dynamic<>(NbtOps.INSTANCE, nbt.getCompound(ModNbtKeys.LISTENER))).resultOrPartial(ModBase.LOGGER::error).ifPresent(vibrationListener -> this.vibrationListener = vibrationListener);
 		}
 	}
 
 	@Override
 	public void writeNbt(NbtCompound nbt) {
 		super.writeNbt(nbt);
-		nbt.putInt("warning_level", this.warningLevel);
-		ModVibrationListener.createCodec(this).encodeStart(NbtOps.INSTANCE, this.vibrationListener).resultOrPartial(ModBase.LOGGER::error).ifPresent(nbtElement -> nbt.put("listener", nbtElement));
+		nbt.putInt(ModNbtKeys.WARNING_LEVEL, this.warningLevel);
+		ModVibrationListener.createCodec(this).encodeStart(NbtOps.INSTANCE, this.vibrationListener).resultOrPartial(ModBase.LOGGER::error).ifPresent(nbtElement -> nbt.put(ModNbtKeys.LISTENER, nbtElement));
 	}
 
-	public TagKey<GameEvent> getTag() { return ModEventTags.SHRIEKER_CAN_LISTEN; }
+	public TagKey<GameEvent> getTag() { return ModGameEventTags.SHRIEKER_CAN_LISTEN; }
 
 	@Override
 	public boolean accepts(ServerWorld world, GameEventListener listener, BlockPos pos, GameEvent event, Entity entity, BlockPos pos2) {

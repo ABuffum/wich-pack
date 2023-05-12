@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:stripped_cassia_wood"
+  },
+  "result": "wich:stripped_cassia_wood_slab",
+  "count": 2
+}

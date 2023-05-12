@@ -1,18 +1,27 @@
 {
   "replace": false,
   "values": [
-    "wich:bone_ladder",
-    "wich:acacia_ladder",
-    "wich:birch_ladder",
-    "wich:dark_oak_ladder",
-    "wich:jungle_ladder",
-    "minecraft:ladder",
-    "wich:spruce_ladder",
+    "wich:cherry_ladder",
     "wich:crimson_ladder",
     "wich:warped_ladder",
+    "wich:bone_ladder",
+    "wich:sugar_cane_ladder",
+    "wich:blue_mushroom_ladder",
+    "wich:hay_ladder",
     "wich:bamboo_ladder",
+    "wich:dogwood_ladder",
+    "wich:gilded_ladder",
+    "wich:dark_oak_ladder",
     "wich:mangrove_ladder",
-    "wich:cherry_ladder",
-    "wich:charred_ladder"
+    "wich:dried_bamboo_ladder",
+    "wich:acacia_ladder",
+    "wich:cassia_ladder",
+    "wich:jungle_ladder",
+    "wich:charred_ladder",
+    "wich:mushroom_stem_ladder",
+    "wich:red_mushroom_ladder",
+    "wich:spruce_ladder",
+    "wich:birch_ladder",
+    "wich:brown_mushroom_ladder"
   ]
 }

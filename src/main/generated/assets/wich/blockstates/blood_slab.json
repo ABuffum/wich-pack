@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/blood_slab"
+    },
+    "type=double": {
+      "model": "wich:block/blood_block"
+    },
+    "type=top": {
+      "model": "wich:block/blood_slab_top"
+    }
+  }
+}

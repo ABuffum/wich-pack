@@ -1,0 +1,15 @@
+{
+  "type": "wich:sonic_boom",
+  "cooldown": 600,
+  "hud_render": {
+	"sprite_location": "origins:textures/gui/resource_bar.png",
+	"bar_index": 5
+  },
+  "damage": 10.0,
+  "key": {
+	"key": "key.wich.tertiary_active",
+	"continuous": true
+  },
+  "name": "Sonic Boom",
+  "description": "You can be louder!"
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:cutting_board_pink_allium"
+    ]
+  },
+  "criteria": {
+    "has_pink_allium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wich:pink_allium"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:cutting_board_pink_allium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_allium",
+      "has_the_recipe"
+    ]
+  ]
+}

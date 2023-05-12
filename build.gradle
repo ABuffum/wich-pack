@@ -43,15 +43,20 @@ repositories {
 			includeGroup "com.jamieswhiteshirt"
 		}
 	}
-	maven {
-		url "https://jitpack.io"
-	}
+	maven { url 'https://jitpack.io' }
 	maven {
 		name = 'Shedaniel Maven'
 		url "https://maven.shedaniel.me/"
 	}
 	maven {
 		url "https://maven.terraformersmc.com/"
+	}
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+		content {
+			includeGroup "maven.modrinth"
+		}
 	}
 }
 

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:cobbled_end_shale"
+    }
+  },
+  "result": {
+    "item": "wich:cobbled_end_shale_wall",
+    "count": 6
+  }
+}

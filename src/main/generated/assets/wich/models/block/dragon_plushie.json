@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/dragon",
+  "textures": {
+    "all": "wich:block/dragon_plushie",
+    "particle": "wich:block/dragon_plushie"
+  }
+}

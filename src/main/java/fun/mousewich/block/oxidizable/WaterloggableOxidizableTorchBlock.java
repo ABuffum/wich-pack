@@ -21,6 +21,7 @@ import java.util.Random;
 public class WaterloggableOxidizableTorchBlock extends OxidizableTorchBlock implements Waterloggable {
 	public WaterloggableOxidizableTorchBlock(OxidationLevel oxidizationLevel, Settings settings, ParticleEffect particle) {
 		super(oxidizationLevel, settings, particle);
+		this.setDefaultState(this.stateManager.getDefaultState().with(Properties.LIT, true).with(Properties.WATERLOGGED, false));
 	}
 
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
@@ -45,10 +46,12 @@ public class WaterloggableOxidizableTorchBlock extends OxidizableTorchBlock impl
 
 	@Override
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-		double d = pos.getX() + 0.5D;
-		double e = pos.getY() + 0.7D;
-		double f = pos.getZ() + 0.5D;
-		world.addParticle(state.get(Properties.WATERLOGGED) ? ParticleTypes.UNDERWATER : ParticleTypes.SMOKE, d, e, f, 0.0D, 0.0D, 0.0D);
-		world.addParticle(this.particle, d, e, f, 0.0D, 0.0D, 0.0D);
+		if (state.get(Properties.LIT)) {
+			double d = pos.getX() + 0.5D;
+			double e = pos.getY() + 0.7D;
+			double f = pos.getZ() + 0.5D;
+			world.addParticle(state.get(Properties.WATERLOGGED) ? ParticleTypes.UNDERWATER : ParticleTypes.SMOKE, d, e, f, 0.0D, 0.0D, 0.0D);
+			world.addParticle(this.particle, d, e, f, 0.0D, 0.0D, 0.0D);
+		}
 	}
 }

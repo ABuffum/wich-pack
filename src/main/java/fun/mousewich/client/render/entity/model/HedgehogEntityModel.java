@@ -1,6 +1,6 @@
 package fun.mousewich.client.render.entity.model;
 
-import fun.mousewich.entity.hedgehog.HedgehogEntity;
+import fun.mousewich.entity.passive.HedgehogEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;

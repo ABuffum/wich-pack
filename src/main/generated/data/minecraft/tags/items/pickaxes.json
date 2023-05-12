@@ -1,0 +1,48 @@
+{
+  "replace": false,
+  "values": [
+    "wich:waxed_weathered_copper_pickaxe",
+    "wich:emerald_pickaxe",
+    "wich:quartz_pickaxe",
+    "wich:waxed_exposed_copper_pickaxe",
+    "wich:waxed_oxidized_copper_pickaxe",
+    "wich:oxidized_copper_pickaxe",
+    "wich:copper_pickaxe",
+    "wich:weathered_copper_pickaxe",
+    "wich:obsidian_pickaxe",
+    "wich:amethyst_pickaxe",
+    "wich:exposed_copper_pickaxe",
+    "wich:waxed_copper_pickaxe",
+    "wich:echo_pickaxe",
+    "minecraft:wooden_pickaxe",
+    "minecraft:stone_pickaxe",
+    "minecraft:iron_pickaxe",
+    "minecraft:golden_pickaxe",
+    "minecraft:diamond_pickaxe",
+    "minecraft:netherite_pickaxe",
+    {
+      "id": "betternether:cincinnasite_pickaxe",
+      "required": false
+    },
+    {
+      "id": "betternether:cincinnasite_pickaxe_diamond",
+      "required": false
+    },
+    {
+      "id": "betternether:nether_ruby_pickaxe",
+      "required": false
+    },
+    {
+      "id": "betterend:aeternium_pickaxe",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_pickaxe",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_pickaxe",
+      "required": false
+    }
+  ]
+}

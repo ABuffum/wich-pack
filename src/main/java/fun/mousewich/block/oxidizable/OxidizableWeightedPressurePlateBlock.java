@@ -12,11 +12,11 @@ import java.util.Optional;
 import java.util.Random;
 
 public class OxidizableWeightedPressurePlateBlock extends WeightedPressurePlateBlock implements Oxidizable {
-	private final Oxidizable.OxidationLevel level;
-	public OxidizableWeightedPressurePlateBlock(Oxidizable.OxidationLevel level, int weight) {
+	private final OxidationLevel level;
+	public OxidizableWeightedPressurePlateBlock(OxidationLevel level, int weight) {
 		this(level, weight, ModFactory.OxidizablePressurePlateSettings(level));
 	}
-	public OxidizableWeightedPressurePlateBlock(Oxidizable.OxidationLevel level, int weight, Settings settings) {
+	public OxidizableWeightedPressurePlateBlock(OxidationLevel level, int weight, Settings settings) {
 		super(weight, settings);
 		this.level = level;
 	}
@@ -26,7 +26,7 @@ public class OxidizableWeightedPressurePlateBlock extends WeightedPressurePlateB
 	public boolean hasRandomTicks(BlockState state) {
 		return OxidationScale.getIncreasedBlock(state.getBlock()).isPresent();
 	}
-	public Oxidizable.OxidationLevel getDegradationLevel() { return this.level; }
+	public OxidationLevel getDegradationLevel() { return this.level; }
 	@Override
 	public Optional<BlockState> getDegradationResult(BlockState state) {
 		return OxidationScale.getIncreasedBlock(state.getBlock()).map((block) -> block.getStateWithProperties(state));

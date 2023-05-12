@@ -10,12 +10,6 @@ import net.minecraft.world.WorldAccess;
 public class ModPressurePlateBlock extends PressurePlateBlock {
 	private final SoundEvent clickOnSound;
 	private final SoundEvent clickOffSound;
-	public static ModPressurePlateBlock Wooden(ActivationRule type, Settings settings) {
-		return new ModPressurePlateBlock(type, settings, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF);
-	}
-	public static ModPressurePlateBlock Stone(ActivationRule type, Settings settings) {
-		return new ModPressurePlateBlock(type, settings, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF);
-	}
 	public ModPressurePlateBlock(ActivationRule type, Settings settings, SoundEvent clickOnSound, SoundEvent clickOffSound) {
 		super(type, settings);
 		this.clickOnSound = clickOnSound;

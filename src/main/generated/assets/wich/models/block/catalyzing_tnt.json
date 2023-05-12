@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "wich:block/catalyzing_tnt_top",
+    "bottom": "wich:block/catalyzing_tnt_bottom",
+    "side": "wich:block/catalyzing_tnt_side"
+  }
+}

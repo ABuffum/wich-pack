@@ -7,10 +7,10 @@
     },
     {
       "when": {
-        "south": "false",
-        "north": "false",
+        "west": "false",
         "east": "false",
-        "west": "false"
+        "north": "false",
+        "south": "false"
       },
       "apply": {
         "model": "wich:block/oxidized_copper_bars_post"
@@ -18,10 +18,10 @@
     },
     {
       "when": {
-        "south": "false",
-        "north": "true",
+        "west": "false",
         "east": "false",
-        "west": "false"
+        "north": "true",
+        "south": "false"
       },
       "apply": {
         "model": "wich:block/oxidized_copper_bars_cap"
@@ -29,10 +29,10 @@
     },
     {
       "when": {
-        "south": "false",
-        "north": "false",
+        "west": "false",
         "east": "true",
-        "west": "false"
+        "north": "false",
+        "south": "false"
       },
       "apply": {
         "model": "wich:block/oxidized_copper_bars_cap",
@@ -41,10 +41,10 @@
     },
     {
       "when": {
-        "south": "true",
-        "north": "false",
+        "west": "false",
         "east": "false",
-        "west": "false"
+        "north": "false",
+        "south": "true"
       },
       "apply": {
         "model": "wich:block/oxidized_copper_bars_cap_alt"
@@ -52,10 +52,10 @@
     },
     {
       "when": {
-        "south": "false",
-        "north": "false",
+        "west": "true",
         "east": "false",
-        "west": "true"
+        "north": "false",
+        "south": "false"
       },
       "apply": {
         "model": "wich:block/oxidized_copper_bars_cap_alt",

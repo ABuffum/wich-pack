@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "minecraft:block/exposed_cut_copper",
+    "side": "wich:block/exposed_cut_copper_pillar_horizontal"
+  }
+}

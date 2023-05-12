@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:crimson_barrel"
+    },
+    {
+      "item": "wich:gunpowder_block"
+    }
+  ],
+  "result": {
+    "item": "wich:crimson_powder_keg"
+  }
+}

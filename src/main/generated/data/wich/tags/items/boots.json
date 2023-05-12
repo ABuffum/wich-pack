@@ -11,6 +11,33 @@
     "wich:emerald_boots",
     "wich:fleece_boots",
     "wich:quartz_boots",
-    "wich:studded_leather_boots"
+    "wich:shulker_boots",
+    "wich:studded_leather_boots",
+    "wich:turtle_boots",
+    "#wich:copper_boots",
+    {
+      "id": "betternether:cincinnasite_boots",
+      "required": false
+    },
+    {
+      "id": "betternether:nether_ruby_boots",
+      "required": false
+    },
+    {
+      "id": "betterend:aeternium_boots",
+      "required": false
+    },
+    {
+      "id": "betterend:crystalite_boots",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_boots",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_boots",
+      "required": false
+    }
   ]
 }

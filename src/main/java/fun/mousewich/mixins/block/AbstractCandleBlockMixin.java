@@ -1,6 +1,7 @@
 package fun.mousewich.mixins.block;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.block.basic.ModCandleCakeBlock;
 import net.minecraft.block.AbstractCandleBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -29,11 +30,16 @@ public abstract class AbstractCandleBlockMixin extends Block {
 	@Inject(method="randomDisplayTick", at = @At("HEAD"), cancellable = true)
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random, CallbackInfo ci) {
 		Block block = state.getBlock();
-		boolean isSoulCandle = block == ModBase.SOUL_CANDLE.asBlock() || block == ModBase.SOUL_CANDLE_CAKE;
-		boolean isEnderCandle = block == ModBase.ENDER_CANDLE.asBlock() || block == ModBase.ENDER_CANDLE_CAKE;
+		boolean isSoulCandle = block == ModBase.SOUL_CANDLE.asBlock()
+				|| block instanceof ModCandleCakeBlock candleCakeBlock && candleCakeBlock.isSoulCandle();
+		boolean isEnderCandle = block == ModBase.ENDER_CANDLE.asBlock()
+				|| block instanceof ModCandleCakeBlock candleCakeBlock && candleCakeBlock.isEnderCandle();
+		boolean isNetherrackCandle = block == ModBase.NETHERRACK_CANDLE.asBlock()
+				|| block instanceof ModCandleCakeBlock candleCakeBlock && candleCakeBlock.isNetherrackCandle();
 		DefaultParticleType particles = null;
 		if (isSoulCandle) particles = ModBase.SMALL_SOUL_FLAME_PARTICLE;
 		else if (isEnderCandle) particles = ModBase.SMALL_ENDER_FLAME_PARTICLE;
+		else if (isNetherrackCandle) particles = ModBase.SMALL_NETHERITE_FLAME_PARTICLE;
 		if (particles != null) {
 			if (state.get(AbstractCandleBlock.LIT)) {
 				DefaultParticleType finalParticles = particles;

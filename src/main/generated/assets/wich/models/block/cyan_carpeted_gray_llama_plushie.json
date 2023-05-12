@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/llama",
+  "textures": {
+    "all": "wich:block/cyan_carpeted_gray_llama_plushie",
+    "particle": "wich:block/cyan_carpeted_gray_llama_plushie"
+  }
+}

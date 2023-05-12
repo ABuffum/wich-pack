@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:diamond_brick_slab_from_diamond_bricks_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_diamond_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wich:diamond_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:diamond_brick_slab_from_diamond_bricks_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_diamond_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

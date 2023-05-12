@@ -1,0 +1,23 @@
+{
+  "multipart": [
+	{
+	  "apply": { "model": "wich:block/bone_row_post" }
+	},
+	{
+	  "apply": { "model": "wich:block/bone_row_side" },
+	  "when": { "north": "true" }
+	},
+	{
+	  "apply": { "model": "wich:block/bone_row_side", "y": 90 },
+	  "when": { "east": "true" }
+	},
+	{
+	  "apply": { "model": "wich:block/bone_row_side_alt" },
+	  "when": { "south": "true" }
+	},
+	{
+	  "apply": { "model": "wich:block/bone_row_side_alt", "y": 90 },
+	  "when": { "west": "true" }
+	}
+  ]
+}

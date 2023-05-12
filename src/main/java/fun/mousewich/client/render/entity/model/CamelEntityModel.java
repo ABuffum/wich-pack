@@ -4,7 +4,7 @@ import fun.mousewich.client.render.entity.animation.Animation;
 import fun.mousewich.client.render.entity.animation.AnimationHelper;
 import fun.mousewich.client.render.entity.animation.AnimationState;
 import fun.mousewich.client.render.entity.animation.CamelAnimations;
-import fun.mousewich.entity.camel.CamelEntity;
+import fun.mousewich.entity.passive.camel.CamelEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
@@ -12,8 +12,6 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.HorseBaseEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
 

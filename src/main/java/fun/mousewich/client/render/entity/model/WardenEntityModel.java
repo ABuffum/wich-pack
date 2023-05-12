@@ -2,7 +2,7 @@ package fun.mousewich.client.render.entity.model;
 
 import com.google.common.collect.ImmutableList;
 import fun.mousewich.client.render.entity.animation.*;
-import fun.mousewich.entity.warden.WardenEntity;
+import fun.mousewich.entity.hostile.warden.WardenEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;

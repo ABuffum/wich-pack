@@ -1,0 +1,8 @@
+{
+	"parent": "wich:block/_template_row_side",
+	"textures": {
+		"side": "wich:block/sugar_cane_row",
+		"top": "wich:block/sugar_cane_row_top",
+		"particle": "wich:block/sugar_cane_row"
+	}
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:granite_tiles"
+  },
+  "result": "wich:granite_tile_wall",
+  "count": 1
+}

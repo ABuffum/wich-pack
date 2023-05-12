@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_glass_pane_side_alt",
+  "textures": {
+    "pane": "wich:block/blood_block",
+    "edge": "wich:block/blood_pane_top"
+  }
+}

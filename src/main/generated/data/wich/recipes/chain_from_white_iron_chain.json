@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "wich:white_iron_chain"
+      "item": "wich:iron_chain"
     },
     {
       "item": "minecraft:black_dye"

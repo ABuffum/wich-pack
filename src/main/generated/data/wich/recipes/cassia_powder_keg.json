@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:cassia_barrel"
+    },
+    {
+      "item": "wich:gunpowder_block"
+    }
+  ],
+  "result": {
+    "item": "wich:cassia_powder_keg"
+  }
+}

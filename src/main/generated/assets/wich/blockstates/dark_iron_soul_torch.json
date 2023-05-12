@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_dark_iron_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/dark_iron_soul_torch"
+    }
+  }
+}

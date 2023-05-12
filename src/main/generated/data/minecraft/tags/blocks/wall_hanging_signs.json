@@ -1,6 +1,28 @@
 {
   "replace": false,
   "values": [
+    "wich:dried_bamboo_wall_hanging_sign",
+    "minecraft:jungle_wall_hanging_sign",
+    "minecraft:warped_wall_hanging_sign",
+    "minecraft:cherry_wall_hanging_sign",
+    "wich:blue_mushroom_wall_hanging_sign",
+    "minecraft:crimson_wall_hanging_sign",
+    "minecraft:dark_oak_wall_hanging_sign",
+    "wich:brown_mushroom_wall_hanging_sign",
+    "minecraft:birch_wall_hanging_sign",
+    "wich:red_mushroom_wall_hanging_sign",
+    "minecraft:acacia_wall_hanging_sign",
+    "minecraft:mangrove_wall_hanging_sign",
+    "minecraft:oak_wall_hanging_sign",
+    "wich:dogwood_wall_hanging_sign",
+    "wich:cassia_wall_hanging_sign",
+    "minecraft:spruce_wall_hanging_sign",
+    "minecraft:bamboo_wall_hanging_sign",
+    "wich:charred_wall_hanging_sign",
+    "wich:gilded_wall_hanging_sign",
+    "wich:sugar_cane_wall_hanging_sign",
+    "wich:hay_wall_hanging_sign",
+    "wich:mushroom_stem_wall_hanging_sign",
     "minecraft:oak_wall_hanging_sign",
     "minecraft:spruce_wall_hanging_sign",
     "minecraft:birch_wall_hanging_sign",
@@ -12,6 +34,8 @@
     "minecraft:mangrove_wall_hanging_sign",
     "minecraft:bamboo_wall_hanging_sign",
     "minecraft:cherry_wall_hanging_sign",
-    "wich:charred_wall_hanging_sign"
+    "wich:charred_wall_hanging_sign",
+    "wich:cassia_wall_hanging_sign",
+    "wich:dogwood_wall_hanging_sign"
   ]
 }

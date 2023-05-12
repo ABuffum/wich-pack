@@ -1,10 +1,12 @@
 package fun.mousewich.container;
 
 import fun.mousewich.ModFactory;
+import fun.mousewich.gen.data.ModDatagen;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import fun.mousewich.gen.data.loot.DropTable;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowerPotBlock;
@@ -33,6 +35,10 @@ public class PottedBlockContainer implements IBlockItemContainer {
 		FlammableBlockRegistry.getDefaultInstance().add(this.asBlock(), burn, spread);
 		return this;
 	}
+	public PottedBlockContainer fuel(int fuelTime) {
+		FuelRegistry.INSTANCE.add(this.asItem(), fuelTime);
+		return this;
+	}
 	public PottedBlockContainer compostable(float chance) {
 		CompostingChanceRegistry.INSTANCE.add(this.asItem(), chance);
 		return this;
@@ -42,9 +48,12 @@ public class PottedBlockContainer implements IBlockItemContainer {
 		BlockLootGenerator.Drops.put(this.getPottedBlock(), DropTable.Potted(this.asItem()));
 		return this;
 	}
-	public PottedBlockContainer dropSelf() {
-		BlockLootGenerator.Drops.put(this.asBlock(), DropTable.Drops(this.asItem()));
+	public PottedBlockContainer drops(DropTable drops) { BlockLootGenerator.Drops.put(this.asBlock(), drops); return this; }
+	public PottedBlockContainer dropSelf() { drops(DropTable.Drops(this.asItem())); return dropPotted(); }
+	public PottedBlockContainer dropPotted() {
 		BlockLootGenerator.Drops.put(this.getPottedBlock(), DropTable.Potted(this.asItem()));
 		return this;
 	}
+
+	public PottedBlockContainer pottedModel() { ModDatagen.Cache.Model.POTTED.add(this); return this; }
 }

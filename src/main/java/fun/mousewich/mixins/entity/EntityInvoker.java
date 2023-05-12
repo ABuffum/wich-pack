@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Entity.class)
 public interface EntityInvoker {
 	@Invoker("getSplashSound")
-	public SoundEvent getSplashSoundInvoker();
+	SoundEvent getSplashSoundInvoker();
 	@Invoker("getHighSpeedSplashSound")
-	public SoundEvent getHighSpeedSplashSoundInvoker();
+	SoundEvent getHighSpeedSplashSoundInvoker();
 }

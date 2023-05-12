@@ -1,11 +1,10 @@
 {
   "powers": [
-	"ryft:breathe_in_water",
 	"ryft:medium_doll_sized",
-	"wich:suffocation_immunity",
+	"wich:no_lungs",
 	"ryft:stiff_joints",
 	"ryft:porcelain_skin",
-	"ryft:rose_identified_sounds"
+	"ryft:identified_sounds/rose"
   ],
   "name": "Bigger Doll",
   "description": "The taller one",

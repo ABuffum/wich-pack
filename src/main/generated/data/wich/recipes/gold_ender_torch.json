@@ -2,18 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "#",
-    "I"
+    "|",
+    "*"
   ],
   "key": {
     "#": {
-      "tag": "wich:ender_torches"
+      "tag": "minecraft:coals"
     },
-    "I": {
-      "item": "minecraft:gold_nugget"
+    "|": {
+      "item": "wich:gold_rod"
+    },
+    "*": {
+      "item": "minecraft:popped_chorus_fruit"
     }
   },
   "result": {
     "item": "wich:gold_ender_torch",
-    "count": 4
+    "count": 8
   }
 }

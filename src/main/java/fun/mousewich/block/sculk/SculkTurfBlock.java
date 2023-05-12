@@ -3,6 +3,7 @@ package fun.mousewich.block.sculk;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.block.MapColor;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -18,6 +19,7 @@ import java.util.Random;
 public class SculkTurfBlock extends Block implements Fertilizable {
 	private final Block block;
 	public Block getBlock() { return block; }
+	public SculkTurfBlock(Block block) { this(block, Block.Settings.copy(block).mapColor(MapColor.BLACK).ticksRandomly()); }
 	public SculkTurfBlock(Block block, Settings settings) {
 		super(settings);
 		this.block = block;
@@ -25,10 +27,7 @@ public class SculkTurfBlock extends Block implements Fertilizable {
 	}
 
 	private static final Map<Block, SculkTurfBlock> sculkTurf = new HashMap<>();
-	public static SculkTurfBlock getSculkTurf(Block block) {
-		if (sculkTurf.containsKey(block)) return sculkTurf.get(block);
-		return null;
-	}
+	public static SculkTurfBlock getSculkTurf(Block block) { return sculkTurf.getOrDefault(block, null); }
 
 
 	private static boolean stayAlive(BlockState state, WorldView world, BlockPos pos) {

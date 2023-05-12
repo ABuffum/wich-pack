@@ -1,13 +1,10 @@
 package fun.mousewich.client.render.entity.model;
 
 import com.google.common.collect.ImmutableList;
-import fun.mousewich.entity.ChestBoatEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
-import net.minecraft.client.render.entity.model.CompositeEntityModel;
-import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class ChestBoatEntityModel extends BoatEntityModel {

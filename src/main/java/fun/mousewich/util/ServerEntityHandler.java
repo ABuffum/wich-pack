@@ -1,7 +1,7 @@
 package fun.mousewich.util;
 
-import fun.mousewich.entity.allay.AllayEntity;
-import fun.mousewich.entity.warden.WardenEntity;
+import fun.mousewich.entity.passive.allay.AllayEntity;
+import fun.mousewich.entity.hostile.warden.WardenEntity;
 import fun.mousewich.event.ModEntityGameEventHandler;
 import fun.mousewich.mixins.server.ServerWorldAccessor;
 import net.minecraft.entity.Entity;
@@ -11,7 +11,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.entity.EntityHandler;
-import net.minecraft.world.event.listener.EntityGameEventHandler;
 
 public class ServerEntityHandler implements EntityHandler<Entity> {
 	public final ServerWorld world;

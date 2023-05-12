@@ -2,7 +2,7 @@ package fun.mousewich.block.sculk;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fun.mousewich.entity.warden.WardenEntity;
+import fun.mousewich.entity.hostile.warden.WardenEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;

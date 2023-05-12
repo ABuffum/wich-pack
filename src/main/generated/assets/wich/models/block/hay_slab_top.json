@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "wich:block/hay_planks",
+    "top": "wich:block/hay_planks",
+    "side": "wich:block/hay_planks"
+  }
+}

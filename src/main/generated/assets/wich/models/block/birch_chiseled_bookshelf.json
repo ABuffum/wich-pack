@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_chiseled_bookshelf_inventory",
+  "textures": {
+    "top": "wich:block/birch_chiseled_bookshelf_top",
+    "front": "wich:block/birch_chiseled_bookshelf_empty",
+    "side": "wich:block/birch_chiseled_bookshelf_side"
+  }
+}

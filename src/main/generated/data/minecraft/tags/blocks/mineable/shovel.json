@@ -3,6 +3,23 @@
   "values": [
     "minecraft:mud",
     "minecraft:muddy_mangrove_roots",
-    "wich:coarse_dirt_slab"
+    "wich:coarse_dirt_slab",
+    "wich:blaze_powder_block",
+    "wich:lime_dye_block",
+    "wich:pink_dye_block",
+    "wich:gray_dye_block",
+    "wich:blue_dye_block",
+    "wich:purple_dye_block",
+    "wich:black_dye_block",
+    "wich:cyan_dye_block",
+    "wich:light_blue_dye_block",
+    "wich:yellow_dye_block",
+    "wich:white_dye_block",
+    "wich:green_dye_block",
+    "wich:red_dye_block",
+    "wich:magenta_dye_block",
+    "wich:light_gray_dye_block",
+    "wich:brown_dye_block",
+    "wich:orange_dye_block"
   ]
 }

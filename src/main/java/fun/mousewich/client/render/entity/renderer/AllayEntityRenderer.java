@@ -2,7 +2,8 @@ package fun.mousewich.client.render.entity.renderer;
 
 import fun.mousewich.ModClient;
 import fun.mousewich.client.render.entity.model.AllayEntityModel;
-import fun.mousewich.entity.allay.AllayEntity;
+import fun.mousewich.client.render.entity.renderer.feature.HeldItemFeatureRenderer;
+import fun.mousewich.entity.passive.allay.AllayEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

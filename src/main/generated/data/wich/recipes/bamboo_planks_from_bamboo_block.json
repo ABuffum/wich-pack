@@ -7,10 +7,17 @@
       },
       {
         "item": "minecraft:stripped_bamboo_block"
+      },
+      {
+        "item": "wich:dried_bamboo_block"
+      },
+      {
+        "item": "wich:stripped_dried_bamboo_block"
       }
     ]
   ],
   "result": {
-    "item": "minecraft:bamboo_planks"
+    "item": "minecraft:bamboo_planks",
+    "count": 2
   }
 }

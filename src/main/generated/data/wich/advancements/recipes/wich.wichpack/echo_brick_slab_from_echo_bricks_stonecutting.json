@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:echo_brick_slab_from_echo_bricks_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_echo_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wich:echo_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:echo_brick_slab_from_echo_bricks_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_echo_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

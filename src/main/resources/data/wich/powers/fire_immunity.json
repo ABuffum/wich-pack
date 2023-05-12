@@ -1,20 +1,13 @@
 {
-  "type": "origins:multiple",
-  "in_fire": {
-    "type": "origins:invulnerability",
-    "damage_condition": { "type": "origins:name", "name": "inFire" }
-  },
-  "in_fire_player": {
-    "type": "origins:invulnerability",
-    "damage_condition": { "type": "origins:name", "name": "inFire.player" }
-  },
-  "on_fire": {
-    "type": "origins:invulnerability",
-    "damage_condition": { "type": "origins:name", "name": "onFire" }
-  },
-  "on_fire_player": {
-    "type": "origins:invulnerability",
-    "damage_condition": { "type": "origins:name", "name": "onFire.player" }
+  "type": "origins:invulnerability",
+  "damage_condition": {
+    "type": "origins:or",
+    "conditions": [
+      { "type": "origins:name", "name": "inFire" },
+      { "type": "origins:name", "name": "inFire.player" },
+      { "type": "origins:name", "name": "onFire" },
+      { "type": "origins:name", "name": "onFire.player" }
+    ]
   },
   "name": "Fire Immunity",
   "description": "You do not take damage from fire."

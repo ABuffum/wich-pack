@@ -8,7 +8,6 @@ import java.util.List;
 
 @Mixin(SubtitlesHud.class)
 public interface SubtitlesHudAccessor {
-
 	@Accessor("entries")
-	public abstract List<SubtitlesHud.SubtitleEntry> getEntries();
+	List<SubtitlesHud.SubtitleEntry> getEntries();
 }

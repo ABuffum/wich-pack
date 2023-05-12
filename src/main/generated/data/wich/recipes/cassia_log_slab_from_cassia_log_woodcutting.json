@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:cassia_log"
+  },
+  "result": "wich:cassia_log_slab",
+  "count": 2
+}

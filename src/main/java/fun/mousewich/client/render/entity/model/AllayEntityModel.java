@@ -1,6 +1,6 @@
 package fun.mousewich.client.render.entity.model;
 
-import fun.mousewich.entity.allay.AllayEntity;
+import fun.mousewich.entity.passive.allay.AllayEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;

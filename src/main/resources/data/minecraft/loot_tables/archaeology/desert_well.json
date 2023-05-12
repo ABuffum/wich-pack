@@ -6,8 +6,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:pottery_shard_arms_up",
-          "weight": 3
+          "name": "minecraft:arms_up_pottery_shard",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:brewer_pottery_shard",
+          "weight": 2
         },
         {
           "type": "minecraft:item",

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:cut_polished_andesite"
+    }
+  },
+  "result": {
+    "item": "wich:cut_polished_andesite_slab",
+    "count": 6
+  }
+}

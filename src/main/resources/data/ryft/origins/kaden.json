@@ -8,7 +8,7 @@
 	"origins:cat_vision",
 	"ryft:warm_body",
 	"origins:more_exhaustion",
-	"ryft:kaden_identified_sounds"
+	"ryft:identified_sounds/kaden"
   ],
   "name": "Kaden",
   "description": "We have high expectations for you.",

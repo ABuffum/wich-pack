@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "wich:smooth_dripstone_slab_from_smooth_dripstone_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_smooth_dripstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "wich:smooth_dripstone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "wich:smooth_dripstone_slab_from_smooth_dripstone_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_smooth_dripstone",
+      "has_the_recipe"
+    ]
+  ]
+}

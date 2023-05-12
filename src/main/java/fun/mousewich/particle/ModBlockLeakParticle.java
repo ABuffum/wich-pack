@@ -98,23 +98,73 @@ public class ModBlockLeakParticle extends SpriteBillboardParticle {
 		}
 	}
 
-	private static ModBlockLeakParticle setCherryLeavesColor(ModBlockLeakParticle particle) {
-		particle.setColor(0.937f, 0.655f, 0.804f);
-		return particle;
+	@Environment(EnvType.CLIENT)
+	public static class FallingDripstoneMudFactory implements ParticleFactory<DefaultParticleType> {
+		protected final SpriteProvider spriteProvider;
+		public FallingDripstoneMudFactory(SpriteProvider spriteProvider) { this.spriteProvider = spriteProvider; }
+		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+			ModBlockLeakParticle blockLeakParticle = new ModBlockLeakParticle.Dripping(clientWorld, d, e, f, ModBase.STILL_MUD_FLUID, ModBase.FALLING_DRIPSTONE_MUD);
+			blockLeakParticle.setColor(0.25F, 0.125F, 0F);
+			blockLeakParticle.setSprite(this.spriteProvider);
+			return blockLeakParticle;
+		}
 	}
 
-	public static SpriteBillboardParticle createDrippingCherryLeaves(DefaultParticleType ignoredType, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-		return setCherryLeavesColor(new Dripping(world, x, y, z, Fluids.EMPTY, ModBase.FALLING_CHERRY_LEAVES_PARTICLE));
+	@Environment(EnvType.CLIENT)
+	public static class FallingMudFactory implements ParticleFactory<DefaultParticleType> {
+		protected final SpriteProvider spriteProvider;
+		public FallingMudFactory(SpriteProvider spriteProvider) { this.spriteProvider = spriteProvider; }
+		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+			ModBlockLeakParticle blockLeakParticle = new ModBlockLeakParticle.ContinuousFalling(clientWorld, d, e, f, ModBase.STILL_MUD_FLUID, ModBase.MUD_SPLASH);
+			blockLeakParticle.setColor(0.25F, 0.125F, 0F);
+			blockLeakParticle.setSprite(this.spriteProvider);
+			return blockLeakParticle;
+		}
+	}
+	@Environment(EnvType.CLIENT)
+	public static class DrippingMudFactory implements ParticleFactory<DefaultParticleType> {
+		protected final SpriteProvider spriteProvider;
+		public DrippingMudFactory(SpriteProvider spriteProvider) { this.spriteProvider = spriteProvider; }
+		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+			ModBlockLeakParticle blockLeakParticle = new ModBlockLeakParticle.Dripping(clientWorld, d, e, f, ModBase.STILL_MUD_FLUID, ModBase.FALLING_MUD);
+			blockLeakParticle.setColor(0.25F, 0.125F, 0F);
+			blockLeakParticle.setSprite(this.spriteProvider);
+			return blockLeakParticle;
+		}
 	}
 
-	public static SpriteBillboardParticle createFallingCherryLeaves(DefaultParticleType ignoredType, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-		ContinuousFalling continuousFalling = new ContinuousFalling(world, x, y, z, Fluids.EMPTY, ModBase.LANDING_CHERRY_LEAVES_PARTICLE);
-		continuousFalling.gravityStrength = 0.005f;
-		return setCherryLeavesColor(continuousFalling);
+	@Environment(EnvType.CLIENT)
+	public static class FallingDripstoneBloodFactory implements ParticleFactory<DefaultParticleType> {
+		protected final SpriteProvider spriteProvider;
+		public FallingDripstoneBloodFactory(SpriteProvider spriteProvider) { this.spriteProvider = spriteProvider; }
+		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+			ModBlockLeakParticle blockLeakParticle = new ModBlockLeakParticle.Dripping(clientWorld, d, e, f, ModBase.STILL_BLOOD_FLUID, ModBase.FALLING_DRIPSTONE_BLOOD);
+			blockLeakParticle.setColor(1F, 0F, 0F);
+			blockLeakParticle.setSprite(this.spriteProvider);
+			return blockLeakParticle;
+		}
 	}
-
-	public static SpriteBillboardParticle createLandingCherryLeaves(DefaultParticleType ignoredType, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-		return setCherryLeavesColor(new Landing(world, x, y, z, Fluids.EMPTY));
+	@Environment(EnvType.CLIENT)
+	public static class FallingBloodFactory implements ParticleFactory<DefaultParticleType> {
+		protected final SpriteProvider spriteProvider;
+		public FallingBloodFactory(SpriteProvider spriteProvider) { this.spriteProvider = spriteProvider; }
+		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+			ModBlockLeakParticle blockLeakParticle = new ModBlockLeakParticle.ContinuousFalling(clientWorld, d, e, f, ModBase.STILL_BLOOD_FLUID, ModBase.BLOOD_SPLASH);
+			blockLeakParticle.setColor(1F, 0F, 0F);
+			blockLeakParticle.setSprite(this.spriteProvider);
+			return blockLeakParticle;
+		}
+	}
+	@Environment(EnvType.CLIENT)
+	public static class DrippingBloodFactory implements ParticleFactory<DefaultParticleType> {
+		protected final SpriteProvider spriteProvider;
+		public DrippingBloodFactory(SpriteProvider spriteProvider) { this.spriteProvider = spriteProvider; }
+		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+			ModBlockLeakParticle blockLeakParticle = new ModBlockLeakParticle.Dripping(clientWorld, d, e, f, ModBase.STILL_BLOOD_FLUID, ModBase.FALLING_BLOOD);
+			blockLeakParticle.setColor(1F, 0F, 0F);
+			blockLeakParticle.setSprite(this.spriteProvider);
+			return blockLeakParticle;
+		}
 	}
 
 	@Environment(value= EnvType.CLIENT)

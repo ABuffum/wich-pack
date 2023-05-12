@@ -5,6 +5,7 @@ import fun.mousewich.ModBase;
 import fun.mousewich.block.sculk.SculkShriekerBlock;
 import fun.mousewich.block.sculk.SculkSpreadManager;
 import fun.mousewich.block.sculk.SculkSpreadable;
+import fun.mousewich.gen.feature.config.SculkPatchFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

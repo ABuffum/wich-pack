@@ -13,7 +13,5 @@ public class VexEntityModelMixin {
 	 * @reason new vex renderer from 1.20
 	 */
 	@Overwrite()
-	public static TexturedModelData getTexturedModelData() {
-		return ModVexEntityModel.getTexturedModelData();
-	}
+	public static TexturedModelData getTexturedModelData() { return ModVexEntityModel.getTexturedModelData(); }
 }

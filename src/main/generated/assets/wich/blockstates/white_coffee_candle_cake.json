@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/white_coffee_candle_cake"
+    },
+    "lit=true": {
+      "model": "wich:block/white_coffee_candle_cake_lit"
+    }
+  }
+}

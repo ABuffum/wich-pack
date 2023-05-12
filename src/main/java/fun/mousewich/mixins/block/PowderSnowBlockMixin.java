@@ -1,7 +1,7 @@
 package fun.mousewich.mixins.block;
 
 import fun.mousewich.ModBase;
-import fun.mousewich.origins.powers.WalkOnPowderSnowPower;
+import fun.mousewich.origins.power.WalkOnPowderSnowPower;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.block.PowderSnowBlock;
 import net.minecraft.entity.Entity;

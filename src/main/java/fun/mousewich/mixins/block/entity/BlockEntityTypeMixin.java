@@ -1,13 +1,12 @@
 package fun.mousewich.mixins.block.entity;
 
 import fun.mousewich.ModBase;
-import fun.mousewich.block.basic.ModBarrelBlock;
-import fun.mousewich.block.basic.ModBedBlock;
-import fun.mousewich.block.basic.ModCampfireBlock;
-import fun.mousewich.block.basic.ModLecternBlock;
+import fun.mousewich.block.basic.*;
+import fun.mousewich.block.container.ChiseledBookshelfBlock;
+import fun.mousewich.block.dust.Brushable;
+import fun.mousewich.block.dust.BrushableEntity;
 import fun.mousewich.block.sign.HangingSignBlock;
 import fun.mousewich.block.sign.WallHangingSignBlock;
-import fun.mousewich.container.BedContainer;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +26,9 @@ public class BlockEntityTypeMixin {
 				if (block instanceof WallHangingSignBlock) cir.setReturnValue(true);
 			}
 		}
+		else if (BlockEntityType.BEEHIVE.equals(this)) {
+			if (block instanceof ModBeehiveBlock) cir.setReturnValue(true);
+		}
 		else if (BlockEntityType.BED.equals(this)) {
 			if (block instanceof ModBedBlock) cir.setReturnValue(true);
 		}
@@ -38,6 +40,12 @@ public class BlockEntityTypeMixin {
 		}
 		else if (BlockEntityType.LECTERN.equals(this)) {
 			if (block instanceof ModLecternBlock) cir.setReturnValue(true);
+		}
+		else if (ModBase.CHISELED_BOOKSHELF_ENTITY.equals(this)) {
+			if (block instanceof ChiseledBookshelfBlock) cir.setReturnValue(true);
+		}
+		else if (this instanceof BrushableEntity) {
+			if (block instanceof Brushable) cir.setReturnValue(true);
 		}
 	}
 }

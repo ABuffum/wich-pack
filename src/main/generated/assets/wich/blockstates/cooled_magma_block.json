@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "wich:block/cooled_magma_block"
+    }
+  }
+}

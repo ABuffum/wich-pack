@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "B"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:carved_melon"
+    },
+    "B": {
+      "tag": "wich:torches"
+    }
+  },
+  "result": {
+    "item": "wich:melon_lantern"
+  }
+}

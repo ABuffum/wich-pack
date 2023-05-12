@@ -5,7 +5,7 @@
 	"group": "undead"
   },
   "modifier": {
-	"name": "Smite damage",
+	"name": "Smiting fists power damage",
 	"operation": "addition",
 	"value": 2.5
   },

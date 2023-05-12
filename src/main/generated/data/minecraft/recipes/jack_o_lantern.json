@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "#",
-    "T"
+    "B"
   ],
   "key": {
     "#": {
       "item": "minecraft:carved_pumpkin"
     },
-    "T": {
+    "B": {
       "tag": "wich:torches"
     }
   },

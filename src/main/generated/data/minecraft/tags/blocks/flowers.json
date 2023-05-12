@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "minecraft:cherry_leaves",
-    "minecraft:pink_petals"
+    "minecraft:pink_petals",
+    "wich:pink_dogwood_leaves",
+    "wich:pale_dogwood_leaves",
+    "wich:white_dogwood_leaves",
+    "wich:flowering_cassia_leaves"
   ]
 }

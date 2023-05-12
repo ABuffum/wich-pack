@@ -6,6 +6,7 @@
   "effects": [
 	{
 	  "effect": "minecraft:regeneration",
+	  "amplifier": 4,
 	  "is_ambient": true,
 	  "show_particles": false,
 	  "show_icon": true

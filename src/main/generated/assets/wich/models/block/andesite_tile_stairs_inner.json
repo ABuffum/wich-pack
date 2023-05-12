@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "wich:block/andesite_tiles",
+    "top": "wich:block/andesite_tiles",
+    "side": "wich:block/andesite_tiles"
+  }
+}

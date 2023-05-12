@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:dogwood_planks"
+    },
+    "S": {
+      "item": "wich:dogwood_slab"
+    }
+  },
+  "result": {
+    "item": "wich:dogwood_barrel"
+  }
+}

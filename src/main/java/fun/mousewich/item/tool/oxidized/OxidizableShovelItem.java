@@ -2,6 +2,7 @@ package fun.mousewich.item.tool.oxidized;
 
 import fun.mousewich.item.OxidizableItem;
 import fun.mousewich.item.tool.ModShovelItem;
+import fun.mousewich.material.ModToolMaterials;
 import fun.mousewich.util.OxidationScale;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.item.Item;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public class OxidizableShovelItem extends ModShovelItem implements OxidizableItem {
 	private final Oxidizable.OxidationLevel level;
+	public OxidizableShovelItem(Oxidizable.OxidationLevel level, ModToolMaterials material) { this(level, material, material.getShovelDamage(), material.getShovelSpeed()); }
 	public OxidizableShovelItem(Oxidizable.OxidationLevel level, ToolMaterial material, float attackDamage, float attackSpeed) {
 		super(material, attackDamage, attackSpeed);
 		this.level = level;

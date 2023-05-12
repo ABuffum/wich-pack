@@ -1,7 +1,7 @@
 package fun.mousewich.mixins.server;
 
 import fun.mousewich.entity.RideableInventory;
-import fun.mousewich.entity.camel.CamelEntity;
+import fun.mousewich.entity.passive.camel.CamelEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.JumpingMount;
 import net.minecraft.network.NetworkThreadUtils;

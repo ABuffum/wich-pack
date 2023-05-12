@@ -1,0 +1,7 @@
+{
+    "parent": "block/bamboo_small_leaves",
+    "textures": {
+        "texture": "wich:block/dried_bamboo_small_leaves",
+        "particle": "wich:block/dried_bamboo_small_leaves"
+    }
+}

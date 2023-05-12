@@ -1,6 +1,7 @@
 package fun.mousewich.client.render.entity.renderer;
 
 import fun.mousewich.client.render.entity.model.ModVexEntityModel;
+import fun.mousewich.client.render.entity.renderer.feature.HeldItemFeatureRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

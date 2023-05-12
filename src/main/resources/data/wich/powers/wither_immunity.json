@@ -1,23 +1,14 @@
 {
   "type": "origins:multiple",
-  "effect": {
-	"type": "origins:effect_immunity",
-	"effects": [
-	  "minecraft:wither"
-	]
-  },
-  "wither": {
+  "effect_immunity": { "type": "origins:effect_immunity", "effect": "minecraft:wither" },
+  "damage_immunity": {
 	"type": "origins:invulnerability",
 	"damage_condition": {
-	  "type": "origins:name",
-	  "name": "wither"
-	}
-  },
-  "player": {
-	"type": "origins:invulnerability",
-	"damage_condition": {
-	  "type": "origins:name",
-	  "name": "wither.player"
+	  "type": "origins:or",
+	  "conditions": [
+		{ "type": "origins:name", "name": "wither" },
+		{ "type": "origins:name", "name": "wither.player" }
+	  ]
 	}
   },
   "name": "Wither Immunity",

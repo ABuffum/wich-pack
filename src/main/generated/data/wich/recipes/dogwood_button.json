@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:dogwood_planks"
+    }
+  ],
+  "result": {
+    "item": "wich:dogwood_button"
+  }
+}

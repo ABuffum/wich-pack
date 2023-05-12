@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "wich:block/iron_bricks"
+    "wall": "wich:block/cut_iron"
   }
 }

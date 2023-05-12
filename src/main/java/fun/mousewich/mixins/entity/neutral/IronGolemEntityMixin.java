@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.entity.neutral;
 
-import fun.mousewich.origins.powers.MobHostilityPower;
+import fun.mousewich.origins.power.MobHostilityPower;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.GolemEntity;
@@ -17,6 +17,6 @@ public abstract class IronGolemEntityMixin extends GolemEntity implements Angera
 
 	@Inject(method="initGoals", at = @At("TAIL"))
 	protected void initGoals(CallbackInfo ci) {
-		this.targetSelector.add(3, MobHostilityPower.makeHostilityGoal(this, 10, true, false, EntityType.IRON_GOLEM));
+		this.targetSelector.add(3, MobHostilityPower.makeHostilityGoal(this, EntityType.IRON_GOLEM));
 	}
 }

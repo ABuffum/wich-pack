@@ -1,0 +1,4 @@
+{
+    "parent": "item/tooting_goat_horn",
+    "textures": { "layer0": "wich:item/wind_horn" }
+}

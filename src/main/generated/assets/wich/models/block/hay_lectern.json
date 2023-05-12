@@ -1,0 +1,10 @@
+{
+  "parent": "wich:block/_template_lectern",
+  "textures": {
+    "bottom": "wich:block/hay_planks",
+    "base": "wich:block/hay_lectern_base",
+    "front": "wich:block/hay_lectern_front",
+    "sides": "wich:block/hay_lectern_sides",
+    "top": "wich:block/hay_lectern_top"
+  }
+}

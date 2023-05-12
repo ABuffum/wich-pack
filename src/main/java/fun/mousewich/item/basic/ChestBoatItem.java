@@ -1,7 +1,7 @@
 package fun.mousewich.item.basic;
 
-import fun.mousewich.entity.ChestBoatEntity;
-import fun.mousewich.entity.ModChestBoatEntity;
+import fun.mousewich.entity.vehicle.ChestBoatEntity;
+import fun.mousewich.entity.vehicle.ModChestBoatEntity;
 import fun.mousewich.entity.vehicle.ModBoatType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

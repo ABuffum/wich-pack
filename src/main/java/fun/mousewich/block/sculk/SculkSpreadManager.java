@@ -6,7 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fun.mousewich.ModBase;
-import fun.mousewich.block.MultifaceGrowthBlock;
+import fun.mousewich.entity.ModNbtKeys;
 import fun.mousewich.event.ModWorldEvents;
 import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.sound.ModSoundEvents;
@@ -17,7 +17,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -26,18 +25,12 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public class SculkSpreadManager {
-	public static final int field_37609 = 24;
-	public static final int field_37610 = 1000;
-	public static final float field_37611 = 0.5F;
-	private static final int field_37613 = 32;
-	public static final int field_37612 = 11;
 	final boolean worldGen;
 	private final TagKey<Block> replaceableTag;
 	private final int extraBlockChance;
@@ -68,11 +61,11 @@ public class SculkSpreadManager {
 	public List<SculkSpreadManager.Cursor> getCursors() { return this.cursors; }
 	public void clearCursors() { this.cursors.clear(); }
 	public void readNbt(NbtCompound nbt) {
-		if (nbt.contains("cursors", 9)) {
+		if (nbt.contains(ModNbtKeys.CURSORS, 9)) {
 			this.cursors.clear();
 			List<SculkSpreadManager.Cursor> list = SculkSpreadManager.Cursor.CODEC
 					.listOf()
-					.parse(new Dynamic<>(NbtOps.INSTANCE, nbt.getList("cursors", 10)))
+					.parse(new Dynamic<>(NbtOps.INSTANCE, nbt.getList(ModNbtKeys.CURSORS, 10)))
 					.resultOrPartial(ModBase.LOGGER::error)
 					.orElseGet(ArrayList::new);
 			int i = Math.min(list.size(), 32);
@@ -84,7 +77,7 @@ public class SculkSpreadManager {
 				.listOf()
 				.encodeStart(NbtOps.INSTANCE, this.cursors)
 				.resultOrPartial(ModBase.LOGGER::error)
-				.ifPresent(cursorsNbt -> nbt.put("cursors", cursorsNbt));
+				.ifPresent(cursorsNbt -> nbt.put(ModNbtKeys.CURSORS, cursorsNbt));
 	}
 	public void spread(BlockPos pos, int charge) {
 		while (charge > 0) {

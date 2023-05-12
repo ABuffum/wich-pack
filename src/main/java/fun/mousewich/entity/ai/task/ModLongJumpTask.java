@@ -2,6 +2,7 @@ package fun.mousewich.entity.ai.task;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import fun.mousewich.ModBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -53,7 +54,7 @@ public class ModLongJumpTask <E extends MobEntity> extends Task<E> {
 	}
 
 	public ModLongJumpTask(UniformIntProvider cooldownRange, int verticalRange, int horizontalRange, float maxRange, Function<E, SoundEvent> entityToSound, Predicate<BlockState> jumpToPredicate) {
-		super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryModuleState.REGISTERED, MemoryModuleType.LONG_JUMP_COOLING_DOWN, MemoryModuleState.VALUE_ABSENT, MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryModuleState.VALUE_ABSENT), 200);
+		super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryModuleState.REGISTERED, MemoryModuleType.LONG_JUMP_COOLING_DOWN, MemoryModuleState.VALUE_ABSENT, MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryModuleState.VALUE_ABSENT), RUN_TIME);
 		this.cooldownRange = cooldownRange;
 		this.verticalRange = verticalRange;
 		this.horizontalRange = horizontalRange;
@@ -64,7 +65,11 @@ public class ModLongJumpTask <E extends MobEntity> extends Task<E> {
 
 	@Override
 	protected boolean shouldRun(ServerWorld serverWorld, MobEntity mobEntity) {
-		boolean bl = mobEntity.isOnGround() && !mobEntity.isTouchingWater() && !mobEntity.isInLava() && !serverWorld.getBlockState(mobEntity.getBlockPos()).isOf(Blocks.HONEY_BLOCK);
+		boolean bl = mobEntity.isOnGround()
+				&& !mobEntity.isTouchingWater()
+				&& !mobEntity.isInLava()
+				&& !mobEntity.hasStatusEffect(ModBase.STICKY_EFFECT)
+				&& !serverWorld.getBlockState(mobEntity.getBlockPos()).isOf(Blocks.HONEY_BLOCK);
 		if (!bl) mobEntity.getBrain().remember(MemoryModuleType.LONG_JUMP_COOLING_DOWN, this.cooldownRange.get(serverWorld.random) / 2);
 		return bl;
 	}
@@ -82,7 +87,7 @@ public class ModLongJumpTask <E extends MobEntity> extends Task<E> {
 	@Override
 	protected void run(ServerWorld serverWorld, E mobEntity, long l) {
 		this.lastTarget = null;
-		this.cooldown = 20;
+		this.cooldown = MAX_COOLDOWN;
 		this.lastPos = Optional.of(mobEntity.getPos());
 		BlockPos blockPos = mobEntity.getBlockPos();
 		int i = blockPos.getX();
@@ -94,7 +99,7 @@ public class ModLongJumpTask <E extends MobEntity> extends Task<E> {
 	@Override
 	protected void keepRunning(ServerWorld serverWorld, E mobEntity, long l) {
 		if (this.lastTarget != null) {
-			if (l - this.targetTime >= 40L) {
+			if (l - this.targetTime >= TARGET_RETAIN_TIME) {
 				mobEntity.setYaw(mobEntity.bodyYaw);
 				mobEntity.setNoDrag(true);
 				double d = this.lastTarget.length();
@@ -118,7 +123,7 @@ public class ModLongJumpTask <E extends MobEntity> extends Task<E> {
 			if (optional.isEmpty() || !this.canJumpTo(serverWorld, mobEntity, blockPos = optional.get().getPos()) || (vec3d2 = this.getRammingVelocity(mobEntity, Vec3d.ofCenter(blockPos))) == null) continue;
 			mobEntity.getBrain().remember(MemoryModuleType.LOOK_TARGET, new BlockPosLookTarget(blockPos));
 			EntityNavigation entityNavigation = mobEntity.getNavigation();
-			Path path = entityNavigation.findPathTo(blockPos, 0, 8);
+			Path path = entityNavigation.findPathTo(blockPos, 0, PATHING_DISTANCE);
 			if (path != null && path.reachesTarget()) continue;
 			this.lastTarget = vec3d2;
 			this.targetTime = l;
@@ -169,7 +174,6 @@ public class ModLongJumpTask <E extends MobEntity> extends Task<E> {
 		double g = Math.sqrt(e);
 		double h = vec3d3.y;
 		double i = Math.sin(2.0f * f);
-		double j = 0.08;
 		double k = Math.pow(Math.cos(f), 2.0);
 		double l = Math.sin(f);
 		double m = Math.cos(f);

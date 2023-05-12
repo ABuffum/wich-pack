@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:stripped_cassia_log"
+    }
+  },
+  "result": {
+    "item": "wich:stripped_cassia_log_slab",
+    "count": 6
+  }
+}

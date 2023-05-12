@@ -40,4 +40,8 @@ public class TorchflowerBlock extends CropBlock {
 	}
 	@Override
 	protected int getGrowthAmount(World world) { return super.getGrowthAmount(world) / 3; }
+
+	public static float GetAvailableMoisture(Block block, BlockView world, BlockPos pos) {
+		return CropBlock.getAvailableMoisture(block, world, pos);
+	}
 }

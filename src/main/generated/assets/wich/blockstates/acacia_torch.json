@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/unlit_acacia_torch"
+    },
+    "lit=true": {
+      "model": "wich:block/acacia_torch"
+    }
+  }
+}

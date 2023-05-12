@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "*",
     "#",
-    "I"
+    "|",
+    "*"
   ],
   "key": {
     "#": {
+      "tag": "minecraft:coals"
+    },
+    "|": {
       "item": "minecraft:bone"
     },
     "*": {
-      "tag": "minecraft:coals"
-    },
-    "I": {
       "item": "minecraft:popped_chorus_fruit"
     }
   },

@@ -1,6 +1,7 @@
 package fun.mousewich.block.mangrove;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.block.ModProperties;
 import fun.mousewich.gen.feature.MangroveSaplingGenerator;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
@@ -26,7 +27,7 @@ import java.util.Random;
 public class PropaguleBlock extends PlantBlock implements Fertilizable, Waterloggable {
 	public static final IntProperty STAGE = Properties.STAGE;
 	private final MangroveSaplingGenerator generator;
-	public static final IntProperty AGE = IntProperty.of("age", 0, 4);
+	public static final IntProperty AGE = ModProperties.AGE_4;
 	private static final VoxelShape[] SHAPES = new VoxelShape[] {
 			Block.createCuboidShape(7.0, 13.0, 7.0, 9.0, 16.0, 9.0),
 			Block.createCuboidShape(7.0, 10.0, 7.0, 9.0, 16.0, 9.0),

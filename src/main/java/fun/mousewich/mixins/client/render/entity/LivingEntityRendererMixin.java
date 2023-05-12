@@ -1,7 +1,7 @@
 package fun.mousewich.mixins.client.render.entity;
 
-import fun.mousewich.origins.powers.PowersUtil;
-import fun.mousewich.origins.powers.PreventShiveringPower;
+import fun.mousewich.origins.power.PowersUtil;
+import fun.mousewich.origins.power.PreventShiveringPower;
 import io.github.apace100.apoli.power.ShakingPower;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;

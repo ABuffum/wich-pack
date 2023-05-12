@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "minecraft:stripped_spruce_wood"
+  },
+  "result": "wich:stripped_spruce_wood_slab",
+  "count": 2
+}

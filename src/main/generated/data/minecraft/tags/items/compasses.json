@@ -2,6 +2,6 @@
   "replace": false,
   "values": [
     "minecraft:compass",
-    "wich:recovery_compass"
+    "minecraft:recovery_compass"
   ]
 }

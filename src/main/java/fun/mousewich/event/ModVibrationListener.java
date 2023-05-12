@@ -2,13 +2,15 @@ package fun.mousewich.event;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fun.mousewich.ModBase;
 import fun.mousewich.advancement.ModCriteria;
 import fun.mousewich.gen.data.tag.ModBlockTags;
-import fun.mousewich.origins.powers.PowersUtil;
-import fun.mousewich.origins.powers.SoftStepsPower;
-import fun.mousewich.util.SculkUtils;
+import fun.mousewich.origins.power.PowersUtil;
+import fun.mousewich.origins.power.SoftStepsPower;
+import fun.mousewich.util.SculkUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.particle.VibrationParticleEffect;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -89,7 +91,7 @@ public class ModVibrationListener implements GameEventListener {
 		if (world instanceof ServerWorld) {
 			if (!this.callback.accepts((ServerWorld)world, this, new BlockPos(vec3d), event, entity, pos)) return false;
 		}
-		if (SculkUtils.isOccluded(world, vec3d, vec3d2)) return false;
+		if (SculkUtil.isOccluded(world, vec3d, vec3d2)) return false;
 		if (world instanceof ServerWorld) this.listen((ServerWorld)world, event, vec3d, vec3d2, entity);
 		return true;
 	}
@@ -116,6 +118,7 @@ public class ModVibrationListener implements GameEventListener {
 				}
 				if (entity.occludeVibrationSignals()) return false;
 				if (PowersUtil.Active(entity, SoftStepsPower.class)) return false;
+				if (entity instanceof LivingEntity living && living.hasStatusEffect(ModBase.SILENT_EFFECT)) return false;
 			}
 			BlockState state = world.getBlockState(pos);
 			if (state != null) return !state.isIn(ModBlockTags.DAMPENS_VIBRATIONS);
@@ -158,4 +161,12 @@ public class ModVibrationListener implements GameEventListener {
 			return this.getEntity(world).filter(entity -> entity instanceof ProjectileEntity).map(entity -> (ProjectileEntity)entity).map(ProjectileEntity::getOwner).or(() -> Optional.ofNullable(this.projectileOwnerUuid).map(world::getEntity));
 		}
 	}
+
+	public static final GameEvent[] field_43323 = new GameEvent[]{
+			ModGameEvent.RESONATE_1, ModGameEvent.RESONATE_2, ModGameEvent.RESONATE_3, ModGameEvent.RESONATE_4,
+			ModGameEvent.RESONATE_5, ModGameEvent.RESONATE_6, ModGameEvent.RESONATE_7, ModGameEvent.RESONATE_8,
+			ModGameEvent.RESONATE_9, ModGameEvent.RESONATE_10, ModGameEvent.RESONATE_11, ModGameEvent.RESONATE_12,
+			ModGameEvent.RESONATE_13, ModGameEvent.RESONATE_14, ModGameEvent.RESONATE_15
+	};
+	public static GameEvent method_49881(int i) { return field_43323[i - 1]; }
 }

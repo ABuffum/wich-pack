@@ -1,7 +1,7 @@
 package fun.mousewich.entity.ai.sensor;
 
 import fun.mousewich.entity.ai.ModMemoryModules;
-import fun.mousewich.entity.frog.FrogEntity;
+import fun.mousewich.entity.passive.frog.FrogEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.sensor.NearestVisibleLivingEntitySensor;

@@ -2,15 +2,14 @@ package fun.mousewich.mixins.entity.passive;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.entity.Pouchable;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.brain.Brain;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -26,11 +25,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RabbitEntity.class)
-public abstract class RabbitEntityMixin extends AnimalEntity implements Pouchable {
+public abstract class RabbitEntityMixin extends AnimalEntity implements Pouchable, EntityWithBloodType {
 	@Shadow public abstract int getRabbitType();
-
-	@Shadow private int moreCarrotTicks;
-
+	@Shadow int moreCarrotTicks;
 	@Shadow public abstract void setRabbitType(int rabbitType);
 
 	protected RabbitEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -74,11 +71,9 @@ public abstract class RabbitEntityMixin extends AnimalEntity implements Pouchabl
 	@Override
 	public boolean canImmediatelyDespawn(double distanceSquared) { return !this.isFromPouch() && !this.hasCustomName(); }
 	@Inject(method="writeCustomDataToNbt", at=@At("TAIL"))
-	public void WriteCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-		nbt.putBoolean("FromPouch", this.isFromPouch());
-	}
+	public void WriteCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) { nbt.putBoolean("FromPouch", this.isFromPouch()); }
 	@Inject(method="readCustomDataFromNbt", at=@At("TAIL"))
-	public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-		this.setFromPouch(nbt.getBoolean("FromPouch"));
-	}
+	public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) { this.setFromPouch(nbt.getBoolean("FromPouch")); }
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.RABBIT_BLOOD_TYPE; }
 }

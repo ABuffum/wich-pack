@@ -11,6 +11,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 
+import net.minecraft.block.Oxidizable.OxidationLevel;
+
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -49,18 +51,18 @@ public class OxidationScale<T> {
 		Register(Items.CUT_COPPER_STAIRS, Items.EXPOSED_CUT_COPPER_STAIRS, Items.WEATHERED_CUT_COPPER_STAIRS, Items.OXIDIZED_CUT_COPPER_STAIRS);
 	}
 
-	public static MapColor getMapColor(Oxidizable.OxidationLevel level) {
-		if (level == Oxidizable.OxidationLevel.OXIDIZED) return MapColor.TEAL;
-		else if (level == Oxidizable.OxidationLevel.WEATHERED) return MapColor.DARK_AQUA;
-		else if (level == Oxidizable.OxidationLevel.EXPOSED) return MapColor.TERRACOTTA_LIGHT_GRAY;
+	public static MapColor getMapColor(OxidationLevel level) {
+		if (level == OxidationLevel.OXIDIZED) return MapColor.TEAL;
+		else if (level == OxidationLevel.WEATHERED) return MapColor.DARK_AQUA;
+		else if (level == OxidationLevel.EXPOSED) return MapColor.TERRACOTTA_LIGHT_GRAY;
 		else return MapColor.ORANGE;
 	}
 
 	public interface BlockSettingsSupplier {
-		AbstractBlock.Settings get(Oxidizable.OxidationLevel level);
+		AbstractBlock.Settings get(OxidationLevel level);
 	}
 
-	public static final Map<Block, Block> WAXED_BLOCKS = new HashMap<>(Map.<Block, Block>ofEntries(
+	public static final Map<Block, Block> WAXED_BLOCKS = new HashMap<>(Map.ofEntries(
 			entry(Blocks.COPPER_BLOCK, Blocks.WAXED_COPPER_BLOCK), entry(Blocks.EXPOSED_COPPER, Blocks.WAXED_EXPOSED_COPPER),
 			entry(Blocks.WEATHERED_COPPER, Blocks.WAXED_WEATHERED_COPPER), entry(Blocks.OXIDIZED_COPPER, Blocks.WAXED_OXIDIZED_COPPER),
 			entry(Blocks.CUT_COPPER, Blocks.WAXED_CUT_COPPER), entry(Blocks.EXPOSED_CUT_COPPER, Blocks.WAXED_EXPOSED_CUT_COPPER),
@@ -70,6 +72,16 @@ public class OxidationScale<T> {
 			entry(Blocks.CUT_COPPER_STAIRS, Blocks.WAXED_CUT_COPPER_STAIRS), entry(Blocks.EXPOSED_CUT_COPPER_STAIRS, Blocks.WAXED_EXPOSED_CUT_COPPER_STAIRS),
 			entry(Blocks.WEATHERED_CUT_COPPER_STAIRS, Blocks.WAXED_WEATHERED_CUT_COPPER_STAIRS), entry(Blocks.OXIDIZED_CUT_COPPER_STAIRS, Blocks.WAXED_OXIDIZED_CUT_COPPER_STAIRS)
 	));
+	public static final Map<Item, Item> WAXED_ITEMS = new HashMap<>(Map.ofEntries(
+			entry(Items.COPPER_BLOCK, Items.WAXED_COPPER_BLOCK), entry(Items.EXPOSED_COPPER, Items.WAXED_EXPOSED_COPPER),
+			entry(Items.WEATHERED_COPPER, Items.WAXED_WEATHERED_COPPER), entry(Items.OXIDIZED_COPPER, Items.WAXED_OXIDIZED_COPPER),
+			entry(Items.CUT_COPPER, Items.WAXED_CUT_COPPER), entry(Items.EXPOSED_CUT_COPPER, Items.WAXED_EXPOSED_CUT_COPPER),
+			entry(Items.WEATHERED_CUT_COPPER, Items.WAXED_WEATHERED_CUT_COPPER), entry(Items.OXIDIZED_CUT_COPPER, Items.WAXED_OXIDIZED_CUT_COPPER),
+			entry(Items.CUT_COPPER_SLAB, Items.WAXED_CUT_COPPER_SLAB), entry(Items.EXPOSED_CUT_COPPER_SLAB, Items.WAXED_EXPOSED_CUT_COPPER_SLAB),
+			entry(Items.WEATHERED_CUT_COPPER_SLAB, Items.WAXED_WEATHERED_CUT_COPPER_SLAB), entry(Items.OXIDIZED_CUT_COPPER_SLAB, Items.WAXED_OXIDIZED_CUT_COPPER_SLAB),
+			entry(Items.CUT_COPPER_STAIRS, Items.WAXED_CUT_COPPER_STAIRS), entry(Items.EXPOSED_CUT_COPPER_STAIRS, Items.WAXED_EXPOSED_CUT_COPPER_STAIRS),
+			entry(Items.WEATHERED_CUT_COPPER_STAIRS, Items.WAXED_WEATHERED_CUT_COPPER_STAIRS), entry(Items.OXIDIZED_CUT_COPPER_STAIRS, Items.WAXED_OXIDIZED_CUT_COPPER_STAIRS)
+	));
 	public static void RegisterWaxed(BlockContainer unwaxed, BlockContainer waxed) {
 		WAXED_BLOCKS.put(unwaxed.asBlock(), waxed.asBlock());
 	}
@@ -77,7 +89,6 @@ public class OxidationScale<T> {
 		WAXED_BLOCKS.put(unwaxed.asBlock(), waxed.asBlock());
 		WAXED_BLOCKS.put(unwaxed.getWallBlock(), waxed.getWallBlock());
 	}
-	public static final Map<Item, Item> WAXED_ITEMS = new HashMap<Item, Item>();
 	public static void RegisterWaxed(ItemConvertible unwaxed, ItemConvertible waxed) {
 		WAXED_ITEMS.put(unwaxed.asItem(), waxed.asItem());
 	}

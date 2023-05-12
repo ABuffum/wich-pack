@@ -24,17 +24,12 @@ public class CherryFoliagePlacer {
 	}
 
 	protected boolean isPositionInvalid(Random random, int dx, int y, int dz, int radius, boolean giantTrunk) {
-		int j;
-		int i;
 		if (giantTrunk) {
-			i = Math.min(Math.abs(dx), Math.abs(dx - 1));
-			j = Math.min(Math.abs(dz), Math.abs(dz - 1));
+			int i = Math.min(Math.abs(dx), Math.abs(dx - 1));
+			int j = Math.min(Math.abs(dz), Math.abs(dz - 1));
+			return this.isInvalidForLeaves(random, i, y, j, radius);
 		}
-		else {
-			i = Math.abs(dx);
-			j = Math.abs(dz);
-		}
-		return this.isInvalidForLeaves(random, i, y, j, radius);
+		else return this.isInvalidForLeaves(random, Math.abs(dx), y, Math.abs(dz), radius);
 	}
 	protected void generateSquare(TestableWorld world, BlockPlacer placer, Random random, BlockPos centerPos, int radius, int y, boolean giantTrunk) {
 		int i = giantTrunk ? 1 : 0;

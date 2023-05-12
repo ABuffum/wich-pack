@@ -1,0 +1,7 @@
+{
+    "parent": "item/handheld_rod",
+    "textures": {
+        "layer0": "wich:item/grappling_rod"
+    },
+    "overrides": [ { "predicate": { "cast": 1 }, "model": "wich:item/grappling_rod_cast" } ]
+}

@@ -1,6 +1,27 @@
 {
   "replace": false,
   "values": [
+    "wich:bamboo_barrel",
+    "wich:blue_mushroom_barrel",
+    "wich:dark_oak_barrel",
+    "wich:mangrove_barrel",
+    "wich:warped_barrel",
+    "wich:charred_barrel",
+    "wich:birch_barrel",
+    "wich:hay_barrel",
+    "wich:cassia_barrel",
+    "wich:cherry_barrel",
+    "wich:crimson_barrel",
+    "wich:brown_mushroom_barrel",
+    "wich:jungle_barrel",
+    "wich:mushroom_stem_barrel",
+    "wich:dogwood_barrel",
+    "wich:red_mushroom_barrel",
+    "wich:oak_barrel",
+    "wich:gilded_barrel",
+    "wich:sugar_cane_barrel",
+    "wich:acacia_barrel",
+    "wich:dried_bamboo_barrel",
     "minecraft:barrel",
     "wich:acacia_barrel",
     "wich:birch_barrel",
@@ -12,6 +33,8 @@
     "wich:bamboo_barrel",
     "wich:mangrove_barrel",
     "wich:cherry_barrel",
-    "wich:charred_barrel"
+    "wich:charred_barrel",
+    "wich:cassia_barrel",
+    "wich:dogwood_barrel"
   ]
 }

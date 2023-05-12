@@ -66,12 +66,13 @@ public class ModBiomeCreator {
 				.generationSettings(generationSettings.build()).build();
 	}
 
-	public static Biome createMangroveSwamp() {//RegistryEntry<PlacedFeature> grassDisk) {
+	public static Biome createMangroveSwamp() {
 		SpawnSettings.Builder builder = new SpawnSettings.Builder();
 		DefaultBiomeFeatures.addBatsAndMonsters(builder);
 		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 1, 1, 1));
 		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModBase.FROG_ENTITY, 10, 2, 5));
 		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(EntityType.TROPICAL_FISH, 25, 8, 8));
+		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(ModBase.PIRANHA_ENTITY, 5, 1, 5));
 		GenerationSettings.Builder builder2 = new GenerationSettings.Builder();
 		DefaultBiomeFeatures.addFossils(builder2);
 		addBasicFeatures(builder2);

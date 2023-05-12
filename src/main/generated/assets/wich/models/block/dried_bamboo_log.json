@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "wich:block/dried_bamboo_log_top",
+    "side": "wich:block/dried_bamboo_log"
+  }
+}

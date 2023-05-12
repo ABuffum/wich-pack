@@ -1,11 +1,17 @@
 package fun.mousewich.gen.data.tag;
 
 import fun.mousewich.event.ModGameEvent;
+import fun.mousewich.gen.data.ModDatagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.entity.EntityType;
 import net.minecraft.tag.GameEventTags;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.event.GameEvent;
+
+import java.util.Map;
+import java.util.Set;
 
 import static fun.mousewich.ModBase.NAMESPACE;
 
@@ -15,11 +21,17 @@ public class GameEventTagGenerator extends FabricTagProvider<GameEvent> {
 	}
 	@Override
 	protected void generateTags() {
-		getOrCreateTagBuilder(ModEventTags.ALLAY_CAN_LISTEN).add(ModGameEvent.NOTE_BLOCK_PLAY);
+		for (Map.Entry<TagKey<GameEvent>, Set<GameEvent>> entry : ModDatagen.Cache.Tag.GAME_EVENT_TAGS.entrySet()) {
+			getOrCreateTagBuilder(entry.getKey()).add(entry.getValue().toArray(GameEvent[]::new));
+			entry.getValue().clear();
+		}
+		ModDatagen.Cache.Tag.GAME_EVENT_TAGS.clear();
+
+		getOrCreateTagBuilder(ModGameEventTags.ALLAY_CAN_LISTEN).add(ModGameEvent.NOTE_BLOCK_PLAY);
 		getOrCreateTagBuilder(GameEventTags.IGNORE_VIBRATIONS_SNEAKING)
 				.add(GameEvent.HIT_GROUND, GameEvent.PROJECTILE_SHOOT, GameEvent.STEP, GameEvent.SWIM)
 				.add(ModGameEvent.ITEM_INTERACT_START, ModGameEvent.ITEM_INTERACT_FINISH);
-		getOrCreateTagBuilder(ModEventTags.SHRIEKER_CAN_LISTEN).add(ModGameEvent.SCULK_SENSOR_TENDRILS_CLICKING);
+		getOrCreateTagBuilder(ModGameEventTags.SHRIEKER_CAN_LISTEN).add(ModGameEvent.SCULK_SENSOR_TENDRILS_CLICKING);
 		getOrCreateTagBuilder(GameEventTags.VIBRATIONS)
 				.add(GameEvent.BLOCK_ATTACH, GameEvent.BLOCK_CHANGE, GameEvent.BLOCK_CLOSE, GameEvent.BLOCK_DESTROY)
 				.add(GameEvent.BLOCK_DETACH, GameEvent.BLOCK_OPEN, GameEvent.BLOCK_PLACE, ModGameEvent.BLOCK_ACTIVATE)
@@ -33,7 +45,7 @@ public class GameEventTagGenerator extends FabricTagProvider<GameEvent> {
 				.add(GameEvent.PISTON_CONTRACT, GameEvent.PISTON_EXTEND, GameEvent.PRIME_FUSE)
 				.add(GameEvent.PROJECTILE_LAND, GameEvent.PROJECTILE_SHOOT, GameEvent.SHEAR, GameEvent.SPLASH)
 				.add(GameEvent.STEP, GameEvent.SWIM, ModGameEvent.TELEPORT, GameEvent.FLAP);
-		getOrCreateTagBuilder(ModEventTags.WARDEN_CAN_LISTEN)
+		getOrCreateTagBuilder(ModGameEventTags.WARDEN_CAN_LISTEN)
 				.add(GameEvent.BLOCK_ATTACH, GameEvent.BLOCK_CHANGE, GameEvent.BLOCK_CLOSE, GameEvent.BLOCK_DESTROY)
 				.add(GameEvent.BLOCK_DETACH, GameEvent.BLOCK_OPEN, GameEvent.BLOCK_PLACE, ModGameEvent.BLOCK_ACTIVATE)
 				.add(ModGameEvent.BLOCK_DEACTIVATE, GameEvent.CONTAINER_CLOSE, GameEvent.CONTAINER_OPEN)
@@ -46,6 +58,6 @@ public class GameEventTagGenerator extends FabricTagProvider<GameEvent> {
 				.add(GameEvent.PISTON_EXTEND, GameEvent.PRIME_FUSE, GameEvent.PROJECTILE_LAND)
 				.add(GameEvent.PROJECTILE_SHOOT, GameEvent.SHEAR, GameEvent.SPLASH, GameEvent.STEP, GameEvent.SWIM)
 				.add(ModGameEvent.TELEPORT, ModGameEvent.SHRIEK)
-				.addTag(ModEventTags.SHRIEKER_CAN_LISTEN);
+				.addTag(ModGameEventTags.SHRIEKER_CAN_LISTEN);
 	}
 }

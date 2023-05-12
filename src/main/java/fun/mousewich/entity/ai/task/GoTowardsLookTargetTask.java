@@ -1,6 +1,5 @@
 package fun.mousewich.entity.ai.task;
 
-import fun.mousewich.entity.camel.CamelEntity;
 import fun.mousewich.util.ModLookTargetUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.LookTarget;

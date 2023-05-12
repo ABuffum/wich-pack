@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/chiseled_purpur_slab"
+    },
+    "type=double": {
+      "model": "wich:block/chiseled_purpur"
+    },
+    "type=top": {
+      "model": "wich:block/chiseled_purpur_slab_top"
+    }
+  }
+}

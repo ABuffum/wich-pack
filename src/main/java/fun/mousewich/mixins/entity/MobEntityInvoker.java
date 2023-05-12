@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(MobEntity.class)
 public interface MobEntityInvoker {
 	@Invoker("interactWithItem")
-	public ActionResult InvokeInteractWithItem(PlayerEntity player, Hand hand);
+	ActionResult InvokeInteractWithItem(PlayerEntity player, Hand hand);
 	@Invoker("interactMob")
-	public ActionResult InvokeInteractMob(PlayerEntity player, Hand hand);
+	ActionResult InvokeInteractMob(PlayerEntity player, Hand hand);
 }

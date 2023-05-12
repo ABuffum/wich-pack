@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "wich:piranha"
+  },
+  "result": "wich:cooked_piranha",
+  "experience": 0.35,
+  "cookingtime": 100
+}

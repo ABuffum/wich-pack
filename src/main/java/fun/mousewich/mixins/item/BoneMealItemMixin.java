@@ -13,7 +13,6 @@ import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -25,8 +24,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Random;
-
 @Mixin(BoneMealItem.class)
 public class BoneMealItemMixin {
 	@Inject(method="useOnBlock", at = @At("HEAD"), cancellable = true)
@@ -34,8 +31,7 @@ public class BoneMealItemMixin {
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		BlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
-		//Get more spore blossoms by bone mealing a spore blossom
+		//Get more spore blossoms by using bone meal on a spore blossom
 		if (state.isOf(Blocks.SPORE_BLOSSOM)) {
 			world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, new ItemStack(Items.SPORE_BLOSSOM, 1)));
 			world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, pos, 0);
@@ -51,20 +47,6 @@ public class BoneMealItemMixin {
 				world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, pos, 0);
 				if (context.getPlayer() != null && !context.getPlayer().getAbilities().creativeMode) context.getStack().decrement(1);
 				cir.setReturnValue(ActionResult.SUCCESS);
-			}
-		}
-		//Try spreading sculk turf
-		else if (world.getBlockState(pos.up()).isTranslucent(world, pos)) {
-			SculkTurfBlock turf = SculkTurfBlock.getSculkTurf(block);
-			if (turf != null) {
-				for (BlockPos blockPos : BlockPos.iterate(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
-					Block b = world.getBlockState(blockPos).getBlock();
-					if (b instanceof SculkTurfBlock || b instanceof SculkBlock) {
-						world.setBlockState(pos, turf.getDefaultState(), Block.NOTIFY_ALL);
-						cir.setReturnValue(ActionResult.SUCCESS);
-						break;
-					}
-				}
 			}
 		}
 	}

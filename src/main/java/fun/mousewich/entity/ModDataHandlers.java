@@ -1,7 +1,7 @@
 package fun.mousewich.entity;
 
-import fun.mousewich.entity.frog.FrogVariant;
-import fun.mousewich.entity.sniffer.SnifferEntity;
+import fun.mousewich.entity.variants.FrogVariant;
+import fun.mousewich.entity.passive.sniffer.SnifferEntity;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.network.PacketByteBuf;

@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.entity.ai.brain;
 
-import fun.mousewich.origins.powers.MobHostilityPower;
+import fun.mousewich.origins.power.MobHostilityPower;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;

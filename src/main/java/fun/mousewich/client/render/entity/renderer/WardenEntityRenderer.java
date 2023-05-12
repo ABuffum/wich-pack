@@ -2,7 +2,8 @@ package fun.mousewich.client.render.entity.renderer;
 
 import fun.mousewich.ModClient;
 import fun.mousewich.client.render.entity.model.WardenEntityModel;
-import fun.mousewich.entity.warden.WardenEntity;
+import fun.mousewich.client.render.entity.renderer.feature.WardenFeatureRenderer;
+import fun.mousewich.entity.hostile.warden.WardenEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;

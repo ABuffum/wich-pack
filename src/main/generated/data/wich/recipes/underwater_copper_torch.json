@@ -1,23 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "*",
     "#",
-    "I"
+    "|"
   ],
   "key": {
     "#": {
-      "item": "minecraft:stick"
+      "item": "minecraft:ink_sac"
     },
-    "*": {
-      "item": "minecraft:glow_ink_sac"
-    },
-    "I": {
-      "item": "wich:copper_nugget"
+    "|": {
+      "item": "wich:copper_rod"
     }
   },
   "result": {
     "item": "wich:underwater_copper_torch",
-    "count": 4
+    "count": 8
   }
 }

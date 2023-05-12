@@ -10,11 +10,11 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(LivingEntity.class)
 public interface LivingEntityAccessor {
 	@Invoker("onStatusEffectRemoved")
-	public void OnStatusEffectRemoved(StatusEffectInstance effect);
+	void OnStatusEffectRemoved(StatusEffectInstance effect);
 	@Invoker("shouldDropXp")
-	public boolean ShouldDropXp();
+	boolean ShouldDropXp();
 	@Invoker("getXpToDrop")
-	public int GetXpToDrop(PlayerEntity player);
+	int GetXpToDrop(PlayerEntity player);
 	@Accessor("jumping")
-	public boolean getJumping();
+	boolean getJumping();
 }

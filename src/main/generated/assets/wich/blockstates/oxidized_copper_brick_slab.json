@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/oxidized_copper_brick_slab"
+    },
+    "type=double": {
+      "model": "wich:block/oxidized_copper_bricks"
+    },
+    "type=top": {
+      "model": "wich:block/oxidized_copper_brick_slab_top"
+    }
+  }
+}

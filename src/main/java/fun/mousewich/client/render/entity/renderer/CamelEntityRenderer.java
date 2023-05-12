@@ -2,7 +2,7 @@ package fun.mousewich.client.render.entity.renderer;
 
 import fun.mousewich.ModClient;
 import fun.mousewich.client.render.entity.model.CamelEntityModel;
-import fun.mousewich.entity.camel.CamelEntity;
+import fun.mousewich.entity.passive.camel.CamelEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;

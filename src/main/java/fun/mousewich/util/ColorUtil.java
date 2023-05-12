@@ -1,5 +1,6 @@
 package fun.mousewich.util;
 
+import fun.mousewich.ModBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -8,6 +9,7 @@ import net.minecraft.util.DyeColor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.Function;
 
 public class ColorUtil {
@@ -15,6 +17,32 @@ public class ColorUtil {
 		Map<DyeColor, T> output = new HashMap<>();
 		for(DyeColor c : DyeColor.values()) output.put(c, op.apply(c));
 		return output;
+	}
+
+	public static DyeColor GetRandomColor(Random random) {
+		DyeColor[] colors = DyeColor.values();
+		return colors[random.nextInt(colors.length)];
+	}
+
+	public static Item GetDye(DyeColor color) {
+		return switch (color) {
+			case ORANGE -> Items.ORANGE_DYE;
+			case MAGENTA -> Items.MAGENTA_DYE;
+			case LIGHT_BLUE -> Items.LIGHT_BLUE_DYE;
+			case YELLOW -> Items.YELLOW_DYE;
+			case LIME -> Items.LIME_DYE;
+			case PINK -> Items.PINK_DYE;
+			case GRAY -> Items.GRAY_DYE;
+			case LIGHT_GRAY -> Items.LIGHT_GRAY_DYE;
+			case CYAN -> Items.CYAN_DYE;
+			case PURPLE -> Items.PURPLE_DYE;
+			case BLUE -> Items.BLUE_DYE;
+			case BROWN -> Items.BROWN_DYE;
+			case GREEN -> Items.GREEN_DYE;
+			case RED -> Items.RED_DYE;
+			case BLACK -> Items.BLACK_DYE;
+			case WHITE -> Items.WHITE_DYE;
+		};
 	}
 
 	public static DyeColor GetCandleColor(Block block) {
@@ -36,6 +64,27 @@ public class ColorUtil {
 		else if (block == Blocks.YELLOW_CANDLE) return DyeColor.YELLOW;
 		else return DyeColor.WHITE;
 	}
+	public static Block GetCandleBlock(DyeColor color) {
+		return switch (color) {
+			case ORANGE -> Blocks.ORANGE_CANDLE;
+			case MAGENTA -> Blocks.MAGENTA_CANDLE;
+			case LIGHT_BLUE -> Blocks.LIGHT_BLUE_CANDLE;
+			case YELLOW -> Blocks.YELLOW_CANDLE;
+			case LIME -> Blocks.LIME_CANDLE;
+			case PINK -> Blocks.PINK_CANDLE;
+			case GRAY -> Blocks.GRAY_CANDLE;
+			case LIGHT_GRAY -> Blocks.LIGHT_GRAY_CANDLE;
+			case CYAN -> Blocks.CYAN_CANDLE;
+			case PURPLE -> Blocks.PURPLE_CANDLE;
+			case BLUE -> Blocks.BLUE_CANDLE;
+			case BROWN -> Blocks.BROWN_CANDLE;
+			case GREEN -> Blocks.GREEN_CANDLE;
+			case RED -> Blocks.RED_CANDLE;
+			case BLACK -> Blocks.BLACK_CANDLE;
+			case WHITE -> Blocks.WHITE_CANDLE;
+		};
+	}
+
 	public static Block GetWoolBlock(DyeColor color) {
 		return switch (color) {
 			case ORANGE -> Blocks.ORANGE_WOOL;
@@ -235,6 +284,132 @@ public class ColorUtil {
 			case BLACK -> Items.BLACK_BANNER;
 			case WHITE -> Items.WHITE_BANNER;
 		};
+	}
+	public static Block GetConcreteBlock(DyeColor color) {
+		switch (color) {
+			case ORANGE: return Blocks.ORANGE_CONCRETE;
+			case MAGENTA: return Blocks.MAGENTA_CONCRETE;
+			case LIGHT_BLUE: return Blocks.LIGHT_BLUE_CONCRETE;
+			case YELLOW: return Blocks.YELLOW_CONCRETE;
+			case LIME: return Blocks.LIME_CONCRETE;
+			case PINK: return Blocks.PINK_CONCRETE;
+			case GRAY: return Blocks.GRAY_CONCRETE;
+			case LIGHT_GRAY: return Blocks.LIGHT_GRAY_CONCRETE;
+			case CYAN: return Blocks.CYAN_CONCRETE;
+			case PURPLE: return Blocks.PURPLE_CONCRETE;
+			case BLUE: return Blocks.BLUE_CONCRETE;
+			case BROWN: return Blocks.BROWN_CONCRETE;
+			case GREEN: return Blocks.GREEN_CONCRETE;
+			case RED: return Blocks.RED_CONCRETE;
+			case BLACK: return Blocks.BLACK_CONCRETE;
+			case WHITE:
+			default: return Blocks.WHITE_CONCRETE;
+		}
+	}
+	public static Item GetConcreteItem(DyeColor color) {
+		switch (color) {
+			case ORANGE: return Items.ORANGE_CONCRETE;
+			case MAGENTA: return Items.MAGENTA_CONCRETE;
+			case LIGHT_BLUE: return Items.LIGHT_BLUE_CONCRETE;
+			case YELLOW: return Items.YELLOW_CONCRETE;
+			case LIME: return Items.LIME_CONCRETE;
+			case PINK: return Items.PINK_CONCRETE;
+			case GRAY: return Items.GRAY_CONCRETE;
+			case LIGHT_GRAY: return Items.LIGHT_GRAY_CONCRETE;
+			case CYAN: return Items.CYAN_CONCRETE;
+			case PURPLE: return Items.PURPLE_CONCRETE;
+			case BLUE: return Items.BLUE_CONCRETE;
+			case BROWN: return Items.BROWN_CONCRETE;
+			case GREEN: return Items.GREEN_CONCRETE;
+			case RED: return Items.RED_CONCRETE;
+			case BLACK: return Items.BLACK_CONCRETE;
+			case WHITE:
+			default: return Items.WHITE_CONCRETE;
+		}
+	}
+	public static Block GetTerracottaBlock(DyeColor color) {
+		switch (color) {
+			case ORANGE: return Blocks.ORANGE_TERRACOTTA;
+			case MAGENTA: return Blocks.MAGENTA_TERRACOTTA;
+			case LIGHT_BLUE: return Blocks.LIGHT_BLUE_TERRACOTTA;
+			case YELLOW: return Blocks.YELLOW_TERRACOTTA;
+			case LIME: return Blocks.LIME_TERRACOTTA;
+			case PINK: return Blocks.PINK_TERRACOTTA;
+			case GRAY: return Blocks.GRAY_TERRACOTTA;
+			case LIGHT_GRAY: return Blocks.LIGHT_GRAY_TERRACOTTA;
+			case CYAN: return Blocks.CYAN_TERRACOTTA;
+			case PURPLE: return Blocks.PURPLE_TERRACOTTA;
+			case BLUE: return Blocks.BLUE_TERRACOTTA;
+			case BROWN: return Blocks.BROWN_TERRACOTTA;
+			case GREEN: return Blocks.GREEN_TERRACOTTA;
+			case RED: return Blocks.RED_TERRACOTTA;
+			case BLACK: return Blocks.BLACK_TERRACOTTA;
+			case WHITE: return Blocks.WHITE_TERRACOTTA;
+			default: return Blocks.TERRACOTTA;
+		}
+	}
+	public static Item GetTerracottaItem(DyeColor color) {
+		switch (color) {
+			case ORANGE: return Items.ORANGE_TERRACOTTA;
+			case MAGENTA: return Items.MAGENTA_TERRACOTTA;
+			case LIGHT_BLUE: return Items.LIGHT_BLUE_TERRACOTTA;
+			case YELLOW: return Items.YELLOW_TERRACOTTA;
+			case LIME: return Items.LIME_TERRACOTTA;
+			case PINK: return Items.PINK_TERRACOTTA;
+			case GRAY: return Items.GRAY_TERRACOTTA;
+			case LIGHT_GRAY: return Items.LIGHT_GRAY_TERRACOTTA;
+			case CYAN: return Items.CYAN_TERRACOTTA;
+			case PURPLE: return Items.PURPLE_TERRACOTTA;
+			case BLUE: return Items.BLUE_TERRACOTTA;
+			case BROWN: return Items.BROWN_TERRACOTTA;
+			case GREEN: return Items.GREEN_TERRACOTTA;
+			case RED: return Items.RED_TERRACOTTA;
+			case BLACK: return Items.BLACK_TERRACOTTA;
+			case WHITE: return Items.WHITE_TERRACOTTA;
+			default: return Items.TERRACOTTA;
+		}
+	}
+	public static Block GetGlazedTerracottaBlock(DyeColor color) {
+		switch (color) {
+			case ORANGE: return Blocks.ORANGE_GLAZED_TERRACOTTA;
+			case MAGENTA: return Blocks.MAGENTA_GLAZED_TERRACOTTA;
+			case LIGHT_BLUE: return Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA;
+			case YELLOW: return Blocks.YELLOW_GLAZED_TERRACOTTA;
+			case LIME: return Blocks.LIME_GLAZED_TERRACOTTA;
+			case PINK: return Blocks.PINK_GLAZED_TERRACOTTA;
+			case GRAY: return Blocks.GRAY_GLAZED_TERRACOTTA;
+			case LIGHT_GRAY: return Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA;
+			case CYAN: return Blocks.CYAN_GLAZED_TERRACOTTA;
+			case PURPLE: return Blocks.PURPLE_GLAZED_TERRACOTTA;
+			case BLUE: return Blocks.BLUE_GLAZED_TERRACOTTA;
+			case BROWN: return Blocks.BROWN_GLAZED_TERRACOTTA;
+			case GREEN: return Blocks.GREEN_GLAZED_TERRACOTTA;
+			case RED: return Blocks.RED_GLAZED_TERRACOTTA;
+			case BLACK: return Blocks.BLACK_GLAZED_TERRACOTTA;
+			case WHITE: return Blocks.WHITE_GLAZED_TERRACOTTA;
+			default: return ModBase.GLAZED_TERRACOTTA.asBlock();
+		}
+	}
+	public static Item GetGlazedTerracottaItem(DyeColor color) {
+		switch (color) {
+			case ORANGE: return Items.ORANGE_GLAZED_TERRACOTTA;
+			case MAGENTA: return Items.MAGENTA_GLAZED_TERRACOTTA;
+			case LIGHT_BLUE: return Items.LIGHT_BLUE_GLAZED_TERRACOTTA;
+			case YELLOW: return Items.YELLOW_GLAZED_TERRACOTTA;
+			case LIME: return Items.LIME_GLAZED_TERRACOTTA;
+			case PINK: return Items.PINK_GLAZED_TERRACOTTA;
+			case GRAY: return Items.GRAY_GLAZED_TERRACOTTA;
+			case LIGHT_GRAY: return Items.LIGHT_GRAY_GLAZED_TERRACOTTA;
+			case CYAN: return Items.CYAN_GLAZED_TERRACOTTA;
+			case PURPLE: return Items.PURPLE_GLAZED_TERRACOTTA;
+			case BLUE: return Items.BLUE_GLAZED_TERRACOTTA;
+			case BROWN: return Items.BROWN_GLAZED_TERRACOTTA;
+			case GREEN: return Items.GREEN_GLAZED_TERRACOTTA;
+			case RED: return Items.RED_GLAZED_TERRACOTTA;
+			case BLACK: return Items.BLACK_GLAZED_TERRACOTTA;
+			case WHITE: return Items.WHITE_GLAZED_TERRACOTTA;
+			default: return ModBase.GLAZED_TERRACOTTA.asItem();
+		}
 	}
 	public static Item GetBedItem(DyeColor color) {
 		return switch (color) {

@@ -2,7 +2,9 @@ package fun.mousewich.gen.data.tag;
 
 import com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry;
 import com.nhoryzon.mc.farmersdelight.tag.Tags;
+import fun.mousewich.container.ArrowContainer;
 import fun.mousewich.container.BlockContainer;
+import fun.mousewich.gen.data.ModDatagen;
 import fun.mousewich.trim.ArmorTrimPattern;
 import fun.mousewich.util.ColorUtil;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -10,11 +12,15 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.tag.ItemTags;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.event.GameEvent;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Set;
 
 import static fun.mousewich.ModBase.*;
 
@@ -29,21 +35,37 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 
 	@Override
 	protected void generateTags() {
-		getOrCreateTagBuilder(ItemTags.ARROWS).add(AMETHYST_ARROW.asItem(), CHORUS_ARROW.asItem());
-		//getOrCreateTagBuilder(ItemTags.BEDS).add(MOSS_BED.asItem(), RAINBOW_BED.asItem());
-		getOrCreateTagBuilder(ItemTags.BOATS)
-				.add(CHARRED_BOAT.asItem())
-				.add(MANGROVE_BOAT.asItem(), CHERRY_BOAT.asItem())
-				.add(BAMBOO_RAFT.asItem());
+		for (Map.Entry<TagKey<Item>, Set<Item>> entry : ModDatagen.Cache.Tag.ITEM_TAGS.entrySet()) {
+			getOrCreateTagBuilder(entry.getKey()).add(entry.getValue().toArray(Item[]::new));
+			entry.getValue().clear();
+		}
+		ModDatagen.Cache.Tag.ITEM_TAGS.clear();
+
+		getOrCreateTagBuilder(ItemTags.ARROWS)
+				.add(AMETHYST_ARROW.asItem(), BLINDING_ARROW.asItem(), BONE_ARROW.asItem(), CHORUS_ARROW.asItem())
+				.add(ArrowContainer.ARROW_CONTAINERS.stream().map(ArrowContainer::asItem).toArray(Item[]::new));
+//		getOrCreateTagBuilder(ItemTags.BEDS).add(GLOW_LICHEN_BED.asItem(), MOSS_BED.asItem(), RAINBOW_BED.asItem());
+		getOrCreateTagBuilder(ItemTags.BOATS).addTag(ModItemTags.CHEST_BOATS);
 		getOrCreateTagBuilder(ItemTags.BUTTONS)
 				.add(NETHERITE_BUTTON.asItem());
-		getOrCreateTagBuilder(ItemTags.CANDLES).add(SOUL_CANDLE.asItem(), ENDER_CANDLE.asItem());
+		getOrCreateTagBuilder(ItemTags.CANDLES).add(SOUL_CANDLE.asItem(), ENDER_CANDLE.asItem(), NETHERRACK_CANDLE.asItem());
 		getOrCreateTagBuilder(ItemTags.CARPETS).addTag(ModItemTags.WOOL_CARPETS).addTag(ModItemTags.FLEECE_CARPETS);
 		getOrCreateTagBuilder(ItemTags.CLUSTER_MAX_HARVESTABLES).addTag(ModItemTags.PICKAXES);
 		getOrCreateTagBuilder(ItemTags.FISHES).addTag(ModItemTags.RAW_FISH).addTag(ModItemTags.COOKED_FISH);
-		getOrCreateTagBuilder(ItemTags.LEAVES).add(MANGROVE_LEAVES.asItem(), CHERRY_LEAVES.asItem());
+		getOrCreateTagBuilder(ItemTags.LEAVES)
+				.add(MANGROVE_LEAVES.asItem(), CHERRY_LEAVES.asItem())
+				.add(WHITE_SPRUCE_LEAVES.asItem(), SWEET_BERRY_LEAVES.asItem())
+				.add(LIGHT_GREEN_ACACIA_LEAVES.asItem(), RED_ACACIA_LEAVES.asItem(), YELLOW_ACACIA_LEAVES.asItem())
+				.add(LIGHT_GREEN_BIRCH_LEAVES.asItem(), RED_BIRCH_LEAVES.asItem(), YELLOW_BIRCH_LEAVES.asItem(), WHITE_BIRCH_LEAVES.asItem())
+				.add(BLUE_GREEN_OAK_LEAVES.asItem(), LIGHT_GREEN_OAK_LEAVES.asItem(), RED_OAK_LEAVES.asItem(), YELLOW_OAK_LEAVES.asItem(), WHITE_OAK_LEAVES.asItem())
+				.add(CASSIA_LEAVES.asItem(), FLOWERING_CASSIA_LEAVES.asItem())
+				.add(PINK_DOGWOOD_LEAVES.asItem(), PALE_DOGWOOD_LEAVES.asItem(), WHITE_DOGWOOD_LEAVES.asItem());
 		getOrCreateTagBuilder(ItemTags.LOGS).addTag(ModItemTags.CHARRED_LOGS);
-		getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN).addTag(ModItemTags.MANGROVE_LOGS).addTag(ModItemTags.CHERRY_LOGS);
+		getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
+				.addTag(ModItemTags.MANGROVE_LOGS)
+				.addTag(ModItemTags.CHERRY_LOGS)
+				.addTag(ModItemTags.CASSIA_LOGS)
+				.addTag(ModItemTags.DOGWOOD_LOGS);
 		getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(MUSIC_DISC_5);
 		getOrCreateTagBuilder(ItemTags.NON_FLAMMABLE_WOOD).add(CRIMSON_HANGING_SIGN.asItem(), WARPED_HANGING_SIGN.asItem());
 		getOrCreateTagBuilder(ItemTags.PIGLIN_LOVED)
@@ -52,35 +74,47 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.add(GILDED_BLACKSTONE_SLAB.asItem(), POLISHED_GILDED_BLACKSTONE_SLAB.asItem(), POLISHED_GILDED_BLACKSTONE_BRICK_SLAB.asItem())
 				.add(GILDED_BLACKSTONE_STAIRS.asItem(), POLISHED_GILDED_BLACKSTONE_STAIRS.asItem(), POLISHED_GILDED_BLACKSTONE_BRICK_STAIRS.asItem())
 				.add(GILDED_BLACKSTONE_WALL.asItem(), POLISHED_GILDED_BLACKSTONE_WALL.asItem(), POLISHED_GILDED_BLACKSTONE_BRICK_WALL.asItem())
-				.add(GOLD_BARS.asItem(), GOLD_CHAIN.asItem())
-				.add(GOLD_LANTERN.asItem(), GOLD_SOUL_LANTERN.asItem(), GOLD_ENDER_LANTERN.asItem())
+				.add(GOLD_BARS.asItem(), GOLD_CHAIN.asItem(), HEAVY_GOLD_CHAIN.asItem())
+				.add(GOLD_LANTERN.asItem(), GOLD_ENDER_LANTERN.asItem())
 				.add(GOLD_BUTTON.asItem())
-				.add(GOLD_WALL.asItem(), GOLD_BRICKS.asItem(), GOLD_BRICK_SLAB.asItem())
+				.add(GOLD_STAIRS.asItem(), GOLD_SLAB.asItem(), GOLD_WALL.asItem(), GOLD_BRICKS.asItem(), GOLD_BRICK_SLAB.asItem())
 				.add(GOLD_BRICK_STAIRS.asItem(), GOLD_BRICK_WALL.asItem(), CUT_GOLD.asItem())
 				.add(CUT_GOLD_PILLAR.asItem(), CUT_GOLD_SLAB.asItem(), CUT_GOLD_STAIRS.asItem())
-				.add(CUT_GOLD_WALL.asItem());
-		getOrCreateTagBuilder(ItemTags.PIGLIN_REPELLENTS).addTag(ModItemTags.SOUL_TORCHES)
-				.add(WHITE_IRON_SOUL_LANTERN.asItem(), GOLD_SOUL_LANTERN.asItem(), NETHERITE_SOUL_LANTERN.asItem())
-				.add(COPPER_SOUL_LANTERN.asItem(), EXPOSED_COPPER_SOUL_LANTERN.asItem())
-				.add(WEATHERED_COPPER_SOUL_LANTERN.asItem(), OXIDIZED_COPPER_SOUL_LANTERN.asItem())
-				.add(WAXED_COPPER_SOUL_LANTERN.asItem(), WAXED_EXPOSED_COPPER_SOUL_LANTERN.asItem())
-				.add(WAXED_WEATHERED_COPPER_SOUL_LANTERN.asItem(), WAXED_OXIDIZED_COPPER_SOUL_LANTERN.asItem());
+				.add(CUT_GOLD_WALL.asItem(), GOLD_ROD);
+		getOrCreateTagBuilder(ItemTags.PIGLIN_REPELLENTS).addTag(ModItemTags.SOUL_TORCHES).addTag(ModItemTags.SOUL_LANTERNS);
 		getOrCreateTagBuilder(ItemTags.PLANKS)
 				.add(CHARRED_PLANKS.asItem())
-				.add(MANGROVE_PLANKS.asItem(), BAMBOO_PLANKS.asItem(), CHERRY_PLANKS.asItem());
+				.add(MANGROVE_PLANKS.asItem(), BAMBOO_PLANKS.asItem(), CHERRY_PLANKS.asItem())
+				.add(CASSIA_PLANKS.asItem(), DOGWOOD_PLANKS.asItem());
+		getOrCreateTagBuilder(ItemTags.SAPLINGS).add(CHERRY_SAPLING.asItem(), MANGROVE_PROPAGULE.asItem(), CASSIA_SAPLING.asItem(), DOGWOOD_SAPLING.asItem());
 		getOrCreateTagBuilder(ItemTags.SIGNS)
 				.add(CHARRED_SIGN.asItem())
-				.add(MANGROVE_SIGN.asItem(), BAMBOO_SIGN.asItem(), CHERRY_SIGN.asItem());
-		getOrCreateTagBuilder(ItemTags.SLABS)
-				.add(SMOOTH_PURPUR_SLAB.asItem(), PURPUR_BRICK_SLAB.asItem())
-				.add(CALCITE_SLAB.asItem(), SMOOTH_CALCITE_SLAB.asItem(), CALCITE_BRICK_SLAB.asItem())
-				.add(DRIPSTONE_SLAB.asItem(), SMOOTH_DRIPSTONE_SLAB.asItem(), DRIPSTONE_BRICK_SLAB.asItem())
-				.add(TUFF_SLAB.asItem(), SMOOTH_TUFF_SLAB.asItem(), TUFF_BRICK_SLAB.asItem())
+				.add(MANGROVE_SIGN.asItem(), BAMBOO_SIGN.asItem(), CHERRY_SIGN.asItem())
+				.add(CASSIA_SIGN.asItem(), DOGWOOD_SIGN.asItem());
+		getOrCreateTagBuilder(ItemTags.SLABS).addTag(ModItemTags.LOG_SLABS)
+				.add(ANDESITE_BRICK_SLAB.asItem(), ANDESITE_TILE_SLAB.asItem(), CUT_POLISHED_ANDESITE_SLAB.asItem())
+				.add(DIORITE_BRICK_SLAB.asItem(), DIORITE_TILE_SLAB.asItem(), CUT_POLISHED_DIORITE_SLAB.asItem())
+				.add(GRANITE_BRICK_SLAB.asItem(), GRANITE_TILE_SLAB.asItem(), CUT_POLISHED_GRANITE_SLAB.asItem(), CHISELED_GRANITE_SLAB.asItem())
+				.add(CHISELED_PURPUR_SLAB.asItem(), PURPUR_MOSAIC_SLAB.asItem(), SMOOTH_PURPUR_SLAB.asItem(), PURPUR_BRICK_SLAB.asItem(), PURPUR_TILE_SLAB.asItem())
+				.add(MOSSY_COBBLED_DEEPSLATE_SLAB.asItem(), MOSSY_DEEPSLATE_BRICK_SLAB.asItem())
+				.add(COBBLED_SHALE_SLAB.asItem(), POLISHED_SHALE_SLAB.asItem(), SHALE_BRICK_SLAB.asItem(), SHALE_TILE_SLAB.asItem())
+				.add(END_STONE_SLAB.asItem(), END_STONE_TILE_SLAB.asItem())
+				.add(COBBLED_END_SHALE_SLAB.asItem(), END_SHALE_BRICK_SLAB.asItem(), END_SHALE_TILE_SLAB.asItem())
+				.add(CALCITE_SLAB.asItem(), SMOOTH_CALCITE_SLAB.asItem(), CALCITE_BRICK_SLAB.asItem(), CALCITE_TILE_SLAB.asItem())
+				.add(DRIPSTONE_SLAB.asItem(), SMOOTH_DRIPSTONE_SLAB.asItem(), DRIPSTONE_BRICK_SLAB.asItem(), DRIPSTONE_TILE_SLAB.asItem())
+				.add(STONE_TILE_SLAB.asItem())
+				.add(CHISELED_PRISMARINE_BRICK_SLAB.asItem(), CUT_PRISMARINE_BRICK_SLAB.asItem(), PRISMARINE_TILE_SLAB.asItem())
+				.add(TUFF_SLAB.asItem(), SMOOTH_TUFF_SLAB.asItem(), TUFF_BRICK_SLAB.asItem(), TUFF_BRICK_SLAB.asItem())
 				.add(AMETHYST_SLAB.asItem(), AMETHYST_BRICK_SLAB.asItem(), AMETHYST_CRYSTAL_SLAB.asItem())
-				.add(TINTED_GLASS_SLAB.asItem())
-				.add(GLASS_SLAB.asItem()).add(COAL_SLAB.asItem(), CHARCOAL_SLAB.asItem(), COARSE_DIRT_SLAB.asItem())
+				.add(GLASS_SLAB.asItem(), TINTED_GLASS_SLAB.asItem(), RUBY_GLASS_SLAB.asItem())
+				.add(COAL_SLAB.asItem(), CHARCOAL_SLAB.asItem(), COARSE_DIRT_SLAB.asItem(), BONE_SLAB.asItem())
+				.add(TERRACOTTA_SLAB.asItem(), GLAZED_TERRACOTTA_SLAB.asItem())
+				.add(TERRACOTTA_SLABS.values().stream().map(BlockContainer::asItem).toArray(Item[]::new))
+				.add(GLAZED_TERRACOTTA_SLABS.values().stream().map(BlockContainer::asItem).toArray(Item[]::new))
+				.add(CONCRETE_SLABS.values().stream().map(BlockContainer::asItem).toArray(Item[]::new))
 				.add(STAINED_GLASS_SLABS.values().stream().map(BlockContainer::asItem).toArray(Item[]::new))
-				.add(EMERALD_BRICK_SLAB.asItem(), CUT_EMERALD_SLAB.asItem())
+				.add(EMERALD_SLAB.asItem(), EMERALD_BRICK_SLAB.asItem(), CUT_EMERALD_SLAB.asItem())
+				.add(RUBY_SLAB.asItem(), RUBY_BRICK_SLAB.asItem())
 				.add(DIAMOND_SLAB.asItem(), DIAMOND_BRICK_SLAB.asItem())
 				.add(QUARTZ_BRICK_SLAB.asItem(), QUARTZ_CRYSTAL_SLAB.asItem())
 				.add(FLINT_SLAB.asItem(), FLINT_BRICK_SLAB.asItem())
@@ -89,9 +123,15 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.add(GOLD_SLAB.asItem(), GOLD_BRICK_SLAB.asItem(), CUT_GOLD_SLAB.asItem())
 				.add(NETHERITE_SLAB.asItem(), NETHERITE_BRICK_SLAB.asItem(), CUT_NETHERITE_SLAB.asItem())
 				.add(OBSIDIAN_SLAB.asItem(), CRYING_OBSIDIAN_SLAB.asItem(), BLEEDING_OBSIDIAN_SLAB.asItem())
-				.add(ECHO_SLAB.asItem(), ECHO_CRYSTAL_SLAB.asItem())
+				.add(COPPER_SLAB.asItem(), EXPOSED_COPPER_SLAB.asItem(), WEATHERED_COPPER_SLAB.asItem(), OXIDIZED_COPPER_SLAB.asItem())
+				.add(WAXED_COPPER_SLAB.asItem(), WAXED_EXPOSED_COPPER_SLAB.asItem(), WAXED_WEATHERED_COPPER_SLAB.asItem(), WAXED_OXIDIZED_COPPER_SLAB.asItem())
+				.add(COPPER_BRICK_SLAB.asItem(), EXPOSED_COPPER_BRICK_SLAB.asItem(), WEATHERED_COPPER_BRICK_SLAB.asItem(), OXIDIZED_COPPER_BRICK_SLAB.asItem())
+				.add(WAXED_COPPER_BRICK_SLAB.asItem(), WAXED_EXPOSED_COPPER_BRICK_SLAB.asItem(), WAXED_WEATHERED_COPPER_BRICK_SLAB.asItem(), WAXED_OXIDIZED_COPPER_BRICK_SLAB.asItem())
+				.add(ECHO_SLAB.asItem(), ECHO_BRICK_SLAB.asItem(), ECHO_CRYSTAL_SLAB.asItem())
+				.add(SMOOTH_BASALT_BRICK_SLAB.asItem())
+				.add(POLISHED_BLACKSTONE_TILE_SLAB.asItem())
 				.add(GILDED_BLACKSTONE_SLAB.asItem(), POLISHED_GILDED_BLACKSTONE_SLAB.asItem(), POLISHED_GILDED_BLACKSTONE_BRICK_SLAB.asItem())
-				.add(SCULK_STONE_SLAB.asItem(), SCULK_STONE_BRICK_SLAB.asItem())
+				.add(SCULK_STONE_SLAB.asItem(), COBBLED_SCULK_STONE_SLAB.asItem(), SCULK_STONE_BRICK_SLAB.asItem(), SCULK_STONE_TILE_SLAB.asItem())
 				.addTag(ModItemTags.WOOL_SLABS).addTag(ModItemTags.FLEECE_SLABS)
 				.add(MOSS_SLAB.asItem())
 				.add(MUD_BRICK_SLAB.asItem());
@@ -100,102 +140,96 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.add(MAGENTA_TULIP.asItem(), MARIGOLD.asItem(), INDIGO_ORCHID.asItem(), MAGENTA_ORCHID.asItem())
 				.add(ORANGE_ORCHID.asItem(), PURPLE_ORCHID.asItem(), RED_ORCHID.asItem(), WHITE_ORCHID.asItem())
 				.add(YELLOW_ORCHID.asItem(), PINK_ALLIUM.asItem(), LAVENDER.asItem(), HYDRANGEA.asItem())
-				.add(PAEONIA.asItem(), ASTER.asItem());
-		getOrCreateTagBuilder(ItemTags.STAIRS)
-				.add(SMOOTH_PURPUR_STAIRS.asItem(), PURPUR_BRICK_STAIRS.asItem())
-				.add(CALCITE_STAIRS.asItem(), SMOOTH_CALCITE_STAIRS.asItem(), CALCITE_BRICK_STAIRS.asItem())
-				.add(DRIPSTONE_STAIRS.asItem(), SMOOTH_DRIPSTONE_STAIRS.asItem(), DRIPSTONE_BRICK_STAIRS.asItem())
-				.add(TUFF_STAIRS.asItem(), SMOOTH_TUFF_STAIRS.asItem(), TUFF_BRICK_STAIRS.asItem())
-				.add(AMETHYST_STAIRS.asItem(), AMETHYST_BRICK_STAIRS.asItem(), AMETHYST_CRYSTAL_STAIRS.asItem())
-				.add(EMERALD_BRICK_STAIRS.asItem(), CUT_EMERALD_STAIRS.asItem())
-				.add(DIAMOND_STAIRS.asItem(), DIAMOND_BRICK_STAIRS.asItem())
-				.add(QUARTZ_BRICK_STAIRS.asItem(), QUARTZ_CRYSTAL_STAIRS.asItem())
-				.add(FLINT_BRICK_STAIRS.asItem())
-				.add(IRON_STAIRS.asItem(), IRON_BRICK_STAIRS.asItem(), CUT_IRON_STAIRS.asItem())
-				.add(GOLD_STAIRS.asItem(), GOLD_BRICK_STAIRS.asItem(), CUT_GOLD_STAIRS.asItem())
-				.add(NETHERITE_STAIRS.asItem(), NETHERITE_BRICK_STAIRS.asItem(), CUT_NETHERITE_STAIRS.asItem())
-				.add(OBSIDIAN_STAIRS.asItem(), CRYING_OBSIDIAN_STAIRS.asItem(), BLEEDING_OBSIDIAN_STAIRS.asItem())
-				.add(ECHO_STAIRS.asItem(), ECHO_CRYSTAL_STAIRS.asItem())
-				.add(GILDED_BLACKSTONE_STAIRS.asItem(), POLISHED_GILDED_BLACKSTONE_STAIRS.asItem(), POLISHED_GILDED_BLACKSTONE_BRICK_STAIRS.asItem())
-				.add(SCULK_STONE_STAIRS.asItem(), SCULK_STONE_BRICK_STAIRS.asItem())
-				.add(MUD_BRICK_STAIRS.asItem());
+				.add(PAEONIA.asItem(), ASTER.asItem(), VANILLA_FLOWER.asItem());
 		getOrCreateTagBuilder(ItemTags.TALL_FLOWERS)
-				.add(AMARANTH.asItem(), BLUE_ROSE_BUSH.asItem(), TALL_ALLIUM.asItem(), TALL_PINK_ALLIUM.asItem());
-		getOrCreateTagBuilder(ItemTags.WALLS)
-				.add(POLISHED_ANDESITE_WALL.asItem(), POLISHED_DIORITE_WALL.asItem(), POLISHED_GRANITE_WALL.asItem())
-				.add(SMOOTH_PURPUR_WALL.asItem(), PURPUR_BRICK_WALL.asItem())
-				.add(SMOOTH_SANDSTONE_WALL.asItem(), SMOOTH_RED_SANDSTONE_WALL.asItem())
-				.add(DARK_PRISMARINE_WALL.asItem(), PURPUR_WALL.asItem())
-				.add(CALCITE_WALL.asItem(), SMOOTH_CALCITE_WALL.asItem(), CALCITE_BRICK_WALL.asItem())
-				.add(DRIPSTONE_WALL.asItem(), SMOOTH_DRIPSTONE_WALL.asItem(), DRIPSTONE_BRICK_WALL.asItem())
-				.add(TUFF_WALL.asItem(), SMOOTH_TUFF_WALL.asItem(), TUFF_BRICK_WALL.asItem())
-				.add(AMETHYST_WALL.asItem(), AMETHYST_BRICK_WALL.asItem(), AMETHYST_CRYSTAL_WALL.asItem())
-				.add(EMERALD_BRICK_WALL.asItem(), CUT_EMERALD_WALL.asItem())
-				.add(DIAMOND_WALL.asItem(), DIAMOND_BRICK_WALL.asItem())
-				.add(SMOOTH_QUARTZ_WALL.asItem(), QUARTZ_BRICK_WALL.asItem(), QUARTZ_WALL.asItem(), QUARTZ_CRYSTAL_WALL.asItem())
-				.add(FLINT_BRICK_WALL.asItem())
-				.add(IRON_WALL.asItem(), IRON_BRICK_WALL.asItem(), CUT_IRON_WALL.asItem())
-				.add(GOLD_WALL.asItem(), GOLD_BRICK_WALL.asItem(), CUT_GOLD_WALL.asItem())
-				.add(NETHERITE_WALL.asItem(), NETHERITE_BRICK_WALL.asItem(), CUT_NETHERITE_WALL.asItem())
-				.add(OBSIDIAN_WALL.asItem(), CRYING_OBSIDIAN_WALL.asItem(), BLEEDING_OBSIDIAN_WALL.asItem())
-				.add(COPPER_WALL.asItem(), EXPOSED_COPPER_WALL.asItem())
-				.add(WEATHERED_COPPER_WALL.asItem(), OXIDIZED_COPPER_WALL.asItem())
-				.add(WAXED_COPPER_WALL.asItem(), WAXED_EXPOSED_COPPER_WALL.asItem())
-				.add(WAXED_WEATHERED_COPPER_WALL.asItem(), WAXED_OXIDIZED_COPPER_WALL.asItem())
-				.add(ECHO_WALL.asItem(), ECHO_CRYSTAL_WALL.asItem())
-				.add(GILDED_BLACKSTONE_WALL.asItem(), POLISHED_GILDED_BLACKSTONE_WALL.asItem(), POLISHED_GILDED_BLACKSTONE_BRICK_WALL.asItem())
-				.add(SCULK_STONE_WALL.asItem(), SCULK_STONE_BRICK_WALL.asItem())
-				.add(MUD_BRICK_WALL.asItem());
+				.add(AMARANTH.asItem(), BLUE_ROSE_BUSH.asItem(), TALL_ALLIUM.asItem(), TALL_PINK_ALLIUM.asItem(), TALL_VANILLA.asItem());
+		getOrCreateTagBuilder(ItemTags.TRAPDOORS)
+				.add(STAINED_GLASS_TRAPDOORS.values().stream().map(BlockContainer::asItem).toArray(Item[]::new))
+				.add(GLASS_TRAPDOOR.asItem(), TINTED_GLASS_TRAPDOOR.asItem(), RUBY_GLASS_TRAPDOOR.asItem());
 		getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
 				.add(CHARRED_BUTTON.asItem())
-				.add(MANGROVE_BUTTON.asItem(), BAMBOO_BUTTON.asItem(), CHERRY_BUTTON.asItem());
-		getOrCreateTagBuilder(ItemTags.WOODEN_DOORS)
-				.add(CHARRED_DOOR.asItem())
-				.add(MANGROVE_DOOR.asItem(), BAMBOO_DOOR.asItem(), CHERRY_DOOR.asItem());
-		getOrCreateTagBuilder(ItemTags.WOODEN_FENCES)
-				.add(CHARRED_FENCE.asItem())
-				.add(MANGROVE_FENCE.asItem(), BAMBOO_FENCE.asItem(), CHERRY_FENCE.asItem());
-		getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES)
-				.add(CHARRED_PRESSURE_PLATE.asItem())
-				.add(MANGROVE_PRESSURE_PLATE.asItem(), BAMBOO_PRESSURE_PLATE.asItem(), CHERRY_PRESSURE_PLATE.asItem());
-		getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
-				.add(CHARRED_SLAB.asItem())
-				.add(MANGROVE_SLAB.asItem(), BAMBOO_SLAB.asItem(), BAMBOO_MOSAIC_SLAB.asItem(), CHERRY_SLAB.asItem());
-		getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
-				.add(CHARRED_STAIRS.asItem())
-				.add(MANGROVE_STAIRS.asItem(), BAMBOO_STAIRS.asItem(), BAMBOO_MOSAIC_STAIRS.asItem(), CHERRY_STAIRS.asItem());
-		getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
-				.add(CHARRED_TRAPDOOR.asItem())
-				.add(MANGROVE_TRAPDOOR.asItem(), BAMBOO_TRAPDOOR.asItem(), CHERRY_TRAPDOOR.asItem());
+				.add(MANGROVE_BUTTON.asItem(), BAMBOO_BUTTON.asItem(), CHERRY_BUTTON.asItem())
+				.add(CASSIA_BUTTON.asItem(), DOGWOOD_BUTTON.asItem());
 		getOrCreateTagBuilder(ItemTags.WOOL).add(RAINBOW_WOOL.asItem());
 
 		getOrCreateTagBuilder(Tags.KNIVES).addTag(ModItemTags.KNIVES);
 
-		getOrCreateTagBuilder(ModItemTags.AXES)
+		getOrCreateTagBuilder(ModItemTags.AXES).add(ECHO_AXE)
 				.add(Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.GOLDEN_AXE, Items.DIAMOND_AXE, Items.NETHERITE_AXE)
-				.add(AMETHYST_AXE, ECHO_AXE, EMERALD_AXE, QUARTZ_AXE)
-				.add(COPPER_AXE, EXPOSED_COPPER_AXE, WEATHERED_COPPER_AXE, OXIDIZED_COPPER_AXE)
-				.add(WAXED_COPPER_AXE, WAXED_EXPOSED_COPPER_AXE, WAXED_WEATHERED_COPPER_AXE, WAXED_OXIDIZED_COPPER_AXE);
+				.addOptional(betternether("cincinnasite_axe")).addOptional(betternether("cincinnasite_axe_diamond"))
+				.addOptional(betternether("nether_ruby_axe")).addOptional(betterend("aeternium_axe"))
+				.addOptional(betterend("thallasium_axe")).addOptional(betterend("terminite_axe"));
+		getOrCreateTagBuilder(ModItemTags.BEEHIVES).add(Items.BEEHIVE);
 		getOrCreateTagBuilder(ModItemTags.BOOKS)
 				.add(Items.BOOK, RED_BOOK, ORANGE_BOOK, YELLOW_BOOK, GREEN_BOOK, BLUE_BOOK, GRAY_BOOK);
 		getOrCreateTagBuilder(ModItemTags.BOOKSHELF_BOOKS)
 				.addTag(ModItemTags.BOOKS).add(UNREADABLE_BOOK)
 				.add(Items.ENCHANTED_BOOK, Items.WRITABLE_BOOK, Items.WRITTEN_BOOK);
-		getOrCreateTagBuilder(ModItemTags.BOOKSHELVES).add(Items.BOOKSHELF)
-				.add(ACACIA_BOOKSHELF.asItem(), BIRCH_BOOKSHELF.asItem(), CRIMSON_BOOKSHELF.asItem(), DARK_OAK_BOOKSHELF.asItem(),
-						JUNGLE_BOOKSHELF.asItem(), SPRUCE_BOOKSHELF.asItem(), WARPED_BOOKSHELF.asItem(),
-						BAMBOO_BOOKSHELF.asItem(), MANGROVE_BOOKSHELF.asItem(), CHERRY_BOOKSHELF.asItem(), CHARRED_BOOKSHELF.asItem());
+		getOrCreateTagBuilder(ModItemTags.BOOKSHELVES).add(Items.BOOKSHELF);
 		getOrCreateTagBuilder(ModItemTags.BOOTS)
 				.add(Items.LEATHER_BOOTS, Items.CHAINMAIL_BOOTS, Items.IRON_BOOTS, Items.GOLDEN_BOOTS, Items.DIAMOND_BOOTS, Items.NETHERITE_BOOTS)
-				.add(AMETHYST_BOOTS, EMERALD_BOOTS, FLEECE_BOOTS, QUARTZ_BOOTS, STUDDED_LEATHER_BOOTS);
+				.add(AMETHYST_BOOTS, EMERALD_BOOTS, FLEECE_BOOTS, QUARTZ_BOOTS, SHULKER_BOOTS, STUDDED_LEATHER_BOOTS, TURTLE_BOOTS)
+				.addTag(ModItemTags.COPPER_BOOTS)
+				.addOptional(betternether("cincinnasite_boots")).addOptional(betternether("nether_ruby_boots"))
+				.addOptional(betterend("aeternium_boots")).addOptional(betterend("crystalite_boots"))
+				.addOptional(betterend("thallasium_boots")).addOptional(betterend("terminite_boots"));
+		getOrCreateTagBuilder(ModItemTags.BREAKS_DECORATED_POTS).addTag(ModItemTags.TOOLS);
 		getOrCreateTagBuilder(ModItemTags.CAMPFIRES).add(Items.CAMPFIRE);
-		getOrCreateTagBuilder(ModItemTags.CARVED_MELONS);
-		getOrCreateTagBuilder(ModItemTags.CARVED_PUMPKINS).add(Items.CARVED_PUMPKIN);
+		getOrCreateTagBuilder(ModItemTags.CANDY);
+		getOrCreateTagBuilder(ModItemTags.CARVED_GOURDS).addTag(ModItemTags.CARVED_MELONS).addTag(ModItemTags.CARVED_PUMPKINS);
+		getOrCreateTagBuilder(ModItemTags.CARVED_MELONS).add(CARVED_MELON.asItem());
+		getOrCreateTagBuilder(ModItemTags.CARVED_PUMPKINS).add(Items.CARVED_PUMPKIN).add(CARVED_WHITE_PUMPKIN.asItem(), CARVED_ROTTEN_PUMPKIN.asItem());
+		getOrCreateTagBuilder(ModItemTags.CASSIA_LOGS).add(CASSIA_LOG.asItem(), CASSIA_WOOD.asItem(), STRIPPED_CASSIA_LOG.asItem(), STRIPPED_CASSIA_WOOD.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHARRABLE_LOG_SLABS)
+				.add(ACACIA_LOG_SLAB.asItem(), BIRCH_LOG_SLAB.asItem(), DARK_OAK_LOG_SLAB.asItem())
+				.add(JUNGLE_LOG_SLAB.asItem(), OAK_LOG_SLAB.asItem(), SPRUCE_LOG_SLAB.asItem())
+				.add(CHERRY_LOG_SLAB.asItem(), MANGROVE_LOG_SLAB.asItem())
+				.add(CASSIA_LOG_SLAB.asItem(), DOGWOOD_LOG_SLAB.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHARRABLE_LOGS)
+				.add(Items.ACACIA_LOG, Items.BIRCH_LOG, Items.DARK_OAK_LOG)
+				.add(Items.JUNGLE_LOG, Items.OAK_LOG, Items.SPRUCE_LOG)
+				.add(CHERRY_LOG.asItem(), MANGROVE_LOG.asItem())
+				.add(CASSIA_LOG.asItem(), DOGWOOD_LOG.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHARRABLE_STRIPPED_LOG_SLABS)
+				.add(STRIPPED_ACACIA_LOG_SLAB.asItem(), STRIPPED_BIRCH_LOG_SLAB.asItem(), STRIPPED_DARK_OAK_LOG_SLAB.asItem())
+				.add(STRIPPED_JUNGLE_LOG_SLAB.asItem(), STRIPPED_OAK_LOG_SLAB.asItem(), STRIPPED_SPRUCE_LOG_SLAB.asItem())
+				.add(STRIPPED_CHERRY_LOG_SLAB.asItem(), STRIPPED_MANGROVE_LOG_SLAB.asItem())
+				.add(STRIPPED_CASSIA_LOG_SLAB.asItem(), STRIPPED_DOGWOOD_LOG_SLAB.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHARRABLE_STRIPPED_LOGS)
+				.add(Items.STRIPPED_ACACIA_LOG, Items.STRIPPED_BIRCH_LOG, Items.STRIPPED_DARK_OAK_LOG)
+				.add(Items.STRIPPED_JUNGLE_LOG, Items.STRIPPED_OAK_LOG, Items.STRIPPED_SPRUCE_LOG)
+				.add(STRIPPED_CHERRY_LOG.asItem(), STRIPPED_MANGROVE_LOG.asItem())
+				.add(STRIPPED_CASSIA_LOG.asItem(), STRIPPED_DOGWOOD_LOG.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHARRABLE_STRIPPED_WOOD_SLABS)
+				.add(STRIPPED_ACACIA_WOOD_SLAB.asItem(), STRIPPED_BIRCH_WOOD_SLAB.asItem(), STRIPPED_DARK_OAK_WOOD_SLAB.asItem())
+				.add(STRIPPED_JUNGLE_WOOD_SLAB.asItem(), STRIPPED_OAK_WOOD_SLAB.asItem(), STRIPPED_SPRUCE_WOOD_SLAB.asItem())
+				.add(STRIPPED_CHERRY_WOOD_SLAB.asItem(), STRIPPED_MANGROVE_WOOD_SLAB.asItem())
+				.add(STRIPPED_CASSIA_WOOD_SLAB.asItem(), STRIPPED_DOGWOOD_WOOD_SLAB.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHARRABLE_STRIPPED_WOODS)
+				.add(Items.STRIPPED_ACACIA_WOOD, Items.STRIPPED_BIRCH_WOOD, Items.STRIPPED_DARK_OAK_WOOD)
+				.add(Items.STRIPPED_JUNGLE_WOOD, Items.STRIPPED_OAK_WOOD, Items.STRIPPED_SPRUCE_WOOD)
+				.add(STRIPPED_CHERRY_WOOD.asItem(), STRIPPED_MANGROVE_WOOD.asItem())
+				.add(STRIPPED_CASSIA_WOOD.asItem(), STRIPPED_DOGWOOD_WOOD.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHARRABLE_WOOD_SLABS)
+				.add(ACACIA_WOOD_SLAB.asItem(), BIRCH_WOOD_SLAB.asItem(), DARK_OAK_WOOD_SLAB.asItem())
+				.add(JUNGLE_WOOD_SLAB.asItem(), OAK_WOOD_SLAB.asItem(), SPRUCE_WOOD_SLAB.asItem())
+				.add(CHERRY_WOOD_SLAB.asItem(), MANGROVE_WOOD_SLAB.asItem())
+				.add(CASSIA_WOOD_SLAB.asItem(), DOGWOOD_WOOD_SLAB.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHARRABLE_WOODS)
+				.add(Items.ACACIA_WOOD, Items.BIRCH_WOOD, Items.DARK_OAK_WOOD)
+				.add(Items.JUNGLE_WOOD, Items.OAK_WOOD, Items.SPRUCE_WOOD)
+				.add(CHERRY_WOOD.asItem(), MANGROVE_WOOD.asItem())
+				.add(CASSIA_WOOD.asItem(), DOGWOOD_WOOD.asItem());
 		getOrCreateTagBuilder(ModItemTags.CHARRED_LOGS).add(CHARRED_LOG.asItem(), CHARRED_WOOD.asItem(), STRIPPED_CHARRED_LOG.asItem(), STRIPPED_CHARRED_WOOD.asItem());
 		getOrCreateTagBuilder(ModItemTags.CHERRY_LOGS).add(CHERRY_LOG.asItem(), CHERRY_WOOD.asItem(), STRIPPED_CHERRY_LOG.asItem(), STRIPPED_CHERRY_WOOD.asItem());
+		getOrCreateTagBuilder(ModItemTags.CHEST_BOATS);
 		getOrCreateTagBuilder(ModItemTags.CHESTPLATES)
 				.add(Items.LEATHER_CHESTPLATE, Items.CHAINMAIL_CHESTPLATE, Items.IRON_CHESTPLATE, Items.GOLDEN_CHESTPLATE, Items.DIAMOND_CHESTPLATE, Items.NETHERITE_CHESTPLATE)
-				.add(AMETHYST_CHESTPLATE, EMERALD_CHESTPLATE, FLEECE_CHESTPLATE, QUARTZ_CHESTPLATE, STUDDED_LEATHER_CHESTPLATE);
+				.add(AMETHYST_CHESTPLATE, EMERALD_CHESTPLATE, FLEECE_CHESTPLATE, QUARTZ_CHESTPLATE, SHULKER_CHESTPLATE, STUDDED_LEATHER_CHESTPLATE, TURTLE_CHESTPLATE)
+				.addTag(ModItemTags.COPPER_CHESTPLATES)
+				.addOptional(betternether("cincinnasite_chestplate")).addOptional(betternether("nether_ruby_chestplate"))
+				.addOptional(betterend("aeternium_chestplate")).addOptional(betterend("crystalite_chestplate"))
+				.addOptional(betterend("thallasium_chestplate")).addOptional(betterend("terminite_chestplate"));
 		getOrCreateTagBuilder(ModItemTags.COMPASSES).add(Items.COMPASS).add(RECOVERY_COMPASS);
 		getOrCreateTagBuilder(ModItemTags.COOKED_BEEF)
 				.add(Items.COOKED_BEEF)
@@ -210,7 +244,7 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.addOptional(croptopia("chicken_and_dumplings")).addOptional(croptopia("chicken_and_noodles"))
 				.addOptional(croptopia("chicken_and_rice")).addOptional(croptopia("fried_chicken"));
 		getOrCreateTagBuilder(ModItemTags.COOKED_FISH)
-				.add(Items.COOKED_COD, Items.COOKED_SALMON)
+				.add(Items.COOKED_COD, Items.COOKED_SALMON).add(COOKED_PIRANHA)
 				.add(ItemsRegistry.COOKED_COD_SLICE.get(), ItemsRegistry.COOKED_SALMON_SLICE.get())
 				.add(ItemsRegistry.FISH_STEW.get(), ItemsRegistry.BAKED_COD_STEW.get(), ItemsRegistry.GRILLED_SALMON.get())
 				.addOptional(croptopia("cooked_anchovy")).addOptional(croptopia("cooked_tuna"))
@@ -238,8 +272,25 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.add(Items.COOKED_MUTTON).add(COOKED_CHEVON)
 				.add(ItemsRegistry.COOKED_MUTTON_CHOPS.get(), ItemsRegistry.ROASTED_MUTTON_CHOPS.get())
 				.add(ItemsRegistry.MUTTON_WRAP.get(), ItemsRegistry.PASTA_WITH_MUTTON_CHOP.get());
+		getOrCreateTagBuilder(ModItemTags.COPPER_BOOTS)
+				.add(COPPER_BOOTS, EXPOSED_COPPER_BOOTS, WEATHERED_COPPER_BOOTS, OXIDIZED_COPPER_BOOTS)
+				.add(WAXED_COPPER_BOOTS, WAXED_EXPOSED_COPPER_BOOTS, WAXED_WEATHERED_COPPER_BOOTS, WAXED_OXIDIZED_COPPER_BOOTS);
+		getOrCreateTagBuilder(ModItemTags.COPPER_CHESTPLATES)
+				.add(COPPER_CHESTPLATE, EXPOSED_COPPER_CHESTPLATE, WEATHERED_COPPER_CHESTPLATE, OXIDIZED_COPPER_CHESTPLATE)
+				.add(WAXED_COPPER_CHESTPLATE, WAXED_EXPOSED_COPPER_CHESTPLATE, WAXED_WEATHERED_COPPER_CHESTPLATE, WAXED_OXIDIZED_COPPER_CHESTPLATE);
+		getOrCreateTagBuilder(ModItemTags.COPPER_HELMETS)
+				.add(COPPER_HELMET, EXPOSED_COPPER_HELMET, WEATHERED_COPPER_HELMET, OXIDIZED_COPPER_HELMET)
+				.add(WAXED_COPPER_HELMET, WAXED_EXPOSED_COPPER_HELMET, WAXED_WEATHERED_COPPER_HELMET, WAXED_OXIDIZED_COPPER_HELMET);
+		getOrCreateTagBuilder(ModItemTags.COPPER_LEGGINGS)
+				.add(COPPER_LEGGINGS, EXPOSED_COPPER_LEGGINGS, WEATHERED_COPPER_LEGGINGS, OXIDIZED_COPPER_LEGGINGS)
+				.add(WAXED_COPPER_LEGGINGS, WAXED_EXPOSED_COPPER_LEGGINGS, WAXED_WEATHERED_COPPER_LEGGINGS, WAXED_OXIDIZED_COPPER_LEGGINGS);
 		getOrCreateTagBuilder(ModItemTags.DECORATED_POT_SHARDS).add(Items.BRICK)
-				.add(POTTERY_SHARD_ARCHER, POTTERY_SHARD_PRIZE, POTTERY_SHARD_ARMS_UP, POTTERY_SHARD_SKULL);
+				.add(ANGLER_POTTERY_SHERD, ARCHER_POTTERY_SHERD, ARMS_UP_POTTERY_SHERD, BLADE_POTTERY_SHERD)
+				.add(BREWER_POTTERY_SHERD, BURN_POTTERY_SHERD, DANGER_POTTERY_SHERD, EXPLORER_POTTERY_SHERD)
+				.add(FRIEND_POTTERY_SHERD, HEART_POTTERY_SHERD, HEARTBREAK_POTTERY_SHERD, HOWL_POTTERY_SHERD)
+				.add(MINER_POTTERY_SHERD, MOURNER_POTTERY_SHERD, PLENTY_POTTERY_SHERD, PRIZE_POTTERY_SHERD)
+				.add(SHEAF_POTTERY_SHERD, SHELTER_POTTERY_SHERD, SKULL_POTTERY_SHERD, SNORT_POTTERY_SHERD);
+		getOrCreateTagBuilder(ModItemTags.DOGWOOD_LOGS).add(DOGWOOD_LOG.asItem(), DOGWOOD_WOOD.asItem(), STRIPPED_DOGWOOD_LOG.asItem(), STRIPPED_DOGWOOD_WOOD.asItem());
 		getOrCreateTagBuilder(ModItemTags.EDIBLE_BEEF).addTag(ModItemTags.RAW_BEEF).addTag(ModItemTags.COOKED_BEEF);
 		getOrCreateTagBuilder(ModItemTags.EDIBLE_BIRD).addTag(ModItemTags.RAW_BIRD).addTag(ModItemTags.COOKED_BIRD);
 		getOrCreateTagBuilder(ModItemTags.EDIBLE_EGG)
@@ -265,7 +316,8 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 						WEATHERED_COPPER_ENDER_TORCH.asItem(), OXIDIZED_COPPER_ENDER_TORCH.asItem(),
 						WAXED_COPPER_ENDER_TORCH.asItem(), WAXED_EXPOSED_COPPER_ENDER_TORCH.asItem(),
 						WAXED_WEATHERED_COPPER_ENDER_TORCH.asItem(), WAXED_OXIDIZED_COPPER_ENDER_TORCH.asItem())
-				.add(BAMBOO_ENDER_TORCH.asItem(), BONE_ENDER_TORCH.asItem(), IRON_ENDER_TORCH.asItem(), GOLD_ENDER_TORCH.asItem(), NETHERITE_ENDER_TORCH.asItem());
+				.add(BAMBOO_ENDER_TORCH.asItem(), DRIED_BAMBOO_ENDER_TORCH.asItem(), BONE_ENDER_TORCH.asItem(), BLAZE_ENDER_TORCH.asItem())
+				.add(IRON_ENDER_TORCH.asItem(), GOLD_ENDER_TORCH.asItem(), NETHERITE_ENDER_TORCH.asItem(), PRISMARINE_ENDER_TORCH.asItem());
 		getOrCreateTagBuilder(ModItemTags.FEATHERS).add(Items.FEATHER, FANCY_FEATHER).add(BLACK_FEATHER, RED_FEATHER);
 		getOrCreateTagBuilder(ModItemTags.FLEECE)
 				.add(FLEECE.values().stream().map(BlockContainer::asItem).toArray(Item[]::new))
@@ -299,36 +351,56 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.addOptional(croptopia("tortilla")).addOptional(croptopia("buttered_toast")).addOptional(croptopia("grilled_cheese"))
 				.addOptional(croptopia("nougat")).addOptional(croptopia("pizza")).addOptional(croptopia("cheese_pizza"))
 				.addOptional(croptopia("toast_sandwich")).addOptional(croptopia("corn_bread"));
-		getOrCreateTagBuilder(ModItemTags.HEAD_WEARABLE_BLOCKS)
-				.add(PIGLIN_HEAD.asItem()).addTag(ModItemTags.CARVED_MELONS).addTag(ModItemTags.CARVED_PUMPKINS);
+		getOrCreateTagBuilder(ModItemTags.HAMMERS).add(GRAVITY_HAMMER, REPULSION_HAMMER);
+		getOrCreateTagBuilder(ModItemTags.HEAD_WEARABLE_BLOCKS).add(PIGLIN_HEAD.asItem()).addTag(ModItemTags.CARVED_GOURDS);
 		getOrCreateTagBuilder(ModItemTags.HELMETS)
 				.add(Items.LEATHER_HELMET, Items.CHAINMAIL_HELMET, Items.IRON_HELMET, Items.GOLDEN_HELMET, Items.DIAMOND_HELMET, Items.NETHERITE_HELMET)
-				.add(AMETHYST_HELMET, EMERALD_HELMET, FLEECE_HELMET, QUARTZ_HELMET, STUDDED_LEATHER_HELMET);
-		getOrCreateTagBuilder(ModItemTags.HOES)
+				.add(AMETHYST_HELMET, EMERALD_HELMET, FLEECE_HELMET, QUARTZ_HELMET, SHULKER_HELMET, STUDDED_LEATHER_HELMET).addTag(ModItemTags.COPPER_HELMETS)
+				.addOptional(betternether("cincinnasite_helmet")).addOptional(betternether("nether_ruby_helmet"))
+				.addOptional(betterend("aeternium_helmet")).addOptional(betterend("crystalite_helmet"))
+				.addOptional(betterend("thallasium_helmet")).addOptional(betterend("terminite_helmet"));
+		getOrCreateTagBuilder(ModItemTags.HOES).add(ECHO_HOE)
 				.add(Items.WOODEN_HOE, Items.STONE_HOE, Items.IRON_HOE, Items.GOLDEN_HOE, Items.DIAMOND_HOE, Items.NETHERITE_HOE)
-				.add(AMETHYST_HOE, ECHO_HOE, EMERALD_HOE, QUARTZ_HOE)
-				.add(COPPER_HOE, EXPOSED_COPPER_HOE, WEATHERED_COPPER_HOE, OXIDIZED_COPPER_HOE)
-				.add(WAXED_COPPER_HOE, WAXED_EXPOSED_COPPER_HOE, WAXED_WEATHERED_COPPER_HOE, WAXED_OXIDIZED_COPPER_HOE);
+				.addOptional(betternether("cincinnasite_hoe")).addOptional(betternether("cincinnasite_hoe_diamond"))
+				.addOptional(betternether("nether_ruby_hoe")).addOptional(betterend("aeternium_hoe"))
+				.addOptional(betterend("thallasium_hoe")).addOptional(betterend("terminite_hoe"));
 		getOrCreateTagBuilder(ModItemTags.KNIVES)
-				.add(ItemsRegistry.FLINT_KNIFE.get(), ItemsRegistry.IRON_KNIFE.get(), ItemsRegistry.GOLDEN_KNIFE.get(), ItemsRegistry.DIAMOND_KNIFE.get(), ItemsRegistry.NETHERITE_KNIFE.get())
-				.add(AMETHYST_KNIFE, ECHO_KNIFE, EMERALD_KNIFE, QUARTZ_KNIFE)
-				.add(COPPER_KNIFE, EXPOSED_COPPER_KNIFE, WEATHERED_COPPER_KNIFE, OXIDIZED_COPPER_KNIFE)
-				.add(WAXED_COPPER_KNIFE, WAXED_EXPOSED_COPPER_KNIFE, WAXED_WEATHERED_COPPER_KNIFE, WAXED_OXIDIZED_COPPER_KNIFE);
+				.add(ItemsRegistry.FLINT_KNIFE.get(), ItemsRegistry.IRON_KNIFE.get(), ItemsRegistry.GOLDEN_KNIFE.get(), ItemsRegistry.DIAMOND_KNIFE.get(), ItemsRegistry.NETHERITE_KNIFE.get());
 		getOrCreateTagBuilder(ModItemTags.LEGGINGS)
 				.add(Items.LEATHER_LEGGINGS, Items.CHAINMAIL_LEGGINGS, Items.IRON_LEGGINGS, Items.GOLDEN_LEGGINGS, Items.DIAMOND_LEGGINGS, Items.NETHERITE_LEGGINGS)
-				.add(AMETHYST_LEGGINGS, EMERALD_LEGGINGS, FLEECE_LEGGINGS, QUARTZ_LEGGINGS, STUDDED_LEATHER_LEGGINGS);
+				.add(AMETHYST_LEGGINGS, EMERALD_LEGGINGS, FLEECE_LEGGINGS, QUARTZ_LEGGINGS, SHULKER_LEGGINGS, STUDDED_LEATHER_LEGGINGS).addTag(ModItemTags.COPPER_LEGGINGS)
+				.addOptional(betternether("cincinnasite_leggings")).addOptional(betternether("nether_ruby_leggings"))
+				.addOptional(betterend("aeternium_leggings")).addOptional(betterend("crystalite_leggings"))
+				.addOptional(betterend("thallasium_leggings")).addOptional(betterend("terminite_leggings"));
 		getOrCreateTagBuilder(ModItemTags.LIGHTS_FLINT).add(Items.IRON_SWORD, ItemsRegistry.IRON_KNIFE.get());
+		getOrCreateTagBuilder(ModItemTags.LOG_SLABS)
+				.add(ACACIA_LOG_SLAB.asItem(), STRIPPED_ACACIA_LOG_SLAB.asItem(), ACACIA_WOOD_SLAB.asItem(), STRIPPED_ACACIA_WOOD_SLAB.asItem())
+				.add(BIRCH_LOG_SLAB.asItem(), STRIPPED_BIRCH_LOG_SLAB.asItem(), BIRCH_WOOD_SLAB.asItem(), STRIPPED_BIRCH_WOOD_SLAB.asItem())
+				.add(DARK_OAK_LOG_SLAB.asItem(), STRIPPED_DARK_OAK_LOG_SLAB.asItem(), DARK_OAK_WOOD_SLAB.asItem(), STRIPPED_DARK_OAK_WOOD_SLAB.asItem())
+				.add(JUNGLE_LOG_SLAB.asItem(), STRIPPED_JUNGLE_LOG_SLAB.asItem(), JUNGLE_WOOD_SLAB.asItem(), STRIPPED_JUNGLE_WOOD_SLAB.asItem())
+				.add(OAK_LOG_SLAB.asItem(), STRIPPED_OAK_LOG_SLAB.asItem(), OAK_WOOD_SLAB.asItem(), STRIPPED_OAK_WOOD_SLAB.asItem())
+				.add(SPRUCE_LOG_SLAB.asItem(), STRIPPED_SPRUCE_LOG_SLAB.asItem(), SPRUCE_WOOD_SLAB.asItem(), STRIPPED_SPRUCE_WOOD_SLAB.asItem())
+				.add(CRIMSON_STEM_SLAB.asItem(), STRIPPED_CRIMSON_STEM_SLAB.asItem(), CRIMSON_HYPHAE_SLAB.asItem(), STRIPPED_CRIMSON_HYPHAE_SLAB.asItem())
+				.add(WARPED_STEM_SLAB.asItem(), STRIPPED_WARPED_STEM_SLAB.asItem(), WARPED_HYPHAE_SLAB.asItem(), STRIPPED_WARPED_HYPHAE_SLAB.asItem())
+				.add(BAMBOO_BLOCK_SLAB.asItem(), STRIPPED_BAMBOO_BLOCK_SLAB.asItem(), DRIED_BAMBOO_BLOCK_SLAB.asItem(), STRIPPED_DRIED_BAMBOO_BLOCK_SLAB.asItem(), SUGAR_CANE_BLOCK_SLAB.asItem())
+				.add(CHERRY_LOG_SLAB.asItem(), STRIPPED_CHERRY_LOG_SLAB.asItem(), CHERRY_WOOD_SLAB.asItem(), STRIPPED_CHERRY_WOOD_SLAB.asItem())
+				.add(MANGROVE_LOG_SLAB.asItem(), STRIPPED_MANGROVE_LOG_SLAB.asItem(), MANGROVE_WOOD_SLAB.asItem(), STRIPPED_MANGROVE_WOOD_SLAB.asItem())
+				.add(CHARRED_LOG_SLAB.asItem(), STRIPPED_CHARRED_LOG_SLAB.asItem(), CHARRED_WOOD_SLAB.asItem(), STRIPPED_CHARRED_WOOD_SLAB.asItem())
+				.add(CASSIA_LOG_SLAB.asItem(), STRIPPED_CASSIA_LOG_SLAB.asItem(), CASSIA_WOOD_SLAB.asItem(), STRIPPED_CASSIA_WOOD_SLAB.asItem())
+				.add(DOGWOOD_LOG_SLAB.asItem(), STRIPPED_DOGWOOD_LOG_SLAB.asItem(), DOGWOOD_WOOD_SLAB.asItem(), STRIPPED_DOGWOOD_WOOD_SLAB.asItem())
+				.add(GILDED_STEM_SLAB.asItem(), STRIPPED_GILDED_STEM_SLAB.asItem(), GILDED_HYPHAE_SLAB.asItem(), STRIPPED_GILDED_HYPHAE_SLAB.asItem());
 		getOrCreateTagBuilder(ModItemTags.MANGROVE_LOGS).add(MANGROVE_LOG.asItem(), MANGROVE_WOOD.asItem(), STRIPPED_MANGROVE_LOG.asItem(), STRIPPED_MANGROVE_WOOD.asItem());
-		getOrCreateTagBuilder(ModItemTags.PICKAXES)
+		getOrCreateTagBuilder(ModItemTags.PICKAXES).add(ECHO_PICKAXE)
 				.add(Items.WOODEN_PICKAXE, Items.STONE_PICKAXE, Items.IRON_PICKAXE, Items.GOLDEN_PICKAXE, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE)
-				.add(AMETHYST_PICKAXE, ECHO_PICKAXE, EMERALD_PICKAXE, QUARTZ_PICKAXE)
-				.add(COPPER_PICKAXE, EXPOSED_COPPER_PICKAXE, WEATHERED_COPPER_PICKAXE, OXIDIZED_COPPER_PICKAXE)
-				.add(WAXED_COPPER_PICKAXE, WAXED_EXPOSED_COPPER_PICKAXE, WAXED_WEATHERED_COPPER_PICKAXE, WAXED_OXIDIZED_COPPER_PICKAXE);
+				.addOptional(betternether("cincinnasite_pickaxe")).addOptional(betternether("cincinnasite_pickaxe_diamond"))
+				.addOptional(betternether("nether_ruby_pickaxe")).addOptional(betterend("aeternium_pickaxe"))
+				.addOptional(betterend("thallasium_pickaxe")).addOptional(betterend("terminite_pickaxe"));
 		getOrCreateTagBuilder(ModItemTags.RAW_BEEF).add(Items.BEEF)
 				.add(ItemsRegistry.MINCED_BEEF.get());
 		getOrCreateTagBuilder(ModItemTags.RAW_BIRD).add(Items.CHICKEN)
 				.add(ItemsRegistry.CHICKEN_CUTS.get());
 		getOrCreateTagBuilder(ModItemTags.RAW_FISH).add(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH)
+				.add(PIRANHA)
 				.add(ItemsRegistry.COD_SLICE.get(), ItemsRegistry.SALMON_SLICE.get())
 				.addOptional(croptopia("anchovy")).addOptional(croptopia("tuna"))
 				.addOptional(betterend("end_fish_raw"));
@@ -346,9 +418,20 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.addOptional(croptopia("oyster")).addOptional(croptopia("shrimp"));
 		getOrCreateTagBuilder(ModItemTags.RAW_SHEEP).add(Items.MUTTON).add(CHEVON)
 				.add(ItemsRegistry.MUTTON_CHOPS.get());
+		getOrCreateTagBuilder(ModItemTags.ROWS).add(BAMBOO_ROW.asItem(), DRIED_BAMBOO_ROW.asItem(), BONE_ROW.asItem(), SUGAR_CANE_ROW.asItem());
 		getOrCreateTagBuilder(ModItemTags.SEEDS)
 				.add(Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.WHEAT_SEEDS)
 				.add(TORCHFLOWER_CROP.asItem())
+				.add(BUTTERCUP_PARTS.asItem(), PINK_DAISY_PARTS.asItem())
+				.add(ROSE_PARTS.asItem(), BLUE_ROSE_PARTS.asItem(), MAGENTA_TULIP_PARTS.asItem(), MARIGOLD_PARTS.asItem())
+				.add(INDIGO_ORCHID_PARTS.asItem(), MAGENTA_ORCHID_PARTS.asItem(), ORANGE_ORCHID_PARTS.asItem(), PURPLE_ORCHID_PARTS.asItem())
+				.add(RED_ORCHID_PARTS.asItem(), WHITE_ORCHID_PARTS.asItem(), YELLOW_ORCHID_PARTS.asItem())
+				.add(PINK_ALLIUM_PARTS.asItem(), LAVENDER_PARTS.asItem(), HYDRANGEA_PARTS.asItem(), PAEONIA_PARTS.asItem(), ASTER_PARTS.asItem())
+				.add(AMARANTH_PARTS.asItem(), VANILLA_PARTS.asItem())
+				.add(ALLIUM_PARTS.asItem(), AZURE_BLUET_PARTS.asItem(), BLUE_ORCHID_PARTS.asItem(), CORNFLOWER_PARTS.asItem())
+				.add(DANDELION_PARTS.asItem(), LILAC_PARTS.asItem(), LILY_OF_THE_VALLEY_PARTS.asItem(), ORANGE_TULIP_PARTS.asItem())
+				.add(OXEYE_DAISY_PARTS.asItem(), PEONY_PARTS.asItem(), PINK_TULIP_PARTS.asItem(), POPPY_PARTS.asItem())
+				.add(SUNFLOWER_PARTS.asItem(), WHITE_TULIP_PARTS.asItem(), WITHER_ROSE_PARTS.asItem())
 				.add(ItemsRegistry.CABBAGE_SEEDS.get(), ItemsRegistry.TOMATO_SEED.get())
 				.addOptional(croptopia("artichoke_seed")).addOptional(croptopia("asparagus_seed"))
 				.addOptional(croptopia("barley_seed")).addOptional(croptopia("basil_seed"))
@@ -379,19 +462,26 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.addOptional(croptopia("tomato_seed")).addOptional(croptopia("turmeric_seed"))
 				.addOptional(croptopia("turnip_seed")).addOptional(croptopia("vanilla_seed"))
 				.addOptional(croptopia("yam_seed")).addOptional(croptopia("zucchini"));
-		getOrCreateTagBuilder(ModItemTags.SHEARS).add(Items.SHEARS);
-		getOrCreateTagBuilder(ModItemTags.SHOVELS)
+		getOrCreateTagBuilder(ModItemTags.SHEARS).add(Items.SHEARS).addOptional(betternether("cincinnasite_shears"));
+		getOrCreateTagBuilder(ModItemTags.SHOVELS).add(ECHO_SHOVEL)
 				.add(Items.WOODEN_SHOVEL, Items.STONE_SHOVEL, Items.IRON_SHOVEL, Items.GOLDEN_SHOVEL, Items.DIAMOND_SHOVEL, Items.NETHERITE_SHOVEL)
-				.add(AMETHYST_SHOVEL, ECHO_SHOVEL, EMERALD_SHOVEL, QUARTZ_SHOVEL)
-				.add(COPPER_SHOVEL, EXPOSED_COPPER_SHOVEL, WEATHERED_COPPER_SHOVEL, OXIDIZED_COPPER_SHOVEL)
-				.add(WAXED_COPPER_SHOVEL, WAXED_EXPOSED_COPPER_SHOVEL, WAXED_WEATHERED_COPPER_SHOVEL, WAXED_OXIDIZED_COPPER_SHOVEL);
+				.addOptional(betternether("cincinnasite_shovel")).addOptional(betternether("cincinnasite_shovel_diamond"))
+				.addOptional(betternether("nether_ruby_shovel")).addOptional(betterend("aeternium_shovel"))
+				.addOptional(betterend("thallasium_shovel")).addOptional(betterend("terminite_shovel"));
 		getOrCreateTagBuilder(ModItemTags.SNIFFER_FOOD).add(TORCHFLOWER_CROP.asItem());
+		getOrCreateTagBuilder(ModItemTags.SOUL_LANTERNS).add(Items.SOUL_LANTERN)
+				.add(IRON_SOUL_LANTERN.asItem(), GOLD_SOUL_LANTERN.asItem(), NETHERITE_SOUL_LANTERN.asItem())
+				.add(COPPER_SOUL_LANTERN.asItem(), EXPOSED_COPPER_SOUL_LANTERN.asItem())
+				.add(WEATHERED_COPPER_SOUL_LANTERN.asItem(), OXIDIZED_COPPER_SOUL_LANTERN.asItem())
+				.add(WAXED_COPPER_SOUL_LANTERN.asItem(), WAXED_EXPOSED_COPPER_SOUL_LANTERN.asItem())
+				.add(WAXED_WEATHERED_COPPER_SOUL_LANTERN.asItem(), WAXED_OXIDIZED_COPPER_SOUL_LANTERN.asItem());
 		getOrCreateTagBuilder(ModItemTags.SOUL_TORCHES).add(Items.SOUL_TORCH)
 				.add(COPPER_SOUL_TORCH.asItem(), EXPOSED_COPPER_SOUL_TORCH.asItem(),
 						WEATHERED_COPPER_SOUL_TORCH.asItem(), OXIDIZED_COPPER_SOUL_TORCH.asItem(),
 						WAXED_COPPER_SOUL_TORCH.asItem(), WAXED_EXPOSED_COPPER_SOUL_TORCH.asItem(),
 						WAXED_WEATHERED_COPPER_SOUL_TORCH.asItem(), WAXED_OXIDIZED_COPPER_SOUL_TORCH.asItem())
-				.add(BAMBOO_SOUL_TORCH.asItem(), BONE_SOUL_TORCH.asItem(), IRON_SOUL_TORCH.asItem(), GOLD_SOUL_TORCH.asItem(), NETHERITE_SOUL_TORCH.asItem());
+				.add(BAMBOO_SOUL_TORCH.asItem(), DRIED_BAMBOO_SOUL_TORCH.asItem(), BONE_SOUL_TORCH.asItem(), BLAZE_SOUL_TORCH.asItem())
+				.add(IRON_SOUL_TORCH.asItem(), GOLD_SOUL_TORCH.asItem(), NETHERITE_SOUL_TORCH.asItem(), PRISMARINE_SOUL_TORCH.asItem());
 		getOrCreateTagBuilder(ModItemTags.SWEETS).add(Items.CAKE, Items.COOKIE, Items.PUMPKIN_PIE)
 				.add(ItemsRegistry.CHOCOLATE_PIE.get(), ItemsRegistry.CHOCOLATE_PIE_SLICE.get(), ItemsRegistry.HONEY_COOKIE.get())
 				.add(ItemsRegistry.PIE_CRUST.get(), ItemsRegistry.CAKE_SLICE.get(), ItemsRegistry.MELON_POPSICLE.get())
@@ -405,40 +495,45 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 				.addOptional(croptopia("sweet_crepes")).addOptional(croptopia("trail_mix")).addOptional(croptopia("protein_bar"))
 				.addOptional(croptopia("tofu_and_dumplings"))
 				.addTag(ModItemTags.NOURISH_SWEETS);
-		getOrCreateTagBuilder(ModItemTags.SWORDS)
+		getOrCreateTagBuilder(ModItemTags.SWORDS).add(ECHO_SWORD)
 				.add(Items.WOODEN_SWORD, Items.STONE_SWORD, Items.IRON_SWORD, Items.GOLDEN_SWORD, Items.DIAMOND_SWORD, Items.NETHERITE_SWORD)
-				.add(AMETHYST_SWORD, ECHO_SWORD, EMERALD_SWORD, QUARTZ_SWORD)
-				.add(COPPER_SWORD, EXPOSED_COPPER_SWORD, WEATHERED_COPPER_SWORD, OXIDIZED_COPPER_SWORD)
-				.add(WAXED_COPPER_SWORD, WAXED_EXPOSED_COPPER_SWORD, WAXED_WEATHERED_COPPER_SWORD, WAXED_OXIDIZED_COPPER_SWORD);
+				.addOptional(betternether("cincinnasite_sword")).addOptional(betternether("cincinnasite_sword_diamond"))
+				.addOptional(betternether("nether_ruby_sword")).addOptional(betterend("aeternium_sword"))
+				.addOptional(betterend("thallasium_sword")).addOptional(betterend("terminite_sword"));
+		getOrCreateTagBuilder(ModItemTags.TOOLS)
+				.addTag(ModItemTags.AXES)
+				.addTag(ModItemTags.HOES)
+				.addTag(ModItemTags.PICKAXES)
+				.addTag(ModItemTags.SHOVELS)
+				.addTag(ModItemTags.SWORDS)
+				.add(Items.TRIDENT);
 		getOrCreateTagBuilder(ModItemTags.TORCHES).add(Items.TORCH)
 				.add(COPPER_TORCH.asItem(), EXPOSED_COPPER_TORCH.asItem(),
 						WEATHERED_COPPER_TORCH.asItem(), OXIDIZED_COPPER_TORCH.asItem(),
 						WAXED_COPPER_TORCH.asItem(), WAXED_EXPOSED_COPPER_TORCH.asItem(),
 						WAXED_WEATHERED_COPPER_TORCH.asItem(), WAXED_OXIDIZED_COPPER_TORCH.asItem())
-				.add(BAMBOO_TORCH.asItem(), BONE_TORCH.asItem(), IRON_TORCH.asItem(), GOLD_TORCH.asItem(), NETHERITE_TORCH.asItem());
+				.add(BAMBOO_TORCH.asItem(), DRIED_BAMBOO_TORCH.asItem(), PRISMARINE_TORCH.asItem(), BLAZE_TORCH.asItem())
+				.add(BONE_TORCH.asItem(), IRON_TORCH.asItem(), GOLD_TORCH.asItem(), NETHERITE_TORCH.asItem());
 		getOrCreateTagBuilder(ModItemTags.UNDERWATER_TORCHES).add(UNDERWATER_TORCH.asItem())
 				.add(UNDERWATER_COPPER_TORCH.asItem(), EXPOSED_UNDERWATER_COPPER_TORCH.asItem(),
 						WEATHERED_UNDERWATER_COPPER_TORCH.asItem(), OXIDIZED_UNDERWATER_COPPER_TORCH.asItem(),
 						WAXED_UNDERWATER_COPPER_TORCH.asItem(), WAXED_EXPOSED_UNDERWATER_COPPER_TORCH.asItem(),
 						WAXED_WEATHERED_UNDERWATER_COPPER_TORCH.asItem(), WAXED_OXIDIZED_UNDERWATER_COPPER_TORCH.asItem())
-				.add(UNDERWATER_BAMBOO_TORCH.asItem(), UNDERWATER_BONE_TORCH.asItem(), UNDERWATER_IRON_TORCH.asItem())
-				.add(UNDERWATER_GOLD_TORCH.asItem(), UNDERWATER_NETHERITE_TORCH.asItem());
-		getOrCreateTagBuilder(ModItemTags.TRIMMABLE_ARMOR);
-		getOrCreateTagBuilder(ModItemTags.TRIM_MATERIALS);
-		getOrCreateTagBuilder(ModItemTags.TRIM_TEMPLATES);
+				.add(UNDERWATER_BAMBOO_TORCH.asItem(), UNDERWATER_DRIED_BAMBOO_TORCH.asItem(), UNDERWATER_BONE_TORCH.asItem(), UNDERWATER_IRON_TORCH.asItem())
+				.add(UNDERWATER_GOLD_TORCH.asItem(), UNDERWATER_NETHERITE_TORCH.asItem(), UNDERWATER_PRISMARINE_TORCH.asItem(), UNDERWATER_BLAZE_TORCH.asItem());
 		getOrCreateTagBuilder(ModItemTags.TRIMMABLE_ARMOR)
 				.add(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS)
 				.add(Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS)
 				.add(Items.IRON_HELMET, Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS)
 				.add(Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS)
 				.add(Items.DIAMOND_HELMET, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_LEGGINGS, Items.DIAMOND_BOOTS)
-				.add(Items.TURTLE_HELMET)
-				.add(Items.NETHERITE_HELMET, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_LEGGINGS, Items.NETHERITE_BOOTS);
+				.add(Items.NETHERITE_HELMET, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_LEGGINGS, Items.NETHERITE_BOOTS)
+				.add(Items.TURTLE_HELMET);
 		getOrCreateTagBuilder(ModItemTags.TRIM_MATERIALS)
 				.add(Items.QUARTZ, Items.IRON_INGOT, Items.NETHERITE_INGOT, Items.REDSTONE, Items.COPPER_INGOT)
 				.add(Items.GOLD_INGOT, Items.EMERALD, Items.DIAMOND, Items.LAPIS_LAZULI, Items.AMETHYST_SHARD);
-		FabricTagBuilder<Item> TRIM_TEMPLATES = getOrCreateTagBuilder(ModItemTags.TRIM_TEMPLATES);
-		for (ArmorTrimPattern pattern : ArmorTrimPattern.values()) TRIM_TEMPLATES.add(pattern.asItem());
+		getOrCreateTagBuilder(ModItemTags.TRIM_TEMPLATES)
+				.add(Arrays.stream(ArmorTrimPattern.values()).map(ArmorTrimPattern::asItem).toArray(Item[]::new));
 		getOrCreateTagBuilder(ModItemTags.VEGETABLES).addTag(ModItemTags.GOLDEN_VEGETABLES)
 				.add(Items.CARROT, Items.POTATO, Items.BAKED_POTATO, Items.POISONOUS_POTATO, Items.BEETROOT, Items.DRIED_KELP)
 				.add(ItemsRegistry.CABBAGE.get(), ItemsRegistry.CABBAGE_LEAF.get(), ItemsRegistry.ONION.get(), ItemsRegistry.RICE.get())
@@ -466,6 +561,24 @@ public class ItemTagGenerator extends FabricTagProvider<Item> {
 		getOrCreateTagBuilder(ModItemTags.NOURISH_FRUIT);
 		getOrCreateTagBuilder(ModItemTags.NOURISH_SWEETS);
 		getOrCreateTagBuilder(ModItemTags.NOURISH_VEGETABLES);
+
 		getOrCreateTagBuilder(ModItemTags.ORIGINS_MEAT).addTag(ModItemTags.EDIBLE_MEAT);
+
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_AXES).addTag(ModItemTags.AXES);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_BOWS);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_CAKES);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_CROPS)
+				.add(Items.CARROT, Items.POTATO, Items.BEETROOT, Items.WHEAT, Items.PUMPKIN, Items.MELON)
+				.add(Items.SUGAR_CANE, Items.COCOA_BEANS, Items.SWEET_BERRIES, Items.GLOW_LICHEN);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_GOLDEN_ARMOUR);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_GOLDEN_TOOLS);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_HELMETS).addTag(ModItemTags.HELMETS);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_IRON_ARMOUR);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_IRON_TOOLS);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_MEAT).addTag(ModItemTags.EDIBLE_MEAT);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_NONMEAT);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_OGRE_ARMOUR)
+				.add(STUDDED_LEATHER_HELMET, STUDDED_LEATHER_CHESTPLATE, STUDDED_LEATHER_LEGGINGS, STUDDED_LEATHER_BOOTS);
+		getOrCreateTagBuilder(ModItemTags.MEDIEVAL_ORIGINS_SWORDS);
 	}
 }

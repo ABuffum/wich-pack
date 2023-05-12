@@ -1,6 +1,63 @@
 {
   "replace": false,
   "values": [
+    "wich:exposed_copper_helmet",
+    "wich:tinted_goggles",
+    "wich:waxed_exposed_copper_leggings",
+    "wich:shulker_leggings",
+    "wich:oxidized_copper_chestplate",
+    "wich:waxed_oxidized_copper_boots",
+    "wich:shulker_chestplate",
+    "wich:emerald_boots",
+    "wich:waxed_oxidized_copper_leggings",
+    "wich:waxed_weathered_copper_chestplate",
+    "wich:copper_leggings",
+    "wich:amethyst_helmet",
+    "wich:studded_leather_leggings",
+    "wich:waxed_copper_helmet",
+    "wich:waxed_copper_leggings",
+    "wich:ruby_goggles",
+    "wich:studded_leather_helmet",
+    "wich:copper_chestplate",
+    "wich:emerald_helmet",
+    "wich:shulker_boots",
+    "wich:waxed_copper_chestplate",
+    "wich:oxidized_copper_leggings",
+    "wich:amethyst_leggings",
+    "wich:waxed_exposed_copper_boots",
+    "wich:studded_leather_boots",
+    "wich:copper_boots",
+    "wich:waxed_exposed_copper_chestplate",
+    "wich:weathered_copper_boots",
+    "wich:waxed_oxidized_copper_helmet",
+    "wich:waxed_copper_boots",
+    "wich:copper_helmet",
+    "wich:waxed_weathered_copper_helmet",
+    "wich:waxed_oxidized_copper_chestplate",
+    "wich:quartz_chestplate",
+    "wich:exposed_copper_leggings",
+    "wich:turtle_chestplate",
+    "wich:weathered_copper_helmet",
+    "wich:emerald_chestplate",
+    "wich:emerald_leggings",
+    "wich:waxed_weathered_copper_leggings",
+    "wich:weathered_copper_leggings",
+    "wich:quartz_helmet",
+    "wich:exposed_copper_boots",
+    "wich:quartz_boots",
+    "wich:oxidized_copper_helmet",
+    "wich:lux_crown",
+    "wich:waxed_exposed_copper_helmet",
+    "wich:exposed_copper_chestplate",
+    "wich:amethyst_boots",
+    "wich:quartz_leggings",
+    "wich:studded_leather_chestplate",
+    "wich:amethyst_chestplate",
+    "wich:weathered_copper_chestplate",
+    "wich:oxidized_copper_boots",
+    "wich:shulker_helmet",
+    "wich:waxed_weathered_copper_boots",
+    "wich:turtle_boots",
     "minecraft:leather_helmet",
     "minecraft:chainmail_helmet",
     "minecraft:iron_helmet",
@@ -11,6 +68,32 @@
     "wich:emerald_helmet",
     "wich:fleece_helmet",
     "wich:quartz_helmet",
-    "wich:studded_leather_helmet"
+    "wich:shulker_helmet",
+    "wich:studded_leather_helmet",
+    "#wich:copper_helmets",
+    {
+      "id": "betternether:cincinnasite_helmet",
+      "required": false
+    },
+    {
+      "id": "betternether:nether_ruby_helmet",
+      "required": false
+    },
+    {
+      "id": "betterend:aeternium_helmet",
+      "required": false
+    },
+    {
+      "id": "betterend:crystalite_helmet",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_helmet",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_helmet",
+      "required": false
+    }
   ]
 }

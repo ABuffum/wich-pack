@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/juicer",
+  "textures": {
+    "front": "wich:block/juicer_loaded"
+  }
+}

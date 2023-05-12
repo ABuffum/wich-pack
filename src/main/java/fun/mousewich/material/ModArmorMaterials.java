@@ -13,26 +13,42 @@ import net.minecraft.util.Lazy;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
+	//TODO: Make a class out of the armor materials maybe? More flexibility for separate mod implementations
 	AMETHYST("amethyst", 33, new int[]{ 3, 5, 7, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.0F, 0.0F,
 			() -> Ingredient.ofItems(Items.AMETHYST_SHARD), 10),
-	COPPER("copper",11, new int[]{ 1, 4, 5, 2 }, 17, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
+	COPPER("copper",11, new int[] { 1, 4, 5, 2 }, 17, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
 			() -> Ingredient.ofItems(Items.COPPER_INGOT), 6),
-	ECHO("echo", 37, new int[]{ 3, 6, 8, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.0F, 0.5F,
+	EXPOSED_COPPER("exposed_copper",11, new int[] { 1, 4, 5, 2 }, 17, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
+			() -> Ingredient.ofItems(Items.COPPER_INGOT), 6),
+	WEATHERED_COPPER("weathered_copper",11, new int[] { 1, 4, 5, 2 }, 17, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
+			() -> Ingredient.ofItems(Items.COPPER_INGOT), 6),
+	OXIDIZED_COPPER("oxidized_copper",11, new int[] { 1, 4, 5, 2 }, 17, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
+			() -> Ingredient.ofItems(Items.COPPER_INGOT), 6),
+	ECHO("echo", 37, new int[] { 3, 6, 8, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.0F, 0.5F,
 			() -> Ingredient.ofItems(ModBase.ECHO_SHARD), 10),
-	EMERALD("emerald", 27, new int[]{ 3, 5, 6, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.5F, 0.0F,
+	EMERALD("emerald", 27, new int[] { 3, 5, 6, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.5F, 0.0F,
 			() -> Ingredient.ofItems(Items.EMERALD), 9),
-	FLEECE("fleece", 4, new int[]{ 1, 1, 2, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F,
+	FLEECE("fleece", 4, new int[] { 1, 1, 2, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F,
 			() -> Ingredient.fromTag(ModItemTags.FLEECE), 3),
-	OBSIDIAN("obsidian", 33, new int[]{ 3, 6, 8, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F, 0.0F,
+	OBSIDIAN("obsidian", 33, new int[] { 3, 6, 8, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.5F, 0.0F,
 			() -> Ingredient.ofItems(Items.OBSIDIAN), 10),
-	QUARTZ("quartz", 20, new int[]{ 2, 5, 5, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.0F, 0.0F,
+	QUARTZ("quartz", 20, new int[] { 2, 5, 5, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.0F, 0.0F,
 			() -> Ingredient.ofItems(Items.QUARTZ), 8),
-	STUDDED_LEATHER("studded_leather", 5, new int[]{ 2, 3, 4, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F,
+	RUBY_GOGGLES("ruby_goggles", 25, new int[]{ 3, 5, 6, 3 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
+			() -> Ingredient.ofItems(Items.LEATHER, ModBase.RUBY), 0),
+	SHULKER("shulker", 30, new int[] { 3, 5, 6, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.0F, 0.25F,
+			() -> Ingredient.ofItems(Items.SHULKER_SHELL), 0),
+	STUDDED_LEATHER("studded_leather", 5, new int[] { 2, 3, 4, 2 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F,
 			() -> Ingredient.ofItems(Items.IRON_NUGGET), 4),
-	TINTED_GOGGLES("tinted_goggles", 25, new int[]{ 3, 5, 6, 3 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
-			() -> Ingredient.ofItems(Items.TINTED_GLASS, Items.LEATHER, Items.AMETHYST_SHARD), 0);
+	TINTED_GOGGLES("tinted_goggles", 25, new int[] { 3, 5, 6, 3 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
+			() -> Ingredient.ofItems(Items.LEATHER, Items.AMETHYST_SHARD), 0),
+	TURTLE("turtle", 25, new int[] { 2, 5, 6, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, 0.0f, 0.25f,
+			() -> Ingredient.ofItems(Items.SCUTE), 0),
+	//Haven
+	LUX_CROWN("lux_crown", 7, new int[]{ 1, 3, 5, 2 }, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0f, 0.0f,
+			() -> Ingredient.ofItems(Items.GOLD_INGOT), 7);
 
-	private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};
+	private static final int[] BASE_DURABILITY = new int[] { 13, 15, 16, 11 };
 	private final String name;
 	private final int durabilityMultiplier;
 	private final int[] protectionAmounts;
@@ -43,7 +59,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
 	private final Lazy<Ingredient> repairIngredientSupplier;
 	private final int horseProtectionAmount;
 
-	private ModArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredientSupplier, int horseProtectionAmount) {
+	ModArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredientSupplier, int horseProtectionAmount) {
 		this.name = name;
 		this.durabilityMultiplier = durabilityMultiplier;
 		this.protectionAmounts = protectionAmounts;

@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(TrackTargetGoal.class)
 public interface TrackTargetGoalAccessor {
 	@Accessor("mob")
-	public MobEntity getMob();
+	MobEntity getMob();
 }

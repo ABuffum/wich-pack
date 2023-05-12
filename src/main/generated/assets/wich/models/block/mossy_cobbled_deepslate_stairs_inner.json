@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "wich:block/mossy_cobbled_deepslate",
+    "top": "wich:block/mossy_cobbled_deepslate",
+    "side": "wich:block/mossy_cobbled_deepslate"
+  }
+}

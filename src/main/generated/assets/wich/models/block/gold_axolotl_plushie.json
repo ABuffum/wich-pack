@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/axolotl",
+  "textures": {
+    "all": "wich:block/gold_axolotl_plushie",
+    "particle": "wich:block/gold_axolotl_plushie"
+  }
+}

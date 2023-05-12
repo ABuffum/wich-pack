@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:lectern",
+    "wich:acacia_lectern",
+    "wich:birch_lectern",
+    "wich:crimson_lectern",
+    "wich:dark_oak_lectern",
+    "wich:jungle_lectern",
+    "wich:spruce_lectern",
+    "wich:warped_lectern",
+    "wich:bamboo_lectern",
+    "wich:mangrove_lectern",
+    "wich:cherry_lectern",
+    "wich:charred_lectern",
+    "wich:cassia_lectern",
+    "wich:dogwood_lectern"
+  ]
+}

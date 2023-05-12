@@ -1,7 +1,7 @@
 package fun.mousewich.entity.ai.sensor;
 
 import fun.mousewich.ModBase;
-import fun.mousewich.mixins.entity.ai.SensorTypeInvoker;
+import fun.mousewich.mixins.entity.ai.brain.sensor.SensorTypeInvoker;
 import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.util.Identifier;

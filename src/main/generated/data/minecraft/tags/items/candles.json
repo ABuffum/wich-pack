@@ -1,7 +1,11 @@
 {
   "replace": false,
   "values": [
+    "wich:netherrack_candle",
+    "wich:ender_candle",
     "wich:soul_candle",
-    "wich:ender_candle"
+    "wich:soul_candle",
+    "wich:ender_candle",
+    "wich:netherrack_candle"
   ]
 }

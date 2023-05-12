@@ -1,10 +1,13 @@
 {
   "replace": false,
   "values": [
+    "minecraft:bamboo_slab",
     "wich:charred_slab",
     "minecraft:mangrove_slab",
     "minecraft:bamboo_slab",
     "minecraft:bamboo_mosaic_slab",
-    "minecraft:cherry_slab"
+    "minecraft:cherry_slab",
+    "wich:cassia_slab",
+    "wich:dogwood_slab"
   ]
 }

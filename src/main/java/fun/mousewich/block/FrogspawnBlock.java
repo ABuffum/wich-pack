@@ -1,7 +1,7 @@
 package fun.mousewich.block;
 
 import fun.mousewich.ModBase;
-import fun.mousewich.entity.frog.TadpoleEntity;
+import fun.mousewich.entity.passive.frog.TadpoleEntity;
 import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;

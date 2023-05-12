@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:pumpkin",
-    "minecraft:melon"
+    "minecraft:melon",
+    "#wich:pumpkins"
   ]
 }

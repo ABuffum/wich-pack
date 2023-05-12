@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:pink_slime_bottle"
+    }
+  ],
+  "result": {
+    "item": "wich:pink_slime_ball"
+  }
+}

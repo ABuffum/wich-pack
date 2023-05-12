@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.mixins.entity.SignBlockEntityAccessor;
-import fun.mousewich.util.Rotationutils;
+import fun.mousewich.util.RotationUtil;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
@@ -93,11 +93,11 @@ public class HangingSignBlock extends AbstractSignBlock {
 				Direction direction2 = blockState.get(WallHangingSignBlock.FACING);
 				if (direction2.getAxis().test(direction)) bl2 = false;
 			}
-			else if (blockState.contains(ROTATION) && (optional = Rotationutils.toDirection(blockState.get(ROTATION))).isPresent() && optional.get().getAxis().test(direction)) {
+			else if (blockState.contains(ROTATION) && (optional = RotationUtil.toDirection(blockState.get(ROTATION))).isPresent() && optional.get().getAxis().test(direction)) {
 				bl2 = false;
 			}
 		}
-		int i = !bl2 ? Rotationutils.fromDirection(direction) : MathHelper.floor((double)((180.0f + ctx.getPlayerYaw()) * 16.0f / 360.0f) + 0.5) & 0xF;
+		int i = !bl2 ? RotationUtil.fromDirection(direction) : MathHelper.floor((double)((180.0f + ctx.getPlayerYaw()) * 16.0f / 360.0f) + 0.5) & 0xF;
 		return this.getDefaultState().with(ATTACHED, bl2).with(ROTATION, i).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
 	}
 	@Override

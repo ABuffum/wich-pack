@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:cassia_planks"
+  },
+  "result": "wich:cassia_stairs",
+  "count": 1
+}

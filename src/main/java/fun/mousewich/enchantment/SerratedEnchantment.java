@@ -1,5 +1,6 @@
 package fun.mousewich.enchantment;
 
+import com.nhoryzon.mc.farmersdelight.item.KnifeItem;
 import fun.mousewich.ModBase;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
@@ -22,17 +23,15 @@ public class SerratedEnchantment extends Enchantment {
 	@Override
 	public float getAttackDamage(int level, EntityGroup group) { return 0.0f; }
 	@Override
-	public boolean canAccept(Enchantment other) { return !(other instanceof SerratedEnchantment); }
-	@Override
 	public boolean isAcceptableItem(ItemStack stack) {
-		if (stack.getItem() instanceof AxeItem) return true;
+		if (stack.getItem() instanceof AxeItem || stack.getItem() instanceof KnifeItem) return true;
 		return super.isAcceptableItem(stack);
 	}
 	@Override
 	public void onTargetDamaged(LivingEntity user, Entity target, int level) {
 		if (target instanceof LivingEntity livingEntity) {
 			int i = 40 + Math.max(0, 10 * level);
-			livingEntity.addStatusEffect(new StatusEffectInstance(ModBase.BLEEDING_EFFECT, i, Math.max(0, level - i)));
+			livingEntity.addStatusEffect(new StatusEffectInstance(ModBase.BLEEDING_EFFECT, i, Math.max(0, level - 1)));
 		}
 	}
 }

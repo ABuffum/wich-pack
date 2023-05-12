@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "wich:block/dogwood_beehive_end",
+    "bottom": "wich:block/dogwood_beehive_end",
+    "side": "wich:block/dogwood_beehive_side",
+    "front": "wich:block/dogwood_beehive_front_honey",
+    "particle": "wich:block/dogwood_beehive_side"
+  }
+}

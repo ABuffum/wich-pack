@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "wich:block/hay_crafting_table_front",
+    "north": "wich:block/hay_crafting_table_front",
+    "south": "wich:block/hay_crafting_table_side",
+    "east": "wich:block/hay_crafting_table_side",
+    "west": "wich:block/hay_crafting_table_front",
+    "up": "wich:block/hay_crafting_table_top",
+    "down": "wich:block/hay_planks"
+  }
+}

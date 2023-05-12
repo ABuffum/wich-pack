@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:cut_polished_granite"
+  },
+  "result": "wich:cut_polished_granite_stairs",
+  "count": 1
+}

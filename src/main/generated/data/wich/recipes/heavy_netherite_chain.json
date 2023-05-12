@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:netherite_chain"
+    }
+  },
+  "result": {
+    "item": "wich:heavy_netherite_chain"
+  }
+}

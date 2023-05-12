@@ -1,0 +1,72 @@
+{
+  "variants": {
+    "count=1": [
+      {
+        "model": "wich:block/death_cap_mushroom_1"
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_1",
+        "y": 90
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_1",
+        "y": 180
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_1",
+        "y": 270
+      }
+    ],
+    "count=2": [
+      {
+        "model": "wich:block/death_cap_mushroom_2"
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_2",
+        "y": 90
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_2",
+        "y": 180
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_2",
+        "y": 270
+      }
+    ],
+    "count=3": [
+      {
+        "model": "wich:block/death_cap_mushroom_3"
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_3",
+        "y": 90
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_3",
+        "y": 180
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_3",
+        "y": 270
+      }
+    ],
+    "count=4": [
+      {
+        "model": "wich:block/death_cap_mushroom_4"
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_4",
+        "y": 90
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_4",
+        "y": 180
+      },
+      {
+        "model": "wich:block/death_cap_mushroom_4",
+        "y": 270
+      }
+    ]
+  }
+}

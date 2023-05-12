@@ -1,5 +1,8 @@
 package fun.mousewich.mixins.entity.passive;
 
+import fun.mousewich.ModBase;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.sound.IdentifiedSounds;
 import net.minecraft.entity.AngledModelEntity;
 import net.minecraft.entity.Bucketable;
@@ -14,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AxolotlEntity.class)
-public abstract class AxolotlEntityMixin extends AnimalEntity implements AngledModelEntity, Bucketable {
+public abstract class AxolotlEntityMixin extends AnimalEntity implements AngledModelEntity, Bucketable, EntityWithBloodType {
 	protected AxolotlEntityMixin(EntityType<? extends AxolotlEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method="getSwimSound", at = @At("HEAD"), cancellable = true)
@@ -27,4 +30,6 @@ public abstract class AxolotlEntityMixin extends AnimalEntity implements AngledM
 		SoundEvent sound = IdentifiedSounds.getSplashSound(this);
 		if (sound != null) cir.setReturnValue(sound);
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.AXOLOTL_BLOOD_TYPE; }
 }

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "tag": "wich:charrable_log_slabs"
+  },
+  "result": "wich:charred_log_slab",
+  "experience": 0.35,
+  "cookingtime": 600
+}

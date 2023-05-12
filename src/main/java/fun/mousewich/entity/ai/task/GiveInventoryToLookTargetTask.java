@@ -2,12 +2,10 @@ package fun.mousewich.entity.ai.task;
 
 import fun.mousewich.advancement.ModCriteria;
 import fun.mousewich.entity.ai.ModMemoryModules;
-import fun.mousewich.entity.allay.AllayBrain;
-import fun.mousewich.entity.allay.AllayEntity;
+import fun.mousewich.entity.passive.allay.AllayBrain;
+import fun.mousewich.entity.passive.allay.AllayEntity;
 import fun.mousewich.sound.ModSoundEvents;
 import fun.mousewich.util.ModLookTargetUtil;
-import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.InventoryOwner;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.LookTarget;

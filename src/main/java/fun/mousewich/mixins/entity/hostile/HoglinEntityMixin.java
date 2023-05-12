@@ -1,5 +1,8 @@
 package fun.mousewich.mixins.entity.hostile;
 
+import fun.mousewich.ModBase;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.sound.IdentifiedSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.Hoglin;
@@ -14,10 +17,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(HoglinEntity.class)
-public abstract class HoglinEntityMixin extends AnimalEntity implements Monster, Hoglin {
-	protected HoglinEntityMixin(EntityType<? extends HoglinEntity> entityType, World world) {
-		super(entityType, world);
-	}
+public abstract class HoglinEntityMixin extends AnimalEntity implements Monster, Hoglin, EntityWithBloodType {
+	protected HoglinEntityMixin(EntityType<? extends HoglinEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method="getSwimSound", at = @At("HEAD"), cancellable = true)
 	protected void GetSwimSound(CallbackInfoReturnable<SoundEvent> cir) {
@@ -29,4 +30,6 @@ public abstract class HoglinEntityMixin extends AnimalEntity implements Monster,
 		SoundEvent sound = IdentifiedSounds.getSplashSound(this);
 		if (sound != null) cir.setReturnValue(sound);
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.HOGLIN_BLOOD_TYPE; }
 }

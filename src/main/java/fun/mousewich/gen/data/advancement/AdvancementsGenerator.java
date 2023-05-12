@@ -5,8 +5,8 @@ import fun.mousewich.advancement.ModCriteria;
 import fun.mousewich.advancement.criterion.ItemCriterion;
 import fun.mousewich.advancement.criterion.ModThrownItemPickedUpByEntityCriterion;
 import fun.mousewich.advancement.criterion.ModTickCriterion;
-import fun.mousewich.entity.frog.FrogEntity;
-import fun.mousewich.entity.frog.FrogVariant;
+import fun.mousewich.entity.passive.frog.FrogEntity;
+import fun.mousewich.entity.variants.FrogVariant;
 import fun.mousewich.gen.data.tag.ModBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
@@ -32,15 +32,13 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class AdvancementsGenerator extends FabricAdvancementProvider {
-	public AdvancementsGenerator(FabricDataGenerator dataGenerator) {
-		super(dataGenerator);
-	}
+	public AdvancementsGenerator(FabricDataGenerator dataGenerator) { super(dataGenerator); }
 
 	private static final EntityType<?>[] BREEDABLE_ANIMALS = new EntityType[]{
 			EntityType.HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.SHEEP, EntityType.COW,
 			EntityType.MOOSHROOM, EntityType.PIG, EntityType.CHICKEN, EntityType.WOLF, EntityType.OCELOT,
 			EntityType.RABBIT, EntityType.LLAMA, EntityType.CAT, EntityType.PANDA, EntityType.FOX, EntityType.BEE,
-			EntityType.HOGLIN, EntityType.STRIDER, EntityType.GOAT, EntityType.AXOLOTL, ModBase.CAMEL_ENTITY
+			EntityType.HOGLIN, EntityType.STRIDER, EntityType.GOAT, EntityType.AXOLOTL, ModBase.CAMEL_ENTITY, ModBase.SNIFFER_ENTITY
 	};
 
 	@Override

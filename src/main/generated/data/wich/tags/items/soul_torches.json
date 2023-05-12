@@ -11,9 +11,12 @@
     "wich:waxed_weathered_copper_soul_torch",
     "wich:waxed_oxidized_copper_soul_torch",
     "wich:bamboo_soul_torch",
+    "wich:dried_bamboo_soul_torch",
     "wich:bone_soul_torch",
+    "wich:blaze_soul_torch",
     "wich:iron_soul_torch",
     "wich:gold_soul_torch",
-    "wich:netherite_soul_torch"
+    "wich:netherite_soul_torch",
+    "wich:prismarine_soul_torch"
   ]
 }

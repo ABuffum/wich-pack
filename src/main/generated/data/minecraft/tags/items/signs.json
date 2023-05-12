@@ -4,6 +4,8 @@
     "wich:charred_sign",
     "minecraft:mangrove_sign",
     "minecraft:bamboo_sign",
-    "minecraft:cherry_sign"
+    "minecraft:cherry_sign",
+    "wich:cassia_sign",
+    "wich:dogwood_sign"
   ]
 }

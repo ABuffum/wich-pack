@@ -1,6 +1,7 @@
 package fun.mousewich;
 
 import com.google.common.collect.ImmutableList;
+import fun.mousewich.block.JuicerBlock;
 import fun.mousewich.container.*;
 
 import fun.mousewich.entity.projectile.ModArrowEntity;
@@ -48,6 +49,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static fun.mousewich.ModBase.*;
@@ -114,6 +116,16 @@ public class ModRegistry {
 		Register(new Identifier(id.getNamespace(), "potted_" + id.getPath()).toString(), value.getPottedBlock(), getRight(translations));
 		return value;
 	}
+	public static FlowerPartContainer Register(String path, FlowerPartContainer value, List<Pair<String, String>> translations) {
+		List<String> left = getLeft(translations);
+		String seeds = path + "_seeds";
+		Register(seeds, value.asBlock(), left);
+		CompostingChanceRegistry.INSTANCE.add(value.asItem(), 0.3F);
+		Register(seeds, value.asItem(), left);
+		Register(path + "_petals", value.petalsItem(), getRight(translations));
+		CompostingChanceRegistry.INSTANCE.add(value.petalsItem(), 0.325F);
+		return value;
+	}
 	public static <T extends Entity> EntityType<T> Register(String path, EntityType<T> value, List<String> translations) {
 		int length = translations.size();
 		Identifier id = ID(path);
@@ -170,6 +182,13 @@ public class ModRegistry {
 		BuiltinBiomesInvoker.Register(key, biome);
 		return biome;
 	}
+
+	public static Item RegisterJuice(String path, Item value, Item source, List<String> translations) { return RegisterJuice(path, value, source::asItem, translations); }
+	public static Item RegisterJuice(String path, Item value, Supplier<Item> source, List<String> translations) {
+		JuicerBlock.JUICE_MAP.put(source, value);
+		return Register(path, value, translations);
+	}
+
 	public static <T extends Recipe<?>> RecipeType<T> RegisterRecipeType(String path) {
 		return Registry.register(Registry.RECIPE_TYPE, ID(path), new RecipeType<T>() { public String toString() { return path; } });
 	}
@@ -202,144 +221,5 @@ public class ModRegistry {
 			}
 		});
 		return arrow;
-	}
-
-	public static ModFactory Register(String name, ModFactory material) {
-		FlammableBlockRegistry FLAMMABLE = FlammableBlockRegistry.getDefaultInstance();
-		FuelRegistry FUEL = FuelRegistry.INSTANCE;
-		CompostingChanceRegistry COMPOST = CompostingChanceRegistry.INSTANCE;
-//		if (material instanceof PottedProvider potted) Register(name, potted.getPotted());
-//		else if (material instanceof Provider provider) Register(name, provider.get()); //PottedProvider registers the block for us
-		//Crafting
-		//Tool
-/*		if (material instanceof ShearsProvider shearsProvider) {
-			Item shears = shearsProvider.getShears();
-			Register(name + "_shears", shears);
-			DispenserBlock.registerBehavior(shears, new ShearsDispenserBehavior());
-		}*/
-/*		if (material instanceof BaleProvider bail) {
-			BlockContainer pair = bail.getBale();
-			Register(name + "_bale", pair);
-			COMPOST.add(pair.getItem(), 0.85F);
-			if (flammable) FLAMMABLE.add(pair.getBlock(), 60, 20);
-		}*/
-/*		if (material instanceof BundleProvider bundle) {
-			BlockContainer pair = bundle.getBundle();
-			Register(name + "_bundle", pair);
-			if (flammable) {
-				FLAMMABLE.add(pair.getBlock(), 5, 5);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof StrippedBundleProvider strippedBundle) {
-			BlockContainer pair = strippedBundle.getStrippedBundle();
-			Register(name + "_bundle", pair);
-			Block strippedBundleBlock = pair.getBlock();
-			if (flammable) {
-				FLAMMABLE.add(strippedBundleBlock, 5, 5);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof StemProvider stem) {
-			BlockContainer pair = stem.getStem();
-			Register(name + "_stem", pair);
-			if (flammable) {
-				FLAMMABLE.add(pair.getBlock(), 5, 5);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof StrippedStemProvider strippedStem) {
-			BlockContainer pair = strippedStem.getStrippedStem();
-			Register("stripped_" + name + "_stem", pair);
-			Block strippedStemBlock = pair.getBlock();
-			if (flammable) {
-				FLAMMABLE.add(strippedStemBlock, 5, 5);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof HyphaeProvider hyphae) {
-			BlockContainer pair = hyphae.getHyphae();
-			Register(name + "_hyphae", pair);
-			if (flammable) {
-				FLAMMABLE.add(pair.getBlock(), 5, 5);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof StrippedHyphaeProvider strippedHyphae) {
-			BlockContainer pair = strippedHyphae.getStrippedHyphae();
-			Register("stripped_" + name + "_hyphae", pair);
-			Block strippedHyphaeBlock = pair.getBlock();
-			if (flammable) {
-				FLAMMABLE.add(strippedHyphaeBlock, 5, 5);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof LeavesProvider leaves) {
-			BlockContainer pair = leaves.getLeaves();
-			Register(name + "_leaves", pair);
-			COMPOST.add(pair.getItem(), 0.3f);
-			if (flammable) FLAMMABLE.add(pair.getBlock(), 30, 60);
-		}*/
-/*		if (material instanceof WartBlockProvider wartBlock){
-			BlockContainer pair = wartBlock.getWartBlock();
-			Register(name + "_wart_block", pair);
-			COMPOST.add(pair.getItem(), 0.85f);
-		}*/
-/*		if (material instanceof SaplingProvider saplingProvider) {
-			SaplingContainer sapling = saplingProvider.getSapling();
-			Register(name + "_sapling", sapling);
-			COMPOST.add(sapling.ITEM, 0.3f);
-		}*/
-/*		if (material instanceof FungusProvider fungusProvider) {
-			FungusContainer fungus = fungusProvider.getFungus();
-			Register(name + "_fungus", fungus);
-			COMPOST.add(fungus.ITEM, 0.65f);
-		}*/
-/*		if (material instanceof PropaguleProvider propaguleProvider) {
-			PottedBlockContainer propagule = propaguleProvider.getPropagule();
-			Register(name + "_propagule", propagule);
-			COMPOST.add(propagule.ITEM, 0.3f);
-		}*/
-/*		if (material instanceof PlanksProvider planks) {
-			BlockContainer pair = planks.getPlanks();
-			Register(name + "_planks", pair);
-			if (flammable) FLAMMABLE.add(pair.getBlock(), 5, 20);
-		}*/
-/*		if (material instanceof FenceProvider fence) {
-			BlockContainer pair = fence.getFence();
-			Register(name + "_fence", pair);
-			if (flammable) {
-				FLAMMABLE.add(pair.getBlock(), 5, 20);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof BookshelfProvider bookshelf) {
-			BlockContainer pair = bookshelf.getBookshelf();
-			Register(name + "_bookshelf", pair);
-			if (flammable) {
-				FLAMMABLE.add(pair.getBlock(), 30, 20);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof ChiseledBookshelfProvider chiseledBookshelf) {
-			BlockContainer pair = chiseledBookshelf.getChiseledBookshelf();
-			Register(name + "_chiseled_bookshelf", pair);
-			if (flammable) FUEL.add(pair.getItem(), 300);
-		}*/
-/*		if (material instanceof RowProvider row) {
-			BlockContainer pair = row.getRow();
-			Register(name + "_row", pair);
-			if (flammable) {
-				FLAMMABLE.add(pair.getBlock(), 5, 20);
-				FUEL.add(pair.getItem(), 300);
-			}
-		}*/
-/*		if (material instanceof LadderProvider ladder) {
-			BlockContainer pair = ladder.getLadder();
-			Register(name + "_ladder", pair);
-			if (flammable) FUEL.add(pair.getItem(), 300);
-		}*/
-//		if (material instanceof WoodcutterProvider woodcutter) Register(name + "_woodcutter", woodcutter.getWoodcutter());
-		return material;
 	}
 }

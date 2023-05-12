@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "wich:block/mushroom_stem_crafting_table_front",
+    "north": "wich:block/mushroom_stem_crafting_table_front",
+    "south": "wich:block/mushroom_stem_crafting_table_side",
+    "east": "wich:block/mushroom_stem_crafting_table_side",
+    "west": "wich:block/mushroom_stem_crafting_table_front",
+    "up": "wich:block/mushroom_stem_crafting_table_top",
+    "down": "wich:block/mushroom_stem_planks"
+  }
+}

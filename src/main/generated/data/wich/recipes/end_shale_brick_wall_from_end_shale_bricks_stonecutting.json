@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:end_shale_bricks"
+  },
+  "result": "wich:end_shale_brick_wall",
+  "count": 1
+}

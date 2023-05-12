@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wich:block/attached_white_pumpkin_stem",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "wich:block/attached_white_pumpkin_stem",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "wich:block/attached_white_pumpkin_stem",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "wich:block/attached_white_pumpkin_stem"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/bamboo1_age0",
+    "textures": {
+        "all": "wich:block/dried_bamboo_stalk",
+        "particle": "wich:block/dried_bamboo_stalk"
+    }
+}

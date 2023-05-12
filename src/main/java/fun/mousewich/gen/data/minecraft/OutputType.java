@@ -5,5 +5,5 @@ public enum OutputType {
 	RESOURCE_PACK("assets"),
 	REPORTS("reports");
 	final String path;
-	private OutputType(String path) { this.path = path; }
+	OutputType(String path) { this.path = path; }
 }

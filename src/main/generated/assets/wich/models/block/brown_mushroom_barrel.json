@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "wich:block/brown_mushroom_barrel_top",
+    "bottom": "wich:block/brown_mushroom_barrel_bottom",
+    "side": "wich:block/brown_mushroom_barrel_side"
+  }
+}

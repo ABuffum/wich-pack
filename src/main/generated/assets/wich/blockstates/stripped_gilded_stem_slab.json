@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/stripped_gilded_stem_slab"
+    },
+    "type=double": {
+      "model": "wich:block/stripped_gilded_stem"
+    },
+    "type=top": {
+      "model": "wich:block/stripped_gilded_stem_slab_top"
+    }
+  }
+}

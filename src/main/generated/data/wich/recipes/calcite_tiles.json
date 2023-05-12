@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:calcite_bricks"
+    }
+  },
+  "result": {
+    "item": "wich:calcite_tiles",
+    "count": 4
+  }
+}

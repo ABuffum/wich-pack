@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_thin_trapdoor_open",
+  "textures": {
+    "texture": "wich:block/oxidized_copper_trapdoor"
+  }
+}

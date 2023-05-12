@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "wich:copper_boots",
+    "wich:exposed_copper_boots",
+    "wich:weathered_copper_boots",
+    "wich:oxidized_copper_boots",
+    "wich:waxed_copper_boots",
+    "wich:waxed_exposed_copper_boots",
+    "wich:waxed_weathered_copper_boots",
+    "wich:waxed_oxidized_copper_boots"
+  ]
+}

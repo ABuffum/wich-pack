@@ -1,5 +1,8 @@
 package fun.mousewich.mixins.entity.passive;
 
+import fun.mousewich.ModBase;
+import fun.mousewich.entity.blood.BloodType;
+import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -16,10 +19,8 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ZombieHorseEntity.class)
-public abstract class ZombieHorseEntityMixin extends HorseBaseEntity {
-	protected ZombieHorseEntityMixin(EntityType<? extends HorseBaseEntity> entityType, World world) {
-		super(entityType, world);
-	}
+public abstract class ZombieHorseEntityMixin extends HorseBaseEntity implements EntityWithBloodType {
+	protected ZombieHorseEntityMixin(EntityType<? extends HorseBaseEntity> entityType, World world) { super(entityType, world); }
 
 	@Override
 	protected void playJumpSound() { this.playSound(ModSoundEvents.ENTITY_ZOMBIE_HORSE_JUMP, 0.4f, 1.0f); }
@@ -44,7 +45,6 @@ public abstract class ZombieHorseEntityMixin extends HorseBaseEntity {
 		if (this.age > 20 && !bl && this.isSaddled()) this.playSound(ModSoundEvents.ENTITY_ZOMBIE_HORSE_SADDLE, 0.5f, 1.0f);
 	}
 
-
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState state) {
 		if (state.getMaterial().isLiquid()) return;
@@ -61,4 +61,6 @@ public abstract class ZombieHorseEntityMixin extends HorseBaseEntity {
 		else sound = ModSoundEvents.ENTITY_ZOMBIE_HORSE_STEP;
 		if (sound != null) this.playSound(sound, blockSoundGroup.getVolume() * 0.15f, blockSoundGroup.getPitch());
 	}
+
+	@Override public BloodType GetDefaultBloodType() { return ModBase.ZOMBIE_HORSE_BLOOD_TYPE; }
 }

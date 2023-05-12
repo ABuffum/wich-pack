@@ -1,0 +1,6 @@
+{
+    "parent": "block/redstone_dust_side1",
+    "textures": {
+        "line": "wich:block/gunpowder_fuse_line1"
+    }
+}

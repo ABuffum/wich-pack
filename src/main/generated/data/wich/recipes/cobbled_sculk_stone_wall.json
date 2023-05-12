@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:cobbled_sculk_stone"
+    }
+  },
+  "result": {
+    "item": "wich:cobbled_sculk_stone_wall",
+    "count": 6
+  }
+}

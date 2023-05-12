@@ -32,18 +32,19 @@ public class CuttableFlowerBlock extends TallFlowerBlock {
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack itemStack = player.getStackInHand(hand);
 		if (itemStack.isOf(Items.SHEARS)) {
-			boolean upper = state.get(TallFlowerBlock.HALF) == DoubleBlockHalf.UPPER;
-			if (upper) {
+			if (state.get(TallFlowerBlock.HALF) == DoubleBlockHalf.UPPER) {
 				world.setBlockState(pos.down(), getShortBlock().getDefaultState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
 				world.setBlockState(pos, Blocks.AIR.getDefaultState(), Block.NOTIFY_ALL);
+				world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 			}
 			else {
 				world.setBlockState(pos, getShortBlock().getDefaultState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
 				world.setBlockState(pos.up(), Blocks.AIR.getDefaultState(), Block.NOTIFY_ALL);
+				world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 			}
 			dropStack(world, pos, new ItemStack(getShortBlock().asItem()));
 			if (alsoDrop != null) dropStack(world, pos, alsoDrop.apply(world));
-			itemStack.damage(1, (LivingEntity)player, (p -> p.sendToolBreakStatus(hand)));
+			itemStack.damage(1, player, p -> p.sendToolBreakStatus(hand));
 			world.emitGameEvent(player, GameEvent.SHEAR, pos);
 			player.incrementStat(Stats.USED.getOrCreateStat(Items.SHEARS));
 			return ActionResult.success(world.isClient);

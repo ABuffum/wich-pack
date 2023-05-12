@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "top": "wich:block/dried_bamboo_door_top",
+    "bottom": "wich:block/dried_bamboo_door_bottom"
+  }
+}

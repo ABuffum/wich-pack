@@ -11,6 +11,32 @@
     "wich:emerald_leggings",
     "wich:fleece_leggings",
     "wich:quartz_leggings",
-    "wich:studded_leather_leggings"
+    "wich:shulker_leggings",
+    "wich:studded_leather_leggings",
+    "#wich:copper_leggings",
+    {
+      "id": "betternether:cincinnasite_leggings",
+      "required": false
+    },
+    {
+      "id": "betternether:nether_ruby_leggings",
+      "required": false
+    },
+    {
+      "id": "betterend:aeternium_leggings",
+      "required": false
+    },
+    {
+      "id": "betterend:crystalite_leggings",
+      "required": false
+    },
+    {
+      "id": "betterend:thallasium_leggings",
+      "required": false
+    },
+    {
+      "id": "betterend:terminite_leggings",
+      "required": false
+    }
   ]
 }

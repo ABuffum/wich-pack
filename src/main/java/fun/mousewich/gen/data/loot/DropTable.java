@@ -1,14 +1,13 @@
 package fun.mousewich.gen.data.loot;
 
+import fun.mousewich.block.ModProperties;
 import fun.mousewich.gen.data.tag.ModItemTags;
-import net.minecraft.block.BedBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SlabBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.BedPart;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
@@ -43,7 +42,9 @@ public interface DropTable {
 	static DropTable Drops(ItemConvertible item) { return (block) -> BlockLootTableGenerator.drops(item); }
 	static DropTable CandleCake(Block candle) { return (block) -> BlockLootTableGenerator.candleCakeDrops(candle); }
 	static DropTable Mushroom(ItemConvertible mushroom) { return (block) -> BlockLootTableGenerator.mushroomBlockDrops(block, mushroom); }
+	static DropTable Ore(Item ore) { return (block) -> BlockLootTableGenerator.oreDrops(block, ore); }
 	static DropTable Potted(ItemConvertible plant) { return (block) -> BlockLootTableGenerator.pottedPlantDrops(plant); }
+	static DropTable Stem(ItemConvertible item) { return (block) -> BlockLootTableGenerator.attachedCropStemDrops(block, item.asItem()); }
 	static DropTable WithSilkTouch(ItemConvertible item) { return (block) -> BlockLootTableGenerator.dropsWithSilkTouch(item); }
 
 	static LootPoolEntry.Builder<?> MelonLikePool(ItemConvertible drop, ItemConvertible item, float min, float max, int totalMax) {
@@ -91,6 +92,7 @@ public interface DropTable {
 	static DropTable SilkTouchOrElse(ItemConvertible item) { return (block) -> BlockLootTableGenerator.drops(block, item); }
 
 	DropTable BED = (block) -> BlockLootTableGenerator.dropsWithProperty(block, BedBlock.PART, BedPart.HEAD);
+	DropTable BEEHIVE = BlockLootTableGenerator::beehiveDrops;
 	DropTable BOOKSHELF = (block) -> BlockLootTableGenerator.drops(block, Items.BOOK, ConstantLootNumberProvider.create(3.0f));
 	DropTable CAMPFIRE = (block) -> BlockLootTableGenerator.dropsWithSilkTouch(block, BlockLootTableGenerator.addSurvivesExplosionCondition(block,
 			ItemEntry.builder(Items.CHARCOAL).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f)))));
@@ -100,6 +102,21 @@ public interface DropTable {
 			ItemEntry.builder(Items.POPPED_CHORUS_FRUIT).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f)))));
 	DropTable FLINT = (Block block) -> BlockLootTableGenerator.drops(block, DropTable.WITH_PICKAXE, DropTable.MelonLikePool(block, Items.FLINT, 3, 7, 9));
 	DropTable FLINT_SLAB = (Block block) -> SlabPool(block, DropTable.WITH_PICKAXE, MelonLikeSlabPool(block, block, Items.FLINT, 1.5f, 3.5f, 9));
+	DropTable FOUR_COUNT = (Block block) -> LootTable.builder().pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0f))
+			.with(BlockLootTableGenerator.applyExplosionDecay(block,
+					(ItemEntry.builder(block)
+							.apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f))
+									.conditionally(BlockStatePropertyLootCondition.builder(block)
+											.properties(StatePredicate.Builder.create()
+													.exactMatch(ModProperties.COUNT_4, 2)))))
+							.apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(3.0f))
+									.conditionally(BlockStatePropertyLootCondition.builder(block)
+											.properties(StatePredicate.Builder.create()
+													.exactMatch(ModProperties.COUNT_4, 3))))
+							.apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(4.0f))
+									.conditionally(BlockStatePropertyLootCondition.builder(block)
+											.properties(StatePredicate.Builder.create()
+													.exactMatch(ModProperties.COUNT_4, 4)))))));
 	DropTable NOTHING = (block) -> BlockLootTableGenerator.dropsNothing();
 	DropTable SLAB = BlockLootTableGenerator::slabDrops;
 	DropTable SOUL_CAMPFIRE = (block) -> BlockLootTableGenerator.dropsWithSilkTouch(block, BlockLootTableGenerator.addSurvivesExplosionCondition(block,

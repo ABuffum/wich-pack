@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:cobbled_shale"
+    }
+  },
+  "result": {
+    "item": "wich:cobbled_shale_slab",
+    "count": 6
+  }
+}

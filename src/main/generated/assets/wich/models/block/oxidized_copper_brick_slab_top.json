@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "wich:block/oxidized_copper_bricks",
+    "top": "wich:block/oxidized_copper_bricks",
+    "side": "wich:block/oxidized_copper_bricks"
+  }
+}

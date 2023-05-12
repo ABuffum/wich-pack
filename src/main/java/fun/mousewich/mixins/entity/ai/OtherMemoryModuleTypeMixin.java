@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(MemoryModuleType.class)
 public interface OtherMemoryModuleTypeMixin {
 	@Invoker("register")
-	public static <U> MemoryModuleType<U> Register(String id) { return null; }
+	static <U> MemoryModuleType<U> Register(String id) { return null; }
 }
