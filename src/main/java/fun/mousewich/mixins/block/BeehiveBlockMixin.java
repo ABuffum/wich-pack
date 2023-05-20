@@ -21,7 +21,9 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -31,6 +33,14 @@ import java.util.List;
 
 @Mixin(BeehiveBlock.class)
 public abstract class BeehiveBlockMixin extends BlockWithEntity {
+	@Shadow public abstract void takeHoney(World world, BlockState state, BlockPos pos);
+
+	@Shadow public abstract void takeHoney(World world, BlockState state, BlockPos pos, @Nullable PlayerEntity player, BeehiveBlockEntity.BeeState beeState);
+
+	@Shadow protected abstract boolean hasBees(World world, BlockPos pos);
+
+	@Shadow protected abstract void angerNearbyBees(World world, BlockPos pos);
+
 	protected BeehiveBlockMixin(Settings settings) { super(settings); }
 
 	@ModifyVariable(method = "angerNearbyBees", at = @At("STORE"), index = 4)
@@ -50,13 +60,11 @@ public abstract class BeehiveBlockMixin extends BlockWithEntity {
 				itemStack.damage(1, (LivingEntity)player, (p -> p.sendToolBreakStatus(hand)));
 				world.emitGameEvent(player, GameEvent.SHEAR, pos);
 				if (!world.isClient()) player.incrementStat(Stats.USED.getOrCreateStat(shears));
-				BeehiveBlock bhb = (BeehiveBlock)(Object)this;
-				BeehiveBlockInvoker bhbi = (BeehiveBlockInvoker)bhb;
 				if (!CampfireBlock.isLitCampfireInRange(world, pos)) {
-					if (bhbi.InvokeHasBees(world, pos)) bhbi.InvokeAngerNearbyBees(world, pos);
-					bhb.takeHoney(world, state, pos, player, BeehiveBlockEntity.BeeState.EMERGENCY);
+					if (this.hasBees(world, pos)) this.angerNearbyBees(world, pos);
+					this.takeHoney(world, state, pos, player, BeehiveBlockEntity.BeeState.EMERGENCY);
 				}
-				else bhb.takeHoney(world, state, pos);
+				else this.takeHoney(world, state, pos);
 				cir.setReturnValue(ActionResult.success(world.isClient));
 			}
 		}

@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/template_coffee",
+  "textures": {
+    "top": "wich:block/coffee_plant_top1",
+    "side": "wich:block/coffee_plant_side1"
+  }
+}

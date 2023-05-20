@@ -61,7 +61,7 @@ public class BucketContainer extends BucketProvider {
 		strawberry_milk_bucket = new ModMilkBucketItem(FilledBucketSettings(netherite), this);
 		vanilla_milk_bucket = new ModMilkBucketItem(FilledBucketSettings(netherite), this);
 		//Datagen
-		ModDatagen.Cache.Model.GENERATED.addAll(GetAll());
+		ModDatagen.Cache.Models.GENERATED.addAll(GetAll());
 	}
 
 	public List<Item> GetAll() {

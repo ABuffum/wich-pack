@@ -16,20 +16,22 @@ import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.LimitCountLootFunction;
-import net.minecraft.loot.function.LootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.StatePredicate;
+import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 
 public interface DropTable {
 	LootTable.Builder get(Block block);
+
+	LootCondition.Builder WITH_SILK_TOUCH = MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))));
 
 	LootCondition.Builder WITH_AXE = MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ModItemTags.AXES));
 	LootCondition.Builder WITH_HOE = MatchToolLootCondition.builder(ItemPredicate.Builder.create().tag(ModItemTags.HOES));
@@ -118,6 +120,13 @@ public interface DropTable {
 											.properties(StatePredicate.Builder.create()
 													.exactMatch(ModProperties.COUNT_4, 4)))))));
 	DropTable NOTHING = (block) -> BlockLootTableGenerator.dropsNothing();
+	DropTable SILK_TOUCH_SLAB = (block) -> LootTable.builder().pool(LootPool.builder().conditionally(WITH_SILK_TOUCH)
+			.rolls(ConstantLootNumberProvider.create(1.0f))
+			.with(BlockLootTableGenerator
+					.applyExplosionDecay(block, ItemEntry.builder(block)
+							.apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f))
+									.conditionally(BlockStatePropertyLootCondition.builder(block)
+											.properties(StatePredicate.Builder.create().exactMatch(SlabBlock.TYPE, SlabType.DOUBLE)))))));
 	DropTable SLAB = BlockLootTableGenerator::slabDrops;
 	DropTable SOUL_CAMPFIRE = (block) -> BlockLootTableGenerator.dropsWithSilkTouch(block, BlockLootTableGenerator.addSurvivesExplosionCondition(block,
 			ItemEntry.builder(Items.SOUL_SOIL).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f)))));

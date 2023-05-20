@@ -6,15 +6,26 @@ import fun.mousewich.ModFactory;
 import fun.mousewich.gen.data.loot.DropTable;
 import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.material.ModToolMaterials;
+import fun.mousewich.util.CrackedBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CampfireBlock;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,5 +51,19 @@ public class HammerItem extends MiningToolItem {
 	public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
 		return true;
+	}
+
+	@Override
+	public ActionResult useOnBlock(ItemUsageContext context) {
+		World world = context.getWorld();
+		BlockPos blockPos = context.getBlockPos();
+		if (CrackedBlocks.Crack(world, blockPos)) {
+			PlayerEntity playerEntity = context.getPlayer();
+			if (playerEntity != null) {
+				context.getStack().damage(1, playerEntity, p -> p.sendToolBreakStatus(context.getHand()));
+			}
+			return ActionResult.success(world.isClient);
+		}
+		return ActionResult.PASS;
 	}
 }

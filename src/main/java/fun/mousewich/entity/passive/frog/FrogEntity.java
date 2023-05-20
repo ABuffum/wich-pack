@@ -278,7 +278,7 @@ public class FrogEntity extends AnimalEntity implements EntityWithBloodType {
 	@Override
 	public boolean isBreedingItem(ItemStack stack) { return SLIME_BALL.test(stack); }
 	public static boolean canSpawn(EntityType<? extends AnimalEntity> ignoredType, WorldAccess world, SpawnReason ignoredReason, BlockPos pos, Random ignoredRandom) {
-		return world.getBlockState(pos.down()).isIn(ModBlockTags.FROGS_SPAWNABLE_ON) && FrogEntity.isLightLevelValidForNaturalSpawn(world, pos);
+		return world.getBlockState(pos.down()).isIn(ModBlockTags.FROGS_SPAWNABLE_ON) && isLightLevelValidForNaturalSpawn(world, pos);
 	}
 
 	@Override public BloodType GetDefaultBloodType() { return ModBase.FROG_BLOOD_TYPE; }

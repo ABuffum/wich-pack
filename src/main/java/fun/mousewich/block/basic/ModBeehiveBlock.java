@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ModBeehiveBlock extends BeehiveBlock {
-
 	public static final Set<Block> BEEHIVES = new HashSet<>();
 
 	public ModBeehiveBlock(BlockConvertible block) { this(block.asBlock()); }

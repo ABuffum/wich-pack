@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:chiseled_sculk_stone_bricks"
+  },
+  "result": "wich:smooth_chiseled_sculk_stone_bricks",
+  "count": 1
+}

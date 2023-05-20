@@ -93,10 +93,10 @@ public class ModFactory {
 	public static Item.Settings GlassBottledItemSettings() { return ItemSettings().maxCount(16).recipeRemainder(Items.GLASS_BOTTLE); }
 	public static Item.Settings NetheriteItemSettings() { return ItemSettings().fireproof(); }
 	//Items
-	public static <T extends Item> T GeneratedItem(T item) { ModDatagen.Cache.Model.GENERATED.add(item); return item; }
-	public static <T extends Item> T HandheldItem(T item) { ModDatagen.Cache.Model.HANDHELD.add(item); return item; }
-	public static <T extends Item> T HammerItem(T item) { ModDatagen.Cache.Model.HAMMER.add(item); return item; }
-	public static <T extends Item> T ParentedItem(T item, Item parent) { ModDatagen.Cache.Model.PARENTED.add(new Pair<>(item, parent)); return item; }
+	public static <T extends Item> T GeneratedItem(T item) { ModDatagen.Cache.Models.GENERATED.add(item); return item; }
+	public static <T extends Item> T HandheldItem(T item) { ModDatagen.Cache.Models.HANDHELD.add(item); return item; }
+	public static <T extends Item> T HammerItem(T item) { ModDatagen.Cache.Models.HAMMER.add(item); return item; }
+	public static <T extends Item> T ParentedItem(T item, Item parent) { ModDatagen.Cache.Models.PARENTED.add(new Pair<>(item, parent)); return item; }
 
 	private static Item MakeItemCommon(Item.Settings settings) { return new Item(settings); }
 	public static Item MakeGeneratedItem() { return MakeGeneratedItem(ItemSettings()); }
@@ -105,13 +105,13 @@ public class ModFactory {
 	public static Item MakeHandheldItem(Item.Settings settings) { return HandheldItem(MakeItemCommon(settings)); }
 
 	private static ModAxeItem MakeAxeCommon(ModToolMaterials material) { return MakeAxeCommon(new ModAxeItem(material)); }
-	private static ModAxeItem MakeAxeCommon(ModAxeItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.AXES, item); return item; }
+	private static ModAxeItem MakeAxeCommon(ModAxeItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.AXES, item); return item; }
 	public static ModAxeItem MakeAxe(ModToolMaterials material) { return HandheldItem(MakeAxeCommon(material)); }
 	public static ModAxeItem MakeOxidizableAxe(Oxidizable.OxidationLevel level, ModToolMaterials material) { return HandheldItem(MakeAxeCommon(new OxidizableAxeItem(level, material))); }
 	public static ModAxeItem MakeWaxedAxe(ModToolMaterials material, Item parent) { return ParentedItem(MakeAxeCommon(material), parent); }
 
 	private static HammerItem MakeHammerCommon(ModToolMaterials material) { return MakeHammerCommon(new HammerItem(material)); }
-	private static HammerItem MakeHammerCommon(HammerItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.HAMMERS, item); return item; }
+	private static HammerItem MakeHammerCommon(HammerItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.HAMMERS, item); return item; }
 	public static HammerItem MakeHammer(ToolMaterial material, float attackDamage, float attackSpeed) { return HammerItem(MakeHammerCommon(new HammerItem(material, attackDamage, attackSpeed))); }
 	public static HammerItem MakeHammer(ToolMaterial material, float attackDamage, float attackSpeed, Item.Settings settings) { return HammerItem(MakeHammerCommon(new HammerItem(material, attackDamage, attackSpeed, settings))); }
 	public static HammerItem MakeHammer(ModToolMaterials material) { return HammerItem(MakeHammerCommon(material)); }
@@ -119,38 +119,38 @@ public class ModFactory {
 	public static HammerItem MakeWaxedHammer(ModToolMaterials material, Item parent) { return ParentedItem(MakeHammerCommon(material), parent); }
 
 	private static ModHoeItem MakeHoeCommon(ModToolMaterials material) { return MakeHoeCommon(new ModHoeItem(material)); }
-	private static ModHoeItem MakeHoeCommon(ModHoeItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.HOES, item); return item; }
+	private static ModHoeItem MakeHoeCommon(ModHoeItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.HOES, item); return item; }
 	public static ModHoeItem MakeHoe(ModToolMaterials material) { return HandheldItem(MakeHoeCommon(material)); }
 	public static ModHoeItem MakeOxidizableHoe(Oxidizable.OxidationLevel level, ModToolMaterials material) { return HandheldItem(MakeHoeCommon(new OxidizableHoeItem(level, material))); }
 	public static ModHoeItem MakeWaxedHoe(ModToolMaterials material, Item parent) { return ParentedItem(MakeHoeCommon(material), parent); }
 
 	private static ModPickaxeItem MakePickaxeCommon(ModToolMaterials material) { return MakePickaxeCommon(new ModPickaxeItem(material)); }
-	private static ModPickaxeItem MakePickaxeCommon(ModPickaxeItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.PICKAXES, item); return item; }
+	private static ModPickaxeItem MakePickaxeCommon(ModPickaxeItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.PICKAXES, item); return item; }
 	public static ModPickaxeItem MakePickaxe(ModToolMaterials material) { return HandheldItem(MakePickaxeCommon(material)); }
 	public static ModPickaxeItem MakeOxidizablePickaxe(Oxidizable.OxidationLevel level, ModToolMaterials material) { return HandheldItem(MakePickaxeCommon(new OxidizablePickaxeItem(level, material))); }
 	public static ModPickaxeItem MakeWaxedPickaxe(ModToolMaterials material, Item parent) { return ParentedItem(MakePickaxeCommon(material), parent); }
 
 	private static ModShovelItem MakeShovelCommon(ModToolMaterials material) { return MakeShovelCommon(new ModShovelItem(material)); }
-	private static ModShovelItem MakeShovelCommon(ModShovelItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.SHOVELS, item); return item; }
+	private static ModShovelItem MakeShovelCommon(ModShovelItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.SHOVELS, item); return item; }
 	public static ModShovelItem MakeShovel(ModToolMaterials material) { return HandheldItem(MakeShovelCommon(material)); }
 	public static ModShovelItem MakeOxidizableShovel(Oxidizable.OxidationLevel level, ModToolMaterials material) { return HandheldItem(MakeShovelCommon(new OxidizableShovelItem(level, material))); }
 	public static ModShovelItem MakeWaxedShovel(ModToolMaterials material, Item parent) { return ParentedItem(MakeShovelCommon(material), parent); }
 
 	private static ModSwordItem MakeSwordCommon(ModToolMaterials material) { return MakeSwordCommon(new ModSwordItem(material)); }
-	private static ModSwordItem MakeSwordCommon(ModSwordItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.SWORDS, item); return item; }
+	private static ModSwordItem MakeSwordCommon(ModSwordItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.SWORDS, item); return item; }
 	public static ModSwordItem MakeSword(ModToolMaterials material) { return HandheldItem(MakeSwordCommon(material)); }
 	public static ModSwordItem MakeOxidizableSword(Oxidizable.OxidationLevel level, ModToolMaterials material) { return HandheldItem(MakeSwordCommon(new OxidizableSwordItem(level, material))); }
 	public static ModSwordItem MakeWaxedSword(ModToolMaterials material, Item parent) { return ParentedItem(MakeSwordCommon(material), parent); }
 
 	private static ModKnifeItem MakeKnifeCommon(ModToolMaterials material) { return MakeKnifeCommon(new ModKnifeItem(material)); }
-	private static ModKnifeItem MakeKnifeCommon(ModKnifeItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.KNIVES, item); return item; }
+	private static ModKnifeItem MakeKnifeCommon(ModKnifeItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.KNIVES, item); return item; }
 	public static ModKnifeItem MakeKnife(ModToolMaterials material) { return HandheldItem(MakeKnifeCommon(material)); }
 	public static ModKnifeItem MakeOxidizableKnife(Oxidizable.OxidationLevel level, ModToolMaterials material) { return HandheldItem(MakeKnifeCommon(new OxidizableKnifeItem(level, material))); }
 	public static ModKnifeItem MakeWaxedKnife(ModToolMaterials material, Item parent) { return ParentedItem(MakeKnifeCommon(material), parent); }
 
 	private static ModShearsItem MakeShearsCommon(ToolMaterials material) { return MakeShearsCommon(new ModShearsItem(material)); }
 	private static ModShearsItem MakeShearsCommon(ModToolMaterials material) { return MakeShearsCommon(new ModShearsItem(material)); }
-	private static ModShearsItem MakeShearsCommon(ModShearsItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.SHEARS, item); return item.dispensable(); }
+	private static ModShearsItem MakeShearsCommon(ModShearsItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.SHEARS, item); return item.dispensable(); }
 	public static ModShearsItem MakeShears(ToolMaterials material) { return GeneratedItem(MakeShearsCommon(material)); }
 	public static ModShearsItem MakeShears(ToolMaterials material, Item.Settings settings) { return GeneratedItem(MakeShearsCommon(new ModShearsItem(material, settings))); }
 	public static ModShearsItem MakeShears(ModToolMaterials material) { return GeneratedItem(MakeShearsCommon(material)); }
@@ -158,28 +158,28 @@ public class ModFactory {
 	public static ModShearsItem MakeWaxedShears(ModToolMaterials material, Item parent) { return ParentedItem(MakeShearsCommon(material), parent); }
 
 	private static ModArmorItem MakeHelmetCommon(ArmorMaterial material) { return MakeHelmetCommon(new ModArmorItem(material, EquipmentSlot.HEAD)); }
-	private static ModArmorItem MakeHelmetCommon(ModArmorItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.HELMETS, item); return item.dispensible(); }
+	private static ModArmorItem MakeHelmetCommon(ModArmorItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.HELMETS, item); return item.dispensible(); }
 	
 	public static ModArmorItem MakeHelmet(ArmorMaterial material) { return GeneratedItem(MakeHelmetCommon(material)); }
 	public static ModArmorItem MakeOxidizableHelmet(Oxidizable.OxidationLevel level, ArmorMaterial material) { return GeneratedItem(MakeHelmetCommon(new OxidizableArmoritem(level, material, EquipmentSlot.HEAD))); }
 	public static ModArmorItem MakeWaxedHelmet(ArmorMaterial material, Item parent) { return ParentedItem(MakeHelmetCommon(material), parent); }
 
 	private static ModArmorItem MakeChestplateCommon(ArmorMaterial material) { return MakeChestplateCommon(new ModArmorItem(material, EquipmentSlot.CHEST)); }
-	private static ModArmorItem MakeChestplateCommon(ModArmorItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.HELMETS, item); return item.dispensible(); }
+	private static ModArmorItem MakeChestplateCommon(ModArmorItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.HELMETS, item); return item.dispensible(); }
 
 	public static ModArmorItem MakeChestplate(ArmorMaterial material) { return GeneratedItem(MakeChestplateCommon(material)); }
 	public static ModArmorItem MakeOxidizableChestplate(Oxidizable.OxidationLevel level, ArmorMaterial material) { return GeneratedItem(MakeChestplateCommon(new OxidizableArmoritem(level, material, EquipmentSlot.CHEST))); }
 	public static ModArmorItem MakeWaxedChestplate(ArmorMaterial material, Item parent) { return ParentedItem(MakeChestplateCommon(material), parent); }
 
 	private static ModArmorItem MakeLeggingsCommon(ArmorMaterial material) { return MakeLeggingsCommon(new ModArmorItem(material, EquipmentSlot.LEGS)); }
-	private static ModArmorItem MakeLeggingsCommon(ModArmorItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.HELMETS, item); return item.dispensible(); }
+	private static ModArmorItem MakeLeggingsCommon(ModArmorItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.HELMETS, item); return item.dispensible(); }
 
 	public static ModArmorItem MakeLeggings(ArmorMaterial material) { return GeneratedItem(MakeLeggingsCommon(material)); }
 	public static ModArmorItem MakeOxidizableLeggings(Oxidizable.OxidationLevel level, ArmorMaterial material) { return GeneratedItem(MakeLeggingsCommon(new OxidizableArmoritem(level, material, EquipmentSlot.LEGS))); }
 	public static ModArmorItem MakeWaxedLeggings(ArmorMaterial material, Item parent) { return ParentedItem(MakeLeggingsCommon(material), parent); }
 
 	private static ModArmorItem MakeBootsCommon(ArmorMaterial material) { return MakeBootsCommon(new ModArmorItem(material, EquipmentSlot.FEET)); }
-	private static ModArmorItem MakeBootsCommon(ModArmorItem item) { ModDatagen.Cache.Tag.Register(ModItemTags.HELMETS, item); return item.dispensible(); }
+	private static ModArmorItem MakeBootsCommon(ModArmorItem item) { ModDatagen.Cache.Tags.Register(ModItemTags.HELMETS, item); return item.dispensible(); }
 
 	public static ModArmorItem MakeBoots(ArmorMaterial material) { return GeneratedItem(MakeBootsCommon(material)); }
 	public static ModArmorItem MakeOxidizableBoots(Oxidizable.OxidationLevel level, ArmorMaterial material) { return GeneratedItem(MakeBootsCommon(new OxidizableArmoritem(level, material, EquipmentSlot.FEET))); }
@@ -195,7 +195,7 @@ public class ModFactory {
 	public static SpawnEggItem MakeSpawnEgg(EntityType<? extends MobEntity> entityType, int primaryColor, int secondaryColor) { return MakeSpawnEgg(entityType, primaryColor, secondaryColor, ItemSettings()); }
 	public static SpawnEggItem MakeSpawnEgg(EntityType<? extends MobEntity> entityType, int primaryColor, int secondaryColor, Item.Settings settings) {
 		SpawnEggItem item = new SpawnEggItem(entityType, primaryColor, secondaryColor, settings);
-		ModDatagen.Cache.Model.SPAWN_EGG.add(item);
+		ModDatagen.Cache.Models.SPAWN_EGG.add(item);
 		return item;
 	}
 
@@ -239,7 +239,7 @@ public class ModFactory {
 	public static BlockContainer MakeBeehive(MapColor color, BlockSoundGroup sounds) {
 		BlockContainer container = new BlockContainer(new ModBeehiveBlock(Block.Settings.of(Material.WOOD, color).strength(0.6f).sounds(sounds)))
 				.drops(DropTable.BEEHIVE).blockTag(ModBlockTags.WOODEN_BEEHIVES).itemTag(ModItemTags.BEEHIVES);
-		ModDatagen.Cache.Model.BEEHIVE.add(container);
+		ModDatagen.Cache.Models.BEEHIVE.add(container);
 		return container;
 	}
 
@@ -250,7 +250,7 @@ public class ModFactory {
 		BlockContainer container = new BlockContainer(new BookshelfBlock(
 				Block.Settings.of(Material.WOOD, base.getDefaultMapColor()).strength(1.5F).sounds(sounds)))
 				.drops(DropTable.BOOKSHELF).blockTag(ModBlockTags.BOOKSHELVES).itemTag(ModItemTags.BOOKSHELVES);
-		ModDatagen.Cache.Model.BOOKSHELF.add(new Pair<>(container, base));
+		ModDatagen.Cache.Models.BOOKSHELF.add(new Pair<>(container, base));
 		return container;
 	}
 
@@ -258,7 +258,7 @@ public class ModFactory {
 	public static BlockContainer MakeChiseledBookshelf(MapColor color, BlockSoundGroup sounds) {
 		BlockContainer container = new BlockContainer(new ChiseledBookshelfBlock(Block.Settings.of(Material.WOOD, color).strength(1.5F).sounds(sounds)))
 				.dropSelf().blockTag(ModBlockTags.CHISELED_BOOKSHELVES);
-		ModDatagen.Cache.Model.CHISELED_BOOKSHELF.add(container);
+		ModDatagen.Cache.Models.CHISELED_BOOKSHELF.add(container);
 		return container;
 	}
 
@@ -267,8 +267,8 @@ public class ModFactory {
 	public static BlockContainer MakeCraftingTable(BlockConvertible base, BlockSoundGroup sounds) { return MakeCraftingTable(base.asBlock(), sounds); }
 	public static BlockContainer MakeCraftingTable(Block base, BlockSoundGroup sounds) {
 		BlockContainer container = new BlockContainer(new ModCraftingTableBlock(Block.Settings.of(Material.WOOD, base.getDefaultMapColor()).strength(2.5f).sounds(sounds))).dropSelf();
-		ModDatagen.Cache.Model.CRAFTING_TABLE.add(new Pair<>(container, base));
-		return container;
+		ModDatagen.Cache.Models.CRAFTING_TABLE.add(new Pair<>(container, base));
+		return container.blockTag(ModBlockTags.CRAFTING_TABLES);
 	}
 
 	public static Block.Settings DyeBlockSettings(DyeColor color) {
@@ -290,7 +290,7 @@ public class ModFactory {
 				.dispenser(ModTntBlock.DispenserBehavior(PowderKegEntity::new))
 				.blockTag(BlockTags.AXE_MINEABLE)
 				.blockTag(ModBlockTags.POWDER_KEGS);
-		ModDatagen.Cache.Model.POWDER_KEG.add(new Pair<>(container, base));
+		ModDatagen.Cache.Models.POWDER_KEG.add(new Pair<>(container, base));
 		return container;
 	}
 
@@ -303,7 +303,7 @@ public class ModFactory {
 	public static BlockContainer MakePlushie(Function<Block.Settings, Block> blockProvider, MapColor color) { return MakePlushie(blockProvider, PlushieSettings(color)); }
 	public static BlockContainer MakePlushie(Function<Block.Settings, Block> blockProvider, Block.Settings settings) {
 		BlockContainer container = BuildBlock(blockProvider.apply(settings), PlushieItemSettings());
-		ModDatagen.Cache.Model.PLUSHIE.add(container);
+		ModDatagen.Cache.Models.PLUSHIE.add(container);
 		return container;
 	}
 
@@ -374,7 +374,7 @@ public class ModFactory {
 	public static BlockContainer MakeCampfire(MapColor color) { return MakeCampfire(color, BlockSoundGroup.WOOD); }
 	public static BlockContainer MakeCampfire(MapColor color, BlockSoundGroup sounds) {
 		BlockContainer container = MakeCampfireCommon(15, 1, color, sounds, true).drops(DropTable.CAMPFIRE);
-		ModDatagen.Cache.Model.CAMPFIRE.add(container);
+		ModDatagen.Cache.Models.CAMPFIRE.add(container);
 		return container;
 	}
 	public static BlockContainer MakeSoulCampfire(BlockConvertible base) { return MakeSoulCampfire(base.asBlock()); }
@@ -382,15 +382,15 @@ public class ModFactory {
 	public static BlockContainer MakeSoulCampfire(BlockConvertible base, BlockSoundGroup sounds) { return MakeSoulCampfire(base.asBlock(), sounds); }
 	public static BlockContainer MakeSoulCampfire(Block base, BlockSoundGroup sounds) {
 		BlockContainer container = MakeCampfireCommon(10, 2, base.getDefaultMapColor(), sounds, false).drops(DropTable.SOUL_CAMPFIRE);
-		ModDatagen.Cache.Model.CAMPFIRE_SOUL.add(new Pair<>(container, base));
-		return container.blockTag(BlockTags.PIGLIN_REPELLENTS).itemTag(ItemTags.PIGLIN_REPELLENTS);
+		ModDatagen.Cache.Models.CAMPFIRE_SOUL.add(new Pair<>(container, base));
+		return container.blockTag(BlockTags.PIGLIN_REPELLENTS).itemTag(ItemTags.PIGLIN_REPELLENTS).itemTag(ModItemTags.SOUL_CAMPFIRES);
 	}
 	public static BlockContainer MakeEnderCampfire(BlockConvertible base) { return MakeEnderCampfire(base.asBlock()); }
 	public static BlockContainer MakeEnderCampfire(Block base) { return MakeEnderCampfire(base, BlockSoundGroup.WOOD); }
 	public static BlockContainer MakeEnderCampfire(BlockConvertible base, BlockSoundGroup sounds) { return MakeEnderCampfire(base.asBlock(), sounds); }
 	public static BlockContainer MakeEnderCampfire(Block base, BlockSoundGroup sounds) {
 		BlockContainer container = MakeCampfireCommon(13, 3, base.getDefaultMapColor(), sounds, false).drops(DropTable.ENDER_CAMPFIRE);
-		ModDatagen.Cache.Model.CAMPFIRE_ENDER.add(new Pair<>(container, base));
+		ModDatagen.Cache.Models.CAMPFIRE_ENDER.add(new Pair<>(container, base));
 		return container;
 	}
 
@@ -404,12 +404,12 @@ public class ModFactory {
 	public static BlockContainer MakeBars(BlockSoundGroup sounds) { return MakeBars(sounds, ItemSettings()); }
 	public static BlockContainer MakeBars(BlockSoundGroup sounds, Item.Settings settings) {
 		BlockContainer container = MakeBarsCommon(sounds, settings);
-		ModDatagen.Cache.Model.BARS.add(container);
+		ModDatagen.Cache.Models.BARS.add(container);
 		return container;
 	}
 	public static BlockContainer MakeOxidizableBars(BlockSoundGroup sounds, Oxidizable.OxidationLevel level) {
 		BlockContainer container = new BlockContainer(new OxidizablePaneBlock(level, BarsSettings(sounds))).dropSelf();
-		ModDatagen.Cache.Model.BARS.add(container);
+		ModDatagen.Cache.Models.BARS.add(container);
 		return container;
 	}
 	public static BlockContainer MakeWaxedBars() { return MakeWaxedBars(BlockSoundGroup.METAL); }
@@ -427,7 +427,7 @@ public class ModFactory {
 	public static BlockContainer MakeWaxedChain() { return MakeChainCommon(ItemSettings()).dropSelf().blockTag(BlockTags.PICKAXE_MINEABLE); }
 	private static BlockContainer MakeChainCommon(Item.Settings settings) { return new BlockContainer(new ChainBlock(ChainSettings()), settings); }
 	private static BlockContainer BuildChain(BlockContainer container) {
-		ModDatagen.Cache.Model.CHAIN.add(container);
+		ModDatagen.Cache.Models.CHAIN.add(container);
 		return container.dropSelf().blockTag(BlockTags.PICKAXE_MINEABLE);
 	}
 	public static BlockContainer MakeHeavyChain() { return MakeHeavyChain(ItemSettings()); }
@@ -436,7 +436,7 @@ public class ModFactory {
 	public static BlockContainer MakeWaxedHeavyChain() { return MakeHeavyChainCommon(ItemSettings()).dropSelf().blockTag(BlockTags.PICKAXE_MINEABLE); }
 	private static BlockContainer MakeHeavyChainCommon(Item.Settings settings) { return new BlockContainer(new HeavyChainBlock(ChainSettings().strength(6.0F, 7.0F)), settings); }
 	private static BlockContainer BuildHeavyChain(BlockContainer container) {
-		ModDatagen.Cache.Model.HEAVY_CHAIN.add(container);
+		ModDatagen.Cache.Models.HEAVY_CHAIN.add(container);
 		return container.dropSelf().blockTag(BlockTags.PICKAXE_MINEABLE);
 	}
 
@@ -459,18 +459,18 @@ public class ModFactory {
 	public static ChestBoatItem MakeChestBoat(BoatEntity.Type type, Item.Settings settings) {
 		ChestBoatItem boat = new ChestBoatItem(type, settings.maxCount(1));
 		DispenserBlock.registerBehavior(boat, new BoatDispenserBehavior(type));
-		ModDatagen.Cache.Tag.Register(ModItemTags.CHEST_BOATS, boat);
-		ModDatagen.Cache.Model.GENERATED.add(boat);
+		ModDatagen.Cache.Tags.Register(ModItemTags.CHEST_BOATS, boat);
+		ModDatagen.Cache.Models.GENERATED.add(boat);
 		return boat;
 	}
 
 	public static BoatContainer MakeBoat(String name, IBlockItemContainer base) { return MakeBoat(name, base, BoatSettings()); }
 	public static BoatContainer MakeBoat(String name, IBlockItemContainer base, Item.Settings settings) {
 		BoatContainer boat = new BoatContainer(name, base, false, settings).dispensable();
-		ModDatagen.Cache.Tag.Register(ItemTags.BOATS, boat.asItem());
-		ModDatagen.Cache.Model.GENERATED.add(boat.asItem());
-		ModDatagen.Cache.Tag.Register(ModItemTags.CHEST_BOATS, boat.getChestBoat());
-		ModDatagen.Cache.Model.GENERATED.add(boat.getChestBoat());
+		ModDatagen.Cache.Tags.Register(ItemTags.BOATS, boat.asItem());
+		ModDatagen.Cache.Models.GENERATED.add(boat.asItem());
+		ModDatagen.Cache.Tags.Register(ModItemTags.CHEST_BOATS, boat.getChestBoat());
+		ModDatagen.Cache.Models.GENERATED.add(boat.getChestBoat());
 		return boat;
 	}
 
@@ -489,7 +489,7 @@ public class ModFactory {
 	public static BlockContainer MakeLadder() { return MakeLadder(BlockSoundGroup.LADDER); }
 	public static BlockContainer MakeLadder(BlockSoundGroup sounds) {
 		BlockContainer container = MakeLadderCommon(sounds);
-		ModDatagen.Cache.Model.LADDER.add(container);
+		ModDatagen.Cache.Models.LADDER.add(container);
 		return container;
 	}
 	public static BlockContainer MakeSpecialLadder(BlockSoundGroup sounds) {
@@ -556,12 +556,12 @@ public class ModFactory {
 	public static BlockContainer BuildWoodPressurePlate(ModPressurePlateBlock block, Block base, Item.Settings settings) {
 		BlockContainer container = new BlockContainer(block, settings).dropSelf();
 		container.blockTag(BlockTags.WOODEN_PRESSURE_PLATES).itemTag(ItemTags.WOODEN_PRESSURE_PLATES);
-		ModDatagen.Cache.Model.PRESSURE_PLATE.add(new Pair<>(container, base));
+		ModDatagen.Cache.Models.PRESSURE_PLATE.add(new Pair<>(container, base));
 		return container;
 	}
 
 	private static BlockContainer BuildDoorCommon(BlockContainer container) {
-		ModDatagen.Cache.Model.DOOR.add(container);
+		ModDatagen.Cache.Models.DOOR.add(container);
 		return container.drops(DropTable.DOOR);
 	}
 
@@ -599,9 +599,10 @@ public class ModFactory {
 	public static SignContainer MakeSign(String name, BlockConvertible planks, Item.Settings settings, BlockConvertible hangingSignBase, BlockSoundGroup sounds, BlockSoundGroup hangingSounds) { return MakeSign(name, planks.asBlock(), settings, hangingSignBase.asBlock(), sounds, hangingSounds); }
 	public static SignContainer MakeSign(String name, Block planks, Item.Settings settings, Block hangingSignBase, BlockSoundGroup sounds, BlockSoundGroup hangingSounds) {
 		SignContainer container = new SignContainer(name, Material.WOOD, sounds, settings.maxCount(16), hangingSignBase, hangingSounds).dropSelf();
-		ModDatagen.Cache.Model.SIGN.add(new Pair<>(container, planks));
-		ModDatagen.Cache.Tag.Register(BlockTags.STANDING_SIGNS, container.asBlock());
-		ModDatagen.Cache.Tag.Register(BlockTags.WALL_SIGNS, container.getWallBlock());
+		ModDatagen.Cache.Models.SIGN.add(new Pair<>(container, planks));
+		ModDatagen.Cache.Tags.Register(BlockTags.STANDING_SIGNS, container.asBlock());
+		ModDatagen.Cache.Tags.Register(BlockTags.WALL_SIGNS, container.getWallBlock());
+		ModDatagen.Cache.Tags.Register(ItemTags.SIGNS, container.asItem());
 		return container;
 	}
 
@@ -619,9 +620,9 @@ public class ModFactory {
 		WallHangingSignBlock wall = new WallHangingSignBlock(settings, type);
 		HangingSignItem item = new HangingSignItem(hanging, wall, itemSettings);
 		WallBlockContainer container = new WallBlockContainer(hanging, wall, item).dropSelf();
-		ModDatagen.Cache.Model.HANGING_SIGN.add(new Pair<>(container, base));
-		ModDatagen.Cache.Tag.Register(ModBlockTags.CEILING_HANGING_SIGNS, container.asBlock());
-		ModDatagen.Cache.Tag.Register(ModBlockTags.WALL_HANGING_SIGNS, container.getWallBlock());
+		ModDatagen.Cache.Models.HANGING_SIGN.add(new Pair<>(container, base));
+		ModDatagen.Cache.Tags.Register(ModBlockTags.CEILING_HANGING_SIGNS, container.asBlock());
+		ModDatagen.Cache.Tags.Register(ModBlockTags.WALL_HANGING_SIGNS, container.getWallBlock());
 		return container;
 	}
 
@@ -662,16 +663,16 @@ public class ModFactory {
 	public static BlockContainer MakeLogSlab(BlockConvertible log, Block.Settings settings) { return MakeLogSlab(log.asBlock(), settings); }
 	public static BlockContainer MakeLogSlab(Block log, Block.Settings settings) {
 		BlockContainer container = MakeSlab(settings).blockTag(ModBlockTags.LOG_SLABS).itemTag(ModItemTags.LOG_SLABS);
-		ModDatagen.Cache.Model.LOG_SLAB.add(new Pair<>(container, log));
-		return container;
+		ModDatagen.Cache.Models.LOG_SLAB.add(new Pair<>(container, log));
+		return container.blockTag(BlockTags.AXE_MINEABLE);
 	}
 
 	public static BlockContainer MakeBarkSlab(BlockConvertible wood, BlockConvertible log) { return MakeBarkSlab(wood, log.asBlock()); }
 	public static BlockContainer MakeBarkSlab(BlockConvertible wood, Block log) { return MakeBarkSlab(wood.asBlock(), log); }
 	public static BlockContainer MakeBarkSlab(Block wood, Block log) {
 		BlockContainer container = BuildSlab(new HorizontalFacingSlabBlock(wood)).blockTag(ModBlockTags.LOG_SLABS).itemTag(ModItemTags.LOG_SLABS);
-		ModDatagen.Cache.Model.BARK_SLAB.add(new Pair<>(container, log));
-		return container;
+		ModDatagen.Cache.Models.BARK_SLAB.add(new Pair<>(container, log));
+		return container.blockTag(BlockTags.AXE_MINEABLE);
 	}
 
 	public static Block.Settings GourdSettings(MapColor color) {
@@ -709,9 +710,7 @@ public class ModFactory {
 		BlockContainer container = new BlockContainer(slab, settings).drops(dropTable);
 		return container.blockTag(BlockTags.SLABS).itemTag(ItemTags.SLABS);
 	}
-	private static BlockContainer WoodenSlabHelper(BlockContainer container) {
-		return container.blockTag(BlockTags.WOODEN_SLABS).itemTag(ItemTags.WOODEN_SLABS);
-	}
+	private static BlockContainer WoodenSlabHelper(BlockContainer container) { return container.blockTag(BlockTags.WOODEN_SLABS).itemTag(ItemTags.WOODEN_SLABS); }
 	public static BlockContainer MakeWoodSlab(BlockConvertible base) { return WoodenSlabHelper(MakeSlab(base)); }
 	public static BlockContainer MakeWoodSlab(BlockConvertible base, Item.Settings settings) { return WoodenSlabHelper(MakeSlab(base, settings)); }
 	public static BlockContainer MakeWoodSlab(Block base) { return WoodenSlabHelper(MakeSlab(base)); }
@@ -781,16 +780,18 @@ public class ModFactory {
 	public static BlockContainer MakeSandy(BlockConvertible block) { return MakeSandy(block.asBlock()); }
 	public static BlockContainer MakeSandy(Block block) { return BuildBlock(new SandyBlock(block)); }
 
-	private static BlockContainer MakeFenceCommon(IBlockItemContainer base, Item.Settings settings) {
-		return new BlockContainer(new ModFenceBlock(base.asBlock()), settings).dropSelf();
+	private static BlockContainer MakeFenceCommon(Block base, Item.Settings settings) {
+		return new BlockContainer(new ModFenceBlock(base), settings).dropSelf();
 	}
-	public static BlockContainer MakeFence(IBlockItemContainer base) { return MakeFence(base, ItemSettings()); }
-	public static BlockContainer MakeFence(IBlockItemContainer base, Item.Settings settings) {
+	public static BlockContainer MakeFence(IBlockItemContainer base) { return MakeFence(base.asBlock()); }
+	public static BlockContainer MakeFence(Block base) { return MakeFence(base, ItemSettings()); }
+	public static BlockContainer MakeFence(IBlockItemContainer base, Item.Settings settings) { return MakeFence(base.asBlock(), settings); }
+	public static BlockContainer MakeFence(Block base, Item.Settings settings) {
 		return MakeFenceCommon(base, settings).blockTag(BlockTags.FENCES).itemTag(ItemTags.FENCES);
 	}
 	public static BlockContainer MakeWoodFence(IBlockItemContainer base) { return MakeWoodFence(base, ItemSettings()); }
 	public static BlockContainer MakeWoodFence(IBlockItemContainer base, Item.Settings settings) {
-		return MakeFenceCommon(base, settings).blockTag(BlockTags.WOODEN_FENCES).itemTag(ItemTags.WOODEN_FENCES);
+		return MakeFenceCommon(base.asBlock(), settings).blockTag(BlockTags.WOODEN_FENCES).itemTag(ItemTags.WOODEN_FENCES);
 	}
 
 	public static BlockContainer MakeWoodFenceGate(IBlockItemContainer ingredient) { return MakeWoodFenceGate(ingredient, ItemSettings()); }
@@ -814,7 +815,7 @@ public class ModFactory {
 	}
 	public static BlockContainer BuildThinMetalTrapdoor(ThinTrapdoorBlock block) {
 		BlockContainer container = BuildBlock(block);
-		ModDatagen.Cache.Model.THIN_TRAPDOOR.add(container);
+		ModDatagen.Cache.Models.THIN_TRAPDOOR.add(container);
 		return BuildMetalTrapdoor(container);
 	}
 	public static BlockContainer MakeMetalTrapdoor(MapColor color, BlockSoundGroup soundGroup, float strength) {
@@ -861,7 +862,7 @@ public class ModFactory {
 	public static BlockContainer MakeWoodcutter(Block base) {
 		BlockContainer container = BuildBlock(new WoodcutterBlock(Block.Settings.of(Material.WOOD, base.getDefaultMapColor()).sounds(base.getSoundGroup(base.getDefaultState())).strength(3.5F)))
 				.blockTag(BlockTags.AXE_MINEABLE);
-		ModDatagen.Cache.Model.WOODCUTTER.add(new Pair<>(container, base));
+		ModDatagen.Cache.Models.WOODCUTTER.add(new Pair<>(container, base));
 		return container;
 	}
 
@@ -873,7 +874,7 @@ public class ModFactory {
 		BlockContainer container = new BlockContainer(new ModBarrelBlock(BarrelSettings(color, soundGroup)))
 				.drops(BlockLootTableGenerator::nameableContainerDrops)
 				.blockTag(BlockTags.AXE_MINEABLE).blockTag(ModBlockTags.BARRELS);
-		ModDatagen.Cache.Model.BARREL.add(container);
+		ModDatagen.Cache.Models.BARREL.add(container);
 		return container;
 	}
 
@@ -888,7 +889,7 @@ public class ModFactory {
 		BlockContainer container = new BlockContainer(block, settings)
 				.flammable(30, 60).compostable(0.3f)
 				.blockTag(BlockTags.LEAVES).itemTag(ItemTags.LEAVES).blockTag(BlockTags.HOE_MINEABLE);
-		ModDatagen.Cache.Model.LEAVES.add(container);
+		ModDatagen.Cache.Models.LEAVES.add(container);
 		return container;
 	}
 
@@ -897,8 +898,8 @@ public class ModFactory {
 	public static BlockContainer MakeLectern(BlockConvertible base, BlockSoundGroup sounds) { return MakeLectern(base.asBlock(), sounds); }
 	public static BlockContainer MakeLectern(Block base, BlockSoundGroup sounds) {
 		BlockContainer container = new BlockContainer(new ModLecternBlock(AbstractBlock.Settings.of(Material.WOOD).mapColor(base.getDefaultMapColor()).strength(2.5f).sounds(sounds))).dropSelf();
-		ModDatagen.Cache.Model.LECTERN.add(new Pair<>(container, base));
-		return container;
+		ModDatagen.Cache.Models.LECTERN.add(new Pair<>(container, base));
+		return container.blockTag(ModBlockTags.LECTERNS);
 	}
 	
 	public static Block MakeMooblossomFlower(BlockConvertible flower) { return MakeMooblossomFlower(flower.asBlock()); }
@@ -935,12 +936,14 @@ public class ModFactory {
 	public static FlowerPartContainer MakeFlowerParts(Block flower) { return MakeFlowerParts(flower, FlowerItemSettings()); }
 	public static FlowerPartContainer MakeFlowerParts(Block flower, Item.Settings settings) { return MakeFlowerParts(flower, FlowerPartSeedBlockSettings(), settings); }
 	public static FlowerPartContainer MakeFlowerParts(Block flower, Block.Settings seedBlockSettings, Item.Settings itemSettings) {
-		return new FlowerPartContainer(flower, seedBlockSettings, itemSettings).compostable(0.3f, 0.1f).dropSelf();
+		FlowerPartContainer container = new FlowerPartContainer(flower, seedBlockSettings, itemSettings).compostable(0.3f, 0.1f).dropSelf();
+		ModDatagen.Cache.Tags.Register(ModItemTags.SEEDS, container.asItem());
+		return container;
 	}
 
 	public static BlockContainer MakeSculkTurf(Block block, Item item) {
 		BlockContainer turf = BuildBlock(new SculkTurfBlock(block), DropTable.SilkTouchOrElse(item));
-		ModDatagen.Cache.Tag.Register(ModBlockTags.SCULK_TURFS, turf);
+		ModDatagen.Cache.Tags.Register(ModBlockTags.SCULK_TURFS, turf);
 		return turf;
 	}
 }

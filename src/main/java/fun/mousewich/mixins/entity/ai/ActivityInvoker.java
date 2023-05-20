@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Activity.class)
 public interface ActivityInvoker {
 	@Invoker("register")
-	public static Activity Register(String id) { return null; }
+	static Activity Register(String id) { return null; }
 }

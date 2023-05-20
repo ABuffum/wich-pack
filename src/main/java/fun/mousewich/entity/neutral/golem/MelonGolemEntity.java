@@ -129,7 +129,7 @@ public class MelonGolemEntity extends GolemEntity implements Shearable, RangedAt
 	protected SoundEvent getHurtSound(DamageSource source) { return SoundEvents.ENTITY_SNOW_GOLEM_HURT; }
 	@Nullable
 	protected SoundEvent getDeathSound() { return SoundEvents.ENTITY_SNOW_GOLEM_DEATH; }
-	public Vec3d getLeashOffset() { return new Vec3d(0.0D, 0.75F * this.getStandingEyeHeight(), this.getWidth() * 0.4F); }
+	public Vec3d getLeashOffset() { return new Vec3d(0.0, 0.75 * this.getStandingEyeHeight(), this.getWidth() * 0.4); }
 
 	@Override public BloodType GetDefaultBloodType() { return BloodType.WATER; }
 }

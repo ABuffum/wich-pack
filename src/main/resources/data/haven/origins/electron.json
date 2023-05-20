@@ -1,0 +1,9 @@
+{
+  "powers": [
+    "wich:lightning_rod",
+    "haven:lightning_self"
+  ],
+  "name": "Electron",
+  "description": "What's up dude?",
+  "icon": "wich:bottled_lightning"
+}

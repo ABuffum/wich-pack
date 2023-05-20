@@ -17,6 +17,8 @@ import fun.mousewich.client.render.entity.renderer.slime.PinkSlimeEntityRenderer
 import fun.mousewich.client.render.entity.renderer.slime.TropicalSlimeEntityRenderer;
 import fun.mousewich.client.render.entity.renderer.spider.BoneSpiderEntityRenderer;
 import fun.mousewich.client.render.entity.renderer.spider.JumpingSpiderEntityRenderer;
+import fun.mousewich.client.render.entity.renderer.zombie.FrozenZombieEntityRenderer;
+import fun.mousewich.client.render.entity.renderer.zombie.JungleZombieEntityRenderer;
 import fun.mousewich.client.render.gui.Generic1x1ContainerScreen;
 import fun.mousewich.container.*;
 import fun.mousewich.haven.HavenModClient;
@@ -101,19 +103,20 @@ public class ModClient implements ClientModInitializer {
 	public static final EntityModelLayer CHEST_RAFT_MODEL_LAYER = MakeModelLayer("chest_raft");
 	public static final EntityModelLayer FANCY_CHICKEN_MODEL_LAYER = MakeModelLayer("fancy_chicken");
 	public static final EntityModelLayer FROG_MODEL_LAYER = MakeModelLayer("frog");
-	public static final EntityModelLayer FROZEN_ZOMBIE_LAYER = MakeModelLayer("frozen_zombie");
-	public static final EntityModelLayer FROZEN_ZOMBIE_INNER_ARMOR_LAYER = MakeModelLayer("frozen_zombie", "inner_armor");
-	public static final EntityModelLayer FROZEN_ZOMBIE_OUTER_ARMOR_LAYER = MakeModelLayer("frozen_zombie", "outer_armor");
-	public static final EntityModelLayer FROZEN_ZOMBIE_OUTER_LAYER = MakeModelLayer("frozen_zombie", "outer");
+	public static final EntityModelLayer LAYERED_ZOMBIE_LAYER = MakeModelLayer("frozen_zombie");
+	public static final EntityModelLayer LAYERED_ZOMBIE_INNER_ARMOR_LAYER = MakeModelLayer("frozen_zombie", "inner_armor");
+	public static final EntityModelLayer LAYERED_ZOMBIE_OUTER_ARMOR_LAYER = MakeModelLayer("frozen_zombie", "outer_armor");
+	public static final EntityModelLayer LAYERED_ZOMBIE_OUTER_LAYER = MakeModelLayer("frozen_zombie", "outer");
 	public static final EntityModelLayer HEDGEHOG_MODEL_LAYER = MakeModelLayer("hedgehog");
-	public static final EntityModelLayer RED_PANDA_MODEL_LAYER = MakeModelLayer("red_panda");
 	public static final EntityModelLayer RACCOON_MODEL_LAYER = MakeModelLayer("raccoon");
 	public static final EntityModelLayer JUMPING_SPIDER_MODEL_LAYER = MakeModelLayer("jumping_spider");
+	public static final EntityModelLayer JUNGLE_ZOMBIE_LAYER = MakeModelLayer("jungle_zombie");
 	public static final EntityModelLayer PIGLIN_HEAD_LAYER = MakeModelLayer("piglin_head");
 	public static final EntityModelLayer PIRANHA_MODEL_LAYER = MakeModelLayer("piranha");
 	public static final EntityModelLayer RAFT_MODEL_LAYER = MakeModelLayer("raft");
 	public static final EntityModelLayer RAINBOW_SHEEP = MakeModelLayer("rainbow_sheep");
 	public static final EntityModelLayer RAINBOW_SHEEP_FUR = MakeModelLayer("rainbow_sheep", "fur");
+	public static final EntityModelLayer RED_PANDA_MODEL_LAYER = MakeModelLayer("red_panda");
 	public static final EntityModelLayer SNIFFER_MODEL_LAYER = MakeModelLayer("sniffer");
 	public static final EntityModelLayer SUNKEN_SKELETON_LAYER = MakeModelLayer("sunken_skeleton");
 	public static final EntityModelLayer SUNKEN_SKELETON_INNER_ARMOR_LAYER = MakeModelLayer("sunken_skeleton", "inner_armor");
@@ -289,6 +292,7 @@ public class ModClient implements ClientModInitializer {
 		setLayer(layer, BLUE_MUSHROOM, MYCELIUM_ROOTS);
 		setLayer(layer, DEATH_CAP_MUSHROOM, BLUE_NETHERSHROOM);
 		setLayer(layer, GILDED_FUNGUS, GILDED_ROOTS);
+		setLayer(layer, WARPED_WART, GILDED_WART);
 	}
 	private static void InitializeTranslucent() {
 		RenderLayer layer = RenderLayer.getTranslucent();
@@ -406,11 +410,13 @@ public class ModClient implements ClientModInitializer {
 		EntityRendererRegistry.register(PINK_SLIME_ENTITY, PinkSlimeEntityRenderer::new);
 		//Frozen Zombie
 		EntityRendererRegistry.register(SLOWING_SNOWBALL_ENTITY, FlyingItemEntityRenderer::new);
-		EntityModelLayerRegistry.registerModelLayer(FROZEN_ZOMBIE_LAYER, FrozenZombieEntityModel::getInnerModelData);
-		EntityModelLayerRegistry.registerModelLayer(FROZEN_ZOMBIE_INNER_ARMOR_LAYER, FrozenZombieEntityModel::getArmorModelData);
-		EntityModelLayerRegistry.registerModelLayer(FROZEN_ZOMBIE_OUTER_ARMOR_LAYER, FrozenZombieEntityModel::getArmorModelData);
-		EntityModelLayerRegistry.registerModelLayer(FROZEN_ZOMBIE_OUTER_LAYER, FrozenZombieEntityModel::getOuterModelData);
+		EntityModelLayerRegistry.registerModelLayer(LAYERED_ZOMBIE_LAYER, LayeredZombieEntityModel::getInnerModelData);
+		EntityModelLayerRegistry.registerModelLayer(LAYERED_ZOMBIE_INNER_ARMOR_LAYER, LayeredZombieEntityModel::getArmorModelData);
+		EntityModelLayerRegistry.registerModelLayer(LAYERED_ZOMBIE_OUTER_ARMOR_LAYER, LayeredZombieEntityModel::getArmorModelData);
+		EntityModelLayerRegistry.registerModelLayer(LAYERED_ZOMBIE_OUTER_LAYER, LayeredZombieEntityModel::getOuterModelData);
 		EntityRendererRegistry.register(FROZEN_ZOMBIE_ENTITY, FrozenZombieEntityRenderer::new);
+		//Jungle Zombie
+		EntityRendererRegistry.register(JUNGLE_ZOMBIE_ENTITY, JungleZombieEntityRenderer::new);
 		//Purple Eye of Ender
 		EntityRendererRegistry.register(PURPLE_EYE_OF_ENDER_ENTITY, context -> new FlyingItemEntityRenderer<>(context, 1.0f, true));
 		//Hanging Signs

@@ -10,7 +10,8 @@
 	"origins:more_exhaustion",
 	"ryft:base_armor",
 	"ryft:thick_skin",
-	"ryft:identified_sounds/oracle"
+	"ryft:identified_sounds/oracle",
+	"wich:blood_types/enderman"
   ],
   "name": "The Oracle",
   "description": "God of Protection",

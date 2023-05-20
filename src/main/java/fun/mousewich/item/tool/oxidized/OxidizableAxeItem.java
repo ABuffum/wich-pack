@@ -4,21 +4,22 @@ import fun.mousewich.item.OxidizableItem;
 import fun.mousewich.item.tool.ModAxeItem;
 import fun.mousewich.material.ModToolMaterials;
 import fun.mousewich.util.OxidationScale;
-import net.minecraft.block.Oxidizable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
 
 import java.util.Optional;
 
+import net.minecraft.block.Oxidizable.OxidationLevel;
+
 public class OxidizableAxeItem extends ModAxeItem implements OxidizableItem {
-	private final Oxidizable.OxidationLevel level;
-	public OxidizableAxeItem(Oxidizable.OxidationLevel level, ModToolMaterials material) { this(level, material, material.getAxeDamage(), material.getAxeSpeed()); }
-	public OxidizableAxeItem(Oxidizable.OxidationLevel level, ToolMaterial material, float attackDamage, float attackSpeed) {
+	private final OxidationLevel level;
+	public OxidizableAxeItem(OxidationLevel level, ModToolMaterials material) { this(level, material, material.getAxeDamage(), material.getAxeSpeed()); }
+	public OxidizableAxeItem(OxidationLevel level, ToolMaterial material, float attackDamage, float attackSpeed) {
 		super(material, attackDamage, attackSpeed);
 		this.level = level;
 	}
 	@Override
-	public Oxidizable.OxidationLevel getDegradationLevel() { return level; }
+	public OxidationLevel getDegradationLevel() { return level; }
 	@Override
 	public Optional<Item> getDegradationResult() { return OxidationScale.getIncreasedItem(this); }
 }

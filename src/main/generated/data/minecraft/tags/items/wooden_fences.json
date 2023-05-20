@@ -1,19 +1,19 @@
 {
   "replace": false,
   "values": [
-    "minecraft:mangrove_fence",
-    "wich:red_mushroom_fence",
     "wich:mushroom_stem_fence",
-    "minecraft:cherry_fence",
-    "wich:dogwood_fence",
     "wich:charred_fence",
-    "wich:blue_mushroom_fence",
-    "wich:hay_fence",
-    "wich:sugar_cane_fence",
-    "wich:dried_bamboo_fence",
+    "minecraft:mangrove_fence",
     "wich:cassia_fence",
+    "wich:gilded_fence",
+    "wich:sugar_cane_fence",
+    "wich:hay_fence",
+    "wich:blue_mushroom_fence",
+    "minecraft:cherry_fence",
     "minecraft:bamboo_fence",
-    "wich:brown_mushroom_fence",
-    "wich:gilded_fence"
+    "wich:red_mushroom_fence",
+    "wich:dogwood_fence",
+    "wich:dried_bamboo_fence",
+    "wich:brown_mushroom_fence"
   ]
 }

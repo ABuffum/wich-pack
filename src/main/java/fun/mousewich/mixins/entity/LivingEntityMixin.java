@@ -4,6 +4,7 @@ import fun.mousewich.ModBase;
 import fun.mousewich.block.basic.ModLadderBlock;
 import fun.mousewich.enchantment.CommittedEnchantment;
 import fun.mousewich.entity.EntityWithAttackStreak;
+import fun.mousewich.entity.RavagerRideableCompatibilityHook;
 import fun.mousewich.entity.projectile.ModArrowEntity;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.gen.data.tag.ModBlockTags;
@@ -15,6 +16,7 @@ import fun.mousewich.sound.ModSoundEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.block.TrapdoorBlock;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
@@ -33,8 +35,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
@@ -302,5 +303,51 @@ public abstract class LivingEntityMixin extends Entity implements EntityWithAtta
 			newAmount = (int)(newAmount * powerModifier);
 		}
 		ExperienceOrbEntity.spawn(world, pos, newAmount);
+	}
+
+	@Redirect(method="getVelocityMultiplier", at=@At(value="INVOKE", target="Lnet/minecraft/enchantment/EnchantmentHelper;getEquipmentLevel(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/LivingEntity;)I"))
+	private int CheckSoulSpeed_getVelocityMultiplier(Enchantment enchantment, LivingEntity entity) { return SoulSpeedPower.getLevel(entity); }
+	@Redirect(method="addSoulSpeedBoostIfNeeded", at=@At(value="INVOKE", target="Lnet/minecraft/enchantment/EnchantmentHelper;getEquipmentLevel(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/LivingEntity;)I"))
+	private int CheckSoulSpeed_addSoulSpeedBoostIfNeeded(Enchantment enchantment, LivingEntity entity) { return SoulSpeedPower.getLevel(entity); }
+
+	@Inject(method="tick", at=@At("HEAD"))
+	public void ClearTravelCheck(CallbackInfo ci) {
+		if (this instanceof RavagerRideableCompatibilityHook rideable) {
+			rideable.SetCheckForTravel(false);
+		}
+	}
+
+	@Inject(method="travel", at=@At("HEAD"), cancellable=true)
+	private void LetPlayersRiveRavagers(Vec3d movementInput, CallbackInfo ci) {
+		if (this instanceof RavagerRideableCompatibilityHook rideable) {
+			if (!rideable.CheckForTravel()) {
+				rideable.SetCheckForTravel(true);
+				if (rideable.RavagerRidableCompatibleTravel(movementInput)) ci.cancel();
+			}
+		}
+	}
+
+	@Inject(method="damage", at=@At("RETURN"))
+	public void AngerAlliesOnBehalf(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+		if (!cir.getReturnValue()) return;
+		if (!(this.world instanceof ServerWorld)) return;
+		if (!(source.getAttacker() instanceof LivingEntity target)) return;
+		if (PowersUtil.Active(this, ZombifiedPiglinAllyPower.class)) {
+			ZombifiedPiglinAllyPower.AngerNearbyPiglins((LivingEntity)(Object)this, target, 35);
+		}
+	}
+
+	@Inject(method="getAttackDistanceScalingFactor", at=@At("RETURN"), cancellable=true)
+	public void AdjustAttackDistanceScalingFactorForModSkulls(Entity entity, CallbackInfoReturnable<Double> cir) {
+		double d = cir.getReturnValue();
+		if (entity != null) {
+			ItemStack itemStack = this.getEquippedStack(EquipmentSlot.HEAD);
+			EntityType<?> entityType = entity.getType();
+			if (entityType == EntityType.PIGLIN && itemStack.isOf(ModBase.PIGLIN_HEAD.asItem())
+					|| entityType == EntityType.PIGLIN_BRUTE && itemStack.isOf(ModBase.PIGLIN_HEAD.asItem())
+					|| entityType == EntityType.ZOMBIFIED_PIGLIN && itemStack.isOf(ModBase.ZOMBIFIED_PIGLIN_HEAD.asItem())) {
+				cir.setReturnValue(d * 0.5);
+			}
+		}
 	}
 }

@@ -3,6 +3,8 @@ package fun.mousewich.mixins.client.render;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import fun.mousewich.ModBase;
+import fun.mousewich.block.fluid.BloodFluid;
+import fun.mousewich.block.fluid.MudFluid;
 import fun.mousewich.effect.StatusEffectFogModifier;
 import fun.mousewich.effect.GogglesEffect;
 import fun.mousewich.util.MixinStore;
@@ -18,6 +20,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
@@ -206,8 +209,14 @@ public class BackgroundRendererMixin {
 	@Inject(method = "applyFog", at = @At("HEAD"), cancellable = true)
 	private static void ApplyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo ci) {
 		Entity entity = camera.getFocusedEntity();
+		Fluid fluid = entity.getEntityWorld().getFluidState(camera.getBlockPos()).getFluid();
 		CameraSubmersionType cameraSubmersionType = camera.getSubmersionType();
-		if (cameraSubmersionType == CameraSubmersionType.LAVA) {
+		if (fluid instanceof MudFluid || fluid instanceof BloodFluid) {
+			RenderSystem.setShaderFogStart(0.25F);
+			RenderSystem.setShaderFogEnd(1.0F);
+			ci.cancel();
+		}
+		else if (cameraSubmersionType == CameraSubmersionType.LAVA) {
 			if (entity instanceof LivingEntity living &&
 					(ModBase.SEE_IN_LAVA_POWER.isActive(living)
 							|| living.hasStatusEffect(ModBase.RUBY_GOGGLES_EFFECT)

@@ -5,7 +5,8 @@
 	"origins:aerial_combatant",
 	"origins:claustrophobia",
 	"origins:more_kinetic_damage",
-	"ryft:identified_sounds/auryon"
+	"ryft:identified_sounds/auryon",
+	"wich:blood_types/avian"
   ],
   "name": "Angel of Love",
   "description": "You're a general in general. Kick some ass!",

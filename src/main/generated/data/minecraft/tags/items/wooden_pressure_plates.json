@@ -2,18 +2,18 @@
   "replace": false,
   "values": [
     "wich:hay_pressure_plate",
-    "wich:red_mushroom_pressure_plate",
+    "wich:brown_mushroom_pressure_plate",
     "wich:dogwood_pressure_plate",
-    "wich:dried_bamboo_pressure_plate",
-    "minecraft:bamboo_pressure_plate",
-    "wich:charred_pressure_plate",
-    "wich:gilded_pressure_plate",
+    "minecraft:mangrove_pressure_plate",
+    "wich:mushroom_stem_pressure_plate",
+    "wich:sugar_cane_pressure_plate",
     "wich:blue_mushroom_pressure_plate",
     "wich:cassia_pressure_plate",
-    "wich:brown_mushroom_pressure_plate",
-    "minecraft:mangrove_pressure_plate",
+    "wich:red_mushroom_pressure_plate",
     "minecraft:cherry_pressure_plate",
-    "wich:sugar_cane_pressure_plate",
-    "wich:mushroom_stem_pressure_plate"
+    "minecraft:bamboo_pressure_plate",
+    "wich:dried_bamboo_pressure_plate",
+    "wich:charred_pressure_plate",
+    "wich:gilded_pressure_plate"
   ]
 }

@@ -1,8 +1,14 @@
 {
   "powers": [
+	"haven:no_stomach",
 	"haven:bad_swimmer_doll",
+	"haven:slow_falling_doll_large",
 	"haven:pincushion",
+	"haven:cotton_guard",
 	"origins-classes:sneaky",
+	"haven:cotton_spare",
+	"wich:cobweb_unrestricted",
+	"haven:cotton_death",
 	"wich:blood_types/none"
   ],
   "name": "Carnie",

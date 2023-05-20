@@ -1,12 +1,16 @@
 package fun.mousewich.mixins.entity;
 
+import fun.mousewich.ModBase;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.gen.data.tag.ModBlockTags;
+import fun.mousewich.origins.power.BurnForeverPower;
+import fun.mousewich.origins.power.CrackBlocksPower;
 import fun.mousewich.origins.power.FireImmunePower;
 import fun.mousewich.origins.power.PowersUtil;
 import fun.mousewich.sound.IdentifiedSounds;
 import fun.mousewich.sound.ModSoundEvents;
 import fun.mousewich.sound.SoundUtil;
+import fun.mousewich.util.CrackedBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -15,6 +19,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Nameable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.entity.EntityLike;
 import net.minecraft.world.event.GameEvent;
@@ -24,6 +29,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -37,6 +43,7 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 	@Shadow public World world;
 	@Shadow private int lastChimeAge;
 	@Shadow private float lastChimeIntensity;
+	@Shadow private Vec3d velocity;
 
 	@Shadow public abstract void emitGameEvent(GameEvent event, @Nullable Entity entity, BlockPos pos);
 	@Shadow public abstract void emitGameEvent(GameEvent event, @Nullable Entity entity);
@@ -45,6 +52,7 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 	@Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
 	@Shadow public abstract BlockPos getBlockPos();
 	@Shadow public abstract BlockState getBlockStateAtPos();
+
 
 	@Inject(method="kill", at = @At("TAIL"))
 	public void Kill(CallbackInfo ci) { this.emitGameEvent(ModGameEvent.ENTITY_DIE); }
@@ -101,5 +109,29 @@ public abstract class EntityMixin implements Nameable, EntityLike, CommandOutput
 	@Inject(method="isFireImmune", at=@At("HEAD"), cancellable=true)
 	public void IsFireImmune(CallbackInfoReturnable<Boolean> cir) {
 		if (PowersUtil.Active((Entity)(Object)this, FireImmunePower.class)) cir.setReturnValue(true);
+	}
+
+	@Redirect(method="baseTick", at=@At(value="INVOKE", target="Lnet/minecraft/entity/Entity;setFireTicks(I)V"))
+	public void StayBurningBaseTick(Entity instance, int fireTicks) {
+		if (PowersUtil.Active(instance, BurnForeverPower.class)) {
+			instance.setFireTicks(Math.max(instance.getFireTicks(), fireTicks));
+		}
+		else instance.setFireTicks(fireTicks);
+	}
+	@Redirect(method="setOnFireFor", at=@At(value="INVOKE", target="Lnet/minecraft/entity/Entity;setFireTicks(I)V"))
+	public void StayBurningSetOnFireFor(Entity instance, int fireTicks) {
+		if (fireTicks > 0 && PowersUtil.Active(instance, BurnForeverPower.class)) {
+			instance.setFireTicks(Math.max(instance.getFireTicks(), fireTicks));
+		}
+		else instance.setFireTicks(fireTicks);
+	}
+
+	@Inject(method="fall", at=@At(value="INVOKE", shift=At.Shift.AFTER, target="Lnet/minecraft/block/Block;onLandedUpon(Lnet/minecraft/world/World;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/Entity;F)V"))
+	public void CrackBlocksOnFall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition, CallbackInfo ci) {
+		int distance = CrackBlocksPower.getDistance((Entity)(Object)this);
+		if (distance > 0) {
+			double y = this.velocity.getY();
+			if (y < 0 && distance * -0.1 >= y) CrackedBlocks.Crack(this.world, landedPosition);
+		}
 	}
 }

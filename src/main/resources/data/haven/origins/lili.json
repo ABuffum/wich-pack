@@ -7,7 +7,7 @@
 	"extraorigins:jockey",
 	"wich:blood_types/axolotl"
   ],
-  "icon": "minecraft:axolotl_bucket",
   "name": "Axolotl Spirit",
-  "description": "We love you too!!!"
+  "description": "We love you too!!!",
+  "icon": "minecraft:axolotl_bucket"
 }

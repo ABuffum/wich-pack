@@ -6,9 +6,10 @@
 	"origins:nine_lives",
 	"origins:scare_creepers",
 	"origins:cat_vision",
-	"ryft:warm_body",
+	"wich:warm_body",
 	"origins:more_exhaustion",
-	"ryft:identified_sounds/kaden"
+	"ryft:identified_sounds/kaden",
+	"wich:blood_types/nephal"
   ],
   "name": "Kaden",
   "description": "We have high expectations for you.",

@@ -11,7 +11,9 @@ public class ModBiomeTags {
 	public static final TagKey<Biome> ALLOWS_SURFACE_SLIME_SPAWNS = createMinecraftTag("allows_surface_slime_spawns");
 	public static final TagKey<Biome> ANCIENT_CITY_HAS_STRUCTURE = createMinecraftTag("has_structure/ancient_city");
 	public static final TagKey<Biome> HAS_CLOSER_WATER_FOG = createMinecraftTag("has_closer_water_fog");
+	public static final TagKey<Biome> INCREASED_FIRE_BURNOUT = createMinecraftTag("increased_fire_burnout");
 	public static final TagKey<Biome> IS_END = createMinecraftTag("is_end");
+	public static final TagKey<Biome> IS_OVERWORLD = createMinecraftTag("is_overworld");
 	public static final TagKey<Biome> IS_SAVANNA = createMinecraftTag("is_savanna");
 	public static final TagKey<Biome> MINESHAFT_BLOCKING = createMinecraftTag("mineshaft_blocking");
 	public static final TagKey<Biome> SPAWNS_COLD_VARIANT_FROGS = createMinecraftTag("spawns_cold_variant_frogs");

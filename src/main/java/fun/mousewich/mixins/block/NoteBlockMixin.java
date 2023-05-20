@@ -53,6 +53,7 @@ public abstract class NoteBlockMixin extends Block {
 		if (state.isOf(Blocks.DRAGON_HEAD)) return SoundEvents.ENTITY_ENDER_DRAGON_AMBIENT;
 		if (state.isOf(Blocks.WITHER_SKELETON_SKULL)) return SoundEvents.ENTITY_WITHER_SKELETON_AMBIENT;
 		if (state.isOf(ModBase.PIGLIN_HEAD.asBlock())) return SoundEvents.ENTITY_PIGLIN_ANGRY;
+		if (state.isOf(ModBase.ZOMBIFIED_PIGLIN_HEAD.asBlock())) return SoundEvents.ENTITY_ZOMBIFIED_PIGLIN_ANGRY;
 		return null;
 	}
 }

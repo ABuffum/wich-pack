@@ -81,8 +81,8 @@ public class FrogspawnBlock extends Block {
 		int i = random.nextInt(MIN_TADPOLES, MAX_TADPOLES + 1);
 		for (int j = 1; j <= i; ++j) {
 			TadpoleEntity tadpoleEntity = ModBase.TADPOLE_ENTITY.create(world);
-			double d = (double)pos.getX() + this.getSpawnOffset(random);
-			double e = (double)pos.getZ() + this.getSpawnOffset(random);
+			double d = pos.getX() + this.getSpawnOffset(random);
+			double e = pos.getZ() + this.getSpawnOffset(random);
 			int k = random.nextInt(0, 361);
 			tadpoleEntity.refreshPositionAndAngles(d, (double)pos.getY() - 0.5, e, k, 0.0f);
 			tadpoleEntity.setPersistent();

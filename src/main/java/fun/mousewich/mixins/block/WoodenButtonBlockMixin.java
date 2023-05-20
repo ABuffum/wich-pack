@@ -17,7 +17,7 @@ public abstract class WoodenButtonBlockMixin extends AbstractButtonBlock {
 	protected WoodenButtonBlockMixin(boolean wooden, Settings settings) { super(wooden, settings); }
 
 	@Inject(method="getClickSound", at = @At("HEAD"), cancellable = true)
-	protected void getClickSound(boolean powered, CallbackInfoReturnable<SoundEvent> cir) {
+	protected void GetClickSound(boolean powered, CallbackInfoReturnable<SoundEvent> cir) {
 		Block block = this;
 		if (block == ModBase.BAMBOO_BUTTON.asBlock()) {
 			cir.setReturnValue(powered ? ModSoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_ON : ModSoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_OFF);

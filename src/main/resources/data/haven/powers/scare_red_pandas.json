@@ -1,0 +1,6 @@
+{
+  "type": "wich:scare_mob",
+  "name": "Natural Predator",
+  "entity_types": [ "wich:red_panda" ],
+  "description": "Red Pandas are scared of you and will flee unless you are holding bamboo."
+}

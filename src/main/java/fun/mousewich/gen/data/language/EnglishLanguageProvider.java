@@ -310,10 +310,10 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("subtitles.item.pouch.empty_rabbit", EN_US.released(EN_US.Rabbit()));
 		builder.add("subtitles.item.pouch.fill_rabbit", EN_US.bagged(EN_US.Rabbit()));
 		//Bone Spider
-		builder.add("subtitles.entity.bone_spider.attack", EN_US.attacks(EN_US.BoneSpider()));
-		builder.add("subtitles.entity.bone_spider.spit", EN_US.spits(EN_US.BoneSpider()));
+		builder.add("subtitles.entity.bone_spider.attack", EN_US.attacks(EN_US.Spider(EN_US.Bone())));
+		builder.add("subtitles.entity.bone_spider.spit", EN_US.spits(EN_US.Spider(EN_US.Bone())));
 		//Jumping Spider
-		builder.add("subtitles.entity.jumping_spider.jump", EN_US.jumps(EN_US.JumpingSpider()));
+		builder.add("subtitles.entity.jumping_spider.jump", EN_US.jumps(EN_US.Spider(EN_US.Spider(EN_US.Jumping()))));
 		//<editor-fold desc="Hedgehog">
 		builder.add("subtitles.entity.hedgehog.ambient", EN_US.grunts(EN_US.Hedgehog()));
 		builder.add("subtitles.entity.hedgehog.death", EN_US.dies(EN_US.Hedgehog()));
@@ -350,14 +350,15 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("subtitles.item.salve.apply", EN_US.applied(EN_US.Salve()));
 		builder.add("subtitles.item.syringe.inject", EN_US.injected(EN_US.Syringe()));
 
-		//TNT Variants (Haven SMP)
 		if (ModConfig.REGISTER_HAVEN_MOD) {
+			//TNT Variants
 			builder.add("subtitles.entity.sharp_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Sharp())));
 			builder.add("subtitles.entity.chunkeater_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Chunkeater())));
 			builder.add("subtitles.entity.violent_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Violent())));
 			builder.add("subtitles.entity.devouring_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Devouring())));
 			builder.add("subtitles.entity.catalyzing_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Catalyzing())));
 			builder.add("subtitles.entity.soft_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Soft())));
+			//Misc
 			builder.add("subtitles.ambient.miasma_coming", "She's coming");
 		}
 	}

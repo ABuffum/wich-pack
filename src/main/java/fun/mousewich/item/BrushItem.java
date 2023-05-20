@@ -24,9 +24,7 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
 public class BrushItem extends Item {
-	public BrushItem(Item.Settings settings) {
-		super(settings);
-	}
+	public BrushItem(Item.Settings settings) { super(settings); }
 	@Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		PlayerEntity playerEntity = context.getPlayer();

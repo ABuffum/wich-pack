@@ -56,9 +56,7 @@ public abstract class BloodFluid extends FlowableFluid {
 	public Optional<SoundEvent> getBucketFillSound() { return Optional.of(SoundEvents.ITEM_BUCKET_FILL); }
 
 	@Nullable
-	public ParticleEffect getParticle() {
-		return ModBase.DRIPPING_BLOOD;
-	}
+	public ParticleEffect getParticle() { return ModBase.DRIPPING_BLOOD; }
 
 	public static class Flowing extends BloodFluid {
 		@Override

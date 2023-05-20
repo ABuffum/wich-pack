@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:sculk_stone_brick_slab"
+    }
+  },
+  "result": {
+    "item": "wich:chiseled_sculk_stone_bricks"
+  }
+}

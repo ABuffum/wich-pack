@@ -73,9 +73,7 @@ public class ModCakeBlock extends Block {
 	public void onEat(WorldAccess world, BlockPos pos, BlockState state, PlayerEntity player) { }
 
 	public ActionResult tryEat(WorldAccess world, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!player.canConsume(false)) {
-			return ActionResult.PASS;
-		}
+		if (!player.canConsume(false)) return ActionResult.PASS;
 		else {
 			player.incrementStat(Stats.EAT_CAKE_SLICE);
 			player.getHungerManager().add(2, 0.1F);

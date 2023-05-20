@@ -42,11 +42,8 @@ public class ModBoatItem extends Item {
 			List<Entity> list = world.getOtherEntities(user, user.getBoundingBox().stretch(vec3d.multiply(5.0D)).expand(1.0D), RIDERS);
 			if (!list.isEmpty()) {
 				Vec3d vec3d2 = user.getEyePos();
-				Iterator var11 = list.iterator();
-
-				while(var11.hasNext()) {
-					Entity entity = (Entity)var11.next();
-					Box box = entity.getBoundingBox().expand((double)entity.getTargetingMargin());
+				for (Entity entity : list) {
+					Box box = entity.getBoundingBox().expand((double) entity.getTargetingMargin());
 					if (box.contains(vec3d2)) {
 						return TypedActionResult.pass(itemStack);
 					}

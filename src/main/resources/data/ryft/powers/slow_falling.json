@@ -12,23 +12,12 @@
 	},
 	"else_action": {
 	  "type": "origins:apply_effect",
-	  "effect": {
-		"effect": "minecraft:slow_falling",
-		"is_ambient": true,
-		"show_particles": false,
-		"show_icon": false,
-		"duration": 60
-	  }
+	  "effect": { "effect": "minecraft:slow_falling", "is_ambient": true, "show_particles": false, "show_icon": false, "duration": 60 }
 	}
   },
   "cooldown": 100,
-  "key": {
-	"key": "key.origins.secondary_active",
-	"continuous": false
-  },
-  "hud_render": {
-	"should_render": false
-  },
+  "key": { "key": "key.origins.secondary_active", "continuous": false },
+  "hud_render": { "should_render": false },
   "name": "Light as feathers",
   "description": "You can use your wings to glide slowly down to the ground"
 }

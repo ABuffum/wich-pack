@@ -14,9 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(HostileEntity.class)
 public abstract class HostileEntityMixin extends PathAwareEntity implements Monster {
-	protected HostileEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
-		super(entityType, world);
-	}
+	protected HostileEntityMixin(EntityType<? extends HostileEntity> entityType, World world) { super(entityType, world); }
 
 	@Inject(method="getSwimSound", at = @At("HEAD"), cancellable = true)
 	protected void GetSwimSound(CallbackInfoReturnable<SoundEvent> cir) {

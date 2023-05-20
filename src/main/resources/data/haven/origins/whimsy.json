@@ -1,0 +1,13 @@
+{
+  "powers": [
+	"wich:predator",
+	"wich:hunger_immunity",
+	"wich:raw_diet",
+	"origins:natural_armor",
+	"wich:warm_body",
+	"wich:blood_types/bear"
+  ],
+  "name": "Polar bear",
+  "description": "A bear of the ice and snow.",
+  "icon": "minecraft:cod"
+}

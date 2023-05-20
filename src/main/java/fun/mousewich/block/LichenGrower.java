@@ -116,21 +116,15 @@ public class LichenGrower {
 	public enum GrowType {
 		SAME_POSITION{
 			@Override
-			public GrowPos getGrowPos(BlockPos pos, Direction newDirection, Direction oldDirection) {
-				return new GrowPos(pos, newDirection);
-			}
+			public GrowPos getGrowPos(BlockPos pos, Direction newDirection, Direction oldDirection) { return new GrowPos(pos, newDirection); }
 		},
 		SAME_PLANE{
 			@Override
-			public GrowPos getGrowPos(BlockPos pos, Direction newDirection, Direction oldDirection) {
-				return new GrowPos(pos.offset(newDirection), oldDirection);
-			}
+			public GrowPos getGrowPos(BlockPos pos, Direction newDirection, Direction oldDirection) { return new GrowPos(pos.offset(newDirection), oldDirection); }
 		},
 		WRAP_AROUND{
 			@Override
-			public GrowPos getGrowPos(BlockPos pos, Direction newDirection, Direction oldDirection) {
-				return new GrowPos(pos.offset(newDirection).offset(oldDirection), newDirection.getOpposite());
-			}
+			public GrowPos getGrowPos(BlockPos pos, Direction newDirection, Direction oldDirection) { return new GrowPos(pos.offset(newDirection).offset(oldDirection), newDirection.getOpposite()); }
 		};
 		public abstract GrowPos getGrowPos(BlockPos var1, Direction var2, Direction var3);
 	}

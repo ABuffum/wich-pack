@@ -76,8 +76,6 @@ public class HavenMod {
 	public static final String SOLEIL = "Soleil";
 	public static final String SOLEIL_s = "Soleil's";
 
-	public static final String NEPHAL = "Nephal";
-
 	//<editor-fold desc="Sound Events">
 	public static final SoundEvent CHUNKEATER_TNT_PRIMED = ModSoundEvents.registerSoundEvent("entity.chunkeater_tnt.primed");
 	public static final SoundEvent DEVOURING_TNT_PRIMED = ModSoundEvents.registerSoundEvent("entity.devouring_tnt.primed");
@@ -118,10 +116,8 @@ public class HavenMod {
 	public static final BloodType CONFETTI_BLOOD_TYPE = BloodType.Register(NAMESPACE, "confetti");
 	public static final BloodType DISEASED_CAT_BLOOD_TYPE = BloodType.Register(NAMESPACE, "diseased_cat");
 	public static final BloodType ICHOR_BLOOD_TYPE = BloodType.Register(NAMESPACE, "ichor");
-	public static final BloodType NEPHAL_BLOOD_TYPE = BloodType.Register(NAMESPACE, "nephal");
 	public static final BloodType NETHER_ROYALTY_BLOOD_TYPE = BloodType.Register(NAMESPACE, "nether_royalty");
 	public static final BloodType SLUDGE_BLOOD_TYPE = BloodType.Register(NAMESPACE, "sludge");
-	public static final BloodType VAMPIRE_BLOOD_TYPE = BloodType.Register(NAMESPACE, "vampire");
 	//</editor-fold>
 
 	//<editor-fold desc="Alcatraz">
@@ -151,14 +147,6 @@ public class HavenMod {
 	//<editor-fold desc="Angel">
 	public static final EntityType<AngelBatEntity> ANGEL_BAT_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AngelBatEntity::new).dimensions(EntityDimensions.fixed(0.5F, 0.9F)).trackRangeChunks(5).build();
 	public static final BlockContainer ANGEL_BAT_PLUSHIE = MakePlushie(BatPlushieBlock::new);
-	public static final Item VAMPIRE_BLOOD_SYRINGE = ParentedItem(new BloodSyringeItem((PlayerEntity user, ItemStack stack, LivingEntity entity) -> {
-		BloodType bloodType = BloodType.Get(entity);
-		if (bloodType == VAMPIRE_BLOOD_TYPE) entity.heal(1);
-		else {
-			entity.damage(ModDamageSource.Injected(user, bloodType), 1);
-			user.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 100, 1));
-		}
-	}), BLOOD_SYRINGE);
 	//</editor-fold>
 	//<editor-fold desc="Aster">
 	public static final Item BROKEN_BOTTLE = GeneratedItem(new Item(ItemSettings()));
@@ -195,15 +183,6 @@ public class HavenMod {
 	public static final ToolItem PTEROR = HandheldItem(new ModSwordItem(ToolMaterials.NETHERITE, 3, -2.4F, ItemSettings().fireproof()));
 	public static final Item LOCKET = MakeGeneratedItem();
 	public static final Item EMERALD_LOCKET = MakeGeneratedItem();
-	public static final Item NEPHAL_BLOOD_SYRINGE = ParentedItem(new BloodSyringeItem((PlayerEntity user, ItemStack stack, LivingEntity entity) -> {
-		BloodType bloodType = BloodType.Get(entity);
-		if (bloodType == NEPHAL_BLOOD_TYPE) entity.heal(1);
-		else if (bloodType == VAMPIRE_BLOOD_TYPE) {
-			entity.heal(1);
-			entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 1));
-		}
-		else entity.damage(ModDamageSource.Injected(user, bloodType), 1);
-	}), BLOOD_SYRINGE);
 	//</editor-fold>
 	//<editor-fold desc="Deepest Sleep">
 	public static final DefaultParticleType VECTOR_ARROW_PARTICLE = FabricParticleTypes.simple(false);
@@ -430,8 +409,6 @@ public class HavenMod {
 		Register("angel_bat", ANGEL_BAT_ENTITY, List.of(EN_US.Bat(EN_US.Angel())));
 		SpawnRestrictionAccessor.callRegister(ANGEL_BAT_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AngelBatEntity::CanSpawn);
 		FabricDefaultAttributeRegistry.register(ANGEL_BAT_ENTITY, AngelBatEntity.createBatAttributes());
-		Register("vampire_blood_syringe", VAMPIRE_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(EN_US.Vampire()))));
-		BloodType.BLOOD_TYPE_TO_SYRINGE.put(VAMPIRE_BLOOD_TYPE, VAMPIRE_BLOOD_SYRINGE);
 		//</editor-fold>
 		//<editor-fold desc="Aster">
 		Register("broken_bottle", BROKEN_BOTTLE, List.of(EN_US.Bottle(EN_US.Broken())));
@@ -452,8 +429,6 @@ public class HavenMod {
 		Register("pteror", PTEROR, List.of("Pteror"));
 		Register("locket", LOCKET, List.of(EN_US.Locket()));
 		Register("emerald_locket", EMERALD_LOCKET, List.of(EN_US.Locket(EN_US.Emerald())));
-		Register("nephal_blood_syringe", NEPHAL_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(NEPHAL))));
-		BloodType.BLOOD_TYPE_TO_SYRINGE.put(NEPHAL_BLOOD_TYPE, NEPHAL_BLOOD_SYRINGE);
 		//</editor-fold>
 		//<editor-fold desc="Deepest Sleep">
 		Register("vector_arrow", VECTOR_ARROW_PARTICLE);

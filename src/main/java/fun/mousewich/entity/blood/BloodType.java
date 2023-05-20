@@ -1,9 +1,11 @@
 package fun.mousewich.entity.blood;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.gen.data.tag.ModBlockTags;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -39,6 +41,7 @@ public class BloodType {
 	public static final BloodType HONEY = Register("honey");
 	public static final BloodType LAVA = Register("lava");
 	public static final BloodType MUD = Register("mud");
+	public static final BloodType SAP = Register("sap");
 	public static final BloodType WATER = Register("water");
 
 	public static BloodType Get(LivingEntity entity) {
@@ -52,6 +55,10 @@ public class BloodType {
 
 	public static final Map<Block, BloodType> BLOCK_TO_BLOOD_TYPE = new HashMap<>();
 	private static boolean registered = false;
+	public static BloodType Get(BlockState state) {
+		//There might be some blockstate variants that produce different blood types
+		return Get(state.getBlock());
+	}
 	public static BloodType Get(Block block) {
 		if (!registered) RegisterBlocksToBloodTypes();
 		return BLOCK_TO_BLOOD_TYPE.getOrDefault(block, NONE);

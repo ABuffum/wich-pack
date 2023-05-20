@@ -19,14 +19,10 @@ public class SculkChargePopParticle extends SpriteBillboardParticle {
 	}
 
 	@Override
-	public int getBrightness(float tint) {
-		return 240;
-	}
+	public int getBrightness(float tint) { return 240; }
 
 	@Override
-	public ParticleTextureSheet getType() {
-		return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
-	}
+	public ParticleTextureSheet getType() { return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT; }
 
 	@Override
 	public void tick() {

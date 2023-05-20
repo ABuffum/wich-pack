@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "wich:block/yellow_nether_bricks",
+    "top": "wich:block/yellow_nether_bricks",
+    "side": "wich:block/yellow_nether_bricks"
+  }
+}

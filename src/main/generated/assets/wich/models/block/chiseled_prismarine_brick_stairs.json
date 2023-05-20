@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/stairs",
   "textures": {
-    "bottom": "wich:block/chiseled_prismarine_bricks",
-    "top": "wich:block/chiseled_prismarine_bricks",
-    "side": "wich:block/chiseled_prismarine_bricks"
+    "bottom": "wich:block/chiseled_prismarine",
+    "top": "wich:block/chiseled_prismarine",
+    "side": "wich:block/chiseled_prismarine"
   }
 }

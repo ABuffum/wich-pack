@@ -18,13 +18,11 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class BaseSyringeItem extends Item {
-	public static interface SyringeEffect {
+	public interface SyringeEffect {
 		void ApplyEffect(PlayerEntity user, ItemStack stack, LivingEntity entity);
 	}
 	private SyringeEffect applyEffect = null;
-	public BaseSyringeItem() {
-		this(ModFactory.ItemSettings().recipeRemainder(ModBase.DIRTY_SYRINGE).maxCount(1));
-	}
+	public BaseSyringeItem() { this(ModFactory.ItemSettings().recipeRemainder(ModBase.DIRTY_SYRINGE).maxCount(1)); }
 	public BaseSyringeItem(SyringeEffect applyEffect) {
 		this();
 		this.applyEffect = applyEffect;

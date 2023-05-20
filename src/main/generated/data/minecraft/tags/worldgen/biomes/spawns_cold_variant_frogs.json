@@ -9,10 +9,10 @@
     "minecraft:frozen_ocean",
     "minecraft:deep_frozen_ocean",
     "minecraft:grove",
-    "minecraft:deep_dark",
     "minecraft:frozen_river",
     "minecraft:snowy_taiga",
     "minecraft:snowy_beach",
+    "minecraft:deep_dark",
     "#minecraft:is_end"
   ]
 }

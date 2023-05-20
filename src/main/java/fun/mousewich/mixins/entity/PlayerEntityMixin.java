@@ -10,11 +10,11 @@ import fun.mousewich.entity.blood.EntityWithBloodType;
 import fun.mousewich.entity.hostile.warden.WardenEntity;
 import fun.mousewich.event.ModGameEvent;
 import fun.mousewich.item.tool.HammerItem;
+import fun.mousewich.origins.power.ExperienceHealingPower;
 import fun.mousewich.origins.power.FluidBreatherPower;
 import fun.mousewich.origins.power.SingleSlotInventoryPower;
 import fun.mousewich.sound.IdentifiedSounds;
 import io.github.apace100.apoli.component.PowerHolderComponent;
-import io.github.apace100.apoli.mixin.EntityAccessor;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
@@ -24,7 +24,6 @@ import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -36,6 +35,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.dynamic.GlobalPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -187,9 +187,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LastDeat
 				for(int i = 0; i < inventory.size(); ++i) {
 					ItemStack itemStack = inventory.getStack(i);
 					if(inventory.shouldDropOnDeath(itemStack)) {
-						if (!itemStack.isEmpty() && EnchantmentHelper.hasVanishingCurse(itemStack)) {
-							inventory.removeStack(i);
-						} else {
+						if (!itemStack.isEmpty() && EnchantmentHelper.hasVanishingCurse(itemStack)) inventory.removeStack(i);
+						else {
 							((PlayerEntity)(Object)this).dropItem(itemStack, true, false);
 							inventory.setStack(i, ItemStack.EMPTY);
 						}
@@ -209,5 +208,19 @@ public abstract class PlayerEntityMixin extends LivingEntity implements LastDeat
 		if (nbt.contains(ModNbtKeys.LAST_DEATH_LOCATION, NbtElement.COMPOUND_TYPE)) {
 			this.setLastDeathPos(GlobalPos.CODEC.parse(NbtOps.INSTANCE, nbt.get(ModNbtKeys.LAST_DEATH_LOCATION)).resultOrPartial(ModBase.LOGGER::error));
 		}
+	}
+
+	private int healingExperience = 0;
+	@Inject(method="addExperience", at=@At("TAIL"))
+	public void AddHealingExperience(int experience, CallbackInfo ci) {
+		int threshold = ExperienceHealingPower.getThreshold(this);
+		if (threshold > 0 && !this.isDead()) {
+			this.healingExperience += experience;
+			if (this.healingExperience > threshold) {
+				this.heal((float)(this.healingExperience / threshold));
+				this.healingExperience %= threshold;
+			}
+		}
+		else this.healingExperience = 0;
 	}
 }

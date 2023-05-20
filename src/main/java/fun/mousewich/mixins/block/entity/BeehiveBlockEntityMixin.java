@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.event.GameEvent;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +20,7 @@ public abstract class BeehiveBlockEntityMixin extends BlockEntity {
 	public BeehiveBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) { super(type, pos, state); }
 
 	@Inject(method = "angerBees", at = @At("HEAD"), cancellable = true)
-	public void angerBees$MobOrigins(@Nullable PlayerEntity player, BlockState state, BeehiveBlockEntity.BeeState beeState, CallbackInfo ci) {
+	public void angerBees$MobOrigins(PlayerEntity player, BlockState state, BeehiveBlockEntity.BeeState beeState, CallbackInfo ci) {
 		if (PowersUtil.Active(player, TakeHoneyPower.class)) ci.cancel();
 	}
 	@Inject(method="tryEnterHive(Lnet/minecraft/entity/Entity;ZI)V", at = @At(value="INVOKE", shift=At.Shift.AFTER, target="Lnet/minecraft/world/World;playSound(Lnet/minecraft/entity/player/PlayerEntity;DDDLnet/minecraft/sound/SoundEvent;Lnet/minecraft/sound/SoundCategory;FF)V"))

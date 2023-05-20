@@ -1,6 +1,5 @@
 package fun.mousewich.block.container;
 
-import com.mojang.logging.LogUtils;
 import fun.mousewich.ModBase;
 import fun.mousewich.gen.data.tag.ModItemTags;
 import net.minecraft.block.Block;
@@ -14,13 +13,11 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import org.slf4j.Logger;
 
 import java.util.Objects;
 import java.util.function.Predicate;
 
 public class ChiseledBookshelfBlockEntity extends BlockEntity implements Inventory {
-	private static final Logger LOGGER = LogUtils.getLogger();
 	private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(ChiseledBookshelfBlock.MAX_BOOK_COUNT, ItemStack.EMPTY);
 	private int lastInteractedSlot = -1;
 
@@ -28,7 +25,7 @@ public class ChiseledBookshelfBlockEntity extends BlockEntity implements Invento
 
 	private void updateState(int interactedSlot) {
 		if (interactedSlot < 0 || interactedSlot >= ChiseledBookshelfBlock.MAX_BOOK_COUNT) {
-			LOGGER.error("Expected slot 0-5, got {}", interactedSlot);
+			ModBase.LOGGER.error("Expected slot 0-5, got {}", interactedSlot);
 			return;
 		}
 		this.lastInteractedSlot = interactedSlot;

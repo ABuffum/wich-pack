@@ -1,7 +1,10 @@
 {
   "replace": false,
   "values": [
+    "wich:blue_nether_brick_fence",
+    "wich:yellow_nether_brick_fence",
     "wich:blood_fence",
+    "wich:red_nether_brick_fence",
     "wich:dried_blood_fence"
   ]
 }

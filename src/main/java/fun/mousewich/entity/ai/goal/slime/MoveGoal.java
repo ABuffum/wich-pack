@@ -18,7 +18,5 @@ public class MoveGoal extends Goal {
 	public boolean canStart() { return !this.slime.hasVehicle(); }
 
 	@Override
-	public void tick() {
-		((SlimeMoveControl)this.slime.getMoveControl()).move(1.0);
-	}
+	public void tick() { ((SlimeMoveControl)this.slime.getMoveControl()).move(1.0); }
 }

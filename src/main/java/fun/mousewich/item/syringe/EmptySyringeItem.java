@@ -7,6 +7,7 @@ import fun.mousewich.damage.ModDamageSource;
 import fun.mousewich.entity.blood.BloodType;
 import fun.mousewich.entity.cloud.ConfettiCloudEntity;
 import fun.mousewich.entity.cloud.DragonBreathCloudEntity;
+import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.mixins.block.BeehiveBlockInvoker;
 import fun.mousewich.mixins.block.TurtleEggBlockInvoker;
 import net.minecraft.block.*;
@@ -92,7 +93,7 @@ public class EmptySyringeItem extends BaseSyringeItem {
 		PlayerEntity player = context.getPlayer();
 		FluidState fluidState = world.getFluidState(pos);
 		Fluid fluid = fluidState.getFluid();
-		BloodType bloodType = BloodType.Get(block);
+		BloodType bloodType = BloodType.Get(state);
 		if (bloodType != BloodType.NONE) {
 			ReplaceSyringe(player, context.getHand(), bloodType);
 			return ActionResult.CONSUME;
@@ -110,6 +111,10 @@ public class EmptySyringeItem extends BaseSyringeItem {
 				}
 				return ActionResult.CONSUME;
 			}
+		}
+		else if (state.isIn(ModBlockTags.OVERWORLD_NATURAL_LOGS)) {
+			ReplaceSyringe(player, context.getHand(), BloodType.SAP);
+			return ActionResult.CONSUME;
 		}
 		else if (fluid instanceof BloodFluid) {
 			ReplaceSyringe(player, context.getHand(), BloodType.PLAYER);

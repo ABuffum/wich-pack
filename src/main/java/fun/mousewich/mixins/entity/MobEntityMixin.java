@@ -3,6 +3,7 @@ package fun.mousewich.mixins.entity;
 import fun.mousewich.ModBase;
 import fun.mousewich.enchantment.CommittedEnchantment;
 import fun.mousewich.event.ModGameEvent;
+import fun.mousewich.item.syringe.BaseSyringeItem;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -10,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -49,5 +51,13 @@ public abstract class MobEntityMixin extends LivingEntity {
 			this.emitGameEvent(ModGameEvent.ENTITY_INTERACT, player);
 		}
 		return actionResult;
+	}
+	@Inject(method="interactWithItem", at = @At("HEAD"), cancellable = true)
+	private void InteractWithItem(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+		ItemStack itemStack = player.getStackInHand(hand);
+		if (itemStack.getItem() instanceof BaseSyringeItem) {
+			ActionResult result = itemStack.useOnEntity(player, this, hand);
+			if (result.isAccepted()) cir.setReturnValue(result);
+		}
 	}
 }

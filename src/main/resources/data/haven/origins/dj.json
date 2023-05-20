@@ -1,0 +1,15 @@
+{
+  "powers": [
+	"origins:cat_vision",
+	"origins:fall_immunity",
+	"origins:sprint_jump",
+	"origins:scare_creepers",
+	"wich:warm_body",
+	"wich:soft_steps",
+	"haven:scare_red_pandas",
+	"wich:blood_types/ocelot"
+  ],
+  "name": "Snow Leopard",
+  "description": "What if a cat... had spots..?",
+  "icon": "minecraft:gray_wool"
+}

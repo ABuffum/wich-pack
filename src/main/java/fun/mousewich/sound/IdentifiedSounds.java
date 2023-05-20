@@ -29,7 +29,6 @@ import net.minecraft.util.registry.Registry;
 import java.util.*;
 
 import static fun.mousewich.ModBase.*;
-import static fun.mousewich.ModFactory.MakeSandy;
 
 public class IdentifiedSounds {
 	public static final String IDENTIFY = "identified_sound.";
@@ -345,11 +344,12 @@ public class IdentifiedSounds {
 		Register("blackstone", List.of(EN_US.Blackstone()), Blocks.BLACKSTONE, Blocks.BLACKSTONE_STAIRS, Blocks.BLACKSTONE_SLAB, Blocks.BLACKSTONE_WALL,
 				Blocks.POLISHED_BLACKSTONE, Blocks.POLISHED_BLACKSTONE_STAIRS, Blocks.POLISHED_BLACKSTONE_SLAB, Blocks.POLISHED_BLACKSTONE_WALL,
 				Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE_BRICK_STAIRS, Blocks.POLISHED_BLACKSTONE_BRICK_SLAB, Blocks.POLISHED_BLACKSTONE_BRICK_WALL,
-				Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE_BUTTON, Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE);
+				Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE_BUTTON, Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE);//,
+//				/* Mod */ SMOOTH_CHISELED_POLISHED_BLACKSTONE.asBlock());
 		Register("blackstone_tiles", List.of(EN_US.Tiles(EN_US.Blackstone())), /* Mod */ POLISHED_BLACKSTONE_TILES.asBlock(),
 				POLISHED_BLACKSTONE_TILE_STAIRS.asBlock(), POLISHED_BLACKSTONE_TILE_SLAB.asBlock(), POLISHED_BLACKSTONE_TILE_WALL.asBlock());
-		Register("blast_furnace", List.of(EN_US.BlastFurnace()), Blocks.SMOKER);
-		Register("bone_ladder", List.of(EN_US.BoneLadder()), /* Mod */ BONE_LADDER.asBlock());
+		Register("blast_furnace", List.of(EN_US.Furnace(EN_US.Blast())), Blocks.SMOKER);
+		Register("bone_ladder", List.of(EN_US.Ladder(EN_US.Bone())), /* Mod */ BONE_LADDER.asBlock());
 		Register("bookshelf", List.of(EN_US.Bookshelf()), Blocks.BOOKSHELF, /* Mod */ ACACIA_BOOKSHELF.asBlock(), BIRCH_BOOKSHELF.asBlock(),
 				DARK_OAK_BOOKSHELF.asBlock(), JUNGLE_BOOKSHELF.asBlock(), SPRUCE_BOOKSHELF.asBlock(),
 				CHERRY_BOOKSHELF.asBlock(), MANGROVE_BOOKSHELF.asBlock(), CHARRED_BOOKSHELF.asBlock());
@@ -604,8 +604,10 @@ public class IdentifiedSounds {
 		Register("mycelium", List.of(EN_US.Mycelium()), Blocks.MYCELIUM);
 		Register("mycelium_roots", List.of(EN_US.Roots(EN_US.Mycelium())), /* Mod */ MYCELIUM_ROOTS.asBlock());
 		Register(NETHER_BARK_BLOCK, Blocks.CRIMSON_HYPHAE, Blocks.WARPED_HYPHAE);
-		Register("nether_brick_fence", List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether()))), Blocks.NETHER_BRICK_FENCE);
-		Register(BlockSounds.BreakPlace("nether_wart", SoundEvents.BLOCK_NETHER_WART_BREAK, SoundEvents.ITEM_NETHER_WART_PLANT, List.of(EN_US.Wart(EN_US.Nether()))), Blocks.NETHER_WART);
+		Register("nether_brick_fence", List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether()))), Blocks.NETHER_BRICK_FENCE);//,
+//				/* Mod */ RED_NETHER_BRICK_FENCE.asBlock(), BLUE_NETHER_BRICK_FENCE.asBlock(), YELLOW_NETHER_BRICK_FENCE.asBlock());
+		Register(BlockSounds.BreakPlace("nether_wart", SoundEvents.BLOCK_NETHER_WART_BREAK, SoundEvents.ITEM_NETHER_WART_PLANT,
+				List.of(EN_US.Wart(EN_US.Nether()))), Blocks.NETHER_WART);//, /* Mod */ WARPED_WART.asBlock(), GILDED_WART.asBlock());
 		Register(NETHER_WOOD_BLOCK, Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_STAIRS, Blocks.CRIMSON_SLAB,
 				Blocks.CRIMSON_BUTTON, Blocks.CRIMSON_PRESSURE_PLATE, Blocks.CRIMSON_SIGN, Blocks.CRIMSON_WALL_SIGN,
 				Blocks.WARPED_PLANKS, Blocks.WARPED_STAIRS, Blocks.WARPED_SLAB, Blocks.WARPED_BUTTON,
@@ -628,7 +630,16 @@ public class IdentifiedSounds {
 		Register("netherrack_quartz_ore", List.of(EN_US.Ore(EN_US.Quartz(EN_US.Netherrack()))), Blocks.NETHER_QUARTZ_ORE);
 		Register("note_block", List.of(EN_US.Block(EN_US.Note())), Blocks.NOTE_BLOCK);
 		Register("observer", List.of(EN_US.Observer()), Blocks.OBSERVER);
-		Register("obsidian", List.of(EN_US.Obsidian()), Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN);
+		Register("obsidian", List.of(EN_US.Obsidian()), Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN,
+				/* Mod */ OBSIDIAN_STAIRS.asBlock(), OBSIDIAN_SLAB.asBlock(), OBSIDIAN_WALL.asBlock(),// CRACKED_POLISHED_OBSIDIAN_BRICKS.asBlock(),
+//				POLISHED_OBSIDIAN.asBlock(), POLISHED_OBSIDIAN_STAIRS.asBlock(), POLISHED_OBSIDIAN_SLAB.asBlock(), POLISHED_OBSIDIAN_WALL.asBlock(),
+//				POLISHED_OBSIDIAN_BRICKS.asBlock(), POLISHED_OBSIDIAN_BRICK_STAIRS.asBlock(), POLISHED_OBSIDIAN_BRICK_SLAB.asBlock(), POLISHED_OBSIDIAN_BRICK_WALL.asBlock(),
+				CRYING_OBSIDIAN_STAIRS.asBlock(), CRYING_OBSIDIAN_SLAB.asBlock(), CRYING_OBSIDIAN_WALL.asBlock(),// CRACKED_POLISHED_CRYING_OBSIDIAN_BRICKS.asBlock(),
+//				POLISHED_CRYING_OBSIDIAN.asBlock(), POLISHED_CRYING_OBSIDIAN_STAIRS.asBlock(), POLISHED_CRYING_OBSIDIAN_SLAB.asBlock(), POLISHED_CRYING_OBSIDIAN_WALL.asBlock(),
+//				POLISHED_CRYING_OBSIDIAN_BRICKS.asBlock(), POLISHED_CRYING_OBSIDIAN_BRICK_STAIRS.asBlock(), POLISHED_CRYING_OBSIDIAN_BRICK_SLAB.asBlock(), POLISHED_CRYING_OBSIDIAN_BRICK_WALL.asBlock(),
+				BLEEDING_OBSIDIAN.asBlock(), BLEEDING_OBSIDIAN_STAIRS.asBlock(), BLEEDING_OBSIDIAN_SLAB.asBlock(), BLEEDING_OBSIDIAN_WALL.asBlock());//, CRACKED_POLISHED_BLEEDING_OBSIDIAN_BRICKS.asBlock(),
+//				POLISHED_BLEEDING_OBSIDIAN.asBlock(), POLISHED_BLEEDING_OBSIDIAN_STAIRS.asBlock(), POLISHED_BLEEDING_OBSIDIAN_SLAB.asBlock(), POLISHED_BLEEDING_OBSIDIAN_WALL.asBlock(),
+//				POLISHED_BLEEDING_OBSIDIAN_BRICKS.asBlock(), POLISHED_BLEEDING_OBSIDIAN_BRICK_STAIRS.asBlock(), POLISHED_BLEEDING_OBSIDIAN_BRICK_SLAB.asBlock(), POLISHED_BLEEDING_OBSIDIAN_BRICK_WALL.asBlock());
 		Register("podzol", List.of(EN_US.Podzol()), Blocks.PODZOL);
 		Register("polished_shale", List.of(EN_US.Shale(EN_US.Polished())), /* Mod */ POLISHED_SHALE.asBlock(), POLISHED_SHALE_STAIRS.asBlock(), POLISHED_SHALE_SLAB.asBlock(), POLISHED_SHALE_WALL.asBlock());
 		Register("pot", List.of(EN_US.Pot()), Blocks.FLOWER_POT);
@@ -655,8 +666,8 @@ public class IdentifiedSounds {
 		Register("prismarine", List.of(EN_US.Prismarine()), Blocks.PRISMARINE, Blocks.PRISMARINE_STAIRS, Blocks.PRISMARINE_SLAB, Blocks.PRISMARINE_WALL,
 				Blocks.PRISMARINE_BRICKS, Blocks.PRISMARINE_BRICK_STAIRS, Blocks.PRISMARINE_BRICK_SLAB,
 				Blocks.DARK_PRISMARINE, Blocks.DARK_PRISMARINE_STAIRS, Blocks.DARK_PRISMARINE_SLAB,
-				/* Mod */ CHISELED_PRISMARINE.asBlock(), CHISELED_PRISMARINE_BRICKS.asBlock(),
-				CHISELED_PRISMARINE_BRICK_STAIRS.asBlock(), CHISELED_PRISMARINE_BRICK_SLAB.asBlock(),
+				/* Mod */ CHISELED_PRISMARINE_BRICKS.asBlock(), SMOOTH_CHISELED_PRISMARINE_BRICKS.asBlock(),
+				CHISELED_PRISMARINE.asBlock(), CHISELED_PRISMARINE_STAIRS.asBlock(), CHISELED_PRISMARINE_SLAB.asBlock(),
 				CUT_PRISMARINE_BRICKS.asBlock(), CUT_PRISMARINE_BRICK_STAIRS.asBlock(), CUT_PRISMARINE_BRICK_SLAB.asBlock(),
 				PRISMARINE_TILES.asBlock(), PRISMARINE_TILE_STAIRS.asBlock(), PRISMARINE_TILE_SLAB.asBlock(),
 				PRISMARINE_TILE_WALL.asBlock(), DARK_PRISMARINE_WALL.asBlock(),
@@ -678,6 +689,7 @@ public class IdentifiedSounds {
 				PURPUR_MOSAIC.asBlock(), PURPUR_MOSAIC_STAIRS.asBlock(), PURPUR_MOSAIC_SLAB.asBlock(), PURPUR_MOSAIC_WALL.asBlock(),
 				SMOOTH_PURPUR.asBlock(), SMOOTH_PURPUR_STAIRS.asBlock(), SMOOTH_PURPUR_SLAB.asBlock(), SMOOTH_PURPUR_WALL.asBlock(),
 				PURPUR_BRICKS.asBlock(), PURPUR_BRICK_STAIRS.asBlock(), PURPUR_BRICK_SLAB.asBlock(), PURPUR_BRICK_WALL.asBlock(),
+//				CHISELED_PURPUR_BRICKS.asBlock(), SMOOTH_CHISELED_PURPUR_BRICKS.asBlock(),
 				PURPUR_TILES.asBlock(), PURPUR_TILE_STAIRS.asBlock(), PURPUR_TILE_SLAB.asBlock(), PURPUR_TILE_WALL.asBlock());
 		Register("purpur_sandy", List.of(EN_US.Purpur()), /* Mod */ SANDY_PURPUR_BLOCK.asBlock(), SANDY_CHISELED_PURPUR.asBlock(),
 				SANDY_SANDY_CHISELED_PURPUR.asBlock(), SANDY_SMOOTH_PURPUR.asBlock(), SANDY_PURPUR_BRICKS.asBlock());
@@ -718,7 +730,8 @@ public class IdentifiedSounds {
 		Register("sculk_stone", List.of(EN_US.Stone(EN_US.Sculk())), /* Mod */ SCULK_STONE.asBlock(),
 				SCULK_STONE_STAIRS.asBlock(), SCULK_STONE_SLAB.asBlock(), SCULK_STONE_WALL.asBlock());
 		Register("sculk_stone_bricks", List.of(EN_US.Bricks(EN_US.Stone(EN_US.Sculk()))),
-				/* Mod */ SCULK_STONE_BRICKS.asBlock(), SCULK_STONE_BRICK_STAIRS.asBlock(), SCULK_STONE_BRICK_SLAB.asBlock(), SCULK_STONE_BRICK_WALL.asBlock());
+				/* Mod */ SCULK_STONE_BRICKS.asBlock(), SCULK_STONE_BRICK_STAIRS.asBlock(), SCULK_STONE_BRICK_SLAB.asBlock(), SCULK_STONE_BRICK_WALL.asBlock());//,
+//				CHISELED_SCULK_STONE_BRICKS.asBlock(), SMOOTH_CHISELED_SCULK_STONE_BRICKS.asBlock());
 		Register("sculk_stone_tiles", List.of(EN_US.Tiles(EN_US.Stone(EN_US.Sculk()))),
 				/* Mod */ SCULK_STONE_TILES.asBlock(), SCULK_STONE_TILE_STAIRS.asBlock(), SCULK_STONE_TILE_SLAB.asBlock(), SCULK_STONE_TILE_WALL.asBlock());
 		Register("sea_lantern", List.of(EN_US.Lantern(EN_US.Sea())), Blocks.SEA_LANTERN);

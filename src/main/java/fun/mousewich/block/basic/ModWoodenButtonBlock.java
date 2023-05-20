@@ -15,6 +15,5 @@ public class ModWoodenButtonBlock extends WoodenButtonBlock {
 		this.clickOnSound = clickOnSound;
 		this.clickOffSound = clickOffSound;
 	}
-
 	protected SoundEvent getClickSound(boolean powered) { return powered ? clickOnSound : clickOffSound; }
 }

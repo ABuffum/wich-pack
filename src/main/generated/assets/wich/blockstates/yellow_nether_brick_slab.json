@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/yellow_nether_brick_slab"
+    },
+    "type=double": {
+      "model": "wich:block/yellow_nether_bricks"
+    },
+    "type=top": {
+      "model": "wich:block/yellow_nether_brick_slab_top"
+    }
+  }
+}

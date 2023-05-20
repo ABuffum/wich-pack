@@ -1,0 +1,13 @@
+{
+  "powers": [
+	"haven:slow_falling",
+	"haven:reduce_fall_damage",
+	"wich:disreputable",
+	"haven:midnight_besties",
+	"wich:hostile_mobs_neutral",
+	"wich:blood_types/phantom"
+  ],
+  "name": "Phantom-Hybrid",
+  "description": "There is something unsettling about your presence",
+  "icon": "minecraft:phantom_membrane"
+}

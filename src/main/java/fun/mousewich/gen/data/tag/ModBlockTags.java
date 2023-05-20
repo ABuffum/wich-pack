@@ -54,6 +54,7 @@ public class ModBlockTags {
 	public static final TagKey<Block> INFLICTS_FIRE_DAMAGE = createTag("inflicts_fire_damage");
 	public static final TagKey<Block> LECTERNS = createTag("lecterns");
 	public static final TagKey<Block> LOG_SLABS = createTag("log_slabs");
+	public static final TagKey<Block> PISTON_IMMOVABLE = createTag("piston_immovable");
 	public static final TagKey<Block> POWDER_KEGS = createTag("powder_kegs");
 	public static final TagKey<Block> PUMPKINS = createTag("pumpkins");
 	public static final TagKey<Block> ROWS = createTag("rows");
@@ -66,6 +67,8 @@ public class ModBlockTags {
 	public static final TagKey<Block> VIBRATION_RESONATORS_ECHO = createTag("vibration_resonators_echo");
 	public static final TagKey<Block> WOODEN_BEEHIVES = createTag("wooden_beehives");
 	public static final TagKey<Block> WOOL_SLABS = createTag("wool_slabs");
+
+	public static final TagKey<Block> ORIGINS_UNPHASEABLE = createTag("origins", "unphasable");
 
 	private static TagKey<Block> createTag(String name) { return TagKey.of(Registry.BLOCK_KEY, ModBase.ID(name)); }
 	private static TagKey<Block> createTag(String namespace, String path) { return TagKey.of(Registry.BLOCK_KEY, new Identifier(namespace, path)); }

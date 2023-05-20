@@ -1,6 +1,6 @@
 package fun.mousewich.mixins.client.render.entity;
 
-import fun.mousewich.block.piglin.*;
+import fun.mousewich.block.piglin.PiglinHeadParent;
 import fun.mousewich.client.render.block.model.PiglinHeadEntityModel;
 import fun.mousewich.client.render.block.renderer.PiglinHeadEntityRenderer;
 import net.minecraft.block.Block;
@@ -53,11 +53,11 @@ public abstract class HeadFeatureRendererMixin<T extends LivingEntity, M extends
 			}
 			((ModelWithHead)this.getContextModel()).getHead().rotate(matrixStack);
 			Block block = blockItem.getBlock();
-			if (block instanceof PiglinHeadBlock || block instanceof WallPiglinHeadBlock) {
+			if (block instanceof PiglinHeadParent head) {
 				matrixStack.scale(1.1875f, -1.1875f, -1.1875f);
 				if (bl) matrixStack.translate(0.0f, 0.0625f, 0.0f);
 				matrixStack.translate(-0.5, 0.0, -0.5);
-				PiglinHeadEntityRenderer.renderSkull(null, 180.0f, f, matrixStack, vertexConsumerProvider, i, piglinHeadModel);
+				PiglinHeadEntityRenderer.renderSkull(null, 180.0f, f, matrixStack, vertexConsumerProvider, i, piglinHeadModel, head.isZombified());
 				ci.cancel();
 			}
 			matrixStack.pop();

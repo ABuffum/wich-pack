@@ -134,6 +134,7 @@ public class ModSoundEvents {
 	public static final SoundEvent MUSIC_OVERWORLD_DEEP_DARK = registerSoundEvent("music.overworld.deep_dark");
 	public static final SoundEvent MUSIC_OVERWORLD_CHERRY_GROVE = registerSoundEvent("music.overworld.cherry_grove");
 	public static final SoundEvent MUSIC_DISC_5 = registerSoundEvent("music_disc.5");
+	public static final SoundEvent MUSIC_DISC_RELIC = registerSoundEvent("music_disc.relic");
 	//</editor-fold>
 	//<editor-fold desc="Goat Horns">
 	public static final SoundEvent[] GOAT_HORN_SOUNDS = new SoundEvent[] {

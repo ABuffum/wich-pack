@@ -4,7 +4,8 @@
 	"wich:no_lungs",
 	"ryft:stiff_joints",
 	"ryft:porcelain_skin",
-	"ryft:identified_sounds/lavender"
+	"ryft:identified_sounds/lavender",
+	"wich:blood_types/none"
   ],
   "name": "Doll",
   "description": "The shorter one",

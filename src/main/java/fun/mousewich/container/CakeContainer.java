@@ -3,6 +3,7 @@ package fun.mousewich.container;
 import fun.mousewich.ModBase;
 import fun.mousewich.block.basic.ModCakeBlock;
 import fun.mousewich.block.basic.ModCandleCakeBlock;
+import fun.mousewich.gen.data.ModDatagen;
 import fun.mousewich.util.ColorUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CandleBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
@@ -43,6 +45,10 @@ public class CakeContainer implements IContainer {
 	public final Map<DyeColor, Block> CANDLE_CAKES = ColorUtil.Map(color ->
 			new ModCandleCakeBlock(4, CAKE::asBlock, CAKE::asItem)
 					.drops(ColorUtil.GetCandleBlock(color)));
+
+	public CakeContainer() {
+		for (Block block : CANDLE_CAKES.values()) ModDatagen.Cache.Tags.Register(BlockTags.CANDLE_CAKES, block);
+	}
 
 	public CakeContainer compostable(float chance) {
 		CAKE.compostable(chance);

@@ -35,7 +35,6 @@ public class PiglinHeadEntityModel extends Model {
 	public void setHeadRotation(float animationProgress, float yaw, float pitch) {
 		this.head.yaw = yaw * ((float)Math.PI / 180);
 		this.head.pitch = pitch * ((float)Math.PI / 180);
-		float f = 1.2f;
 		this.leftEar.roll = (float)(-(Math.cos(animationProgress * (float)Math.PI * 0.2f * 1.2f) + 2.5)) * 0.2f;
 		this.rightEar.roll = (float)(Math.cos(animationProgress * (float)Math.PI * 0.2f) + 2.5) * 0.2f;
 	}

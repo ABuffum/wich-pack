@@ -10,7 +10,5 @@ import java.util.function.Supplier;
 @Mixin(SensorType.class)
 public interface SensorTypeInvoker {
 	@Invoker("register")
-	static <U extends Sensor<?>> SensorType<U> Register(String id, Supplier<U> factory) {
-		return null;
-	}
+	static <U extends Sensor<?>> SensorType<U> Register(String id, Supplier<U> factory) { return null; }
 }

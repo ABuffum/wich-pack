@@ -27,11 +27,10 @@ public class PiglinHeadEntityRenderer implements BlockEntityRenderer<PiglinHeadE
 		return new PiglinHeadEntityModel(modelLoader.getModelPart(ModClient.PIGLIN_HEAD_LAYER));
 	}
 	private static final Identifier TEXTURE = new Identifier("textures/entity/piglin/piglin.png");
-
+	private static final Identifier TEXTURE_ZOMBIFIED = new Identifier("textures/entity/piglin/zombified_piglin.png");
 	public PiglinHeadEntityRenderer(BlockEntityRendererFactory.Context ctx) {
 		this.MODEL = new PiglinHeadEntityModel(ctx.getLayerModelPart(ModClient.PIGLIN_HEAD_LAYER));
 	}
-
 	@Override
 	public void render(PiglinHeadEntity blockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
 		BlockState blockState = blockEntity.getCachedState();
@@ -42,15 +41,14 @@ public class PiglinHeadEntityRenderer implements BlockEntityRenderer<PiglinHeadE
 			yaw = direction.getAxis().isVertical() ? 0 : direction.getOpposite().getHorizontal() * 90;
 		}
 		else yaw = blockState.get(Properties.ROTATION) * 22.5f;
-		renderSkull(direction, yaw, blockEntity.getPoweredTicks(f), matrixStack, vertexConsumerProvider, i, this.MODEL);
+		renderSkull(direction, yaw, blockEntity.getPoweredTicks(f), matrixStack, vertexConsumerProvider, i, this.MODEL, blockEntity.isZombified());
 	}
-
-	public static void renderSkull(@Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, PiglinHeadEntityModel model) {
+	public static void renderSkull(@Nullable Direction direction, float yaw, float animationProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, PiglinHeadEntityModel model, boolean zombified) {
 		matrices.push();
 		if (direction == null) matrices.translate(0.5f, 0.0f, 0.5f);
 		else matrices.translate(0.5f - (float)direction.getOffsetX() * 0.25f, 0.25f, 0.5f - (float)direction.getOffsetZ() * 0.25f);
 		matrices.scale(-1.0f, -1.0f, 1.0f);
-		VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(TEXTURE));
+		VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(zombified ? TEXTURE_ZOMBIFIED : TEXTURE));
 		model.setHeadRotation(animationProgress, yaw, 0.0f);
 		model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
 		matrices.pop();

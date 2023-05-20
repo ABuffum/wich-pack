@@ -11,9 +11,12 @@
 	"ryft:spiders_neutral",
 	"ryft:eat_dog_food",
 	"wich:soft_steps",
-	"ryft:golem_hated",
-	"ryft:villager_hated",
-	"ryft:identified_sounds/kirha"
+	"wich:disreputable",
+	"wich:golem_hated",
+	"wich:spider_eyes",
+	"wich:attacked_by_hedgehogs",
+	"ryft:identified_sounds/kirha",
+	"wich:blood_types/spider"
   ],
   "name": "Jumping Spider(?)",
   "description": "Not actually a spider.  Not at all. No way.",

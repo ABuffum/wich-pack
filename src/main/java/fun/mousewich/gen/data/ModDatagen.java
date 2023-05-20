@@ -15,7 +15,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.event.GameEvent;
@@ -42,7 +41,7 @@ public class ModDatagen implements DataGeneratorEntrypoint {
 	}
 
 	public static class Cache {
-		public static class Tag {
+		public static class Tags {
 			public static Map<TagKey<Biome>, Set<Biome>> BIOME_TAGS = new HashMap<>();
 			public static void Register(TagKey<Biome> tag, Biome biome) { Register(BIOME_TAGS, tag, biome); }
 			public static Map<TagKey<Block>, Set<Block>> BLOCK_TAGS = new HashMap<>();
@@ -63,7 +62,7 @@ public class ModDatagen implements DataGeneratorEntrypoint {
 			}
 		}
 
-		public static class Model {
+		public static class Models {
 			//Block - Standalone
 			public static Set<IBlockItemContainer> BAMBOO_FENCE = new HashSet<>();
 			public static Set<IBlockItemContainer> BAMBOO_FENCE_GATE = new HashSet<>();

@@ -1,10 +1,9 @@
 package fun.mousewich.mixins.client.render.item;
 
 import fun.mousewich.block.basic.ModBedBlock;
-import fun.mousewich.block.piglin.PiglinHeadBlock;
+import fun.mousewich.block.piglin.PiglinHeadParent;
 import fun.mousewich.client.render.block.model.PiglinHeadEntityModel;
 import fun.mousewich.client.render.block.renderer.PiglinHeadEntityRenderer;
-import fun.mousewich.block.piglin.WallPiglinHeadBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -46,12 +45,11 @@ public class BuiltinModelItemRendererMixin {
 				this.blockEntityRenderDispatcher.renderEntity((BlockEntity) BlockEntityType.BED.instantiate(BlockPos.ORIGIN, blockState), matrices, vertexConsumers, light, overlay);
 				ci.cancel();
 			}
-			else if (block instanceof PiglinHeadBlock || block instanceof WallPiglinHeadBlock) {
+			else if (block instanceof PiglinHeadParent head) {
 				if (this.piglinHeadModel == null) this.piglinHeadModel = PiglinHeadEntityRenderer.getModel(this.entityModelLoader);
-				PiglinHeadEntityRenderer.renderSkull(null, 180.0f, 0.0f, matrices, vertexConsumers, light, piglinHeadModel);
+				PiglinHeadEntityRenderer.renderSkull(null, 180.0f, 0.0f, matrices, vertexConsumers, light, piglinHeadModel, head.isZombified());
 				ci.cancel();
 			}
 		}
 	}
-
 }

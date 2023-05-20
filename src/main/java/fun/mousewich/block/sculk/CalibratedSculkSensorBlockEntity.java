@@ -24,7 +24,6 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 public class CalibratedSculkSensorBlockEntity extends BlockEntity implements ExtendedSculkEntity {
-	private static final Logger LOGGER = LogUtils.getLogger();
 	private ModVibrationListener listener;
 	private final ModVibrationListener.Callback listenerCallback;
 	private int lastVibrationFrequency;
@@ -39,7 +38,7 @@ public class CalibratedSculkSensorBlockEntity extends BlockEntity implements Ext
 		super.readNbt(nbt);
 		this.lastVibrationFrequency = nbt.getInt(ModNbtKeys.LAST_VIBRATION_FREQUENCY);
 		if (nbt.contains(ModNbtKeys.LISTENER, NbtElement.COMPOUND_TYPE)) {
-			ModVibrationListener.createCodec(this.listenerCallback).parse(new Dynamic<>(NbtOps.INSTANCE, nbt.getCompound(ModNbtKeys.LISTENER))).resultOrPartial(LOGGER::error).ifPresent(listener -> {
+			ModVibrationListener.createCodec(this.listenerCallback).parse(new Dynamic<>(NbtOps.INSTANCE, nbt.getCompound(ModNbtKeys.LISTENER))).resultOrPartial(ModBase.LOGGER::error).ifPresent(listener -> {
 				this.listener = listener;
 			});
 		}
@@ -49,7 +48,7 @@ public class CalibratedSculkSensorBlockEntity extends BlockEntity implements Ext
 	protected void writeNbt(NbtCompound nbt) {
 		super.writeNbt(nbt);
 		nbt.putInt(ModNbtKeys.LAST_VIBRATION_FREQUENCY, this.lastVibrationFrequency);
-		ModVibrationListener.createCodec(this.listenerCallback).encodeStart(NbtOps.INSTANCE, this.listener).resultOrPartial(LOGGER::error).ifPresent(listenerNbt -> nbt.put(ModNbtKeys.LISTENER, listenerNbt));
+		ModVibrationListener.createCodec(this.listenerCallback).encodeStart(NbtOps.INSTANCE, this.listener).resultOrPartial(ModBase.LOGGER::error).ifPresent(listenerNbt -> nbt.put(ModNbtKeys.LISTENER, listenerNbt));
 	}
 
 	public ModVibrationListener getEventListener() { return this.listener; }

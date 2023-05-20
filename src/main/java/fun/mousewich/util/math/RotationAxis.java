@@ -19,10 +19,8 @@ public interface RotationAxis {
 		float cos = (float)Math.sqrt(1.0f - sin * sin);
 		float a = angle + PIHalf_f;
 		float b = a - (int)(a / PI2_f) * PI2_f;
-		if (b < 0.0)
-			b = PI2_f + b;
-		if (b >= PI_f)
-			return -cos;
+		if (b < 0.0) b = PI2_f + b;
+		if (b >= PI_f) return -cos;
 		return cos;
 	}
 
@@ -50,7 +48,5 @@ public interface RotationAxis {
 
 	Quaternion rotation(float var1);
 
-	default Quaternion rotationDegrees(float deg) {
-		return this.rotation(deg * ((float)Math.PI / 180));
-	}
+	default Quaternion rotationDegrees(float deg) { return this.rotation(deg * ((float)Math.PI / 180)); }
 }

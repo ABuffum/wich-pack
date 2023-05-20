@@ -1,6 +1,7 @@
 package fun.mousewich.mixins.block;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.gen.data.tag.ModBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PistonBlockMixin {
 	@Inject(method="isMovable", at = @At("HEAD"), cancellable = true)
 	private static void IsMovable(BlockState state, World world, BlockPos pos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
-		if (state.isOf(ModBase.REINFORCED_DEEPSLATE.asBlock())) cir.setReturnValue(false);
+		if (state.isIn(ModBlockTags.PISTON_IMMOVABLE)) cir.setReturnValue(false);
 	}
 }

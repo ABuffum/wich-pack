@@ -1,9 +1,9 @@
 {
   "powers": [
-	"ryft:tougher_body",
-	"ryft:golem_hated",
-	"ryft:villager_hated",
-	"ryft:hostile_mobs_neutral",
+	"wich:tougher_body",
+	"wich:golem_hated",
+	"wich:villager_hated",
+	"wich:hostile_mobs_neutral",
 	"ryft:rationed_diet",
 	"wich:hunger_immunity",
 	"ryft:identified_sounds/arsene"

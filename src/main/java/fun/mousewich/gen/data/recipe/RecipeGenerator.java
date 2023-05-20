@@ -621,18 +621,18 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeSoulTorch(PRISMARINE_SOUL_TORCH, PRISMARINE_ROD, 8).offerTo(exporter);
 		Recipes.MakeEnderTorch(PRISMARINE_ENDER_TORCH, PRISMARINE_ROD, 8).offerTo(exporter);
 		Recipes.MakeUnderwaterTorch(UNDERWATER_PRISMARINE_TORCH, PRISMARINE_ROD, 8).offerTo(exporter);
+		//Chiseled Bricks
+		Recipes.Make1x2(CHISELED_PRISMARINE_BRICKS, Items.PRISMARINE_BRICK_SLAB).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_BRICKS, Items.PRISMARINE);
+		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_BRICKS, Items.PRISMARINE_BRICKS);
+		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_PRISMARINE_BRICKS, CHISELED_PRISMARINE_BRICKS);
 		//Chiseled
 		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE, Items.PRISMARINE);
-		//Chiseled Bricks
-		Recipes.Make2x2(CHISELED_PRISMARINE_BRICKS, CHISELED_PRISMARINE).offerTo(exporter);
-		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_BRICKS, Items.PRISMARINE);
-		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_BRICKS, CHISELED_PRISMARINE);
-		Recipes.MakeStairs(CHISELED_PRISMARINE_BRICK_STAIRS, CHISELED_PRISMARINE_BRICKS).offerTo(exporter);
-		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_BRICK_STAIRS, CHISELED_PRISMARINE);
-		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_BRICK_STAIRS, CHISELED_PRISMARINE_BRICKS);
-		Recipes.MakeSlab(CHISELED_PRISMARINE_BRICK_SLAB, CHISELED_PRISMARINE_BRICKS).offerTo(exporter);
-		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_BRICK_SLAB, CHISELED_PRISMARINE, 2);
-		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_BRICK_SLAB, CHISELED_PRISMARINE_BRICKS, 2);
+		Recipes.MakeStairs(CHISELED_PRISMARINE_STAIRS, CHISELED_PRISMARINE).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_STAIRS, Items.PRISMARINE_STAIRS);
+		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_STAIRS, CHISELED_PRISMARINE);
+		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_SLAB, Items.PRISMARINE_SLAB);
+		OfferStonecuttingRecipe(exporter, CHISELED_PRISMARINE_SLAB, CHISELED_PRISMARINE, 2);
 		//Cut Bricks
 		OfferStonecuttingRecipe(exporter, CUT_PRISMARINE_BRICKS, Items.PRISMARINE_BRICKS);
 		Recipes.MakeStairs(CUT_PRISMARINE_BRICK_STAIRS, CUT_PRISMARINE_BRICKS).offerTo(exporter);
@@ -712,6 +712,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		OfferStonecuttingRecipe(exporter, PURPUR_BRICK_SLAB, PURPUR_BRICKS, 2);
 		Recipes.MakeWall(PURPUR_BRICK_WALL, PURPUR_BRICKS).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, PURPUR_BRICK_WALL, PURPUR_BRICKS);
+		//Chiseled Bricks
+		Recipes.Make1x2(CHISELED_PURPUR_BRICKS, PURPUR_BRICK_SLAB).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, CHISELED_PURPUR_BRICKS, Items.PURPUR_BLOCK);
+		OfferStonecuttingRecipe(exporter, CHISELED_PURPUR_BRICKS, PURPUR_BRICKS);
+		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_PURPUR_BRICKS, CHISELED_PURPUR_BRICKS);
 		//Tiles
 		Recipes.Make2x2(PURPUR_TILES, PURPUR_BRICKS, 4).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, PURPUR_TILES, Items.PURPUR_BLOCK);
@@ -1629,6 +1634,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeKnife(BONE_KNIFE, BONE_SHARD).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Blackstone">
+		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_POLISHED_BLACKSTONE, Items.CHISELED_POLISHED_BLACKSTONE);
 		Recipes.Make2x2(POLISHED_BLACKSTONE_TILES, Items.POLISHED_BLACKSTONE_BRICKS, 4).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, POLISHED_BLACKSTONE_TILES, Items.POLISHED_BLACKSTONE);
 		OfferStonecuttingRecipe(exporter, POLISHED_BLACKSTONE_TILES, Items.POLISHED_BLACKSTONE_BRICKS);
@@ -1669,6 +1675,9 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeWall(POLISHED_GILDED_BLACKSTONE_WALL, POLISHED_GILDED_BLACKSTONE).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, POLISHED_GILDED_BLACKSTONE_WALL, POLISHED_GILDED_BLACKSTONE);
 		OfferSmithingRecipe(exporter, POLISHED_GILDED_BLACKSTONE_WALL, Items.POLISHED_BLACKSTONE_WALL, Items.GOLD_INGOT);
+		OfferStonecuttingRecipe(exporter, CHISELED_POLISHED_GILDED_BLACKSTONE, POLISHED_GILDED_BLACKSTONE);
+		OfferSmithingRecipe(exporter, CHISELED_POLISHED_GILDED_BLACKSTONE, Items.CHISELED_POLISHED_BLACKSTONE, Items.GOLD_INGOT);
+		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_POLISHED_GILDED_BLACKSTONE, CHISELED_POLISHED_GILDED_BLACKSTONE);
 		//Bricks
 		Recipes.Make2x2(POLISHED_GILDED_BLACKSTONE_BRICKS, POLISHED_GILDED_BLACKSTONE, 4).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, POLISHED_GILDED_BLACKSTONE_BRICKS, POLISHED_GILDED_BLACKSTONE);
@@ -1685,6 +1694,8 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		OfferStonecuttingRecipe(exporter, POLISHED_GILDED_BLACKSTONE_BRICK_WALL, POLISHED_GILDED_BLACKSTONE);
 		OfferStonecuttingRecipe(exporter, POLISHED_GILDED_BLACKSTONE_BRICK_WALL, POLISHED_GILDED_BLACKSTONE_BRICKS);
 		OfferSmithingRecipe(exporter, POLISHED_GILDED_BLACKSTONE_BRICK_WALL, Items.POLISHED_BLACKSTONE_BRICK_WALL, Items.GOLD_INGOT);
+		OfferSmeltingRecipe(exporter, CRACKED_POLISHED_GILDED_BLACKSTONE_BRICKS, POLISHED_GILDED_BLACKSTONE_BRICKS);
+		OfferSmithingRecipe(exporter, CRACKED_POLISHED_GILDED_BLACKSTONE_BRICKS, Items.CRACKED_POLISHED_BLACKSTONE_BRICKS, Items.GOLD_INGOT);
 		//</editor-fold>
 		//<editor-fold desc="Misc Stuff">
 		Recipes.MakeShaped(WOOD_BUCKET, ItemTags.LOGS).pattern("# #").pattern(" # ").offerTo(exporter);
@@ -1776,6 +1787,8 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeShaped(COPPER_LAVA_BUCKET, LAVA_BOTTLE).input('B', COPPER_BUCKET).pattern("##").pattern("#B").offerTo(exporter);
 		Recipes.MakeShaped(GOLDEN_LAVA_BUCKET, LAVA_BOTTLE).input('B', GOLDEN_BUCKET).pattern("##").pattern("#B").offerTo(exporter);
 		Recipes.MakeShaped(NETHERITE_LAVA_BUCKET, LAVA_BOTTLE).input('B', NETHERITE_BUCKET).pattern("##").pattern("#B").offerTo(exporter);
+		Recipes.MakeShapeless(SUGAR_WATER_BOTTLE, Items.SUGAR).input(Ingredient.ofItems(Items.POTION, DISTILLED_WATER_BOTTLE)).offerTo(exporter);
+		OfferSmeltingRecipe(exporter, SYRUP_BOTTLE, SAP_BOTTLE);
 		Recipes.MakeShapeless(Items.MAGMA_CREAM, MAGMA_CREAM_BOTTLE).offerTo(exporter);
 		Recipes.MakeShapeless(MAGMA_CREAM_BOTTLE, Items.MAGMA_CREAM).input(Items.GLASS_BOTTLE).offerTo(exporter);
 		Recipes.MakeShapeless(COOLED_MAGMA_BLOCK, Items.MAGMA_BLOCK).input(Items.ICE).offerTo(exporter);
@@ -1912,7 +1925,15 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.Make3x3(MUSIC_DISC_5, DISC_FRAGMENT_5).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Mud">
+		//Packed
 		Recipes.MakeShapeless(PACKED_MUD, MUD).input(Items.WHEAT).offerTo(exporter);
+		Recipes.MakeSlab(PACKED_MUD_SLAB, PACKED_MUD).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, PACKED_MUD_SLAB, PACKED_MUD, 2);
+		Recipes.MakeStairs(PACKED_MUD_STAIRS, PACKED_MUD).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, PACKED_MUD_STAIRS, PACKED_MUD);
+		Recipes.MakeWall(PACKED_MUD_WALL, PACKED_MUD).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, PACKED_MUD_WALL, PACKED_MUD);
+		//Bricks
 		Recipes.Make2x2(MUD_BRICKS, PACKED_MUD, 4).offerTo(exporter);
 		Recipes.MakeSlab(MUD_BRICK_SLAB, MUD_BRICKS).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, MUD_BRICK_SLAB, MUD_BRICKS, 2);
@@ -1920,6 +1941,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		OfferStonecuttingRecipe(exporter, MUD_BRICK_STAIRS, MUD_BRICKS);
 		Recipes.MakeWall(MUD_BRICK_WALL, MUD_BRICKS).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, MUD_BRICK_WALL, MUD_BRICKS);
+		//Chiseled Bricks
+		Recipes.Make1x2(CHISELED_MUD_BRICKS, MUD_BRICK_SLAB).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, CHISELED_MUD_BRICKS, MUD);
+		OfferStonecuttingRecipe(exporter, CHISELED_MUD_BRICKS, MUD_BRICKS);
+		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_MUD_BRICKS, CHISELED_MUD_BRICKS);
 		//</editor-fold>
 		//<editor-fold desc="Mangrove">
 		Recipes.Make2x2(MANGROVE_WOOD, MANGROVE_LOG, 3).offerTo(exporter);
@@ -2205,6 +2231,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeWall(SCULK_STONE_BRICK_WALL, SCULK_STONE_BRICKS).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, SCULK_STONE_BRICK_WALL, SCULK_STONE);
 		OfferStonecuttingRecipe(exporter, SCULK_STONE_BRICK_WALL, SCULK_STONE_BRICKS);
+		//Chiseled Bricks
+		Recipes.Make1x2(CHISELED_SCULK_STONE_BRICKS, SCULK_STONE_BRICK_SLAB).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, CHISELED_SCULK_STONE_BRICKS, SCULK_STONE);
+		OfferStonecuttingRecipe(exporter, CHISELED_SCULK_STONE_BRICKS, SCULK_STONE_BRICKS);
+		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_SCULK_STONE_BRICKS, CHISELED_SCULK_STONE_BRICKS);
 		//Tiles
 		Recipes.Make2x2(SCULK_STONE_TILES, SCULK_STONE_BRICKS, 4).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, SCULK_STONE_TILES, SCULK_STONE);
@@ -2221,6 +2252,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		OfferStonecuttingRecipe(exporter, SCULK_STONE_TILE_WALL, SCULK_STONE);
 		OfferStonecuttingRecipe(exporter, SCULK_STONE_TILE_WALL, SCULK_STONE_BRICKS);
 		OfferStonecuttingRecipe(exporter, SCULK_STONE_TILE_WALL, SCULK_STONE_TILES);
+		//Smooth
+		OfferSmeltingRecipe(exporter, Items.SMOOTH_STONE_SLAB, Items.STONE_SLAB);
+		Recipes.MakeStairs(SMOOTH_STONE_STAIRS, Items.SMOOTH_STONE).offerTo(exporter);
+		OfferStonecuttingRecipe(exporter, SMOOTH_STONE_STAIRS, Items.SMOOTH_STONE);
+		OfferSmeltingRecipe(exporter, SMOOTH_STONE_STAIRS, Items.STONE_STAIRS);
 		//</editor-fold>
 		//<editor-fold desc="Flowers">
 		Recipes.MakeShapeless(Items.MAGENTA_DYE, AMARANTH, 2).offerTo(exporter, ID("amaranth"));

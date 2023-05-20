@@ -2,7 +2,6 @@ package fun.mousewich.mixins.item;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.block.sculk.SculkTurfBlock;
-import fun.mousewich.container.BlockContainer;
 import fun.mousewich.container.PottedBlockContainer;
 import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.sound.ModSoundEvents;

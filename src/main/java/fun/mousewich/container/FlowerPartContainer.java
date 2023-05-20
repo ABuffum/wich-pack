@@ -31,5 +31,5 @@ public class FlowerPartContainer extends BlockContainer {
 	}
 	public FlowerPartContainer dropSelf() { return (FlowerPartContainer)super.dropSelf(); }
 
-	public FlowerPartContainer flowerPartModel() { ModDatagen.Cache.Model.FLOWER_PART.add(this); return this; }
+	public FlowerPartContainer flowerPartModel() { ModDatagen.Cache.Models.FLOWER_PART.add(this); return this; }
 }

@@ -72,11 +72,11 @@ public class TorchContainer implements IWallBlockItemContainer {
 	}
 
 	public TorchContainer torchModel() {
-		ModDatagen.Cache.Model.TORCH.add(this);
+		ModDatagen.Cache.Models.TORCH.add(this);
 		return this;
 	}
 	public TorchContainer torchModel(TorchContainer parent) {
-		ModDatagen.Cache.Model.TORCH_CHILD.add(new Pair<>(this, parent));
+		ModDatagen.Cache.Models.TORCH_CHILD.add(new Pair<>(this, parent));
 		return this;
 	}
 

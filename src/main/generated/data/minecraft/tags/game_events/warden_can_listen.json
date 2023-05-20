@@ -43,6 +43,21 @@
     "minecraft:swim",
     "minecraft:teleport",
     "minecraft:shriek",
+    "wich:resonate_1",
+    "wich:resonate_2",
+    "wich:resonate_3",
+    "wich:resonate_4",
+    "wich:resonate_5",
+    "wich:resonate_6",
+    "wich:resonate_7",
+    "wich:resonate_8",
+    "wich:resonate_9",
+    "wich:resonate_10",
+    "wich:resonate_11",
+    "wich:resonate_12",
+    "wich:resonate_13",
+    "wich:resonate_14",
+    "wich:resonate_15",
     "#minecraft:shrieker_can_listen"
   ]
 }

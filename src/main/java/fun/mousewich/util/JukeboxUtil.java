@@ -39,7 +39,8 @@ public class JukeboxUtil {
 			Map.entry(Items.MUSIC_DISC_WAIT, 238),
 			Map.entry(Items.MUSIC_DISC_OTHERSIDE, 195),
 			Map.entry(Items.MUSIC_DISC_PIGSTEP, 149),
-			Map.entry(ModBase.MUSIC_DISC_5, 178)
+			Map.entry(ModBase.MUSIC_DISC_5, 178),
+			Map.entry(ModBase.MUSIC_DISC_RELIC, 128)
 	));
 	public static void tick(World world, BlockPos pos, BlockState state, JukeboxBlockEntity blockEntity) {
 		if (blockEntity instanceof JukeboxBlockExtension jukebox) {

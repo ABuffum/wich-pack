@@ -1,19 +1,19 @@
 {
   "replace": false,
   "values": [
-    "minecraft:cherry_trapdoor",
-    "wich:sugar_cane_trapdoor",
-    "wich:mushroom_stem_trapdoor",
-    "wich:charred_trapdoor",
-    "wich:gilded_trapdoor",
     "wich:dried_bamboo_trapdoor",
     "wich:blue_mushroom_trapdoor",
-    "wich:red_mushroom_trapdoor",
     "wich:hay_trapdoor",
-    "wich:dogwood_trapdoor",
-    "minecraft:bamboo_trapdoor",
+    "minecraft:cherry_trapdoor",
+    "wich:cassia_trapdoor",
     "minecraft:mangrove_trapdoor",
+    "minecraft:bamboo_trapdoor",
+    "wich:sugar_cane_trapdoor",
     "wich:brown_mushroom_trapdoor",
-    "wich:cassia_trapdoor"
+    "wich:gilded_trapdoor",
+    "wich:mushroom_stem_trapdoor",
+    "wich:dogwood_trapdoor",
+    "wich:charred_trapdoor",
+    "wich:red_mushroom_trapdoor"
   ]
 }

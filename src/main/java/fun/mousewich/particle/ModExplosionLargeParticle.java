@@ -19,9 +19,7 @@ public class ModExplosionLargeParticle extends SpriteBillboardParticle {
 	}
 
 	@Override
-	public int getBrightness(float tint) {
-		return 0xF000F0;
-	}
+	public int getBrightness(float tint) { return 0xF000F0; }
 
 	@Override
 	public void tick() {
@@ -36,17 +34,13 @@ public class ModExplosionLargeParticle extends SpriteBillboardParticle {
 	}
 
 	@Override
-	public ParticleTextureSheet getType() {
-		return ParticleTextureSheet.PARTICLE_SHEET_LIT;
-	}
+	public ParticleTextureSheet getType() { return ParticleTextureSheet.PARTICLE_SHEET_LIT; }
 
 	@Environment(value=EnvType.CLIENT)
 	public static class Factory implements ParticleFactory<DefaultParticleType> {
 		private final SpriteProvider spriteProvider;
 
-		public Factory(SpriteProvider spriteProvider) {
-			this.spriteProvider = spriteProvider;
-		}
+		public Factory(SpriteProvider spriteProvider) { this.spriteProvider = spriteProvider; }
 
 		@Override
 		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {

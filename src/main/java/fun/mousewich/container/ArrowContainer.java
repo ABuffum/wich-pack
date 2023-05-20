@@ -53,5 +53,5 @@ public class ArrowContainer implements IContainer, ItemConvertible {
 	public static final Map<EntityType<? extends MobEntity>, Item> SUMMONING_ARROWS = new HashMap<>();
 	public static final Map<Item, Pair<Integer, Integer>> SUMMONING_ARROW_COLORS = new HashMap<>();
 
-	public ArrowContainer generatedItemModel() { ModDatagen.Cache.Model.GENERATED.add(this.item); return this; }
+	public ArrowContainer generatedItemModel() { ModDatagen.Cache.Models.GENERATED.add(this.item); return this; }
 }

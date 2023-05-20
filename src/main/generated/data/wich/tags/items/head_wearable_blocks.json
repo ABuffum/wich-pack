@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:piglin_head",
+    "wich:zombified_piglin_head",
     "#wich:carved_gourds"
   ]
 }

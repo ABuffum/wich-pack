@@ -332,11 +332,15 @@ public class GunpowderFuseBlock extends Block {
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		if (!player.getAbilities().allowModifyWorld) return ActionResult.PASS;
 		ItemStack itemStack = player.getStackInHand(hand);
-		if (itemStack.isOf(Items.FLINT_AND_STEEL) || itemStack.isOf(Items.FIRE_CHARGE)) {
+		boolean lava;
+		if ((lava = itemStack.isOf(ModBase.LAVA_BOTTLE)) || itemStack.isOf(Items.FLINT_AND_STEEL) || itemStack.isOf(Items.FIRE_CHARGE)) {
 			Light(world, pos);
 			if (!player.isCreative()) {
 				if (itemStack.isOf(Items.FLINT_AND_STEEL)) itemStack.damage(1, player, p -> p.sendToolBreakStatus(hand));
-				else itemStack.decrement(1);
+				else {
+					itemStack.decrement(1);
+					if (lava) player.giveItemStack(new ItemStack(ModBase.LAVA_BOTTLE.getRecipeRemainder()));
+				}
 			}
 			player.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
 			return ActionResult.success(world.isClient);

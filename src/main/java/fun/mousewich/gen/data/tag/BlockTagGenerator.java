@@ -1,10 +1,13 @@
 package fun.mousewich.gen.data.tag;
 
+import fun.mousewich.ModConfig;
 import fun.mousewich.container.BlockContainer;
 import fun.mousewich.gen.data.ModDatagen;
+import fun.mousewich.haven.HavenMod;
 import fun.mousewich.util.ColorUtil;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
@@ -26,11 +29,11 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 	@Override
 	protected void generateTags() {
 		//Datagen Cache
-		for (Map.Entry<TagKey<Block>, Set<Block>> entry : ModDatagen.Cache.Tag.BLOCK_TAGS.entrySet()) {
+		for (Map.Entry<TagKey<Block>, Set<Block>> entry : ModDatagen.Cache.Tags.BLOCK_TAGS.entrySet()) {
 			getOrCreateTagBuilder(entry.getKey()).add(entry.getValue().toArray(Block[]::new));
 			entry.getValue().clear();
 		}
-		ModDatagen.Cache.Tag.BLOCK_TAGS.clear();
+		ModDatagen.Cache.Tags.BLOCK_TAGS.clear();
 
 		getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
 				.addTag(ModBlockTags.ALL_HANGING_SIGNS)
@@ -41,9 +44,7 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.addTag(ModBlockTags.CRAFTING_TABLES)
 				.addTag(ModBlockTags.LECTERNS)
 				.addTag(ModBlockTags.GOURDS).addTag(ModBlockTags.CARVED_GOURDS).addTag(ModBlockTags.GOURD_LANTERNS)
-				.addTag(ModBlockTags.LOG_SLABS)
 				.add(WHITE_PUMPKIN_STEM, ATTACHED_WHITE_PUMPKIN_STEM)
-				.add(BAMBOO_MOSAIC.asBlock(), BAMBOO_MOSAIC_STAIRS.asBlock(), BAMBOO_MOSAIC_SLAB.asBlock())
 				.add(BAMBOO_BLOCK.asBlock(), STRIPPED_BAMBOO_BLOCK.asBlock(), BAMBOO_ROW.asBlock())
 				.add(DRIED_BAMBOO.asBlock(), DRIED_BAMBOO_BLOCK.asBlock(), STRIPPED_DRIED_BAMBOO_BLOCK.asBlock(), DRIED_BAMBOO_ROW.asBlock())
 				.add(MANGROVE_ROOTS.asBlock())
@@ -62,18 +63,8 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(BlockTags.BUTTONS)
 				.add(NETHERITE_BUTTON.asBlock());
 		getOrCreateTagBuilder(BlockTags.CAMPFIRES).add(ENDER_CAMPFIRE.asBlock());
-		getOrCreateTagBuilder(BlockTags.CANDLE_CAKES).add(SOUL_CANDLE_CAKE, ENDER_CANDLE_CAKE);
-		getOrCreateTagBuilder(BlockTags.CARPETS)
-				.add(RAINBOW_CARPET.asBlock())
-				.add(FLEECE_CARPETS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(RAINBOW_FLEECE_CARPET.asBlock())
-				.add(GLOW_LICHEN_CARPET.asBlock());
-		getOrCreateTagBuilder(BlockTags.CRYSTAL_SOUND_BLOCKS)
-				.add(AMETHYST_SLAB.asBlock(), AMETHYST_STAIRS.asBlock(), AMETHYST_WALL.asBlock())
-				.add(AMETHYST_CRYSTAL_BLOCK.asBlock(), AMETHYST_CRYSTAL_SLAB.asBlock())
-				.add(AMETHYST_CRYSTAL_STAIRS.asBlock(), AMETHYST_CRYSTAL_WALL.asBlock())
-				.add(AMETHYST_BRICKS.asBlock(), AMETHYST_BRICK_SLAB.asBlock())
-				.add(AMETHYST_BRICK_STAIRS.asBlock(), AMETHYST_BRICK_WALL.asBlock());
+		getOrCreateTagBuilder(BlockTags.CANDLE_CAKES).add(SOUL_CANDLE_CAKE, ENDER_CANDLE_CAKE, NETHERRACK_CANDLE_CAKE);
+		getOrCreateTagBuilder(BlockTags.CARPETS).addTag(ModBlockTags.WOOL_CARPETS).addTag(ModBlockTags.FLEECE_CARPETS);
 		getOrCreateTagBuilder(BlockTags.DIRT).add(MUD.asBlock(), MUDDY_MANGROVE_ROOTS.asBlock());
 		getOrCreateTagBuilder(BlockTags.DRAGON_IMMUNE).add(REINFORCED_DEEPSLATE.asBlock());
 		getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE).add(BLUE_MUSHROOM.asBlock(), MYCELIUM_ROOTS.asBlock());
@@ -82,15 +73,6 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(CHARRED_FENCE_GATE.asBlock())
 				.add(MANGROVE_FENCE_GATE.asBlock(), BAMBOO_FENCE_GATE.asBlock(), CHERRY_FENCE_GATE.asBlock())
 				.add(CASSIA_FENCE_GATE.asBlock(), DOGWOOD_FENCE_GATE.asBlock());
-		getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
-				.add(MANGROVE_PROPAGULE.getPottedBlock(), CHERRY_SAPLING.getPottedBlock())
-				.add(BUTTERCUP.getPottedBlock(), PINK_DAISY.getPottedBlock(), ROSE.getPottedBlock(), BLUE_ROSE.getPottedBlock())
-				.add(MAGENTA_TULIP.getPottedBlock(), MARIGOLD.getPottedBlock(), INDIGO_ORCHID.getPottedBlock(), MAGENTA_ORCHID.getPottedBlock())
-				.add(ORANGE_ORCHID.getPottedBlock(), PURPLE_ORCHID.getPottedBlock(), RED_ORCHID.getPottedBlock(), WHITE_ORCHID.getPottedBlock())
-				.add(YELLOW_ORCHID.getPottedBlock(), PINK_ALLIUM.getPottedBlock(), LAVENDER.getPottedBlock(), HYDRANGEA.getPottedBlock())
-				.add(PAEONIA.getPottedBlock(), ASTER.getPottedBlock())
-				.add(BLUE_MUSHROOM.getPottedBlock(), MYCELIUM_ROOTS.getPottedBlock(), DRIED_BAMBOO.getPottedBlock())
-				.add(CASSIA_SAPLING.getPottedBlock(), DOGWOOD_SAPLING.getPottedBlock());
 		getOrCreateTagBuilder(BlockTags.FLOWERS)
 				.add(CHERRY_LEAVES.asBlock(), PINK_PETALS.asBlock())
 				.add(PINK_DOGWOOD_LEAVES.asBlock(), PALE_DOGWOOD_LEAVES.asBlock(), WHITE_DOGWOOD_LEAVES.asBlock(), FLOWERING_CASSIA_LEAVES.asBlock());
@@ -142,8 +124,14 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(NETHERITE_BRICK_STAIRS.asBlock(), NETHERITE_BRICK_WALL.asBlock(), CUT_NETHERITE.asBlock())
 				.add(CUT_NETHERITE_PILLAR.asBlock(), CUT_NETHERITE_SLAB.asBlock(), CUT_NETHERITE_STAIRS.asBlock())
 				.add(OBSIDIAN_SLAB.asBlock(), OBSIDIAN_STAIRS.asBlock(), OBSIDIAN_WALL.asBlock())
+				.add(POLISHED_OBSIDIAN.asBlock(), POLISHED_OBSIDIAN_STAIRS.asBlock(), POLISHED_OBSIDIAN_SLAB.asBlock(), POLISHED_OBSIDIAN_WALL.asBlock(), CRACKED_POLISHED_OBSIDIAN_BRICKS.asBlock())
+				.add(POLISHED_OBSIDIAN_BRICKS.asBlock(), POLISHED_OBSIDIAN_BRICK_STAIRS.asBlock(), POLISHED_OBSIDIAN_BRICK_SLAB.asBlock(), POLISHED_OBSIDIAN_BRICK_WALL.asBlock())
 				.add(CRYING_OBSIDIAN_SLAB.asBlock(), CRYING_OBSIDIAN_STAIRS.asBlock(), CRYING_OBSIDIAN_WALL.asBlock())
+				.add(POLISHED_CRYING_OBSIDIAN.asBlock(), POLISHED_CRYING_OBSIDIAN_STAIRS.asBlock(), POLISHED_CRYING_OBSIDIAN_SLAB.asBlock(), POLISHED_CRYING_OBSIDIAN_WALL.asBlock(), CRACKED_POLISHED_CRYING_OBSIDIAN_BRICKS.asBlock())
+				.add(POLISHED_CRYING_OBSIDIAN_BRICKS.asBlock(), POLISHED_CRYING_OBSIDIAN_BRICK_STAIRS.asBlock(), POLISHED_CRYING_OBSIDIAN_BRICK_SLAB.asBlock(), POLISHED_CRYING_OBSIDIAN_BRICK_WALL.asBlock())
 				.add(BLEEDING_OBSIDIAN_SLAB.asBlock(), BLEEDING_OBSIDIAN_STAIRS.asBlock(), BLEEDING_OBSIDIAN_WALL.asBlock())
+				.add(POLISHED_BLEEDING_OBSIDIAN.asBlock(), POLISHED_BLEEDING_OBSIDIAN_STAIRS.asBlock(), POLISHED_BLEEDING_OBSIDIAN_SLAB.asBlock(), POLISHED_BLEEDING_OBSIDIAN_WALL.asBlock(), CRACKED_POLISHED_BLEEDING_OBSIDIAN_BRICKS.asBlock())
+				.add(POLISHED_BLEEDING_OBSIDIAN_BRICKS.asBlock(), POLISHED_BLEEDING_OBSIDIAN_BRICK_STAIRS.asBlock(), POLISHED_BLEEDING_OBSIDIAN_BRICK_SLAB.asBlock(), POLISHED_BLEEDING_OBSIDIAN_BRICK_WALL.asBlock())
 				.add(CUT_NETHERITE_WALL.asBlock(), CRUSHING_WEIGHTED_PRESSURE_PLATE.asBlock())
 				.add(NETHERITE_TRAPDOOR.asBlock());
 		getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
@@ -290,7 +278,8 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(TUFF_TILES.asBlock(), TUFF_TILE_STAIRS.asBlock(), TUFF_TILE_SLAB.asBlock(), TUFF_TILE_WALL.asBlock())
 				.add(MOSSY_CHISELED_STONE_BRICKS.asBlock(), STONE_TILES.asBlock(), STONE_TILE_STAIRS.asBlock(), STONE_TILE_SLAB.asBlock(), STONE_TILE_WALL.asBlock())
 				.add(SMOOTH_SANDSTONE_WALL.asBlock(), SMOOTH_RED_SANDSTONE_WALL.asBlock())
-				.add(CHISELED_PRISMARINE.asBlock(), CHISELED_PRISMARINE_BRICKS.asBlock(), CHISELED_PRISMARINE_BRICK_STAIRS.asBlock(), CHISELED_PRISMARINE_BRICK_SLAB.asBlock())
+				.add(CHISELED_PRISMARINE_BRICKS.asBlock(), SMOOTH_CHISELED_PRISMARINE_BRICKS.asBlock())
+				.add(CHISELED_PRISMARINE.asBlock(), CHISELED_PRISMARINE_STAIRS.asBlock(), CHISELED_PRISMARINE_SLAB.asBlock())
 				.add(CUT_PRISMARINE_BRICKS.asBlock(), CUT_PRISMARINE_BRICK_STAIRS.asBlock(), CUT_PRISMARINE_BRICK_SLAB.asBlock())
 				.add(PRISMARINE_TILES.asBlock(), PRISMARINE_TILE_STAIRS.asBlock(), PRISMARINE_TILE_SLAB.asBlock(), PRISMARINE_TILE_WALL.asBlock())
 				.add(DARK_PRISMARINE_WALL.asBlock())
@@ -448,20 +437,13 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(DRIED_BAMBOO_SOUL_TORCH.asBlock(), DRIED_BAMBOO_SOUL_TORCH.getWallBlock())
 				.add(PRISMARINE_SOUL_TORCH.asBlock(), PRISMARINE_SOUL_TORCH.getWallBlock())
 				.add(BLAZE_SOUL_TORCH.asBlock(), BLAZE_SOUL_TORCH.getWallBlock());
-		getOrCreateTagBuilder(BlockTags.PLANKS)
-				.add(CHARRED_PLANKS.asBlock())
-				.add(MANGROVE_PLANKS.asBlock(), BAMBOO_PLANKS.asBlock(), CHERRY_PLANKS.asBlock())
-				.add(CASSIA_PLANKS.asBlock(), DOGWOOD_PLANKS.asBlock());
 		getOrCreateTagBuilder(BlockTags.PRESSURE_PLATES)
 				.add(MEDIUM_WEIGHTED_PRESSURE_PLATE.asBlock(), EXPOSED_MEDIUM_WEIGHTED_PRESSURE_PLATE.asBlock())
 				.add(WEATHERED_MEDIUM_WEIGHTED_PRESSURE_PLATE.asBlock(), OXIDIZED_MEDIUM_WEIGHTED_PRESSURE_PLATE.asBlock())
 				.add(WAXED_MEDIUM_WEIGHTED_PRESSURE_PLATE.asBlock(), WAXED_EXPOSED_MEDIUM_WEIGHTED_PRESSURE_PLATE.asBlock())
 				.add(WAXED_WEATHERED_MEDIUM_WEIGHTED_PRESSURE_PLATE.asBlock(), WAXED_OXIDIZED_MEDIUM_WEIGHTED_PRESSURE_PLATE.asBlock())
 				.add(CRUSHING_WEIGHTED_PRESSURE_PLATE.asBlock());
-		getOrCreateTagBuilder(BlockTags.SAND).add(Blocks.SAND, Blocks.RED_SAND, SUSPICIOUS_SAND.asBlock());
-		getOrCreateTagBuilder(BlockTags.SAPLINGS)
-				.add(CHERRY_SAPLING.asBlock(), MANGROVE_PROPAGULE.asBlock(), CASSIA_SAPLING.asBlock(), DOGWOOD_SAPLING.asBlock());
-		getOrCreateTagBuilder(BlockTags.SIGNS).addTag(BlockTags.STANDING_SIGNS).addTag(BlockTags.WALL_SIGNS);
+		getOrCreateTagBuilder(BlockTags.SIGNS);
 		getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(MUD.asBlock(), MUDDY_MANGROVE_ROOTS.asBlock())
 				.add(COARSE_DIRT_SLAB.asBlock(), BLAZE_POWDER_BLOCK.asBlock())
 				.add(DYE_BLOCKS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new));
@@ -471,58 +453,6 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(ORANGE_ORCHID.asBlock(), PURPLE_ORCHID.asBlock(), RED_ORCHID.asBlock(), WHITE_ORCHID.asBlock())
 				.add(YELLOW_ORCHID.asBlock(), PINK_ALLIUM.asBlock(), LAVENDER.asBlock(), HYDRANGEA.asBlock())
 				.add(PAEONIA.asBlock(), ASTER.asBlock(), VANILLA_FLOWER.asBlock());
-		getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
-				.add(Blocks.ACACIA_SIGN, Blocks.BIRCH_SIGN, Blocks.DARK_OAK_SIGN)
-				.add(Blocks.JUNGLE_SIGN, Blocks.OAK_SIGN, Blocks.SPRUCE_SIGN)
-				.add(Blocks.CRIMSON_SIGN, Blocks.WARPED_SIGN)
-				.add(MANGROVE_SIGN.asBlock(), BAMBOO_SIGN.asBlock(), CHERRY_SIGN.asBlock())
-				.add(CHARRED_SIGN.asBlock())
-				.add(CASSIA_SIGN.asBlock(), DOGWOOD_SIGN.asBlock());
-		getOrCreateTagBuilder(BlockTags.SLABS).addTag(ModBlockTags.LOG_SLABS)
-				.add(ANDESITE_BRICK_SLAB.asBlock(), ANDESITE_TILE_SLAB.asBlock(), CUT_POLISHED_ANDESITE_SLAB.asBlock())
-				.add(DIORITE_BRICK_SLAB.asBlock(), DIORITE_TILE_SLAB.asBlock(), CUT_POLISHED_DIORITE_SLAB.asBlock())
-				.add(GRANITE_BRICK_SLAB.asBlock(), GRANITE_TILE_SLAB.asBlock(), CUT_POLISHED_GRANITE_SLAB.asBlock(), CHISELED_GRANITE_SLAB.asBlock())
-				.add(CHISELED_PURPUR_SLAB.asBlock(), PURPUR_MOSAIC_SLAB.asBlock(), SMOOTH_PURPUR_SLAB.asBlock(), PURPUR_BRICK_SLAB.asBlock(), PURPUR_TILE_SLAB.asBlock())
-				.add(MOSSY_COBBLED_DEEPSLATE_SLAB.asBlock(), MOSSY_DEEPSLATE_BRICK_SLAB.asBlock())
-				.add(COBBLED_SHALE_SLAB.asBlock(), POLISHED_SHALE_SLAB.asBlock(), SHALE_BRICK_SLAB.asBlock(), SHALE_TILE_SLAB.asBlock())
-				.add(END_STONE_SLAB.asBlock(), END_STONE_TILE_SLAB.asBlock())
-				.add(COBBLED_END_SHALE_SLAB.asBlock(), END_SHALE_BRICK_SLAB.asBlock(), END_SHALE_TILE_SLAB.asBlock())
-				.add(CALCITE_SLAB.asBlock(), SMOOTH_CALCITE_SLAB.asBlock(), CALCITE_BRICK_SLAB.asBlock(), CALCITE_TILE_SLAB.asBlock())
-				.add(DRIPSTONE_SLAB.asBlock(), SMOOTH_DRIPSTONE_SLAB.asBlock(), DRIPSTONE_BRICK_SLAB.asBlock(), DRIPSTONE_TILE_SLAB.asBlock())
-				.add(TUFF_SLAB.asBlock(), SMOOTH_TUFF_SLAB.asBlock(), TUFF_BRICK_SLAB.asBlock(), TUFF_TILE_SLAB.asBlock())
-				.add(STONE_TILE_SLAB.asBlock())
-				.add(CHISELED_PRISMARINE_BRICK_SLAB.asBlock(), CUT_PRISMARINE_BRICK_SLAB.asBlock(), PRISMARINE_TILE_SLAB.asBlock())
-				.add(AMETHYST_SLAB.asBlock(), AMETHYST_BRICK_SLAB.asBlock(), AMETHYST_CRYSTAL_SLAB.asBlock())
-				.add(GLASS_SLAB.asBlock(), TINTED_GLASS_SLAB.asBlock(), RUBY_GLASS_SLAB.asBlock())
-				.add(COAL_SLAB.asBlock(), CHARCOAL_SLAB.asBlock(), COARSE_DIRT_SLAB.asBlock(), BONE_SLAB.asBlock())
-				.add(TERRACOTTA_SLAB.asBlock(), GLAZED_TERRACOTTA_SLAB.asBlock())
-				.add(TERRACOTTA_SLABS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(GLAZED_TERRACOTTA_SLABS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(CONCRETE_SLABS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(STAINED_GLASS_SLABS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(EMERALD_SLAB.asBlock(), EMERALD_BRICK_SLAB.asBlock(), CUT_EMERALD_SLAB.asBlock())
-				.add(RUBY_SLAB.asBlock(), RUBY_BRICK_SLAB.asBlock())
-				.add(DIAMOND_SLAB.asBlock(), DIAMOND_BRICK_SLAB.asBlock())
-				.add(QUARTZ_BRICK_SLAB.asBlock(), QUARTZ_CRYSTAL_SLAB.asBlock())
-				.add(FLINT_SLAB.asBlock(), FLINT_BRICK_SLAB.asBlock())
-				.add(RAW_COPPER_SLAB.asBlock(), RAW_GOLD_SLAB.asBlock(), RAW_IRON_SLAB.asBlock())
-				.add(IRON_SLAB.asBlock(), IRON_BRICK_SLAB.asBlock(), CUT_IRON_SLAB.asBlock())
-				.add(GOLD_SLAB.asBlock(), GOLD_BRICK_SLAB.asBlock(), CUT_GOLD_SLAB.asBlock())
-				.add(NETHERITE_SLAB.asBlock(), NETHERITE_BRICK_SLAB.asBlock(), CUT_NETHERITE_SLAB.asBlock())
-				.add(OBSIDIAN_SLAB.asBlock(), CRYING_OBSIDIAN_SLAB.asBlock(), BLEEDING_OBSIDIAN_SLAB.asBlock())
-				.add(COPPER_SLAB.asBlock(), EXPOSED_COPPER_SLAB.asBlock(), WEATHERED_COPPER_SLAB.asBlock(), OXIDIZED_COPPER_SLAB.asBlock())
-				.add(WAXED_COPPER_SLAB.asBlock(), WAXED_EXPOSED_COPPER_SLAB.asBlock(), WAXED_WEATHERED_COPPER_SLAB.asBlock(), WAXED_OXIDIZED_COPPER_SLAB.asBlock())
-				.add(COPPER_BRICK_SLAB.asBlock(), EXPOSED_COPPER_BRICK_SLAB.asBlock(), WEATHERED_COPPER_BRICK_SLAB.asBlock(), OXIDIZED_COPPER_BRICK_SLAB.asBlock())
-				.add(WAXED_COPPER_BRICK_SLAB.asBlock(), WAXED_EXPOSED_COPPER_BRICK_SLAB.asBlock(), WAXED_WEATHERED_COPPER_BRICK_SLAB.asBlock(), WAXED_OXIDIZED_COPPER_BRICK_SLAB.asBlock())
-				.add(ECHO_SLAB.asBlock(), ECHO_BRICK_SLAB.asBlock(), ECHO_CRYSTAL_SLAB.asBlock())
-				.add(SMOOTH_BASALT_BRICK_SLAB.asBlock())
-				.add(POLISHED_BLACKSTONE_TILE_SLAB.asBlock())
-				.add(GILDED_BLACKSTONE_SLAB.asBlock(), POLISHED_GILDED_BLACKSTONE_SLAB.asBlock(), POLISHED_GILDED_BLACKSTONE_BRICK_SLAB.asBlock())
-				.add(SCULK_STONE_SLAB.asBlock(), COBBLED_SCULK_STONE_SLAB.asBlock(), SCULK_STONE_BRICK_SLAB.asBlock(), SCULK_STONE_TILE_SLAB.asBlock())
-				.add(WOOL_SLABS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.addTag(ModBlockTags.WOOL_SLABS).addTag(ModBlockTags.FLEECE_SLABS)
-				.add(MOSS_SLAB.asBlock())
-				.add(MUD_BRICK_SLAB.asBlock());
 		getOrCreateTagBuilder(BlockTags.SNOW);
 		getOrCreateTagBuilder(BlockTags.TALL_FLOWERS)
 				.add(AMARANTH.asBlock(), BLUE_ROSE_BUSH.asBlock(), TALL_ALLIUM.asBlock(), TALL_PINK_ALLIUM.asBlock(), TALL_VANILLA.asBlock());
@@ -541,13 +471,6 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(WEATHERED_COPPER_TRAPDOOR.asBlock(), OXIDIZED_COPPER_TRAPDOOR.asBlock())
 				.add(WAXED_COPPER_TRAPDOOR.asBlock(), WAXED_EXPOSED_COPPER_TRAPDOOR.asBlock())
 				.add(WAXED_WEATHERED_COPPER_TRAPDOOR.asBlock(), WAXED_OXIDIZED_COPPER_TRAPDOOR.asBlock());
-		getOrCreateTagBuilder(BlockTags.WALL_SIGNS)
-				.add(Blocks.ACACIA_WALL_SIGN, Blocks.BIRCH_WALL_SIGN, Blocks.DARK_OAK_WALL_SIGN)
-				.add(Blocks.JUNGLE_WALL_SIGN, Blocks.OAK_WALL_SIGN, Blocks.SPRUCE_WALL_SIGN)
-				.add(Blocks.CRIMSON_WALL_SIGN, Blocks.WARPED_WALL_SIGN)
-				.add(MANGROVE_SIGN.getWallBlock(), BAMBOO_SIGN.getWallBlock(), CHERRY_SIGN.getWallBlock())
-				.add(CHARRED_SIGN.getWallBlock())
-				.add(CASSIA_SIGN.getWallBlock(), DOGWOOD_SIGN.getWallBlock());
 		getOrCreateTagBuilder(BlockTags.WITHER_IMMUNE).add(REINFORCED_DEEPSLATE.asBlock());
 		getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
 				.add(CHARRED_BUTTON.asBlock())
@@ -583,35 +506,15 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 						Blocks.DEEPSLATE_BRICK_WALL, Blocks.COBBLED_DEEPSLATE, Blocks.CRACKED_DEEPSLATE_BRICKS,
 						Blocks.CRACKED_DEEPSLATE_TILES)
 				.addTag(ModBlockTags.SCULK_TURFS);
-		getOrCreateTagBuilder(ModBlockTags.BARRELS).add(Blocks.BARREL)
-				.add(ACACIA_BARREL.asBlock(), BIRCH_BARREL.asBlock(), CRIMSON_BARREL.asBlock(), DARK_OAK_BARREL.asBlock())
-				.add(JUNGLE_BARREL.asBlock(), OAK_BARREL.asBlock(), WARPED_BARREL.asBlock())
-				.add(BAMBOO_BARREL.asBlock(), MANGROVE_BARREL.asBlock(), CHERRY_BARREL.asBlock(), CHARRED_BARREL.asBlock())
-				.add(CASSIA_BARREL.asBlock(), DOGWOOD_BARREL.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.BOOKSHELVES).add(Blocks.BOOKSHELF)
-				.add(ACACIA_BOOKSHELF.asBlock(), BIRCH_BOOKSHELF.asBlock(), CRIMSON_BOOKSHELF.asBlock(), DARK_OAK_BOOKSHELF.asBlock())
-				.add(JUNGLE_BOOKSHELF.asBlock(), SPRUCE_BOOKSHELF.asBlock(), WARPED_BOOKSHELF.asBlock())
-				.add(BAMBOO_BOOKSHELF.asBlock(), MANGROVE_BOOKSHELF.asBlock(), CHERRY_BOOKSHELF.asBlock(), CHARRED_BOOKSHELF.asBlock())
-				.add(CASSIA_BOOKSHELF.asBlock(), DOGWOOD_BOOKSHELF.asBlock());
+		getOrCreateTagBuilder(ModBlockTags.BARRELS).add(Blocks.BARREL);
+		getOrCreateTagBuilder(ModBlockTags.BOOKSHELVES).add(Blocks.BOOKSHELF);
 		getOrCreateTagBuilder(ModBlockTags.BROOM_SWEEPS).addTag(BlockTags.LEAVES).add(HEDGE_BLOCK.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.CARVED_GOURDS).addTag(ModBlockTags.CARVED_MELONS).addTag(ModBlockTags.CARVED_PUMPKINS);
 		getOrCreateTagBuilder(ModBlockTags.CARVED_MELONS).add(CARVED_MELON.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.CARVED_PUMPKINS).add(Blocks.CARVED_PUMPKIN, CARVED_WHITE_PUMPKIN.asBlock(), CARVED_ROTTEN_PUMPKIN.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.CASSIA_LOGS).add(CASSIA_LOG.asBlock(), CASSIA_WOOD.asBlock(), STRIPPED_CASSIA_LOG.asBlock(), STRIPPED_CASSIA_WOOD.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.CEILING_HANGING_SIGNS)
-				.add(OAK_HANGING_SIGN.asBlock(), SPRUCE_HANGING_SIGN.asBlock(), BIRCH_HANGING_SIGN.asBlock())
-				.add(ACACIA_HANGING_SIGN.asBlock(), JUNGLE_HANGING_SIGN.asBlock(), DARK_OAK_HANGING_SIGN.asBlock())
-				.add(CRIMSON_HANGING_SIGN.asBlock(), WARPED_HANGING_SIGN.asBlock())
-				.add(MANGROVE_SIGN.getHanging().asBlock(), BAMBOO_SIGN.getHanging().asBlock(), CHERRY_SIGN.getHanging().asBlock())
-				.add(CHARRED_SIGN.getHanging().asBlock())
-				.add(CASSIA_SIGN.getHanging().asBlock(), DOGWOOD_SIGN.getHanging().asBlock());
 		getOrCreateTagBuilder(ModBlockTags.CHARRED_LOGS).add(CHARRED_LOG.asBlock(), CHARRED_WOOD.asBlock(), STRIPPED_CHARRED_LOG.asBlock(), STRIPPED_CHARRED_WOOD.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.CHERRY_LOGS).add(CHERRY_LOG.asBlock(), CHERRY_WOOD.asBlock(), STRIPPED_CHERRY_LOG.asBlock(), STRIPPED_CHERRY_WOOD.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.CHISELED_BOOKSHELVES).add(CHISELED_BOOKSHELF.asBlock())
-				.add(ACACIA_CHISELED_BOOKSHELF.asBlock(), BIRCH_CHISELED_BOOKSHELF.asBlock(), CRIMSON_CHISELED_BOOKSHELF.asBlock(), DARK_OAK_CHISELED_BOOKSHELF.asBlock())
-				.add(JUNGLE_CHISELED_BOOKSHELF.asBlock(), SPRUCE_CHISELED_BOOKSHELF.asBlock(), WARPED_CHISELED_BOOKSHELF.asBlock())
-				.add(BAMBOO_CHISELED_BOOKSHELF.asBlock(), MANGROVE_CHISELED_BOOKSHELF.asBlock(), CHERRY_CHISELED_BOOKSHELF.asBlock(), CHARRED_CHISELED_BOOKSHELF.asBlock())
-				.add(CASSIA_CHISELED_BOOKSHELF.asBlock(), DOGWOOD_CHISELED_BOOKSHELF.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.COMBINATION_STEP_SOUND_BLOCKS)
 				.addTag(ModBlockTags.WOOL_CARPETS).addTag(ModBlockTags.FLEECE_CARPETS)
 				.add(Blocks.CRIMSON_ROOTS, Blocks.WARPED_ROOTS, Blocks.NETHER_SPROUTS)
@@ -620,11 +523,7 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(ModBlockTags.CONVERTIBLE_TO_MUD).add(Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.ROOTED_DIRT);
 		getOrCreateTagBuilder(ModBlockTags.COLD_BLOCKS).addTag(BlockTags.ICE).addTag(BlockTags.SNOW)
 				.add(Blocks.POWDER_SNOW_CAULDRON);
-		getOrCreateTagBuilder(ModBlockTags.CRAFTING_TABLES).add(Blocks.CRAFTING_TABLE)
-				.add(ACACIA_CRAFTING_TABLE.asBlock(), BIRCH_CRAFTING_TABLE.asBlock(), CRIMSON_CRAFTING_TABLE.asBlock(), DARK_OAK_CRAFTING_TABLE.asBlock())
-				.add(JUNGLE_CRAFTING_TABLE.asBlock(), SPRUCE_CRAFTING_TABLE.asBlock(), WARPED_CRAFTING_TABLE.asBlock())
-				.add(BAMBOO_CRAFTING_TABLE.asBlock(), MANGROVE_CRAFTING_TABLE.asBlock(), CHERRY_CRAFTING_TABLE.asBlock(), CHARRED_CRAFTING_TABLE.asBlock())
-				.add(CASSIA_CRAFTING_TABLE.asBlock(), DOGWOOD_CRAFTING_TABLE.asBlock());
+		getOrCreateTagBuilder(ModBlockTags.CRAFTING_TABLES).add(Blocks.CRAFTING_TABLE);
 		getOrCreateTagBuilder(ModBlockTags.DAMPENS_VIBRATIONS)
 				.addTag(BlockTags.WOOL).addTag(ModBlockTags.WOOL_SLABS).addTag(ModBlockTags.WOOL_CARPETS)
 				.addTag(ModBlockTags.FLEECE).addTag(ModBlockTags.FLEECE_SLABS).addTag(ModBlockTags.FLEECE_CARPETS);
@@ -635,15 +534,6 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.add(ECHO_BRICKS.asBlock(), ECHO_BRICK_SLAB.asBlock(), ECHO_BRICK_STAIRS.asBlock(), ECHO_BRICK_WALL.asBlock())
 				.add(ECHO_CRYSTAL_BLOCK.asBlock(), ECHO_CRYSTAL_SLAB.asBlock())
 				.add(ECHO_CRYSTAL_STAIRS.asBlock(), ECHO_CRYSTAL_WALL.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.FLEECE)
-				.add(FLEECE.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(RAINBOW_FLEECE.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.FLEECE_SLABS)
-				.add(FLEECE_SLABS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(RAINBOW_FLEECE_SLAB.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.FLEECE_CARPETS)
-				.add(FLEECE_CARPETS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(RAINBOW_FLEECE_CARPET.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.FROG_PREFER_JUMP_TO).add(Blocks.LILY_PAD, Blocks.BIG_DRIPLEAF);
 		getOrCreateTagBuilder(ModBlockTags.FROGS_SPAWNABLE_ON).add(Blocks.GRASS_BLOCK)
 				.add(MUD.asBlock(), MANGROVE_ROOTS.asBlock(), MUDDY_MANGROVE_ROOTS.asBlock());
@@ -653,27 +543,7 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(ModBlockTags.INFLICTS_FIRE_DAMAGE)
 				.add(Blocks.FIRE, Blocks.LAVA, Blocks.LAVA_CAULDRON, Blocks.MAGMA_BLOCK)
 				.add(COOLED_MAGMA_BLOCK.asBlock(), BLAZE_POWDER_BLOCK.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.LECTERNS).add(Blocks.LECTERN)
-				.add(ACACIA_LECTERN.asBlock(), BIRCH_LECTERN.asBlock(), CRIMSON_LECTERN.asBlock(), DARK_OAK_LECTERN.asBlock())
-				.add(JUNGLE_LECTERN.asBlock(), SPRUCE_LECTERN.asBlock(), WARPED_LECTERN.asBlock())
-				.add(BAMBOO_LECTERN.asBlock(), MANGROVE_LECTERN.asBlock(), CHERRY_LECTERN.asBlock(), CHARRED_LECTERN.asBlock())
-				.add(CASSIA_LECTERN.asBlock(), DOGWOOD_LECTERN.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.LOG_SLABS)
-				.add(ACACIA_LOG_SLAB.asBlock(), STRIPPED_ACACIA_LOG_SLAB.asBlock(), ACACIA_WOOD_SLAB.asBlock(), STRIPPED_ACACIA_WOOD_SLAB.asBlock())
-				.add(BIRCH_LOG_SLAB.asBlock(), STRIPPED_BIRCH_LOG_SLAB.asBlock(), BIRCH_WOOD_SLAB.asBlock(), STRIPPED_BIRCH_WOOD_SLAB.asBlock())
-				.add(DARK_OAK_LOG_SLAB.asBlock(), STRIPPED_DARK_OAK_LOG_SLAB.asBlock(), DARK_OAK_WOOD_SLAB.asBlock(), STRIPPED_DARK_OAK_WOOD_SLAB.asBlock())
-				.add(JUNGLE_LOG_SLAB.asBlock(), STRIPPED_JUNGLE_LOG_SLAB.asBlock(), JUNGLE_WOOD_SLAB.asBlock(), STRIPPED_JUNGLE_WOOD_SLAB.asBlock())
-				.add(OAK_LOG_SLAB.asBlock(), STRIPPED_OAK_LOG_SLAB.asBlock(), OAK_WOOD_SLAB.asBlock(), STRIPPED_OAK_WOOD_SLAB.asBlock())
-				.add(SPRUCE_LOG_SLAB.asBlock(), STRIPPED_SPRUCE_LOG_SLAB.asBlock(), SPRUCE_WOOD_SLAB.asBlock(), STRIPPED_SPRUCE_WOOD_SLAB.asBlock())
-				.add(CRIMSON_STEM_SLAB.asBlock(), STRIPPED_CRIMSON_STEM_SLAB.asBlock(), CRIMSON_HYPHAE_SLAB.asBlock(), STRIPPED_CRIMSON_HYPHAE_SLAB.asBlock())
-				.add(WARPED_STEM_SLAB.asBlock(), STRIPPED_WARPED_STEM_SLAB.asBlock(), WARPED_HYPHAE_SLAB.asBlock(), STRIPPED_WARPED_HYPHAE_SLAB.asBlock())
-				.add(BAMBOO_BLOCK_SLAB.asBlock(), STRIPPED_BAMBOO_BLOCK_SLAB.asBlock(), DRIED_BAMBOO_BLOCK_SLAB.asBlock(), STRIPPED_DRIED_BAMBOO_BLOCK_SLAB.asBlock(), SUGAR_CANE_BLOCK_SLAB.asBlock())
-				.add(CHERRY_LOG_SLAB.asBlock(), STRIPPED_CHERRY_LOG_SLAB.asBlock(), CHERRY_WOOD_SLAB.asBlock(), STRIPPED_CHERRY_WOOD_SLAB.asBlock())
-				.add(MANGROVE_LOG_SLAB.asBlock(), STRIPPED_MANGROVE_LOG_SLAB.asBlock(), MANGROVE_WOOD_SLAB.asBlock(), STRIPPED_MANGROVE_WOOD_SLAB.asBlock())
-				.add(CHARRED_LOG_SLAB.asBlock(), STRIPPED_CHARRED_LOG_SLAB.asBlock(), CHARRED_WOOD_SLAB.asBlock(), STRIPPED_CHARRED_WOOD_SLAB.asBlock())
-				.add(CASSIA_LOG_SLAB.asBlock(), STRIPPED_CASSIA_LOG_SLAB.asBlock(), CASSIA_WOOD_SLAB.asBlock(), STRIPPED_CASSIA_WOOD_SLAB.asBlock())
-				.add(DOGWOOD_LOG_SLAB.asBlock(), STRIPPED_DOGWOOD_LOG_SLAB.asBlock(), DOGWOOD_WOOD_SLAB.asBlock(), STRIPPED_DOGWOOD_WOOD_SLAB.asBlock())
-				.add(GILDED_STEM_SLAB.asBlock(), STRIPPED_GILDED_STEM_SLAB.asBlock(), GILDED_HYPHAE_SLAB.asBlock(), STRIPPED_GILDED_HYPHAE_SLAB.asBlock());
+		getOrCreateTagBuilder(ModBlockTags.LECTERNS).add(Blocks.LECTERN);
 		getOrCreateTagBuilder(ModBlockTags.MANGROVE_LOGS).add(MANGROVE_LOG.asBlock(), MANGROVE_WOOD.asBlock(),STRIPPED_MANGROVE_LOG.asBlock(), STRIPPED_MANGROVE_WOOD.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.MANGROVE_LOGS_CAN_GROW_THROUGH)
 				.add(MUD.asBlock(), MUDDY_MANGROVE_ROOTS.asBlock(), MANGROVE_ROOTS.asBlock())
@@ -686,8 +556,9 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(ModBlockTags.OCCLUDES_VIBRATION_SIGNALS).addTag(BlockTags.WOOL).addTag(ModBlockTags.FLEECE);
 		getOrCreateTagBuilder(ModBlockTags.OVERWORLD_NATURAL_LOGS)
 				.add(Blocks.ACACIA_LOG, Blocks.BIRCH_LOG, Blocks.DARK_OAK_LOG, Blocks.JUNGLE_LOG, Blocks.OAK_LOG, Blocks.SPRUCE_LOG)
-				.add(CHERRY_LOG.asBlock(), MANGROVE_LOG.asBlock())
-				.add(CASSIA_LOG.asBlock(), DOGWOOD_LOG.asBlock());
+				.add(CHERRY_LOG.asBlock(), MANGROVE_LOG.asBlock(), CASSIA_LOG.asBlock(), DOGWOOD_LOG.asBlock());
+		getOrCreateTagBuilder(ModBlockTags.PISTON_IMMOVABLE).add(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN, Blocks.RESPAWN_ANCHOR);
+		if (ModConfig.REGISTER_HAVEN_MOD) getOrCreateTagBuilder(ModBlockTags.PISTON_IMMOVABLE).add(HavenMod.SUBSTITUTE_ANCHOR_BLOCK);
 		getOrCreateTagBuilder(ModBlockTags.PUMPKINS).add(Blocks.PUMPKIN, WHITE_PUMPKIN.asBlock(), ROTTEN_PUMPKIN.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.ROWS).add(BAMBOO_ROW.asBlock(), DRIED_BAMBOO_ROW.asBlock(), BONE_ROW.asBlock(), SUGAR_CANE_ROW.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.RUBY_ORES).add(RUBY_ORE.asBlock(), DEEPSLATE_RUBY_ORE.asBlock());
@@ -702,14 +573,6 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 				.addTag(ModBlockTags.SCULK_REPLACEABLE)
 				.add(Blocks.DEEPSLATE_BRICKS, Blocks.DEEPSLATE_TILES, Blocks.COBBLED_DEEPSLATE)
 				.add(Blocks.CRACKED_DEEPSLATE_BRICKS, Blocks.CRACKED_DEEPSLATE_TILES, Blocks.POLISHED_DEEPSLATE);
-		getOrCreateTagBuilder(ModBlockTags.SCULK_TURFS)
-				.add(ANDESITE_SCULK_TURF.asBlock(), BASALT_SCULK_TURF.asBlock(), BLACKSTONE_SCULK_TURF.asBlock())
-				.add(CALCITE_SCULK_TURF.asBlock(), DEEPSLATE_SCULK_TURF.asBlock(), DIORITE_SCULK_TURF.asBlock())
-				.add(DRIPSTONE_SCULK_TURF.asBlock(), GRANITE_SCULK_TURF.asBlock(), NETHERRACK_SCULK_TURF.asBlock())
-				.add(END_SHALE_SCULK_TURF.asBlock(), END_STONE_SCULK_TURF.asBlock())
-				.add(END_ROCK_SCULK_TURF.asBlock(), END_ROCK_SHALE_SCULK_TURF.asBlock(), END_SHALE_ROCK_SCULK_TURF.asBlock())
-				.add(RED_SANDSTONE_SCULK_TURF.asBlock(), SANDSTONE_SCULK_TURF.asBlock(), SHALE_SCULK_TURF.asBlock())
-				.add(SMOOTH_BASALT_SCULK_TURF.asBlock(), STONE_SCULK_TURF.asBlock(), TUFF_SCULK_TURF.asBlock());
 		getOrCreateTagBuilder(ModBlockTags.SCULK_VEIN_CAN_PLACE_ON)
 				.add(Blocks.STONE, Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE, Blocks.DRIPSTONE_BLOCK)
 				.add(Blocks.CALCITE, Blocks.TUFF, Blocks.DEEPSLATE);
@@ -726,23 +589,11 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(ModBlockTags.TRAIL_RUINS_REPLACEABLE).add(Blocks.SAND, Blocks.GRAVEL, Blocks.DIRT, Blocks.COARSE_DIRT);
 		getOrCreateTagBuilder(ModBlockTags.VIBRATION_RESONATORS).add(Blocks.AMETHYST_BLOCK);
 		getOrCreateTagBuilder(ModBlockTags.VIBRATION_RESONATORS_ECHO).add(ECHO_BLOCK.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.WALL_HANGING_SIGNS)
-				.add(OAK_HANGING_SIGN.getWallBlock(), SPRUCE_HANGING_SIGN.getWallBlock(), BIRCH_HANGING_SIGN.getWallBlock())
-				.add(ACACIA_HANGING_SIGN.getWallBlock(), JUNGLE_HANGING_SIGN.getWallBlock(), DARK_OAK_HANGING_SIGN.getWallBlock())
-				.add(CRIMSON_HANGING_SIGN.getWallBlock(), WARPED_HANGING_SIGN.getWallBlock())
-				.add(MANGROVE_SIGN.getHanging().getWallBlock(), BAMBOO_SIGN.getHanging().getWallBlock(), CHERRY_SIGN.getHanging().getWallBlock())
-				.add(CHARRED_SIGN.getHanging().getWallBlock())
-				.add(CASSIA_SIGN.getHanging().getWallBlock(), DOGWOOD_SIGN.getHanging().getWallBlock());
-		getOrCreateTagBuilder(ModBlockTags.WOODEN_BEEHIVES).add(Blocks.BEEHIVE)
-				.add(ACACIA_BEEHIVE.asBlock(), BIRCH_BEEHIVE.asBlock(), DARK_OAK_BEEHIVE.asBlock(), JUNGLE_BEEHIVE.asBlock())
-				.add(CRIMSON_BEEHIVE.asBlock(), WARPED_BEEHIVE.asBlock(), BAMBOO_BEEHIVE.asBlock(), CHERRY_BEEHIVE.asBlock())
-				.add(MANGROVE_BEEHIVE.asBlock(), CHARRED_BEEHIVE.asBlock())
-				.add(CASSIA_BEEHIVE.asBlock(), DOGWOOD_BEEHIVE.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.WOOL_SLABS)
-				.add(WOOL_SLABS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new))
-				.add(RAINBOW_WOOL_SLAB.asBlock());
-		getOrCreateTagBuilder(ModBlockTags.WOOL_CARPETS)
-				.add(Arrays.stream(DyeColor.values()).map(ColorUtil::GetWoolCarpetBlock).toArray(Block[]::new))
-				.add(RAINBOW_CARPET.asBlock());
+		getOrCreateTagBuilder(ModBlockTags.WOODEN_BEEHIVES).add(Blocks.BEEHIVE);
+
+		getOrCreateTagBuilder(ModBlockTags.WOOL_CARPETS).add(Arrays.stream(DyeColor.values()).map(ColorUtil::GetWoolCarpetBlock).toArray(Block[]::new));
+
+		getOrCreateTagBuilder(ConventionalBlockTags.ORES).addTag(ModBlockTags.RUBY_ORES);
+		getOrCreateTagBuilder(ModBlockTags.ORIGINS_UNPHASEABLE).addTag(ModBlockTags.PISTON_IMMOVABLE);
 	}
 }

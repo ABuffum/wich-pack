@@ -8,14 +8,13 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class DiscFragmentItem extends Item {
 	public DiscFragmentItem(Settings settings) { super(settings); }
 	@Override
-	public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		tooltip.add(this.getDescription().formatted(Formatting.GRAY));
 	}
 	public MutableText getDescription() { return new TranslatableText("item.minecraft.disc_fragment_5.desc"); }

@@ -17,9 +17,9 @@ import java.util.Random;
 public class TorchflowerBlock extends CropBlock {
 	public static final IntProperty AGE_2 = Properties.AGE_2;
 	private static final VoxelShape[] SHAPES = new VoxelShape[]{
-			Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0),
-			Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0),
-			Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 10.0, 12.0)
+			Block.createCuboidShape(4, 0, 4, 12, 10, 12),
+			Block.createCuboidShape(4, 0, 4, 12, 10, 12),
+			Block.createCuboidShape(4, 0, 4, 12, 10, 12)
 	};
 	public TorchflowerBlock(AbstractBlock.Settings settings) { super(settings); }
 	@Override

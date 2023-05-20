@@ -13,6 +13,7 @@ import fun.mousewich.haven.HavenMod;
 import fun.mousewich.mixins.entity.LivingEntityAccessor;
 import fun.mousewich.origins.power.ChorusImmunePower;
 import fun.mousewich.origins.power.PowersUtil;
+import fun.mousewich.ryft.RyftMod;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
@@ -42,8 +43,6 @@ public class BloodSyringeItem extends BaseSyringeItem {
 		super();
 		this.applyEffect = applyEffect;
 	}
-
-	public static final Map<BloodType, Item> ITEM_MAP = new HashMap<>();
 
 	public static ItemStack getForBloodType(BloodType type) {
 		ItemStack stack = new ItemStack(ModBase.BLOOD_SYRINGE);
@@ -141,8 +140,16 @@ public class BloodSyringeItem extends BaseSyringeItem {
 				else if (ModConfig.REGISTER_HAVEN_MOD && entityType == HavenMod.DISEASED_CAT_BLOOD_TYPE) heal(entity, 1);
 				else entity.damage(source, 1);
 			}
+			else if (bloodType == ModBase.ENDER_DRAGON_BLOOD_TYPE || (ModConfig.REGISTER_RYFT_MOD && bloodType == RyftMod.DRACONIC_BLOOD_TYPE)) {
+				if (entityType == ModBase.ENDER_DRAGON_BLOOD_TYPE || entityType == RyftMod.DRACONIC_BLOOD_TYPE) heal(entity, 1);
+				else entity.damage(source, 1);
+			}
 			else if (bloodType == ModBase.GOAT_BLOOD_TYPE || bloodType == ModBase.SHEEP_BLOOD_TYPE) {
 				if (entityType == ModBase.GOAT_BLOOD_TYPE || entityType == ModBase.SHEEP_BLOOD_TYPE) heal(entity, 1);
+				else entity.damage(source, 1);
+			}
+			else if (bloodType == ModBase.SQUID_BLOOD_TYPE || bloodType == ModBase.GLOW_SQUID_BLOOD_TYPE) {
+				if (entityType == ModBase.SQUID_BLOOD_TYPE || entityType == ModBase.GLOW_SQUID_BLOOD_TYPE) heal(entity, 1);
 				else entity.damage(source, 1);
 			}
 			else if (ModConfig.REGISTER_HAVEN_MOD && bloodType == HavenMod.DISEASED_CAT_BLOOD_TYPE) {

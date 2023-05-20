@@ -13,7 +13,6 @@ import net.minecraft.util.Lazy;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-	//TODO: Make a class out of the armor materials maybe? More flexibility for separate mod implementations
 	AMETHYST("amethyst", 33, new int[]{ 3, 5, 7, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.0F, 0.0F,
 			() -> Ingredient.ofItems(Items.AMETHYST_SHARD), 10),
 	COPPER("copper",11, new int[] { 1, 4, 5, 2 }, 17, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
@@ -24,6 +23,8 @@ public enum ModArmorMaterials implements ArmorMaterial {
 			() -> Ingredient.ofItems(Items.COPPER_INGOT), 6),
 	OXIDIZED_COPPER("oxidized_copper",11, new int[] { 1, 4, 5, 2 }, 17, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F,
 			() -> Ingredient.ofItems(Items.COPPER_INGOT), 6),
+	DARK_IRON("dark_iron", 15, new int[]{ 2, 5, 6, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, 0.0F,
+			() -> Ingredient.ofItems(ModBase.DARK_IRON_INGOT), 5),
 	ECHO("echo", 37, new int[] { 3, 6, 8, 3 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.0F, 0.5F,
 			() -> Ingredient.ofItems(ModBase.ECHO_SHARD), 10),
 	EMERALD("emerald", 27, new int[] { 3, 5, 6, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.5F, 0.0F,

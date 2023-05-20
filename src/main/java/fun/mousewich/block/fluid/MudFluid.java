@@ -53,14 +53,9 @@ public class MudFluid extends FlowableFluid {
 	}
 
 	@Override
-	public int getTickRate(WorldView p_205569_1_) {
-		return 20;
-	}
-
+	public int getTickRate(WorldView worldView) { return 20; }
 	@Override
-	protected float getBlastResistance() {
-		return 100.0F;
-	}
+	protected float getBlastResistance() { return 100; }
 
 	@Override
 	protected BlockState toBlockState(FluidState state) {
@@ -76,11 +71,8 @@ public class MudFluid extends FlowableFluid {
 	@Override
 	public Optional<SoundEvent> getBucketFillSound() { return Optional.of(SoundEvents.ITEM_BUCKET_FILL); }
 
-
 	@Nullable
-	public ParticleEffect getParticle() {
-		return ModBase.DRIPPING_MUD;
-	}
+	public ParticleEffect getParticle() { return ModBase.DRIPPING_MUD; }
 
 	@Override
 	protected void flow(WorldAccess world, BlockPos pos, BlockState blockStateIn, Direction direction, FluidState fluidStateIn) {

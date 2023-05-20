@@ -1,6 +1,7 @@
 package fun.mousewich.block.basic;
 
 import com.google.common.collect.ImmutableList;
+import fun.mousewich.ModBase;
 import fun.mousewich.gen.data.loot.DropTable;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import net.minecraft.block.*;
@@ -62,7 +63,7 @@ public class ModCandleCakeBlock extends AbstractCandleBlock {
 
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack itemStack = player.getStackInHand(hand);
-		if (!itemStack.isOf(Items.FLINT_AND_STEEL) && !itemStack.isOf(Items.FIRE_CHARGE)) {
+		if (!itemStack.isOf(Items.FLINT_AND_STEEL) && !itemStack.isOf(Items.FIRE_CHARGE) && !itemStack.isOf(ModBase.LAVA_BOTTLE)) {
 			if (isHittingCandle(hit) && player.getStackInHand(hand).isEmpty() && state.get(LIT)) {
 				extinguish(player, state, world, pos);
 				return ActionResult.success(world.isClient);

@@ -1,0 +1,6 @@
+{
+  "type": "wich:experience_healing",
+  "threshold": 15,
+  "name": "Thirst for Ambition",
+  "description": "Literally ;) (Gaining experience heals you slightly)"
+}

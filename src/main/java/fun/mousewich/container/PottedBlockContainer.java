@@ -13,6 +13,8 @@ import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.TagKey;
 
 public class PottedBlockContainer implements IBlockItemContainer {
 	private final Block block;
@@ -27,6 +29,7 @@ public class PottedBlockContainer implements IBlockItemContainer {
 		this.block = block;
 		item = new BlockItem(this.block, itemSettings);
 		potted = new FlowerPotBlock(this.block, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
+		ModDatagen.Cache.Tags.Register(BlockTags.FLOWER_POTS, this.potted);
 	}
 
 	public boolean contains(Block block) { return block == this.block || block == this.potted; }
@@ -43,6 +46,7 @@ public class PottedBlockContainer implements IBlockItemContainer {
 		CompostingChanceRegistry.INSTANCE.add(this.asItem(), chance);
 		return this;
 	}
+	//Drops
 	public PottedBlockContainer requireSilkTouch() {
 		BlockLootGenerator.Drops.put(this.asBlock(), DropTable.WithSilkTouch(this.asItem()));
 		BlockLootGenerator.Drops.put(this.getPottedBlock(), DropTable.Potted(this.asItem()));
@@ -54,6 +58,9 @@ public class PottedBlockContainer implements IBlockItemContainer {
 		BlockLootGenerator.Drops.put(this.getPottedBlock(), DropTable.Potted(this.asItem()));
 		return this;
 	}
+	//Tags
+	public PottedBlockContainer blockTag(TagKey<Block> tag) { ModDatagen.Cache.Tags.Register(tag, this.block); return this; }
+	public PottedBlockContainer itemTag(TagKey<Item> tag) { ModDatagen.Cache.Tags.Register(tag, this.item); return this; }
 
-	public PottedBlockContainer pottedModel() { ModDatagen.Cache.Model.POTTED.add(this); return this; }
+	public PottedBlockContainer pottedModel() { ModDatagen.Cache.Models.POTTED.add(this); return this; }
 }

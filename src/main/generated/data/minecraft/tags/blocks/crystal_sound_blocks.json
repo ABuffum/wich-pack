@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "wich:amethyst_slab",
-    "wich:amethyst_stairs",
-    "wich:amethyst_wall",
-    "wich:amethyst_crystal_block",
-    "wich:amethyst_crystal_slab",
-    "wich:amethyst_crystal_stairs",
-    "wich:amethyst_crystal_wall",
     "wich:amethyst_bricks",
     "wich:amethyst_brick_slab",
+    "wich:amethyst_slab",
+    "wich:amethyst_crystal_stairs",
+    "wich:amethyst_wall",
     "wich:amethyst_brick_stairs",
-    "wich:amethyst_brick_wall"
+    "wich:amethyst_stairs",
+    "wich:amethyst_crystal_wall",
+    "wich:amethyst_brick_wall",
+    "wich:amethyst_crystal_block",
+    "wich:amethyst_crystal_slab"
   ]
 }

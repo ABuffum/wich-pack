@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:chiseled_polished_gilded_blackstone"
+  },
+  "result": "wich:smooth_chiseled_polished_gilded_blackstone",
+  "count": 1
+}

@@ -1,10 +1,11 @@
 {
   "powers": [
-	"haven:attacked_by_hedgehogs",
 	"haven:stinging_fists",
 	"haven:nectarvore",
 	"origins:water_vulnerability",
 	"wich:take_honey",
+	"haven:tall",
+	"wich:attacked_by_hedgehogs",
 	"haven:blood_types/bee_enderman"
   ],
   "name": "B33 Hybr1d",

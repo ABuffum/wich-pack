@@ -1,0 +1,20 @@
+{
+  "powers": [
+	"haven:hit_harder",
+	"haven:sludge_move",
+	"haven:sludge_blast",
+	"wich:nausea_immunity",
+	"wich:poison_immunity",
+	"wich:wither_immunity",
+	"wich:golem_hated",
+	"wich:villager_hated",
+	"haven:slimy_self",
+	"wich:tougher_body",
+	"origins:natural_armor",
+	"wich:hostile_mobs_neutral",
+	"haven:blood_types/sludge"
+  ],
+  "name": "Krozhul",
+  "description": "Radioactive, gooey, and a personality to match. You're an antagonist!",
+  "icon": "minecraft:dead_brain_coral"
+}

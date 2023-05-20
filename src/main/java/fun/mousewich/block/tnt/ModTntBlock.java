@@ -1,5 +1,6 @@
 package fun.mousewich.block.tnt;
 
+import fun.mousewich.ModBase;
 import fun.mousewich.entity.tnt.ModTntEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -58,18 +59,22 @@ public abstract class ModTntBlock extends Block {
 	protected abstract void primeTnt(World world, BlockPos pos, @Nullable LivingEntity igniter);
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack itemStack = player.getStackInHand(hand);
-		if (!itemStack.isOf(Items.FLINT_AND_STEEL) && !itemStack.isOf(Items.FIRE_CHARGE)) return super.onUse(state, world, pos, player, hand, hit);
-		else {
+		boolean flint, lava = false;
+		if ((flint = itemStack.isOf(Items.FLINT_AND_STEEL)) || (lava = itemStack.isOf(ModBase.LAVA_BOTTLE)) || itemStack.isOf(Items.FIRE_CHARGE)) {
 			primeTnt(world, pos, player);
 			world.setBlockState(pos, Blocks.AIR.getDefaultState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
 			Item item = itemStack.getItem();
 			if (!player.isCreative()) {
-				if (itemStack.isOf(Items.FLINT_AND_STEEL)) itemStack.damage(1, player, p -> p.sendToolBreakStatus(hand));
-				else itemStack.decrement(1);
+				if (flint) itemStack.damage(1, player, p -> p.sendToolBreakStatus(hand));
+				else {
+					itemStack.decrement(1);
+					if (lava) player.giveItemStack(new ItemStack(ModBase.LAVA_BOTTLE.getRecipeRemainder()));
+				}
 			}
 			player.incrementStat(Stats.USED.getOrCreateStat(item));
 			return ActionResult.success(world.isClient);
 		}
+		return super.onUse(state, world, pos, player, hand, hit);
 	}
 	public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
 		if (!world.isClient) {

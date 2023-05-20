@@ -1,0 +1,16 @@
+{
+  "powers": [
+	"haven:favored_material",
+	"haven:weary_allies",
+	"wich:is_piglin",
+	"wich:is_zombified_piglin",
+	"wich:fire_immunity",
+	"wich:easy_freeze",
+	"extraorigins:soul_spooked",
+	"wich:zombified_piglin_ally",
+	"wich:blood_types/zombified_piglin"
+  ],
+  "icon": "minecraft:piglin_head",
+  "name": "Zombified Piglin",
+  "description": "This little piggy has issues"
+}

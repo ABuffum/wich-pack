@@ -6,8 +6,9 @@
     "wich:flashbanged_immunity",
     "ryft:sun_regen",
     "ryft:sunlight_fists",
-    "ryft:skin_glow_10",
-    "ryft:identified_sounds/dj"
+    "wich:skin_glow_10",
+    "ryft:identified_sounds/dj",
+    "wich:blood_types/none"
   ],
   "name": "Sun Goddess",
   "description": "Light it up!",

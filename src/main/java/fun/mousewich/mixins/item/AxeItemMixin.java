@@ -20,7 +20,7 @@ import java.util.Optional;
 public class AxeItemMixin {
 
 	@Inject(method="getStrippedState", at = @At("HEAD"), cancellable = true)
-	private void getStrippedState(BlockState state, CallbackInfoReturnable<Optional<BlockState>> cir) {
+	private void GetStrippedState(BlockState state, CallbackInfoReturnable<Optional<BlockState>> cir) {
 		Block stripped = StrippedBlockUtil.STRIPPED_BLOCKS.getOrDefault(state.getBlock(), null);
 		if (stripped != null) {
 			BlockState outState = stripped.getDefaultState();

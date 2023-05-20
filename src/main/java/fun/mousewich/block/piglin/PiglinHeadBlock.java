@@ -18,13 +18,15 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-public class PiglinHeadBlock extends BlockWithEntity implements Wearable {
+public class PiglinHeadBlock extends BlockWithEntity implements Wearable, PiglinHeadParent {
 	private static final int MAX_ROTATIONS = 16;
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
-	public PiglinHeadBlock(Settings settings) {
+	private final boolean zombified;
+	public boolean isZombified() { return this.zombified; }
+	public PiglinHeadBlock(Settings settings, boolean zombified) {
 		super(settings);
+		this.zombified = zombified;
 		this.setDefaultState(this.stateManager.getDefaultState().with(Properties.ROTATION, 0));
 	}
 	@Override
@@ -46,14 +48,16 @@ public class PiglinHeadBlock extends BlockWithEntity implements Wearable {
 	}
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) { builder.add(Properties.ROTATION); }
-
 	@Override
-	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) { return new PiglinHeadEntity(pos, state); }
-
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		PiglinHeadEntity entity = new PiglinHeadEntity(pos, state);
+		entity.setZombified(this.zombified);
+		return entity;
+	}
 	@Override
-	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		return world.isClient && ModBase.PIGLIN_HEAD.contains(state.getBlock()) ? checkType(type, ModBase.PIGLIN_HEAD_BLOCK_ENTITY, PiglinHeadEntity::tick) : null;
+		return world.isClient && (ModBase.PIGLIN_HEAD.contains(state.getBlock()) || ModBase.ZOMBIFIED_PIGLIN_HEAD.contains(state.getBlock()))
+				? checkType(type, ModBase.PIGLIN_HEAD_BLOCK_ENTITY, PiglinHeadEntity::tick) : null;
 	}
 	@Override
 	public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) { return false; }

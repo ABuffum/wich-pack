@@ -1,5 +1,6 @@
 package fun.mousewich.block.cryingobsidian;
 
+import fun.mousewich.block.BlockConvertible;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
@@ -12,9 +13,8 @@ import java.util.Random;
 
 public class CryingObsidianSlabBlock extends SlabBlock {
 	private final DefaultParticleType particle;
-	public CryingObsidianSlabBlock(Block block, DefaultParticleType particle) {
-		this(Settings.copy(block), particle);
-	}
+	public CryingObsidianSlabBlock(BlockConvertible block, DefaultParticleType particle) { this(block.asBlock(), particle); }
+	public CryingObsidianSlabBlock(Block block, DefaultParticleType particle) { this(Settings.copy(block), particle); }
 	public CryingObsidianSlabBlock(Settings settings, DefaultParticleType particle) {
 		super(settings);
 		this.particle = particle;
@@ -26,10 +26,10 @@ public class CryingObsidianSlabBlock extends SlabBlock {
 				BlockPos blockPos = pos.offset(direction);
 				BlockState blockState = world.getBlockState(blockPos);
 				if (!state.isOpaque() || !blockState.isSideSolidFullSquare(world, blockPos, direction.getOpposite())) {
-					double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5D + (double)direction.getOffsetX() * 0.6D;
-					double e = direction.getOffsetY() == 0 ? random.nextDouble() : 0.5D + (double)direction.getOffsetY() * 0.6D;
-					double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5D + (double)direction.getOffsetZ() * 0.6D;
-					world.addParticle(particle, (double)pos.getX() + d, (double)pos.getY() + e, (double)pos.getZ() + f, 0.0D, 0.0D, 0.0D);
+					double d = direction.getOffsetX() == 0 ? random.nextDouble() : 0.5 + direction.getOffsetX() * 0.6;
+					double e = direction.getOffsetY() == 0 ? random.nextDouble() : 0.5 + direction.getOffsetY() * 0.6;
+					double f = direction.getOffsetZ() == 0 ? random.nextDouble() : 0.5 + direction.getOffsetZ() * 0.6;
+					world.addParticle(particle, pos.getX() + d, pos.getY() + e, pos.getZ() + f, 0.0, 0.0, 0.0);
 				}
 			}
 		}

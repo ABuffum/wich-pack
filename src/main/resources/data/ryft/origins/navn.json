@@ -8,7 +8,8 @@
 	"origins:aquatic",
 	"origins:conduit_power_on_land",
 	"origins:air_from_potions",
-	"ryft:identified_sounds/navn"
+	"ryft:identified_sounds/navn",
+	"wich:blood_types/fish"
   ],
   "name": "Mer-Navn",
   "description": "LOL + LMAO + Fish Time",

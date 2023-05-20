@@ -22,9 +22,9 @@
   },
   "cooldown": 40,
   "hud_render": {
+	"bar_index": 4,
 	"should_render": true,
 	"sprite_location": "origins:textures/gui/resource_bar.png",
-	"bar_index": 4,
 	"condition": { "value": true, "type": "origins:constant", "inverted": false }
   },
   "hidden": false,

@@ -1,9 +1,9 @@
 package fun.mousewich.mixins.item.farmersdelight;
 
 import com.nhoryzon.mc.farmersdelight.item.KnifeItem;
-import com.nhoryzon.mc.farmersdelight.tag.Tags;
 import fun.mousewich.ModBase;
 import fun.mousewich.block.gourd.CarvableGourdBlock;
+import fun.mousewich.gen.data.tag.ModItemTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CarvedPumpkinBlock;
@@ -30,7 +30,7 @@ public abstract class KnifeItemMixin {
 	public void UseOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
 		World world = context.getWorld();
 		ItemStack tool = context.getStack();
-		if (tool.isIn(Tags.KNIVES)) {
+		if (tool.isIn(ModItemTags.KNIVES)) {
 			BlockPos pos = context.getBlockPos();
 			BlockState state = world.getBlockState(pos);
 			BlockState outState = null;

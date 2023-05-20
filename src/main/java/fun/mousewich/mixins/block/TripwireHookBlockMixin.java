@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(TripwireHookBlock.class)
 public abstract class TripwireHookBlockMixin {
 	@Inject(method="playSound", at = @At("HEAD"))
-	private void playSound(World world, BlockPos pos, boolean attached, boolean on, boolean detached, boolean off, CallbackInfo ci) {
+	private void PlaySound(World world, BlockPos pos, boolean attached, boolean on, boolean detached, boolean off, CallbackInfo ci) {
 		if (on && !off) world.emitGameEvent(null, ModGameEvent.BLOCK_ACTIVATE, pos);
 		else if (!on && off) world.emitGameEvent(null, ModGameEvent.BLOCK_DEACTIVATE, pos);
 	}

@@ -11,9 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PowderKegEntity extends ModTntEntity {
 	public PowderKegEntity(EntityType<? extends Entity> entityType, World world) { this(entityType, world, ModBase.SPRUCE_POWDER_KEG.asBlock()); }
-	public PowderKegEntity(EntityType<? extends Entity> entityType, World world, Block block) {
-		super(entityType, world, block);
-	}
+	public PowderKegEntity(EntityType<? extends Entity> entityType, World world, Block block) { super(entityType, world, block); }
 	public PowderKegEntity(World world, double x, double y, double z, @Nullable LivingEntity igniter, Block block) {
 		super(ModBase.POWDER_KEG_ENTITY, world, x, y, z, igniter, block);
 	}

@@ -8,7 +8,8 @@
 		{
 		  "type": "origins:in_tag",
 		  "tag": "wich:spiders"
-		},{
+		},
+		{
 		  "type": "origins:origin",
 		  "layer": "origins:origin",
 		  "origin": "ryft:kirha"

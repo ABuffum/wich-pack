@@ -4,7 +4,7 @@
       "model": "wich:block/chiseled_prismarine_brick_slab"
     },
     "type=double": {
-      "model": "wich:block/chiseled_prismarine_bricks"
+      "model": "wich:block/chiseled_prismarine"
     },
     "type=top": {
       "model": "wich:block/chiseled_prismarine_brick_slab_top"

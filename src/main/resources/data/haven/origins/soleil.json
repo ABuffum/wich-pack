@@ -9,7 +9,7 @@
 	"origins-classes:sneaky",
 	"haven:blood_types/sugar_water"
   ],
-  "name": "Clown",
   "description": "Often associated with jokes and being so very funny.",
-  "icon": "wich:confetti_cake"
+  "icon": "wich:confetti_cake",
+  "name": "Clown"
 }

@@ -50,43 +50,43 @@ public class BlockContainer implements IBlockItemContainer {
 	}
 
 	//Tags
-	public BlockContainer blockTag(TagKey<Block> tag) { ModDatagen.Cache.Tag.Register(tag, this.block); return this; }
-	public BlockContainer itemTag(TagKey<Item> tag) { ModDatagen.Cache.Tag.Register(tag, this.item); return this; }
+	public BlockContainer blockTag(TagKey<Block> tag) { ModDatagen.Cache.Tags.Register(tag, this.block); return this; }
+	public BlockContainer itemTag(TagKey<Item> tag) { ModDatagen.Cache.Tags.Register(tag, this.item); return this; }
 
 	//<editor-fold desc="Models">
-	public BlockContainer generatedItemModel() { ModDatagen.Cache.Model.GENERATED.add(this.item); return this; }
+	public BlockContainer generatedItemModel() { ModDatagen.Cache.Models.GENERATED.add(this.item); return this; }
 
-	public BlockContainer cubeAllModel() { ModDatagen.Cache.Model.CUBE_ALL.add(this); return this; }
+	public BlockContainer cubeAllModel() { ModDatagen.Cache.Models.CUBE_ALL.add(this); return this; }
 
 	public BlockContainer buttonModel(BlockConvertible base) { return buttonModel(base.asBlock()); }
-	public BlockContainer buttonModel(Block base) { ModDatagen.Cache.Model.BUTTON.add(new Pair<>(this, base)); return this; }
+	public BlockContainer buttonModel(Block base) { ModDatagen.Cache.Models.BUTTON.add(new Pair<>(this, base)); return this; }
 
 	public BlockContainer fenceModel(BlockConvertible base) { return fenceModel(base.asBlock()); }
-	public BlockContainer fenceModel(Block base) { ModDatagen.Cache.Model.FENCE.add(new Pair<>(this, base)); return this; }
+	public BlockContainer fenceModel(Block base) { ModDatagen.Cache.Models.FENCE.add(new Pair<>(this, base)); return this; }
 
 	public BlockContainer fenceGateModel(BlockConvertible base) { return fenceGateModel(base.asBlock()); }
-	public BlockContainer fenceGateModel(Block base) { ModDatagen.Cache.Model.FENCE_GATE.add(new Pair<>(this, base)); return this; }
+	public BlockContainer fenceGateModel(Block base) { ModDatagen.Cache.Models.FENCE_GATE.add(new Pair<>(this, base)); return this; }
 
 	public BlockContainer paneModel(BlockConvertible base) { return paneModel(base.asBlock()); }
-	public BlockContainer paneModel(Block base) { ModDatagen.Cache.Model.PANE.add(new Pair<>(this, base)); return this; }
+	public BlockContainer paneModel(Block base) { ModDatagen.Cache.Models.PANE.add(new Pair<>(this, base)); return this; }
 
 	public BlockContainer slabModel(BlockConvertible base) { return slabModel(base.asBlock()); }
-	public BlockContainer slabModel(Block base) { ModDatagen.Cache.Model.SLAB.add(new Pair<>(this, base)); return this; }
+	public BlockContainer slabModel(Block base) { ModDatagen.Cache.Models.SLAB.add(new Pair<>(this, base)); return this; }
 
 	public BlockContainer stairsModel(BlockConvertible base) { return stairsModel(base.asBlock()); }
-	public BlockContainer stairsModel(Block base) { ModDatagen.Cache.Model.STAIRS.add(new Pair<>(this, base)); return this; }
+	public BlockContainer stairsModel(Block base) { ModDatagen.Cache.Models.STAIRS.add(new Pair<>(this, base)); return this; }
 
-	public BlockContainer trapdoorModel(boolean orientable) { ModDatagen.Cache.Model.TRAPDOOR.add(new Pair<>(this, orientable)); return this; }
+	public BlockContainer trapdoorModel(boolean orientable) { ModDatagen.Cache.Models.TRAPDOOR.add(new Pair<>(this, orientable)); return this; }
 
 	public BlockContainer wallModel(BlockConvertible base) { return wallModel(base.asBlock()); }
-	public BlockContainer wallModel(Block base) { ModDatagen.Cache.Model.WALL.add(new Pair<>(this, base)); return this; }
+	public BlockContainer wallModel(Block base) { ModDatagen.Cache.Models.WALL.add(new Pair<>(this, base)); return this; }
 
 	public BlockContainer weightedPressurePlateModel(BlockConvertible base) { return weightedPressurePlateModel(base.asBlock()); }
-	public BlockContainer weightedPressurePlateModel(Block base) { ModDatagen.Cache.Model.WEIGHTED_PRESSURE_PLATE.add(new Pair<>(this, base)); return this; }
+	public BlockContainer weightedPressurePlateModel(Block base) { ModDatagen.Cache.Models.WEIGHTED_PRESSURE_PLATE.add(new Pair<>(this, base)); return this; }
 
 	//Niche
-	public BlockContainer bambooFenceModel() { ModDatagen.Cache.Model.BAMBOO_FENCE.add(this); return this; }
-	public BlockContainer bambooFenceGateModel() { ModDatagen.Cache.Model.BAMBOO_FENCE_GATE.add(this); return this; }
+	public BlockContainer bambooFenceModel() { ModDatagen.Cache.Models.BAMBOO_FENCE.add(this); return this; }
+	public BlockContainer bambooFenceGateModel() { ModDatagen.Cache.Models.BAMBOO_FENCE_GATE.add(this); return this; }
 	//</editor-fold>
 
 	public BlockContainer drops(DropTable dropTable) {
@@ -98,5 +98,6 @@ public class BlockContainer implements IBlockItemContainer {
 	public BlockContainer dropSelf() { return drops(this.item); }
 	public BlockContainer dropSlabs() { return drops(DropTable.SLAB); }
 	public BlockContainer requireSilkTouch() { return drops(DropTable.WithSilkTouch(this.item)); }
+	public BlockContainer requireSilkTouchSlab() { return drops(DropTable.SILK_TOUCH_SLAB); }
 	public BlockContainer requireSilkTouchOrDrop(Item item) { return drops(DropTable.SilkTouchOrElse(item)); }
 }
