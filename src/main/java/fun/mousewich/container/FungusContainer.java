@@ -1,11 +1,14 @@
 package fun.mousewich.container;
 
 import fun.mousewich.block.basic.ModFungusBlock;
+import fun.mousewich.gen.data.ModDatagen;
 import fun.mousewich.gen.feature.ModConfiguredFeature;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
+import net.minecraft.item.Item;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.tag.TagKey;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
 import java.util.function.Supplier;
@@ -20,4 +23,7 @@ public class FungusContainer extends PottedBlockContainer {
 	public FungusContainer(Supplier<ModConfiguredFeature<HugeFungusFeatureConfig, ?>> fungusGenerator, Block.Settings settings) {
 		super(new ModFungusBlock(settings, fungusGenerator));
 	}
+	//Tags
+	public FungusContainer blockTag(TagKey<Block> tag) { return (FungusContainer)super.blockTag(tag); }
+	public FungusContainer itemTag(TagKey<Item> tag) { return (FungusContainer)super.itemTag(tag); }
 }

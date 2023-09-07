@@ -81,8 +81,8 @@ public class TorchContainer implements IWallBlockItemContainer {
 	}
 
 	public TorchContainer dropSelf() {
-		BlockLootGenerator.Drops.put(this.block, DropTable.Drops(this.item));
-		BlockLootGenerator.Drops.put(this.wallBlock, DropTable.Drops(this.item));
+		ModDatagen.Cache.Drops.put(this.block, DropTable.Drops(this.item));
+		ModDatagen.Cache.Drops.put(this.wallBlock, DropTable.Drops(this.item));
 		return this;
 	}
 }

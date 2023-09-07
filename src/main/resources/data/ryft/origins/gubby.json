@@ -18,11 +18,15 @@
 	"wich:crushing_fall",
 	"wich:warden_neutral",
 	"wich:knockback_immunity",
+	"wich:hunger_immunity",
+	"wich:fire_immunity",
+	"wich:lava_immunity",
+	"wich:drink_blood",
 	"origins-classes:more_attack_damage",
 	"ryft:identified_sounds/gubby",
 	"wich:blood_types/warden"
   ],
   "name": "Warden",
   "description": "The ultimate denizen of the Deep Dark.",
-  "icon": "minecraft:echo_shard"
+  "icon": "minecraft:sculk_catalyst"
 }

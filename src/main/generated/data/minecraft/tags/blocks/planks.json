@@ -1,19 +1,19 @@
 {
   "replace": false,
   "values": [
-    "wich:charred_planks",
-    "minecraft:cherry_planks",
     "minecraft:bamboo_planks",
-    "wich:dogwood_planks",
-    "wich:dried_bamboo_planks",
-    "minecraft:mangrove_planks",
-    "wich:blue_mushroom_planks",
-    "wich:cassia_planks",
     "wich:gilded_planks",
+    "minecraft:mangrove_planks",
+    "wich:charred_planks",
     "wich:sugar_cane_planks",
-    "wich:mushroom_stem_planks",
+    "wich:dried_bamboo_planks",
+    "wich:blue_mushroom_planks",
+    "minecraft:cherry_planks",
+    "wich:brown_mushroom_planks",
+    "wich:cassia_planks",
+    "wich:dogwood_planks",
     "wich:red_mushroom_planks",
     "wich:hay_planks",
-    "wich:brown_mushroom_planks"
+    "wich:mushroom_stem_planks"
   ]
 }

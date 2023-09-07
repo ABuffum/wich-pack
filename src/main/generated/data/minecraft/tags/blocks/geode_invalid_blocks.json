@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "wich:blood_fluid_block",
+    "wich:mud_fluid_block"
+  ]
+}

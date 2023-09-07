@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "berries=false": {
+      "model": "wich:block/grape_vines"
+    },
+    "berries=true": {
+      "model": "wich:block/grape_vines_berried"
+    }
+  }
+}

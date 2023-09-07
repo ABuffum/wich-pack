@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:mushroom_stem_planks"
+    },
+    "S": {
+      "item": "wich:mushroom_stem_slab"
+    }
+  },
+  "result": {
+    "item": "wich:mushroom_stem_barrel"
+  }
+}

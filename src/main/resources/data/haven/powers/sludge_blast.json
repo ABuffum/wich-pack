@@ -10,7 +10,7 @@
   "hidden": true,
   "condition": {
 	"type": "origins:resource",
-	"resource": "havenorigins:sludge_move",
+	"resource": "haven:sludge_move",
 	"comparison": ">=",
 	"compare_to": 159
   }

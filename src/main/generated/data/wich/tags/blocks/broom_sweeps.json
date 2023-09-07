@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:leaves",
-    "wich:hedge_block"
+    "wich:hedge_block",
+    "#minecraft:leaves"
   ]
 }

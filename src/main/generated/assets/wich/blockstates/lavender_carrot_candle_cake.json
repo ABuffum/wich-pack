@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "wich:block/lavender_carrot_candle_cake"
+    },
+    "lit=true": {
+      "model": "wich:block/lavender_carrot_candle_cake_lit"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:dried_bamboo_planks"
+    },
+    "S": {
+      "item": "wich:dried_bamboo_slab"
+    }
+  },
+  "result": {
+    "item": "wich:dried_bamboo_barrel"
+  }
+}

@@ -4,7 +4,6 @@ import fun.mousewich.enchantment.ShieldBreakingEnchantment;
 import fun.mousewich.item.tool.HammerItem;
 import net.minecraft.enchantment.DamageEnchantment;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

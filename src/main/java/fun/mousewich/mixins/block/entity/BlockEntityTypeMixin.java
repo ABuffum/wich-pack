@@ -9,6 +9,7 @@ import fun.mousewich.block.sign.HangingSignBlock;
 import fun.mousewich.block.sign.WallHangingSignBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.SignType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +22,8 @@ public class BlockEntityTypeMixin {
 		Block block = state.getBlock();
 		if (BlockEntityType.SIGN.equals(this)) {
 			if (block instanceof AbstractSignBlock sign) {
-				if (ModBase.SIGN_TYPES.contains(sign.getSignType())) cir.setReturnValue(true);
+				SignType type = sign.getSignType();
+				if (ModBase.SIGN_TYPES.contains(type) || ModBase.HANGING_SIGN_SUBTYPES.containsKey(type)) cir.setReturnValue(true);
 				if (block instanceof HangingSignBlock) cir.setReturnValue(true);
 				if (block instanceof WallHangingSignBlock) cir.setReturnValue(true);
 			}

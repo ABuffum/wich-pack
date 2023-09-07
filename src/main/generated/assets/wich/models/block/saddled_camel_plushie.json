@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/camel",
+  "textures": {
+    "all": "wich:block/saddled_camel_plushie",
+    "particle": "wich:block/saddled_camel_plushie"
+  }
+}

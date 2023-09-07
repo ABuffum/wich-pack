@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "wich:block/pink_allium_seeds"
+      "model": "wich:block/allium_seeds"
     }
   }
 }

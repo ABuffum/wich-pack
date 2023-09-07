@@ -2,6 +2,8 @@ package fun.mousewich.entity.hostile.slime;
 
 import fun.mousewich.entity.ai.goal.slime.*;
 import fun.mousewich.origins.power.MobHostilityPower;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.Goal;
@@ -13,9 +15,7 @@ import net.minecraft.world.World;
 
 public abstract class ModSlimeEntity extends SlimeEntity {
 	protected Goal swimmingGoal;
-	public ModSlimeEntity(EntityType<? extends SlimeEntity> entityType, World world) {
-		super(entityType, world);
-	}
+	public ModSlimeEntity(EntityType<? extends SlimeEntity> entityType, World world) { super(entityType, world); }
 
 	@Override
 	protected void initGoals() {

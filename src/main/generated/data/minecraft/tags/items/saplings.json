@@ -1,9 +1,10 @@
 {
   "replace": false,
   "values": [
-    "wich:dogwood_sapling",
+    "minecraft:mangrove_propagule",
     "wich:cassia_sapling",
+    "wich:dogwood_sapling",
     "minecraft:cherry_sapling",
-    "minecraft:mangrove_propagule"
+    "wich:grape_sapling"
   ]
 }

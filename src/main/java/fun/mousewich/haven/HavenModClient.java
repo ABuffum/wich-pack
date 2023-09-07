@@ -17,12 +17,8 @@ import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.BatEntityRenderer;
-import net.minecraft.nbt.NbtCompound;
 
-import static fun.mousewich.ModBase.*;
-import static fun.mousewich.ModBase.FLEECE_HORSE_ARMOR;
 import static fun.mousewich.ModClient.*;
-
 import static fun.mousewich.haven.HavenMod.*;
 
 public class HavenModClient {
@@ -37,7 +33,7 @@ public class HavenModClient {
 				DECORATIVE_DARK_OAK_SAPLING, DECORATIVE_JUNGLE_SAPLING,
 				DECORATIVE_OAK_SAPLING, DECORATIVE_SPRUCE_SAPLING,
 				DECORATIVE_CHERRY_SAPLING,
-				DECORATIVE_CASSIA_SAPLING, DECORATIVE_DOGWOOD_SAPLING,
+				DECORATIVE_CASSIA_SAPLING, DECORATIVE_DOGWOOD_SAPLING, DECORATIVE_GRAPE_SAPLING,
 				DECORATIVE_BEETROOTS, DECORATIVE_CARROTS,
 				DECORATIVE_POTATOES, DECORATIVE_WHEAT,
 				DECORATIVE_CABBAGES, DECORATIVE_ONIONS);

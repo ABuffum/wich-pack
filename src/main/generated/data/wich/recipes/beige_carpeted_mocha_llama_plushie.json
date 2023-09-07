@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:mocha_llama_plushie"
+    },
+    {
+      "item": "wich:beige_dye"
+    }
+  ],
+  "result": {
+    "item": "wich:beige_carpeted_mocha_llama_plushie"
+  }
+}

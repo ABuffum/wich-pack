@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "|"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:ink_sac"
+    },
+    "|": {
+      "item": "wich:cassia_log"
+    }
+  },
+  "result": {
+    "item": "wich:underwater_cassia_torch",
+    "count": 8
+  }
+}

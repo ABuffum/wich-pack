@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:gilded_wart_block"
+    }
+  ],
+  "result": {
+    "item": "wich:gilded_wart",
+    "count": 9
+  }
+}

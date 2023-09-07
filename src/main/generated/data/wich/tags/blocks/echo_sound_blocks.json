@@ -1,18 +1,18 @@
 {
   "replace": false,
   "values": [
-    "wich:budding_echo",
     "wich:echo_block",
-    "wich:echo_slab",
-    "wich:echo_stairs",
-    "wich:echo_wall",
     "wich:echo_bricks",
-    "wich:echo_brick_slab",
-    "wich:echo_brick_stairs",
-    "wich:echo_brick_wall",
     "wich:echo_crystal_block",
     "wich:echo_crystal_slab",
+    "wich:echo_crystal_wall",
+    "wich:echo_brick_stairs",
     "wich:echo_crystal_stairs",
-    "wich:echo_crystal_wall"
+    "wich:echo_brick_wall",
+    "wich:echo_brick_slab",
+    "wich:budding_echo",
+    "wich:echo_stairs",
+    "wich:echo_wall",
+    "wich:echo_slab"
   ]
 }

@@ -2,8 +2,8 @@
   "replace": false,
   "values": [
     "wich:charred_log",
+    "wich:stripped_charred_wood",
     "wich:charred_wood",
-    "wich:stripped_charred_log",
-    "wich:stripped_charred_wood"
+    "wich:stripped_charred_log"
   ]
 }

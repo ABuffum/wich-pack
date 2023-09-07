@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/red_sandy_cassia_slab"
+    },
+    "type=double": {
+      "model": "wich:block/red_sandy_cassia_planks"
+    },
+    "type=top": {
+      "model": "wich:block/red_sandy_cassia_slab_top"
+    }
+  }
+}

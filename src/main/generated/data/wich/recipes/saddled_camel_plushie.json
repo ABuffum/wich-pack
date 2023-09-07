@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:camel_plushie"
+    },
+    {
+      "item": "minecraft:saddle"
+    }
+  ],
+  "result": {
+    "item": "wich:saddled_camel_plushie"
+  }
+}

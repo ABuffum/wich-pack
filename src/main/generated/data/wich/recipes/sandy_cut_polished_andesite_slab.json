@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "wich:cut_polished_andesite_slab"
+    }
+  ],
+  "result": {
+    "item": "wich:sandy_cut_polished_andesite_slab"
+  }
+}

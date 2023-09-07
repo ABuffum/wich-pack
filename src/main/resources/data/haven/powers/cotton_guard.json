@@ -25,6 +25,26 @@
 			"value": 1
 		}
 	},
+	"shears": {
+		"type": "origins:modify_damage_taken",
+		"damage_condition": {
+			"type": "origins:attacker",
+			"entity_condition": {
+			"type": "origins:equipped_item",
+			"equipment_slot": "mainhand",
+			"item_condition": {
+				"type": "origins:ingredient",
+				"ingredient": {
+				"tag": "c:tools/shears"
+				}
+			}
+		}
+	},
+	"modifier": {
+		"operation": "multiply_total",
+		"value": 1
+	}
+	},
 	"name": "Cotton Guard",
-	"description": "Your unique body renders you immune to fall damage and slightly increases your armor, but makes you more vulnerable to fire."
+	"description": "Your unique body renders you immune to fall damage and slightly increases your armor, but makes you more vulnerable to fire and shears."
 }

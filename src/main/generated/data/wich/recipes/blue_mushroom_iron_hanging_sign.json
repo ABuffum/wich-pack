@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "| |",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:blue_mushroom_block"
+    },
+    "|": {
+      "item": "wich:iron_chain"
+    }
+  },
+  "result": {
+    "item": "wich:blue_mushroom_iron_hanging_sign"
+  }
+}

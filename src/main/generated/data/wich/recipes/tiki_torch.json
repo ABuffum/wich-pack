@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:torch"
+    }
+  },
+  "result": {
+    "item": "wich:tiki_torch"
+  }
+}

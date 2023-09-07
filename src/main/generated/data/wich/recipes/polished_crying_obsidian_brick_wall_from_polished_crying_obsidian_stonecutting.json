@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:polished_crying_obsidian"
+  },
+  "result": "wich:polished_crying_obsidian_brick_wall",
+  "count": 1
+}

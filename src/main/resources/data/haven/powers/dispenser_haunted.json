@@ -7,7 +7,7 @@
   "interval": 22,
   "condition": {
 	"type": "origins:power_active",
-	"power": "havenorigins:dispenser_haunted_toggle"
+	"power": "haven:dispenser_haunted_toggle"
   },
   "name": "Haunted",
   "description": "Tick. Tick. Tick. Tick."

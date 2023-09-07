@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_magma_cube_lantern",
+  "textures": {
+    "texture": "wich:block/magma_cube_lantern"
+  }
+}

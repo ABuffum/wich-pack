@@ -32,9 +32,8 @@ import java.util.List;
 import java.util.Map;
 
 import static fun.mousewich.ModBase.*;
-import static fun.mousewich.ModBase.STRIPPED_GILDED_STEM;
-import static fun.mousewich.ModFactory.MakeMooblossomFlower;
-
+import static fun.mousewich.registry.ModBambooRegistry.*;
+import static fun.mousewich.registry.ModCopperRegistry.*;
 public class ModelGenerator extends FabricModelProvider {
 	public ModelGenerator(FabricDataGenerator dataGenerator) { super(dataGenerator); }
 	public static Identifier prefixPath(Identifier id, String prefix) { return new Identifier(id.getNamespace(), prefix + id.getPath()); }
@@ -85,20 +84,20 @@ public class ModelGenerator extends FabricModelProvider {
 	}
 	public static void handheldItemModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) { handheldItemModel(bsmg, container.asItem(), container.asBlock()); }
 	public static void handheldItemModel(BlockStateModelGenerator bsmg, Item item, Block block) {
-		net.minecraft.data.client.Models.HANDHELD.upload(ModelIds.getItemModelId(item), TextureMap.layer0(block), bsmg.modelCollector);
+		Models.HANDHELD.upload(ModelIds.getItemModelId(item), TextureMap.layer0(block), bsmg.modelCollector);
 	}
 	public static void handheldItemModel(BlockStateModelGenerator bsmg, Item item) {
-		net.minecraft.data.client.Models.HANDHELD.upload(ModelIds.getItemModelId(item), TextureMap.layer0(item), bsmg.modelCollector);
+		Models.HANDHELD.upload(ModelIds.getItemModelId(item), TextureMap.layer0(item), bsmg.modelCollector);
 	}
 	public static void generatedItemModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) { generatedItemModel(bsmg, container.asItem(), container.asBlock()); }
 	public static void generatedItemModel(BlockStateModelGenerator bsmg, Item item, Block block) {
-		net.minecraft.data.client.Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(block), bsmg.modelCollector);
+		Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(block), bsmg.modelCollector);
 	}
 	public static void generatedItemModel(BlockStateModelGenerator bsmg, Item item) {
-		net.minecraft.data.client.Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(item), bsmg.modelCollector);
+		Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(item), bsmg.modelCollector);
 	}
 	public static void generatedItemModel(BlockStateModelGenerator bsmg, Item item, Identifier identifier) {
-		net.minecraft.data.client.Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(identifier), bsmg.modelCollector);
+		Models.GENERATED.upload(ModelIds.getItemModelId(item), TextureMap.layer0(identifier), bsmg.modelCollector);
 	}
 	public static void generatedItemModels(BlockStateModelGenerator bsmg, ItemConvertible... items) {
 		for (ItemConvertible item : items) generatedItemModel(bsmg, item.asItem());
@@ -110,21 +109,21 @@ public class ModelGenerator extends FabricModelProvider {
 		if (log != null) {
 			Block logBlock = log.asBlock();
 			textures = TextureMap.sideAndEndForTop(logBlock);
-			Identifier identifier = net.minecraft.data.client.Models.CUBE_COLUMN.upload(logBlock, textures, bsmg.modelCollector);
-			Identifier identifier2 = net.minecraft.data.client.Models.CUBE_COLUMN_HORIZONTAL.upload(logBlock, textures, bsmg.modelCollector);
+			Identifier identifier = Models.CUBE_COLUMN.upload(logBlock, textures, bsmg.modelCollector);
+			Identifier identifier2 = Models.CUBE_COLUMN_HORIZONTAL.upload(logBlock, textures, bsmg.modelCollector);
 			bsmg.blockStateCollector.accept(BlockStateModelGenerator.createAxisRotatedBlockState(logBlock, identifier, identifier2));
 			parentedItem(bsmg, log.asItem(), logBlock);
 		}
 		else {
 			Block stemBlock = stem.asBlock();
 			textures = TextureMap.sideAndEndForTop(stemBlock);
-			Identifier identifier = net.minecraft.data.client.Models.CUBE_COLUMN.upload(stemBlock, textures, bsmg.modelCollector);
+			Identifier identifier = Models.CUBE_COLUMN.upload(stemBlock, textures, bsmg.modelCollector);
 			bsmg.blockStateCollector.accept(BlockStateModelGenerator.createAxisRotatedBlockState(stemBlock, identifier));
 			parentedItem(bsmg, stem.asItem(), stemBlock);
 		}
 		Block woodBlock = wood.asBlock();
 		TextureMap textureMap = textures.copyAndAdd(TextureKey.END, textures.getTexture(TextureKey.SIDE));
-		Identifier identifier3 = net.minecraft.data.client.Models.CUBE_COLUMN.upload(woodBlock, textureMap, bsmg.modelCollector);
+		Identifier identifier3 = Models.CUBE_COLUMN.upload(woodBlock, textureMap, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createAxisRotatedBlockState(woodBlock, identifier3));
 		parentedItem(bsmg, wood.asItem(), woodBlock);
 	}
@@ -134,7 +133,7 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void pillarModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
 		Block block = container.asBlock();
 		TextureMap textures = TextureMap.of(TextureKey.SIDE, TextureMap.getId(block)).put(TextureKey.END, TextureMap.getSubId(block, "_top"));
-		Identifier model = net.minecraft.data.client.Models.CUBE_COLUMN.upload(block, textures, bsmg.modelCollector);
+		Identifier model = Models.CUBE_COLUMN.upload(block, textures, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createAxisRotatedBlockState(block, model));
 		parentedItem(bsmg, container.asItem(), block);
 	}
@@ -142,7 +141,7 @@ public class ModelGenerator extends FabricModelProvider {
 		Block block = container.asBlock();
 		Identifier modelId = getBlockModelId(block);
 		TextureMap textures = TextureMap.of(TextureKey.SIDE, modelId).put(TextureKey.END, TextureMap.getSubId(block, "_top"));
-		Identifier model = net.minecraft.data.client.Models.CUBE_COLUMN.upload(block, textures, bsmg.modelCollector);
+		Identifier model = Models.CUBE_COLUMN.upload(block, textures, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithTwoModelAndRandomInversion(block, modelId, model).coordinate(BlockStateModelGenerator.createAxisRotatedVariantMap()));
 		parentedItem(bsmg, container.asItem(), block);
 	}
@@ -154,7 +153,7 @@ public class ModelGenerator extends FabricModelProvider {
 				.put(TextureKey.BOTTOM, bottom)
 				.put(TextureKey.TOP, TextureMap.getId(top))
 				.put(TextureKey.SIDE, TextureMap.getSubId(block, "_side"));
-		Identifier model = net.minecraft.data.client.Models.CUBE_BOTTOM_TOP.upload(block, textureMap, bsmg.modelCollector);
+		Identifier model = Models.CUBE_BOTTOM_TOP.upload(block, textureMap, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createBlockStateWithTwoModelAndRandomInversion(block, modelId, model).coordinate(BlockStateModelGenerator.createAxisRotatedVariantMap()));
 		parentedItem(bsmg, container.asItem(), block);
 	}
@@ -164,7 +163,7 @@ public class ModelGenerator extends FabricModelProvider {
 				.put(TextureKey.BOTTOM, bottom)
 				.put(TextureKey.TOP, top)
 				.put(TextureKey.SIDE, TextureMap.getSubId(block, "_side"));
-		Identifier model = net.minecraft.data.client.Models.CUBE_BOTTOM_TOP.upload(block, textureMap, bsmg.modelCollector);
+		Identifier model = Models.CUBE_BOTTOM_TOP.upload(block, textureMap, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
 				.coordinate(BlockStateVariantMap.create(Properties.FACING)
 						.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.MODEL, model)
@@ -191,15 +190,15 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void tallFlowerModel(BlockStateModelGenerator bsmg, TallBlockContainer flower) {
 		Block doubleBlock = flower.asBlock();
 		bsmg.registerItemModel(doubleBlock, "_top");
-		Identifier identifier = bsmg.createSubModel(doubleBlock, "_top", net.minecraft.data.client.Models.CROSS, TextureMap::cross);
-		Identifier identifier2 = bsmg.createSubModel(doubleBlock, "_bottom", net.minecraft.data.client.Models.CROSS, TextureMap::cross);
+		Identifier identifier = bsmg.createSubModel(doubleBlock, "_top", Models.CROSS, TextureMap::cross);
+		Identifier identifier2 = bsmg.createSubModel(doubleBlock, "_bottom", Models.CROSS, TextureMap::cross);
 		bsmg.registerDoubleBlock(doubleBlock, identifier, identifier2);
 	}
 	public static void tallFlowerModel(BlockStateModelGenerator bsmg, TallBlockContainer flower, Block topModel, Identifier bottomModel) {
 		generatedItemModel(bsmg, flower.asItem(), topModel);
 		Block doubleBlock = flower.asBlock();
-		Identifier identifier = net.minecraft.data.client.Models.CROSS.upload(doubleBlock, "_top", TextureMap.cross(topModel), bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.CROSS.upload(doubleBlock, "_bottom", TextureMap.cross(bottomModel), bsmg.modelCollector);
+		Identifier identifier = Models.CROSS.upload(doubleBlock, "_top", TextureMap.cross(topModel), bsmg.modelCollector);
+		Identifier identifier2 = Models.CROSS.upload(doubleBlock, "_bottom", TextureMap.cross(bottomModel), bsmg.modelCollector);
 		bsmg.registerDoubleBlock(doubleBlock, identifier, identifier2);
 	}
 	public static void amethystModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
@@ -207,9 +206,14 @@ public class ModelGenerator extends FabricModelProvider {
 		bsmg.registerAmethyst(block);
 		generatedItemModel(bsmg, container.asItem(), block);
 	}
-	public static void flowerPartModels(BlockStateModelGenerator bsmg, Identifier seeds, FlowerPartContainer... containers) {
-		net.minecraft.data.client.Models.GENERATED.upload(seeds, TextureMap.layer0(seeds), bsmg.modelCollector);
-		for (FlowerPartContainer container : containers) flowerPartModel(bsmg, seeds, container);
+	public static void flowerPartModels(BlockStateModelGenerator bsmg, Identifier seedsItem, Identifier seedsBlock, FlowerPartContainer... containers) {
+		Models.GENERATED.upload(seedsItem, TextureMap.layer0(seedsItem), bsmg.modelCollector);
+		Identifier blockIdentifier = Models.CROSS.upload(seedsBlock, TextureMap.cross(seedsBlock), bsmg.modelCollector);
+		for (FlowerPartContainer container : containers) {
+			flowerPartModelCommon(bsmg, container, blockIdentifier);
+			Item item = container.asItem();
+			if (!getItemModelId(item).equals(seedsItem)) parentedItem(bsmg, container.asItem(), seedsItem);
+		}
 	}
 	public static void flowerPartModelCommon(BlockStateModelGenerator bsmg, FlowerPartContainer container, Identifier identifier) {
 		Block block = container.asBlock();
@@ -218,32 +222,22 @@ public class ModelGenerator extends FabricModelProvider {
 	}
 	public static void flowerPartModelCommon(BlockStateModelGenerator bsmg, FlowerPartContainer container) {
 		Block block = container.asBlock();
-		Identifier identifier = net.minecraft.data.client.Models.CROSS.upload(block, TextureMap.cross(block), bsmg.modelCollector);
-		flowerPartModelCommon(bsmg, container, identifier);
-	}
-	public static void flowerPartModelSeeds(BlockStateModelGenerator bsmg, FlowerPartContainer container, Identifier seeds) {
-		Block block = container.asBlock();
-		Identifier identifier = net.minecraft.data.client.Models.CROSS.upload(block, TextureMap.cross(seeds), bsmg.modelCollector);
+		Identifier identifier = Models.CROSS.upload(block, TextureMap.cross(block), bsmg.modelCollector);
 		flowerPartModelCommon(bsmg, container, identifier);
 	}
 	public static void flowerPartModel(BlockStateModelGenerator bsmg, FlowerPartContainer container) {
 		flowerPartModelCommon(bsmg, container);
 		generatedItemModel(bsmg, container.asItem());
 	}
-	public static void flowerPartModel(BlockStateModelGenerator bsmg, Identifier seeds, FlowerPartContainer container) {
-		flowerPartModelSeeds(bsmg, container, seeds);
-		Item item = container.asItem();
-		if (!getItemModelId(item).equals(seeds)) parentedItem(bsmg, container.asItem(), seeds);
-	}
 	public static void crossModel(BlockStateModelGenerator bsmg, Block block) { crossModel(bsmg, TextureMap.cross(block), block); }
 	public static void crossModel(BlockStateModelGenerator bsmg, TextureMap cross, Block block) {
 		bsmg.registerItemModel(block);
-		Identifier identifier = net.minecraft.data.client.Models.CROSS.upload(block, cross, bsmg.modelCollector);
+		Identifier identifier = Models.CROSS.upload(block, cross, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier));
 	}
 	public static void potModel(BlockStateModelGenerator bsmg, PottedBlockContainer container) { potModel(bsmg, TextureMap.plant(container.asBlock()), container.getPottedBlock()); }
 	public static void potModel(BlockStateModelGenerator bsmg, TextureMap pottedCross, Block potted) {
-		Identifier identifier2 = net.minecraft.data.client.Models.FLOWER_POT_CROSS.upload(potted, pottedCross, bsmg.modelCollector);
+		Identifier identifier2 = Models.FLOWER_POT_CROSS.upload(potted, pottedCross, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(potted, identifier2));
 	}
 	private static void pottedModelCommon(BlockStateModelGenerator bsmg, TextureMap cross, TextureMap pottedCross, PottedBlockContainer container) {
@@ -261,12 +255,12 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void paneModel(BlockStateModelGenerator bsmg, IBlockItemContainer pane, Block baseBlock) {
 		Block paneBlock = pane.asBlock();
 		TextureMap textureMap = TextureMap.paneAndTopForEdge(baseBlock, paneBlock);
-		Identifier identifier = net.minecraft.data.client.Models.TEMPLATE_GLASS_PANE_POST.upload(paneBlock, textureMap, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.TEMPLATE_GLASS_PANE_SIDE.upload(paneBlock, textureMap, bsmg.modelCollector);
-		Identifier identifier3 = net.minecraft.data.client.Models.TEMPLATE_GLASS_PANE_SIDE_ALT.upload(paneBlock, textureMap, bsmg.modelCollector);
-		Identifier identifier4 = net.minecraft.data.client.Models.TEMPLATE_GLASS_PANE_NOSIDE.upload(paneBlock, textureMap, bsmg.modelCollector);
-		Identifier identifier5 = net.minecraft.data.client.Models.TEMPLATE_GLASS_PANE_NOSIDE_ALT.upload(paneBlock, textureMap, bsmg.modelCollector);
-		net.minecraft.data.client.Models.GENERATED.upload(getItemModelId(pane.asItem()), TextureMap.layer0(baseBlock), bsmg.modelCollector);
+		Identifier identifier = Models.TEMPLATE_GLASS_PANE_POST.upload(paneBlock, textureMap, bsmg.modelCollector);
+		Identifier identifier2 = Models.TEMPLATE_GLASS_PANE_SIDE.upload(paneBlock, textureMap, bsmg.modelCollector);
+		Identifier identifier3 = Models.TEMPLATE_GLASS_PANE_SIDE_ALT.upload(paneBlock, textureMap, bsmg.modelCollector);
+		Identifier identifier4 = Models.TEMPLATE_GLASS_PANE_NOSIDE.upload(paneBlock, textureMap, bsmg.modelCollector);
+		Identifier identifier5 = Models.TEMPLATE_GLASS_PANE_NOSIDE_ALT.upload(paneBlock, textureMap, bsmg.modelCollector);
+		Models.GENERATED.upload(getItemModelId(pane.asItem()), TextureMap.layer0(baseBlock), bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(MultipartBlockStateSupplier.create(paneBlock).with(BlockStateVariant.create().put(VariantSettings.MODEL, identifier)).with(When.create().set(Properties.NORTH, true), BlockStateVariant.create().put(VariantSettings.MODEL, identifier2)).with(When.create().set(Properties.EAST, true), BlockStateVariant.create().put(VariantSettings.MODEL, identifier2).put(VariantSettings.Y, VariantSettings.Rotation.R90)).with(When.create().set(Properties.SOUTH, true), BlockStateVariant.create().put(VariantSettings.MODEL, identifier3)).with(When.create().set(Properties.WEST, true), BlockStateVariant.create().put(VariantSettings.MODEL, identifier3).put(VariantSettings.Y, VariantSettings.Rotation.R90)).with(When.create().set(Properties.NORTH, false), BlockStateVariant.create().put(VariantSettings.MODEL, identifier4)).with(When.create().set(Properties.EAST, false), BlockStateVariant.create().put(VariantSettings.MODEL, identifier5)).with(When.create().set(Properties.SOUTH, false), BlockStateVariant.create().put(VariantSettings.MODEL, identifier5).put(VariantSettings.Y, VariantSettings.Rotation.R90)).with(When.create().set(Properties.WEST, false), BlockStateVariant.create().put(VariantSettings.MODEL, identifier4).put(VariantSettings.Y, VariantSettings.Rotation.R270)));
 	}
 	private static void slabModelCommon(BlockStateModelGenerator bsmg, IBlockItemContainer container, Identifier slab, Identifier slabTop, Block baseBlock) { slabModelCommon(bsmg, container, slab, slabTop, getBlockModelId(baseBlock)); }
@@ -277,8 +271,8 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void slabModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, IBlockItemContainer baseBlock) { slabModel(bsmg, container, baseBlock.asBlock()); }
 	public static void slabModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock, TextureMap textures) {
 		Block block = container.asBlock();
-		Identifier identifier = net.minecraft.data.client.Models.SLAB.upload(block, textures, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.SLAB_TOP.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier = Models.SLAB.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier2 = Models.SLAB_TOP.upload(block, textures, bsmg.modelCollector);
 		slabModelCommon(bsmg, container, identifier, identifier2, baseBlock);
 	}
 	public static void slabModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock) { slabModel(bsmg, container, baseBlock, TextureMap.all(baseBlock)); }
@@ -305,8 +299,8 @@ public class ModelGenerator extends FabricModelProvider {
 	private void glassSlabModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock) {
 		Block block = container.asBlock();
 		TextureMap textures = TextureMap.sideEnd(TextureMap.getSubId(block, "_side"), TextureMap.getId(baseBlock));
-		Identifier identifier = net.minecraft.data.client.Models.SLAB.upload(block, textures, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.SLAB_TOP.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier = Models.SLAB.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier2 = Models.SLAB_TOP.upload(block, textures, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSlabBlockState(block, identifier, identifier2, getBlockModelId(baseBlock)));
 		parentedItem(bsmg, container.asItem(), identifier);
 	}
@@ -317,9 +311,9 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void stairsModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock) {
 		Block block = container.asBlock();
 		TextureMap textures = TextureMap.all(baseBlock);
-		Identifier inner = net.minecraft.data.client.Models.INNER_STAIRS.upload(block, textures, bsmg.modelCollector);
-		Identifier stairs = net.minecraft.data.client.Models.STAIRS.upload(block, textures, bsmg.modelCollector);
-		Identifier outer = net.minecraft.data.client.Models.OUTER_STAIRS.upload(block, textures, bsmg.modelCollector);
+		Identifier inner = Models.INNER_STAIRS.upload(block, textures, bsmg.modelCollector);
+		Identifier stairs = Models.STAIRS.upload(block, textures, bsmg.modelCollector);
+		Identifier outer = Models.OUTER_STAIRS.upload(block, textures, bsmg.modelCollector);
 		stairsModelCommon(bsmg, container, inner, stairs, outer);
 	}
 	public static void copiedStairsModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, IBlockItemContainer copy) {
@@ -338,10 +332,10 @@ public class ModelGenerator extends FabricModelProvider {
 	}
 	public static void wallModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, TextureMap textures) {
 		Block block = container.asBlock();
-		Identifier post = net.minecraft.data.client.Models.TEMPLATE_WALL_POST.upload(block, textures, bsmg.modelCollector);
-		Identifier side = net.minecraft.data.client.Models.TEMPLATE_WALL_SIDE.upload(block, textures, bsmg.modelCollector);
-		Identifier sideTall = net.minecraft.data.client.Models.TEMPLATE_WALL_SIDE_TALL.upload(block, textures, bsmg.modelCollector);
-		Identifier inventory = net.minecraft.data.client.Models.WALL_INVENTORY.upload(block, textures, bsmg.modelCollector);
+		Identifier post = Models.TEMPLATE_WALL_POST.upload(block, textures, bsmg.modelCollector);
+		Identifier side = Models.TEMPLATE_WALL_SIDE.upload(block, textures, bsmg.modelCollector);
+		Identifier sideTall = Models.TEMPLATE_WALL_SIDE_TALL.upload(block, textures, bsmg.modelCollector);
+		Identifier inventory = Models.WALL_INVENTORY.upload(block, textures, bsmg.modelCollector);
 		wallModelCommon(bsmg, container, post, side, sideTall, inventory);
 	}
 	public static void copiedWallModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, IBlockItemContainer copy) {
@@ -356,10 +350,10 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void doorModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
 		Block block = container.asBlock();
 		TextureMap textureMap = TextureMap.topBottom(block);
-		Identifier identifier = net.minecraft.data.client.Models.DOOR_BOTTOM.upload(block, textureMap, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.DOOR_BOTTOM_RH.upload(block, textureMap, bsmg.modelCollector);
-		Identifier identifier3 = net.minecraft.data.client.Models.DOOR_TOP.upload(block, textureMap, bsmg.modelCollector);
-		Identifier identifier4 = net.minecraft.data.client.Models.DOOR_TOP_RH.upload(block, textureMap, bsmg.modelCollector);
+		Identifier identifier = Models.DOOR_BOTTOM.upload(block, textureMap, bsmg.modelCollector);
+		Identifier identifier2 = Models.DOOR_BOTTOM_RH.upload(block, textureMap, bsmg.modelCollector);
+		Identifier identifier3 = Models.DOOR_TOP.upload(block, textureMap, bsmg.modelCollector);
+		Identifier identifier4 = Models.DOOR_TOP_RH.upload(block, textureMap, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createDoorBlockState(block, identifier, identifier2, identifier3, identifier4));
 		generatedItemModel(bsmg, container.asItem());
 	}
@@ -368,15 +362,15 @@ public class ModelGenerator extends FabricModelProvider {
 		TextureMap textureMap = TextureMap.texture(block);
 		Identifier identifier2;
 		if (orientable) {
-			Identifier identifier = net.minecraft.data.client.Models.TEMPLATE_ORIENTABLE_TRAPDOOR_TOP.upload(block, textureMap, bsmg.modelCollector);
-			identifier2 = net.minecraft.data.client.Models.TEMPLATE_ORIENTABLE_TRAPDOOR_BOTTOM.upload(block, textureMap, bsmg.modelCollector);
-			Identifier identifier3 = net.minecraft.data.client.Models.TEMPLATE_ORIENTABLE_TRAPDOOR_OPEN.upload(block, textureMap, bsmg.modelCollector);
+			Identifier identifier = Models.TEMPLATE_ORIENTABLE_TRAPDOOR_TOP.upload(block, textureMap, bsmg.modelCollector);
+			identifier2 = Models.TEMPLATE_ORIENTABLE_TRAPDOOR_BOTTOM.upload(block, textureMap, bsmg.modelCollector);
+			Identifier identifier3 = Models.TEMPLATE_ORIENTABLE_TRAPDOOR_OPEN.upload(block, textureMap, bsmg.modelCollector);
 			bsmg.blockStateCollector.accept(BlockStateModelGenerator.createOrientableTrapdoorBlockState(block, identifier, identifier2, identifier3));
 		}
 		else {
-			Identifier identifier = net.minecraft.data.client.Models.TEMPLATE_TRAPDOOR_TOP.upload(block, textureMap, bsmg.modelCollector);
-			identifier2 = net.minecraft.data.client.Models.TEMPLATE_TRAPDOOR_BOTTOM.upload(block, textureMap, bsmg.modelCollector);
-			Identifier identifier3 = net.minecraft.data.client.Models.TEMPLATE_TRAPDOOR_OPEN.upload(block, textureMap, bsmg.modelCollector);
+			Identifier identifier = Models.TEMPLATE_TRAPDOOR_TOP.upload(block, textureMap, bsmg.modelCollector);
+			identifier2 = Models.TEMPLATE_TRAPDOOR_BOTTOM.upload(block, textureMap, bsmg.modelCollector);
+			Identifier identifier3 = Models.TEMPLATE_TRAPDOOR_OPEN.upload(block, textureMap, bsmg.modelCollector);
 			bsmg.blockStateCollector.accept(BlockStateModelGenerator.createTrapdoorBlockState(block, identifier, identifier2, identifier3));
 		}
 		parentedItem(bsmg, container.asItem(), identifier2);
@@ -423,9 +417,9 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void buttonModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock) {
 		Block block = container.asBlock();
 		TextureMap textures = TextureMap.all(baseBlock);
-		Identifier unpressed = net.minecraft.data.client.Models.BUTTON.upload(block, textures, bsmg.modelCollector);
-		Identifier pressed = net.minecraft.data.client.Models.BUTTON_PRESSED.upload(block, textures, bsmg.modelCollector);
-		Identifier inventory = net.minecraft.data.client.Models.BUTTON_INVENTORY.upload(block, textures, bsmg.modelCollector);
+		Identifier unpressed = Models.BUTTON.upload(block, textures, bsmg.modelCollector);
+		Identifier pressed = Models.BUTTON_PRESSED.upload(block, textures, bsmg.modelCollector);
+		Identifier inventory = Models.BUTTON_INVENTORY.upload(block, textures, bsmg.modelCollector);
 		buttonModel(bsmg, container, unpressed, pressed, inventory);
 	}
 	public static void copiedButtonModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, IBlockItemContainer copy) {
@@ -451,12 +445,12 @@ public class ModelGenerator extends FabricModelProvider {
 						.put(VariantSettings.UVLOCK, true))
 				.with(When.create().set(Properties.EAST, true), BlockStateVariant.create()
 						.put(VariantSettings.MODEL, identifier3)
-						.put(VariantSettings.Y, VariantSettings.Rotation.R90).put(VariantSettings.UVLOCK, true))
+						.put(VariantSettings.UVLOCK, true))
 				.with(When.create().set(Properties.SOUTH, true), BlockStateVariant.create()
-						.put(VariantSettings.MODEL, identifier4).put(VariantSettings.Y, VariantSettings.Rotation.R180)
+						.put(VariantSettings.MODEL, identifier4)
 						.put(VariantSettings.UVLOCK, true))
 				.with(When.create().set(Properties.WEST, true), BlockStateVariant.create()
-						.put(VariantSettings.MODEL, identifier5).put(VariantSettings.Y, VariantSettings.Rotation.R270)
+						.put(VariantSettings.MODEL, identifier5)
 						.put(VariantSettings.UVLOCK, true)));
 		parentedItem(bsmg, container.asItem(), ModModels.CUSTOM_FENCE_INVENTORY.upload(block, textures, bsmg.modelCollector));
 	}
@@ -476,27 +470,27 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void fenceModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock) {
 		Block block = container.asBlock();
 		TextureMap textures = TextureMap.all(baseBlock);
-		Identifier identifier = net.minecraft.data.client.Models.FENCE_POST.upload(block, textures, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.FENCE_SIDE.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier = Models.FENCE_POST.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier2 = Models.FENCE_SIDE.upload(block, textures, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createFenceBlockState(block, identifier, identifier2));
-		parentedItem(bsmg, container.asItem(), net.minecraft.data.client.Models.FENCE_INVENTORY.upload(block, textures, bsmg.modelCollector));
+		parentedItem(bsmg, container.asItem(), Models.FENCE_INVENTORY.upload(block, textures, bsmg.modelCollector));
 	}
 	public static void fenceGateModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, IBlockItemContainer baseBlock) { fenceGateModel(bsmg, container, baseBlock.asBlock()); }
 	public static void fenceGateModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock) {
 		Block block = container.asBlock();
 		TextureMap textures = TextureMap.all(baseBlock);
-		Identifier identifier = net.minecraft.data.client.Models.TEMPLATE_FENCE_GATE_OPEN.upload(block, textures, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.TEMPLATE_FENCE_GATE.upload(block, textures, bsmg.modelCollector);
-		Identifier identifier3 = net.minecraft.data.client.Models.TEMPLATE_FENCE_GATE_WALL_OPEN.upload(block, textures, bsmg.modelCollector);
-		Identifier identifier4 = net.minecraft.data.client.Models.TEMPLATE_FENCE_GATE_WALL.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier = Models.TEMPLATE_FENCE_GATE_OPEN.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier2 = Models.TEMPLATE_FENCE_GATE.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier3 = Models.TEMPLATE_FENCE_GATE_WALL_OPEN.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier4 = Models.TEMPLATE_FENCE_GATE_WALL.upload(block, textures, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createFenceGateBlockState(block, identifier, identifier2, identifier3, identifier4));
 		parentedItem(bsmg, container.asItem(), identifier2);
 	}
 	public static void pressurePlateModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock) {
 		Block block = container.asBlock();
 		TextureMap textures = TextureMap.all(baseBlock);
-		Identifier identifier = net.minecraft.data.client.Models.PRESSURE_PLATE_UP.upload(block, textures, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.PRESSURE_PLATE_DOWN.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier = Models.PRESSURE_PLATE_UP.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier2 = Models.PRESSURE_PLATE_DOWN.upload(block, textures, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createPressurePlateBlockState(block, identifier, identifier2));
 		parentedItem(bsmg, container.asItem(), identifier);
 	}
@@ -507,8 +501,8 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void weightedPressurePlateModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block baseBlock) {
 		Block block = container.asBlock();
 		TextureMap textures = TextureMap.all(baseBlock);
-		Identifier up = net.minecraft.data.client.Models.PRESSURE_PLATE_UP.upload(block, textures, bsmg.modelCollector);
-		Identifier down = net.minecraft.data.client.Models.PRESSURE_PLATE_DOWN.upload(block, textures, bsmg.modelCollector);
+		Identifier up = Models.PRESSURE_PLATE_UP.upload(block, textures, bsmg.modelCollector);
+		Identifier down = Models.PRESSURE_PLATE_DOWN.upload(block, textures, bsmg.modelCollector);
 		weightedPressurePlateModel(bsmg, container, up, down);
 	}
 	public static void copiedWeightedPressurePlateModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, IBlockItemContainer useModels) {
@@ -518,7 +512,7 @@ public class ModelGenerator extends FabricModelProvider {
 	}
 	public static void signModel(BlockStateModelGenerator bsmg, WallBlockContainer container, Block baseBlock) {
 		Block block = container.asBlock(), wallBlock = container.getWallBlock();
-		Identifier identifier = net.minecraft.data.client.Models.PARTICLE.upload(block, TextureMap.all(baseBlock), bsmg.modelCollector);
+		Identifier identifier = Models.PARTICLE.upload(block, TextureMap.all(baseBlock), bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier));
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(wallBlock, identifier));
 		bsmg.excludeFromSimpleItemModelGeneration(wallBlock);
@@ -527,17 +521,14 @@ public class ModelGenerator extends FabricModelProvider {
 
 	public static void hangingSignModel(BlockStateModelGenerator bsmg, Block particle, WallBlockContainer hangingSign) {
 		TextureMap textureMap = TextureMap.particle(particle);
-		Identifier identifier = net.minecraft.data.client.Models.PARTICLE.upload(hangingSign.asBlock(), textureMap, bsmg.modelCollector);
+		Identifier identifier = Models.PARTICLE.upload(hangingSign.asBlock(), textureMap, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(hangingSign.asBlock(), identifier));
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(hangingSign.getWallBlock(), identifier));
 		bsmg.excludeFromSimpleItemModelGeneration(hangingSign.getWallBlock());
 		generatedItemModel(bsmg, hangingSign.asItem());
 	}
 
-	private static void plushieModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
-		if (!(container.asBlock() instanceof PlushieBlock block)) throw new IllegalArgumentException("Block must be of type PlushieBlock");
-		Identifier model = block.getModel().upload(block, new TextureMap().put(TextureKey.ALL, TextureMap.getId(block))
-				.put(TextureKey.PARTICLE, TextureMap.getId(block)), bsmg.modelCollector);
+	private static void statueModelCommon(BlockStateModelGenerator bsmg, Identifier model, Block block, Item item) {
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
 				.coordinate(BlockStateVariantMap.create(Properties.HORIZONTAL_FACING)
 						.register(Direction.EAST, BlockStateVariant.create()
@@ -548,7 +539,17 @@ public class ModelGenerator extends FabricModelProvider {
 								.put(VariantSettings.MODEL, model).put(VariantSettings.Y, VariantSettings.Rotation.R270))
 						.register(Direction.NORTH, BlockStateVariant.create()
 								.put(VariantSettings.MODEL, model))));
-		parentedItem(bsmg, container.asItem(), model);
+		parentedItem(bsmg, item, model);
+	}
+	private static void explicitStatueModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+		Block block = container.asBlock();
+		statueModelCommon(bsmg, getBlockModelId(block), block, container.asItem());
+	}
+	private static void plushieModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+		if (!(container.asBlock() instanceof PlushieBlock block)) throw new IllegalArgumentException("Block must be of type PlushieBlock");
+		Identifier model = block.getModel().upload(block, new TextureMap().put(TextureKey.ALL, TextureMap.getId(block))
+				.put(TextureKey.PARTICLE, TextureMap.getId(block)), bsmg.modelCollector);
+		statueModelCommon(bsmg, model, block, container.asItem());
 	}
 
 	private static void torchModelCommon(BlockStateModelGenerator bsmg, TorchContainer container, Identifier lit, Identifier litWall, Identifier unlit, Identifier unlitWall, Model template, Model templateWall, ItemConvertible parentItem) {
@@ -586,7 +587,7 @@ public class ModelGenerator extends FabricModelProvider {
 		torchModelCommon(bsmg, container, null,  null, unlit, unlitWall, template, templateWall, null);
 	}
 	private static void torchModelCommon(BlockStateModelGenerator bsmg, TorchContainer container, Identifier unlit, Identifier unlitWall) {
-		torchModelCommon(bsmg, container, unlit, unlitWall, net.minecraft.data.client.Models.TEMPLATE_TORCH, net.minecraft.data.client.Models.TEMPLATE_TORCH_WALL);
+		torchModelCommon(bsmg, container, unlit, unlitWall, Models.TEMPLATE_TORCH, Models.TEMPLATE_TORCH_WALL);
 	}
 	public static void torchModel(BlockStateModelGenerator bsmg, TorchContainer container) { torchModelCommon(bsmg, container, null, null); }
 	public static void torchModel(BlockStateModelGenerator bsmg, TorchContainer container, UnlitTorchContainer unlit) {
@@ -596,7 +597,7 @@ public class ModelGenerator extends FabricModelProvider {
 		torchModelCommon(bsmg, container, getBlockModelId("unlit_", base.asBlock()), getBlockModelId("unlit_", base.getWallBlock()));
 	}
 	public static void copiedTorchModel(BlockStateModelGenerator bsmg, TorchContainer container, TorchContainer looksLike) {
-		torchModelCommon(bsmg, container, getBlockModelId(looksLike.asBlock()), getBlockModelId(looksLike.getWallBlock()), getBlockModelId("unlit_", looksLike.asBlock()), getBlockModelId("unlit_", looksLike.getWallBlock()), net.minecraft.data.client.Models.TEMPLATE_TORCH, net.minecraft.data.client.Models.TEMPLATE_TORCH_WALL, looksLike);
+		torchModelCommon(bsmg, container, getBlockModelId(looksLike.asBlock()), getBlockModelId(looksLike.getWallBlock()), getBlockModelId("unlit_", looksLike.asBlock()), getBlockModelId("unlit_", looksLike.getWallBlock()), Models.TEMPLATE_TORCH, Models.TEMPLATE_TORCH_WALL, looksLike);
 	}
 	private static void unlitTorchModelCommon(BlockStateModelGenerator bsmg, Block block, Block wallBlock, Identifier identifier, Identifier identifier2) {
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier));
@@ -605,8 +606,8 @@ public class ModelGenerator extends FabricModelProvider {
 	private static void unlitTorchModel(BlockStateModelGenerator bsmg, UnlitTorchContainer container) {
 		Block block = container.asBlock(), wallBlock = container.getWallBlock();
 		TextureMap textures = TextureMap.torch(block);
-		Identifier identifier = net.minecraft.data.client.Models.TEMPLATE_TORCH.upload(block, textures, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.TEMPLATE_TORCH_WALL.upload(wallBlock, textures, bsmg.modelCollector);
+		Identifier identifier = Models.TEMPLATE_TORCH.upload(block, textures, bsmg.modelCollector);
+		Identifier identifier2 = Models.TEMPLATE_TORCH_WALL.upload(wallBlock, textures, bsmg.modelCollector);
 		unlitTorchModelCommon(bsmg, block, wallBlock, identifier, identifier2);
 	}
 
@@ -616,6 +617,24 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void boneTorchModel(BlockStateModelGenerator bsmg, TorchContainer container) { boneTorchModelCommon(bsmg, container, null, null); }
 	public static void boneTorchModel(BlockStateModelGenerator bsmg, TorchContainer container, TorchContainer base) {
 		boneTorchModelCommon(bsmg, container, getBlockModelId("unlit_", base.asBlock()), getBlockModelId("unlit_", base.getWallBlock()));
+	}
+
+	public static void thickTorchModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+		Identifier unlitModel = getBlockModelId("unlit_", container.asBlock());
+		unlitModel = ModModels.TEMPLATE_THICK_TORCH.upload(unlitModel, TextureMap.all(unlitModel), bsmg.modelCollector);
+		thickTorchModel(bsmg, container, unlitModel);
+	}
+	public static void thickTorchModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Identifier unlitModel) {
+		Block block = container.asBlock();
+		Identifier litModel = ModModels.TEMPLATE_THICK_TORCH.upload(block, TextureMap.all(block), bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.LIT, litModel, unlitModel)));
+		parentedItem(bsmg, container.asItem(), block);
+	}
+	public static void postModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+		Block block = container.asBlock();
+		Identifier model = ModModels.TEMPLATE_POST.upload(block, TextureMap.all(block), bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, model));
+		parentedItem(bsmg, container.asItem(), block);
 	}
 
 	public static void lanternModelCommon(BlockStateModelGenerator bsmg, IBlockItemContainer container, Identifier lit, Identifier litHanging, Identifier unlit, Identifier unlitHanging) {
@@ -634,8 +653,8 @@ public class ModelGenerator extends FabricModelProvider {
 		Block block = container.asBlock();
 		Identifier litModel = TexturedModel.TEMPLATE_LANTERN.upload(block, bsmg.modelCollector);
 		Identifier litHanging = TexturedModel.TEMPLATE_HANGING_LANTERN.upload(block, bsmg.modelCollector);
-		Identifier unlitModel = unlit != null ? unlit : net.minecraft.data.client.Models.TEMPLATE_LANTERN.upload(getBlockModelId("unlit_", block), unlitLanternTextureMap(block), bsmg.modelCollector);
-		Identifier unlitHanging = unlit != null ? postfixPath(unlit, "_hanging") : net.minecraft.data.client.Models.TEMPLATE_HANGING_LANTERN.upload(getBlockModelId("unlit_", block, "_hanging"), unlitLanternTextureMap(block), bsmg.modelCollector);
+		Identifier unlitModel = unlit != null ? unlit : Models.TEMPLATE_LANTERN.upload(getBlockModelId("unlit_", block), unlitLanternTextureMap(block), bsmg.modelCollector);
+		Identifier unlitHanging = unlit != null ? postfixPath(unlit, "_hanging") : Models.TEMPLATE_HANGING_LANTERN.upload(getBlockModelId("unlit_", block, "_hanging"), unlitLanternTextureMap(block), bsmg.modelCollector);
 		lanternModelCommon(bsmg, container, litModel, litHanging, unlitModel, unlitHanging);
 		generatedItemModel(bsmg, container.asItem());
 	}
@@ -666,8 +685,19 @@ public class ModelGenerator extends FabricModelProvider {
 	}
 	public static void unlitLanternModel(BlockStateModelGenerator bsmg, Block block, Block copyModel) {
 		Identifier identifier = getBlockModelId(copyModel);
-		Identifier identifier2 = postfixPath(identifier, "_hanging");
-		unlitLanternModelCommon(bsmg, block, identifier, identifier2);
+		unlitLanternModelCommon(bsmg, block, identifier, postfixPath(identifier, "_hanging"));
+	}
+	public static void explicitLanternModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+		Block block = container.asBlock();
+		Identifier identifier = getBlockModelId(block);
+		unlitLanternModelCommon(bsmg, block, identifier, postfixPath(identifier, "_hanging"));
+		generatedItemModel(bsmg, container.asItem());
+	}
+	private static void slimeLanternModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Model model) {
+		Block block = container.asBlock();
+		Identifier identifier = model.upload(block, TextureMap.texture(block), bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, identifier)).coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
+		parentedItem(bsmg, container.asItem(), block);
 	}
 	private static final Identifier CAMPFIRE_FIRE = ID("minecraft:block/campfire_fire");
 	private static final Identifier SOUL_CAMPFIRE_FIRE = ID("minecraft:block/soul_campfire_fire");
@@ -700,14 +730,14 @@ public class ModelGenerator extends FabricModelProvider {
 		generatedItemModel(bsmg, container.asItem());
 		TextureMap textureMap = TextureMap.all(TextureMap.getId(candle));
 		TextureMap textureMap2 = TextureMap.all(TextureMap.getSubId(candle, "_lit"));
-		Identifier identifier = net.minecraft.data.client.Models.TEMPLATE_CANDLE.upload(candle, "_one_candle", textureMap, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.TEMPLATE_TWO_CANDLES.upload(candle, "_two_candles", textureMap, bsmg.modelCollector);
-		Identifier identifier3 = net.minecraft.data.client.Models.TEMPLATE_THREE_CANDLES.upload(candle, "_three_candles", textureMap, bsmg.modelCollector);
-		Identifier identifier4 = net.minecraft.data.client.Models.TEMPLATE_FOUR_CANDLES.upload(candle, "_four_candles", textureMap, bsmg.modelCollector);
-		Identifier identifier5 = net.minecraft.data.client.Models.TEMPLATE_CANDLE.upload(candle, "_one_candle_lit", textureMap2, bsmg.modelCollector);
-		Identifier identifier6 = net.minecraft.data.client.Models.TEMPLATE_TWO_CANDLES.upload(candle, "_two_candles_lit", textureMap2, bsmg.modelCollector);
-		Identifier identifier7 = net.minecraft.data.client.Models.TEMPLATE_THREE_CANDLES.upload(candle, "_three_candles_lit", textureMap2, bsmg.modelCollector);
-		Identifier identifier8 = net.minecraft.data.client.Models.TEMPLATE_FOUR_CANDLES.upload(candle, "_four_candles_lit", textureMap2, bsmg.modelCollector);
+		Identifier identifier = Models.TEMPLATE_CANDLE.upload(candle, "_one_candle", textureMap, bsmg.modelCollector);
+		Identifier identifier2 = Models.TEMPLATE_TWO_CANDLES.upload(candle, "_two_candles", textureMap, bsmg.modelCollector);
+		Identifier identifier3 = Models.TEMPLATE_THREE_CANDLES.upload(candle, "_three_candles", textureMap, bsmg.modelCollector);
+		Identifier identifier4 = Models.TEMPLATE_FOUR_CANDLES.upload(candle, "_four_candles", textureMap, bsmg.modelCollector);
+		Identifier identifier5 = Models.TEMPLATE_CANDLE.upload(candle, "_one_candle_lit", textureMap2, bsmg.modelCollector);
+		Identifier identifier6 = Models.TEMPLATE_TWO_CANDLES.upload(candle, "_two_candles_lit", textureMap2, bsmg.modelCollector);
+		Identifier identifier7 = Models.TEMPLATE_THREE_CANDLES.upload(candle, "_three_candles_lit", textureMap2, bsmg.modelCollector);
+		Identifier identifier8 = Models.TEMPLATE_FOUR_CANDLES.upload(candle, "_four_candles_lit", textureMap2, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(candle)
 				.coordinate(BlockStateVariantMap.create(Properties.CANDLES, Properties.LIT)
 						.register(1, false, BlockStateVariant.create().put(VariantSettings.MODEL, identifier))
@@ -718,8 +748,8 @@ public class ModelGenerator extends FabricModelProvider {
 						.register(2, true, BlockStateVariant.create().put(VariantSettings.MODEL, identifier6))
 						.register(3, true, BlockStateVariant.create().put(VariantSettings.MODEL, identifier7))
 						.register(4, true, BlockStateVariant.create().put(VariantSettings.MODEL, identifier8))));
-		Identifier identifier9 = net.minecraft.data.client.Models.TEMPLATE_CAKE_WITH_CANDLE.upload(cake, TextureMap.candleCake(candle, false), bsmg.modelCollector);
-		Identifier identifier10 = net.minecraft.data.client.Models.TEMPLATE_CAKE_WITH_CANDLE.upload(cake, "_lit", TextureMap.candleCake(candle, true), bsmg.modelCollector);
+		Identifier identifier9 = Models.TEMPLATE_CAKE_WITH_CANDLE.upload(cake, TextureMap.candleCake(candle, false), bsmg.modelCollector);
+		Identifier identifier10 = Models.TEMPLATE_CAKE_WITH_CANDLE.upload(cake, "_lit", TextureMap.candleCake(candle, true), bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(cake).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.LIT, identifier10, identifier9)));
 	}
 	public static TextureMap cakeTextureMap(Block cake, boolean slice) {
@@ -735,8 +765,8 @@ public class ModelGenerator extends FabricModelProvider {
 		return cakeTextureMap(cake, false).put(TextureKey.CANDLE, TextureMap.getSubId(candle, lit ? "_lit" : ""));
 	}
 	public static void candleCakeModel(BlockStateModelGenerator bsmg, Block candle, Block cake, Block candleCake) {
-		Identifier identifier9 = net.minecraft.data.client.Models.TEMPLATE_CAKE_WITH_CANDLE.upload(candleCake, candleCakeTextureMap(cake, candle, false), bsmg.modelCollector);
-		Identifier identifier10 = net.minecraft.data.client.Models.TEMPLATE_CAKE_WITH_CANDLE.upload(candleCake, "_lit", candleCakeTextureMap(cake, candle, true), bsmg.modelCollector);
+		Identifier identifier9 = Models.TEMPLATE_CAKE_WITH_CANDLE.upload(candleCake, candleCakeTextureMap(cake, candle, false), bsmg.modelCollector);
+		Identifier identifier10 = Models.TEMPLATE_CAKE_WITH_CANDLE.upload(candleCake, "_lit", candleCakeTextureMap(cake, candle, true), bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(candleCake).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.LIT, identifier10, identifier9)));
 	}
 	private static void registerCake(BlockStateModelGenerator bsmg, Block cake, Item item) {
@@ -769,6 +799,10 @@ public class ModelGenerator extends FabricModelProvider {
 		for (DyeColor color : DyeColor.values()) {
 			candleCakeModel(bsmg, ColorUtil.GetCandleBlock(color), cake, container.CANDLE_CAKES.get(color));
 		}
+		candleCakeModel(bsmg, BEIGE_CANDLE.asBlock(), cake, container.BEIGE_CANDLE_CAKE);
+		candleCakeModel(bsmg, BURGUNDY_CANDLE.asBlock(), cake, container.BURGUNDY_CANDLE_CAKE);
+		candleCakeModel(bsmg, LAVENDER_CANDLE.asBlock(), cake, container.LAVENDER_CANDLE_CAKE);
+		candleCakeModel(bsmg, MINT_CANDLE.asBlock(), cake, container.MINT_CANDLE_CAKE);
 	}
 	private static void barsModelCommon(BlockStateModelGenerator bsmg, Block block, Identifier ends, Identifier post, Identifier cap, Identifier capAlt, Identifier side, Identifier sideAlt) {
 		bsmg.blockStateCollector.accept(MultipartBlockStateSupplier.create(block)
@@ -824,7 +858,7 @@ public class ModelGenerator extends FabricModelProvider {
 				.put(TextureKey.BOTTOM, bottom)
 				.put(TextureKey.TOP, TextureMap.getId(top))
 				.put(TextureKey.SIDE, TextureMap.getSubId(block, "_side"));
-		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, net.minecraft.data.client.Models.CUBE_BOTTOM_TOP.upload(block, textureMap, bsmg.modelCollector)));
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, Models.CUBE_BOTTOM_TOP.upload(block, textureMap, bsmg.modelCollector)));
 		parentedItem(bsmg, container.asItem(), block);
 	}
 	public static void topBottomSidesModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
@@ -833,7 +867,7 @@ public class ModelGenerator extends FabricModelProvider {
 				.put(TextureKey.BOTTOM, TextureMap.getSubId(block, "_bottom"))
 				.put(TextureKey.TOP, TextureMap.getSubId(block, "_top"))
 				.put(TextureKey.SIDE, TextureMap.getSubId(block, "_side"));
-		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, net.minecraft.data.client.Models.CUBE_BOTTOM_TOP.upload(block, textureMap, bsmg.modelCollector)));
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, Models.CUBE_BOTTOM_TOP.upload(block, textureMap, bsmg.modelCollector)));
 		parentedItem(bsmg, container.asItem(), block);
 	}
 	public static TextureMap uniqueSidesTextureMap(Identifier base, String particle, String up, String down, String north, String south, String east, String west) {
@@ -874,8 +908,8 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void metalPillarModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block nonPillar) {
 		Block block = container.asBlock();
 		Identifier end = TextureMap.getId(nonPillar), side = TextureMap.getId(block);
-		Identifier pillar = net.minecraft.data.client.Models.CUBE_COLUMN.upload(block, TextureMap.sideEnd(side, end), bsmg.modelCollector);
-		Identifier horizontal = net.minecraft.data.client.Models.CUBE_COLUMN_HORIZONTAL.upload(block, TextureMap.sideEnd(postfixPath(side, "_horizontal"), end), bsmg.modelCollector);
+		Identifier pillar = Models.CUBE_COLUMN.upload(block, TextureMap.sideEnd(side, end), bsmg.modelCollector);
+		Identifier horizontal = Models.CUBE_COLUMN_HORIZONTAL.upload(block, TextureMap.sideEnd(postfixPath(side, "_horizontal"), end), bsmg.modelCollector);
 		metalPillarModelCommon(bsmg, container, pillar, horizontal);
 	}
 	public static void copiedMetalPillarModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, IBlockItemContainer copy) {
@@ -886,7 +920,7 @@ public class ModelGenerator extends FabricModelProvider {
 	}
 	public static void uprightPillarModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
 		Block block = container.asBlock();
-		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createAxisRotatedBlockState(block, net.minecraft.data.client.Models.CUBE_COLUMN.upload(block, TextureMap.sideEnd(block), bsmg.modelCollector)));
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createAxisRotatedBlockState(block, Models.CUBE_COLUMN.upload(block, TextureMap.sideEnd(block), bsmg.modelCollector)));
 		parentedItem(bsmg, container.asItem(), block);
 	}
 	public static void ladderModelCommon(BlockStateModelGenerator bsmg, Block block, Item item, Identifier model) {
@@ -913,8 +947,8 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void horizontalFacingSlabModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block slabDouble, TextureMap textures) { horizontalFacingSlabModel(bsmg, container, getBlockModelId(slabDouble), textures); }
 	public static void horizontalFacingSlabModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Identifier slabDouble, TextureMap textures) {
 		Block block = container.asBlock();
-		Identifier slab = net.minecraft.data.client.Models.SLAB.upload(block, textures, bsmg.modelCollector);
-		Identifier slabTop = net.minecraft.data.client.Models.SLAB_TOP.upload(block, textures, bsmg.modelCollector);
+		Identifier slab = Models.SLAB.upload(block, textures, bsmg.modelCollector);
+		Identifier slabTop = Models.SLAB_TOP.upload(block, textures, bsmg.modelCollector);
 		horizontalFacingSlabModel(bsmg, container, slab, slabTop, slabDouble);
 	}
 	public static void horizontalFacingSlabModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Identifier slab, Identifier slabTop, Identifier slabDouble) {
@@ -963,12 +997,12 @@ public class ModelGenerator extends FabricModelProvider {
 		Block block = container.asBlock();
 		Identifier base = getBlockModelId(block);
 		String particle = "_particle", p = "_p", r = "_r", hpr = "_horiz_p_r", hrp = "_horiz_r_p", vpr = "_vert_p_r", vrp = "_vert_r_p";
-		Identifier up = net.minecraft.data.client.Models.CUBE.upload(block, "_up", uniqueSidesTextureMap(base, particle, r, p, vrp, vrp, vrp, vrp), bsmg.modelCollector);
-		Identifier down = net.minecraft.data.client.Models.CUBE.upload(block, "_down", uniqueSidesTextureMap(base, particle, p, r, vpr, vpr, vpr, vpr), bsmg.modelCollector);
-		Identifier north = net.minecraft.data.client.Models.CUBE.upload(block, "_north", uniqueSidesTextureMap(base, particle, vpr, vrp, p, r, hrp, hpr), bsmg.modelCollector);
-		Identifier south = net.minecraft.data.client.Models.CUBE.upload(block, "_south", uniqueSidesTextureMap(base, particle, hrp, hrp, hpr, hrp, p, r), bsmg.modelCollector);
-		Identifier east = net.minecraft.data.client.Models.CUBE.upload(block, "_east", uniqueSidesTextureMap(base, particle, vrp, vpr, r, p, hpr, hrp), bsmg.modelCollector);
-		Identifier west = net.minecraft.data.client.Models.CUBE.upload(block, "_west", uniqueSidesTextureMap(base, particle, hpr, hpr, hrp, hpr, r, p), bsmg.modelCollector);
+		Identifier up = Models.CUBE.upload(block, "_up", uniqueSidesTextureMap(base, particle, r, p, vrp, vrp, vrp, vrp), bsmg.modelCollector);
+		Identifier down = Models.CUBE.upload(block, "_down", uniqueSidesTextureMap(base, particle, p, r, vpr, vpr, vpr, vpr), bsmg.modelCollector);
+		Identifier north = Models.CUBE.upload(block, "_north", uniqueSidesTextureMap(base, particle, vpr, vrp, p, r, hrp, hpr), bsmg.modelCollector);
+		Identifier south = Models.CUBE.upload(block, "_south", uniqueSidesTextureMap(base, particle, hrp, hrp, hpr, hrp, p, r), bsmg.modelCollector);
+		Identifier east = Models.CUBE.upload(block, "_east", uniqueSidesTextureMap(base, particle, vrp, vpr, r, p, hpr, hrp), bsmg.modelCollector);
+		Identifier west = Models.CUBE.upload(block, "_west", uniqueSidesTextureMap(base, particle, hpr, hpr, hrp, hpr, r, p), bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
 				.coordinate(BlockStateVariantMap.create(Properties.FACING)
 						.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.MODEL, up))
@@ -1033,12 +1067,12 @@ public class ModelGenerator extends FabricModelProvider {
 	}
 	public static void bedModel(BlockStateModelGenerator bsmg, BedContainer bed, Identifier particle) {
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(bed.asBlock(), ID("minecraft:block/bed")));
-		net.minecraft.data.client.Models.TEMPLATE_BED.upload(getItemModelId(bed.asItem()), new TextureMap().put(TextureKey.PARTICLE, particle), bsmg.modelCollector);
+		Models.TEMPLATE_BED.upload(getItemModelId(bed.asItem()), new TextureMap().put(TextureKey.PARTICLE, particle), bsmg.modelCollector);
 	}
 	public static void mudBricksModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
 		Block block = container.asBlock();
 		TextureMap map = TextureMap.all(block);
-		Identifier identifier = net.minecraft.data.client.Models.CUBE_ALL.upload(block, map, bsmg.modelCollector);
+		Identifier identifier = Models.CUBE_ALL.upload(block, map, bsmg.modelCollector);
 		Identifier identifier2 = ModModels.CUBE_NORTH_WEST_MIRRORED_ALL.upload(block, map, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier2));
 		parentedItem(bsmg, container.asItem(), identifier);
@@ -1055,8 +1089,8 @@ public class ModelGenerator extends FabricModelProvider {
 		Block block = container.asBlock();
 		TextureMap textureMap = TextureMap.sideFrontEnd(block).inherit(TextureKey.SIDE, TextureKey.PARTICLE);
 		TextureMap textureMap2 = textureMap.copyAndAdd(TextureKey.FRONT, TextureMap.getSubId(block, "_front_honey"));
-		Identifier identifier = net.minecraft.data.client.Models.ORIENTABLE_WITH_BOTTOM.upload(block, textureMap, bsmg.modelCollector);
-		Identifier identifier2 = net.minecraft.data.client.Models.ORIENTABLE_WITH_BOTTOM.upload(block, "_honey", textureMap2, bsmg.modelCollector);
+		Identifier identifier = Models.ORIENTABLE_WITH_BOTTOM.upload(block, textureMap, bsmg.modelCollector);
+		Identifier identifier2 = Models.ORIENTABLE_WITH_BOTTOM.upload(block, "_honey", textureMap2, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
 				.coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates())
 				.coordinate(BlockStateModelGenerator.createValueFencedModelMap(Properties.HONEY_LEVEL, 5, identifier2, identifier)));
@@ -1083,7 +1117,7 @@ public class ModelGenerator extends FabricModelProvider {
 				.put(TextureKey.SIDE, TextureMap.getSubId(block, "_side"))
 				.put(TextureKey.TOP, TextureMap.getSubId(block, "_top"));
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block,
-						BlockStateVariant.create().put(VariantSettings.MODEL, net.minecraft.data.client.Models.CUBE_BOTTOM_TOP.upload(block, map, bsmg.modelCollector)))
+						BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_BOTTOM_TOP.upload(block, map, bsmg.modelCollector)))
 				.coordinate(bsmg.createUpDefaultFacingVariantMap()));
 		parentedItem(bsmg, container.asItem(), block);
 	}
@@ -1106,7 +1140,7 @@ public class ModelGenerator extends FabricModelProvider {
 	public static void bookshelfModel(BlockStateModelGenerator bsmg, IBlockItemContainer container, Block planks) {
 		Block block = container.asBlock();
 		TextureMap textureMap = TextureMap.sideEnd(TextureMap.getId(block), TextureMap.getId(planks));
-		Identifier identifier = net.minecraft.data.client.Models.CUBE_COLUMN.upload(block, textureMap, bsmg.modelCollector);
+		Identifier identifier = Models.CUBE_COLUMN.upload(block, textureMap, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier));
 		parentedItem(bsmg, container.asItem(), identifier);
 	}
@@ -1157,9 +1191,22 @@ public class ModelGenerator extends FabricModelProvider {
 		parentedItem(bsmg, container.asItem(), block);
 	}
 
+	private static void frontSidePumpkinModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
+		Block block = container.asBlock();
+		Identifier top = TextureMap.getSubId(block, "_top");
+		Identifier front = TextureMap.getSubId(block, "_front");
+		Identifier side = TextureMap.getSubId(block, "_side");
+		TextureMap textureMap = new TextureMap().put(TextureKey.PARTICLE, front)
+				.put(TextureKey.DOWN, top).put(TextureKey.UP, top)
+				.put(TextureKey.NORTH, front).put(TextureKey.SOUTH, front)
+				.put(TextureKey.EAST, side).put(TextureKey.WEST, side);
+		Identifier id = Models.CUBE.upload(block, textureMap, bsmg.modelCollector);
+		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, id));
+		parentedItem(bsmg, container.asItem(), block);
+	}
 	private static void pumpkinModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
 		Block block = container.asBlock();
-		Identifier id = net.minecraft.data.client.Models.CUBE_BOTTOM_TOP.upload(block, TextureMap.sideEnd(block), bsmg.modelCollector);
+		Identifier id = Models.CUBE_BOTTOM_TOP.upload(block, TextureMap.sideEnd(block), bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, id));
 		parentedItem(bsmg, container.asItem(), block);
 	}
@@ -1173,15 +1220,24 @@ public class ModelGenerator extends FabricModelProvider {
 	private static void parentedGourdStemModels(BlockStateModelGenerator bsmg, Block stemBlock, Block attachedStemBlock, Block baseStem, Block baseAttached) {
 		TextureMap textureMap = TextureMap.stem(baseStem);
 		TextureMap textureMap2 = TextureMap.stemAndUpper(baseStem, baseAttached);
-		Identifier identifier = net.minecraft.data.client.Models.STEM_FRUIT.upload(attachedStemBlock, textureMap2, bsmg.modelCollector);
+		Identifier identifier = Models.STEM_FRUIT.upload(attachedStemBlock, textureMap2, bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(attachedStemBlock, BlockStateVariant.create().put(VariantSettings.MODEL, identifier)).coordinate(BlockStateVariantMap.create(Properties.HORIZONTAL_FACING).register(Direction.WEST, BlockStateVariant.create()).register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270)).register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90)).register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))));
-		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(stemBlock).coordinate(BlockStateVariantMap.create(Properties.AGE_7).register(integer -> BlockStateVariant.create().put(VariantSettings.MODEL, net.minecraft.data.client.Models.STEM_GROWTH_STAGES[integer].upload(stemBlock, textureMap, bsmg.modelCollector)))));
+		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(stemBlock).coordinate(BlockStateVariantMap.create(Properties.AGE_7).register(integer -> BlockStateVariant.create().put(VariantSettings.MODEL, Models.STEM_GROWTH_STAGES[integer].upload(stemBlock, textureMap, bsmg.modelCollector)))));
+	}
+
+	private static void vinesModel(BlockStateModelGenerator bsmg, Block vines, Block plant) {
+		Identifier identifier = bsmg.createSubModel(vines, "", Models.CROSS, TextureMap::cross);
+		Identifier identifier2 = bsmg.createSubModel(vines, "_berried", Models.CROSS, TextureMap::cross);
+		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(vines).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.BERRIES, identifier2, identifier)));
+		Identifier identifier3 = bsmg.createSubModel(plant, "", Models.CROSS, TextureMap::cross);
+		Identifier identifier4 = bsmg.createSubModel(plant, "_berried", Models.CROSS, TextureMap::cross);
+		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(plant).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.BERRIES, identifier4, identifier3)));
 	}
 
 	private static void berryLeavesModel(BlockStateModelGenerator bsmg, IBlockItemContainer container) {
 		Block block = container.asBlock();
-		Identifier stage0 = net.minecraft.data.client.Models.LEAVES.upload(block, "_stage0", TextureMap.all(TextureMap.getSubId(block, "_stage0")), bsmg.modelCollector);
-		Identifier stage1 = net.minecraft.data.client.Models.LEAVES.upload(block, "_stage1", TextureMap.all(TextureMap.getSubId(block, "_stage1")), bsmg.modelCollector);
+		Identifier stage0 = Models.LEAVES.upload(block, "_stage0", TextureMap.all(TextureMap.getSubId(block, "_stage0")), bsmg.modelCollector);
+		Identifier stage1 = Models.LEAVES.upload(block, "_stage1", TextureMap.all(TextureMap.getSubId(block, "_stage1")), bsmg.modelCollector);
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.BERRIES, stage1, stage0)));
 		parentedItem(bsmg, container.asItem(), stage1);
 	}
@@ -1191,7 +1247,7 @@ public class ModelGenerator extends FabricModelProvider {
 		bsmg.blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(ModProperties.DUSTED).register(integer -> {
 			String string = "_" + integer;
 			Identifier identifier = TextureMap.getSubId(block, string);
-			return BlockStateVariant.create().put(VariantSettings.MODEL, net.minecraft.data.client.Models.CUBE_ALL.upload(block, string, new TextureMap().put(TextureKey.ALL, identifier), bsmg.modelCollector));
+			return BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, string, new TextureMap().put(TextureKey.ALL, identifier), bsmg.modelCollector));
 		})));
 		bsmg.registerParentedItemModel(container.asItem(), TextureMap.getSubId(block, "_0"));
 	}
@@ -1336,6 +1392,12 @@ public class ModelGenerator extends FabricModelProvider {
 		//Overrides
 		ladderModel(bsmg, Blocks.LADDER, null);
 		barsModelBlockOnly(bsmg, Blocks.IRON_BARS);
+
+		thickTorchModel(bsmg, TIKI_TORCH);
+		thickTorchModel(bsmg, TIKI_SOUL_TORCH, getBlockModelId("unlit_", TIKI_TORCH.asBlock()));
+		thickTorchModel(bsmg, TIKI_ENDER_TORCH, getBlockModelId("unlit_", TIKI_TORCH.asBlock()));
+		postModel(bsmg, TIKI_TORCH_POST);
+
 		//Light Sources
 		unlitTorchModel(bsmg, UNLIT_TORCH);
 		unlitTorchModelCommon(bsmg, UNLIT_SOUL_TORCH.asBlock(), UNLIT_SOUL_TORCH.getWallBlock(), getBlockModelId(UNLIT_TORCH.asBlock()), getBlockModelId(UNLIT_TORCH.getWallBlock()));
@@ -1344,11 +1406,16 @@ public class ModelGenerator extends FabricModelProvider {
 		torchModel(bsmg, ENDER_TORCH, UNLIT_TORCH);
 		unlitLanternModel(bsmg, UNLIT_LANTERN);
 		unlitLanternModel(bsmg, UNLIT_SOUL_LANTERN, UNLIT_LANTERN);
+		explicitLanternModel(bsmg, EMPTY_LANTERN);
 		lanternModel(bsmg, ENDER_LANTERN, UNLIT_LANTERN);
 		//<editor-fold desc="Candles & Cakes">
 		candleModel(bsmg, SOUL_CANDLE, SOUL_CANDLE_CAKE);
 		candleModel(bsmg, ENDER_CANDLE, ENDER_CANDLE_CAKE);
 		candleModel(bsmg, NETHERRACK_CANDLE, NETHERRACK_CANDLE_CAKE);
+		candleModel(bsmg, BEIGE_CANDLE, BEIGE_CANDLE_CAKE);
+		candleModel(bsmg, BURGUNDY_CANDLE, BURGUNDY_CANDLE_CAKE);
+		candleModel(bsmg, LAVENDER_CANDLE, LAVENDER_CANDLE_CAKE);
+		candleModel(bsmg, MINT_CANDLE, MINT_CANDLE_CAKE);
 		cakeModels(bsmg, CARROT_CAKE);
 		cakeModels(bsmg, CHOCOLATE_CAKE);
 		cakeModels(bsmg, CHORUS_CAKE);
@@ -1367,6 +1434,52 @@ public class ModelGenerator extends FabricModelProvider {
 				parentedItem(bsmg, arrow, TEMPLATE_SUMMONING_ARROW);
 			}
 		}
+		//</editor-fold>
+		//<editor-fold desc="Mod Dye Colors">
+		//Beige
+		bsmg.registerWoolAndCarpet(BEIGE_WOOL.asBlock(), BEIGE_CARPET.asBlock());
+		parentedItem(bsmg, BEIGE_WOOL);
+		parentedItem(bsmg, BEIGE_CARPET);
+		bsmg.registerWoolAndCarpet(BEIGE_FLEECE.asBlock(), BEIGE_FLEECE_CARPET.asBlock());
+		parentedItem(bsmg, BEIGE_FLEECE);
+		parentedItem(bsmg, BEIGE_FLEECE_CARPET);
+		glassSlabModel(bsmg, BEIGE_STAINED_GLASS_SLAB, BEIGE_STAINED_GLASS);
+		glassTrapdoorModel(bsmg, BEIGE_STAINED_GLASS_TRAPDOOR, BEIGE_STAINED_GLASS, BEIGE_STAINED_GLASS_PANE);
+		glazedTerracottaModel(bsmg, BEIGE_GLAZED_TERRACOTTA);
+		glazedTerracottaSlabModel(bsmg, BEIGE_GLAZED_TERRACOTTA_SLAB,  BEIGE_GLAZED_TERRACOTTA);
+		//Burgundy
+		bsmg.registerWoolAndCarpet(BURGUNDY_WOOL.asBlock(), BURGUNDY_CARPET.asBlock());
+		parentedItem(bsmg, BURGUNDY_WOOL);
+		parentedItem(bsmg, BURGUNDY_CARPET);
+		bsmg.registerWoolAndCarpet(BURGUNDY_FLEECE.asBlock(), BURGUNDY_FLEECE_CARPET.asBlock());
+		parentedItem(bsmg, BURGUNDY_FLEECE);
+		parentedItem(bsmg, BURGUNDY_FLEECE_CARPET);
+		glassSlabModel(bsmg, BURGUNDY_STAINED_GLASS_SLAB, BURGUNDY_STAINED_GLASS);
+		glassTrapdoorModel(bsmg, BURGUNDY_STAINED_GLASS_TRAPDOOR, BURGUNDY_STAINED_GLASS, BURGUNDY_STAINED_GLASS_PANE);
+		glazedTerracottaModel(bsmg, BURGUNDY_GLAZED_TERRACOTTA);
+		glazedTerracottaSlabModel(bsmg, BURGUNDY_GLAZED_TERRACOTTA_SLAB,  BURGUNDY_GLAZED_TERRACOTTA);
+		//Lavender
+		bsmg.registerWoolAndCarpet(LAVENDER_WOOL.asBlock(), LAVENDER_CARPET.asBlock());
+		parentedItem(bsmg, LAVENDER_WOOL);
+		parentedItem(bsmg, LAVENDER_CARPET);
+		bsmg.registerWoolAndCarpet(LAVENDER_FLEECE.asBlock(), LAVENDER_FLEECE_CARPET.asBlock());
+		parentedItem(bsmg, LAVENDER_FLEECE);
+		parentedItem(bsmg, LAVENDER_FLEECE_CARPET);
+		glassSlabModel(bsmg, LAVENDER_STAINED_GLASS_SLAB, LAVENDER_STAINED_GLASS);
+		glassTrapdoorModel(bsmg, LAVENDER_STAINED_GLASS_TRAPDOOR, LAVENDER_STAINED_GLASS, LAVENDER_STAINED_GLASS_PANE);
+		glazedTerracottaModel(bsmg, LAVENDER_GLAZED_TERRACOTTA);
+		glazedTerracottaSlabModel(bsmg, LAVENDER_GLAZED_TERRACOTTA_SLAB,  LAVENDER_GLAZED_TERRACOTTA);
+		//Mint
+		bsmg.registerWoolAndCarpet(MINT_WOOL.asBlock(), MINT_CARPET.asBlock());
+		parentedItem(bsmg, MINT_WOOL);
+		parentedItem(bsmg, MINT_CARPET);
+		bsmg.registerWoolAndCarpet(MINT_FLEECE.asBlock(), MINT_FLEECE_CARPET.asBlock());
+		parentedItem(bsmg, MINT_FLEECE);
+		parentedItem(bsmg, MINT_FLEECE_CARPET);
+		glassSlabModel(bsmg, MINT_STAINED_GLASS_SLAB, MINT_STAINED_GLASS);
+		glassTrapdoorModel(bsmg, MINT_STAINED_GLASS_TRAPDOOR, MINT_STAINED_GLASS, MINT_STAINED_GLASS_PANE);
+		glazedTerracottaModel(bsmg, MINT_GLAZED_TERRACOTTA);
+		glazedTerracottaSlabModel(bsmg, MINT_GLAZED_TERRACOTTA_SLAB,  MINT_GLAZED_TERRACOTTA);
 		//</editor-fold>
 		//<editor-fold desc="Glass">
 		glassSlabModel(bsmg, TINTED_GLASS_SLAB, Blocks.TINTED_GLASS);
@@ -1529,6 +1642,7 @@ public class ModelGenerator extends FabricModelProvider {
 		//<editor-fold desc="Gourds">
 		carvedPumpkinModel(bsmg, SOUL_JACK_O_LANTERN, Blocks.PUMPKIN);
 		carvedPumpkinModel(bsmg, ENDER_JACK_O_LANTERN, Blocks.PUMPKIN);
+		frontSidePumpkinModel(bsmg, BURNT_PUMPKIN);
 		pumpkinModel(bsmg, WHITE_PUMPKIN);
 		carvedPumpkinModel(bsmg, CARVED_WHITE_PUMPKIN, WHITE_PUMPKIN);
 		carvedPumpkinModel(bsmg, WHITE_JACK_O_LANTERN, WHITE_PUMPKIN);
@@ -1622,9 +1736,15 @@ public class ModelGenerator extends FabricModelProvider {
 		glazedTerracottaSlabModel(bsmg, GLAZED_TERRACOTTA_SLAB, GLAZED_TERRACOTTA);
 		for (DyeColor color : DyeColor.values()) glazedTerracottaSlabModel(bsmg, GLAZED_TERRACOTTA_SLABS.get(color), ColorUtil.GetGlazedTerracottaBlock(color));
 		berryLeavesModel(bsmg, SWEET_BERRY_LEAVES);
+		berryLeavesModel(bsmg, GRAPE_LEAVES);
+		vinesModel(bsmg, GRAPE_VINES, GRAPE_VINES_PLANT);
 		//Slime
 		explicitBlockParentedItem(bsmg, BLUE_SLIME_BLOCK);
 		explicitBlockParentedItem(bsmg, PINK_SLIME_BLOCK);
+		slimeLanternModel(bsmg, MAGMA_CUBE_LANTERN, ModModels.TEMPLATE_MAGMA_CUBE_LANTERN);
+		slimeLanternModel(bsmg, SLIME_LANTERN, ModModels.TEMPLATE_SLIME_LANTERN);
+		slimeLanternModel(bsmg, TROPICAL_SLIME_LANTERN, ModModels.TEMPLATE_SLIME_LANTERN);
+		slimeLanternModel(bsmg, PINK_SLIME_LANTERN, ModModels.TEMPLATE_SLIME_LANTERN);
 		//<editor-fold desc="Wool">
 		rainbowBlockModel(bsmg, RAINBOW_WOOL);
 		rainbowSlabModel(bsmg, RAINBOW_WOOL_SLAB, RAINBOW_WOOL.asBlock());
@@ -1773,23 +1893,29 @@ public class ModelGenerator extends FabricModelProvider {
 		tallFlowerModel(bsmg, TALL_VANILLA);
 		//</editor-fold>
 		//<editor-fold desc="Flower Parts">
-		flowerPartModels(bsmg, ID("item/daisy_seeds"), PINK_DAISY_PARTS, OXEYE_DAISY_PARTS);
-		flowerPartModels(bsmg, ID("item/rose_seeds"), ROSE_PARTS, BLUE_ROSE_PARTS, WITHER_ROSE_PARTS);
-		flowerPartModels(bsmg, ID("item/allium_seeds"), PINK_ALLIUM_PARTS, ALLIUM_PARTS);
-		flowerPartModels(bsmg, ID("item/orchid_seeds"), INDIGO_ORCHID_PARTS, MAGENTA_ORCHID_PARTS, ORANGE_ORCHID_PARTS,
-				PURPLE_ORCHID_PARTS, RED_ORCHID_PARTS, WHITE_ORCHID_PARTS, YELLOW_ORCHID_PARTS, BLUE_ORCHID_PARTS);
-		flowerPartModels(bsmg, ID("item/tulip_seeds"), MAGENTA_TULIP_PARTS, ORANGE_TULIP_PARTS, PINK_TULIP_PARTS, RED_TULIP_PARTS, WHITE_TULIP_PARTS);
-		flowerPartModels(bsmg, ID("item/peony_seeds"), PAEONIA_PARTS, PEONY_PARTS);
-		flowerPartModels(bsmg, ID("item/lily_seeds"), LILY_OF_THE_VALLEY_PARTS);
+		flowerPartModels(bsmg, ID("item/daisy_seeds"), ID("block/daisy_seeds"), PINK_DAISY_PARTS, OXEYE_DAISY_PARTS);
+		flowerPartModels(bsmg, ID("item/rose_seeds"), ID("block/rose_seeds"), ROSE_PARTS, BLUE_ROSE_PARTS, WITHER_ROSE_PARTS);
+		flowerPartModels(bsmg, ID("item/allium_seeds"), ID("block/allium_seeds"), PINK_ALLIUM_PARTS, ALLIUM_PARTS);
+		flowerPartModels(bsmg, ID("item/orchid_seeds"), ID("block/orchid_seeds"), INDIGO_ORCHID_PARTS, MAGENTA_ORCHID_PARTS,
+				ORANGE_ORCHID_PARTS, PURPLE_ORCHID_PARTS, RED_ORCHID_PARTS, WHITE_ORCHID_PARTS, YELLOW_ORCHID_PARTS, BLUE_ORCHID_PARTS);
+		flowerPartModels(bsmg, ID("item/tulip_seeds"), ID("block/tulip_seeds"), MAGENTA_TULIP_PARTS, ORANGE_TULIP_PARTS,
+				PINK_TULIP_PARTS, RED_TULIP_PARTS, WHITE_TULIP_PARTS);
+		flowerPartModels(bsmg, ID("item/peony_seeds"), ID("block/peony_seeds"), PAEONIA_PARTS, PEONY_PARTS);
+		flowerPartModels(bsmg, ID("item/lily_seeds"), ID("block/lily_seeds"), LILY_OF_THE_VALLEY_PARTS);
 		//</editor-fold>
+		//Statues
+		explicitStatueModel(bsmg, CREEPER_ANATOMY_STATUE);
 		//Skulls
 		skullModel(bsmg, PIGLIN_HEAD.asItem());
 		skullModel(bsmg, ZOMBIFIED_PIGLIN_HEAD.asItem());
+		//Ragdoll
+		skullModel(bsmg, RAGDOLL.asItem());
+		explicitModelCommon(bsmg, RAGDOLL);
 		//Recovery Compass
 		for (int i = 0; i < 32; i++) {
 			String suffix = i < 10 ? "_0" : "_";
 			Identifier identifier = TextureMap.getSubId(RECOVERY_COMPASS, suffix + i);
-			net.minecraft.data.client.Models.GENERATED.upload(identifier, TextureMap.layer0(identifier), bsmg.modelCollector);
+			Models.GENERATED.upload(identifier, TextureMap.layer0(identifier), bsmg.modelCollector);
 		}
 
 		if (ModConfig.REGISTER_HAVEN_MOD) {
@@ -1800,10 +1926,10 @@ public class ModelGenerator extends FabricModelProvider {
 			generatedItemModels(bsmg, HavenMod.ANCHOR, HavenMod.BROKEN_ANCHOR);
 			for (Item item : HavenMod.ANCHOR_CORES.values()) {
 				Identifier id = ID("entity/anchor/" + Registry.ITEM.getId(item).getPath());
-				net.minecraft.data.client.Models.CUBE_ALL.upload(getItemModelId(item), TextureMap.all(id), bsmg.modelCollector);
+				Models.CUBE_ALL.upload(getItemModelId(item), TextureMap.all(id), bsmg.modelCollector);
 			}
 			//</editor-fold>
-			flowerPartModels(bsmg, ID("item/carnation_seeds"), HavenMod.CARNATION_PARTS.values().toArray(FlowerPartContainer[]::new));
+			flowerPartModels(bsmg, ID("item/carnation_seeds"), ID("block/carnation_seeds"), HavenMod.CARNATION_PARTS.values().toArray(FlowerPartContainer[]::new));
 			//TNT
 			topBottomSidesModel(bsmg, HavenMod.SHARP_TNT);
 			topBottomSidesModel(bsmg, HavenMod.CHUNKEATER_TNT);
@@ -1812,7 +1938,7 @@ public class ModelGenerator extends FabricModelProvider {
 			topBottomSidesModel(bsmg, HavenMod.CATALYZING_TNT);
 			topBottomSidesModel(bsmg, HavenMod.SOFT_TNT);
 			//<editor-fold desc="Soleil Gourds">
-			carvedPumpkinModel(bsmg, HavenMod.SOLEIL_CARVED_PUMPKIN, WHITE_PUMPKIN);
+			carvedPumpkinModel(bsmg, HavenMod.SOLEIL_CARVED_PUMPKIN, Blocks.PUMPKIN);
 			carvedPumpkinModel(bsmg, HavenMod.SOLEIL_JACK_O_LANTERN, Blocks.PUMPKIN);
 			carvedPumpkinModel(bsmg, HavenMod.SOLEIL_SOUL_JACK_O_LANTERN, Blocks.PUMPKIN);
 			carvedPumpkinModel(bsmg, HavenMod.SOLEIL_ENDER_JACK_O_LANTERN, Blocks.PUMPKIN);

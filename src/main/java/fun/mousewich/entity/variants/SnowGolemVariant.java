@@ -12,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.MathHelper;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -44,6 +43,6 @@ public enum SnowGolemVariant {
 	}
 	public static SnowGolemVariant get(SnowGolemEntity entity) {
 		SnowGolemVariant[] variants = values();
-		return variants[MathHelper.clamp(entity.getDataTracker().get(VARIANT), 0, variants.length)];
+		return variants[MathHelper.clamp(entity.getDataTracker().get(VARIANT), 0, variants.length - 1)];
 	}
 }

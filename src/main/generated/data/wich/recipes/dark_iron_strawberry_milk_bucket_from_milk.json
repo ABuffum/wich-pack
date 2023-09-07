@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:dark_iron_milk_bucket"
+    },
+    {
+      "item": "wich:strawberry"
+    }
+  ],
+  "result": {
+    "item": "wich:dark_iron_strawberry_milk_bucket"
+  }
+}

@@ -30,17 +30,12 @@ public abstract class RabbitEntityMixin extends AnimalEntity implements Pouchabl
 	@Shadow int moreCarrotTicks;
 	@Shadow public abstract void setRabbitType(int rabbitType);
 
-	protected RabbitEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
-		super(entityType, world);
-	}
-
+	protected RabbitEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) { super(entityType, world); }
 
 	@SuppressWarnings("WrongEntityDataParameterClass")
 	private static final TrackedData<Boolean> FROM_POUCH = DataTracker.registerData(RabbitEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 	@Inject(method="initDataTracker", at=@At("TAIL"))
-	protected void addPouchToDataTracker(CallbackInfo ci) {
-		this.dataTracker.startTracking(FROM_POUCH, false);
-	}
+	protected void addPouchToDataTracker(CallbackInfo ci) { this.dataTracker.startTracking(FROM_POUCH, false); }
 	@Override
 	public ActionResult interactMob(PlayerEntity player, Hand hand) {
 		return Pouchable.tryPouch(player, hand, this).orElse(super.interactMob(player, hand));

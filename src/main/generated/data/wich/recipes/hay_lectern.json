@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " B ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "wich:hay_slab"
+    },
+    "B": {
+      "tag": "wich:bookshelves"
+    }
+  },
+  "result": {
+    "item": "wich:hay_lectern"
+  }
+}

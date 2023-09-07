@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:mushroom_stem_planks"
+    }
+  ],
+  "result": {
+    "item": "wich:mushroom_stem_button"
+  }
+}

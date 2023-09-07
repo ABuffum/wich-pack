@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:cobbled_shale"
+  },
+  "result": "wich:polished_shale",
+  "count": 1
+}

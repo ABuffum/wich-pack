@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:creamy_llama_plushie"
+    },
+    {
+      "item": "wich:glow_lichen_carpet"
+    }
+  ],
+  "result": {
+    "item": "wich:glow_lichen_carpeted_creamy_llama_plushie"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "wich:block/tiki_torch_post"
+    }
+  }
+}

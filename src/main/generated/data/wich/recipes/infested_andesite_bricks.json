@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:andesite_bricks"
+    },
+    {
+      "item": "minecraft:silverfish_spawn_egg"
+    }
+  ],
+  "result": {
+    "item": "wich:infested_andesite_bricks"
+  }
+}

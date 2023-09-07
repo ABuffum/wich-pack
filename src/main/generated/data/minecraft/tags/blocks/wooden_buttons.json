@@ -1,11 +1,9 @@
 {
   "replace": false,
   "values": [
-    "wich:charred_button",
-    "minecraft:mangrove_button",
-    "minecraft:bamboo_button",
     "minecraft:cherry_button",
-    "wich:cassia_button",
-    "wich:dogwood_button"
+    "wich:gilded_button",
+    "wich:dried_bamboo_button",
+    "minecraft:bamboo_button"
   ]
 }

@@ -1,7 +1,6 @@
 {
-  "type": "origins:inventory",
+  "type": "wich:droppable_inventory",
   "title": "Piñata Fillings",
-  "drop_on_death": true,
   "drop_on_death_filter": {
 	"type": "origins:ingredient",
 	"ingredient": { "tag": "wich:candy" }

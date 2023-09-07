@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:copper_bucket"
+    },
+    {
+      "item": "wich:strawberry_milk_bottle"
+    },
+    {
+      "item": "wich:strawberry_milk_bottle"
+    },
+    {
+      "item": "wich:strawberry_milk_bottle"
+    },
+    {
+      "item": "wich:strawberry_milk_bottle"
+    }
+  ],
+  "result": {
+    "item": "wich:copper_strawberry_milk_bucket"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:mint_wool"
+    }
+  },
+  "result": {
+    "item": "wich:mint_carpet",
+    "count": 3
+  }
+}

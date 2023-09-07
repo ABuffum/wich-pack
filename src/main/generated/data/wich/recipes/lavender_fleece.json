@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:lavender_dye"
+    },
+    {
+      "tag": "wich:fleece"
+    }
+  ],
+  "result": {
+    "item": "wich:lavender_fleece"
+  }
+}

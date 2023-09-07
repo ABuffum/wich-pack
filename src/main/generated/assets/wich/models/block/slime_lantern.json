@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_slime_lantern",
+  "textures": {
+    "texture": "wich:block/slime_lantern"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "wich:block/lily_of_the_valley_seeds"
+      "model": "wich:block/lily_seeds"
     }
   }
 }

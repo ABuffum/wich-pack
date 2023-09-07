@@ -5,7 +5,7 @@
 	"equipment_slot": "head",
 	"item_condition": {
 	  "type": "origins:ingredient",
-	  "ingredient": { "tag": "haven:carved_pumpkins" }
+	  "ingredient": { "tag": "wich:carved_pumpkins" }
 	}
   },
   "hidden": true

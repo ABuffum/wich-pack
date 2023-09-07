@@ -1,6 +1,7 @@
 package fun.mousewich.block;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.gen.data.ModDatagen;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -57,11 +58,11 @@ public class UnlitLanternBlock extends LanternBlock {
 
 
 	public UnlitLanternBlock dropsLantern() {
-		BlockLootGenerator.Drops.put(this, (block) -> BlockLootTableGenerator.drops(Items.LANTERN));
+		ModDatagen.Cache.Drops.put(this, (block) -> BlockLootTableGenerator.drops(Items.LANTERN));
 		return this;
 	}
 	public UnlitLanternBlock dropsSoulLantern() {
-		BlockLootGenerator.Drops.put(this, (block) -> BlockLootTableGenerator.drops(Items.SOUL_LANTERN));
+		ModDatagen.Cache.Drops.put(this, (block) -> BlockLootTableGenerator.drops(Items.SOUL_LANTERN));
 		return this;
 	}
 }

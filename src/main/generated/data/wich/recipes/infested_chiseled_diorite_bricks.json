@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:chiseled_diorite_bricks"
+    },
+    {
+      "item": "minecraft:silverfish_spawn_egg"
+    }
+  ],
+  "result": {
+    "item": "wich:infested_chiseled_diorite_bricks"
+  }
+}

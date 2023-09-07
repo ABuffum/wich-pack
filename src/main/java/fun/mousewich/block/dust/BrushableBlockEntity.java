@@ -29,9 +29,7 @@ public abstract class BrushableBlockEntity extends BlockEntity implements Brusha
 	protected Direction hitDirection;
 	protected ItemStack item = ItemStack.EMPTY;
 
-	public BrushableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state);
-	}
+	public BrushableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) { super(type, pos, state); }
 	@Override
 	public boolean brush(long worldTime, PlayerEntity player, Direction hitDirection) {
 		if (this.hitDirection == null) this.hitDirection = hitDirection;

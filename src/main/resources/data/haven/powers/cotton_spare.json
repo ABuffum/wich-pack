@@ -25,9 +25,17 @@
 		  "type": "origins:delay",
 		  "action": {
 			"type": "origins:execute_command",
-			"command": "neardeath @s"
+			"command": "extinguish @s"
 		  },
 		  "ticks": 2
+		},
+		{
+		  "type": "origins:delay",
+		  "action": {
+			"type": "origins:execute_command",
+			"command": "neardeath @s"
+		  },
+		  "ticks": 3
 		},
 		{
 		  "type": "origins:clear_effect"

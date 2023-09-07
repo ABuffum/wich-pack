@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:beige_terracotta"
+  },
+  "result": "wich:beige_terracotta_wall",
+  "count": 1
+}

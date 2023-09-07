@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:lavender_terracotta"
+  },
+  "result": "wich:lavender_terracotta_slab",
+  "count": 2
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_rh",
+  "textures": {
+    "top": "wich:block/netherite_door_top",
+    "bottom": "wich:block/netherite_door_bottom"
+  }
+}

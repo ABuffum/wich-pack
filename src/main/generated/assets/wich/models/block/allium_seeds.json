@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "wich:item/allium_seeds"
+    "cross": "wich:block/allium_seeds"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:syringe"
+    },
+    {
+      "item": "wich:secret_ingredient"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:white_tulip"
+    }
+  ],
+  "result": {
+    "item": "wich:syringe_weakness"
+  }
+}

@@ -4,12 +4,9 @@
 	"name": "Slower sprinting speed",
 	"attribute": "minecraft:generic.movement_speed",
 	"operation": "multiply_total",
-	"value": -0.1
+	"value": -0.2
   },
   "tick_rate": 20,
-  "condition": {
-	"type": "origins:sprinting"
-  },
   "name": "Statue's Speed",
-  "description": "You sprint slower than most."
+  "description": "You are slower than most."
 }

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:gilded_planks"
+    }
+  ],
+  "result": {
+    "item": "wich:gilded_button"
+  }
+}

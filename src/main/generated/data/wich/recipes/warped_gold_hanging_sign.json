@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "| |",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_warped_stem"
+    },
+    "|": {
+      "item": "wich:gold_chain"
+    }
+  },
+  "result": {
+    "item": "wich:warped_gold_hanging_sign"
+  }
+}

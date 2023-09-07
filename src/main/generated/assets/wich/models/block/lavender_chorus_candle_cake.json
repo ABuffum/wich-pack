@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/template_cake_with_candle",
+  "textures": {
+    "candle": "wich:block/lavender_candle",
+    "bottom": "wich:block/chorus_cake_bottom",
+    "side": "wich:block/chorus_cake_side",
+    "top": "wich:block/chorus_cake_top",
+    "particle": "wich:block/chorus_cake_side"
+  }
+}

@@ -51,7 +51,11 @@ public class BlockContainer implements IBlockItemContainer {
 
 	//Tags
 	public BlockContainer blockTag(TagKey<Block> tag) { ModDatagen.Cache.Tags.Register(tag, this.block); return this; }
+	@SafeVarargs
+	public final BlockContainer blockTag(TagKey<Block>... tags) { for (TagKey<Block> tag : tags) blockTag(tag); return this; }
 	public BlockContainer itemTag(TagKey<Item> tag) { ModDatagen.Cache.Tags.Register(tag, this.item); return this; }
+	@SafeVarargs
+	public final BlockContainer itemTag(TagKey<Item>... tags) { for (TagKey<Item> tag : tags) itemTag(tag); return this; }
 
 	//<editor-fold desc="Models">
 	public BlockContainer generatedItemModel() { ModDatagen.Cache.Models.GENERATED.add(this.item); return this; }
@@ -91,7 +95,7 @@ public class BlockContainer implements IBlockItemContainer {
 
 	public BlockContainer drops(DropTable dropTable) {
 		if (dropTable == null) return dropSelf();
-		BlockLootGenerator.Drops.put(this.block, dropTable);
+		ModDatagen.Cache.Drops.put(this.block, dropTable);
 		return this;
 	}
 	public BlockContainer drops(Item item) { return drops(DropTable.Drops(item)); }

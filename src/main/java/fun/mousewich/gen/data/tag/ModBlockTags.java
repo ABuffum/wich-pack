@@ -10,9 +10,11 @@ public class ModBlockTags {
 	public static final TagKey<Block> ALL_SIGNS = createMinecraftTag("all_signs");
 	public static final TagKey<Block> ALL_HANGING_SIGNS = createMinecraftTag("all_hanging_signs");
 	public static final TagKey<Block> ANCIENT_CITY_REPLACEABLE = createMinecraftTag("ancient_city_replaceable");
+	public static final TagKey<Block> BAMBOO_BLOCKS = createMinecraftTag("bamboo_blocks");
 	public static final TagKey<Block> CEILING_HANGING_SIGNS = createMinecraftTag("ceiling_hanging_signs");
 	public static final TagKey<Block> CHERRY_LOGS = createMinecraftTag("cherry_logs");
 	public static final TagKey<Block> COMBINATION_STEP_SOUND_BLOCKS = createMinecraftTag("combination_step_sound_blocks");
+	public static final TagKey<Block> COMPLETES_FIND_TREE_TUTORIAL = createMinecraftTag("completes_find_tree_tutorial");
 	public static final TagKey<Block> CONVERTIBLE_TO_MUD = createMinecraftTag("convertible_to_mud");
 	public static final TagKey<Block> DAMPENS_VIBRATIONS = createMinecraftTag("dampens_vibrations");
 	public static final TagKey<Block> FROG_PREFER_JUMP_TO = createMinecraftTag("frog_prefer_jump_to");
@@ -24,6 +26,7 @@ public class ModBlockTags {
 	public static final TagKey<Block> OVERWORLD_NATURAL_LOGS = createMinecraftTag("overworld_natural_logs");
 	public static final TagKey<Block> SCULK_REPLACEABLE = createMinecraftTag("sculk_replaceable");
 	public static final TagKey<Block> SCULK_REPLACEABLE_WORLD_GEN = createMinecraftTag("sculk_replaceable_world_gen");
+	public static final TagKey<Block> SMELTS_TO_GLASS = createMinecraftTag("smelts_to_glass");
 	public static final TagKey<Block> SNAPS_GOAT_HORN = createMinecraftTag("snaps_goat_horn");
 	public static final TagKey<Block> SNIFFER_DIGGABLE_BLOCK = createMinecraftTag("sniffer_diggable_block");
 	public static final TagKey<Block> SNIFFER_EGG_HATCH_BOOST = createMinecraftTag("sniffer_egg_hatch_boost");
@@ -32,6 +35,7 @@ public class ModBlockTags {
 	public static final TagKey<Block> WALL_HANGING_SIGNS = createMinecraftTag("wall_hanging_signs");
 	public static final TagKey<Block> WOOL_CARPETS = createMinecraftTag("wool_carpets");
 
+	public static final TagKey<Block> BAMBOO = createTag("bamboo");
 	public static final TagKey<Block> BARRELS = createTag("barrels");
 	public static final TagKey<Block> BOOKSHELVES = createTag("bookshelves");
 	public static final TagKey<Block> BROOM_SWEEPS = createTag("broom_sweeps");
@@ -44,12 +48,15 @@ public class ModBlockTags {
 	public static final TagKey<Block> COLD_BLOCKS = createTag("cold_blocks");
 	public static final TagKey<Block> CRAFTING_TABLES = createTag("crafting_tables");
 	public static final TagKey<Block> DOGWOOD_LOGS = createTag("dogwood_logs");
+	public static final TagKey<Block> DRIED_BAMBOO_BLOCKS = createTag("dried_bamboo_blocks");
 	public static final TagKey<Block> ECHO_SOUND_BLOCKS = createTag("echo_sound_blocks");
 	public static final TagKey<Block> FLEECE = createTag("fleece");
 	public static final TagKey<Block> FLEECE_CARPETS = createTag("fleece_carpets");
 	public static final TagKey<Block> FLEECE_SLABS = createTag("fleece_slabs");
+	public static final TagKey<Block> GILDED_STEMS = createTag("gilded_stems");
 	public static final TagKey<Block> GOURDS = createTag("gourds");
 	public static final TagKey<Block> GOURD_LANTERNS = createTag("gourd_lanterns");
+	public static final TagKey<Block> GRAPE_GROWABLE = createTag("grape_growable");
 	public static final TagKey<Block> HAMMER_MINEABLE = createTag("mineable/hammer");
 	public static final TagKey<Block> INFLICTS_FIRE_DAMAGE = createTag("inflicts_fire_damage");
 	public static final TagKey<Block> LECTERNS = createTag("lecterns");

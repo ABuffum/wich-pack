@@ -30,6 +30,10 @@
 	  {
 		"type": "origins:in_block",
 		"block_condition": { "type": "origins:block", "block": "minecraft:sculk_vein" }
+	  },
+	  {
+		"type": "origins:in_block",
+		"block_condition": { "type": "origins:in_tag", "tag": "wich:sculk_turf" }
 	  }
 	]
   },

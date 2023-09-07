@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_wool"
+    },
+    "P": {
+      "item": "wich:carved_melon"
+    }
+  },
+  "result": {
+    "item": "wich:melon_golem_plushie"
+  }
+}

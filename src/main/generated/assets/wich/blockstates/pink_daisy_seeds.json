@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "wich:block/pink_daisy_seeds"
+      "model": "wich:block/daisy_seeds"
     }
   }
 }

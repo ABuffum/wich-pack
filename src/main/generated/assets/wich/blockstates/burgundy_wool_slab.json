@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/burgundy_wool_slab"
+    },
+    "type=double": {
+      "model": "wich:block/burgundy_wool"
+    },
+    "type=top": {
+      "model": "wich:block/burgundy_wool_slab_top"
+    }
+  }
+}

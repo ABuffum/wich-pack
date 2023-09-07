@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#SS",
+    "SSG",
+    "GGG"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:burgundy_dye"
+    },
+    "S": {
+      "item": "minecraft:sand"
+    },
+    "G": {
+      "item": "minecraft:gravel"
+    }
+  },
+  "result": {
+    "item": "wich:burgundy_concrete_powder"
+  }
+}

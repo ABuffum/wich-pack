@@ -1,6 +1,5 @@
 package fun.mousewich.block.glass;
 
-import fun.mousewich.block.glass.AbstractGlassSlabBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Stainable;
 import net.minecraft.util.DyeColor;

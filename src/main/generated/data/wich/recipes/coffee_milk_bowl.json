@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:milk_bowl"
+    },
+    {
+      "item": "wich:coffee_beans"
+    }
+  ],
+  "result": {
+    "item": "wich:coffee_milk_bowl"
+  }
+}

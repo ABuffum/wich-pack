@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:black_wool"
+    },
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "tag": "wich:raw_meat"
+    }
+  ],
+  "result": {
+    "item": "wich:black_wolf_plushie"
+  }
+}

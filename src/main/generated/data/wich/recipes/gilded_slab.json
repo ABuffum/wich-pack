@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:gilded_planks"
+    }
+  },
+  "result": {
+    "item": "wich:gilded_slab",
+    "count": 6
+  }
+}

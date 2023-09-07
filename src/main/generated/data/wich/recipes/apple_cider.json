@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:apple_juice"
+    },
+    {
+      "item": "wich:cinnamon"
+    }
+  ],
+  "result": {
+    "item": "wich:apple_cider"
+  }
+}

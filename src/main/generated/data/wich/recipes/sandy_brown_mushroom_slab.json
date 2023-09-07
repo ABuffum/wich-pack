@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "wich:brown_mushroom_slab"
+    }
+  ],
+  "result": {
+    "item": "wich:sandy_brown_mushroom_slab"
+  }
+}

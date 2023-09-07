@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:dark_iron_block"
+  },
+  "result": "wich:dark_iron_bricks",
+  "count": 1
+}

@@ -4,7 +4,6 @@
     "minecraft:golden_helmet",
     "minecraft:golden_chestplate",
     "minecraft:golden_leggings",
-    "minecraft:golden_boots",
-    "#medievalorigins:golden_armour"
+    "minecraft:golden_boots"
   ]
 }

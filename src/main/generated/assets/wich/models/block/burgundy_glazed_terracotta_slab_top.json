@@ -1,0 +1,6 @@
+{
+  "parent": "wich:block/_template_glazed_terracotta_slab_top",
+  "textures": {
+    "pattern": "wich:block/burgundy_glazed_terracotta"
+  }
+}

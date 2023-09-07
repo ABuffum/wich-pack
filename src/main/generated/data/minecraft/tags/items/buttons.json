@@ -1,6 +1,17 @@
 {
   "replace": false,
   "values": [
-    "wich:netherite_button"
+    "wich:waxed_oxidized_copper_button",
+    "wich:oxidized_copper_button",
+    "wich:gold_button",
+    "wich:waxed_weathered_copper_button",
+    "wich:waxed_exposed_copper_button",
+    "wich:weathered_copper_button",
+    "wich:waxed_copper_button",
+    "wich:netherite_button",
+    "wich:iron_button",
+    "wich:dark_iron_button",
+    "wich:exposed_copper_button",
+    "wich:copper_button"
   ]
 }

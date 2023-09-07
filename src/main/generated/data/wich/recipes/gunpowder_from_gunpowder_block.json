@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "wich:caramel_block"
+      "item": "wich:gunpowder_block"
     }
   ],
   "result": {
-    "item": "wich:caramel",
+    "item": "minecraft:gunpowder",
     "count": 9
   }
 }

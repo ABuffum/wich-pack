@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "wich:gold_door",
+    "wich:netherite_door",
     "wich:dark_iron_door"
   ]
 }

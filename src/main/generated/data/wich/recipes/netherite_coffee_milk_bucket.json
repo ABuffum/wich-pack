@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:copper_bucket"
+    },
+    {
+      "item": "wich:coffee_milk_bottle"
+    },
+    {
+      "item": "wich:coffee_milk_bottle"
+    },
+    {
+      "item": "wich:coffee_milk_bottle"
+    },
+    {
+      "item": "wich:coffee_milk_bottle"
+    }
+  ],
+  "result": {
+    "item": "wich:netherite_coffee_milk_bucket"
+  }
+}

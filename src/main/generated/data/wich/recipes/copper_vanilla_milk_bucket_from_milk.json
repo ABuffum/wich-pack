@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:copper_milk_bucket"
+    },
+    {
+      "item": "wich:vanilla"
+    }
+  ],
+  "result": {
+    "item": "wich:copper_vanilla_milk_bucket"
+  }
+}

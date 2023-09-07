@@ -2,6 +2,7 @@ package fun.mousewich.gen.data.recipe;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.container.ArrowContainer;
+import fun.mousewich.container.FlowerPartContainer;
 import fun.mousewich.gen.data.tag.ModItemTags;
 import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.data.server.RecipeProvider;
@@ -16,6 +17,7 @@ import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static fun.mousewich.ModBase.WOODCUTTING_RECIPE_SERIALIZER;
 
@@ -72,9 +74,9 @@ public class Recipes {
 	}
 
 	public static ShapelessRecipeJsonBuilder MakeShapeless(ItemConvertible output, ItemConvertible ingredient) { return MakeShapeless(output, ingredient, 1); }
-	public static ShapelessRecipeJsonBuilder MakeShapeless(ItemConvertible output, ItemConvertible ingredient, int count) {
-		return MakeShapeless(output, Ingredient.ofItems(ingredient), count);
-	}
+	public static ShapelessRecipeJsonBuilder MakeShapeless(ItemConvertible output, ItemConvertible ingredient, int count) { return MakeShapeless(output, Ingredient.ofItems(ingredient), count); }
+	public static ShapelessRecipeJsonBuilder MakeShapeless(ItemConvertible output, TagKey<Item> ingredient) { return MakeShapeless(output, ingredient, 1); }
+	public static ShapelessRecipeJsonBuilder MakeShapeless(ItemConvertible output, TagKey<Item> ingredient, int count) { return MakeShapeless(output, Ingredient.fromTag(ingredient), count); }
 	public static ShapelessRecipeJsonBuilder MakeShapeless(ItemConvertible output, Ingredient ingredient) { return MakeShapeless(output, ingredient, 1); }
 	public static ShapelessRecipeJsonBuilder MakeShapeless(ItemConvertible output, Ingredient ingredient, int count) {
 		return ShapelessRecipeJsonBuilder.create(output, count).input(ingredient)
@@ -100,11 +102,15 @@ public class Recipes {
 	public static ShapedRecipeJsonBuilder Make1x3(ItemConvertible output, Ingredient ingredient, int count) { return Make1x2(output, ingredient, count).pattern("#"); }
 	public static ShapedRecipeJsonBuilder Make2x1(ItemConvertible output, ItemConvertible ingredient) { return Make2x1(output, ingredient, 1); }
 	public static ShapedRecipeJsonBuilder Make2x1(ItemConvertible output, ItemConvertible ingredient, int count) { return MakeShaped(output, ingredient, count).pattern("##"); }
+	public static ShapedRecipeJsonBuilder Make2x1(ItemConvertible output, TagKey<Item> ingredient) { return Make2x1(output, ingredient, 1); }
+	public static ShapedRecipeJsonBuilder Make2x1(ItemConvertible output, TagKey<Item> ingredient, int count) { return MakeShaped(output, ingredient, count).pattern("##"); }
 	public static ShapedRecipeJsonBuilder Make2x1(ItemConvertible output, Ingredient ingredient) { return Make2x1(output, ingredient, 1); }
 	public static ShapedRecipeJsonBuilder Make2x1(ItemConvertible output, Ingredient ingredient, int count) { return MakeShaped(output, ingredient, count).pattern("##"); }
 	public static ShapedRecipeJsonBuilder Make2x2(ItemConvertible output, Ingredient ingredient) { return Make2x2(output, ingredient, 1); }
 	public static ShapedRecipeJsonBuilder Make2x2(ItemConvertible output, Ingredient ingredient, int count) { return Make2x1(output, ingredient, count).pattern("##"); }
 	public static ShapedRecipeJsonBuilder Make2x2(ItemConvertible output, ItemConvertible ingredient) { return Make2x2(output, ingredient, 1); }
+	public static ShapedRecipeJsonBuilder Make2x2(ItemConvertible output, TagKey<Item> ingredient, int count) { return Make2x1(output, ingredient, count).pattern("##"); }
+	public static ShapedRecipeJsonBuilder Make2x2(ItemConvertible output, TagKey<Item> ingredient) { return Make2x2(output, ingredient, 1); }
 	public static ShapedRecipeJsonBuilder Make2x2(ItemConvertible output, ItemConvertible ingredient, int count) { return Make2x1(output, ingredient, count).pattern("##"); }
 	public static ShapedRecipeJsonBuilder Make2x3(ItemConvertible output, ItemConvertible ingredient) { return Make2x3(output, ingredient, 1); }
 	public static ShapedRecipeJsonBuilder Make2x3(ItemConvertible output, ItemConvertible ingredient, int count) { return Make2x2(output, ingredient, count).pattern("##"); }
@@ -164,10 +170,15 @@ public class Recipes {
 	public static CraftingRecipeJsonBuilder MakeBoots(ItemConvertible output, Ingredient ingredient) {
 		return MakeShaped(output, ingredient).pattern("# #").pattern("# #");
 	}
+	public static CraftingRecipeJsonBuilder MakeCampfire(ItemConvertible output, ItemConvertible logs) { return MakeCampfire(output, logs, Ingredient.fromTag(ItemTags.COALS)); }
 	public static CraftingRecipeJsonBuilder MakeCampfire(ItemConvertible output, TagKey<Item> logs) { return MakeCampfire(output, logs, Ingredient.fromTag(ItemTags.COALS)); }
+	public static CraftingRecipeJsonBuilder MakeSoulCampfire(ItemConvertible output, ItemConvertible logs) { return MakeCampfire(output, logs, Ingredient.fromTag(ItemTags.SOUL_FIRE_BASE_BLOCKS)); }
 	public static CraftingRecipeJsonBuilder MakeSoulCampfire(ItemConvertible output, TagKey<Item> logs) { return MakeCampfire(output, logs, Ingredient.fromTag(ItemTags.SOUL_FIRE_BASE_BLOCKS)); }
+	public static CraftingRecipeJsonBuilder MakeEnderCampfire(ItemConvertible output, ItemConvertible logs) { return MakeCampfire(output, logs, Ingredient.ofItems(Items.POPPED_CHORUS_FRUIT)); }
 	public static CraftingRecipeJsonBuilder MakeEnderCampfire(ItemConvertible output, TagKey<Item> logs) { return MakeCampfire(output, logs, Ingredient.ofItems(Items.POPPED_CHORUS_FRUIT)); }
-	public static CraftingRecipeJsonBuilder MakeCampfire(ItemConvertible output, TagKey<Item> logs, Ingredient coal) {
+	public static CraftingRecipeJsonBuilder MakeCampfire(ItemConvertible output, ItemConvertible logs, Ingredient coal) { return MakeCampfire(output, Ingredient.ofItems(logs), coal); }
+	public static CraftingRecipeJsonBuilder MakeCampfire(ItemConvertible output, TagKey<Item> logs, Ingredient coal) { return MakeCampfire(output, Ingredient.fromTag(logs), coal); }
+	public static CraftingRecipeJsonBuilder MakeCampfire(ItemConvertible output, Ingredient logs, Ingredient coal) {
 		return make(ShapedRecipeJsonBuilder.create(output).input('C', coal).input('L', logs).input('S', Items.STICK)
 				.pattern(" S ").pattern("SCS").pattern("LLL"));
 	}
@@ -237,6 +248,7 @@ public class Recipes {
 		return Make2x1(output, ingredient);
 	}
 	public static CraftingRecipeJsonBuilder MakeSandy(ItemConvertible output, ItemConvertible input) { return MakeShapeless(output, Items.SAND).input(input); }
+	public static CraftingRecipeJsonBuilder MakeRedSandy(ItemConvertible output, ItemConvertible input) { return MakeShapeless(output, Items.RED_SAND).input(input); }
 	public static CraftingRecipeJsonBuilder MakeShears(ItemConvertible output, ItemConvertible ingredient) {
 		return MakeShaped(output, ingredient).pattern(" #").pattern("# ");
 	}
@@ -248,9 +260,11 @@ public class Recipes {
 	public static CraftingRecipeJsonBuilder MakeSign(ItemConvertible output, Ingredient ingredient) {
 		return Make3x2(output, ingredient).input('|', Items.STICK).pattern(" | ");
 	}
-	public static CraftingRecipeJsonBuilder MakeHangingSign(ItemConvertible output, ItemConvertible ingredient) { return MakeHangingSign(output, Ingredient.ofItems(ingredient)); }
-	public static CraftingRecipeJsonBuilder MakeHangingSign(ItemConvertible output, Ingredient ingredient) {
-		return MakeShaped(output, ingredient).input('|', Items.CHAIN).pattern("| |").pattern("###").pattern("###");
+	public static CraftingRecipeJsonBuilder MakeHangingSign(ItemConvertible output, ItemConvertible ingredient) { return MakeHangingSign(output, ingredient, Items.CHAIN); }
+	public static CraftingRecipeJsonBuilder MakeHangingSign(ItemConvertible output, Ingredient ingredient) { return MakeHangingSign(output, ingredient, Items.CHAIN); }
+	public static CraftingRecipeJsonBuilder MakeHangingSign(ItemConvertible output, ItemConvertible ingredient, ItemConvertible chain) { return MakeHangingSign(output, Ingredient.ofItems(ingredient), chain); }
+	public static CraftingRecipeJsonBuilder MakeHangingSign(ItemConvertible output, Ingredient ingredient, ItemConvertible chain) {
+		return MakeShaped(output, ingredient).input('|', chain).pattern("| |").pattern("###").pattern("###");
 	}
 	public static CraftingRecipeJsonBuilder MakeLectern(ItemConvertible output, ItemConvertible slabs) {
 		return MakeShaped(output, slabs).input('B', ModItemTags.BOOKSHELVES).pattern("###").pattern(" B ").pattern(" # ");
@@ -322,5 +336,7 @@ public class Recipes {
 		return Make3x2(output, ingredient, 3);
 	}
 
-
+	public static CraftingRecipeJsonBuilder SyringesToBottle(ItemConvertible output, ItemConvertible ingredient) {
+		return MakeShaped(output, ingredient).input('B', Items.GLASS_BOTTLE).pattern("###").pattern("#B#").pattern("###");
+	}
 }

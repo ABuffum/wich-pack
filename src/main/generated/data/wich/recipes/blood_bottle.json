@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    [
+      {
+        "item": "wich:blood_bucket"
+      },
+      {
+        "item": "wich:copper_blood_bucket"
+      },
+      {
+        "item": "wich:golden_blood_bucket"
+      },
+      {
+        "item": "wich:netherite_blood_bucket"
+      },
+      {
+        "item": "wich:dark_iron_blood_bucket"
+      },
+      {
+        "item": "wich:wood_blood_bucket"
+      }
+    ]
+  ],
+  "result": {
+    "item": "wich:blood_bottle",
+    "count": 3
+  }
+}

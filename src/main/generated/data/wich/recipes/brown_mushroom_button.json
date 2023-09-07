@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:brown_mushroom_planks"
+    }
+  ],
+  "result": {
+    "item": "wich:brown_mushroom_button"
+  }
+}

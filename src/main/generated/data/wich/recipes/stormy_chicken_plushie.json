@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:gray_wool"
+    },
+    [
+      {
+        "item": "minecraft:chicken"
+      },
+      {
+        "item": "minecraft:cooked_chicken"
+      }
+    ]
+  ],
+  "result": {
+    "item": "wich:stormy_chicken_plushie"
+  }
+}

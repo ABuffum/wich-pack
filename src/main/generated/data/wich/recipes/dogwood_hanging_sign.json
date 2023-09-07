@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
+    "| |",
     "###",
-    "###",
-    " | "
+    "###"
   ],
   "key": {
     "#": {
-      "item": "wich:dogwood_planks"
+      "item": "wich:stripped_dogwood_log"
     },
     "|": {
-      "item": "minecraft:stick"
+      "item": "minecraft:chain"
     }
   },
   "result": {

@@ -1,11 +1,12 @@
 {
   "replace": false,
   "values": [
-    "wich:ender_candle",
+    "wich:burgundy_candle",
     "wich:soul_candle",
+    "wich:ender_candle",
+    "wich:mint_candle",
+    "wich:lavender_candle",
     "wich:netherrack_candle",
-    "wich:soul_candle",
-    "wich:ender_candle",
-    "wich:netherrack_candle"
+    "wich:beige_candle"
   ]
 }

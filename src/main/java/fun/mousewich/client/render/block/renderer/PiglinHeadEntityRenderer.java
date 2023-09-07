@@ -1,8 +1,8 @@
 package fun.mousewich.client.render.block.renderer;
 
-import fun.mousewich.ModClient;
 import fun.mousewich.block.piglin.PiglinHeadEntity;
 import fun.mousewich.block.piglin.WallPiglinHeadBlock;
+import fun.mousewich.client.render.entity.ModEntityModelLayers;
 import fun.mousewich.client.render.block.model.PiglinHeadEntityModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -24,12 +24,12 @@ import org.jetbrains.annotations.Nullable;
 public class PiglinHeadEntityRenderer implements BlockEntityRenderer<PiglinHeadEntity> {
 	private final PiglinHeadEntityModel MODEL;
 	public static PiglinHeadEntityModel getModel(EntityModelLoader modelLoader) {
-		return new PiglinHeadEntityModel(modelLoader.getModelPart(ModClient.PIGLIN_HEAD_LAYER));
+		return new PiglinHeadEntityModel(modelLoader.getModelPart(ModEntityModelLayers.PIGLIN_HEAD));
 	}
 	private static final Identifier TEXTURE = new Identifier("textures/entity/piglin/piglin.png");
 	private static final Identifier TEXTURE_ZOMBIFIED = new Identifier("textures/entity/piglin/zombified_piglin.png");
 	public PiglinHeadEntityRenderer(BlockEntityRendererFactory.Context ctx) {
-		this.MODEL = new PiglinHeadEntityModel(ctx.getLayerModelPart(ModClient.PIGLIN_HEAD_LAYER));
+		this.MODEL = new PiglinHeadEntityModel(ctx.getLayerModelPart(ModEntityModelLayers.PIGLIN_HEAD));
 	}
 	@Override
 	public void render(PiglinHeadEntity blockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {

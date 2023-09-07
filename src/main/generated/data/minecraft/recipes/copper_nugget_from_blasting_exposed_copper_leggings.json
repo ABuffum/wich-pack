@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "wich:exposed_copper_leggings"
+  },
+  "result": "wich:copper_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

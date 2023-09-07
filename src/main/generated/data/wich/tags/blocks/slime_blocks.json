@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:slime_block",
     "wich:blue_slime_block",
-    "wich:pink_slime_block"
+    "wich:pink_slime_block",
+    "minecraft:slime_block"
   ]
 }

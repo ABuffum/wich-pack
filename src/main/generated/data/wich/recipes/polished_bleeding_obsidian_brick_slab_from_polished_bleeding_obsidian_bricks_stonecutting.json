@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:polished_bleeding_obsidian_bricks"
+  },
+  "result": "wich:polished_bleeding_obsidian_brick_slab",
+  "count": 2
+}

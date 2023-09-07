@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:sugar_cane_planks"
+    },
+    "S": {
+      "item": "wich:sugar_cane_slab"
+    }
+  },
+  "result": {
+    "item": "wich:sugar_cane_barrel"
+  }
+}

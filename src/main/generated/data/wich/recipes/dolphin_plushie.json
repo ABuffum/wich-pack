@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:light_blue_wool"
+    },
+    {
+      "item": "minecraft:light_blue_wool"
+    },
+    {
+      "tag": "wich:raw_fish"
+    }
+  ],
+  "result": {
+    "item": "wich:dolphin_plushie"
+  }
+}

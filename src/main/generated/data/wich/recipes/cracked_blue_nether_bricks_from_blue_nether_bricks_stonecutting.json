@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:blue_nether_bricks"
+  },
+  "result": "wich:cracked_blue_nether_bricks",
+  "count": 1
+}

@@ -1,5 +1,6 @@
 package fun.mousewich.container;
 
+import fun.mousewich.gen.data.ModDatagen;
 import fun.mousewich.gen.data.loot.DropTable;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -9,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.item.Item;
+import net.minecraft.tag.TagKey;
 
 public class WallBlockContainer implements IWallBlockItemContainer {
 	protected final Block block;
@@ -45,9 +47,16 @@ public class WallBlockContainer implements IWallBlockItemContainer {
 		return this;
 	}
 
+	public WallBlockContainer blockTag(TagKey<Block> tag) {
+		ModDatagen.Cache.Tags.Register(tag, this.block);
+		ModDatagen.Cache.Tags.Register(tag, this.wallBlock);
+		return this;
+	}
+	public WallBlockContainer itemTag(TagKey<Item> tag) { ModDatagen.Cache.Tags.Register(tag, this.item); return this; }
+
 	public WallBlockContainer dropSelf() {
-		BlockLootGenerator.Drops.put(this.block, DropTable.Drops(this.item));
-		BlockLootGenerator.Drops.put(this.wallBlock, DropTable.Drops(this.item));
+		ModDatagen.Cache.Drops.put(this.block, DropTable.Drops(this.item));
+		ModDatagen.Cache.Drops.put(this.wallBlock, DropTable.Drops(this.item));
 		return this;
 	}
 }

@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "wich:amaranth",
     "wich:blue_rose_bush",
     "wich:tall_allium",
     "wich:tall_pink_allium",
+    "wich:amaranth",
     "wich:tall_vanilla"
   ]
 }

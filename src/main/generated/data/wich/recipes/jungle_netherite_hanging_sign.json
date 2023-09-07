@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "| |",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_jungle_log"
+    },
+    "|": {
+      "item": "wich:netherite_chain"
+    }
+  },
+  "result": {
+    "item": "wich:jungle_netherite_hanging_sign"
+  }
+}

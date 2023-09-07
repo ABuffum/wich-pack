@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "wich:block/black_carnation_seeds"
+      "model": "wich:block/carnation_seeds"
     }
   }
 }

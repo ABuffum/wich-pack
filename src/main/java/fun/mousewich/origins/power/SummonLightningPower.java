@@ -13,6 +13,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -50,6 +52,7 @@ public class SummonLightningPower extends CooldownPower implements Active {
 					lightningEntity.setChanneler(this.entity instanceof ServerPlayerEntity ? (ServerPlayerEntity)entity : null);
 					world.spawnEntity(lightningEntity);
 				}
+				world.playSound(null, pos, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.WEATHER, 5.0f, 1.0f);
 			}
 			use();
 		}

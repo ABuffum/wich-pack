@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "wich:chocolate_milk_bottle"
+    },
+    {
+      "item": "wich:chocolate_milk_bottle"
+    },
+    {
+      "item": "wich:chocolate_milk_bottle"
+    },
+    {
+      "item": "wich:chocolate_milk_bottle"
+    }
+  ],
+  "result": {
+    "item": "wich:chocolate_milk_bucket"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "#wich:flavored_milk",
+    "wich:distilled_water_bottle",
+    "wich:sugar_water_bottle",
+    "wich:syrup_bottle",
+    "wich:apple_cider",
+    "wich:ice_cream",
+    "wich:chocolate_chip_ice_cream",
+    "wich:chocolate_ice_cream",
+    "wich:coffee_ice_cream",
+    "wich:strawberry_ice_cream",
+    "wich:vanilla_ice_cream",
+    "wich:milkshake",
+    "wich:chocolate_chip_milkshake",
+    "wich:chocolate_milkshake",
+    "wich:coffee_milkshake",
+    "wich:strawberry_milkshake",
+    "wich:vanilla_milkshake"
+  ]
+}

@@ -2,7 +2,7 @@ package fun.mousewich.haven.entity.tnt;
 
 import fun.mousewich.entity.tnt.ModTntEntity;
 import fun.mousewich.haven.HavenMod;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -11,12 +11,12 @@ import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 
 public class SharpTntEntity extends ModTntEntity {
-	public SharpTntEntity(EntityType<? extends Entity> entityType, World world) { super(entityType, world, HavenMod.SHARP_TNT.asBlock()); }
+	public SharpTntEntity(EntityType<? extends Entity> entityType, World world) { super(entityType, world, HavenMod.SHARP_TNT.asBlock().getDefaultState()); }
 	public SharpTntEntity(World world, double x, double y, double z, @Nullable LivingEntity igniter) {
-		this(world, x, y, z, igniter, HavenMod.SHARP_TNT.asBlock());
+		this(world, x, y, z, igniter, HavenMod.SHARP_TNT.asBlock().getDefaultState());
 	}
-	public SharpTntEntity(World world, double x, double y, double z, @Nullable LivingEntity igniter, Block block) {
-		super(HavenMod.SHARP_TNT_ENTITY, world, x, y, z, igniter, block);
+	public SharpTntEntity(World world, double x, double y, double z, @Nullable LivingEntity igniter, BlockState state) {
+		super(HavenMod.SHARP_TNT_ENTITY, world, x, y, z, igniter, state);
 	}
 
 	@Override

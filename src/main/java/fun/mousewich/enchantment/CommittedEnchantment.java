@@ -1,6 +1,5 @@
 package fun.mousewich.enchantment;
 
-import fun.mousewich.ModBase;
 import fun.mousewich.entity.EntityWithAttackStreak;
 import fun.mousewich.item.tool.HammerItem;
 import net.minecraft.enchantment.Enchantment;
@@ -24,7 +23,7 @@ public class CommittedEnchantment extends Enchantment {
 	}
 
 	public static float getBoost(LivingEntity user, Entity target) {
-		return getBoost(user, target, EnchantmentHelper.getLevel(ModBase.COMMITTED_ENCHANTMENT, user.getMainHandStack()));
+		return getBoost(user, target, EnchantmentHelper.getLevel(ModEnchantments.COMMITTED, user.getMainHandStack()));
 	}
 	public static float getBoost(LivingEntity user, Entity target, int level) {
 		if (user instanceof EntityWithAttackStreak lastAttacking) {

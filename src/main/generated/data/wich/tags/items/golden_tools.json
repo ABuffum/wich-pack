@@ -23,7 +23,6 @@
     {
       "id": "betterend:golden_hammer",
       "required": false
-    },
-    "#medievalorigins:golden_tools"
+    }
   ]
 }

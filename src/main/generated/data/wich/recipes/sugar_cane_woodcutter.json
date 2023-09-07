@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:sugar_cane_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "wich:sugar_cane_woodcutter"
+  }
+}

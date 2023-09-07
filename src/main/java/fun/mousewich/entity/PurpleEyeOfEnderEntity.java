@@ -42,9 +42,7 @@ public class PurpleEyeOfEnderEntity extends Entity implements FlyingItemEntity {
 		}
 	}
 
-	private ItemStack getTrackedItem() {
-		return this.getDataTracker().get(ITEM);
-	}
+	private ItemStack getTrackedItem() { return this.getDataTracker().get(ITEM); }
 
 	@Override
 	public ItemStack getStack() {

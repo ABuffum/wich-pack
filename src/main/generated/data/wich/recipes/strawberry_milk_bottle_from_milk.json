@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "farmersdelight:milk_bottle"
+    },
+    {
+      "item": "wich:strawberry"
+    }
+  ],
+  "result": {
+    "item": "wich:strawberry_milk_bottle"
+  }
+}

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#wich:charred_logs"
+    "#wich:charred_logs",
+    "#wich:gilded_stems"
   ]
 }

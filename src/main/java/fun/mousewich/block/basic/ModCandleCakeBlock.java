@@ -2,6 +2,7 @@ package fun.mousewich.block.basic;
 
 import com.google.common.collect.ImmutableList;
 import fun.mousewich.ModBase;
+import fun.mousewich.gen.data.ModDatagen;
 import fun.mousewich.gen.data.loot.DropTable;
 import fun.mousewich.gen.data.loot.BlockLootGenerator;
 import net.minecraft.block.*;
@@ -53,7 +54,7 @@ public class ModCandleCakeBlock extends AbstractCandleBlock {
 	}
 
 	public ModCandleCakeBlock drops(Block candle) {
-		BlockLootGenerator.Drops.put(this, DropTable.CandleCake(candle));
+		ModDatagen.Cache.Drops.put(this, DropTable.CandleCake(candle));
 		return this;
 	}
 

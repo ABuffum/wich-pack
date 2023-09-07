@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "wich:weathered_copper_boots"
+  },
+  "result": "wich:copper_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

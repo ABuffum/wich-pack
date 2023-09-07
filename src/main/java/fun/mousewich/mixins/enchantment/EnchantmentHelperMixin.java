@@ -2,7 +2,6 @@ package fun.mousewich.mixins.enchantment;
 
 import fun.mousewich.item.tool.ExtraKnockbackItem;
 import fun.mousewich.item.tool.HammerItem;
-import fun.mousewich.origins.power.PowersUtil;
 import fun.mousewich.origins.power.SoulSpeedPower;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;

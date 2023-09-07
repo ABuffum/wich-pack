@@ -2,7 +2,6 @@ package fun.mousewich.client.render.block.renderer;
 
 import fun.mousewich.block.ModProperties;
 import fun.mousewich.block.dust.BrushableBlockEntity;
-import fun.mousewich.block.dust.sand.SandyBlockEntity;
 import fun.mousewich.util.math.RotationAxis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,10 +15,8 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 @Environment(value=EnvType.CLIENT)
 public class BrushableBlockEntityRenderer<E extends BrushableBlockEntity> implements BlockEntityRenderer<E> {
@@ -48,7 +45,7 @@ public class BrushableBlockEntityRenderer<E extends BrushableBlockEntity> implem
 		matrixStack.pop();
 	}
 
-	private void renderItemExplicit(ItemRenderer itemRenderer, ItemStack stack, int light, MatrixStack matrices, VertexConsumerProvider vertexConsumers, @Nullable World world) {
+	private void renderItemExplicit(ItemRenderer itemRenderer, ItemStack stack, int light, MatrixStack matrices, VertexConsumerProvider vertexConsumers, World world) {
 		itemRenderer.renderItem(null, stack, ModelTransformation.Mode.FIXED, false, matrices, vertexConsumers, world, light, OverlayTexture.DEFAULT_UV, 0);
 	}
 

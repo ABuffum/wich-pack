@@ -8,12 +8,15 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItemTags {
 	public static final TagKey<Item> AXES = createMinecraftTag("axes");
+	public static final TagKey<Item> BAMBOO_BLOCKS = createMinecraftTag("bamboo_blocks");
+	public static final TagKey<Item> BAMBOO_LOGS = createTag("bamboo_logs");
 	public static final TagKey<Item> BEEHIVES = createTag("beehives");
 	public static final TagKey<Item> BOOKS = createTag("books");
 	public static final TagKey<Item> BOOKSHELF_BOOKS = createMinecraftTag("bookshelf_books");
 	public static final TagKey<Item> BOOKSHELVES = createTag("bookshelves");
 	public static final TagKey<Item> BOOTS = createTag("boots");
 	public static final TagKey<Item> BREAKS_DECORATED_POTS = createMinecraftTag("breaks_decorated_pots");
+	public static final TagKey<Item> BUCKETS = createTag("buckets");
 	public static final TagKey<Item> CAMPFIRES = createTag("campfires");
 	public static final TagKey<Item> CANDY = createTag("candy");
 	public static final TagKey<Item> CARVED_GOURDS = createTag("carved_gourds");
@@ -34,6 +37,7 @@ public class ModItemTags {
 	public static final TagKey<Item> CHEST_BOATS = createMinecraftTag("chest_boats");
 	public static final TagKey<Item> CHESTPLATES = createTag("chestplates");
 	public static final TagKey<Item> COMPASSES = createMinecraftTag("compasses");
+	public static final TagKey<Item> COMPLETES_FIND_TREE_TUTORIAL = createMinecraftTag("completes_find_tree_tutorial");
 	public static final TagKey<Item> COOKED_BEEF = createTag("cooked_beef");
 	public static final TagKey<Item> COOKED_BIRD = createTag("cooked_bird");
 	public static final TagKey<Item> COOKED_FISH = createTag("cooked_fish");
@@ -46,8 +50,12 @@ public class ModItemTags {
 	public static final TagKey<Item> COPPER_CHESTPLATES = createTag("copper_chestplates");
 	public static final TagKey<Item> COPPER_HELMETS = createTag("copper_helmets");
 	public static final TagKey<Item> COPPER_LEGGINGS = createTag("copper_leggings");
-	public static final TagKey<Item> DECORATED_POT_SHARDS = createTag("decorated_pot_shards");
+	public static final TagKey<Item> DAMPENS_VIBRATIONS = createMinecraftTag("dampens_vibrations");
+	public static final TagKey<Item> DECORATED_POT_INGREDIENTS = createTag("decorated_pot_ingredients");
+	public static final TagKey<Item> DECORATED_POT_SHERDS = createTag("decorated_pot_sherds");
 	public static final TagKey<Item> DOGWOOD_LOGS = createTag("dogwood_logs");
+	public static final TagKey<Item> DRIED_BAMBOO_BLOCKS = createTag("dried_bamboo_blocks");
+	public static final TagKey<Item> DRIED_BAMBOO_LOGS = createTag("dried_bamboo_logs");
 	public static final TagKey<Item> EDIBLE_BEEF = createTag("edible_beef");
 	public static final TagKey<Item> EDIBLE_BIRD = createTag("edible_bird");
 	public static final TagKey<Item> EDIBLE_EGG = createTag("edible_egg");
@@ -61,11 +69,14 @@ public class ModItemTags {
 	public static final TagKey<Item> ELYTRA = createTag("elytra");
 	public static final TagKey<Item> ENDER_TORCHES = createTag("ender_torches");
 	public static final TagKey<Item> FEATHERS = createTag("feathers");
+	public static final TagKey<Item> FENCE_GATES = createMinecraftTag("fence_gates");
 	public static final TagKey<Item> FLAVORED_MILK = createTag("flavored_milk");
 	public static final TagKey<Item> FLEECE = createTag("fleece");
 	public static final TagKey<Item> FLEECE_SLABS = createTag("fleece_slabs");
 	public static final TagKey<Item> FLEECE_CARPETS = createTag("fleece_carpets");
 	public static final TagKey<Item> FRUITS = createTag("fruits");
+	public static final TagKey<Item> GILDED_STEMS = createTag("gilded_stems");
+	public static final TagKey<Item> GLASS_PANES = createTag("glass_panes");
 	public static final TagKey<Item> GOLDEN_ARMOR = createTag("golden_armor");
 	public static final TagKey<Item> GOLDEN_FOOD = createTag("golden_food");
 	public static final TagKey<Item> GOLDEN_FRUIT = createTag("golden_fruit");
@@ -76,13 +87,21 @@ public class ModItemTags {
 	public static final TagKey<Item> HEAD_WEARABLE_BLOCKS = createTag("head_wearable_blocks");
 	public static final TagKey<Item> HELMETS = createTag("helmets");
 	public static final TagKey<Item> HOES = createMinecraftTag("hoes");
+	public static final TagKey<Item> IGNORE_RECIPE_REMAINDER = createTag("ignore_recipe_remainder");
 	public static final TagKey<Item> IRON_ARMOR = createTag("iron_armor");
 	public static final TagKey<Item> IRON_BASE_ARMOR = createTag("iron_base_armor");
+	public static final TagKey<Item> IRON_TOOLS = createTag("iron_tools");
 	public static final TagKey<Item> KNIVES = createCommonTag("tools/knives");
 	public static final TagKey<Item> LEGGINGS = createTag("leggings");
 	public static final TagKey<Item> LIGHTS_FLINT = createTag("lights_flint");
 	public static final TagKey<Item> LOG_SLABS = createTag("log_slabs");
 	public static final TagKey<Item> MANGROVE_LOGS = createMinecraftTag("mangrove_logs");
+	public static final TagKey<Item> MILK_BUCKETS = createTag("milk_buckets");
+	public static final TagKey<Item> MILK_BUCKETS_CHOCOLATE = createTag("milk_buckets_chocolate");
+	public static final TagKey<Item> MILK_BUCKETS_COFFEE = createTag("milk_buckets_coffee");
+	public static final TagKey<Item> MILK_BUCKETS_STRAWBERRY = createTag("milk_buckets_strawberry");
+	public static final TagKey<Item> MILK_BUCKETS_VANILLA = createTag("milk_buckets_vanilla");
+	public static final TagKey<Item> NOTEBLOCK_TOP_INSTRUMENTS = createMinecraftTag("noteblock_top_instruments");
 	public static final TagKey<Item> PICKAXES = createMinecraftTag("pickaxes");
 	public static final TagKey<Item> RAW_BEEF = createTag("raw_beef");
 	public static final TagKey<Item> RAW_BIRD = createTag("raw_bird");
@@ -96,6 +115,7 @@ public class ModItemTags {
 	public static final TagKey<Item> SEEDS = createTag("seeds");
 	public static final TagKey<Item> SHEARS = createCommonTag("tools/shears");
 	public static final TagKey<Item> SHOVELS = createMinecraftTag("shovels");
+	public static final TagKey<Item> SMELTS_TO_GLASS = createMinecraftTag("smelts_to_glass");
 	public static final TagKey<Item> SNIFFER_FOOD = createMinecraftTag("sniffer_food");
 	public static final TagKey<Item> SOUL_CAMPFIRES = createTag("soul_campfires");
 	public static final TagKey<Item> SOUL_LANTERNS = createTag("soul_lanterns");
@@ -109,12 +129,15 @@ public class ModItemTags {
 	public static final TagKey<Item> TRIM_TEMPLATES = createMinecraftTag("trim_templates");
 	public static final TagKey<Item> UNDERWATER_TORCHES = createTag("underwater_torches");
 	public static final TagKey<Item> VEGETABLES = createTag("vegetables");
+	public static final TagKey<Item> VILLAGER_PLANTABLE_SEEDS = createMinecraftTag("villager_plantable_seeds");
+	public static final TagKey<Item> WART_BLOCKS = createMinecraftTag("wart_blocks");
 	public static final TagKey<Item> WOOD_HAMMERS = createTag("wood_hammers");
 	public static final TagKey<Item> WOOL_SLABS = createTag("wool_slabs");
 	public static final TagKey<Item> WOOL_CARPETS = createTag("wool_carpets");
 
 	public static final TagKey<Item> CROPTOPIA_NUTS = createTag("croptopia", "nuts");
 	public static final TagKey<Item> FORGE_VEGETABLES = createTag("forge", "vegetables");
+	public static final TagKey<Item> FORGE_INGOTS_IRON = createTag("forge", "ingots/iron");
 	public static final TagKey<Item> NOURISH_FRUIT = createTag("nourish", "fruit");
 	public static final TagKey<Item> NOURISH_SWEETS = createTag("nourish", "sweets");
 	public static final TagKey<Item> NOURISH_VEGETABLES = createTag("nourish", "vegetables");

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "wich:block/wither_rose_seeds"
+      "model": "wich:block/rose_seeds"
     }
   }
 }

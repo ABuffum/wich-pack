@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:dried_blood_block"
+    }
+  },
+  "result": {
+    "item": "wich:dried_blood_slab",
+    "count": 6
+  }
+}

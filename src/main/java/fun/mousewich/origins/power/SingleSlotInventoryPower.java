@@ -23,7 +23,7 @@ import net.minecraft.util.collection.DefaultedList;
 
 import java.util.function.Predicate;
 
-public class SingleSlotInventoryPower extends Power implements Active, Inventory {
+public class SingleSlotInventoryPower extends Power implements Active, IInventoryPower {
 	private final DefaultedList<ItemStack> inventory;
 	private final TranslatableText containerName;
 	private final ScreenHandlerFactory factory;
@@ -68,6 +68,7 @@ public class SingleSlotInventoryPower extends Power implements Active, Inventory
 	@Override public boolean canPlayerUse(PlayerEntity player) { return player == this.entity; }
 	@Override public void clear() { setStack(0, ItemStack.EMPTY); }
 	public boolean shouldDropOnDeath() { return shouldDropOnDeath; }
+	@Override
 	public boolean shouldDropOnDeath(ItemStack stack) { return shouldDropOnDeath && dropOnDeathFilter.test(stack); }
 
 	private Key key;

@@ -20,7 +20,7 @@
   },
   "condition": {
 	"type": "origins:power_active",
-	"power": "havenorigins:phantomize_vex"
+	"power": "haven:phantomize_vex"
   },
   "name": "Phasing",
   "description": "While phantomized, you can walk through solid material, except Obsidian."

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:syringe"
+    },
+    {
+      "item": "wich:secret_ingredient"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:white_tulip"
+    },
+    {
+      "item": "wich:blood_block"
+    }
+  ],
+  "result": {
+    "item": "wich:syringe_exp3"
+  }
+}

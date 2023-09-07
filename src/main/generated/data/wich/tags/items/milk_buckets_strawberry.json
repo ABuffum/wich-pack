@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "wich:strawberry_milk_bucket",
+    "wich:golden_strawberry_milk_bucket",
+    "wich:copper_strawberry_milk_bucket",
+    "wich:netherite_strawberry_milk_bucket",
+    "wich:wood_strawberry_milk_bucket",
+    "wich:dark_iron_strawberry_milk_bucket"
+  ]
+}

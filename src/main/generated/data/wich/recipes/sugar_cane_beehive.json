@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "PPP",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:honeycomb"
+    },
+    "P": {
+      "item": "wich:sugar_cane_planks"
+    }
+  },
+  "result": {
+    "item": "wich:sugar_cane_beehive"
+  }
+}

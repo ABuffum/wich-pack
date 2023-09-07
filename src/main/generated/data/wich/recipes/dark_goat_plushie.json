@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:black_fleece"
+    },
+    [
+      {
+        "item": "wich:chevon"
+      },
+      {
+        "item": "wich:cooked_chevon"
+      }
+    ]
+  ],
+  "result": {
+    "item": "wich:dark_goat_plushie"
+  }
+}

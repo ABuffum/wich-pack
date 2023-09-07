@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "wich:block/burgundy_terracotta",
+    "top": "wich:block/burgundy_terracotta",
+    "side": "wich:block/burgundy_terracotta"
+  }
+}

@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class BroomItem extends Item {
+public class BroomItem extends Item implements ExtraKnockbackItem {
 	private final double knockback;
 	public BroomItem(double knockback, Settings settings) {
 		super(settings);
@@ -59,4 +59,7 @@ public class BroomItem extends Item {
 		}
 		return ActionResult.PASS;
 	}
+
+	@Override
+	public int getExtraKnockback() { return (int)(1 + knockback); }
 }

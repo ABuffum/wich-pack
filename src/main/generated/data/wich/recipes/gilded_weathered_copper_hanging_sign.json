@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "| |",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:stripped_gilded_stem"
+    },
+    "|": {
+      "item": "wich:waxed_weathered_copper_chain"
+    }
+  },
+  "result": {
+    "item": "wich:gilded_weathered_copper_hanging_sign"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " B ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "wich:dried_bamboo_slab"
+    },
+    "B": {
+      "tag": "wich:bookshelves"
+    }
+  },
+  "result": {
+    "item": "wich:dried_bamboo_lectern"
+  }
+}

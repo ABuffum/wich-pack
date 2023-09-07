@@ -10,6 +10,7 @@
     }
   },
   "result": {
-    "item": "wich:ruby_glass_pane"
+    "item": "wich:ruby_glass_pane",
+    "count": 16
   }
 }

@@ -10,6 +10,7 @@
     }
   },
   "result": {
-    "item": "wich:tinted_glass_pane"
+    "item": "wich:tinted_glass_pane",
+    "count": 16
   }
 }

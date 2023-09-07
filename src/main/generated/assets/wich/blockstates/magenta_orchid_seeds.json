@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "wich:block/magenta_orchid_seeds"
+      "model": "wich:block/orchid_seeds"
     }
   }
 }

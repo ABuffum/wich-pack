@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:mushroom_stem_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "wich:mushroom_stem_woodcutter"
+  }
+}

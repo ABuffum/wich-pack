@@ -1,6 +1,6 @@
 package fun.mousewich.client.render.entity.renderer;
 
-import fun.mousewich.ModClient;
+import fun.mousewich.client.render.entity.ModEntityModelLayers;
 import fun.mousewich.client.render.entity.model.AllayEntityModel;
 import fun.mousewich.client.render.entity.renderer.feature.HeldItemFeatureRenderer;
 import fun.mousewich.entity.passive.allay.AllayEntity;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 public class AllayEntityRenderer extends MobEntityRenderer<AllayEntity, AllayEntityModel> {
 	private static final Identifier TEXTURE = new Identifier("textures/entity/allay/allay.png");
 	public AllayEntityRenderer(EntityRendererFactory.Context context) {
-		super(context, new AllayEntityModel(context.getPart(ModClient.ALLAY_MODEL_LAYER)), 0.4f);
+		super(context, new AllayEntityModel(context.getPart(ModEntityModelLayers.ALLAY)), 0.4f);
 		//this.addFeature(new HeldItemFeatureRenderer<AllayEntity, AllayEntityModel>(this, context.getHeldItemRenderer()));
 		this.addFeature(new HeldItemFeatureRenderer<>(this, MinecraftClient.getInstance().getHeldItemRenderer()));
 		//this.addFeature(new AllayFeatureRenderer(this));

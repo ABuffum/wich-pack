@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/lavender_fleece_slab"
+    },
+    "type=double": {
+      "model": "wich:block/lavender_fleece"
+    },
+    "type=top": {
+      "model": "wich:block/lavender_fleece_slab_top"
+    }
+  }
+}

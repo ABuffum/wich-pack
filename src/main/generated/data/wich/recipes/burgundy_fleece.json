@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:burgundy_dye"
+    },
+    {
+      "tag": "wich:fleece"
+    }
+  ],
+  "result": {
+    "item": "wich:burgundy_fleece"
+  }
+}

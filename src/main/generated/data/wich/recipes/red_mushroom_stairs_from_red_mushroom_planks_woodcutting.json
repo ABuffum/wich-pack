@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:red_mushroom_planks"
+  },
+  "result": "wich:red_mushroom_stairs",
+  "count": 1
+}

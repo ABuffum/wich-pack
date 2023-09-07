@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "wich:block/red_sandy_cut_polished_granite",
+    "top": "wich:block/red_sandy_cut_polished_granite",
+    "side": "wich:block/red_sandy_cut_polished_granite"
+  }
+}

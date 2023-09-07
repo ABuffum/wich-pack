@@ -6,6 +6,7 @@
 	"origins:claustrophobia",
 	"origins:more_kinetic_damage",
 	"ryft:identified_sounds/auryon",
+	"ryft:loot_tables/auryon",
 	"wich:blood_types/avian"
   ],
   "name": "Angel of Love",

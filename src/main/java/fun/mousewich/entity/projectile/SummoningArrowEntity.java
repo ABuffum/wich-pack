@@ -3,6 +3,7 @@ package fun.mousewich.entity.projectile;
 import fun.mousewich.ModBase;
 import fun.mousewich.container.ArrowContainer;
 import net.minecraft.entity.*;
+import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -54,6 +55,7 @@ public class SummoningArrowEntity extends ModArrowEntity {
 				BlockPos pos = entityHitResult.getEntity().getBlockPos();
 				PlayerEntity player = getOwner() instanceof PlayerEntity p ? p : null;
 				MobEntity entity = entityType.create(serverWorld, null, null, player, pos, SpawnReason.TRIGGERED, false, false);
+				if (entity instanceof WitherEntity wither) wither.onSummoned();
 				if (entity != null) {
 					entity.initialize(serverWorld, serverWorld.getLocalDifficulty(pos), SpawnReason.TRIGGERED, null, null);
 					Vec3d entityPos = entityHitResult.getPos();
@@ -76,6 +78,7 @@ public class SummoningArrowEntity extends ModArrowEntity {
 				BlockPos pos = blockHitResult.getBlockPos();
 				PlayerEntity player = getOwner() instanceof PlayerEntity p ? p : null;
 				MobEntity entity = entityType.create(serverWorld, null, null, player, pos, SpawnReason.TRIGGERED, false, false);
+				if (entity instanceof WitherEntity wither) wither.onSummoned();
 				if (entity != null) {
 					entity.initialize(serverWorld, serverWorld.getLocalDifficulty(pos), SpawnReason.TRIGGERED, null, null);
 					entity.setPosition(blockHitResult.getPos());

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "berries=false": {
+      "model": "wich:block/grape_leaves_stage0"
+    },
+    "berries=true": {
+      "model": "wich:block/grape_leaves_stage1"
+    }
+  }
+}

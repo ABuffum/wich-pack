@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
+    "wich:shale",
+    "wich:end_shale_rock",
+    "wich:end_rock_shale",
+    "wich:end_shale",
+    "wich:end_rock",
     "#minecraft:base_stone_overworld",
     "#minecraft:dirt",
     "#minecraft:terracotta",
@@ -17,11 +22,6 @@
     "minecraft:end_stone",
     "minecraft:sandstone",
     "minecraft:red_sandstone",
-    "wich:shale",
-    "wich:end_shale",
-    "wich:end_rock",
-    "wich:end_rock_shale",
-    "wich:end_shale_rock",
     "#wich:sculk_turfs"
   ]
 }

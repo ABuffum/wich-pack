@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:milk_bowl"
+    },
+    {
+      "item": "wich:strawberry"
+    }
+  ],
+  "result": {
+    "item": "wich:strawberry_milk_bowl"
+  }
+}

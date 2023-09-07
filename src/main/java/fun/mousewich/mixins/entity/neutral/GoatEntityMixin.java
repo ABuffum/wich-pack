@@ -70,7 +70,7 @@ public abstract class GoatEntityMixin extends AnimalEntity implements EntityWith
 	public void ReadCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
 		this.dataTracker.set(GoatUtil.LEFT_HORN, nbt.getBoolean("HasLeftHorn"));
 		this.dataTracker.set(GoatUtil.RIGHT_HORN, nbt.getBoolean("HasRightHorn"));
-		this.dataTracker.set(GoatVariant.VARIANT, nbt.getInt("Variant"));
+		if (nbt.contains("Variant")) this.dataTracker.set(GoatVariant.VARIANT, nbt.getInt("Variant"));
 	}
 	@Inject(method="onGrowUp", at = @At("TAIL"))
 	protected void OnGrowUp(CallbackInfo ci) {

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:cow_plushie"
+    },
+    {
+      "item": "wich:pink_daisy"
+    }
+  ],
+  "result": {
+    "item": "wich:moolip_plushie"
+  }
+}

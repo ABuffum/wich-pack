@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:sugar_cane_mosaic"
+  },
+  "result": "wich:sugar_cane_mosaic_stairs",
+  "count": 1
+}

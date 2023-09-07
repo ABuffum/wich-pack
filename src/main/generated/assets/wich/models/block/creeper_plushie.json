@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/plushie/creeper",
+  "textures": {
+    "all": "wich:block/creeper_plushie",
+    "particle": "wich:block/creeper_plushie"
+  }
+}

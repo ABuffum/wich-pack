@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " B ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "wich:sugar_cane_slab"
+    },
+    "B": {
+      "tag": "wich:bookshelves"
+    }
+  },
+  "result": {
+    "item": "wich:sugar_cane_lectern"
+  }
+}

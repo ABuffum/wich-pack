@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:netherite_milk_bucket"
+    },
+    {
+      "item": "wich:strawberry"
+    }
+  ],
+  "result": {
+    "item": "wich:netherite_strawberry_milk_bucket"
+  }
+}

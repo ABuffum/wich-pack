@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "wich:block/empty_lantern"
+    },
+    "hanging=true": {
+      "model": "wich:block/empty_lantern_hanging"
+    }
+  }
+}

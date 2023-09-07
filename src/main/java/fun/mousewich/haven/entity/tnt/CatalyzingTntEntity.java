@@ -4,6 +4,7 @@ import fun.mousewich.block.tnt.ModTntBlock;
 import fun.mousewich.entity.tnt.ModTntEntity;
 import fun.mousewich.haven.HavenMod;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.TntBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -14,12 +15,12 @@ import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 
 public class CatalyzingTntEntity extends ModTntEntity {
-	public CatalyzingTntEntity(EntityType<? extends Entity> entityType, World world) { super(entityType, world, HavenMod.CATALYZING_TNT.asBlock()); }
+	public CatalyzingTntEntity(EntityType<? extends Entity> entityType, World world) { super(entityType, world, HavenMod.CATALYZING_TNT.asBlock().getDefaultState()); }
 	public CatalyzingTntEntity(World world, double x, double y, double z, @Nullable LivingEntity igniter) {
-		this(world, x, y, z, igniter, HavenMod.CATALYZING_TNT.asBlock());
+		this(world, x, y, z, igniter, HavenMod.CATALYZING_TNT.asBlock().getDefaultState());
 	}
-	public CatalyzingTntEntity(World world, double x, double y, double z, @Nullable LivingEntity igniter, Block block) {
-		super(HavenMod.CATALYZING_TNT_ENTITY, world, x, y, z, igniter, block);
+	public CatalyzingTntEntity(World world, double x, double y, double z, @Nullable LivingEntity igniter, BlockState state) {
+		super(HavenMod.CATALYZING_TNT_ENTITY, world, x, y, z, igniter, state);
 	}
 
 	@Override

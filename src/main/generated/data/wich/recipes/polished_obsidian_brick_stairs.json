@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:polished_obsidian_bricks"
+    }
+  },
+  "result": {
+    "item": "wich:polished_obsidian_brick_stairs",
+    "count": 4
+  }
+}

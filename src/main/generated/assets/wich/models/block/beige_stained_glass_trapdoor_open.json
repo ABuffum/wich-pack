@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/_template_glass_trapdoor_open",
+  "textures": {
+    "top": "wich:block/beige_stained_glass",
+    "side": "wich:block/beige_stained_glass_pane_top"
+  }
+}

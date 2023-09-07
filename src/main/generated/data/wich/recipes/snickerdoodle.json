@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#X#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat"
+    },
+    "X": {
+      "item": "wich:cinnamon"
+    }
+  },
+  "result": {
+    "item": "wich:snickerdoodle",
+    "count": 8
+  }
+}

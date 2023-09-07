@@ -1,4 +1,36 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "wich:cinnamon_bean",
+    "wich:pink_cotton_candy",
+    "wich:blue_cotton_candy",
+    "wich:candy_cane",
+    "wich:candy_corn",
+    "wich:caramel",
+    "wich:caramel_apple",
+    "wich:lollipop",
+    "wich:milk_chocolate",
+    "wich:dark_chocolate",
+    "wich:white_chocolate",
+    "wich:marshmallow",
+    "wich:roast_marshmallow",
+    "wich:marshmallow_on_stick",
+    "wich:roast_marshmallow_on_stick",
+    "wich:white_rock_candy",
+    "wich:gray_rock_candy",
+    "wich:brown_rock_candy",
+    "wich:light_blue_rock_candy",
+    "wich:red_rock_candy",
+    "wich:light_gray_rock_candy",
+    "wich:orange_rock_candy",
+    "wich:yellow_rock_candy",
+    "wich:blue_rock_candy",
+    "wich:purple_rock_candy",
+    "wich:lime_rock_candy",
+    "wich:black_rock_candy",
+    "wich:pink_rock_candy",
+    "wich:cyan_rock_candy",
+    "wich:green_rock_candy",
+    "wich:magenta_rock_candy"
+  ]
 }

@@ -1,0 +1,8 @@
+{
+  "type": "wich:woodcutting",
+  "ingredient": {
+    "item": "wich:sugar_cane_planks"
+  },
+  "result": "wich:sugar_cane_slab",
+  "count": 2
+}

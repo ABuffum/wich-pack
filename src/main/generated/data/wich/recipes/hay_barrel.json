@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "# #",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:hay_planks"
+    },
+    "S": {
+      "item": "wich:hay_slab"
+    }
+  },
+  "result": {
+    "item": "wich:hay_barrel"
+  }
+}

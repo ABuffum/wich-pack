@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "wich:block/sandy_oak_slab"
+    },
+    "type=double": {
+      "model": "wich:block/sandy_oak_planks"
+    },
+    "type=top": {
+      "model": "wich:block/sandy_oak_slab_top"
+    }
+  }
+}

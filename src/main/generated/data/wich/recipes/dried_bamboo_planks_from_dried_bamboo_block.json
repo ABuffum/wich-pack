@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    [
+      {
+        "item": "wich:dried_bamboo_block"
+      },
+      {
+        "item": "wich:stripped_dried_bamboo_block"
+      }
+    ]
+  ],
+  "result": {
+    "item": "wich:dried_bamboo_planks",
+    "count": 2
+  }
+}

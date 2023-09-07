@@ -2,8 +2,8 @@ package fun.mousewich.event;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fun.mousewich.ModBase;
 import fun.mousewich.advancement.ModCriteria;
+import fun.mousewich.effect.ModStatusEffects;
 import fun.mousewich.gen.data.tag.ModBlockTags;
 import fun.mousewich.origins.power.PowersUtil;
 import fun.mousewich.origins.power.SoftStepsPower;
@@ -118,7 +118,7 @@ public class ModVibrationListener implements GameEventListener {
 				}
 				if (entity.occludeVibrationSignals()) return false;
 				if (PowersUtil.Active(entity, SoftStepsPower.class)) return false;
-				if (entity instanceof LivingEntity living && living.hasStatusEffect(ModBase.SILENT_EFFECT)) return false;
+				if (entity instanceof LivingEntity living && living.hasStatusEffect(ModStatusEffects.SILENT)) return false;
 			}
 			BlockState state = world.getBlockState(pos);
 			if (state != null) return !state.isIn(ModBlockTags.DAMPENS_VIBRATIONS);

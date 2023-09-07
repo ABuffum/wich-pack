@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wich:block/white_carpeted_mocha_llama_plushie",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wich:block/white_carpeted_mocha_llama_plushie"
+    },
+    "facing=south": {
+      "model": "wich:block/white_carpeted_mocha_llama_plushie",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wich:block/white_carpeted_mocha_llama_plushie",
+      "y": 270
+    }
+  }
+}

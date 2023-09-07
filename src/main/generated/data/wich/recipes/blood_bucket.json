@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "#B"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:blood_bottle"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "wich:blood_bucket"
+  }
+}

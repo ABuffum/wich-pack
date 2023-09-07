@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "wich:gilded_stem"
+    }
+  },
+  "result": {
+    "item": "wich:gilded_hyphae",
+    "count": 3
+  }
+}

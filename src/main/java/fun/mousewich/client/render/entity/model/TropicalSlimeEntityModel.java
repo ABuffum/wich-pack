@@ -35,7 +35,7 @@ public class TropicalSlimeEntityModel extends SinglePartEntityModel<TropicalSlim
 		return TexturedModelData.of(modelData, 140, 170);
 	}
 
-	public static TexturedModelData getInnerTexturedModelData() {
+	public static TexturedModelData getTexturedModelData() {
 		List<Pair<Integer, Integer>> bodyUV = List.of(
 				new Pair<>(0, 5), new Pair<>(28, 5), new Pair<>(56, 5), new Pair<>(84, 5), new Pair<>(112, 5),
 				new Pair<>(0, 22), new Pair<>(28, 22), new Pair<>(56, 22), new Pair<>(84, 22), new Pair<>(112, 22),

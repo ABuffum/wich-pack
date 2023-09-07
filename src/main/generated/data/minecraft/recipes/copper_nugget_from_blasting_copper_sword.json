@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "wich:copper_sword"
+  },
+  "result": "wich:copper_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

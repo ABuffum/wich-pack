@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bucket",
+    "wich:golden_bucket",
+    "wich:copper_bucket",
+    "wich:netherite_bucket",
+    "wich:wood_bucket",
+    "wich:dark_iron_bucket"
+  ]
+}

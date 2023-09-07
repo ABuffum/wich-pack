@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:milk_bucket",
+    "wich:golden_milk_bucket",
+    "wich:copper_milk_bucket",
+    "wich:netherite_milk_bucket",
+    "wich:wood_milk_bucket",
+    "wich:dark_iron_milk_bucket"
+  ]
+}

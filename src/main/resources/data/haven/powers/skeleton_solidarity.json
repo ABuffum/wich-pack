@@ -5,12 +5,15 @@
 	"minecraft:stray",
 	"minecraft:wither_skeleton",
 	"minecraft:skeleton_horse",
+	
 	"wich:mossy_skeleton",
 	"wich:sunken_skeleton",
+	
 	"betternether:jungle_skeleton",
-	"graveyard:skeleton_creeper",
 	"betternether:skull",
 	"betternether:naga",
+	
+	"graveyard:skeleton_creeper",
 	"graveyard:revenant"
   ],
   "name": "Skeleton Solidarity",
