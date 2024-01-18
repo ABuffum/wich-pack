@@ -1,7 +1,7 @@
 package fun.mousewich.gen.structure;
 
 import com.mojang.datafixers.util.Pair;
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolElement;
 import net.minecraft.util.Identifier;
@@ -14,7 +14,7 @@ public class ModPoolPair {
 	public final int count;
 	private Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer> pair;
 	public ModPoolPair(String id, ModStructureProcessorList processor, int count) {
-		this.identifier = ModBase.ID(id);
+		this.identifier = ModId.ID(id);
 		this.processor = processor;
 		this.count = count;
 	}

@@ -1,10 +1,12 @@
 {
   "type": "extraorigins:mob_neutrality",
   "entity_types": [
-	"minecraft:spider",
+    "minecraft:spider",
     "minecraft:cave_spider",
     "wich:bone_spider",
-    "wich:jumping_spider"
+    "wich:icy_spider",
+    "wich:jumping_spider",
+    "wich:slime_spider"
   ],
   "name": "Spider Solidarity",
   "description": "Spiders will not attack you unless provoked."

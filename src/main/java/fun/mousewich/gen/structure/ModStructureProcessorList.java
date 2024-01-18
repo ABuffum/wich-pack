@@ -1,6 +1,6 @@
 package fun.mousewich.gen.structure;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import net.minecraft.structure.processor.StructureProcessorList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -11,7 +11,7 @@ public class ModStructureProcessorList {
 	public final StructureProcessorList structure;
 	private RegistryEntry<StructureProcessorList> registryEntry;
 	public ModStructureProcessorList(String id, StructureProcessorList structure) {
-		this.identifier = ModBase.ID(id);
+		this.identifier = ModId.ID(id);
 		this.structure = structure;
 	}
 	public RegistryEntry<StructureProcessorList> get() {

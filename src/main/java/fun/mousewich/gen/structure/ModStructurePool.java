@@ -1,8 +1,7 @@
 package fun.mousewich.gen.structure;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolElement;
 import net.minecraft.structure.pool.StructurePools;
@@ -21,7 +20,7 @@ public class ModStructurePool {
 		this(id, elementCounts, StructurePool.Projection.RIGID);
 	}
 	public ModStructurePool(String id, List<ModPoolPair> elementCounts, StructurePool.Projection projection) {
-		this.identifier = ModBase.ID(id);
+		this.identifier = ModId.ID(id);
 		this.elementCounts = elementCounts;
 		this.projection = projection;
 	}

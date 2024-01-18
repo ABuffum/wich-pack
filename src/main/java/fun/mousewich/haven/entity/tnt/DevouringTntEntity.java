@@ -25,9 +25,7 @@ public class DevouringTntEntity extends ModTntEntity {
 		propagateExplosion(5);
 	}
 	@Override
-	public boolean shouldDestroyBlocks() { return true; }
-	@Override
-	public float damageMultiplier() { return 0; }
+	public boolean shouldDamage() { return false; }
 	@Override
 	public float knockbackMultiplier() { return -1; }
 }

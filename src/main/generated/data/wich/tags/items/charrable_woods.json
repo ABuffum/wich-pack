@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:mangrove_wood",
     "minecraft:cherry_wood",
+    "minecraft:mangrove_wood",
     "wich:cassia_wood",
     "minecraft:acacia_wood",
     "minecraft:birch_wood",

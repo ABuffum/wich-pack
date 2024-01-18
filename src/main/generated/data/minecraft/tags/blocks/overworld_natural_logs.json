@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
+    "minecraft:mangrove_log",
+    "wich:cassia_log",
     "minecraft:cherry_log",
     "wich:dogwood_log",
-    "wich:cassia_log",
-    "minecraft:mangrove_log",
     "minecraft:acacia_log",
     "minecraft:birch_log",
     "minecraft:dark_oak_log",

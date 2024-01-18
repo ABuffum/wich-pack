@@ -1,7 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "wich:tuff_bricks"
+    "item": "minecraft:tuff_bricks"
   },
   "result": "wich:tuff_tiles",
   "count": 1

@@ -34,6 +34,7 @@ import fun.mousewich.material.ModToolMaterials;
 import fun.mousewich.mixins.SignTypeAccessor;
 import fun.mousewich.particle.ModParticleTypes;
 import fun.mousewich.sound.ModBlockSoundGroups;
+import fun.mousewich.sound.ModSoundEvents;
 import fun.mousewich.util.dye.ModDyeColor;
 import fun.mousewich.util.OxidationScale;
 import fun.mousewich.util.banners.ModBannerPattern;
@@ -68,8 +69,6 @@ import net.minecraft.world.World;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
-
-import static fun.mousewich.ModBase.ID;
 
 public class ModFactory {
 	//Helpful BlockState Delegates
@@ -234,7 +233,7 @@ public class ModFactory {
 	public static Item MakeStew(Item.Settings settings) { return GeneratedItem(new StewItem(settings)); }
 
 	public static EntityModelLayer MakeModelLayer(String path) { return MakeModelLayer(path, "main"); }
-	public static EntityModelLayer MakeModelLayer(String path, String name) { return new EntityModelLayer(ID(path), name); }
+	public static EntityModelLayer MakeModelLayer(String path, String name) { return new EntityModelLayer(ModId.ID(path), name); }
 
 	public static EntityType<ModArrowEntity> MakeArrowEntity(EntityType.EntityFactory<ModArrowEntity> factory) {
 		return FabricEntityTypeBuilder.create(SpawnGroup.MISC, factory).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(4).trackedUpdateRate(20).build();
@@ -477,6 +476,12 @@ public class ModFactory {
 		return container.dropSelf().blockTag(BlockTags.PICKAXE_MINEABLE);
 	}
 
+	public static Block.Settings CopperGrateSettings(Oxidizable.OxidationLevel level) {
+		return AbstractBlock.Settings.of(Material.METAL, OxidationScale.getMapColor(level)).strength(3.0f, 6.0f)
+				.sounds(ModBlockSoundGroups.COPPER_GRATE).nonOpaque().requiresTool()
+				.allowsSpawning(ModFactory::never).solidBlock(ModFactory::never).suffocates(ModFactory::never).blockVision(ModFactory::never);
+	}
+
 	public static Block.Settings BedSettings(MapColor color, BlockSoundGroup sounds, ToIntFunction<BlockState> luminance) {
 		Block.Settings output = AbstractBlock.Settings.copy(Blocks.WHITE_BED).mapColor(color).sounds(sounds);
 		return luminance == null ? output : output.luminance(luminance);
@@ -613,6 +618,13 @@ public class ModFactory {
 	public static BlockContainer BuildMetalDoor(ModDoorBlock door) { return BuildMetalDoor(door, ItemSettings()); }
 	public static BlockContainer BuildMetalDoor(ModDoorBlock door, Item.Settings settings) {
 		return BuildDoorCommon(new BlockContainer(door, settings)).blockTag(BlockTags.DOORS).itemTag(ItemTags.DOORS);
+	}
+	public static BlockContainer BuildCopiedMetalDoor(ModDoorBlock door) { return BuildCopiedMetalDoor(door, ItemSettings()); }
+	public static BlockContainer BuildCopiedMetalDoor(ModDoorBlock door, Item.Settings settings) {
+		return new BlockContainer(door, settings).blockTag(BlockTags.DOORS).itemTag(ItemTags.DOORS).drops(DropTable.DOOR);
+	}
+	public static Block.Settings OxidizableDoorSettings(Oxidizable.OxidationLevel level) {
+		return Block.Settings.of(Material.STONE, OxidationScale.getMapColor(level)).requiresTool().strength(5.0f).sounds(BlockSoundGroup.METAL).nonOpaque();
 	}
 
 	public static Block.Settings WoodDoorSettings(MapColor color, BlockSoundGroup soundGroup) { return Block.Settings.of(Material.WOOD, color).strength(3.0F).sounds(soundGroup).nonOpaque(); }
@@ -869,6 +881,9 @@ public class ModFactory {
 	public static Block.Settings MetalTrapdoorSettings(MapColor color, BlockSoundGroup soundGroup) { return Block.Settings.of(Material.METAL).requiresTool().mapColor(color).sounds(soundGroup).nonOpaque().allowsSpawning(ModFactory::never); }
 	public static Block.Settings MetalTrapdoorSettings(MapColor color, BlockSoundGroup soundGroup, float strength) { return MetalTrapdoorSettings(color, soundGroup).strength(strength); }
 	public static Block.Settings MetalTrapdoorSettings(MapColor color, BlockSoundGroup soundGroup, float strength, float resistance) { return MetalTrapdoorSettings(color, soundGroup).strength(strength, resistance); }
+	public static Block.Settings CopperTrapdoorSettings(MapColor color, BlockSoundGroup soundGroup, float strength) {
+		return Block.Settings.of(Material.STONE, color).requiresTool().sounds(soundGroup).nonOpaque().allowsSpawning(ModFactory::never).strength(strength);
+	}
 
 	public static BlockContainer MakeThinMetalTrapdoor(MapColor color, BlockSoundGroup soundGroup, float strength) {
 		return BuildThinMetalTrapdoor(new ThinTrapdoorBlock(MetalTrapdoorSettings(color, soundGroup, strength), SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN, SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE));
@@ -899,11 +914,13 @@ public class ModFactory {
 		return container;
 	}
 
-	public static BlockContainer MakeOxidizableTrapdoor(Oxidizable.OxidationLevel level, float strength) {
-		return BuildThinMetalTrapdoor(new OxidizableTrapdoorBlock(level, MetalTrapdoorSettings(OxidationScale.getMapColor(level), BlockSoundGroup.COPPER, strength)));
+	public static BlockContainer MakeOxidizableTrapdoor(Oxidizable.OxidationLevel level, float strength) { return MakeOxidizableTrapdoor(level, strength, ItemSettings()); }
+	public static BlockContainer MakeOxidizableTrapdoor(Oxidizable.OxidationLevel level, float strength, Item.Settings settings) {
+		return BuildMetalTrapdoor(new OxidizableTrapdoorBlock(level, CopperTrapdoorSettings(OxidationScale.getMapColor(level), BlockSoundGroup.COPPER, strength)), settings);
 	}
-	public static BlockContainer MakeWaxedTrapdoor(MapColor color, BlockSoundGroup soundGroup, float strength) {
-		return BuildMetalTrapdoor(BuildBlock(new ThinTrapdoorBlock(MetalTrapdoorSettings(color, soundGroup, strength), SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN, SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE)));
+	public static BlockContainer MakeWaxedTrapdoor(MapColor color, BlockSoundGroup soundGroup, float strength) { return MakeWaxedTrapdoor(color, soundGroup, strength, ItemSettings()); }
+	public static BlockContainer MakeWaxedTrapdoor(MapColor color, BlockSoundGroup soundGroup, float strength, Item.Settings settings) {
+		return BuildMetalTrapdoor(BuildBlock(new ModTrapdoorBlock(CopperTrapdoorSettings(color, soundGroup, strength), ModSoundEvents.BLOCK_COPPER_TRAPDOOR_OPEN, ModSoundEvents.BLOCK_COPPER_TRAPDOOR_CLOSE), settings));
 	}
 
 	public static Block.Settings WoodTrapdoorSettings(MapColor color, BlockSoundGroup soundGroup) { return Block.Settings.of(Material.WOOD, color).strength(3.0F).sounds(soundGroup).nonOpaque().allowsSpawning(ModFactory::noSpawning); }

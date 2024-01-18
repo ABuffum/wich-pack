@@ -1,6 +1,6 @@
 package fun.mousewich.entity.projectile;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import fun.mousewich.container.ArrowContainer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.boss.WitherEntity;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 public class SummoningArrowEntity extends ModArrowEntity {
-	public static final Identifier TEXTURE = ModBase.ID("textures/entity/projectiles/summoning_arrow.png");
+	public static final Identifier TEXTURE = ModId.ID("textures/entity/projectiles/summoning_arrow.png");
 	private final EntityType<? extends MobEntity> summon;
 	public EntityType<? extends MobEntity> getSummon() { return summon; }
 

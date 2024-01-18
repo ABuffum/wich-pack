@@ -1,6 +1,6 @@
 package fun.mousewich.origins.power;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.mixin.EntityAccessor;
 import io.github.apace100.apoli.power.Power;
@@ -9,13 +9,11 @@ import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataType;
 import io.github.apace100.calio.data.SerializableDataTypes;
-import io.github.apace100.origins.power.OriginsPowerTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.Registry;
@@ -33,7 +31,7 @@ public class FluidBreatherPower extends Power {
 		this.touch = touch;
 	}
 	public static PowerFactory<FluidBreatherPower> createFactory() {
-		return new PowerFactory<FluidBreatherPower>(ModBase.ID("fluid_breather"), new SerializableData()
+		return new PowerFactory<FluidBreatherPower>(ModId.ID("fluid_breather"), new SerializableData()
 				.add("fluid", SerializableDataType.tag(Registry.FLUID_KEY))
 				.add("suffocate", SerializableDataTypes.BOOLEAN, false)
 				.add("dryout", SerializableDataTypes.BOOLEAN, false)

@@ -2,8 +2,8 @@
   "replace": false,
   "values": [
     "minecraft:cherry_button",
-    "wich:gilded_button",
     "wich:dried_bamboo_button",
+    "wich:gilded_button",
     "minecraft:bamboo_button"
   ]
 }

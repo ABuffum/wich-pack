@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:cocoa_llama_plushie"
+    },
+    {
+      "item": "wich:mint_dye"
+    }
+  ],
+  "result": {
+    "item": "wich:mint_carpeted_cocoa_llama_plushie"
+  }
+}

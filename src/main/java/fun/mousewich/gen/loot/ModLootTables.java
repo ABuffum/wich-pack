@@ -1,8 +1,7 @@
 package fun.mousewich.gen.loot;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import fun.mousewich.mixins.LootTablesInvoker;
-import net.minecraft.loot.LootTables;
 import net.minecraft.util.Identifier;
 
 public class ModLootTables {
@@ -28,5 +27,5 @@ public class ModLootTables {
 		};
 	}
 
-	private static Identifier register(String id) { return LootTablesInvoker.InvokeRegisterLootTable(ModBase.ID(id)); }
+	private static Identifier register(String id) { return LootTablesInvoker.InvokeRegisterLootTable(ModId.ID(id)); }
 }

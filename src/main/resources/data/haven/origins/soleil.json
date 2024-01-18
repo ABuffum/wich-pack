@@ -7,6 +7,10 @@
 	"haven:candy_filled",
 	"haven:clown_sized",
 	"origins-classes:sneaky",
+	"wich:illager_trading",
+	"wich:illager_neutral",
+	"haven:vectortech_javelin_recall",
+	"haven:vectortech_javelin_teleport",
 	"haven:loot_tables/soleil",
 	"haven:blood_types/confetti"
   ],

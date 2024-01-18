@@ -1,0 +1,15 @@
+{
+  "type": "wich:enable_trade",
+  "entity_types": [
+	"minecraft:evoker",
+    "minecraft:illusioner",
+    "minecraft:pillager",
+    "minecraft:vindicator",
+    "minecraft:witch",
+  
+    "wich:iceologer",
+    "wich:mage"
+  ],
+  "name": "Black Market Trader",
+  "description": "Pillagers are open to trading with you."
+}

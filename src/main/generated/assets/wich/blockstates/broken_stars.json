@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "wich:block/broken_stars",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "wich:block/broken_stars"
+    },
+    "facing=south": {
+      "model": "wich:block/broken_stars",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "wich:block/broken_stars",
+      "y": 270
+    }
+  }
+}

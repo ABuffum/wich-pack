@@ -1,5 +1,7 @@
 package fun.mousewich.dispenser;
 
+import fun.mousewich.block.DispenserMinecartPointer;
+import fun.mousewich.entity.vehicle.DispenserMinecartEntity;
 import fun.mousewich.item.bucket.BucketProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -34,8 +36,15 @@ public class BucketDispenserBehavior extends FallibleItemDispenserBehavior {
 				stack.decrement(1);
 				if (stack.isEmpty()) return new ItemStack(item2);
 				else {
-					if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(item2)) < 0) {
-						this.fallbackBehavior.dispense(pointer, new ItemStack(item2));
+					if (pointer instanceof DispenserMinecartPointer minecartPointer) {
+						if (minecartPointer.getEntity().addToFirstFreeSlot(new ItemStack(item2)) < 0) {
+							this.fallbackBehavior.dispense(minecartPointer, new ItemStack(item2));
+						}
+					}
+					else {
+						if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(item2)) < 0) {
+							this.fallbackBehavior.dispense(pointer, new ItemStack(item2));
+						}
 					}
 					return stack;
 				}

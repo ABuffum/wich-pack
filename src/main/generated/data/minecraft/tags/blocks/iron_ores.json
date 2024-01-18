@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "wich:nether_iron_ore",
+    "wich:end_iron_ore"
+  ]
+}

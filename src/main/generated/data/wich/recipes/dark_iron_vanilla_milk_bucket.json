@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "wich:copper_bucket"
+      "item": "wich:dark_iron_bucket"
     },
     {
       "item": "wich:vanilla_milk_bottle"

@@ -1,6 +1,7 @@
 package fun.mousewich.mixins.entity.passive;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.entity.ModNbtKeys;
 import fun.mousewich.entity.Pouchable;
 import fun.mousewich.entity.blood.BloodType;
 import fun.mousewich.entity.blood.EntityWithBloodType;
@@ -24,11 +25,8 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -81,16 +79,14 @@ public abstract class ChickenEntityMixin extends AnimalEntity implements Pouchab
 	public void copyDataToStack(ItemStack stack) {
 		Pouchable.copyDataToStack(this, stack);
 		NbtCompound nbt = stack.getOrCreateNbt();
-		nbt.putBoolean("IsChickenJockey", this.hasJockey);
-		nbt.putInt("EggLayTime", this.eggLayTime);
+		nbt.putBoolean(ModNbtKeys.IS_CHICKEN_JOCKEY, this.hasJockey);
+		nbt.putInt(ModNbtKeys.EGG_LAY_TIME, this.eggLayTime);
 	}
 	@Override
 	public void copyDataFromNbt(NbtCompound nbt) {
 		Pouchable.copyDataFromNbt(this, nbt);
-		this.hasJockey = nbt.getBoolean("IsChickenJockey");
-		if (nbt.contains("EggLayTime")) {
-			this.eggLayTime = nbt.getInt("EggLayTime");
-		}
+		this.hasJockey = nbt.getBoolean(ModNbtKeys.IS_CHICKEN_JOCKEY);
+		if (nbt.contains(ModNbtKeys.EGG_LAY_TIME)) this.eggLayTime = nbt.getInt(ModNbtKeys.EGG_LAY_TIME);
 	}
 	@Override
 	public SoundEvent getPouchedSound() {
@@ -108,9 +104,9 @@ public abstract class ChickenEntityMixin extends AnimalEntity implements Pouchab
 		if (this.isFromPouch()) cir.setReturnValue(false);
 	}
 	@Inject(method="writeCustomDataToNbt", at=@At("TAIL"))
-	public void WriteCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) { nbt.putBoolean("FromPouch", this.isFromPouch()); }
+	public void WriteCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) { nbt.putBoolean(ModNbtKeys.FROM_POUCH, this.isFromPouch()); }
 	@Inject(method="readCustomDataFromNbt", at=@At("TAIL"))
-	public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) { this.setFromPouch(nbt.getBoolean("FromPouch")); }
+	public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) { this.setFromPouch(nbt.getBoolean(ModNbtKeys.FROM_POUCH)); }
 
 	@Redirect(method="tickMovement", at=@At(value="INVOKE", target="Lnet/minecraft/entity/passive/ChickenEntity;dropItem(Lnet/minecraft/item/ItemConvertible;)Lnet/minecraft/entity/ItemEntity;"))
 	public ItemEntity LayDifferentEggs(ChickenEntity instance, ItemConvertible itemConvertible) {

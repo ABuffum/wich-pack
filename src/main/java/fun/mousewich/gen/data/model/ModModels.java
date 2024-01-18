@@ -1,10 +1,9 @@
 package fun.mousewich.gen.data.model;
 
+import fun.mousewich.ModId;
 import net.minecraft.data.client.*;
 
 import java.util.Optional;
-
-import static fun.mousewich.ModBase.ID;
 
 public class ModModels {
 	public static final Model CUBE_NORTH_WEST_MIRRORED_ALL = Make("minecraft:block/cube_north_west_mirrored_all", "_north_west_mirrored", TextureKey.ALL);
@@ -98,9 +97,9 @@ public class ModModels {
 	//</editor-fold>
 
 	public static Model Make(String path, TextureKey... requiredTextureKeys) {
-		return new Model(Optional.of(ID(path)), Optional.empty(), requiredTextureKeys);
+		return new Model(Optional.of(ModId.ID(path)), Optional.empty(), requiredTextureKeys);
 	}
 	public static Model Make(String path, String variant, TextureKey... requiredTextureKeys) {
-		return new Model(Optional.of(ID(path)), Optional.of(variant), requiredTextureKeys);
+		return new Model(Optional.of(ModId.ID(path)), Optional.of(variant), requiredTextureKeys);
 	}
 }

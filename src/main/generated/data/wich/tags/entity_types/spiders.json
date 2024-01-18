@@ -4,6 +4,8 @@
     "minecraft:spider",
     "minecraft:cave_spider",
     "wich:bone_spider",
-    "wich:jumping_spider"
+    "wich:icy_spider",
+    "wich:jumping_spider",
+    "wich:slime_spider"
   ]
 }

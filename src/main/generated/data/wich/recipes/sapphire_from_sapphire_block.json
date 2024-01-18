@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wich:sapphire_block"
+    }
+  ],
+  "result": {
+    "item": "wich:sapphire",
+    "count": 9
+  }
+}

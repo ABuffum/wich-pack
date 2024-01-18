@@ -2,9 +2,7 @@ package fun.mousewich.gen.data.recipe;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.container.ArrowContainer;
-import fun.mousewich.container.FlowerPartContainer;
 import fun.mousewich.gen.data.tag.ModItemTags;
-import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.data.server.RecipeProvider;
 import net.minecraft.data.server.recipe.*;
 import net.minecraft.item.Item;
@@ -17,9 +15,6 @@ import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 
 import java.util.Arrays;
-import java.util.List;
-
-import static fun.mousewich.ModBase.WOODCUTTING_RECIPE_SERIALIZER;
 
 public class Recipes {
 	private static CraftingRecipeJsonBuilder make(CraftingRecipeJsonBuilder recipe) {
@@ -69,7 +64,7 @@ public class Recipes {
 	}
 	public static SingleItemRecipeJsonBuilder MakeWoodcutting(ItemConvertible output, ItemConvertible ingredient) { return MakeWoodcutting(output, ingredient, 1); }
 	public static SingleItemRecipeJsonBuilder MakeWoodcutting(ItemConvertible output, ItemConvertible ingredient, int count) {
-		return new SingleItemRecipeJsonBuilder(WOODCUTTING_RECIPE_SERIALIZER, Ingredient.ofItems(ingredient), output, count)
+		return new SingleItemRecipeJsonBuilder(ModBase.WOODCUTTING_RECIPE_SERIALIZER, Ingredient.ofItems(ingredient), output, count)
 				.criterion(RecipeProvider.hasItem(ingredient), RecipeProvider.conditionsFromItem(ingredient));
 	}
 
@@ -160,6 +155,9 @@ public class Recipes {
 	}
 	public static CraftingRecipeJsonBuilder MakeBookshelf(ItemConvertible output, ItemConvertible ingredient) {
 		return Make3x1(output, ingredient).input('X', ModItemTags.BOOKS).pattern("XXX").pattern("###");
+	}
+	public static CraftingRecipeJsonBuilder MakeChiseledBookshelf(ItemConvertible output, Ingredient ingredient) {
+		return Make3x1(output, ingredient).input('X', ItemTags.WOODEN_SLABS).pattern("XXX").pattern("###");
 	}
 	public static CraftingRecipeJsonBuilder MakeChiseledBookshelf(ItemConvertible output, ItemConvertible ingredient) {
 		return Make3x1(output, ingredient).input('X', ItemTags.WOODEN_SLABS).pattern("XXX").pattern("###");

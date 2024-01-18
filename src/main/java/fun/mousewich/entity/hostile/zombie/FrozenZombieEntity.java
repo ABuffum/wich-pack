@@ -36,7 +36,7 @@ public class FrozenZombieEntity extends ZombieEntity implements RangedAttackMob,
 	@Override
 	protected void initCustomGoals() {
 		this.goalSelector.add(2, new FrozenZombieAttackGoal(this, 1.0, false));
-		this.goalSelector.add(2, new FrozenZombieProjectileAttackGoal(this, 1.25, 20, 10.0f));
+		this.goalSelector.add(2, new SlowingSnowballEntity.SlowingProjectileAttackGoal(this, 1.25, 20, 10.0f));
 		this.goalSelector.add(6, new MoveThroughVillageGoal(this, 1.0, true, 4, this::canBreakDoors));
 		this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
 		this.targetSelector.add(1, new RevengeGoal(this).setGroupRevenge(ZombifiedPiglinEntity.class));
@@ -54,27 +54,12 @@ public class FrozenZombieEntity extends ZombieEntity implements RangedAttackMob,
 		}
 	}
 
-	private static boolean targetSlowed(LivingEntity target) {
-		return target != null && (target.hasStatusEffect(StatusEffects.SLOWNESS) || FreezeConversionEntity.InPowderSnow(target));
-	}
-
 	public static class FrozenZombieAttackGoal extends ZombieAttackGoal {
 		public FrozenZombieAttackGoal(ZombieEntity zombie, double speed, boolean pauseWhenMobIdle) { super(zombie, speed, pauseWhenMobIdle); }
 		@Override
-		public boolean canStart() { return super.canStart() && targetSlowed(this.mob.getTarget()); }
+		public boolean canStart() { return super.canStart() && SlowingSnowballEntity.targetSlowed(this.mob.getTarget()); }
 		@Override
-		public boolean shouldContinue() { return super.shouldContinue() && targetSlowed(this.mob.getTarget()); }
-	}
-	public static class FrozenZombieProjectileAttackGoal extends ProjectileAttackGoal {
-		private final MobEntity mob;
-		public FrozenZombieProjectileAttackGoal(FrozenZombieEntity mob, double mobSpeed, int intervalTicks, float maxShootRange) {
-			super(mob, mobSpeed, intervalTicks, maxShootRange);
-			this.mob = mob;
-		}
-		@Override
-		public boolean canStart() { return super.canStart() && !targetSlowed(this.mob.getTarget()); }
-		@Override
-		public boolean shouldContinue() { return super.shouldContinue() && !targetSlowed(this.mob.getTarget()); }
+		public boolean shouldContinue() { return super.shouldContinue() && SlowingSnowballEntity.targetSlowed(this.mob.getTarget()); }
 	}
 
 	public static boolean canSpawn(EntityType<FrozenZombieEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:smooth_tuff"
-  },
-  "result": "wich:smooth_tuff_stairs",
-  "count": 1
-}

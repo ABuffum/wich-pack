@@ -1,0 +1,20 @@
+{
+  "powers": [
+	"ryft:water_breathing",
+	"origins:water_vision",
+	"origins:aqua_affinity",
+	"origins:swim_speed",
+	"origins:like_water",
+	"origins:aquatic",
+	"origins:conduit_power_on_land",
+	"origins:air_from_potions",
+	"wich:night_vision_immunity",
+	"wich:guardians_neutral",
+	"ryft:identified_sounds/eldora",
+	"ryft:loot_tables/eldora",
+	"wich:blood_types/guardian"
+  ],
+  "name": "Guardian",
+  "description": "What are you doing so far outside of your monument?",
+  "icon": "minecraft:conduit"
+}

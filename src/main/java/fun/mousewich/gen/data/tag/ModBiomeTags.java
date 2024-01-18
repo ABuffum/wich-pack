@@ -1,7 +1,6 @@
 package fun.mousewich.gen.data.tag;
 
-import fun.mousewich.ModBase;
-import net.minecraft.tag.BiomeTags;
+import fun.mousewich.ModId;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -22,7 +21,7 @@ public class ModBiomeTags {
 	public static final TagKey<Biome> WARM_OCEANS = createTag("warm_oceans");
 	public static final TagKey<Biome> WATER_ON_MAP_OUTLINES = createMinecraftTag("water_on_map_outlines");
 
-	private static TagKey<Biome> createTag(String name) { return TagKey.of(Registry.BIOME_KEY, ModBase.ID(name)); }
+	private static TagKey<Biome> createTag(String name) { return TagKey.of(Registry.BIOME_KEY, ModId.ID(name)); }
 	private static TagKey<Biome> createCommonTag(String name) {
 		return TagKey.of(Registry.BIOME_KEY, new Identifier("c", name));
 	}

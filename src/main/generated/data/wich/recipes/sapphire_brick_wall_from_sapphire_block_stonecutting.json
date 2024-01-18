@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:sapphire_block"
+  },
+  "result": "wich:sapphire_brick_wall",
+  "count": 1
+}

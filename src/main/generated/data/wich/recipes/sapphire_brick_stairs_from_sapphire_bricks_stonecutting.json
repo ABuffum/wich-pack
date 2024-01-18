@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "wich:sapphire_bricks"
+  },
+  "result": "wich:sapphire_brick_stairs",
+  "count": 1
+}

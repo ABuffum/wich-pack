@@ -1,8 +1,10 @@
 accessWidener v1 named
 accessible    class    net/minecraft/client/gui/hud/InGameHud$HeartType
 accessible    class    net/minecraft/entity/passive/BeeEntity$GrowCropsGoal
+accessible    class    net/minecraft/entity/passive/BeeEntity$PollinateGoal
 accessible    class    net/minecraft/entity/passive/FoxEntity$MateGoal
 accessible    class    net/minecraft/entity/passive/TurtleEntity$MateGoal
+accessible    class    net/minecraft/entity/mob/PhantomEntity$FindTargetGoal
 extendable    class    net/minecraft/client/model/ModelPart
 accessible    field    net/minecraft/client/model/ModelPart    cuboids    Ljava/util/List;
 accessible    field    net/minecraft/client/model/ModelPart    children    Ljava/util/Map;

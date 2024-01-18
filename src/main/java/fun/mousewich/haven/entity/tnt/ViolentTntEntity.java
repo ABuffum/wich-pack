@@ -25,7 +25,5 @@ public class ViolentTntEntity extends ModTntEntity {
 		propagateExplosion(3);
 	}
 	@Override
-	public boolean shouldDestroyBlocks() { return true; }
-	@Override
-	public float knockbackMultiplier() { return 0; }
+	public boolean shouldDoKnockback() { return false; }
 }

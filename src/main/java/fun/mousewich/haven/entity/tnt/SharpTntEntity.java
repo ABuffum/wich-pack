@@ -27,7 +27,7 @@ public class SharpTntEntity extends ModTntEntity {
 	@Override
 	public boolean shouldDestroyBlocks() { return false; }
 	@Override
-	public float damageMultiplier() { return 3; }
+	public boolean shouldDoKnockback() { return false; }
 	@Override
-	public float knockbackMultiplier() { return 0; }
+	public float damageMultiplier() { return 3; }
 }

@@ -1,6 +1,6 @@
 package fun.mousewich.sound;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import fun.mousewich.mixins.client.gui.SubtitlesHudAccessor;
 import fun.mousewich.mixins.client.sound.SoundSystemAccessor;
 import net.minecraft.SharedConstants;
@@ -64,7 +64,7 @@ public class SoundUtil {
 		if (!sound2.canPlay()) return;
 		Marker MARKER = SoundSystemAccessor.getMarker();
 		Set<Identifier> UNKNOWN_SOUNDS = SoundSystemAccessor.getUnknownSounds();
-		Logger LOGGER = ModBase.LOGGER;
+		Logger LOGGER = ModId.LOGGER;
 		WeightedSoundSet weightedSoundSet = sound2.getSoundSet(accessor.getLoader());
 		Identifier identifier = sound2.getId();
 		if (weightedSoundSet == null) {

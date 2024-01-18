@@ -1,6 +1,7 @@
 package fun.mousewich.entity.projectile;
 
 import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import fun.mousewich.command.ChorusCommand;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -12,7 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class BlindingArrowEntity extends ModArrowEntity {
-	public static final Identifier TEXTURE = ModBase.ID("textures/entity/projectiles/blinding_arrow.png");
+	public static final Identifier TEXTURE = ModId.ID("textures/entity/projectiles/blinding_arrow.png");
 	private int duration = 200;
 
 	public BlindingArrowEntity(EntityType<? extends ModArrowEntity> entityType, World world) { super(entityType, world); }

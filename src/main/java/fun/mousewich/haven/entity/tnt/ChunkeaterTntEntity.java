@@ -25,7 +25,5 @@ public class ChunkeaterTntEntity extends ModTntEntity {
 		propagateExplosion(16);
 	}
 	@Override
-	public boolean shouldDestroyBlocks() { return true; }
-	@Override
 	public float damageMultiplier() { return 2; }
 }

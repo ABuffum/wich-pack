@@ -1,6 +1,6 @@
 package fun.mousewich.gen.data.tag;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -136,8 +136,8 @@ public class ModItemTags {
 	public static final TagKey<Item> WOOL_CARPETS = createTag("wool_carpets");
 
 	public static final TagKey<Item> CROPTOPIA_NUTS = createTag("croptopia", "nuts");
+	public static final TagKey<Item> FORGE_IRON_INGOTS = createTag("forge", "ingots/iron");
 	public static final TagKey<Item> FORGE_VEGETABLES = createTag("forge", "vegetables");
-	public static final TagKey<Item> FORGE_INGOTS_IRON = createTag("forge", "ingots/iron");
 	public static final TagKey<Item> NOURISH_FRUIT = createTag("nourish", "fruit");
 	public static final TagKey<Item> NOURISH_SWEETS = createTag("nourish", "sweets");
 	public static final TagKey<Item> NOURISH_VEGETABLES = createTag("nourish", "vegetables");
@@ -157,7 +157,7 @@ public class ModItemTags {
 	public static final TagKey<Item> MEDIEVAL_ORIGINS_OGRE_ARMOUR = createTag("medievalorigins", "ogre_armour");
 	public static final TagKey<Item> MEDIEVAL_ORIGINS_SWORDS = createTag("medievalorigins", "swords");
 
-	private static TagKey<Item> createTag(String name) { return TagKey.of(Registry.ITEM_KEY, ModBase.ID(name)); }
+	private static TagKey<Item> createTag(String name) { return TagKey.of(Registry.ITEM_KEY, ModId.ID(name)); }
 	private static TagKey<Item> createTag(String namespace, String path) { return TagKey.of(Registry.ITEM_KEY, new Identifier(namespace, path)); }
 	private static TagKey<Item> createCommonTag(String name) { return TagKey.of(Registry.ITEM_KEY, new Identifier("c", name)); }
 	private static TagKey<Item> createMinecraftTag(String name) { return TagKey.of(Registry.ITEM_KEY, new Identifier(name)); }

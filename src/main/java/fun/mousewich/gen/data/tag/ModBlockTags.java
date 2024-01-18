@@ -1,6 +1,6 @@
 package fun.mousewich.gen.data.tag;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import net.minecraft.block.Block;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -65,7 +65,9 @@ public class ModBlockTags {
 	public static final TagKey<Block> POWDER_KEGS = createTag("powder_kegs");
 	public static final TagKey<Block> PUMPKINS = createTag("pumpkins");
 	public static final TagKey<Block> ROWS = createTag("rows");
+	public static final TagKey<Block> QUARTZ_ORES = createTag("quartz_ores");
 	public static final TagKey<Block> RUBY_ORES = createTag("ruby_ores");
+	public static final TagKey<Block> SAPPHIRE_ORES = createTag("sapphire_ores");
 	public static final TagKey<Block> SCULK_TURFS = createTag("sculk_turfs");
 	public static final TagKey<Block> SCULK_VEIN_CAN_PLACE_ON = createTag("sculk_vein_can_place_on");
 	public static final TagKey<Block> SIZZLE_RAIN_BLOCKS = createTag("sizzle_rain_blocks");
@@ -77,7 +79,7 @@ public class ModBlockTags {
 
 	public static final TagKey<Block> ORIGINS_UNPHASEABLE = createTag("origins", "unphasable");
 
-	private static TagKey<Block> createTag(String name) { return TagKey.of(Registry.BLOCK_KEY, ModBase.ID(name)); }
+	private static TagKey<Block> createTag(String name) { return TagKey.of(Registry.BLOCK_KEY, ModId.ID(name)); }
 	private static TagKey<Block> createTag(String namespace, String path) { return TagKey.of(Registry.BLOCK_KEY, new Identifier(namespace, path)); }
 	private static TagKey<Block> createCommonTag(String name) { return TagKey.of(Registry.BLOCK_KEY,new Identifier("c", name)); }
 	private static TagKey<Block> createMinecraftTag(String name) { return TagKey.of(Registry.BLOCK_KEY,new Identifier(name)); }

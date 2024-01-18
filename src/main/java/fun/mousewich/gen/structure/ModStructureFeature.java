@@ -1,6 +1,6 @@
 package fun.mousewich.gen.structure;
 
-import fun.mousewich.ModBase;
+import fun.mousewich.ModId;
 import fun.mousewich.mixins.world.StructureFeatureInvoker;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.GenerationStep;
@@ -13,7 +13,7 @@ public class ModStructureFeature {
 	public final JigsawFeature jigsawFeature;
 	private StructureFeature<StructurePoolFeatureConfig> feature;
 	public ModStructureFeature(String id, JigsawFeature jigsawFeature) {
-		this.identifier = ModBase.ID(id);
+		this.identifier = ModId.ID(id);
 		this.jigsawFeature = jigsawFeature;
 	}
 

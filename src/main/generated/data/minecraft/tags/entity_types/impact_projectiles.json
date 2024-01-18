@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "wich:throwable_tomato",
-    "wich:pink_slime"
+    "wich:pink_slime_ball",
+    "wich:javelin",
+    "wich:amethyst_trident",
+    "wich:pride_trident",
+    "wich:vectortech_javelin"
   ]
 }

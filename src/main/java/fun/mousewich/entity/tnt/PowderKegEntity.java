@@ -21,5 +21,4 @@ public class PowderKegEntity extends ModTntEntity {
 		this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), 5F, Explosion.DestructionType.BREAK);
 		propagateExplosion(3);
 	}
-	@Override public boolean shouldDestroyBlocks() { return true; }
 }

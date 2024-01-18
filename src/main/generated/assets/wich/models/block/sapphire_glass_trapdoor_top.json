@@ -1,0 +1,7 @@
+{
+  "parent": "wich:block/_template_glass_trapdoor_top",
+  "textures": {
+    "top": "wich:block/sapphire_glass",
+    "side": "wich:block/sapphire_glass_pane_top"
+  }
+}

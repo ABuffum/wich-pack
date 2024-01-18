@@ -2,6 +2,7 @@ package fun.mousewich.item.syringe;
 
 import fun.mousewich.ModBase;
 import fun.mousewich.ModConfig;
+import fun.mousewich.ModId;
 import fun.mousewich.command.ChorusCommand;
 import fun.mousewich.damage.InjectedBloodDamageSource;
 import fun.mousewich.damage.ModDamageSource;
@@ -20,6 +21,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
@@ -51,8 +53,12 @@ public class BloodSyringeItem extends BaseSyringeItem {
 	}
 	public static BloodType getBloodType(ItemStack stack) {
 		NbtCompound nbt = stack.getNbt();
+		Item item = stack.getItem();
+		if (BloodType.SYRINGE_TO_BLOOD_TYPE.containsKey(item)) {
+			return BloodType.SYRINGE_TO_BLOOD_TYPE.get(item);
+		}
 		if (nbt != null && nbt.contains(ModNbtKeys.BLOOD_TYPE, NbtElement.STRING_TYPE)) {
-			Identifier id = ModBase.ID(nbt.getString(ModNbtKeys.BLOOD_TYPE));
+			Identifier id = ModId.ID(nbt.getString(ModNbtKeys.BLOOD_TYPE));
 			if (BloodType.BLOOD_TYPES.containsKey(id)) return BloodType.BLOOD_TYPES.get(id);
 		}
 		return BloodType.PLAYER;

@@ -21,13 +21,13 @@ public class SoftTntEntity extends ModTntEntity {
 
 	@Override
 	protected void explode() {
-		Explosion explosion = this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), -3F, Explosion.DestructionType.NONE);
+		Explosion explosion = this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), -4F, Explosion.DestructionType.NONE);
 		propagateExplosion(3);
 	}
 	@Override
 	public boolean shouldDestroyBlocks() { return false; }
 	@Override
-	public float damageMultiplier() { return 0; }
+	public boolean shouldDamage() { return false; }
 	@Override
 	public float knockbackMultiplier() { return 1.5F; }
 }

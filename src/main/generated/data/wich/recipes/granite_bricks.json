@@ -6,10 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:granite"
+      "item": "minecraft:polished_granite"
     }
   },
   "result": {
-    "item": "wich:granite_bricks"
+    "item": "wich:granite_bricks",
+    "count": 4
   }
 }

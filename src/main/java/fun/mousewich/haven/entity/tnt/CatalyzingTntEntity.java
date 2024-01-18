@@ -31,9 +31,9 @@ public class CatalyzingTntEntity extends ModTntEntity {
 	@Override
 	public boolean shouldDestroyBlocks() { return false; }
 	@Override
-	public float damageMultiplier() { return 0; }
+	public boolean shouldDamage() { return false; }
 	@Override
-	public float knockbackMultiplier() { return 0; }
+	public boolean shouldDoKnockback() { return false; }
 	@Override
 	public boolean shouldMakeSound() { return false; }
 
