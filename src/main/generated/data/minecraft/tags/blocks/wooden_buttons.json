@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
+    "minecraft:bamboo_button",
     "minecraft:cherry_button",
     "wich:gilded_button",
-    "wich:dried_bamboo_button",
-    "minecraft:bamboo_button"
+    "wich:dried_bamboo_button"
   ]
 }

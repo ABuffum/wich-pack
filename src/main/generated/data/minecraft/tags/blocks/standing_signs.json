@@ -1,19 +1,19 @@
 {
   "replace": false,
   "values": [
+    "wich:mushroom_stem_sign",
+    "wich:brown_mushroom_sign",
+    "wich:charred_sign",
+    "wich:cassia_sign",
+    "minecraft:cherry_sign",
+    "minecraft:mangrove_sign",
+    "wich:sugar_cane_sign",
+    "wich:blue_mushroom_sign",
+    "minecraft:bamboo_sign",
     "wich:dogwood_sign",
     "wich:dried_bamboo_sign",
-    "wich:sugar_cane_sign",
-    "minecraft:bamboo_sign",
-    "wich:cassia_sign",
-    "minecraft:mangrove_sign",
-    "wich:hay_sign",
-    "wich:charred_sign",
-    "wich:blue_mushroom_sign",
-    "wich:brown_mushroom_sign",
-    "wich:red_mushroom_sign",
-    "minecraft:cherry_sign",
     "wich:gilded_sign",
-    "wich:mushroom_stem_sign"
+    "wich:hay_sign",
+    "wich:red_mushroom_sign"
   ]
 }

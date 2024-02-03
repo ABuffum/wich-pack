@@ -1,19 +1,19 @@
 {
   "replace": false,
   "values": [
-    "wich:brown_mushroom_wall_sign",
-    "minecraft:mangrove_wall_sign",
-    "wich:mushroom_stem_wall_sign",
-    "wich:gilded_wall_sign",
-    "wich:red_mushroom_wall_sign",
-    "wich:hay_wall_sign",
-    "wich:cassia_wall_sign",
     "minecraft:cherry_wall_sign",
-    "wich:dried_bamboo_wall_sign",
-    "wich:sugar_cane_wall_sign",
     "wich:dogwood_wall_sign",
-    "minecraft:bamboo_wall_sign",
+    "wich:mushroom_stem_wall_sign",
+    "wich:hay_wall_sign",
+    "wich:sugar_cane_wall_sign",
     "wich:blue_mushroom_wall_sign",
-    "wich:charred_wall_sign"
+    "wich:dried_bamboo_wall_sign",
+    "minecraft:mangrove_wall_sign",
+    "wich:cassia_wall_sign",
+    "wich:brown_mushroom_wall_sign",
+    "wich:charred_wall_sign",
+    "minecraft:bamboo_wall_sign",
+    "wich:gilded_wall_sign",
+    "wich:red_mushroom_wall_sign"
   ]
 }

@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
+    "wich:mycelium_roots",
     "wich:gilded_fungus",
-    "wich:gilded_roots",
     "wich:blue_mushroom",
-    "wich:mycelium_roots"
+    "wich:gilded_roots"
   ]
 }
