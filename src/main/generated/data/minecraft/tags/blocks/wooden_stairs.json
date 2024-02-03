@@ -1,21 +1,21 @@
 {
   "replace": false,
   "values": [
-    "wich:cassia_stairs",
     "wich:sugar_cane_stairs",
-    "wich:blue_mushroom_stairs",
-    "wich:mushroom_stem_stairs",
-    "wich:red_mushroom_stairs",
-    "wich:brown_mushroom_stairs",
-    "wich:charred_stairs",
     "wich:dried_bamboo_mosaic_stairs",
-    "wich:hay_stairs",
-    "wich:dried_bamboo_stairs",
-    "minecraft:bamboo_mosaic_stairs",
-    "minecraft:mangrove_stairs",
-    "minecraft:bamboo_stairs",
     "wich:dogwood_stairs",
+    "wich:charred_stairs",
+    "wich:cassia_stairs",
+    "minecraft:cherry_stairs",
+    "minecraft:mangrove_stairs",
+    "wich:red_mushroom_stairs",
     "wich:gilded_stairs",
-    "minecraft:cherry_stairs"
+    "minecraft:bamboo_stairs",
+    "wich:mushroom_stem_stairs",
+    "minecraft:bamboo_mosaic_stairs",
+    "wich:hay_stairs",
+    "wich:brown_mushroom_stairs",
+    "wich:dried_bamboo_stairs",
+    "wich:blue_mushroom_stairs"
   ]
 }

@@ -4149,6 +4149,7 @@ public class ModBase implements ModInitializer {
 		Register(BiggerLungsPower::createFactory);
 		Register(BurnForeverPower::createFactory);
 		Register(CannotFreezePower::createFactory);
+		Register(CapePower::createFactory);
 		Register(ChorusImmunePower::createFactory);
 		Register(ChorusTeleportPower::createFactory);
 		Register(ClownPacifistPower::createFactory);

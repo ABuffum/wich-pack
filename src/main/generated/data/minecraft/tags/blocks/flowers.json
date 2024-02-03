@@ -2,11 +2,11 @@
   "replace": false,
   "values": [
     "wich:pink_dogwood_leaves",
-    "wich:flowering_cassia_leaves",
-    "wich:white_dogwood_leaves",
-    "minecraft:cherry_leaves",
+    "wich:pale_dogwood_leaves",
     "minecraft:pink_petals",
+    "wich:flowering_cassia_leaves",
     "minecraft:mangrove_propagule",
-    "wich:pale_dogwood_leaves"
+    "wich:white_dogwood_leaves",
+    "minecraft:cherry_leaves"
   ]
 }

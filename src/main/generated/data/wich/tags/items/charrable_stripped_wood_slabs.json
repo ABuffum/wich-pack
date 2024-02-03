@@ -2,16 +2,16 @@
   "replace": false,
   "values": [
     "wich:stripped_dark_oak_wood_slab",
-    "wich:stripped_cassia_wood_slab",
-    "wich:stripped_dogwood_wood_slab",
-    "wich:stripped_bamboo_wood_slab",
-    "wich:stripped_oak_wood_slab",
-    "wich:stripped_dried_bamboo_wood_slab",
     "wich:stripped_birch_wood_slab",
+    "wich:stripped_bamboo_wood_slab",
+    "wich:stripped_cassia_wood_slab",
+    "wich:stripped_mangrove_wood_slab",
+    "wich:stripped_oak_wood_slab",
+    "wich:stripped_dogwood_wood_slab",
     "wich:stripped_jungle_wood_slab",
+    "wich:stripped_spruce_wood_slab",
     "wich:stripped_acacia_wood_slab",
     "wich:stripped_cherry_wood_slab",
-    "wich:stripped_mangrove_wood_slab",
-    "wich:stripped_spruce_wood_slab"
+    "wich:stripped_dried_bamboo_wood_slab"
   ]
 }

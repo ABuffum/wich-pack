@@ -2,16 +2,16 @@
   "replace": false,
   "values": [
     "wich:soul_jack_o_lantern",
-    "wich:rotten_jack_o_lantern",
     "wich:ender_jack_o_lantern",
+    "wich:rotten_jack_o_lantern",
     "wich:soul_melon_lantern",
-    "wich:ender_melon_lantern",
-    "wich:rotten_ender_jack_o_lantern",
-    "wich:white_jack_o_lantern",
     "wich:rotten_soul_jack_o_lantern",
-    "wich:white_soul_jack_o_lantern",
-    "wich:white_ender_jack_o_lantern",
     "wich:melon_lantern",
+    "wich:white_soul_jack_o_lantern",
+    "wich:white_jack_o_lantern",
+    "wich:ender_melon_lantern",
+    "wich:white_ender_jack_o_lantern",
+    "wich:rotten_ender_jack_o_lantern",
     "minecraft:jack_o_lantern"
   ]
 }

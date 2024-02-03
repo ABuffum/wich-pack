@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:stripped_bamboo_block",
-    "minecraft:bamboo_block",
     "wich:bamboo_log",
-    "wich:stripped_bamboo_log"
+    "wich:stripped_bamboo_log",
+    "minecraft:stripped_bamboo_block",
+    "minecraft:bamboo_block"
   ]
 }

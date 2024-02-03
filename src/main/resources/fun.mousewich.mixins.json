@@ -266,6 +266,7 @@
 	"world.structure.WoodlandMansionGeneratorPieceMixin"
   ],
   "client": [
+	"client.AbstractClientPlayerEntityMixin",
 	"client.BlockColorsMixin",
 	"client.ClientPlayerEntityMixin",
 	"client.ClientPlayerInteractionManagerMixin",

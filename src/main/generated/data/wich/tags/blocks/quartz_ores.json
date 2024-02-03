@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wich:quartz_ore",
-    "wich:deepslate_quartz_ore"
+    "wich:deepslate_quartz_ore",
+    "wich:quartz_ore"
   ]
 }

@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "wich:rotten_pumpkin",
     "wich:white_pumpkin",
     "wich:burnt_pumpkin",
+    "wich:rotten_pumpkin",
     "minecraft:pumpkin"
   ]
 }

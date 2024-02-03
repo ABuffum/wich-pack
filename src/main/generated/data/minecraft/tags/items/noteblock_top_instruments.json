@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wich:zombified_piglin_head",
     "minecraft:piglin_head",
+    "wich:zombified_piglin_head",
     "minecraft:zombie_head",
     "minecraft:skeleton_skull",
     "minecraft:creeper_head",

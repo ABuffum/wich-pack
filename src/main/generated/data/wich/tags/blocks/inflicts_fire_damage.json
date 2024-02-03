@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wich:blaze_powder_block",
     "wich:cooled_magma_block",
+    "wich:blaze_powder_block",
     "minecraft:fire",
     "minecraft:lava",
     "minecraft:lava_cauldron",

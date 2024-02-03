@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:pitcher_crop",
-    "minecraft:torchflower_crop"
+    "minecraft:torchflower_crop",
+    "minecraft:pitcher_crop"
   ]
 }
