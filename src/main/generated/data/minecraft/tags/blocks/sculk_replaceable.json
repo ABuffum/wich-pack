@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
+    "wich:end_shale",
     "wich:end_shale_rock",
+    "wich:end_rock",
     "wich:shale",
     "wich:end_rock_shale",
-    "wich:end_shale",
-    "wich:end_rock",
     "#minecraft:base_stone_overworld",
     "#minecraft:dirt",
     "#minecraft:terracotta",

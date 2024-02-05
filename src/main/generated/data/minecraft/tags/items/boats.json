@@ -1,18 +1,18 @@
 {
   "replace": false,
   "values": [
-    "wich:cassia_boat",
     "wich:charred_boat",
-    "wich:mushroom_stem_boat",
-    "wich:brown_mushroom_boat",
+    "minecraft:mangrove_boat",
+    "wich:hay_boat",
     "wich:dogwood_boat",
-    "minecraft:cherry_boat",
     "wich:red_mushroom_boat",
     "wich:sugar_cane_boat",
-    "minecraft:bamboo_raft",
-    "wich:hay_boat",
-    "minecraft:mangrove_boat",
+    "wich:cassia_boat",
+    "wich:mushroom_stem_boat",
+    "minecraft:cherry_boat",
     "wich:blue_mushroom_boat",
+    "minecraft:bamboo_raft",
+    "wich:brown_mushroom_boat",
     "#minecraft:chest_boats"
   ]
 }

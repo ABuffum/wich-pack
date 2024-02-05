@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "wich:ruby_ore",
-    "wich:deepslate_ruby_ore"
+    "wich:deepslate_ruby_ore",
+    "wich:ruby_ore"
   ]
 }

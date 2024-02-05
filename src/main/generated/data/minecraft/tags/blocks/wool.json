@@ -1,14 +1,14 @@
 {
   "replace": false,
   "values": [
-    "wich:burgundy_fleece",
-    "wich:mint_fleece",
-    "wich:burgundy_wool",
-    "wich:mint_wool",
-    "wich:beige_wool",
-    "wich:lavender_wool",
-    "wich:beige_fleece",
     "wich:rainbow_wool",
-    "wich:lavender_fleece"
+    "wich:lavender_fleece",
+    "wich:beige_wool",
+    "wich:beige_fleece",
+    "wich:mint_fleece",
+    "wich:mint_wool",
+    "wich:burgundy_fleece",
+    "wich:burgundy_wool",
+    "wich:lavender_wool"
   ]
 }

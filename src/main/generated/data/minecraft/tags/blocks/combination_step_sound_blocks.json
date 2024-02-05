@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "wich:glow_lichen_carpet",
     "wich:gilded_roots",
+    "wich:glow_lichen_carpet",
     "#minecraft:carpets",
     "minecraft:moss_block",
     "wich:glow_lichen_carpet",
