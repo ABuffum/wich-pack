@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_rh",
-  "textures": {
-    "top": "wich:block/brown_mushroom_door_top",
-    "bottom": "wich:block/brown_mushroom_door_bottom"
-  }
-}

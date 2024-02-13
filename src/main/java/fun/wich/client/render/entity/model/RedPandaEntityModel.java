@@ -44,6 +44,12 @@ public class RedPandaEntityModel extends EntityModel<RedPandaEntity> {
 	}
 	@Override
 	public void setAngles(RedPandaEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch) {
+		if (entity.GetStanding()) {
+			this.head.pitch = 0;
+			this.head.yaw = 0;
+			this.frontLeftLeg.pitch = this.frontRightLeg.pitch = this.backLeftLeg.pitch = this.backRightLeg.pitch = 0;
+			return;
+		}
 		this.head.pitch = headPitch * 0.017453292F;
 		this.head.yaw = headYaw * 0.017453292F;
 		this.frontRightLeg.pitch = this.backRightLeg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;

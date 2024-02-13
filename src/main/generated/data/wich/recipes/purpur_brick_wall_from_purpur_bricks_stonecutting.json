@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:purpur_bricks"
-  },
-  "result": "wich:purpur_brick_wall",
-  "count": 1
-}

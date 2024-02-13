@@ -1,6 +1,0 @@
-{
-  "parent": "wich:item/_template_simple_hammer",
-  "textures": {
-    "texture": "wich:item/cassia_hammer"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_side_alt",
-  "textures": {
-    "pane": "wich:block/sapphire_glass",
-    "edge": "wich:block/sapphire_glass_pane_top"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "wich:item/crimson_weathered_copper_hanging_sign"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "minecraft:dark_oak_log"
-  },
-  "result": "wich:dark_oak_log_slab",
-  "count": 2
-}

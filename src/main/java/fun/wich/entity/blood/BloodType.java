@@ -2,6 +2,7 @@ package fun.wich.entity.blood;
 
 import fun.wich.ModBase;
 import fun.wich.ModId;
+import fun.wich.gen.data.language.Words;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
 import net.minecraft.block.Block;
@@ -10,9 +11,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static fun.wich.ModBase.EN_US;
+import static fun.wich.ModBase.LANGUAGE_CACHES;
 
 public class BloodType {
 	private final String name;
@@ -32,17 +38,24 @@ public class BloodType {
 
 	public static final Map<Identifier, BloodType> BLOOD_TYPES = new HashMap<>();
 
-	public static BloodType Register(String name) { return Register(ModId.NAMESPACE, name); }
-	public static BloodType Register(String namespace, String name) { return new BloodType(namespace, name); }
+	public static BloodType Register(String name, List<String> translations) { return Register(ModId.NAMESPACE, name, translations); }
+	public static BloodType Register(String namespace, String name, List<String> translations) {
+		int length = translations.size();
+		for (int i = 0; i < LANGUAGE_CACHES.length; i++) {
+			if (length <= i) throw new RuntimeException("Missing translation for Language: " + LANGUAGE_CACHES[i].getLanguageCode() + " & Blood Type: " + namespace + "." + name);
+			LANGUAGE_CACHES[i].TranslationKeys.put("blood_type." + namespace + "." + name, translations.get(i));
+		}
+		return new BloodType(namespace, name);
+	}
 
-	public static final BloodType NONE = Register("none");
-	public static final BloodType PLAYER = Register("player");
+	public static final BloodType NONE = Register("none", List.of(Words.None));
+	public static final BloodType PLAYER = Register("player", List.of(EN_US.Blood(Words.Player)));
 
-	public static final BloodType HONEY = Register("honey");
-	public static final BloodType LAVA = Register("lava");
-	public static final BloodType MUD = Register("mud");
-	public static final BloodType SAP = Register("sap");
-	public static final BloodType WATER = Register("water");
+	public static final BloodType HONEY = Register("honey", List.of(Words.Honey));
+	public static final BloodType LAVA = Register("lava", List.of(Words.Lava));
+	public static final BloodType MUD = Register("mud", List.of(Words.Mud));
+	public static final BloodType SAP = Register("sap", List.of(Words.Sap));
+	public static final BloodType WATER = Register("water", List.of(Words.Water));
 
 	public static BloodType Get(LivingEntity entity) {
 		for (BloodType bloodType : BLOOD_TYPES.values()) {

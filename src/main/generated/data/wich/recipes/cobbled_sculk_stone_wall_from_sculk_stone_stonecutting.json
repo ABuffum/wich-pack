@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:sculk_stone"
-  },
-  "result": "wich:cobbled_sculk_stone_wall",
-  "count": 1
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "wich:block/granite_tiles",
-    "top": "wich:block/granite_tiles",
-    "side": "wich:block/granite_tiles"
-  }
-}

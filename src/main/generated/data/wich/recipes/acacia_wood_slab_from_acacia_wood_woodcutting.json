@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "minecraft:acacia_wood"
-  },
-  "result": "wich:acacia_wood_slab",
-  "count": 2
-}

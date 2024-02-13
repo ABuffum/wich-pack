@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "wich:block/red_sandy_dogwood_planks",
-    "top": "wich:block/red_sandy_dogwood_planks",
-    "side": "wich:block/red_sandy_dogwood_planks"
-  }
-}

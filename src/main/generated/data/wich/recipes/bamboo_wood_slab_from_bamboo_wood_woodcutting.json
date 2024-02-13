@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "wich:bamboo_wood"
-  },
-  "result": "wich:bamboo_wood_slab",
-  "count": 2
-}

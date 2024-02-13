@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "wich:block/sandy_warped_planks",
-    "top": "wich:block/sandy_warped_planks",
-    "side": "wich:block/sandy_warped_planks"
-  }
-}

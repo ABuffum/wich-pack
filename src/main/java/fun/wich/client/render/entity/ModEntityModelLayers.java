@@ -9,7 +9,7 @@ public class ModEntityModelLayers {
 	public static final EntityModelLayer BOAT = MakeModelLayer("boat");
 	public static final EntityModelLayer BONE_SPIDER = MakeModelLayer("bone_spider");
 	public static final EntityModelLayer CAMEL = MakeModelLayer("camel");
-	public static final EntityModelLayer CAPED_ILLAGER = MakeModelLayer("iceologer");
+	public static final EntityModelLayer CAPED_ILLAGER = MakeModelLayer("caped_illager");
 	public static final EntityModelLayer CHEST_BOAT = MakeModelLayer("chest_boat");
 	public static final EntityModelLayer CHEST_RAFT = MakeModelLayer("chest_raft");
 	public static final EntityModelLayer DISPENSER_MINECART = MakeModelLayer("dispenser_minecart");
@@ -25,6 +25,7 @@ public class ModEntityModelLayers {
 	public static final EntityModelLayer LAYERED_ZOMBIE_INNER_ARMOR = MakeModelLayer("layered_zombie", "inner_armor");
 	public static final EntityModelLayer LAYERED_ZOMBIE_OUTER_ARMOR = MakeModelLayer("layered_zombie", "outer_armor");
 	public static final EntityModelLayer LAYERED_ZOMBIE_OUTER = MakeModelLayer("layered_zombie", "outer");
+	public static final EntityModelLayer MOUNTAINEER = MakeModelLayer("mountaineer");
 	public static final EntityModelLayer PIGLIN_HEAD = MakeModelLayer("piglin_head");
 	public static final EntityModelLayer PIRANHA = MakeModelLayer("piranha");
 	public static final EntityModelLayer RACCOON = MakeModelLayer("raccoon");

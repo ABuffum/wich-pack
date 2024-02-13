@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "wich:netherite_horse_armor"
-  },
-  "result": "wich:netherite_nugget",
-  "experience": 0.1,
-  "cookingtime": 100
-}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "tag": "wich:charrable_woods"
-  },
-  "result": "wich:charred_wood",
-  "experience": 0.35,
-  "cookingtime": 600
-}

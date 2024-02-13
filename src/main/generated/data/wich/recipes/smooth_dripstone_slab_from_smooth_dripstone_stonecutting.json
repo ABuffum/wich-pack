@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:smooth_dripstone"
-  },
-  "result": "wich:smooth_dripstone_slab",
-  "count": 2
-}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "wich:waxed_exposed_copper_axe"
-  },
-  "result": "wich:copper_nugget",
-  "experience": 0.1,
-  "cookingtime": 100
-}

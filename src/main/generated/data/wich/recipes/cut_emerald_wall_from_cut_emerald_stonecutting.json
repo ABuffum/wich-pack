@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:cut_emerald"
-  },
-  "result": "wich:cut_emerald_wall",
-  "count": 1
-}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "wich:exposed_copper_pickaxe"
-  },
-  "result": "wich:copper_nugget",
-  "experience": 0.1,
-  "cookingtime": 200
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "wich:block/stripped_dried_bamboo_log_top",
-    "side": "wich:block/stripped_dried_bamboo_log"
-  }
-}

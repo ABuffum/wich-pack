@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "wich:block/white_pumpkin_top",
-    "bottom": "wich:block/white_pumpkin_top",
-    "side": "wich:block/white_pumpkin_side"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:sculk_stone"
-  },
-  "result": "wich:sculk_stone_brick_slab",
-  "count": 2
-}

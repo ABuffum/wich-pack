@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:cut_netherite"
-  },
-  "result": "wich:cut_netherite_pillar",
-  "count": 1
-}

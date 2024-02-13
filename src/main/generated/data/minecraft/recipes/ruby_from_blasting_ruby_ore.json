@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "wich:ruby_ore"
-  },
-  "result": "wich:ruby",
-  "experience": 1.0,
-  "cookingtime": 100
-}

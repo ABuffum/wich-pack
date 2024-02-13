@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "wich:waxed_weathered_copper_hoe"
-  },
-  "result": "wich:copper_nugget",
-  "experience": 0.1,
-  "cookingtime": 100
-}

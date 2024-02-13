@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "wich:block/cut_polished_andesite",
-    "top": "wich:block/cut_polished_andesite",
-    "side": "wich:block/cut_polished_andesite"
-  }
-}

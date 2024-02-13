@@ -1,6 +1,0 @@
-{
-  "parent": "wich:block/_template_woodcutter",
-  "textures": {
-    "planks": "wich:block/charred_planks"
-  }
-}

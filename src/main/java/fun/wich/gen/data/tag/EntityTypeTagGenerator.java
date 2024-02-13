@@ -16,7 +16,7 @@ import net.minecraft.util.registry.Registry;
 import java.util.Map;
 import java.util.Set;
 
-import static fun.wich.ModBase.*;
+import static fun.wich.entity.ModEntityType.*;
 
 public class EntityTypeTagGenerator extends FabricTagProvider<EntityType<?>> {
 	public EntityTypeTagGenerator(FabricDataGenerator dataGenerator) {
@@ -51,7 +51,7 @@ public class EntityTypeTagGenerator extends FabricTagProvider<EntityType<?>> {
 		getOrCreateTagBuilder(EntityTypeTags.IMPACT_PROJECTILES)
 				.add(THROWABLE_TOMATO_ENTITY, PINK_SLIME_BALL_ENTITY)
 				.add(JAVELIN_ENTITY, AMETHYST_TRIDENT_ENTITY);
-		getOrCreateTagBuilder(EntityTypeTags.RAIDERS).add(ICEOLOGER_ENTITY, MAGE_ENTITY);
+		getOrCreateTagBuilder(EntityTypeTags.RAIDERS).add(ICEOLOGER_ENTITY, MOUNTAINEER_ENTITY, MAGE_ENTITY);
 		getOrCreateTagBuilder(EntityTypeTags.SKELETONS)
 				.add(MOSSY_SKELETON_ENTITY, SUNKEN_SKELETON_ENTITY)
 				.addOptional(betternether("jungle_skeleton"))

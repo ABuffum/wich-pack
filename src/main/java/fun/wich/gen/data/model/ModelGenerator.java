@@ -33,6 +33,8 @@ import java.util.Map;
 import static fun.wich.ModBase.*;
 import static fun.wich.registry.ModBambooRegistry.*;
 import static fun.wich.registry.ModCopperRegistry.*;
+import static fun.wich.registry.ModEntityRegistry.*;
+
 public class ModelGenerator extends FabricModelProvider {
 	public ModelGenerator(FabricDataGenerator dataGenerator) { super(dataGenerator); }
 	public static Identifier prefixPath(Identifier id, String prefix) { return new Identifier(id.getNamespace(), prefix + id.getPath()); }

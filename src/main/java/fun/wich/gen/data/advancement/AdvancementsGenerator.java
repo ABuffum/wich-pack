@@ -5,9 +5,11 @@ import fun.wich.advancement.ModCriteria;
 import fun.wich.advancement.criterion.ItemCriterion;
 import fun.wich.advancement.criterion.ModThrownItemPickedUpByEntityCriterion;
 import fun.wich.advancement.criterion.ModTickCriterion;
+import fun.wich.entity.ModEntityType;
 import fun.wich.entity.passive.frog.FrogEntity;
 import fun.wich.entity.variants.FrogVariant;
 import fun.wich.gen.data.tag.ModBlockTags;
+import fun.wich.registry.ModEntityRegistry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.Advancement;
@@ -38,7 +40,7 @@ public class AdvancementsGenerator extends FabricAdvancementProvider {
 			EntityType.HORSE, EntityType.DONKEY, EntityType.MULE, EntityType.SHEEP, EntityType.COW,
 			EntityType.MOOSHROOM, EntityType.PIG, EntityType.CHICKEN, EntityType.WOLF, EntityType.OCELOT,
 			EntityType.RABBIT, EntityType.LLAMA, EntityType.CAT, EntityType.PANDA, EntityType.FOX, EntityType.BEE,
-			EntityType.HOGLIN, EntityType.STRIDER, EntityType.GOAT, EntityType.AXOLOTL, ModBase.CAMEL_ENTITY, ModBase.SNIFFER_ENTITY
+			EntityType.HOGLIN, EntityType.STRIDER, EntityType.GOAT, EntityType.AXOLOTL, ModEntityType.CAMEL_ENTITY, ModEntityType.SNIFFER_ENTITY
 	};
 
 	@Override
@@ -52,9 +54,9 @@ public class AdvancementsGenerator extends FabricAdvancementProvider {
 		Advancement breedAllAnimals = this.requireListedAnimalsBred(Advancement.Builder.create()).parent(BREED_ANIMAL).display(Items.GOLDEN_CARROT, new TranslatableText("advancements.husbandry.breed_all_animals.title"), new TranslatableText("advancements.husbandry.breed_all_animals.description"), null, AdvancementFrame.CHALLENGE, true, true, false).rewards(AdvancementRewards.Builder.experience(100)).build(exporter, "husbandry/bred_all_animals");
 		//Override glow sign
 		Advancement makeASignGlow = Advancement.Builder.create().parent(HUSBANDRY_ROOT).display(Items.GLOW_INK_SAC, new TranslatableText("advancements.husbandry.make_a_sign_glow.title"), new TranslatableText("advancements.husbandry.make_a_sign_glow.description"), null, AdvancementFrame.TASK, true, true, false).criterion("make_a_sign_glow", ItemCriterion.Conditions.create(LocationPredicate.Builder.create().block(BlockPredicate.Builder.create().tag(ModBlockTags.ALL_SIGNS).build()), ItemPredicate.Builder.create().items(Items.GLOW_INK_SAC))).build(exporter, "husbandry/make_a_sign_glow");
-		Advancement allayDeliverItemToPlayer = Advancement.Builder.create().parent(HUSBANDRY_ROOT).display(Items.COOKIE, new TranslatableText("advancements.husbandry.allay_deliver_item_to_player.title"), new TranslatableText("advancements.husbandry.allay_deliver_item_to_player.description"), null, AdvancementFrame.TASK, true, true, true).criterion("allay_deliver_item_to_player", ModThrownItemPickedUpByEntityCriterion.Conditions.createThrownItemPickedUpByPlayer(EntityPredicate.Extended.EMPTY, ItemPredicate.ANY, EntityPredicate.Extended.ofLegacy(EntityPredicate.Builder.create().type(ModBase.ALLAY_ENTITY).build()))).build(exporter, "husbandry/allay_deliver_item_to_player");
+		Advancement allayDeliverItemToPlayer = Advancement.Builder.create().parent(HUSBANDRY_ROOT).display(Items.COOKIE, new TranslatableText("advancements.husbandry.allay_deliver_item_to_player.title"), new TranslatableText("advancements.husbandry.allay_deliver_item_to_player.description"), null, AdvancementFrame.TASK, true, true, true).criterion("allay_deliver_item_to_player", ModThrownItemPickedUpByEntityCriterion.Conditions.createThrownItemPickedUpByPlayer(EntityPredicate.Extended.EMPTY, ItemPredicate.ANY, EntityPredicate.Extended.ofLegacy(EntityPredicate.Builder.create().type(ModEntityType.ALLAY_ENTITY).build()))).build(exporter, "husbandry/allay_deliver_item_to_player");
 		Advancement allayDeliverCakeToNoteBlock = Advancement.Builder.create().parent(allayDeliverItemToPlayer).display(Items.NOTE_BLOCK, new TranslatableText("advancements.husbandry.allay_deliver_cake_to_note_block.title"), new TranslatableText("advancements.husbandry.allay_deliver_cake_to_note_block.description"), null, AdvancementFrame.TASK, true, true, true).criterion("allay_deliver_cake_to_note_block", ItemCriterion.Conditions.createAllayDropItemOnBlock(LocationPredicate.Builder.create().block(BlockPredicate.Builder.create().blocks(Blocks.NOTE_BLOCK).build()), ItemPredicate.Builder.create().items(Items.CAKE))).build(exporter, "husbandry/allay_deliver_cake_to_note_block");
-		Advancement tadpoleInABucket = Advancement.Builder.create().parent(HUSBANDRY_ROOT).criterion(Registry.ITEM.getId(ModBase.TADPOLE_BUCKET).getPath(), FilledBucketCriterion.Conditions.create(ItemPredicate.Builder.create().items(ModBase.TADPOLE_BUCKET).build())).display(ModBase.TADPOLE_BUCKET, new TranslatableText("advancements.husbandry.tadpole_in_a_bucket.title"), new TranslatableText("advancements.husbandry.tadpole_in_a_bucket.description"), null, AdvancementFrame.TASK, true, true, false).build(exporter, "husbandry/tadpole_in_a_bucket");
+		Advancement tadpoleInABucket = Advancement.Builder.create().parent(HUSBANDRY_ROOT).criterion(Registry.ITEM.getId(ModEntityRegistry.TADPOLE_BUCKET).getPath(), FilledBucketCriterion.Conditions.create(ItemPredicate.Builder.create().items(ModEntityRegistry.TADPOLE_BUCKET).build())).display(ModEntityRegistry.TADPOLE_BUCKET, new TranslatableText("advancements.husbandry.tadpole_in_a_bucket.title"), new TranslatableText("advancements.husbandry.tadpole_in_a_bucket.description"), null, AdvancementFrame.TASK, true, true, false).build(exporter, "husbandry/tadpole_in_a_bucket");
 		Advancement leashAllFrogVariants = this.requireAllFrogsOnLeads(Advancement.Builder.create()).parent(tadpoleInABucket).display(Items.LEAD, new TranslatableText("advancements.husbandry.leash_all_frog_variants.title"), new TranslatableText("advancements.husbandry.leash_all_frog_variants.description"), null, AdvancementFrame.TASK, true, true, false).build(exporter, "husbandry/leash_all_frog_variants");
 		Advancement froglights = Advancement.Builder.create().parent(leashAllFrogVariants).display(ModBase.VERDANT_FROGLIGHT, new TranslatableText("advancements.husbandry.froglights.title"), new TranslatableText("advancements.husbandry.froglights.description"), null, AdvancementFrame.CHALLENGE, true, true, false).criterion("froglights", InventoryChangedCriterion.Conditions.items(ModBase.OCHRE_FROGLIGHT, ModBase.PEARLESCENT_FROGLIGHT, ModBase.VERDANT_FROGLIGHT)).build(exporter, "husbandry/froglights");
 	}
@@ -70,7 +72,7 @@ public class AdvancementsGenerator extends FabricAdvancementProvider {
 						EntityPredicate.Extended.EMPTY,
 						ItemPredicate.Builder.create().items(Items.LEAD),
 						EntityPredicate.Extended.ofLegacy(
-								EntityPredicate.Builder.create().type(ModBase.FROG_ENTITY)
+								EntityPredicate.Builder.create().type(ModEntityType.FROG_ENTITY)
 										.nbt(new FrogVariantPredicate(variant))
 										.build()))));
 		return builder;

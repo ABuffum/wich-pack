@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "wich:block/chiseled_purpur",
-    "top": "wich:block/chiseled_purpur",
-    "side": "wich:block/chiseled_purpur"
-  }
-}

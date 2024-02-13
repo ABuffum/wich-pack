@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "wich:brown_mushroom_planks"
-  },
-  "result": "wich:brown_mushroom_slab",
-  "count": 2
-}

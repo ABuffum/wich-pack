@@ -1,7 +1,0 @@
-{
-  "parent": "wich:block/plushie/warden",
-  "textures": {
-    "all": "wich:block/warden_plushie",
-    "particle": "wich:block/warden_plushie"
-  }
-}

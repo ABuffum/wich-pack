@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:weathered_copper_bricks"
-  },
-  "result": "wich:weathered_copper_brick_slab",
-  "count": 2
-}

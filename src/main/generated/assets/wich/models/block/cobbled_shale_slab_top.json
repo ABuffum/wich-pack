@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "wich:block/cobbled_shale",
-    "top": "wich:block/cobbled_shale",
-    "side": "wich:block/cobbled_shale"
-  }
-}

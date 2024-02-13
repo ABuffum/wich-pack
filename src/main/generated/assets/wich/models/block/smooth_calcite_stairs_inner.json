@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "wich:block/smooth_calcite",
-    "top": "wich:block/smooth_calcite",
-    "side": "wich:block/smooth_calcite"
-  }
-}

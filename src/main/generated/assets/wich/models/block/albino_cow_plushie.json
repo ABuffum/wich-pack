@@ -1,7 +1,0 @@
-{
-  "parent": "wich:block/plushie/cow",
-  "textures": {
-    "all": "wich:block/albino_cow_plushie",
-    "particle": "wich:block/albino_cow_plushie"
-  }
-}

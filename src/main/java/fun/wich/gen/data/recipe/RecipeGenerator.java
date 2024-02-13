@@ -28,6 +28,7 @@ import java.util.function.Consumer;
 import static fun.wich.ModBase.*;
 import static fun.wich.registry.ModBambooRegistry.*;
 import static fun.wich.registry.ModCopperRegistry.*;
+import static fun.wich.registry.ModEntityRegistry.*;
 
 public class RecipeGenerator extends FabricRecipeProvider {
 	public RecipeGenerator(FabricDataGenerator dataGenerator) { super(dataGenerator); }
@@ -154,6 +155,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeShaped(Items.GRAVEL, Items.FLINT).input('S', Items.SAND).pattern("S#").pattern("#S").offerTo(exporter, ModId.ID("gravel_from_flint_and_sand"));
 		Recipes.MakeSmelting(Items.DEAD_BUSH, Ingredient.fromTag(ItemTags.SAPLINGS), 200, 0.1).offerTo(exporter, ModId.ID("dead_bush_from_smelting_saplings"));
 		Recipes.Make3x1(Items.TRIDENT, Items.QUARTZ).input('|', PRISMARINE_ROD).pattern(" | ").pattern(" | ").offerTo(exporter);
+		//Utility Recipes - Horse Armor & Saddles
+		Recipes.MakeHorseArmor(Items.IRON_HORSE_ARMOR, Items.IRON_INGOT).offerTo(exporter);
+		Recipes.MakeHorseArmor(Items.GOLDEN_HORSE_ARMOR, Items.GOLD_INGOT).offerTo(exporter);
+		Recipes.MakeHorseArmor(Items.DIAMOND_HORSE_ARMOR, Items.DIAMOND).offerTo(exporter);
+		Recipes.Make3x1(Items.SADDLE, Items.LEATHER).input('S', Items.STRING).pattern("# #").pattern("S S").offerTo(exporter);
 		//Nether Bricks
 		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_NETHER_BRICKS, Items.CHISELED_NETHER_BRICKS);
 		//Red Nether Bricks
@@ -521,7 +527,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeSoulTorch(CRIMSON_SOUL_TORCH, Items.CRIMSON_STEM, 8).offerTo(exporter);
 		Recipes.MakeUnderwaterTorch(UNDERWATER_CRIMSON_TORCH, Items.CRIMSON_STEM, 8).offerTo(exporter);
 		Recipes.MakeShapeless(Items.NETHER_WART, Items.NETHER_WART_BLOCK, 9).offerTo(exporter, ModId.ID("nether_wart_from_block"));
-		Recipes.MakeSlab(NETHER_WART_SLAB, Items.NETHER_WART_BLOCK);
+		Recipes.MakeSlab(NETHER_WART_SLAB, Items.NETHER_WART_BLOCK).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Warped">
 		Recipes.MakeBeehive(WARPED_BEEHIVE, Items.WARPED_PLANKS).offerTo(exporter);
@@ -562,7 +568,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeUnderwaterTorch(UNDERWATER_WARPED_TORCH, Items.WARPED_STEM, 8).offerTo(exporter);
 		Recipes.Make3x3(Items.WARPED_WART_BLOCK, WARPED_WART).offerTo(exporter);
 		Recipes.MakeShapeless(WARPED_WART, Items.WARPED_WART_BLOCK, 9).offerTo(exporter, ModId.ID("warped_wart_from_block"));
-		Recipes.MakeSlab(WARPED_WART_SLAB, Items.WARPED_WART_BLOCK);
+		Recipes.MakeSlab(WARPED_WART_SLAB, Items.WARPED_WART_BLOCK).offerTo(exporter);
 		Recipes.MakeShaped(BLUE_NETHER_BRICKS, WARPED_WART).input('*', Items.NETHER_BRICK).pattern("#*").pattern("*#").offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, CHISELED_BLUE_NETHER_BRICKS, BLUE_NETHER_BRICKS);
 		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_BLUE_NETHER_BRICKS, CHISELED_BLUE_NETHER_BRICKS);
@@ -685,7 +691,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeWall(COBBLED_SHALE_WALL, COBBLED_SHALE).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, COBBLED_SHALE_WALL, COBBLED_SHALE);
 		//Polished
-		Recipes.Make2x2(POLISHED_SHALE, COBBLED_SHALE);
+		Recipes.Make2x2(POLISHED_SHALE, COBBLED_SHALE).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, POLISHED_SHALE, COBBLED_SHALE);
 		Recipes.MakeSlab(POLISHED_SHALE_SLAB, POLISHED_SHALE).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, POLISHED_SHALE_SLAB, POLISHED_SHALE, 2);
@@ -1159,9 +1165,9 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		OfferStonecuttingRecipe(exporter, TUFF_BRICK_WALL, POLISHED_TUFF);
 		OfferStonecuttingRecipe(exporter, TUFF_BRICK_WALL, TUFF_BRICKS);
 		//Chiseled
-		Recipes.Make1x2(CHISELED_TUFF, TUFF_SLAB);
+		Recipes.Make1x2(CHISELED_TUFF, TUFF_SLAB).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, CHISELED_TUFF, Items.TUFF);
-		Recipes.Make1x2(CHISELED_TUFF_BRICKS, TUFF_BRICK_SLAB);
+		Recipes.Make1x2(CHISELED_TUFF_BRICKS, TUFF_BRICK_SLAB).offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, CHISELED_TUFF_BRICKS, Items.TUFF);
 		OfferStonecuttingRecipe(exporter, CHISELED_TUFF_BRICKS, TUFF_BRICKS);
 		OfferStonecuttingRecipe(exporter, CHISELED_TUFF_BRICKS, POLISHED_TUFF);
@@ -1381,6 +1387,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeSummoningArrow(SLIME_ZOMBIE_SUMMONING_ARROW, SLIME_ZOMBIE_SPAWN_EGG).offerTo(exporter);
 		Recipes.MakeSummoningArrow(SLIME_CREEPER_SUMMONING_ARROW, SLIME_CREEPER_SPAWN_EGG).offerTo(exporter);
 		Recipes.MakeSummoningArrow(ICEOLOGER_SUMMONING_ARROW, ICEOLOGER_SPAWN_EGG).offerTo(exporter);
+		Recipes.MakeSummoningArrow(MOUNTAINEER_SUMMONING_ARROW, MOUNTAINEER_SPAWN_EGG).offerTo(exporter);
 		Recipes.MakeSummoningArrow(MAGE_SUMMONING_ARROW, MAGE_SPAWN_EGG).offerTo(exporter);
 		Recipes.MakeSummoningArrow(JOLLY_LLAMA_SUMMONING_ARROW, JOLLY_LLAMA_SPAWN_EGG).offerTo(exporter);
 		//</editor-fold>
@@ -1440,8 +1447,8 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeSlab(GLASS_SLAB, Items.GLASS).offerTo(exporter);
 		Recipes.Make3x2(GLASS_TRAPDOOR, Items.GLASS_PANE).offerTo(exporter);
 		for (DyeColor color : DyeColor.values()){
-			Recipes.MakeSlab(STAINED_GLASS_SLABS.get(color), ColorUtil.GetStainedGlassItem(color));
-			Recipes.Make2x2(STAINED_GLASS_TRAPDOORS.get(color), ColorUtil.GetStainedGlassPaneItem(color));
+			Recipes.MakeSlab(STAINED_GLASS_SLABS.get(color), ColorUtil.GetStainedGlassItem(color)).offerTo(exporter);
+			Recipes.Make2x2(STAINED_GLASS_TRAPDOORS.get(color), ColorUtil.GetStainedGlassPaneItem(color)).offerTo(exporter);
 		}
 		//</editor-fold>
 		//<editor-fold desc="Emerald">
@@ -2130,7 +2137,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.Make2x3(NETHERITE_DOOR, Items.NETHERITE_INGOT).offerTo(exporter);
 		Recipes.Make2x2(NETHERITE_TRAPDOOR, Items.NETHERITE_INGOT).offerTo(exporter);
 		Recipes.MakeShears(NETHERITE_SHEARS, Items.NETHERITE_INGOT).offerTo(exporter);
-		Recipes.MakeHorseArmor(NETHERITE_HORSE_ARMOR, Items.NETHERITE_INGOT).offerTo(exporter);
+		OfferSmithingRecipe(exporter, NETHERITE_HORSE_ARMOR, Items.DIAMOND_HORSE_ARMOR, Items.NETHERITE_INGOT);
 		Recipes.MakePressurePlate(CRUSHING_WEIGHTED_PRESSURE_PLATE, Items.NETHERITE_INGOT).offerTo(exporter);
 		Recipes.MakeShaped(NETHERITE_BUCKET, Items.NETHERITE_INGOT).pattern("# #").pattern(" # ").offerTo(exporter);
 		//</editor-fold>
@@ -2822,7 +2829,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeShapeless(GRAY_BOOK, Items.BOOK).input(Items.GRAY_DYE).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Wool">
-		for (DyeColor color : DyeColor.values()) Recipes.MakeSlab(WOOL_SLABS.get(color), ColorUtil.GetWoolItem(color));
+		for (DyeColor color : DyeColor.values()) Recipes.MakeSlab(WOOL_SLABS.get(color), ColorUtil.GetWoolItem(color)).offerTo(exporter);
 		Recipes.MakeSlab(RAINBOW_WOOL_SLAB, RAINBOW_WOOL).offerTo(exporter);
 		Recipes.MakeCarpet(RAINBOW_CARPET, RAINBOW_WOOL).offerTo(exporter);
 //		Recipes.MakeBed(RAINBOW_BED, Ingredient.ofItems(RAINBOW_WOOL, RAINBOW_FLEECE)).offerTo(exporter);
@@ -2850,11 +2857,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		for (DyeColor color : DyeColor.values()) Recipes.MakeCarpet(FLEECE_CARPETS.get(color), FLEECE.get(color)).offerTo(exporter);
 		Recipes.MakeSlab(RAINBOW_FLEECE_SLAB, RAINBOW_FLEECE).offerTo(exporter);
 		Recipes.MakeCarpet(RAINBOW_FLEECE_CARPET, RAINBOW_FLEECE).offerTo(exporter);
-		Recipes.MakeHelmet(FLEECE_HELMET, Ingredient.fromTag(ModItemTags.FLEECE));
-		Recipes.MakeChestplate(FLEECE_CHESTPLATE, Ingredient.fromTag(ModItemTags.FLEECE));
-		Recipes.MakeLeggings(FLEECE_LEGGINGS, Ingredient.fromTag(ModItemTags.FLEECE));
-		Recipes.MakeBoots(FLEECE_BOOTS, Ingredient.fromTag(ModItemTags.FLEECE));
-		Recipes.MakeHorseArmor(FLEECE_HORSE_ARMOR, Ingredient.fromTag(ModItemTags.FLEECE));
+		Recipes.MakeHelmet(FLEECE_HELMET, Ingredient.fromTag(ModItemTags.FLEECE)).offerTo(exporter);
+		Recipes.MakeChestplate(FLEECE_CHESTPLATE, Ingredient.fromTag(ModItemTags.FLEECE)).offerTo(exporter);
+		Recipes.MakeLeggings(FLEECE_LEGGINGS, Ingredient.fromTag(ModItemTags.FLEECE)).offerTo(exporter);
+		Recipes.MakeBoots(FLEECE_BOOTS, Ingredient.fromTag(ModItemTags.FLEECE)).offerTo(exporter);
+		Recipes.MakeHorseArmor(FLEECE_HORSE_ARMOR, Ingredient.fromTag(ModItemTags.FLEECE)).offerTo(exporter);
 		//</editor-fold>
 		//<editor-fold desc="Studded Leather">
 		Recipes.MakeShaped(STUDDED_LEATHER_HELMET, Items.LEATHER).input('C', Items.CHAIN).pattern("C#C").pattern("# #").offerTo(exporter);
@@ -3591,7 +3598,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeUnderwaterTorch(UNDERWATER_GILDED_TORCH, GILDED_STEM, 8).offerTo(exporter);
 		Recipes.Make3x3(GILDED_WART_BLOCK, GILDED_WART).offerTo(exporter);
 		Recipes.MakeShapeless(GILDED_WART, GILDED_WART_BLOCK, 9).offerTo(exporter, ModId.ID("gilded_wart_from_block"));
-		Recipes.MakeSlab(GILDED_WART_SLAB, GILDED_WART_BLOCK);
+		Recipes.MakeSlab(GILDED_WART_SLAB, GILDED_WART_BLOCK).offerTo(exporter);
 		Recipes.MakeShaped(YELLOW_NETHER_BRICKS, GILDED_WART).input('*', Items.NETHER_BRICK).pattern("#*").pattern("*#").offerTo(exporter);
 		OfferStonecuttingRecipe(exporter, CHISELED_YELLOW_NETHER_BRICKS, YELLOW_NETHER_BRICKS);
 		OfferStonecuttingRecipe(exporter, SMOOTH_CHISELED_YELLOW_NETHER_BRICKS, CHISELED_YELLOW_NETHER_BRICKS);
@@ -3771,7 +3778,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeShaped(POUCH, Items.LEATHER).input('S', Items.STRING).pattern("SSS").pattern("# #").pattern("###").offerTo(exporter);
 		//Sweeping / Brushing
 		Recipes.MakeShaped(BROOM, Items.WHEAT).input('/', Items.STICK).pattern("  #").pattern(" / ").pattern("/  ").offerTo(exporter);
-		Recipes.MakeShaped(BRUSH, Items.FEATHER).input('C', Items.COPPER_INGOT).input('|', Items.STICK).pattern("#").pattern("C").pattern("|").offerTo(exporter);
+		Recipes.MakeShaped(BRUSH, ModItemTags.FEATHERS).input('C', Items.COPPER_INGOT).input('|', Items.STICK).pattern("#").pattern("C").pattern("|").offerTo(exporter);
 		//<editor-fold desc="Sandy Blocks">
 		Recipes.MakeSandy(SANDY_COBBLESTONE, Items.COBBLESTONE).offerTo(exporter);
 		Recipes.MakeSandy(SANDY_COBBLESTONE_SLAB, Items.COBBLESTONE_SLAB).offerTo(exporter);

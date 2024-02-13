@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "wich:block/birch_barrel_top_open",
-    "bottom": "wich:block/birch_barrel_bottom",
-    "side": "wich:block/birch_barrel_side"
-  }
-}

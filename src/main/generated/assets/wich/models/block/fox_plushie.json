@@ -1,7 +1,0 @@
-{
-  "parent": "wich:block/plushie/fox",
-  "textures": {
-    "all": "wich:block/fox_plushie",
-    "particle": "wich:block/fox_plushie"
-  }
-}

@@ -1,6 +1,7 @@
 package fun.wich.trim;
 
 import fun.wich.ModFactory;
+import fun.wich.gen.data.language.Words;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -15,22 +16,22 @@ import java.util.Optional;
 import static fun.wich.ModBase.EN_US;
 
 public enum ArmorTrimPattern implements ItemConvertible {
-	SENTRY("sentry", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Sentry())) }),
-	DUNE("dune", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Dune())) }),
-	COAST("coast", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Coast())) }),
-	WILD("wild", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Wild())) }),
-	WARD("ward", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Ward())) }),
-	EYE("eye", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Eye())) }),
-	VEX("vex", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Vex())) }),
-	TIDE("tide", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Tide())) }),
-	SNOUT("snout", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Snout())) }),
-	RIB("rib", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Rib())) }),
-	SPIRE("spire", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Spire())) }),
-	WAYFINDER("wayfinder", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Wayfinder())) }),
-	SHAPER("shaper", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Shaper())) }),
-	SILENCE("silence", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Silence())) }),
-	RAISER("raiser", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Raider())) }),
-	HOST("host", new String[] { EN_US.Template(EN_US.Smithing(EN_US.Host())) });
+	SENTRY("sentry", new String[] { EN_US.Template(EN_US.Smithing(Words.Sentry)) }),
+	DUNE("dune", new String[] { EN_US.Template(EN_US.Smithing(Words.Dune)) }),
+	COAST("coast", new String[] { EN_US.Template(EN_US.Smithing(Words.Coast)) }),
+	WILD("wild", new String[] { EN_US.Template(EN_US.Smithing(Words.Wild)) }),
+	WARD("ward", new String[] { EN_US.Template(EN_US.Smithing(Words.Ward)) }),
+	EYE("eye", new String[] { EN_US.Template(EN_US.Smithing(Words.Eye)) }),
+	VEX("vex", new String[] { EN_US.Template(EN_US.Smithing(Words.Vex)) }),
+	TIDE("tide", new String[] { EN_US.Template(EN_US.Smithing(Words.Tide)) }),
+	SNOUT("snout", new String[] { EN_US.Template(EN_US.Smithing(Words.Snout)) }),
+	RIB("rib", new String[] { EN_US.Template(EN_US.Smithing(Words.Rib)) }),
+	SPIRE("spire", new String[] { EN_US.Template(EN_US.Smithing(Words.Spire)) }),
+	WAYFINDER("wayfinder", new String[] { EN_US.Template(EN_US.Smithing(Words.Wayfinder)) }),
+	SHAPER("shaper", new String[] { EN_US.Template(EN_US.Smithing(Words.Shaper)) }),
+	SILENCE("silence", new String[] { EN_US.Template(EN_US.Smithing(Words.Silence)) }),
+	RAISER("raiser", new String[] { EN_US.Template(EN_US.Smithing(Words.Raider)) }),
+	HOST("host", new String[] { EN_US.Template(EN_US.Smithing(Words.Host)) });
 
 	private final String name;
 	private final String namespace;

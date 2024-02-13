@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "wich:block/gilded_stem",
-    "top": "wich:block/gilded_stem",
-    "side": "wich:block/gilded_stem"
-  }
-}

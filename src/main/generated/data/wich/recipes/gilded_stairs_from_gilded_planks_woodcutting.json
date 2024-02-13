@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "wich:gilded_planks"
-  },
-  "result": "wich:gilded_stairs",
-  "count": 1
-}

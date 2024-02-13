@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "wich:block/cassia_planks",
-    "top": "wich:block/cassia_planks",
-    "side": "wich:block/cassia_planks"
-  }
-}

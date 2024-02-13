@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "wich:block/gilded_nylium",
-    "bottom": "minecraft:block/netherrack",
-    "side": "wich:block/gilded_nylium_side"
-  }
-}

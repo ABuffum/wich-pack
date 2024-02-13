@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "wich:gilded_stem"
-  },
-  "result": "wich:gilded_stem_slab",
-  "count": 2
-}

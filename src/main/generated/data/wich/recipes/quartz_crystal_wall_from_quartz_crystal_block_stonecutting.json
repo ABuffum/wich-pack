@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:quartz_crystal_block"
-  },
-  "result": "wich:quartz_crystal_wall",
-  "count": 1
-}

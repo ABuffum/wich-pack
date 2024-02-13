@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "wich:item/rainbow_sheep_spawn_egg"
-  }
-}

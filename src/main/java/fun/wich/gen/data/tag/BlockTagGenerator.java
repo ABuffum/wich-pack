@@ -150,6 +150,7 @@ public class BlockTagGenerator extends FabricTagProvider<Block> {
 		getOrCreateTagBuilder(ModBlockTags.SIZZLE_RAIN_BLOCKS).add(Blocks.MAGMA_BLOCK);
 		getOrCreateTagBuilder(ModBlockTags.SLIME_BLOCKS).add(Blocks.SLIME_BLOCK);
 		getOrCreateTagBuilder(ModBlockTags.STICKY).addTag(ModBlockTags.SLIME_BLOCKS).add(Blocks.HONEY_BLOCK);
+		getOrCreateTagBuilder(ModBlockTags.STONEAXE_MINEABLE).addTag(BlockTags.AXE_MINEABLE).addTag(BlockTags.PICKAXE_MINEABLE);
 		getOrCreateTagBuilder(ModBlockTags.WOODEN_BEEHIVES).add(Blocks.BEEHIVE);
 
 		getOrCreateTagBuilder(ConventionalBlockTags.ORES).addTag(ModBlockTags.RUBY_ORES);

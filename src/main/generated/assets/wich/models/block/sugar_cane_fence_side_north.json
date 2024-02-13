@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/custom_fence_side_north",
-  "textures": {
-    "particle": "wich:block/sugar_cane_fence_particle",
-    "texture": "wich:block/sugar_cane_fence"
-  }
-}

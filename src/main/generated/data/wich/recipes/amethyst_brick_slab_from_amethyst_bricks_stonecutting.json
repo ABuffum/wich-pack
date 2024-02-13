@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:amethyst_bricks"
-  },
-  "result": "wich:amethyst_brick_slab",
-  "count": 2
-}

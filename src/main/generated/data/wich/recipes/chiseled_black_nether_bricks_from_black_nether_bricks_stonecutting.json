@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:black_nether_bricks"
-  },
-  "result": "wich:chiseled_black_nether_bricks",
-  "count": 1
-}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:end_shale"
-  },
-  "result": "wich:end_shale_brick_slab",
-  "count": 2
-}

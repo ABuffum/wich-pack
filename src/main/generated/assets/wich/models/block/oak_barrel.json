@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "wich:block/oak_barrel_top",
-    "bottom": "wich:block/oak_barrel_bottom",
-    "side": "wich:block/oak_barrel_side"
-  }
-}

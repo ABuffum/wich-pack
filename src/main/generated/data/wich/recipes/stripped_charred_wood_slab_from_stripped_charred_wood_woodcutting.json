@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "wich:stripped_charred_wood"
-  },
-  "result": "wich:stripped_charred_wood_slab",
-  "count": 2
-}

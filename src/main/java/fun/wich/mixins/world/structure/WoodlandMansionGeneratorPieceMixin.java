@@ -1,6 +1,6 @@
 package fun.wich.mixins.world.structure;
 
-import fun.wich.ModBase;
+import fun.wich.entity.ModEntityType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -35,7 +35,7 @@ public class WoodlandMansionGeneratorPieceMixin {
 				}
 				case "Group of Allays": {
 					int i = world.getRandom().nextInt(3) + 1;
-					for (int j = 0; j < i; ++j) list.add(ModBase.ALLAY_ENTITY.create(world.toServerWorld()));
+					for (int j = 0; j < i; ++j) list.add(ModEntityType.ALLAY_ENTITY.create(world.toServerWorld()));
 					break;
 				}
 				default: return;

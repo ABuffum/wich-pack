@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:cut_gold"
-  },
-  "result": "wich:cut_gold_wall",
-  "count": 1
-}

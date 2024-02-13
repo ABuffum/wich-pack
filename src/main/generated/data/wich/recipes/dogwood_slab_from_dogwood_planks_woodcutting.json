@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "wich:dogwood_planks"
-  },
-  "result": "wich:dogwood_slab",
-  "count": 2
-}

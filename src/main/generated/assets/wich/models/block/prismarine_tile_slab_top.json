@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "wich:block/prismarine_tiles",
-    "top": "wich:block/prismarine_tiles",
-    "side": "wich:block/prismarine_tiles"
-  }
-}

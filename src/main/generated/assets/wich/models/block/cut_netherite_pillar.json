@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "wich:block/cut_netherite",
-    "side": "wich:block/cut_netherite_pillar"
-  }
-}

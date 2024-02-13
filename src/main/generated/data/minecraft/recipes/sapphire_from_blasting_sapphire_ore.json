@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "wich:sapphire_ore"
-  },
-  "result": "wich:sapphire",
-  "experience": 1.0,
-  "cookingtime": 100
-}

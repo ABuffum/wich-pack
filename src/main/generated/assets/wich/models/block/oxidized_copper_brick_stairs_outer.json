@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "wich:block/oxidized_copper_bricks",
-    "top": "wich:block/oxidized_copper_bricks",
-    "side": "wich:block/oxidized_copper_bricks"
-  }
-}

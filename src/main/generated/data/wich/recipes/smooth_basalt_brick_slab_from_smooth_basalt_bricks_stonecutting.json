@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:smooth_basalt_bricks"
-  },
-  "result": "wich:smooth_basalt_brick_slab",
-  "count": 2
-}

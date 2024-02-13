@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "wich:block/stripped_dogwood_log_top",
-    "top": "wich:block/stripped_dogwood_log_top",
-    "side": "wich:block/stripped_dogwood_log"
-  }
-}

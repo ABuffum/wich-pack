@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "wich:block/dark_iron_bricks",
-    "top": "wich:block/dark_iron_bricks",
-    "side": "wich:block/dark_iron_bricks"
-  }
-}

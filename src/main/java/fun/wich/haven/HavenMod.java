@@ -16,6 +16,8 @@ import fun.wich.effect.ModStatusEffects;
 import fun.wich.entity.blood.BloodType;
 import fun.wich.entity.projectile.BottledLightningEntity;
 import fun.wich.entity.projectile.JavelinEntity;
+import fun.wich.gen.data.language.Lang;
+import fun.wich.gen.data.language.Words;
 import fun.wich.haven.block.AmberEyeEndPortalFrameBlock;
 import fun.wich.haven.block.BrokenStarsBlock;
 import fun.wich.haven.block.anchor.*;
@@ -115,16 +117,23 @@ public class HavenMod {
 	));
 	//</editor-fold>
 	//<editor-fold desc="Blood Types">
-	public static final BloodType ANEMIC_BLOOD_TYPE = BloodType.Register(NAMESPACE, "anemic");
-	public static final BloodType BEE_ENDERMAN_BLOOD_TYPE = BloodType.Register(NAMESPACE, "bee_enderman");
-	public static final BloodType CONFETTI_BLOOD_TYPE = BloodType.Register(NAMESPACE, "confetti");
-	public static final BloodType DISEASED_CAT_BLOOD_TYPE = BloodType.Register(NAMESPACE, "diseased_cat");
-	public static final BloodType ICHOR_BLOOD_TYPE = BloodType.Register(NAMESPACE, "ichor");
-	public static final BloodType NETHER_ROYALTY_BLOOD_TYPE = BloodType.Register(NAMESPACE, "nether_royalty");
-	public static final BloodType SLUDGE_BLOOD_TYPE = BloodType.Register(NAMESPACE, "sludge");
+	public static final BloodType ANEMIC_BLOOD_TYPE = BloodType.Register(NAMESPACE, "anemic", List.of(EN_US.Blood(Words.Anemic)));
+	public static final BloodType BEE_ENDERMAN_BLOOD_TYPE = BloodType.Register(NAMESPACE, "bee_enderman", List.of(EN_US.Blood(EN_US.Enderman(Words.Bee))));
+	public static final BloodType CONFETTI_BLOOD_TYPE = BloodType.Register(NAMESPACE, "confetti", List.of(Words.Confetti));
+	public static final BloodType DISEASED_CAT_BLOOD_TYPE = BloodType.Register(NAMESPACE, "diseased_cat", List.of(EN_US.Blood(EN_US.Cat(Words.Diseased))));
+	public static final BloodType ICHOR_BLOOD_TYPE = BloodType.Register(NAMESPACE, "ichor", List.of(Words.Ichor));
+	public static final BloodType NETHER_ROYALTY_BLOOD_TYPE = BloodType.Register(NAMESPACE, "nether_royalty", List.of(EN_US.Blood(EN_US.Royalty(Words.Nether))));
+	public static final BloodType SLUDGE_BLOOD_TYPE = BloodType.Register(NAMESPACE, "sludge", List.of(Words.Sludge));
 	//</editor-fold>
 
 	//<editor-fold desc="Alcatraz">
+	public static final Item SHARP_MARTINI = GeneratedItem(new BottledDrinkItem(GlassBottledItemSettings()) {
+		@Override
+		public void OnDrink(ItemStack stack, LivingEntity user) {
+			user.damage(ModDamageSource.DIE_INSTANTLY, 9999);
+			if (user.getHealth() > 0) user.kill(); //They're supposed to be dead after the damage, even if they're in creative, kill that fucker
+		}
+	});
 	public static final BlockContainer SHARP_TNT = new BlockContainer(new SharpTntBlock(ModFactory.TntSettings(MapColor.BLACK)));
 	public static final EntityType<SharpTntEntity> SHARP_TNT_ENTITY = FabricEntityTypeBuilder.<SharpTntEntity>create(SpawnGroup.MISC, SharpTntEntity::new)
 			.dimensions(EntityDimensions.fixed(0.98F, 0.98F)).fireImmune().trackRangeChunks(10).trackedUpdateRate(10).build();
@@ -405,22 +414,23 @@ public class HavenMod {
 
 	public static void RegisterAll() {
 		//<editor-fold desc="Anchors">
-		Register("anchor", ANCHOR, List.of(EN_US.Anchor()));
+		Register("anchor", ANCHOR, List.of(Words.Anchor));
 		Register("anchor_block_entity", ANCHOR_BLOCK_ENTITY);
-		Register("broken_anchor", BROKEN_ANCHOR, List.of(EN_US.Anchor(EN_US.Broken())));
+		Register("broken_anchor", BROKEN_ANCHOR, List.of(EN_US.Anchor(Words.Broken)));
 		Register("broken_anchor_block_entity", BROKEN_ANCHOR_BLOCK_ENTITY);
-		Register("substitute_anchor", SUBSTITUTE_ANCHOR_BLOCK, List.of(EN_US.Anchor(EN_US.Substitute())));
+		Register("substitute_anchor", SUBSTITUTE_ANCHOR_BLOCK, List.of(EN_US.Anchor(Words.Substitute)));
 		Register("substitute_anchor_block_entity", SUBSTITUTE_ANCHOR_BLOCK_ENTITY);
 		//Anchor core items
 		for (Integer owner : ANCHOR_CORES.keySet()) {
-			Register(ANCHOR_MAP.get(owner) + "_core", ANCHOR_CORES.get(owner), List.of(EN_US.Core(EN_US.Anchor(GetAnchorCoreString_EN_US(owner)))));
+			Register(ANCHOR_MAP.get(owner) + "_core", ANCHOR_CORES.get(owner), List.of(Lang.join(GetAnchorCoreString_EN_US(owner), Words.Anchor, Words.Core)));
 		}
 		for (Integer owner : BROKEN_ANCHOR_CORES.keySet()) {
-			Register(ANCHOR_MAP.get(owner) + "_broken_core", BROKEN_ANCHOR_CORES.get(owner), List.of(EN_US.Core(EN_US.Anchor(EN_US.Broken(GetAnchorCoreString_EN_US(owner))))));
+			Register(ANCHOR_MAP.get(owner) + "_broken_core", BROKEN_ANCHOR_CORES.get(owner), List.of(Lang.join(GetAnchorCoreString_EN_US(owner), Words.Broken, Words.Anchor, Words.Core)));
 		}
 		//</editor-fold>
 
 		//<editor-fold desc="Alcatraz">
+		Register("sharp_martini", SHARP_MARTINI, List.of(EN_US.Martini(EN_US.Sharp())));
 		Register("sharp_tnt", SHARP_TNT, List.of(EN_US.TNT(EN_US.Sharp())));
 		Register("sharp_tnt", SHARP_TNT_ENTITY, List.of(EN_US.TNT(EN_US.Sharp())));
 		DispenserBlock.registerBehavior(SHARP_TNT.asBlock(), ModTntBlock.DispenserBehavior(SharpTntEntity::new));
@@ -428,35 +438,35 @@ public class HavenMod {
 		//<editor-fold desc="Amber">
 		Register("amber_eye", AMBER_EYE, List.of(EN_US.Eye(AMBER_s)));
 		Register("amber_eye_end_portal_frame", AMBER_EYE_END_PORTAL_FRAME, List.of(EN_US.Frame(EN_US.Portal(EN_US.End(EN_US.Eye(AMBER))))));
-		Register("bee_enderman_blood_syringe", BEE_ENDERMAN_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Syringe(EN_US.Blood(EN_US.Hybrid(EN_US.Enderman(EN_US.Bee())))))));
+		Register("bee_enderman_blood_syringe", BEE_ENDERMAN_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(EN_US.Hybrid(EN_US.Enderman(Words.Bee))))));
 		BloodType.RegisterBloodType(BEE_ENDERMAN_BLOOD_TYPE, BEE_ENDERMAN_BLOOD_SYRINGE);
 		//</editor-fold>
 		//<editor-fold desc="Anathema">
-		Register("bone_rot", BONE_ROT_EFFECT, List.of(EN_US.Rot(EN_US.Bone())));
-		Register("deteriorating", DETERIORATION_EFFECT, List.of(EN_US.Deterioration()));
-		Register("marked", MARKED_EFFECT, List.of(EN_US.Marked()));
+		Register("bone_rot", BONE_ROT_EFFECT, List.of(EN_US.Rot(Words.Bone)));
+		Register("deteriorating", DETERIORATION_EFFECT, List.of(Words.Deterioration));
+		Register("marked", MARKED_EFFECT, List.of(Words.Marked));
 		//</editor-fold>
 		//<editor-fold desc="Moth">
-		Register("shoddy_wood_bucket", SHODDY_WOOD_BUCKET, List.of(EN_US.Bucket(EN_US.Wood(EN_US.Shoddy()))));
+		Register("shoddy_wood_bucket", SHODDY_WOOD_BUCKET, List.of(EN_US.Bucket(EN_US.Wood(Words.Shoddy))));
 		//</editor-fold>
 		//<editor-fold desc="Angel">
-		Register("angel_bat_plushie", ANGEL_BAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Bat(EN_US.Angel()))));
-		Register("angel_bat", ANGEL_BAT_ENTITY, List.of(EN_US.Bat(EN_US.Angel())));
+		Register("angel_bat_plushie", ANGEL_BAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Bat(Words.Angel))));
+		Register("angel_bat", ANGEL_BAT_ENTITY, List.of(EN_US.Bat(Words.Angel)));
 		SpawnRestrictionAccessor.callRegister(ANGEL_BAT_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AngelBatEntity::CanSpawn);
 		FabricDefaultAttributeRegistry.register(ANGEL_BAT_ENTITY, AngelBatEntity.createBatAttributes());
 		//</editor-fold>
 		//<editor-fold desc="Aster">
-		Register("broken_bottle", BROKEN_BOTTLE, List.of(EN_US.Bottle(EN_US.Broken())));
+		Register("broken_bottle", BROKEN_BOTTLE, List.of(EN_US.Bottle(Words.Broken)));
 		//</editor-fold>
 		//<editor-fold desc="August">
-		Register("ichored", ICHORED_EFFECT, List.of(EN_US.Ichored()));
-		Register("ichor_bottle", ICHOR_BOTTLE, List.of(EN_US.Bottle(EN_US.Ichor())));
-		Register("ichor_syringe", ICHOR_SYRINGE, List.of(EN_US.Syringe(EN_US.Ichor())));
+		Register("ichored", ICHORED_EFFECT, List.of(Words.Ichored));
+		Register("ichor_bottle", ICHOR_BOTTLE, List.of(EN_US.Bottle(Words.Ichor)));
+		Register("ichor_syringe", ICHOR_SYRINGE, List.of(EN_US.Syringe(Words.Ichor)));
 		BloodType.RegisterBloodType(ICHOR_BLOOD_TYPE, ICHOR_SYRINGE);
 		//</editor-fold>
 		//<editor-fold desc="Bird">
-		Register("pride_trident", PRIDE_TRIDENT, List.of(EN_US.Pride()));
-		Register("pride_trident", PRIDE_TRIDENT_ENTITY, List.of(EN_US.Pride()));
+		Register("pride_trident", PRIDE_TRIDENT, List.of(Words.Pride));
+		Register("pride_trident", PRIDE_TRIDENT_ENTITY, List.of(Words.Pride));
 		//</editor-fold>
 		//<editor-fold desc="Carnation">
 		for (DyeColor color : DyeColor.values()) {
@@ -467,60 +477,60 @@ public class HavenMod {
 		//<editor-fold desc="Dakota">
 		Register("pteror", PTEROR, List.of("Pteror"));
 		Register("locket", LOCKET, List.of(EN_US.Locket()));
-		Register("emerald_locket", EMERALD_LOCKET, List.of(EN_US.Locket(EN_US.Emerald())));
+		Register("emerald_locket", EMERALD_LOCKET, List.of(EN_US.Locket(Words.Emerald)));
 		//</editor-fold>
 		//<editor-fold desc="Deepest Sleep">
 		Register("vector_arrow", VECTOR_ARROW_PARTICLE);
-		Register("chunkeater_tnt", CHUNKEATER_TNT, List.of(EN_US.TNT(EN_US.Chunkeater())));
-		Register("chunkeater_tnt", CHUNKEATER_TNT_ENTITY, List.of(EN_US.TNT(EN_US.Chunkeater())));
+		Register("chunkeater_tnt", CHUNKEATER_TNT, List.of(EN_US.TNT(Words.Chunkeater)));
+		Register("chunkeater_tnt", CHUNKEATER_TNT_ENTITY, List.of(EN_US.TNT(Words.Chunkeater)));
 		DispenserBlock.registerBehavior(CHUNKEATER_TNT.asBlock(), ModTntBlock.DispenserBehavior(ChunkeaterTntEntity::new));
 		//</editor-fold>
 		//<editor-fold desc="Digger Krozhul">
-		Register("sludge_bottle", SLUDGE_BOTTLE, List.of(EN_US.Bottle(EN_US.Sludge())));
-		Register("sludge_syringe", SLUDGE_SYRINGE, List.of(EN_US.Syringe(EN_US.Sludge())));
+		Register("sludge_bottle", SLUDGE_BOTTLE, List.of(EN_US.Bottle(Words.Sludge)));
+		Register("sludge_syringe", SLUDGE_SYRINGE, List.of(EN_US.Syringe(Words.Sludge)));
 		BloodType.RegisterBloodType(SLUDGE_BLOOD_TYPE, SLUDGE_SYRINGE);
-		Register("violent_tnt", VIOLENT_TNT, List.of(EN_US.TNT(EN_US.Violent())));
-		Register("violent_tnt", VIOLENT_TNT_ENTITY, List.of(EN_US.TNT(EN_US.Violent())));
+		Register("violent_tnt", VIOLENT_TNT, List.of(EN_US.TNT(Words.Violent)));
+		Register("violent_tnt", VIOLENT_TNT_ENTITY, List.of(EN_US.TNT(Words.Violent)));
 		DispenserBlock.registerBehavior(VIOLENT_TNT.asBlock(), ModTntBlock.DispenserBehavior(ViolentTntEntity::new));
 		//</editor-fold>
 		//<editor-fold desc="Dr. Dae">
-		Register("secret_ingredient", SECRET_INGREDIENT, List.of(EN_US.Ingredient(EN_US.Secret())));
-		Register("syringe_blindness", SYRINGE_BLINDNESS, List.of(EN_US.Syringe(EN_US.Blinding())));
-		Register("syringe_mining_fatigue", SYRINGE_MINING_FATIGUE, List.of(EN_US.Syringe(EN_US.Inducing(EN_US.Fatigue(EN_US.Mining())))));
-		Register("syringe_poison", SYRINGE_POISON, List.of(EN_US.Syringe(EN_US.Poison())));
-		Register("syringe_regeneration", SYRINGE_REGENERATION, List.of(EN_US.Syringe(EN_US.Regenerative())));
-		Register("syringe_saturation", SYRINGE_SATURATION, List.of(EN_US.Syringe(EN_US.Saturating())));
-		Register("syringe_slowness", SYRINGE_SLOWNESS, List.of(EN_US.Syringe(EN_US.Inducing(EN_US.Slowness()))));
-		Register("syringe_weakness", SYRINGE_WEAKNESS, List.of(EN_US.Syringe(EN_US.Weakening())));
-		Register("syringe_wither", SYRINGE_WITHER, List.of(EN_US.Syringe(EN_US.Withering())));
-		Register("syringe_exp1", SYRINGE_EXP1, List.of(EN_US.I(EN_US.Syringe(EN_US.Experimental()))));
-		Register("syringe_exp2", SYRINGE_EXP2, List.of(EN_US.II(EN_US.Syringe(EN_US.Experimental()))));
-		Register("syringe_exp3", SYRINGE_EXP3, List.of(EN_US.III(EN_US.Syringe(EN_US.Experimental()))));
+		Register("secret_ingredient", SECRET_INGREDIENT, List.of(EN_US.Ingredient(Words.Secret)));
+		Register("syringe_blindness", SYRINGE_BLINDNESS, List.of(EN_US.Syringe(Words.Blinding)));
+		Register("syringe_mining_fatigue", SYRINGE_MINING_FATIGUE, List.of(EN_US.Syringe(EN_US.Inducing(EN_US.Fatigue(Words.Mining)))));
+		Register("syringe_poison", SYRINGE_POISON, List.of(EN_US.Syringe(Words.Poison)));
+		Register("syringe_regeneration", SYRINGE_REGENERATION, List.of(EN_US.Syringe(Words.Regenerative)));
+		Register("syringe_saturation", SYRINGE_SATURATION, List.of(EN_US.Syringe(Words.Saturating)));
+		Register("syringe_slowness", SYRINGE_SLOWNESS, List.of(EN_US.Syringe(EN_US.Inducing(Words.Slowness))));
+		Register("syringe_weakness", SYRINGE_WEAKNESS, List.of(EN_US.Syringe(Words.Weakening)));
+		Register("syringe_wither", SYRINGE_WITHER, List.of(EN_US.Syringe(Words.Withering)));
+		Register("syringe_exp1", SYRINGE_EXP1, List.of(Lang.join(Words.Experimental, Words.Syringe, Words.I)));
+		Register("syringe_exp2", SYRINGE_EXP2, List.of(Lang.join(Words.Experimental, Words.Syringe, Words.II)));
+		Register("syringe_exp3", SYRINGE_EXP3, List.of(Lang.join(Words.Experimental, Words.Syringe, Words.III)));
 		//</editor-fold>
 		//<editor-fold desc="Electron the Blue Mage">
-		Register("drinkable_bottled_lightning", DRINKABLE_BOTTLED_LIGHTNING, List.of(EN_US.Lightning(EN_US.Bottled(EN_US.Drinkable()))));
+		Register("drinkable_bottled_lightning", DRINKABLE_BOTTLED_LIGHTNING, List.of(EN_US.Lightning(EN_US.Bottled(Words.Drinkable))));
 		//</editor-fold>
 		//<editor-fold desc="Ferris">
 		Register("vectortech_javelin", VECTORTECH_JAVELIN, List.of(EN_US.Javelin(VECTORTECH)));
 		Register("vectortech_javelin", VECTORTECH_JAVELIN_ENTITY, List.of(EN_US.Javelin(VECTORTECH)));
 		//</editor-fold>
 		//<editor-fold desc="Gawain">
-		Register("protected", PROTECTED_EFFECT, List.of(EN_US.Protected()));
-		Register("red_curse_breaker_potion", RED_CURSE_BREAKER_POTION, List.of(EN_US.Protection(EN_US._for(EN_US.Red()))));
-		Register("relieved", RELIEVED_EFFECT, List.of(EN_US.Relieved()));
-		Register("white_curse_breaker_potion", WHITE_CURSE_BREAKER_POTION, List.of(EN_US.Pain(EN_US._for(EN_US.White()))));
+		Register("protected", PROTECTED_EFFECT, List.of(Words.Protected));
+		Register("red_curse_breaker_potion", RED_CURSE_BREAKER_POTION, List.of(Lang.join(Words.Red, Words._for, Words.Protection)));
+		Register("relieved", RELIEVED_EFFECT, List.of(Words.Relieved));
+		Register("white_curse_breaker_potion", WHITE_CURSE_BREAKER_POTION, List.of(Lang.join(Words.White, Words._for, Words.Pain)));
 		//</editor-fold>
 		//<editor-fold desc="Hezekiah">
-		Register("devouring_tnt", DEVOURING_TNT, List.of(EN_US.TNT(EN_US.Devouring())));
-		Register("devouring_tnt", DEVOURING_TNT_ENTITY, List.of(EN_US.TNT(EN_US.Devouring())));
+		Register("devouring_tnt", DEVOURING_TNT, List.of(EN_US.TNT(Words.Devouring)));
+		Register("devouring_tnt", DEVOURING_TNT_ENTITY, List.of(EN_US.TNT(Words.Devouring)));
 		DispenserBlock.registerBehavior(DEVOURING_TNT.asBlock(), ModTntBlock.DispenserBehavior(DevouringTntEntity::new));
 		//</editor-fold>
 		//<editor-fold desc="Jackdaw">
-		Register("withering", WITHERING_EFFECT, List.of(EN_US.Withering()));
+		Register("withering", WITHERING_EFFECT, List.of(Words.Withering));
 		//</editor-fold>
 		//<editor-fold desc="Lux">
 		Register("lux_crown", LUX_CROWN, List.of(EN_US.Crown(LUX_s)));
-		Register("nether_royalty_blood_syringe", NETHER_ROYALTY_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(EN_US.Royalty(EN_US.Nether())))));
+		Register("nether_royalty_blood_syringe", NETHER_ROYALTY_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(EN_US.Royalty(Words.Nether)))));
 		BloodType.RegisterBloodType(NETHER_ROYALTY_BLOOD_TYPE, NETHER_ROYALTY_BLOOD_SYRINGE);
 		//</editor-fold>
 		//<editor-fold desc="Miasma">
@@ -559,8 +569,8 @@ public class HavenMod {
 		//</editor-fold>
 		//</editor-fold>
 		//<editor-fold desc="STARS">
-		Register("tinker_toy", TINKER_TOY, List.of(EN_US.Toy(EN_US.Tinker())));
-		Register("amethyst_candy", AMETHYST_CANDY, List.of(EN_US.Candy(EN_US.Amethyst())));
+		Register("tinker_toy", TINKER_TOY, List.of(EN_US.Toy(Words.Tinker)));
+		Register("amethyst_candy", AMETHYST_CANDY, List.of(EN_US.Candy(Words.Amethyst)));
 		Register("broken_stars", BROKEN_STARS, List.of("The remnants of STARS"));
 		//</editor-fold>
 		//<editor-fold desc="The Captain">
@@ -582,12 +592,12 @@ public class HavenMod {
 		Register("decoration_only_cassia_sapling", DECORATIVE_CASSIA_SAPLING, List.of(EN_US.Sapling(EN_US.Cassia(EN_US.Only(EN_US.Decoration())))));
 		Register("decoration_only_dogwood_sapling", DECORATIVE_DOGWOOD_SAPLING, List.of(EN_US.Sapling(EN_US.Dogwood(EN_US.Only(EN_US.Decoration())))));
 		Register("decoration_only_grape_sapling", DECORATIVE_GRAPE_SAPLING, List.of(EN_US.Sapling(EN_US.Grape(EN_US.Only(EN_US.Decoration())))));
-		Register("decoration_only_beetroots", DECORATIVE_BEETROOTS, List.of(EN_US.Beetroots(EN_US.Only(EN_US.Decoration()))));
-		Register("decoration_only_carrots", DECORATIVE_CARROTS, List.of(EN_US.Carrots(EN_US.Only(EN_US.Decoration()))));
-		Register("decoration_only_potatoes", DECORATIVE_POTATOES, List.of(EN_US.Potatoes(EN_US.Only(EN_US.Decoration()))));
-		Register("decoration_only_wheat", DECORATIVE_WHEAT, List.of(EN_US.Wheat(EN_US.Only(EN_US.Decoration()))));
-		Register("decoration_only_cabbages", DECORATIVE_CABBAGES, List.of(EN_US.Cabbages(EN_US.Only(EN_US.Decoration()))));
-		Register("decoration_only_onions", DECORATIVE_ONIONS, List.of(EN_US.Onions(EN_US.Only(EN_US.Decoration()))));
+		Register("decoration_only_beetroots", DECORATIVE_BEETROOTS, List.of(Lang.join(Words.Decoration, Words.Only, Words.Beetroots)));
+		Register("decoration_only_carrots", DECORATIVE_CARROTS, List.of(Lang.join(Words.Decoration, Words.Only, Words.Carrots)));
+		Register("decoration_only_potatoes", DECORATIVE_POTATOES, List.of(Lang.join(Words.Decoration, Words.Only, Words.Potatoes)));
+		Register("decoration_only_wheat", DECORATIVE_WHEAT, List.of(Lang.join(Words.Decoration, Words.Only, Words.Wheat)));
+		Register("decoration_only_cabbages", DECORATIVE_CABBAGES, List.of(Lang.join(Words.Decoration, Words.Only, Words.Cabbages)));
+		Register("decoration_only_onions", DECORATIVE_ONIONS, List.of(Lang.join(Words.Decoration, Words.Only, Words.Onions)));
 		//</editor-fold>
 	}
 

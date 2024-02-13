@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "wich:block/end_shale_top",
-    "side": "wich:block/end_shale"
-  }
-}

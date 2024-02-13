@@ -1,6 +1,5 @@
 package fun.wich.entity;
 
-import fun.wich.ModBase;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -24,7 +23,7 @@ public class SummonedAnvilEntity extends Entity {
 	protected static final TrackedData<BlockPos> BLOCK_POS = DataTracker.registerData(SummonedAnvilEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
 	public SummonedAnvilEntity(EntityType<? extends SummonedAnvilEntity> entityType, World world) { super(entityType, world); }
 	public SummonedAnvilEntity(World world, double x, double y, double z) {
-		this(ModBase.SUMMONED_ANVIL_ENTITY, world);
+		this(ModEntityType.SUMMONED_ANVIL_ENTITY, world);
 		this.intersectionChecked = true;
 		this.setPosition(x, y, z);
 		this.setVelocity(Vec3d.ZERO);

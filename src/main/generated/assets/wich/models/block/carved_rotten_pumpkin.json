@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "wich:block/rotten_pumpkin_top",
-    "front": "wich:block/carved_rotten_pumpkin",
-    "side": "wich:block/rotten_pumpkin_side"
-  }
-}

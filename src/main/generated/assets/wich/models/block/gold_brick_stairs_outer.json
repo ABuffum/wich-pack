@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "wich:block/gold_bricks",
-    "top": "wich:block/gold_bricks",
-    "side": "wich:block/gold_bricks"
-  }
-}

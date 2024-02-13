@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/template_chiseled_bookshelf_inventory",
-  "textures": {
-    "top": "wich:block/charred_chiseled_bookshelf_top",
-    "front": "wich:block/charred_chiseled_bookshelf_empty",
-    "side": "wich:block/charred_chiseled_bookshelf_side"
-  }
-}

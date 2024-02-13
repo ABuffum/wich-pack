@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "wich:block/mossy_deepslate_bricks",
-    "top": "wich:block/mossy_deepslate_bricks",
-    "side": "wich:block/mossy_deepslate_bricks"
-  }
-}

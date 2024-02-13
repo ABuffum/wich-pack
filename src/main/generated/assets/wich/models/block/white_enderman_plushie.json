@@ -1,7 +1,0 @@
-{
-  "parent": "wich:block/plushie/enderman",
-  "textures": {
-    "all": "wich:block/white_enderman_plushie",
-    "particle": "wich:block/white_enderman_plushie"
-  }
-}

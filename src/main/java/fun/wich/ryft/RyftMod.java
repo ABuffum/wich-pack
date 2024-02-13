@@ -1,5 +1,6 @@
 package fun.wich.ryft;
 
+import fun.wich.gen.data.language.Words;
 import fun.wich.registry.ModRegistry;
 import fun.wich.damage.ModDamageSource;
 import fun.wich.entity.blood.BloodType;
@@ -27,8 +28,8 @@ public class RyftMod {
 	public static final String VICTORIAS = "Victoria's";
 
 	//<editor-fold desc="Blood Types">
-	public static final BloodType DRACONIC_BLOOD_TYPE = BloodType.Register(NAMESPACE, "draconic");
-	public static final BloodType FIREBIRD_BLOOD_TYPE = BloodType.Register(NAMESPACE, "firebird");
+	public static final BloodType DRACONIC_BLOOD_TYPE = BloodType.Register(NAMESPACE, "draconic", List.of(EN_US.Blood(Words.Draconic)));
+	public static final BloodType FIREBIRD_BLOOD_TYPE = BloodType.Register(NAMESPACE, "firebird", List.of(EN_US.Blood(Words.Firebird)));
 	//</editor-fold>
 
 	//<editor-fold desc="Auryon">
@@ -56,59 +57,59 @@ public class RyftMod {
 
 		ModRegistry.Register("broken_pteror", BROKEN_PTEROR, List.of("Broken Pteror"));
 
-		ModRegistry.Register("firebird_blood_syringe", FIREBIRD_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(EN_US.Firebird()))));
+		ModRegistry.Register("firebird_blood_syringe", FIREBIRD_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(Words.Firebird))));
 		BloodType.RegisterBloodType(FIREBIRD_BLOOD_TYPE, FIREBIRD_BLOOD_SYRINGE);
 
-		IdentifiedSounds.RegisterPower(NAMESPACE, "angel", List.of(EN_US.clacking(EN_US.Heels())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.crashes(EN_US.Someone())), List.of(EN_US.swims(EN_US.Someone())), List.of(EN_US.splashes(EN_US.Someone())), List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))), List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "arsene", List.of(EN_US.footsteps(EN_US.Aggressive())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.crashes(EN_US.Someone())), List.of(EN_US.swims(EN_US.Someone())), List.of(EN_US.splashes(EN_US.Someone())), List.of(EN_US.cannonballs(EN_US.Someone())), List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "auryon", List.of(EN_US.marching(EN_US.Confident())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.crashes(EN_US.Someone())), List.of(EN_US.sloshing(EN_US.Feathers())), List.of(EN_US.splashing(EN_US.Undignified())), List.of(EN_US.splashing(EN_US.undignified(EN_US.Loud()))), List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "dj", List.of(EN_US.steps(EN_US.Light())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.crashes(EN_US.Someone())), List.of(EN_US.swims(EN_US.Someone())), List.of(EN_US.splashes(EN_US.lightly(EN_US.Someone()))), List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))), List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "eldora", List.of(EN_US.wetly(EN_US.stomps(EN_US.Guardian(EN_US.Ancient())))), List.of(EN_US.trips(EN_US.Guardian(EN_US.Ancient()))), List.of(EN_US.fell(EN_US.Guardian(EN_US.Ancient()))), List.of(EN_US.crashes(EN_US.Guardian(EN_US.Ancient()))), List.of(EN_US.swims(EN_US.Guardian(EN_US.Ancient()))), List.of(EN_US.splashes(EN_US.Guardian(EN_US.Ancient()))), List.of(EN_US.hard(EN_US.splashes(EN_US.Guardian(EN_US.Ancient())))), List.of(EN_US.dies(EN_US.Guardian(EN_US.Ancient()))));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "faerie", List.of(EN_US.footsteps(EN_US.Clumsy())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.crashes(EN_US.Someone())), List.of(EN_US.splashing(EN_US.Rhythmic())), List.of(EN_US.splashes(EN_US.awkwardly(EN_US.Someone()))), List.of(EN_US.splashing(EN_US.loudly(EN_US.Someone()))), List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "gubby", List.of(EN_US.steps(EN_US.Warden())), List.of(EN_US.trips(EN_US.Warden())), List.of(EN_US.fell(EN_US.Warden())), List.of(EN_US.crashes(EN_US.Warden())), List.of(EN_US.swims(EN_US.Warden())), List.of(EN_US.splashes(EN_US.Warden())), List.of(EN_US.hard(EN_US.splashes(EN_US.Warden()))), List.of(EN_US.dies(EN_US.Warden())));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "angel", List.of(EN_US.clacking(Words.Heels)), List.of(EN_US.trips(Words.Someone)), List.of(EN_US.fell(Words.Someone)), List.of(EN_US.crashes(Words.Someone)), List.of(EN_US.swims(Words.Someone)), List.of(EN_US.splashes(Words.Someone)), List.of(EN_US.hard(EN_US.splashes(Words.Someone))), List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "arsene", List.of(EN_US.footsteps(Words.Aggressive)), List.of(EN_US.trips(Words.Someone)), List.of(EN_US.fell(Words.Someone)), List.of(EN_US.crashes(Words.Someone)), List.of(EN_US.swims(Words.Someone)), List.of(EN_US.splashes(Words.Someone)), List.of(EN_US.cannonballs(Words.Someone)), List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "auryon", List.of(EN_US.marching(Words.Confident)), List.of(EN_US.trips(Words.Someone)), List.of(EN_US.fell(Words.Someone)), List.of(EN_US.crashes(Words.Someone)), List.of(EN_US.sloshing(EN_US.Feathers())), List.of(EN_US.splashing(Words.Undignified)), List.of(EN_US.splashing(EN_US.undignified(Words.Loud))), List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "dj", List.of(EN_US.steps(Words.Light)), List.of(EN_US.trips(Words.Someone)), List.of(EN_US.fell(Words.Someone)), List.of(EN_US.crashes(Words.Someone)), List.of(EN_US.swims(Words.Someone)), List.of(EN_US.splashes(EN_US.lightly(Words.Someone))), List.of(EN_US.hard(EN_US.splashes(Words.Someone))), List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "eldora", List.of(EN_US.wetly(EN_US.stomps(EN_US.Guardian(Words.Ancient)))), List.of(EN_US.trips(EN_US.Guardian(Words.Ancient))), List.of(EN_US.fell(EN_US.Guardian(Words.Ancient))), List.of(EN_US.crashes(EN_US.Guardian(Words.Ancient))), List.of(EN_US.swims(EN_US.Guardian(Words.Ancient))), List.of(EN_US.splashes(EN_US.Guardian(Words.Ancient))), List.of(EN_US.hard(EN_US.splashes(EN_US.Guardian(Words.Ancient)))), List.of(EN_US.dies(EN_US.Guardian(Words.Ancient))));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "faerie", List.of(EN_US.footsteps(Words.Clumsy)), List.of(EN_US.trips(Words.Someone)), List.of(EN_US.fell(Words.Someone)), List.of(EN_US.crashes(Words.Someone)), List.of(EN_US.splashing(Words.Rhythmic)), List.of(EN_US.splashes(EN_US.awkwardly(Words.Someone))), List.of(EN_US.splashing(EN_US.loudly(Words.Someone))), List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "gubby", List.of(EN_US.steps(Words.Warden)), List.of(EN_US.trips(Words.Warden)), List.of(EN_US.fell(Words.Warden)), List.of(EN_US.crashes(Words.Warden)), List.of(EN_US.swims(Words.Warden)), List.of(EN_US.splashes(Words.Warden)), List.of(EN_US.hard(EN_US.splashes(Words.Warden))), List.of(EN_US.dies(Words.Warden)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "ivy",
-				List.of(EN_US.steps(EN_US.Spiteful())),
-				List.of(EN_US.trips(EN_US.Someone())),
-				List.of(EN_US.fell(EN_US.Someone())),
-				List.of(EN_US.crashes(EN_US.Someone())),
-				List.of(EN_US.swims(EN_US.Someone())),
-				List.of(EN_US.splashes(EN_US.Someone())),
-				List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))),
-				List.of(EN_US.dies(EN_US.Someone())));
+				List.of(EN_US.steps(Words.Spiteful)),
+				List.of(EN_US.trips(Words.Someone)),
+				List.of(EN_US.fell(Words.Someone)),
+				List.of(EN_US.crashes(Words.Someone)),
+				List.of(EN_US.swims(Words.Someone)),
+				List.of(EN_US.splashes(Words.Someone)),
+				List.of(EN_US.hard(EN_US.splashes(Words.Someone))),
+				List.of(EN_US.dies(Words.Someone)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "justin",
-				List.of(EN_US.steps(EN_US.Someone())),
-				List.of(EN_US.trips(EN_US.Someone())),
-				List.of(EN_US.fell(EN_US.Someone())),
-				List.of(EN_US.crashes(EN_US.Someone())),
-				List.of(EN_US.swims(EN_US.Someone())),
-				List.of(EN_US.splashes(EN_US.Someone())),
-				List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))),
-				List.of(EN_US.dies(EN_US.Someone())));
+				List.of(EN_US.steps(Words.Someone)),
+				List.of(EN_US.trips(Words.Someone)),
+				List.of(EN_US.fell(Words.Someone)),
+				List.of(EN_US.crashes(Words.Someone)),
+				List.of(EN_US.swims(Words.Someone)),
+				List.of(EN_US.splashes(Words.Someone)),
+				List.of(EN_US.hard(EN_US.splashes(Words.Someone))),
+				List.of(EN_US.dies(Words.Someone)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "kaden", List.of(EN_US.softly(EN_US.steps(KADEN))), List.of(EN_US.trips(KADEN)), List.of(EN_US.softly(EN_US.lands(KADEN))), List.of(EN_US.crashes(KADEN)), List.of(EN_US.swims(KADEN)), List.of(EN_US.splashes(EN_US.quietly(KADEN))), List.of(EN_US.splashes(KADEN)), List.of(EN_US.dies(KADEN)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "kirha", List.of(EN_US.scuttles(KIRHA)), List.of(EN_US.trips(KIRHA)), List.of(EN_US.lands(KIRHA)), List.of(EN_US.splats(KIRHA)), List.of(EN_US.paddles(KIRHA)), List.of(EN_US.sploshes(KIRHA)), List.of(EN_US.hard(EN_US.sploshes(KIRHA))), List.of(EN_US.dies(KIRHA)));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "lavender", List.of(EN_US.tapping(EN_US.porcelain(EN_US.Excited()))), List.of(EN_US.trips(EN_US.small(EN_US.Someone()))), List.of(EN_US.crunches(EN_US.Porcelain())), List.of(EN_US.crashes(EN_US.Porcelain())), List.of(EN_US.glugs(EN_US.Porcelain())), List.of(EN_US.splashes(EN_US.small(EN_US.Something()))), List.of(EN_US.hard(EN_US.splashes(EN_US.small(EN_US.Something())))), List.of(EN_US.dies(EN_US.Someone())));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "lavender", List.of(EN_US.tapping(EN_US.porcelain(Words.Excited))), List.of(EN_US.trips(EN_US.small(Words.Someone))), List.of(EN_US.crunches(Words.Porcelain)), List.of(EN_US.crashes(Words.Porcelain)), List.of(EN_US.glugs(Words.Porcelain)), List.of(EN_US.splashes(EN_US.small(Words.Something))), List.of(EN_US.hard(EN_US.splashes(EN_US.small(Words.Something)))), List.of(EN_US.dies(Words.Someone)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "navn", List.of(EN_US.wetly(EN_US.stomps(NAVN))), List.of(EN_US.trips(NAVN)), List.of(EN_US.fell(NAVN)), List.of(EN_US.crashes(NAVN)), List.of(EN_US.swims(NAVN)), List.of(EN_US.splashes(NAVN)), List.of(EN_US.hard(EN_US.splashes(NAVN))), List.of(EN_US.dies(NAVN)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "olm",
-				List.of(EN_US.steps(EN_US.Someone())),
-				List.of(EN_US.trips(EN_US.Someone())),
-				List.of(EN_US.fell(EN_US.Someone())),
-				List.of(EN_US.crashes(EN_US.Someone())),
-				List.of(EN_US.swims(EN_US.Someone())),
-				List.of(EN_US.splashes(EN_US.Someone())),
-				List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))),
-				List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "oracle", List.of(EN_US.footsteps(EN_US.Aloof())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.crashes(EN_US.Someone())), List.of(EN_US.swims(EN_US.Someone())), List.of(EN_US.splashes(EN_US.Someone())), List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))), List.of(EN_US.dies(EN_US.Someone())));
+				List.of(EN_US.steps(Words.Someone)),
+				List.of(EN_US.trips(Words.Someone)),
+				List.of(EN_US.fell(Words.Someone)),
+				List.of(EN_US.crashes(Words.Someone)),
+				List.of(EN_US.swims(Words.Someone)),
+				List.of(EN_US.splashes(Words.Someone)),
+				List.of(EN_US.hard(EN_US.splashes(Words.Someone))),
+				List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "oracle", List.of(EN_US.footsteps(Words.Aloof)), List.of(EN_US.trips(Words.Someone)), List.of(EN_US.fell(Words.Someone)), List.of(EN_US.crashes(Words.Someone)), List.of(EN_US.swims(Words.Someone)), List.of(EN_US.splashes(Words.Someone)), List.of(EN_US.hard(EN_US.splashes(Words.Someone))), List.of(EN_US.dies(Words.Someone)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "penny",
-				List.of(EN_US.steps(EN_US.Spiteful())),
-				List.of(EN_US.trips(EN_US.Someone())),
-				List.of(EN_US.fell(EN_US.Someone())),
-				List.of(EN_US.crashes(EN_US.Someone())),
-				List.of(EN_US.swims(EN_US.Someone())),
-				List.of(EN_US.splashes(EN_US.Someone())),
-				List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))),
-				List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "quincy", List.of(EN_US.steps(EN_US.boot(EN_US.Light()))), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.chivalrously(EN_US.crashes(EN_US.Someone()))), List.of(EN_US.swims(EN_US.Someone())), List.of(EN_US.splashes(EN_US.Someone())), List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))), List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "rose", List.of(EN_US.tapping(EN_US.porcelain(EN_US.Paced()))), List.of(EN_US.trips(EN_US.medium(EN_US.Someone()))), List.of(EN_US.crunches(EN_US.Porcelain())), List.of(EN_US.crashes(EN_US.Porcelain())), List.of(EN_US.glugs(EN_US.Porcelain())), List.of(EN_US.splashes(EN_US.medium(EN_US.Something()))), List.of(EN_US.hard(EN_US.splashes(EN_US.medium(EN_US.Something())))), List.of(EN_US.dies(EN_US.Someone())));
+				List.of(EN_US.steps(Words.Someone)),
+				List.of(EN_US.trips(Words.Someone)),
+				List.of(EN_US.fell(Words.Someone)),
+				List.of(EN_US.crashes(Words.Someone)),
+				List.of(EN_US.swims(Words.Someone)),
+				List.of(EN_US.splashes(Words.Someone)),
+				List.of(EN_US.hard(EN_US.splashes(Words.Someone))),
+				List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "quincy", List.of(EN_US.steps(EN_US.boot(Words.Light))), List.of(EN_US.trips(Words.Someone)), List.of(EN_US.fell(Words.Someone)), List.of(EN_US.chivalrously(EN_US.crashes(Words.Someone))), List.of(EN_US.swims(Words.Someone)), List.of(EN_US.splashes(Words.Someone)), List.of(EN_US.hard(EN_US.splashes(Words.Someone))), List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "rose", List.of(EN_US.tapping(EN_US.porcelain(Words.Paced))), List.of(EN_US.trips(EN_US.medium(Words.Someone))), List.of(EN_US.crunches(Words.Porcelain)), List.of(EN_US.crashes(Words.Porcelain)), List.of(EN_US.glugs(Words.Porcelain)), List.of(EN_US.splashes(EN_US.medium(Words.Something))), List.of(EN_US.hard(EN_US.splashes(EN_US.medium(Words.Something)))), List.of(EN_US.dies(Words.Someone)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "simon",
 				List.of(EN_US.steps(SIMON)),
 				List.of(EN_US.trips(SIMON)),
@@ -119,14 +120,14 @@ public class RyftMod {
 				List.of(EN_US.hard(EN_US.splashes(SIMON))),
 				List.of(EN_US.dies(SIMON)));
 		IdentifiedSounds.RegisterPower(NAMESPACE, "tatiy",
-				List.of(EN_US.steps(EN_US.Someone())),
-				List.of(EN_US.trips(EN_US.Someone())),
-				List.of(EN_US.fell(EN_US.Someone())),
-				List.of(EN_US.crashes(EN_US.Someone())),
-				List.of(EN_US.swims(EN_US.Someone())),
-				List.of(EN_US.splashes(EN_US.Someone())),
-				List.of(EN_US.hard(EN_US.splashes(EN_US.Someone()))),
-				List.of(EN_US.dies(EN_US.Someone())));
-		IdentifiedSounds.RegisterPower(NAMESPACE, "zofia", List.of(EN_US.footsteps(EN_US.Cindering())), List.of(EN_US.trips(EN_US.Someone())), List.of(EN_US.fell(EN_US.Someone())), List.of(EN_US.burned(EN_US.and(EN_US.crashed(EN_US.Someone())))), List.of(EN_US.sizzles(EN_US.Water())), List.of(EN_US.splashes(EN_US.hot(EN_US.Something()))), List.of(EN_US.hard(EN_US.splashes(EN_US.hot(EN_US.Something())))), List.of(EN_US.dies(EN_US.Someone())));
+				List.of(EN_US.steps(Words.Someone)),
+				List.of(EN_US.trips(Words.Someone)),
+				List.of(EN_US.fell(Words.Someone)),
+				List.of(EN_US.crashes(Words.Someone)),
+				List.of(EN_US.swims(Words.Someone)),
+				List.of(EN_US.splashes(Words.Someone)),
+				List.of(EN_US.hard(EN_US.splashes(Words.Someone))),
+				List.of(EN_US.dies(Words.Someone)));
+		IdentifiedSounds.RegisterPower(NAMESPACE, "zofia", List.of(EN_US.footsteps(Words.Cindering)), List.of(EN_US.trips(Words.Someone)), List.of(EN_US.fell(Words.Someone)), List.of(EN_US.burned(EN_US.and(EN_US.crashed(Words.Someone)))), List.of(EN_US.sizzles(EN_US.Water())), List.of(EN_US.splashes(EN_US.hot(Words.Something))), List.of(EN_US.hard(EN_US.splashes(EN_US.hot(Words.Something)))), List.of(EN_US.dies(Words.Someone)));
 	}
 }

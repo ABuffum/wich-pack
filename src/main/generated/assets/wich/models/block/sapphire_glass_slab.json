@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "wich:block/sapphire_glass",
-    "top": "wich:block/sapphire_glass",
-    "side": "wich:block/sapphire_glass_slab_side"
-  }
-}

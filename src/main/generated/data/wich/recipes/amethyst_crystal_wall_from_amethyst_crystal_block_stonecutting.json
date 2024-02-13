@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:amethyst_crystal_block"
-  },
-  "result": "wich:amethyst_crystal_wall",
-  "count": 1
-}

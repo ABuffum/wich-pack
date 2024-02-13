@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "wich:block/dried_bamboo_planks",
-    "top": "wich:block/dried_bamboo_planks",
-    "side": "wich:block/dried_bamboo_planks"
-  }
-}

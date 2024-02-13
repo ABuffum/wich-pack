@@ -1,8 +1,0 @@
-{
-  "parent": "wich:block/_template_bars_post_ends",
-  "textures": {
-    "particle": "wich:block/copper_bars",
-    "bars": "wich:block/copper_bars",
-    "edge": "wich:block/copper_bars"
-  }
-}

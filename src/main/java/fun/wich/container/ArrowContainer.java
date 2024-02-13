@@ -1,23 +1,34 @@
 package fun.wich.container;
 
 import fun.wich.ModFactory;
+import fun.wich.ModId;
 import fun.wich.entity.projectile.ModArrowEntity;
 import fun.wich.entity.projectile.SummoningArrowEntity;
 import fun.wich.gen.data.ModDatagen;
+import fun.wich.gen.data.language.ModLanguageCache;
 import fun.wich.item.projectile.ModArrowItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Pair;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import static fun.wich.ModBase.LANGUAGE_CACHES;
 
 public class ArrowContainer implements IContainer, ItemConvertible {
 	private final ModArrowItem item;
@@ -54,4 +65,10 @@ public class ArrowContainer implements IContainer, ItemConvertible {
 	public static final Map<Item, Pair<Integer, Integer>> SUMMONING_ARROW_COLORS = new HashMap<>();
 
 	public ArrowContainer generatedItemModel() { ModDatagen.Cache.Models.GENERATED.add(this.item); return this; }
+
+	public ArrowContainer translate(ModLanguageCache cache, String translation) {
+		cache.TranslationKeys.put(asItem().getTranslationKey(), translation);
+		cache.TranslationKeys.put(getEntityType().getTranslationKey(), translation);
+		return this;
+	}
 }

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:dripstone_block"
-  },
-  "result": "wich:dripstone_tiles",
-  "count": 1
-}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:chiseled_prismarine"
-  },
-  "result": "wich:chiseled_prismarine_brick_stairs",
-  "count": 1
-}

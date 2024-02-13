@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "wich:block/purple_fleece",
-    "top": "wich:block/purple_fleece",
-    "side": "wich:block/purple_fleece"
-  }
-}

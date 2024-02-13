@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:calcite_tiles"
-  },
-  "result": "wich:calcite_tile_stairs",
-  "count": 1
-}

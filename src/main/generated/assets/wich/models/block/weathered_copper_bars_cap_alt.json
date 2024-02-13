@@ -1,8 +1,0 @@
-{
-  "parent": "wich:block/_template_bars_cap_alt",
-  "textures": {
-    "particle": "wich:block/weathered_copper_bars",
-    "bars": "wich:block/weathered_copper_bars",
-    "edge": "wich:block/weathered_copper_bars"
-  }
-}

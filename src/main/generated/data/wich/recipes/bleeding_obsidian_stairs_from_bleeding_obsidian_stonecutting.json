@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:bleeding_obsidian"
-  },
-  "result": "wich:bleeding_obsidian_stairs",
-  "count": 1
-}

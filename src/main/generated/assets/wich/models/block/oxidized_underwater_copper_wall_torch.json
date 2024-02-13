@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_torch_wall",
-  "textures": {
-    "torch": "wich:block/oxidized_underwater_copper_torch"
-  }
-}

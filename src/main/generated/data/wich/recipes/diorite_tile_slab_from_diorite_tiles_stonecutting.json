@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:diorite_tiles"
-  },
-  "result": "wich:diorite_tile_slab",
-  "count": 2
-}

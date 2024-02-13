@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:ruby_bricks"
-  },
-  "result": "wich:ruby_brick_slab",
-  "count": 2
-}

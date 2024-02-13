@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:beige_concrete"
-  },
-  "result": "wich:beige_concrete_wall",
-  "count": 1
-}

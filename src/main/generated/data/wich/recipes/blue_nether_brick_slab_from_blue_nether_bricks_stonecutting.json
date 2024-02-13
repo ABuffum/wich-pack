@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:blue_nether_bricks"
-  },
-  "result": "wich:blue_nether_brick_slab",
-  "count": 2
-}

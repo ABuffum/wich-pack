@@ -37,36 +37,12 @@ import fun.wich.container.*;
 import fun.wich.entity.ai.ModMemoryModules;
 import fun.wich.entity.ai.sensor.*;
 import fun.wich.entity.blood.BloodType;
-import fun.wich.entity.cloud.ConfettiCloudEntity;
-import fun.wich.entity.hostile.illager.IceologerEntity;
-import fun.wich.entity.hostile.illager.MageEntity;
-import fun.wich.entity.hostile.RedPhantomEntity;
-import fun.wich.entity.hostile.SlimeCreeperEntity;
-import fun.wich.entity.hostile.zombie.JungleZombieEntity;
-import fun.wich.entity.hostile.zombie.SlimeZombieEntity;
-import fun.wich.entity.passive.*;
-import fun.wich.entity.passive.allay.AllayEntity;
-import fun.wich.entity.passive.camel.*;
-import fun.wich.entity.passive.chicken.FancyChickenEntity;
-import fun.wich.entity.passive.chicken.SlimeChickenEntity;
-import fun.wich.entity.passive.cow.*;
-import fun.wich.entity.passive.frog.*;
-import fun.wich.entity.neutral.golem.*;
-import fun.wich.entity.hostile.piranha.PiranhaEntity;
 import fun.wich.entity.projectile.*;
-import fun.wich.entity.passive.sheep.*;
-import fun.wich.entity.hostile.skeleton.*;
-import fun.wich.entity.hostile.slime.*;
-import fun.wich.entity.passive.sniffer.SnifferEntity;
-import fun.wich.entity.hostile.spider.*;
-import fun.wich.entity.tnt.PowderKegEntity;
 import fun.wich.entity.variants.SnowGolemVariant;
-import fun.wich.entity.vehicle.*;
-import fun.wich.entity.hostile.warden.WardenEntity;
-import fun.wich.entity.hostile.zombie.FrozenZombieEntity;
 import fun.wich.event.*;
 import fun.wich.gen.data.ModDatagen;
 import fun.wich.gen.data.language.ModLanguageCache;
+import fun.wich.gen.data.language.Words;
 import fun.wich.gen.data.loot.*;
 import fun.wich.gen.data.tag.*;
 import fun.wich.gen.feature.*;
@@ -82,14 +58,12 @@ import fun.wich.item.basic.*;
 import fun.wich.item.bucket.*;
 import fun.wich.item.consumable.*;
 import fun.wich.item.horn.WindHornItem;
-import fun.wich.item.pouch.ChickenPouchItem;
 import fun.wich.item.projectile.*;
 import fun.wich.item.syringe.*;
 import fun.wich.item.tool.*;
 import fun.wich.item.tool.echo.*;
 import fun.wich.item.horn.goat.*;
 import fun.wich.material.*;
-import fun.wich.item.pouch.EntityPouchItem;
 import fun.wich.item.pouch.PouchItem;
 import fun.wich.mixins.world.BuiltinBiomesInvoker;
 import fun.wich.origins.power.*;
@@ -110,7 +84,6 @@ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.object.builder.v1.entity.*;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -122,7 +95,6 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.mixin.object.builder.PointOfInterestTypeAccessor;
-import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.fabricmc.fabric.mixin.object.builder.VillagerProfessionAccessor;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
@@ -130,11 +102,7 @@ import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.block.dispenser.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.brain.sensor.TemptationsSensor;
 import net.minecraft.entity.effect.*;
-import net.minecraft.entity.mob.*;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
@@ -165,7 +133,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.*;
@@ -185,7 +152,6 @@ import net.minecraft.world.poi.PointOfInterestType;
 import java.util.*;
 
 import static fun.wich.ModFactory.*;
-import static fun.wich.ModFactory.LUMINANCE_13;
 import static fun.wich.registry.ModRegistry.*;
 
 @SuppressWarnings("ConstantConditions")
@@ -235,10 +201,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer ACACIA_SOUL_CAMPFIRE = MakeSoulCampfire(ACACIA_CAMPFIRE).blockTag(BlockTags.AXE_MINEABLE);
 	public static final BlockContainer ACACIA_ENDER_CAMPFIRE = MakeEnderCampfire(ACACIA_CAMPFIRE).blockTag(BlockTags.AXE_MINEABLE);
 	//</editor-fold>
-	//<editor-fold desc="Allay">
-	public static final EntityType<AllayEntity> ALLAY_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AllayEntity::new).dimensions(EntityDimensions.fixed(0.35f, 0.6f)).trackRangeChunks(8).trackedUpdateRate(2).build();
-	public static final Item ALLAY_SPAWN_EGG = MakeSpawnEgg(ALLAY_ENTITY, 56063, 44543, ItemSettings(ItemGroup.MISC));
-	//</editor-fold>
 	//<editor-fold desc="Amethyst">
 	public static final BlockContainer AMETHYST_STAIRS = BuildStairs(AmethystStairsBlock::new, Blocks.AMETHYST_BLOCK).stairsModel(Blocks.AMETHYST_BLOCK).blockTag(BlockTags.CRYSTAL_SOUND_BLOCKS).blockTag(BlockTags.PICKAXE_MINEABLE);
 	public static final BlockContainer AMETHYST_SLAB = BuildSlab(AmethystSlabBlock::new, Blocks.AMETHYST_BLOCK).slabModel(Blocks.AMETHYST_BLOCK).blockTag(BlockTags.CRYSTAL_SOUND_BLOCKS).blockTag(BlockTags.PICKAXE_MINEABLE);
@@ -279,9 +241,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer CUT_POLISHED_ANDESITE_STAIRS = MakeStairs(CUT_POLISHED_ANDESITE).stairsModel(CUT_POLISHED_ANDESITE).blockTag(BlockTags.PICKAXE_MINEABLE);
 	public static final BlockContainer CUT_POLISHED_ANDESITE_SLAB = MakeSlab(CUT_POLISHED_ANDESITE).slabModel(CUT_POLISHED_ANDESITE).blockTag(BlockTags.PICKAXE_MINEABLE);
 	public static final BlockContainer CUT_POLISHED_ANDESITE_WALL = MakeWall(CUT_POLISHED_ANDESITE).wallModel(CUT_POLISHED_ANDESITE).blockTag(BlockTags.PICKAXE_MINEABLE);
-	//</editor-fold>
-	//<editor-fold desc="Anvil">
-	public static final EntityType<SummonedAnvilEntity> SUMMONED_ANVIL_ENTITY = FabricEntityTypeBuilder.<SummonedAnvilEntity>create(SpawnGroup.MISC, SummonedAnvilEntity::new).dimensions(EntityDimensions.fixed(0.98f, 0.98f)).trackRangeChunks(10).trackedUpdateRate(20).build();
 	//</editor-fold>
 	//<editor-fold desc="Arrows">
 	public static final ArrowContainer AMETHYST_ARROW = new ArrowContainer(AmethystArrowEntity::new, AmethystArrowEntity::new, AmethystArrowEntity::new).generatedItemModel();
@@ -381,11 +340,6 @@ public class ModBase implements ModInitializer {
 	});
 	public static final BucketItem BLOOD_BUCKET = GeneratedItem(new ModBucketItem(STILL_BLOOD_FLUID, ItemSettings().recipeRemainder(Items.BUCKET).maxCount(1), BucketProvider.DEFAULT_PROVIDER));
 	//</editor-fold>
-	//<editor-fold desc="Boats">
-	public static final EntityType<ModBoatEntity> MOD_BOAT_ENTITY = FabricEntityTypeBuilder.<ModBoatEntity>create(SpawnGroup.MISC, ModBoatEntity::new).dimensions(EntityDimensions.fixed(1.375F, 0.5625F)).trackRangeChunks(10).build();
-	public static final EntityType<ChestBoatEntity> CHEST_BOAT_ENTITY = FabricEntityTypeBuilder.<ChestBoatEntity>create(SpawnGroup.MISC, ChestBoatEntity::new).dimensions(EntityDimensions.fixed(1.375f, 0.5625f)).trackRangeChunks(10).build();
-	public static final EntityType<ModChestBoatEntity> MOD_CHEST_BOAT_ENTITY = FabricEntityTypeBuilder.<ModChestBoatEntity>create(SpawnGroup.MISC, ModChestBoatEntity::new).dimensions(EntityDimensions.fixed(1.375f, 0.5625f)).trackRangeChunks(10).build();
-	//</editor-fold>
 	//<editor-fold desc="Bone">
 	public static final TorchContainer BONE_TORCH = MakeTorch(BlockSoundGroup.BONE);
 	public static final TorchContainer BONE_SOUL_TORCH = MakeSoulTorch(BlockSoundGroup.BONE);
@@ -397,12 +351,7 @@ public class ModBase implements ModInitializer {
 	public static final Item BONE_KNIFE = MakeKnife(ModToolMaterials.BONE);
 	public static final Item BONE_HAMMER = MakeHammer(ModToolMaterials.BONE);
 	//</editor-fold>
-	//<editor-fold desc="Bone Spider">
-	public static final EntityType<BoneSpiderEntity> BONE_SPIDER_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, BoneSpiderEntity::new).dimensions(EntityDimensions.fixed(1.4f, 0.9f)).trackRangeChunks(8).build();
-	public static final Item BONE_SPIDER_SPAWN_EGG = MakeSpawnEgg(BONE_SPIDER_ENTITY, 0x270F19, 0x632FB7);
 	public static final Item BONE_SHARD = MakeGeneratedItem();
-	public static final EntityType<BoneShardEntity> BONE_SHARD_PROJECTILE_ENTITY = FabricEntityTypeBuilder.<BoneShardEntity>create(SpawnGroup.MISC, BoneShardEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(4).trackedUpdateRate(20).build();
-	//</editor-fold>
 	//<editor-fold desc="Books">
 	public static final Item UNREADABLE_BOOK = ParentedItem(new Item(ItemSettings()), Items.WRITTEN_BOOK);
 	public static final Item RED_BOOK = MakeGeneratedItem();
@@ -413,18 +362,8 @@ public class ModBase implements ModInitializer {
 	public static final Item PURPLE_BOOK = MakeGeneratedItem();
 	public static final Item GRAY_BOOK = MakeGeneratedItem();
 	//</editor-fold>
-	//<editor-fold desc="Bottled Confetti & Dragon's Breath">
 	public static final Item BOTTLED_CONFETTI_ITEM = GeneratedItem(new BottledConfettiItem(ItemSettings().recipeRemainder(Items.GLASS_BOTTLE)));
-	public static final EntityType<BottledConfettiEntity> BOTTLED_CONFETTI_ENTITY = FabricEntityTypeBuilder.<BottledConfettiEntity>create(SpawnGroup.MISC, BottledConfettiEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build();
-	public static final EntityType<DroppedConfettiEntity> DROPPED_CONFETTI_ENTITY = FabricEntityTypeBuilder.<DroppedConfettiEntity>create(SpawnGroup.MISC, DroppedConfettiEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build();
-	public static final EntityType<ConfettiCloudEntity> CONFETTI_CLOUD_ENTITY = FabricEntityTypeBuilder.<ConfettiCloudEntity>create(SpawnGroup.MISC, ConfettiCloudEntity::new).build();
-	public static final EntityType<DroppedDragonBreathEntity> DROPPED_DRAGON_BREATH_ENTITY = FabricEntityTypeBuilder.<DroppedDragonBreathEntity>create(SpawnGroup.MISC, DroppedDragonBreathEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build();
-	public static final EntityType<ConfettiCloudEntity> DRAGON_BREATH_CLOUD_ENTITY = FabricEntityTypeBuilder.<ConfettiCloudEntity>create(SpawnGroup.MISC, ConfettiCloudEntity::new).build();
-	//</editor-fold>
-	//<editor-fold desc="Bottled Lightning">
 	public static final Item BOTTLED_LIGHTNING_ITEM = GeneratedItem(new BottledLightningItem(ItemSettings().recipeRemainder(Items.GLASS_BOTTLE)));
-	public static final EntityType<BottledLightningEntity> BOTTLED_LIGHTNING_ENTITY = FabricEntityTypeBuilder.<BottledLightningEntity>create(SpawnGroup.MISC, BottledLightningEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build();
-	//</editor-fold>
 	//<editor-fold desc="Brews">
 	/*//TODO: Apply burning effect https://minecraft.wiki/w/Minecraft_Dungeons:Burning
 	public static final Item BURNING_BREW = GeneratedItem(new BottledDrinkItem(GlassBottledItemSettings()) {
@@ -433,14 +372,8 @@ public class ModBase implements ModInitializer {
 
 		}
 	});*/
-	public static final Item DENSE_BREW = GeneratedItem(new BottledDrinkItem(GlassBottledItemSettings()) { @Override public void OnDrink(ItemStack stack, LivingEntity user) { user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.DENSE_BREW, 3000)); } });
-	/*//TODO: reduce damage by 1/2 for 15 seconds
-	public static final Item OAKWOOD_BREW = GeneratedItem(new BottledDrinkItem(GlassBottledItemSettings()) {
-		@Override
-		public void OnDrink(ItemStack stack, LivingEntity user) {
-
-		}
-	});*/
+	public static final Item DENSE_BREW = GeneratedItem(new BottledDrinkItem(GlassBottledItemSettings()) { @Override public void OnDrink(ItemStack stack, LivingEntity user) { user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.DENSE, 1200)); } });
+	public static final Item OAKWOOD_BREW = GeneratedItem(new BottledDrinkItem(GlassBottledItemSettings()) { @Override public void OnDrink(ItemStack stack, LivingEntity user) { user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.OAKWOOD_ARMOR, 1200)); } });
 	/*//TODO: Apply shadow form https://minecraft.wiki/w/Minecraft_Dungeons:Shadow_Brew
 	public static final Item SHADOW_BREW = GeneratedItem(new BottledDrinkItem(GlassBottledItemSettings()) {
 		@Override
@@ -448,11 +381,12 @@ public class ModBase implements ModInitializer {
 
 		}
 	});*/
-	//TODO: reduce damage by 1/6
 	public static final Item SWEET_BREW = GeneratedItem(new BottledDrinkItem(GlassBottledItemSettings()) {
 		@Override
 		public void OnDrink(ItemStack stack, LivingEntity user) {
 			user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.FREEZING_RESISTANCE, 2400, 0));
+			if (user.hasStatusEffect(ModStatusEffects.FROZEN)) user.removeStatusEffect(ModStatusEffects.FROZEN);
+			user.addStatusEffect(new StatusEffectInstance(ModStatusEffects.SWEET_BREW, 2400, 0, false, false));
 		}
 	});
 	//</editor-fold>
@@ -479,11 +413,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer CALCITE_TILE_STAIRS = MakeStairs(CALCITE_TILES).stairsModel(CALCITE_TILES).blockTag(BlockTags.PICKAXE_MINEABLE);
 	public static final BlockContainer CALCITE_TILE_SLAB = MakeSlab(CALCITE_TILES).slabModel(CALCITE_TILES).blockTag(BlockTags.PICKAXE_MINEABLE);
 	public static final BlockContainer CALCITE_TILE_WALL = MakeWall(CALCITE_TILES).wallModel(CALCITE_TILES).blockTag(BlockTags.PICKAXE_MINEABLE);
-	//</editor-fold>
-	//<editor-fold desc="Camel">
-	public static final ModSensorType<TemptationsSensor> CAMEL_TEMPTATIONS_SENSOR = new ModSensorType<>("camel_temptations", () -> new TemptationsSensor(CamelBrain.getBreedingIngredient()));
-	public static final EntityType<CamelEntity> CAMEL_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CamelEntity::new).dimensions(EntityDimensions.fixed(1.7f, 2.375f)).trackRangeChunks(10).build();
-	public static final Item CAMEL_SPAWN_EGG = MakeSpawnEgg(CAMEL_ENTITY, 16565097, 13341495, ItemSettings(ItemGroup.MISC));
 	//</editor-fold>
 	//<editor-fold desc="Cassia">
 	public static final BlockContainer CASSIA_LOG = MakeLog(MapColor.BROWN).flammable(5, 5).fuel(300).blockTag(ModBlockTags.CASSIA_LOGS).itemTag(ModItemTags.CASSIA_LOGS).blockTag(ModBlockTags.OVERWORLD_NATURAL_LOGS).itemTag(ModItemTags.CHARRABLE_LOGS).blockTag(BlockTags.AXE_MINEABLE);
@@ -669,19 +598,6 @@ public class ModBase implements ModInitializer {
 	public static final Map<DyeColor, BlockContainer> CONCRETE_STAIRS = ColorUtil.Map(color -> { Block block = ColorUtil.GetConcreteBlock(color); return MakeStairs(block).stairsModel(block).blockTag(BlockTags.PICKAXE_MINEABLE); });
 	public static final Map<DyeColor, BlockContainer> CONCRETE_SLABS = ColorUtil.Map(color -> { Block block = ColorUtil.GetConcreteBlock(color); return MakeSlab(block).slabModel(block).blockTag(BlockTags.PICKAXE_MINEABLE); });
 	public static final Map<DyeColor, BlockContainer> CONCRETE_WALLS = ColorUtil.Map(color -> { Block block = ColorUtil.GetConcreteBlock(color); return MakeWall(block).wallModel(block).blockTag(BlockTags.PICKAXE_MINEABLE); });
-	//</editor-fold>
-	//<editor-fold desc="Cow Variants">
-	public static final EntityType<BlueMooshroomEntity> BLUE_MOOSHROOM_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BlueMooshroomEntity::new).dimensions(EntityDimensions.fixed(0.9F, 1.4F)).trackRangeChunks(10).build();
-	public static final Item BLUE_MOOSHROOM_SPAWN_EGG = MakeSpawnEgg(BLUE_MOOSHROOM_ENTITY, 0x0D6794, 0x929292);
-	public static final EntityType<NetherMooshroomEntity> NETHER_MOOSHROOM_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, NetherMooshroomEntity::new).dimensions(EntityDimensions.fixed(0.9F, 1.4F)).trackRangeChunks(10).build();
-	public static final Item NETHER_MOOSHROOM_SPAWN_EGG = MakeSpawnEgg(NETHER_MOOSHROOM_ENTITY, 0x871116, 0xFF6500);
-	//Mooblooms
-	public static final EntityType<MoobloomEntity> MOOBLOOM_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, MoobloomEntity::new).dimensions(EntityDimensions.fixed(0.9F, 1.4F)).trackRangeChunks(10).build();
-	public static final Item MOOBLOOM_SPAWN_EGG = MakeSpawnEgg(MOOBLOOM_ENTITY, 0xFDD500, 0xFDF7BA);
-	public static final EntityType<MoolipEntity> MOOLIP_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, MoolipEntity::new).dimensions(EntityDimensions.fixed(0.9F, 1.4F)).trackRangeChunks(10).build();
-	public static final Item MOOLIP_SPAWN_EGG = MakeSpawnEgg(MOOLIP_ENTITY, 0xFFA9C2, 0xFFE4E4);
-	public static final EntityType<MooblossomEntity> MOOBLOSSOM_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, MooblossomEntity::new).dimensions(EntityDimensions.fixed(0.9F, 1.4F)).trackRangeChunks(10).build();
-	public static final Item MOOBLOSSOM_SPAWN_EGG = MakeSpawnEgg(MOOBLOSSOM_ENTITY, 0xDF317C, 0x994369);
 	//</editor-fold>
 	//<editor-fold desc="Crimson">
 	public static final WallBlockContainer CRIMSON_HANGING_SIGN = MakeHangingSign(SignType.CRIMSON, Blocks.STRIPPED_CRIMSON_STEM, SignItemSettings(ItemGroup.DECORATIONS), ModBlockSoundGroups.NETHER_WOOD).blockTag(BlockTags.NON_FLAMMABLE_WOOD).itemTag(ItemTags.NON_FLAMMABLE_WOOD).blockTag(BlockTags.AXE_MINEABLE);
@@ -1133,7 +1049,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer END_SHALE_ROCK = BuildBlock(new ModFacingBlock(END_SHALE), DropTable.SilkTouchOrElse(COBBLED_END_SHALE.asItem())).blockTag(ModBlockTags.SCULK_REPLACEABLE).blockTag(BlockTags.PICKAXE_MINEABLE);
 	//</editor-fold>
 	public static final Item PURPLE_ENDER_EYE = GeneratedItem(new PurpleEnderEyeItem(ItemSettings()));
-	public static final EntityType<PurpleEyeOfEnderEntity> PURPLE_EYE_OF_ENDER_ENTITY = FabricEntityTypeBuilder.<PurpleEyeOfEnderEntity>create(SpawnGroup.MISC, PurpleEyeOfEnderEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeChunks(4).trackedUpdateRate(4).build();
 	public static final Block PURPLE_EYE_END_PORTAL_FRAME = new PurpleEyeEndPortalFrameBlock(Block.Settings.of(Material.STONE, MapColor.PURPLE).sounds(BlockSoundGroup.GLASS).luminance(LUMINANCE_1).strength(-1.0F, 3600000.0F));
 	//<editor-fold desc="Ender Fire">
 	public static final BlockContainer ENDER_CANDLE = MakeCandle(MapColor.PALE_YELLOW, 2.75);
@@ -1143,10 +1058,6 @@ public class ModBase implements ModInitializer {
 	public static final TorchContainer ENDER_TORCH = MakeTorch(12, BlockSoundGroup.WOOD, ModParticleTypes.ENDER_FIRE_FLAME);
 	public static final BlockContainer ENDER_LANTERN = MakeLantern(13);
 	public static final BlockContainer ENDER_CAMPFIRE = MakeEnderCampfire(Blocks.CAMPFIRE);
-	//</editor-fold>
-	//<editor-fold desc="Fancy Chicken">
-	public static final EntityType<FancyChickenEntity> FANCY_CHICKEN_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, FancyChickenEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.7F)).trackRangeChunks(10).build();
-	public static final Item FANCY_CHICKEN_SPAWN_EGG = MakeSpawnEgg(FANCY_CHICKEN_ENTITY, 0xB788CB, 0xF7B035);
 	//</editor-fold>
 	//<editor-fold desc="Feathers">
 	public static final Item FANCY_FEATHER = MakeGeneratedItem(); //Minecraft Earth
@@ -1370,17 +1281,8 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer OCHRE_FROGLIGHT = MakeFroglight(MapColor.PALE_YELLOW, ItemSettings(ItemGroup.DECORATIONS));
 	public static final BlockContainer VERDANT_FROGLIGHT = MakeFroglight(MapColor.LICHEN_GREEN, ItemSettings(ItemGroup.DECORATIONS));
 	public static final BlockContainer PEARLESCENT_FROGLIGHT = MakeFroglight(MapColor.PINK, ItemSettings(ItemGroup.DECORATIONS));
-
-	public static final ModSensorType<TemptationsSensor> FROG_TEMPTATIONS_SENSOR = new ModSensorType<>("frog_temptations", () -> new TemptationsSensor(FrogBrain.getTemptItems()));
-	public static final ModSensorType<FrogAttackablesSensor> FROG_ATTACKABLES_SENSOR = new ModSensorType<>("frog_attackables", FrogAttackablesSensor::new);
-	public static final ModSensorType<IsInWaterSensor> IS_IN_WATER_SENSOR = new ModSensorType<>("is_in_water", IsInWaterSensor::new);
-	public static final EntityType<FrogEntity> FROG_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, FrogEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(10).build();
-	public static final Item FROG_SPAWN_EGG = MakeSpawnEgg(FROG_ENTITY, 13661252, 0xFFC77C, ItemSettings(ItemGroup.MISC));
 	private static final Block FROGSPAWN_BLOCK = new FrogspawnBlock(Block.Settings.of(FROGSPAWN_MATERIAL).breakInstantly().nonOpaque().noCollision().sounds(ModBlockSoundGroups.FROGSPAWN));
 	public static final BlockContainer FROGSPAWN = new BlockContainer(FROGSPAWN_BLOCK, new LilyPadItem(FROGSPAWN_BLOCK, ItemSettings(ItemGroup.MISC))).drops(DropTable.NOTHING);
-	public static final EntityType<TadpoleEntity> TADPOLE_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TadpoleEntity::new).dimensions(EntityDimensions.fixed(TadpoleEntity.WIDTH, TadpoleEntity.HEIGHT)).trackRangeChunks(10).build();
-	public static final Item TADPOLE_BUCKET = GeneratedItem(new EntityBucketItem(TADPOLE_ENTITY, Fluids.WATER, ModSoundEvents.ITEM_BUCKET_EMPTY_TADPOLE, ItemSettings(ItemGroup.MISC).maxCount(1)));
-	public static final Item TADPOLE_SPAWN_EGG = MakeSpawnEgg(TADPOLE_ENTITY, 7164733, 1444352, ItemSettings(ItemGroup.MISC));
 	//</editor-fold>
 	public static final ScreenHandlerType<Generic1x1ContainerScreenHandler> GENERIC_1X1_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(ModId.ID("generic_1x1"), Generic1x1ContainerScreenHandler::new);
 	//<editor-fold desc="Gilded Blackstone">
@@ -1639,15 +1541,7 @@ public class ModBase implements ModInitializer {
 	public static final TorchContainer UNDERWATER_HAY_TORCH = MakeUnderwaterTorch(BlockSoundGroup.WOOD).torchModel(HAY_TORCH);
 	//</editor-fold>
 	public static final BlockContainer HEDGE_BLOCK = MakeBlock(Block.Settings.of(Material.LEAVES).strength(0.2F).sounds(BlockSoundGroup.GRASS).nonOpaque()).flammable(5, 20).compostable(0.75f).dropSelf().blockTag(ModBlockTags.BROOM_SWEEPS).blockTag(BlockTags.HOE_MINEABLE);
-	//<editor-fold desc="Hedgehog">
-	public static final EntityType<HedgehogEntity> HEDGEHOG_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, HedgehogEntity::new).dimensions(EntityDimensions.fixed(0.5F, 0.45F)).trackRangeChunks(8).build();
-	public static final Item HEDGEHOG_SPAWN_EGG = MakeSpawnEgg(HEDGEHOG_ENTITY, 11440263, 7558239);
-	//</editor-fold>
 	public static final Item HORN = MakeGeneratedItem(); //Minecraft Earth
-	//<editor-fold desc="Icy Spider">
-	public static final EntityType<IcySpiderEntity> ICY_SPIDER_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, IcySpiderEntity::new).dimensions(EntityDimensions.fixed(1.4f, 0.9f)).trackRangeChunks(8).build();
-	public static final Item ICY_SPIDER_SPAWN_EGG = MakeSpawnEgg(ICY_SPIDER_ENTITY, 0x045480, 0x3CFEFB);
-	//</editor-fold>
 	//<editor-fold desc="Igneous Rocks">
 	public static final BlockContainer COOLED_MAGMA_BLOCK = BuildBlock(new CooledMagmaBlock(Blocks.MAGMA_BLOCK)).cubeAllModel().blockTag(ModBlockTags.INFLICTS_FIRE_DAMAGE).blockTag(ModBlockTags.SIZZLE_RAIN_BLOCKS).blockTag(BlockTags.PICKAXE_MINEABLE);
 	public static final BlockContainer PUMICE = BuildBlock(new PumiceBlock(Block.Settings.of(Material.STONE, MapColor.BROWN).requiresTool().strength(1.5f, 6.0f))).cubeAllModel().blockTag(BlockTags.PICKAXE_MINEABLE);
@@ -1763,10 +1657,6 @@ public class ModBase implements ModInitializer {
 	public static final Item STRAWBERRY_SMOOTHIE = MakeDrink(5, 0.5F);
 	public static final Item SWEET_BERRY_SMOOTHIE = MakeDrink(5, 0.5F);
 	public static final Item TOMATO_SMOOTHIE = MakeDrink(5, 0.5F);
-	//</editor-fold>
-	//<editor-fold desc="Jumping Spider">
-	public static final EntityType<JumpingSpiderEntity> JUMPING_SPIDER_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, JumpingSpiderEntity::new).dimensions(EntityDimensions.fixed(0.7f, 0.5f)).trackRangeChunks(8).build();
-	public static final Item JUMPING_SPIDER_SPAWN_EGG = MakeSpawnEgg(JUMPING_SPIDER_ENTITY, 0x281206, 0x3C0202);
 	//</editor-fold>
 	//<editor-fold desc="Jungle">
 	public static final Item JUNGLE_CHEST_BOAT = MakeChestBoat(BoatEntity.Type.JUNGLE, BoatSettings(ItemGroup.TRANSPORTATION));
@@ -1953,8 +1843,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer MANGROVE_ENDER_CAMPFIRE = MakeEnderCampfire(MANGROVE_CAMPFIRE).blockTag(BlockTags.AXE_MINEABLE);
 	//</editor-fold>
 	//<editor-fold desc="Melon">
-	public static final EntityType<MelonSeedProjectileEntity> MELON_SEED_PROJECTILE_ENTITY = FabricEntityTypeBuilder.<MelonSeedProjectileEntity>create(SpawnGroup.MISC, MelonSeedProjectileEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build();
-	public static final EntityType<MelonGolemEntity> MELON_GOLEM_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MISC, MelonGolemEntity::new).dimensions(EntityType.SNOW_GOLEM.getDimensions()).trackRangeChunks(8).build();
 	public static final BlockContainer CARVED_MELON = BuildBlock(new CarvedMelonBlock(GourdSettings(MapColor.LIME))).compostable(0.65f).blockTag(ModBlockTags.CARVED_MELONS).itemTag(ModItemTags.CARVED_MELONS).blockTag(BlockTags.AXE_MINEABLE);
 	public static final BlockContainer MELON_LANTERN = BuildBlock(new CarvedMelonBlock(GourdSettings(MapColor.LIME).luminance(LUMINANCE_15))).blockTag(ModBlockTags.GOURD_LANTERNS).blockTag(BlockTags.AXE_MINEABLE);
 	public static final BlockContainer SOUL_MELON_LANTERN = MakeGourdLantern(MapColor.LIME, LUMINANCE_10).blockTag(ModBlockTags.GOURD_LANTERNS).blockTag(BlockTags.AXE_MINEABLE);
@@ -1984,15 +1872,10 @@ public class ModBase implements ModInitializer {
 	//Cheese
 	public static final BlockContainer CHEESE_BLOCK = MakeBlock(Block.Settings.of(Material.SOLID_ORGANIC, MapColor.YELLOW).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK)).cubeAllModel().blockTag(BlockTags.SHOVEL_MINEABLE);
 	//</editor-fold>
-	//<editor-fold desc="Minecarts">
-	public static final EntityType<DispenserMinecartEntity> DISPENSER_MINECART_ENTITY = FabricEntityTypeBuilder.<DispenserMinecartEntity>create(SpawnGroup.MISC, DispenserMinecartEntity::new).dimensions(EntityDimensions.fixed(0.98f, 0.7f)).trackRangeChunks(8).build();
 	public static final Item DISPENSER_MINECART_ITEM = GeneratedItem(new DispenserMinecartItem(ItemSettings().maxCount(1)));
-	//</editor-fold>
 	//<editor-fold desc="Moss">
 	public static final BlockContainer MOSS_SLAB = BuildSlab(new MossSlabBlock(Blocks.MOSS_BLOCK)).compostable(0.325f).slabModel(Blocks.MOSS_BLOCK).blockTag(BlockTags.HOE_MINEABLE);
 //	public static final BedContainer MOSS_BED = MakeBed("moss", MapColor.GREEN, BlockSoundGroup.MOSS_BLOCK);
-	public static final EntityType<MossySheepEntity> MOSSY_SHEEP_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, MossySheepEntity::new).dimensions(EntityType.SHEEP.getDimensions()).trackRangeChunks(10).build();
-	public static final Item MOSSY_SHEEP_SPAWN_EGG = GeneratedItem(new SpawnEggItem(MOSSY_SHEEP_ENTITY, 0xFFFFFF, 0xFFFFFF, ItemSettings()));
 	//</editor-fold>
 	//<editor-fold desc="Mud">
 	public static final BlockContainer MUD = BuildBlock(new MudBlock(Block.Settings.copy(Blocks.DIRT).mapColor(MapColor.TERRACOTTA_CYAN).allowsSpawning(ModFactory::always).solidBlock(ModFactory::always).blockVision(ModFactory::always).suffocates(ModFactory::always).sounds(ModBlockSoundGroups.MUD)), ItemSettings(ItemGroup.BUILDING_BLOCKS)).cubeAllModel().blockTag(BlockTags.DIRT).itemTag(ItemTags.DIRT).blockTag(ModBlockTags.FROGS_SPAWNABLE_ON).blockTag(ModBlockTags.MANGROVE_LOGS_CAN_GROW_THROUGH).blockTag(ModBlockTags.MANGROVE_ROOTS_CAN_GROW_THROUGH).blockTag(ModBlockTags.SNIFFER_DIGGABLE_BLOCK).blockTag(BlockTags.SHOVEL_MINEABLE);
@@ -2363,10 +2246,6 @@ public class ModBase implements ModInitializer {
 	public static final Item OBSIDIAN_HORSE_ARMOR = MakeHorseArmor(ModArmorMaterials.OBSIDIAN);
 	*/
 	//</editor-fold>
-	//<editor-fold desc="Phantoms">
-	public static final EntityType<RedPhantomEntity> RED_PHANTOM_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RedPhantomEntity::new).dimensions(EntityDimensions.fixed(0.9f, 0.5f)).trackRangeChunks(8).build();
-	public static final Item RED_PHANTOM_SPAWN_EGG = MakeSpawnEgg(RED_PHANTOM_ENTITY, 0x881214, 0x00E5F9);
-	//</editor-fold>
 	//<editor-fold desc="Piglin Head">
 	private static final Block PIGLIN_HEAD_BLOCK = new PiglinHeadBlock(Block.Settings.of(Material.DECORATION).strength(1.0f), false);
 	private static final Block PIGLIN_WALL_HEAD = new WallPiglinHeadBlock(Block.Settings.of(Material.DECORATION).strength(1.0f), false);
@@ -2380,8 +2259,6 @@ public class ModBase implements ModInitializer {
 	//</editor-fold>
 	public static final BlockContainer PINK_PETALS = new BlockContainer(new FlowerbedBlock(Block.Settings.of(Material.REPLACEABLE_PLANT, MapColor.PINK).strength(0.1f).noCollision().sounds(ModBlockSoundGroups.PINK_PETALS)), ItemSettings(ItemGroup.DECORATIONS)).compostable(0.3f).blockTag(BlockTags.FLOWERS).itemTag(ItemTags.FLOWERS).blockTag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).blockTag(BlockTags.HOE_MINEABLE);
 	//<editor-fold desc="Piranha">
-	public static final EntityType<PiranhaEntity> PIRANHA_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.WATER_AMBIENT, PiranhaEntity::new).dimensions(EntityDimensions.fixed(0.7F, 0.7F)).trackRangeChunks(4).build();
-	public static final Item PIRANHA_SPAWN_EGG = MakeSpawnEgg(PIRANHA_ENTITY, 4877153, 11762012);
 	public static final Item PIRANHA = MakeFood(2, 0.1f);
 	public static final Item COOKED_PIRANHA = MakeFood(6, 0.7f);
 	//</editor-fold>
@@ -2665,7 +2542,6 @@ public class ModBase implements ModInitializer {
 	public static final Item SNORT_POTTERY_SHERD = MakeGeneratedItem(ItemSettings(ItemGroup.MATERIALS));
 	//</editor-fold>
 	public static final Item POUCH = GeneratedItem(new PouchItem(ItemSettings().maxCount(16)));
-	public static final EntityType<PowderKegEntity> POWDER_KEG_ENTITY = FabricEntityTypeBuilder.<PowderKegEntity>create(SpawnGroup.MISC, PowderKegEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.98F)).fireImmune().trackRangeChunks(10).trackedUpdateRate(10).build();
 	//<editor-fold desc="Prismarine">
 	public static final Item PRISMARINE_ROD = MakeHandheldItem();
 	public static final TorchContainer PRISMARINE_TORCH = MakeTorch(15, BlockSoundGroup.STONE, ModParticleTypes.PRISMARINE_FLAME).torchModel();
@@ -2739,11 +2615,7 @@ public class ModBase implements ModInitializer {
 	public static final Item QUARTZ_BOOTS = MakeBoots(ModArmorMaterials.QUARTZ);
 	public static final Item QUARTZ_HORSE_ARMOR = MakeHorseArmor(ModArmorMaterials.QUARTZ);
 	//</editor-fold>
-	//TODO: Steal from containers
-	//<editor-fold desc="Raccoon">
-	public static final EntityType<RaccoonEntity> RACCOON_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, RaccoonEntity::new).dimensions(EntityDimensions.fixed(1F, 1F)).trackRangeChunks(8).build();
-	public static final Item RACCOON_SPAWN_EGG = MakeSpawnEgg(RACCOON_ENTITY, 0x646464, 0x0B0B0B);
-	//</editor-fold>
+	//TODO: Raccoons steal from containers
 	//<editor-fold desc="Ragdoll">
 	private static final Block RAGDOLL_BLOCK = new RagdollBlock(Block.Settings.copy(Blocks.PLAYER_HEAD).noCollision());
 	private static final Item RAGDOLL_ITEM = new RagdollItem(RAGDOLL_BLOCK, ItemSettings());
@@ -2756,11 +2628,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer RAW_IRON_SLAB = MakeSlab(Blocks.RAW_IRON_BLOCK).slabModel(Blocks.RAW_IRON_BLOCK).blockTag(BlockTags.NEEDS_STONE_TOOL).blockTag(BlockTags.PICKAXE_MINEABLE);
 	//</editor-fold>
 	public static final Item RECOVERY_COMPASS = new Item(ItemSettings(ItemGroup.TOOLS)); //Minecraft 1.19
-	//TODO: Stand on hind legs for defensive animation
-	//<editor-fold desc="Red Panda">
-	public static final EntityType<RedPandaEntity> RED_PANDA_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, RedPandaEntity::new).dimensions(EntityDimensions.fixed(1F, 1F)).trackRangeChunks(8).build();
-	public static final Item RED_PANDA_SPAWN_EGG = MakeSpawnEgg(RED_PANDA_ENTITY, 0xC35330, 0x0B0B0B);
-	//</editor-fold>
+	//TODO: Red Pandas stand on hind legs for defensive animation
 	//<editor-fold desc="Ruby">
 	public static final Item RUBY = MakeGeneratedItem();
 	public static final BlockContainer RUBY_ORE = BuildBlock(new OreBlock(Block.Settings.copy(Blocks.EMERALD_ORE), UniformIntProvider.create(3, 7)), DropTable.Ore(RUBY)).cubeAllModel().blockTag(ModBlockTags.RUBY_ORES).blockTag(ModBlockTags.SNAPS_GOAT_HORN).blockTag(BlockTags.NEEDS_IRON_TOOL).blockTag(BlockTags.PICKAXE_MINEABLE);
@@ -2878,38 +2746,17 @@ public class ModBase implements ModInitializer {
 	public static final Item PINK_SLIME_BOTTLE = GeneratedItem(new BottledSlimeItem(GlassBottledItemSettings()));
 	public static final BlockContainer BLUE_SLIME_BLOCK = BuildBlock(new SlimeBlock(Block.Settings.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.WATER_BLUE))).blockTag(ModBlockTags.SLIME_BLOCKS);
 	public static final BlockContainer PINK_SLIME_BLOCK = BuildBlock(new SlimeBlock(Block.Settings.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.MAGENTA))).blockTag(ModBlockTags.SLIME_BLOCKS);
-	public static final EntityType<TropicalSlimeEntity> TROPICAL_SLIME_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TropicalSlimeEntity::new).dimensions(EntityDimensions.changing(2.04f, 2.04f)).trackRangeChunks(10).build();
-	public static final Item TROPICAL_SLIME_SPAWN_EGG = MakeSpawnEgg(TROPICAL_SLIME_ENTITY, 0x8FD3FF, 0x345C7A);
-	public static final EntityType<PinkSlimeBallEntity> PINK_SLIME_BALL_ENTITY = FabricEntityTypeBuilder.<PinkSlimeBallEntity>create(SpawnGroup.MISC, PinkSlimeBallEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeChunks(4).trackedUpdateRate(10).build();
-	public static final EntityType<PinkSlimeEntity> PINK_SLIME_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, PinkSlimeEntity::new).dimensions(EntityDimensions.changing(2.04f, 2.04f)).trackRangeChunks(10).build();
-	public static final Item PINK_SLIME_SPAWN_EGG = MakeSpawnEgg(PINK_SLIME_ENTITY, 0xE0A3EE, 0xB85ECE);
-	//Other Mobs
 	public static final Item SLIME_FEATHER = MakeGeneratedItem();
-	public static final EntityType<SlimeChickenEntity> SLIME_CHICKEN_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, SlimeChickenEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.7F)).trackRangeChunks(10).build();
-	public static final Item SLIME_CHICKEN_SPAWN_EGG = MakeSpawnEgg(SLIME_CHICKEN_ENTITY, 5349438, 0xFF0000);
-
-	public static final EntityType<SlimeCowEntity> SLIME_COW_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, SlimeCowEntity::new).dimensions(EntityDimensions.fixed(0.9f, 1.4f)).trackRangeChunks(10).build();
-	public static final Item SLIME_COW_SPAWN_EGG = MakeSpawnEgg(SLIME_COW_ENTITY, 5349438, 0x3F3024);
-
-	public static final EntityType<SlimeHorseEntity> SLIME_HORSE_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, SlimeHorseEntity::new).dimensions(EntityDimensions.fixed(1.3964844f, 1.6f)).trackRangeChunks(10).build();
-	public static final Item SLIME_HORSE_SPAWN_EGG = MakeSpawnEgg(SLIME_HORSE_ENTITY, 5349438, 0xCFC700);
-
-	public static final EntityType<SlimeSpiderEntity> SLIME_SPIDER_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SlimeSpiderEntity::new).dimensions(EntityDimensions.fixed(1.4f, 0.9f)).trackRangeChunks(8).build();
-	public static final Item SLIME_SPIDER_SPAWN_EGG = MakeSpawnEgg(SLIME_SPIDER_ENTITY, 5349438, 11013646);
 	//Lanterns
 	public static final BlockContainer MAGMA_CUBE_LANTERN = BuildBlock(new SlimeLanternBlock(SlimeLanternSettings(LUMINANCE_15), EntityType.MAGMA_CUBE), DropTable.Drops(EMPTY_LANTERN)).blockTag(BlockTags.PICKAXE_MINEABLE);
 	public static final BlockContainer SLIME_LANTERN = BuildBlock(new SlimeLanternBlock(SlimeLanternSettings(LUMINANCE_13), EntityType.SLIME), DropTable.Drops(EMPTY_LANTERN)).blockTag(BlockTags.PICKAXE_MINEABLE);
-	public static final BlockContainer TROPICAL_SLIME_LANTERN = BuildBlock(new SlimeLanternBlock(SlimeLanternSettings(LUMINANCE_13), TROPICAL_SLIME_ENTITY), DropTable.Drops(EMPTY_LANTERN)).blockTag(BlockTags.PICKAXE_MINEABLE);
-	public static final BlockContainer PINK_SLIME_LANTERN = BuildBlock(new SlimeLanternBlock(SlimeLanternSettings(LUMINANCE_13), PINK_SLIME_ENTITY), DropTable.Drops(EMPTY_LANTERN)).blockTag(BlockTags.PICKAXE_MINEABLE);
+	public static final BlockContainer TROPICAL_SLIME_LANTERN = BuildBlock(new SlimeLanternBlock(SlimeLanternSettings(LUMINANCE_13), ModEntityType.TROPICAL_SLIME_ENTITY), DropTable.Drops(EMPTY_LANTERN)).blockTag(BlockTags.PICKAXE_MINEABLE);
+	public static final BlockContainer PINK_SLIME_LANTERN = BuildBlock(new SlimeLanternBlock(SlimeLanternSettings(LUMINANCE_13), ModEntityType.PINK_SLIME_ENTITY), DropTable.Drops(EMPTY_LANTERN)).blockTag(BlockTags.PICKAXE_MINEABLE);
 	//</editor-fold>
 	//<editor-fold desc="Smithing Templates (1.20)">
 	public static final Item NETHERITE_UPGRADE_SMITHING_TEMPLATE = GeneratedItem(SmithingTemplateItem.createNetheriteUpgrade());
 	//</editor-fold>
-	//<editor-fold desc="Sniffer">
-	public static final EntityType<SnifferEntity> SNIFFER_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, SnifferEntity::new).dimensions(EntityDimensions.fixed(1.9f, 1.75f)).trackRangeChunks(10).build();
-	public static final Item SNIFFER_SPAWN_EGG = MakeSpawnEgg(SNIFFER_ENTITY, 9840944, 5085536, ItemSettings(ItemGroup.MISC));
 	public static final BlockContainer SNIFFER_EGG = BuildBlock(new SnifferEggBlock(Block.Settings.of(new Material.Builder(MapColor.DARK_GREEN).allowsMovement().build(), MapColor.RED).strength(0.5f).sounds(BlockSoundGroup.METAL).nonOpaque()), ItemSettings(ItemGroup.MISC)).generatedItemModel();
-	//</editor-fold>
 	//<editor-fold desc="Soul & Netherrack Fire">
 	public static final BlockContainer SOUL_CANDLE = MakeCandle(MapColor.BROWN, 2.5);
 	public static final Block SOUL_CANDLE_CAKE = new ModCandleCakeBlock(2, () -> Blocks.CAKE, () -> Items.CAKE) {
@@ -3040,10 +2887,7 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer GLAZED_TERRACOTTA_SLAB = BuildSlab(new HorizontalFacingSlabBlock(GLAZED_TERRACOTTA)).blockTag(BlockTags.PICKAXE_MINEABLE);
 	public static final Map<DyeColor, BlockContainer> GLAZED_TERRACOTTA_SLABS = ColorUtil.Map(color -> BuildSlab(new HorizontalFacingSlabBlock(ColorUtil.GetGlazedTerracottaBlock(color))).blockTag(BlockTags.PICKAXE_MINEABLE));
 	//</editor-fold>
-	//<editor-fold desc="Throwable Tomatoes">
 	public static final Item THROWABLE_TOMATO_ITEM = GeneratedItem(new ThrowableTomatoItem(ItemSettings().maxCount(16)));
-	public static final EntityType<ThrownTomatoEntity> THROWABLE_TOMATO_ENTITY = FabricEntityTypeBuilder.<ThrownTomatoEntity>create(SpawnGroup.MISC, ThrownTomatoEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build();
-	//</editor-fold>
 	public static final BlockContainer TIKI_TORCH = BuildBlock(new ThickTorchBlock(Block.Settings.of(Material.DECORATION).breakInstantly().nonOpaque().luminance(createLightLevelFromLitBlockState(15)).sounds(BlockSoundGroup.WOOD), ParticleTypes.FLAME)).blockTag(BlockTags.AXE_MINEABLE);
 	public static final BlockContainer TIKI_SOUL_TORCH = BuildBlock(new ThickTorchBlock(Block.Settings.of(Material.DECORATION).breakInstantly().nonOpaque().luminance(createLightLevelFromLitBlockState(10)).sounds(BlockSoundGroup.WOOD), ParticleTypes.SOUL_FIRE_FLAME)).blockTag(BlockTags.AXE_MINEABLE).blockTag(BlockTags.PIGLIN_REPELLENTS).itemTag(ItemTags.PIGLIN_REPELLENTS);
 	public static final BlockContainer TIKI_ENDER_TORCH = BuildBlock(new ThickTorchBlock(Block.Settings.of(Material.DECORATION).breakInstantly().nonOpaque().luminance(createLightLevelFromLitBlockState(12)).sounds(BlockSoundGroup.WOOD), ModParticleTypes.ENDER_FIRE_FLAME)).blockTag(BlockTags.AXE_MINEABLE);
@@ -3091,11 +2935,6 @@ public class ModBase implements ModInitializer {
 	public static final UnlitTorchContainer UNLIT_SOUL_TORCH = new UnlitTorchContainer(new UnlitTorchBlock((TorchBlock)Blocks.SOUL_TORCH), new UnlitWallTorchBlock((WallTorchBlock)Blocks.SOUL_WALL_TORCH)).drops(Items.SOUL_TORCH);
 	public static final Block UNLIT_LANTERN = MakeUnlitLantern(Blocks.LANTERN, Items.LANTERN).dropsLantern();
 	public static final Block UNLIT_SOUL_LANTERN = MakeUnlitLantern(Blocks.SOUL_LANTERN, Items.SOUL_LANTERN).dropsSoulLantern();
-	//</editor-fold>
-	//<editor-fold desc="Warden">
-	public static final ModSensorType<WardenAttackablesSensor> WARDEN_ENTITY_SENSOR = new ModSensorType<>("minecraft:warden_entity_sensor", WardenAttackablesSensor::new);
-	public static final EntityType<WardenEntity> WARDEN_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WardenEntity::new).dimensions(EntityDimensions.fixed(0.9f, 2.9f)).trackRangeChunks(16).fireImmune().build();
-	public static final Item WARDEN_SPAWN_EGG = MakeSpawnEgg(WARDEN_ENTITY, 1001033, 3790560, ItemSettings(ItemGroup.MISC));
 	//</editor-fold>
 	//<editor-fold desc="Warped">
 	public static final WallBlockContainer WARPED_HANGING_SIGN = MakeHangingSign(SignType.WARPED, Blocks.STRIPPED_WARPED_STEM, SignItemSettings(ItemGroup.DECORATIONS), ModBlockSoundGroups.NETHER_WOOD).blockTag(BlockTags.NON_FLAMMABLE_WOOD).itemTag(ItemTags.NON_FLAMMABLE_WOOD).blockTag(BlockTags.AXE_MINEABLE);
@@ -3165,34 +3004,6 @@ public class ModBase implements ModInitializer {
 	public static final BlockContainer RAINBOW_WOOL_SLAB = BuildSlab(new HorizontalFacingSlabBlock(RAINBOW_WOOL)).flammable(40, 40).fuel(50).blockTag(ModBlockTags.WOOL_SLABS).itemTag(ModItemTags.WOOL_SLABS);
 	public static final BlockContainer RAINBOW_CARPET = BuildBlock(new HorziontalFacingCarpetBlock(RAINBOW_WOOL)).flammable(60, 20).fuel(67).blockTag(BlockTags.CARPETS).itemTag(ItemTags.CARPETS).blockTag(ModBlockTags.WOOL_CARPETS).itemTag(ModItemTags.WOOL_CARPETS);
 //	public static final BedContainer RAINBOW_BED = MakeBed("rainbow");
-	public static final EntityType<RainbowSheepEntity> RAINBOW_SHEEP_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, RainbowSheepEntity::new).dimensions(EntityType.SHEEP.getDimensions()).trackRangeChunks(10).build();
-	public static final Item RAINBOW_SHEEP_SPAWN_EGG = GeneratedItem(new SpawnEggItem(RAINBOW_SHEEP_ENTITY, 0xFFFFFF, 0xFFFFFF, ItemSettings()));
-	//</editor-fold>
-	//<editor-fold desc="Creepers">
-	public static final EntityType<SlimeCreeperEntity> SLIME_CREEPER_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SlimeCreeperEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.7f)).trackRangeChunks(8).build();
-	public static final Item SLIME_CREEPER_SPAWN_EGG = MakeSpawnEgg(SLIME_CREEPER_ENTITY, 5349438, 0);
-	//</editor-fold>
-	//<editor-fold desc="Skeletons">
-	public static final EntityType<MossySkeletonEntity> MOSSY_SKELETON_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MossySkeletonEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.6f)).trackRangeChunks(10).build();
-	public static final Item MOSSY_SKELETON_SPAWN_EGG = MakeSpawnEgg(MOSSY_SKELETON_ENTITY, 0xD6D7C6, 0x526121);
-	public static final EntityType<SlimySkeletonEntity> SLIMY_SKELETON_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SlimySkeletonEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.6f)).trackRangeChunks(10).build();
-	public static final Item SLIMY_SKELETON_SPAWN_EGG = MakeSpawnEgg(SLIMY_SKELETON_ENTITY, 5349438, 0x494949);
-	public static final EntityType<SunkenSkeletonEntity> SUNKEN_SKELETON_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SunkenSkeletonEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.6f)).trackRangeChunks(10).build();
-	public static final Item SUNKEN_SKELETON_SPAWN_EGG = MakeSpawnEgg(SUNKEN_SKELETON_ENTITY, 0xD6D0C9, 0x98439E);
-	//</editor-fold>
-	//<editor-fold desc="Zombies">
-	public static final EntityType<SlowingSnowballEntity> SLOWING_SNOWBALL_ENTITY = FabricEntityTypeBuilder.<SlowingSnowballEntity>create(SpawnGroup.MISC, SlowingSnowballEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeChunks(4).trackedUpdateRate(10).build();
-	public static final EntityType<FrozenZombieEntity> FROZEN_ZOMBIE_ENTITY = FabricEntityTypeBuilder.<FrozenZombieEntity>create(SpawnGroup.MONSTER, FrozenZombieEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).trackRangeChunks(8).build();
-	public static final Item FROZEN_ZOMBIE_SPAWN_EGG = MakeSpawnEgg(FROZEN_ZOMBIE_ENTITY, 0x78BEDE, 0x5A8684);
-	public static final EntityType<JungleZombieEntity> JUNGLE_ZOMBIE_ENTITY = FabricEntityTypeBuilder.<JungleZombieEntity>create(SpawnGroup.MONSTER, JungleZombieEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).trackRangeChunks(8).build();
-	public static final Item JUNGLE_ZOMBIE_SPAWN_EGG = MakeSpawnEgg(JUNGLE_ZOMBIE_ENTITY, 0x67BC97, 0x5A8646);
-	public static final EntityType<SlimeZombieEntity> SLIME_ZOMBIE_ENTITY = FabricEntityTypeBuilder.<SlimeZombieEntity>create(SpawnGroup.MONSTER, SlimeZombieEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).trackRangeChunks(8).build();
-	public static final Item SLIME_ZOMBIE_SPAWN_EGG = MakeSpawnEgg(SLIME_ZOMBIE_ENTITY, 5349438, 0x5A8646);
-	//</editor-fold>
-
-	//<editor-fold desc="Jolly LLamas">
-	public static final EntityType<JollyLlamaEntity> JOLLY_LLAMA_ENTITY = FabricEntityTypeBuilder.<JollyLlamaEntity>create(SpawnGroup.CREATURE, JollyLlamaEntity::new).dimensions(EntityDimensions.fixed(0.9f, 1.87f)).trackRangeChunks(10).build();
-	public static final Item JOLLY_LLAMA_SPAWN_EGG = MakeSpawnEgg(JOLLY_LLAMA_ENTITY, 12623485, 0xFF0000);
 	//</editor-fold>
 
 	//<editor-fold desc="Villagers and Illagers">
@@ -3200,25 +3011,21 @@ public class ModBase implements ModInitializer {
 	public static final PointOfInterestType FACETING_TABLE_POI = PointOfInterestTypeAccessor.callCreate("faceting_table_poi", ImmutableSet.copyOf(FACETING_TABLE.asBlock().getStateManager().getStates()), 1, 1);
 	public static final VillagerProfession LAPIDARY = VillagerProfessionAccessor.create("lapidary", FACETING_TABLE_POI, ImmutableSet.of(), ImmutableSet.of(), ModSoundEvents.ENTITY_VILLAGER_WORK_LAPIDARY);
 
-	public static final EntityType<IceologerEntity> ICEOLOGER_ENTITY = FabricEntityTypeBuilder.<IceologerEntity>create(SpawnGroup.MONSTER, IceologerEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).trackRangeChunks(8).build();
-	public static final Item ICEOLOGER_SPAWN_EGG = MakeSpawnEgg(ICEOLOGER_ENTITY, 0x959B9B, 0x01374B);
-	public static final EntityType<IceChunkEntity> ICE_CHUNK_ENTITY = FabricEntityTypeBuilder.<IceChunkEntity>create(SpawnGroup.MISC, IceChunkEntity::new).dimensions(EntityDimensions.fixed(2f, 1.5f)).trackRangeChunks(8).build();
+	public static final Item LADLE = MakeHandheldItem();
 
-	public static final EntityType<MageEntity> MAGE_ENTITY = FabricEntityTypeBuilder.<MageEntity>create(SpawnGroup.MONSTER, MageEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).trackRangeChunks(8).build();
-	public static final Item MAGE_SPAWN_EGG = MakeSpawnEgg(MAGE_ENTITY, 0x959B9B, 0x5A1949);
+	public static final Item MOUNTAINEER_AXE = HandheldItem(new StoneaxeItem(ToolMaterials.IRON, 3.5f, -2.95f));
+	public static final Item GOLD_MOUNTAINEER_AXE = HandheldItem(new StoneaxeItem(ModToolMaterials.STRONG_GOLD));
+	public static final Item DIAMOND_MOUNTAINEER_AXE = HandheldItem(new StoneaxeItem(ToolMaterials.DIAMOND, 3f, -2.9f));
 
 	public static void RegisterVillagers() {
-		//Iceologer
-		Register("iceologer", ICEOLOGER_ENTITY, List.of(EN_US.Iceologer()));
-		FabricDefaultAttributeRegistry.register(ICEOLOGER_ENTITY, IceologerEntity.createSpellcasterAttributes());
-		SpawnRestrictionAccessor.callRegister(ICEOLOGER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canMobSpawn);
-		Register("ice_chunk", ICE_CHUNK_ENTITY, List.of(EN_US.Chunk(EN_US.Ice())));
-		//Mage
-		Register("mage", MAGE_ENTITY, List.of(EN_US.Iceologer()));
-		FabricDefaultAttributeRegistry.register(MAGE_ENTITY, MageEntity.createSpellcasterAttributes());
-		SpawnRestrictionAccessor.callRegister(MAGE_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canMobSpawn);
+		//Chef Vindicato
+		Register("ladle", LADLE, List.of(Words.Ladle));
+		//Mountaineer
+		Register("mountaineer_axe", MOUNTAINEER_AXE, List.of(EN_US.Axe(Words.Mountaineer)));
+		Register("gold_mountaineer_axe", GOLD_MOUNTAINEER_AXE, List.of(EN_US.Axe(EN_US.Mountaineer(Words.Gold))));
+		Register("diamond_mountaineer_axe", DIAMOND_MOUNTAINEER_AXE, List.of(EN_US.Axe(EN_US.Mountaineer(Words.Diamond))));
 		//Lapidary Villager
-		Register("faceting_table", FACETING_TABLE, List.of(EN_US.Table(EN_US.Faceting())));
+		Register("faceting_table", FACETING_TABLE, List.of(EN_US.Table(Words.Faceting)));
 		PointOfInterestTypeAccessor.callSetup(Register(FACETING_TABLE_POI.getId(), FACETING_TABLE_POI));
 		Register(LAPIDARY.getId(), LAPIDARY);
 		TradeOfferHelper.registerVillagerOffers(LAPIDARY, 1, //Novice
@@ -3558,73 +3365,73 @@ public class ModBase implements ModInitializer {
 	//</editor-fold>
 
 	//<editor-fold desc="Blood Types">
-	public static final BloodType AXOLOTL_BLOOD_TYPE = BloodType.Register("axolotl");
-	public static final BloodType BAT_BLOOD_TYPE = BloodType.Register("bat");
-	public static final BloodType BEAR_BLOOD_TYPE = BloodType.Register("polar_bear");
-	public static final BloodType BEE_BLOOD_TYPE = BloodType.Register("bee");
-	public static final BloodType CAT_BLOOD_TYPE = BloodType.Register("cat");
-	public static final BloodType CAMEL_BLOOD_TYPE = BloodType.Register("camel");
-	public static final BloodType CAVE_SPIDER_BLOOD_TYPE = BloodType.Register("cave_spider");
-	public static final BloodType CHICKEN_BLOOD_TYPE = BloodType.Register("chicken");
-	public static final BloodType COW_BLOOD_TYPE = BloodType.Register("cow");
-	public static final BloodType CREEPER_BLOOD_TYPE = BloodType.Register("creeper");
-	public static final BloodType DOLPHIN_BLOOD_TYPE = BloodType.Register("dolphin");
-	public static final BloodType DONKEY_BLOOD_TYPE = BloodType.Register("donkey");
-	public static final BloodType ENDER_DRAGON_BLOOD_TYPE = BloodType.Register("ender_dragon");
-	public static final BloodType ENDERMAN_BLOOD_TYPE = BloodType.Register("enderman");
-	public static final BloodType ENDERMITE_BLOOD_TYPE = BloodType.Register("endermite");
-	public static final BloodType FISH_BLOOD_TYPE = BloodType.Register("fish");
-	public static final BloodType FOX_BLOOD_TYPE = BloodType.Register("fox");
-	public static final BloodType FROG_BLOOD_TYPE = BloodType.Register("frog");
-	public static final BloodType GLOW_SQUID_BLOOD_TYPE = BloodType.Register("glow_squid");
-	public static final BloodType GOAT_BLOOD_TYPE = BloodType.Register("goat");
-	public static final BloodType GUARDIAN_BLOOD_TYPE = BloodType.Register("guardian");
-	public static final BloodType HOGLIN_BLOOD_TYPE = BloodType.Register("hoglin");
-	public static final BloodType HORSE_BLOOD_TYPE = BloodType.Register("horse");
-	public static final BloodType LLAMA_BLOOD_TYPE = BloodType.Register("llama");
-	public static final BloodType MAGMA_CREAM_BLOOD_TYPE = BloodType.Register("magma_cream");
-	public static final BloodType MOOSHROOM_BLOOD_TYPE = BloodType.Register("mooshroom");
-	public static final BloodType MULE_BLOOD_TYPE = BloodType.Register("mule");
-	public static final BloodType OCELOT_BLOOD_TYPE = BloodType.Register("ocelot");
-	public static final BloodType PANDA_BLOOD_TYPE = BloodType.Register("panda");
-	public static final BloodType PARROT_BLOOD_TYPE = BloodType.Register("parrot");
-	public static final BloodType PHANTOM_BLOOD_TYPE = BloodType.Register("phantom");
-	public static final BloodType PIG_BLOOD_TYPE = BloodType.Register("pig");
-	public static final BloodType PIGLIN_BLOOD_TYPE = BloodType.Register("piglin");
-	public static final BloodType PUFFERFISH_BLOOD_TYPE = BloodType.Register("pufferfish");
-	public static final BloodType RABBIT_BLOOD_TYPE = BloodType.Register("rabbit");
-	public static final BloodType RAVAGER_BLOOD_TYPE = BloodType.Register("ravager");
-	public static final BloodType SHEEP_BLOOD_TYPE = BloodType.Register("sheep");
-	public static final BloodType SHULKER_BLOOD_TYPE = BloodType.Register("shulker");
-	public static final BloodType SILVERFISH_BLOOD_TYPE = BloodType.Register("silverfish");
-	public static final BloodType SLIME_BLOOD_TYPE = BloodType.Register("slime");
-	public static final BloodType SNIFFER_BLOOD_TYPE = BloodType.Register("sniffer");
-	public static final BloodType SPIDER_BLOOD_TYPE = BloodType.Register("spider");
-	public static final BloodType SQUID_BLOOD_TYPE = BloodType.Register("squid");
-	public static final BloodType STRIDER_BLOOD_TYPE = BloodType.Register("strider");
-	public static final BloodType TURTLE_BLOOD_TYPE = BloodType.Register("turtle");
-	public static final BloodType VILLAGER_BLOOD_TYPE = BloodType.Register("villager");
-	public static final BloodType WARDEN_BLOOD_TYPE = BloodType.Register("warden");
-	public static final BloodType WOLF_BLOOD_TYPE = BloodType.Register("wolf");
-	public static final BloodType ZOGLIN_BLOOD_TYPE = BloodType.Register("zoglin");
-	public static final BloodType ZOMBIE_BLOOD_TYPE = BloodType.Register("zombie");
-	public static final BloodType ZOMBIE_HORSE_BLOOD_TYPE = BloodType.Register("zombie_horse");
-	public static final BloodType ZOMBIE_VILLAGER_BLOOD_TYPE = BloodType.Register("zombie_villager");
-	public static final BloodType ZOMBIFIED_PIGLIN_BLOOD_TYPE = BloodType.Register("zombified_piglin");
+	public static final BloodType AXOLOTL_BLOOD_TYPE = BloodType.Register("axolotl", List.of(EN_US.Blood(Words.Axolotl)));
+	public static final BloodType BAT_BLOOD_TYPE = BloodType.Register("bat", List.of(EN_US.Blood(Words.Bat)));
+	public static final BloodType BEAR_BLOOD_TYPE = BloodType.Register("bear", List.of(EN_US.Blood(EN_US.Bear())));
+	public static final BloodType BEE_BLOOD_TYPE = BloodType.Register("bee", List.of(EN_US.Blood(EN_US.Bee())));
+	public static final BloodType CAT_BLOOD_TYPE = BloodType.Register("cat", List.of(EN_US.Blood(EN_US.Cat())));
+	public static final BloodType CAMEL_BLOOD_TYPE = BloodType.Register("camel", List.of(EN_US.Blood(EN_US.Camel())));
+	public static final BloodType CAVE_SPIDER_BLOOD_TYPE = BloodType.Register("cave_spider", List.of(EN_US.Blood(EN_US.Spider(EN_US.Cave()))));
+	public static final BloodType CHICKEN_BLOOD_TYPE = BloodType.Register("chicken", List.of(EN_US.Blood(Words.Chicken)));
+	public static final BloodType COW_BLOOD_TYPE = BloodType.Register("cow", List.of(EN_US.Blood(Words.Cow)));
+	public static final BloodType CREEPER_BLOOD_TYPE = BloodType.Register("creeper", List.of(EN_US.Blood(EN_US.Creeper())));
+	public static final BloodType DOLPHIN_BLOOD_TYPE = BloodType.Register("dolphin", List.of(EN_US.Blood(EN_US.Dolphin())));
+	public static final BloodType DONKEY_BLOOD_TYPE = BloodType.Register("donkey", List.of(EN_US.Blood(EN_US.Donkey())));
+	public static final BloodType ENDER_DRAGON_BLOOD_TYPE = BloodType.Register("ender_dragon", List.of(EN_US.Blood(EN_US.Dragon(EN_US.Ender()))));
+	public static final BloodType ENDERMAN_BLOOD_TYPE = BloodType.Register("enderman", List.of(EN_US.Blood(EN_US.Enderman())));
+	public static final BloodType ENDERMITE_BLOOD_TYPE = BloodType.Register("endermite", List.of(EN_US.Blood(EN_US.Endermite())));
+	public static final BloodType FISH_BLOOD_TYPE = BloodType.Register("fish", List.of(EN_US.Blood(EN_US.Fish())));
+	public static final BloodType FOX_BLOOD_TYPE = BloodType.Register("fox", List.of(EN_US.Blood(EN_US.Fox())));
+	public static final BloodType FROG_BLOOD_TYPE = BloodType.Register("frog", List.of(EN_US.Blood(Words.Frog)));
+	public static final BloodType GLOW_SQUID_BLOOD_TYPE = BloodType.Register("glow_squid", List.of(EN_US.Blood(EN_US.Squid(EN_US.Glow()))));
+	public static final BloodType GOAT_BLOOD_TYPE = BloodType.Register("goat", List.of(EN_US.Blood(EN_US.Goat())));
+	public static final BloodType GUARDIAN_BLOOD_TYPE = BloodType.Register("guardian", List.of(EN_US.Blood(EN_US.Guardian())));
+	public static final BloodType HOGLIN_BLOOD_TYPE = BloodType.Register("hoglin", List.of(EN_US.Blood(EN_US.Hoglin())));
+	public static final BloodType HORSE_BLOOD_TYPE = BloodType.Register("horse", List.of(EN_US.Blood(Words.Horse)));
+	public static final BloodType LLAMA_BLOOD_TYPE = BloodType.Register("llama", List.of(EN_US.Blood(EN_US.Llama())));
+	public static final BloodType MAGMA_CREAM_BLOOD_TYPE = BloodType.Register("magma_cream", List.of(EN_US.Cream(EN_US.Magma())));
+	public static final BloodType MOOSHROOM_BLOOD_TYPE = BloodType.Register("mooshroom", List.of(EN_US.Blood(EN_US.Mooshroom())));
+	public static final BloodType MULE_BLOOD_TYPE = BloodType.Register("mule", List.of(EN_US.Blood(EN_US.Mule())));
+	public static final BloodType OCELOT_BLOOD_TYPE = BloodType.Register("ocelot", List.of(EN_US.Blood(EN_US.Ocelot())));
+	public static final BloodType PANDA_BLOOD_TYPE = BloodType.Register("panda", List.of(EN_US.Blood(EN_US.Panda())));
+	public static final BloodType PARROT_BLOOD_TYPE = BloodType.Register("parrot", List.of(EN_US.Blood(EN_US.Parrot())));
+	public static final BloodType PHANTOM_BLOOD_TYPE = BloodType.Register("phantom", List.of(EN_US.Blood(EN_US.Phantom())));
+	public static final BloodType PIG_BLOOD_TYPE = BloodType.Register("pig", List.of(EN_US.Blood(EN_US.Pig())));
+	public static final BloodType PIGLIN_BLOOD_TYPE = BloodType.Register("piglin", List.of(EN_US.Blood(EN_US.Piglin())));
+	public static final BloodType PUFFERFISH_BLOOD_TYPE = BloodType.Register("pufferfish", List.of(EN_US.Blood(EN_US.Pufferfish())));
+	public static final BloodType RABBIT_BLOOD_TYPE = BloodType.Register("rabbit", List.of(EN_US.Blood(EN_US.Rabbit())));
+	public static final BloodType RAVAGER_BLOOD_TYPE = BloodType.Register("ravager", List.of(EN_US.Blood(EN_US.Ravager())));
+	public static final BloodType SHEEP_BLOOD_TYPE = BloodType.Register("sheep", List.of(EN_US.Blood(EN_US.Sheep())));
+	public static final BloodType SHULKER_BLOOD_TYPE = BloodType.Register("shulker", List.of(EN_US.Blood(EN_US.Shulker())));
+	public static final BloodType SILVERFISH_BLOOD_TYPE = BloodType.Register("silverfish", List.of(EN_US.Blood(EN_US.Silverfish())));
+	public static final BloodType SLIME_BLOOD_TYPE = BloodType.Register("slime", List.of(Words.Slime));
+	public static final BloodType SNIFFER_BLOOD_TYPE = BloodType.Register("sniffer", List.of(EN_US.Blood(EN_US.Sniffer())));
+	public static final BloodType SPIDER_BLOOD_TYPE = BloodType.Register("spider", List.of(EN_US.Blood(EN_US.Spider())));
+	public static final BloodType SQUID_BLOOD_TYPE = BloodType.Register("squid", List.of(EN_US.Blood(EN_US.Squid())));
+	public static final BloodType STRIDER_BLOOD_TYPE = BloodType.Register("strider", List.of(EN_US.Blood(EN_US.Strider())));
+	public static final BloodType TURTLE_BLOOD_TYPE = BloodType.Register("turtle", List.of(EN_US.Blood(EN_US.Turtle())));
+	public static final BloodType VILLAGER_BLOOD_TYPE = BloodType.Register("villager", List.of(EN_US.Blood(EN_US.Villager())));
+	public static final BloodType WARDEN_BLOOD_TYPE = BloodType.Register("warden", List.of(EN_US.Blood(EN_US.Warden())));
+	public static final BloodType WOLF_BLOOD_TYPE = BloodType.Register("wolf", List.of(EN_US.Blood(Words.Wolf)));
+	public static final BloodType ZOGLIN_BLOOD_TYPE = BloodType.Register("zoglin", List.of(EN_US.Blood(EN_US.Zoglin())));
+	public static final BloodType ZOMBIE_BLOOD_TYPE = BloodType.Register("zombie", List.of(EN_US.Blood(Words.Zombie)));
+	public static final BloodType ZOMBIE_HORSE_BLOOD_TYPE = BloodType.Register("zombie_horse", List.of(EN_US.Blood(EN_US.Horse(Words.Zombie))));
+	public static final BloodType ZOMBIE_VILLAGER_BLOOD_TYPE = BloodType.Register("zombie_villager", List.of(EN_US.Blood(EN_US.Villager(Words.Zombie))));
+	public static final BloodType ZOMBIFIED_PIGLIN_BLOOD_TYPE = BloodType.Register("zombified_piglin", List.of(EN_US.Blood(EN_US.Piglin(EN_US.Zombified()))));
 	//</editor-fold>
 	//<editor-fold desc="Mod Mob Blood Types">
-	public static final BloodType HEDGEHOG_BLOOD_TYPE = BloodType.Register("hedgehog");
-	public static final BloodType RACCOON_BLOOD_TYPE = BloodType.Register("raccoon");
-	public static final BloodType RED_PANDA_BLOOD_TYPE = BloodType.Register("red_panda");
-	public static final BloodType FLOWER_COW_BLOOD_TYPE = BloodType.Register("flower_cow");
-	public static final BloodType PIRANHA_BLOOD_TYPE = BloodType.Register("piranha");
-	public static final BloodType BLUE_SLIME_BLOOD_TYPE = BloodType.Register("blue_slime");
-	public static final BloodType PINK_SLIME_BLOOD_TYPE = BloodType.Register("pink_slime");
+	public static final BloodType HEDGEHOG_BLOOD_TYPE = BloodType.Register("hedgehog", List.of(EN_US.Blood(Words.Hedgehog)));
+	public static final BloodType RACCOON_BLOOD_TYPE = BloodType.Register("raccoon", List.of(EN_US.Blood(Words.Raccoon)));
+	public static final BloodType RED_PANDA_BLOOD_TYPE = BloodType.Register("red_panda", List.of(EN_US.Blood(EN_US.Panda(Words.Red))));
+	public static final BloodType FLOWER_COW_BLOOD_TYPE = BloodType.Register("flower_cow", List.of(EN_US.Blood(EN_US.Cow(Words.Flower))));
+	public static final BloodType PIRANHA_BLOOD_TYPE = BloodType.Register("piranha", List.of(EN_US.Blood(Words.Piranha)));
+	public static final BloodType BLUE_SLIME_BLOOD_TYPE = BloodType.Register("blue_slime", List.of(EN_US.Slime(Words.Blue)));
+	public static final BloodType PINK_SLIME_BLOOD_TYPE = BloodType.Register("pink_slime", List.of(EN_US.Slime(Words.Pink)));
 	//</editor-fold>
 	//<editor-fold desc="Special Blood Types">
-	public static final BloodType AVIAN_BLOOD_TYPE = BloodType.Register(ModId.NAMESPACE, "avian");
-	public static final BloodType NEPHAL_BLOOD_TYPE = BloodType.Register(ModId.NAMESPACE, "nephal");
-	public static final BloodType VAMPIRE_BLOOD_TYPE = BloodType.Register(ModId.NAMESPACE, "vampire");
+	public static final BloodType AVIAN_BLOOD_TYPE = BloodType.Register(ModId.NAMESPACE, "avian", List.of(EN_US.Blood(Words.Avian)));
+	public static final BloodType NEPHAL_BLOOD_TYPE = BloodType.Register(ModId.NAMESPACE, "nephal", List.of(EN_US.Blood(Words.Nephal)));
+	public static final BloodType VAMPIRE_BLOOD_TYPE = BloodType.Register(ModId.NAMESPACE, "vampire", List.of(EN_US.Blood(Words.Vampire)));
 	//</editor-fold>
 	//<editor-fold desc="Syringes">
 	public static final Item SYRINGE = HandheldItem(new EmptySyringeItem(ItemSettings().maxCount(16)));
@@ -3718,7 +3525,6 @@ public class ModBase implements ModInitializer {
 
 	//<editor-fold desc="Javelins & Custom Tridents">
 	public static final JavelinItem JAVELIN = GeneratedItem(new JavelinItem(4.0, -2.9f, ModId.ID("textures/entity/projectiles/javelin.png"), ItemSettings().maxDamage(250)));
-	public static final EntityType<JavelinEntity> JAVELIN_ENTITY = FabricEntityTypeBuilder.<JavelinEntity>create(SpawnGroup.MISC, JavelinEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(4).trackedUpdateRate(20).build();
 
 	public static final JavelinItem AMETHYST_TRIDENT = GeneratedItem(new AmethystTridentItem(8.0, -2.9f, ModId.ID("textures/entity/projectiles/amethyst_trident.png"), ItemSettings().maxDamage(250)));
 	private static class AmethystTridentItem extends JavelinItem {
@@ -3727,144 +3533,6 @@ public class ModBase implements ModInitializer {
 			this.FACTORY = AmethystTridentEntity::new;
 		}
 	}
-	public static final EntityType<JavelinEntity> AMETHYST_TRIDENT_ENTITY = FabricEntityTypeBuilder.<JavelinEntity>create(SpawnGroup.MISC, AmethystTridentEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(4).trackedUpdateRate(20).build();
-	private static class AmethystTridentEntity extends JavelinEntity {
-		public AmethystTridentEntity(EntityType<? extends JavelinEntity> entityType, World world) {
-			super(entityType, world);
-			this.item = AMETHYST_TRIDENT;
-		}
-		public AmethystTridentEntity(World world, LivingEntity owner, ItemStack stack) {
-			super(AMETHYST_TRIDENT_ENTITY, world, owner, stack, AMETHYST_TRIDENT);
-		}
-	}
-	//</editor-fold>
-
-	//<editor-fold desc="Mod Buckets">
-	public static final Item PIRANHA_BUCKET = GeneratedItem(new EntityBucketItem(PIRANHA_ENTITY, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, ItemSettings().maxCount(1)));
-	//</editor-fold>
-	//<editor-fold desc="Pouches">
-	public static final Item CHICKEN_POUCH = GeneratedItem(new ChickenPouchItem(EntityType.CHICKEN, ItemSettings().maxCount(1)).dispensible());
-	public static final Item RABBIT_POUCH = GeneratedItem(new EntityPouchItem(EntityType.RABBIT, ModSoundEvents.ITEM_POUCH_EMPTY_RABBIT, ItemSettings().maxCount(1)).dispensible());
-	public static final Item PARROT_POUCH = GeneratedItem(new EntityPouchItem(EntityType.PARROT, ModSoundEvents.ITEM_POUCH_EMPTY_PARROT, ItemSettings().maxCount(1)).dispensible());
-	public static final Item ENDERMITE_POUCH = GeneratedItem(new EntityPouchItem(EntityType.ENDERMITE, ModSoundEvents.ITEM_POUCH_EMPTY_ENDERMITE, ItemSettings().maxCount(1)).dispensible());
-	public static final Item SILVERFISH_POUCH = GeneratedItem(new EntityPouchItem(EntityType.SILVERFISH, ModSoundEvents.ITEM_POUCH_EMPTY_SILVERFISH, ItemSettings().maxCount(1)).dispensible());
-	//</editor-fold>
-	//<editor-fold desc="Mod Pouches">
-	public static final Item HEDGEHOG_POUCH = GeneratedItem(new EntityPouchItem(HEDGEHOG_ENTITY, ModSoundEvents.ITEM_POUCH_EMPTY_HEDGEHOG, ItemSettings().maxCount(1)).dispensible());
-	//</editor-fold>
-	//<editor-fold desc="Summoning Arrows">
-	public static final ArrowContainer ALLAY_SUMMONING_ARROW = ArrowContainer.Summoning(ALLAY_ENTITY, 56063, 44543);
-	public static final ArrowContainer AXOLOTL_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.AXOLOTL, 16499171, 10890612);
-	public static final ArrowContainer BAT_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.BAT, 4996656, 986895);
-	public static final ArrowContainer BEE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.BEE, 15582019, 4400155);
-	public static final ArrowContainer BLAZE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.BLAZE, 16167425, 16775294);
-	public static final ArrowContainer CAT_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.CAT, 15714446, 9794134);
-	public static final ArrowContainer CAMEL_SUMMONING_ARROW = ArrowContainer.Summoning(CAMEL_ENTITY, 16565097, 13341495);
-	public static final ArrowContainer CAVE_SPIDER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.CAVE_SPIDER, 803406, 11013646);
-	public static final ArrowContainer CHICKEN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.CHICKEN, 0xA1A1A1, 0xFF0000);
-	public static final ArrowContainer COD_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.COD, 12691306, 15058059);
-	public static final ArrowContainer COW_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.COW, 4470310, 0xA1A1A1);
-	public static final ArrowContainer CREEPER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.CREEPER, 894731, 0);
-	public static final ArrowContainer DOLPHIN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.DOLPHIN, 2243405, 0xF9F9F9);
-	public static final ArrowContainer DONKEY_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.DONKEY, 5457209, 8811878);
-	public static final ArrowContainer DROWNED_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.DROWNED, 9433559, 7969893);
-	public static final ArrowContainer ELDER_GUARDIAN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.ELDER_GUARDIAN, 13552826, 7632531);
-	public static final ArrowContainer ENDERMAN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.ENDERMAN, 0x161616, 0);
-	public static final ArrowContainer ENDERMITE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.ENDERMITE, 0x161616, 0x6E6E6E);
-	public static final ArrowContainer EVOKER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.EVOKER, 0x959B9B, 1973274);
-	public static final ArrowContainer FOX_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.FOX, 14005919, 13396256);
-	public static final ArrowContainer FROG_SUMMONING_ARROW = ArrowContainer.Summoning(FROG_ENTITY, 13661252, 0xFFC77C);
-	public static final ArrowContainer GHAST_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.GHAST, 0xF9F9F9, 0xBCBCBC);
-	public static final ArrowContainer GIANT_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.GIANT, 44975, 7969893);
-	public static final ArrowContainer GLOW_SQUID_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.GLOW_SQUID, 611926, 8778172);
-	public static final ArrowContainer GOAT_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.GOAT, 10851452, 5589310);
-	public static final ArrowContainer GUARDIAN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.GUARDIAN, 5931634, 15826224);
-	public static final ArrowContainer HOGLIN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.HOGLIN, 13004373, 6251620);
-	public static final ArrowContainer HORSE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.HORSE, 12623485, 0xEEE500);
-	public static final ArrowContainer HUSK_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.HUSK, 7958625, 15125652);
-	public static final ArrowContainer IRON_GOLEM_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.IRON_GOLEM, 0xB1B0B0, 0xE3901D);
-	public static final ArrowContainer LLAMA_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.LLAMA, 12623485, 10051392);
-	public static final ArrowContainer MAGMA_CUBE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.MAGMA_CUBE, 0x340000, 0xFCFC00);
-	public static final ArrowContainer MOOSHROOM_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.MOOSHROOM, 10489616, 0xB7B7B7);
-	public static final ArrowContainer MULE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.MULE, 1769984, 5321501);
-	public static final ArrowContainer OCELOT_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.OCELOT, 15720061, 5653556);
-	public static final ArrowContainer PANDA_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.PANDA, 0xE7E7E7, 0x1B1B22);
-	public static final ArrowContainer PARROT_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.PARROT, 894731, 0xFF0000);
-	public static final ArrowContainer PHANTOM_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.PHANTOM, 4411786, 0x88FF00);
-	public static final ArrowContainer PIG_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.PIG, 15771042, 14377823);
-	public static final ArrowContainer PIGLIN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.PIGLIN, 10051392, 16380836);
-	public static final ArrowContainer PIGLIN_BRUTE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.PIGLIN_BRUTE, 5843472, 16380836);
-	public static final ArrowContainer PILLAGER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.PILLAGER, 5451574, 0x959B9B);
-	public static final ArrowContainer POLAR_BEAR_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.POLAR_BEAR, 0xF2F2F2, 0x959590);
-	public static final ArrowContainer PUFFERFISH_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.PUFFERFISH, 16167425, 3654642);
-	public static final ArrowContainer RABBIT_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.RABBIT, 10051392, 7555121);
-	public static final ArrowContainer RAVAGER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.RAVAGER, 7697520, 5984329);
-	public static final ArrowContainer SALMON_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SALMON, 10489616, 951412);
-	public static final ArrowContainer SHEEP_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SHEEP, 0xE7E7E7, 0xFFB5B5);
-	public static final ArrowContainer SHULKER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SHULKER, 9725844, 5060690);
-	public static final ArrowContainer SILVERFISH_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SILVERFISH, 0x6E6E6E, 0x303030);
-	public static final ArrowContainer SKELETON_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SKELETON, 0xC1C1C1, 0x494949);
-	public static final ArrowContainer SKELETON_HORSE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SKELETON_HORSE, 6842447, 15066584);
-	public static final ArrowContainer SLIME_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SLIME, 5349438, 8306542);
-	public static final ArrowContainer SNIFFER_SUMMONING_ARROW = ArrowContainer.Summoning(SNIFFER_ENTITY, 9840944, 5085536);
-	public static final ArrowContainer SNOW_GOLEM_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SNOW_GOLEM, 0xF0FDFD, 0xE3901D);
-	public static final ArrowContainer SPIDER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SPIDER, 3419431, 11013646);
-	public static final ArrowContainer SQUID_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.SQUID, 2243405, 7375001);
-	public static final ArrowContainer STRAY_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.STRAY, 0x617677, 0xDDEAEA);
-	public static final ArrowContainer STRIDER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.STRIDER, 10236982, 0x4D494D);
-	public static final ArrowContainer TADPOLE_SUMMONING_ARROW = ArrowContainer.Summoning(TADPOLE_ENTITY, 7164733, 1444352);
-	public static final ArrowContainer TRADER_LLAMA_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.TRADER_LLAMA, 15377456, 4547222);
-	public static final ArrowContainer TROPICAL_FISH_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.TROPICAL_FISH, 15690005, 0xFFF9EF);
-	public static final ArrowContainer TURTLE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.TURTLE, 0xE7E7E7, 44975);
-	public static final ArrowContainer VEX_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.VEX, 8032420, 15265265);
-	public static final ArrowContainer VILLAGER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.VILLAGER, 5651507, 12422002);
-	public static final ArrowContainer VINDICATOR_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.VINDICATOR, 0x959B9B, 2580065);
-	public static final ArrowContainer WANDERING_TRADER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.WANDERING_TRADER, 4547222, 15377456);
-	public static final ArrowContainer WARDEN_SUMMONING_ARROW = ArrowContainer.Summoning(WARDEN_ENTITY, 1001033, 3790560);
-	public static final ArrowContainer WITCH_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.WITCH, 0x340000, 5349438);
-	public static final ArrowContainer WITHER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.WITHER, 0x141414, 0x474D4D);
-	public static final ArrowContainer WITHER_SKELETON_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.WITHER_SKELETON, 0x141414, 0x474D4D);
-	public static final ArrowContainer WOLF_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.WOLF, 0xD7D3D3, 13545366);
-	public static final ArrowContainer ZOGLIN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.ZOGLIN, 13004373, 0xE6E6E6);
-	public static final ArrowContainer ZOMBIE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.ZOMBIE, 44975, 7969893);
-	public static final ArrowContainer ZOMBIE_HORSE_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.ZOMBIE_HORSE, 3232308, 9945732);
-	public static final ArrowContainer ZOMBIE_VILLAGER_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.ZOMBIE_VILLAGER, 5651507, 7969893);
-	public static final ArrowContainer ZOMBIFIED_PIGLIN_SUMMONING_ARROW = ArrowContainer.Summoning(EntityType.ZOMBIFIED_PIGLIN, 15373203, 5009705);
-	//</editor-fold>
-	//<editor-fold desc="Mod Mob Summoning Arrows">
-	public static final ArrowContainer MELON_GOLEM_SUMMONING_ARROW = ArrowContainer.Summoning(MELON_GOLEM_ENTITY, 0xF0FDFD, 0x7B7F16);
-	public static final ArrowContainer BONE_SPIDER_SUMMONING_ARROW = ArrowContainer.Summoning(BONE_SPIDER_ENTITY, 0x270F19, 0x632FB7);
-	public static final ArrowContainer ICY_SPIDER_SUMMONING_ARROW = ArrowContainer.Summoning(ICY_SPIDER_ENTITY, 0x045480, 0x3CFEFB);
-	public static final ArrowContainer SLIME_SPIDER_SUMMONING_ARROW = ArrowContainer.Summoning(SLIME_SPIDER_ENTITY, 5349438, 11013646);
-	public static final ArrowContainer HEDGEHOG_SUMMONING_ARROW = ArrowContainer.Summoning(HEDGEHOG_ENTITY, 11440263, 7558239);
-	public static final ArrowContainer RACCOON_SUMMONING_ARROW = ArrowContainer.Summoning(RACCOON_ENTITY, 0x646464, 0x0B0B0B);
-	public static final ArrowContainer RED_PANDA_SUMMONING_ARROW = ArrowContainer.Summoning(RED_PANDA_ENTITY, 0xC35330, 0x0B0B0B);
-	public static final ArrowContainer JUMPING_SPIDER_SUMMONING_ARROW = ArrowContainer.Summoning(JUMPING_SPIDER_ENTITY, 0x281206, 0x3C0202);
-	public static final ArrowContainer RED_PHANTOM_SUMMONING_ARROW = ArrowContainer.Summoning(RED_PHANTOM_ENTITY, 0x881214, 0x00E5F9);
-	public static final ArrowContainer PIRANHA_SUMMONING_ARROW = ArrowContainer.Summoning(PIRANHA_ENTITY, 4877153, 11762012);
-	public static final ArrowContainer TROPICAL_SLIME_SUMMONING_ARROW = ArrowContainer.Summoning(TROPICAL_SLIME_ENTITY, 0x8FD3FF, 0x345C7A);
-	public static final ArrowContainer PINK_SLIME_SUMMONING_ARROW = ArrowContainer.Summoning(PINK_SLIME_ENTITY, 0xE0A3EE, 0xB85ECE);
-	public static final ArrowContainer SLIME_CHICKEN_SUMMONING_ARROW = ArrowContainer.Summoning(SLIME_CHICKEN_ENTITY, 5349438, 0xFF0000);
-	public static final ArrowContainer SLIME_COW_SUMMONING_ARROW = ArrowContainer.Summoning(SLIME_COW_ENTITY, 5349438, 0x3F3024);
-	public static final ArrowContainer SLIME_HORSE_SUMMONING_ARROW = ArrowContainer.Summoning(SLIME_HORSE_ENTITY, 5349438, 0xCFC700);
-	public static final ArrowContainer FANCY_CHICKEN_SUMMONING_ARROW = ArrowContainer.Summoning(FANCY_CHICKEN_ENTITY, 0xB788CB, 0xF7B035);
-	public static final ArrowContainer BLUE_MOOSHROOM_SUMMONING_ARROW = ArrowContainer.Summoning(BLUE_MOOSHROOM_ENTITY, 0x0D6794, 0x929292);
-	public static final ArrowContainer NETHER_MOOSHROOM_SUMMONING_ARROW = ArrowContainer.Summoning(NETHER_MOOSHROOM_ENTITY, 0x871116, 0xFF6500);
-	public static final ArrowContainer MOOBLOOM_SUMMONING_ARROW = ArrowContainer.Summoning(MOOBLOOM_ENTITY, 0xFDD500, 0xFDF7BA);
-	public static final ArrowContainer MOOLIP_SUMMONING_ARROW = ArrowContainer.Summoning(MOOLIP_ENTITY, 0xFFA9C2, 0xFFE4E4);
-	public static final ArrowContainer MOOBLOSSOM_SUMMONING_ARROW = ArrowContainer.Summoning(MOOBLOSSOM_ENTITY, 0xDF317C, 0x994369);
-	public static final ArrowContainer MOSSY_SHEEP_SUMMONING_ARROW = ArrowContainer.Summoning(MOSSY_SHEEP_ENTITY, 0xFFFFFF, 0x6C8031);
-	public static final ArrowContainer RAINBOW_SHEEP_SUMMONING_ARROW = ArrowContainer.Summoning(RAINBOW_SHEEP_ENTITY, 0xFFFFFF, 0xFFFFFF).generatedItemModel();
-	public static final ArrowContainer SLIME_CREEPER_SUMMONING_ARROW = ArrowContainer.Summoning(SLIME_CREEPER_ENTITY, 5349438, 0);
-	public static final ArrowContainer MOSSY_SKELETON_SUMMONING_ARROW = ArrowContainer.Summoning(MOSSY_SKELETON_ENTITY, 0xD6D7C6, 0x526121);
-	public static final ArrowContainer SLIMY_SKELETON_SUMMONING_ARROW = ArrowContainer.Summoning(SLIMY_SKELETON_ENTITY, 5349438, 0x494949);
-	public static final ArrowContainer SUNKEN_SKELETON_SUMMONING_ARROW = ArrowContainer.Summoning(SUNKEN_SKELETON_ENTITY, 0xD6D0C9, 0x98439E);
-	public static final ArrowContainer FROZEN_ZOMBIE_SUMMONING_ARROW = ArrowContainer.Summoning(FROZEN_ZOMBIE_ENTITY, 0x78BEDE, 0x5A8684);
-	public static final ArrowContainer JUNGLE_ZOMBIE_SUMMONING_ARROW = ArrowContainer.Summoning(JUNGLE_ZOMBIE_ENTITY, 0x67BC97, 0x5A8646);
-	public static final ArrowContainer SLIME_ZOMBIE_SUMMONING_ARROW = ArrowContainer.Summoning(SLIME_ZOMBIE_ENTITY, 5349438, 0x5A8646);
-	public static final ArrowContainer ICEOLOGER_SUMMONING_ARROW = ArrowContainer.Summoning(ICEOLOGER_ENTITY, 5349438, 0x5A8646);
-	public static final ArrowContainer MAGE_SUMMONING_ARROW = ArrowContainer.Summoning(MAGE_ENTITY, 5349438, 0x5A1949);
-	public static final ArrowContainer JOLLY_LLAMA_SUMMONING_ARROW = ArrowContainer.Summoning(JOLLY_LLAMA_ENTITY, 12623485, 0xFF0000);
 	//</editor-fold>
 
 	//Worldgen
@@ -4237,56 +3905,44 @@ public class ModBase implements ModInitializer {
 		registered = true;
 		OxidationScale.Initialize();
 		CrackedBlocks.Initialize();
-		//<editor-fold desc="Boats">
-		Register("mod_boat", MOD_BOAT_ENTITY, List.of(EN_US.Boat()));
-		Register("minecraft:chest_boat", CHEST_BOAT_ENTITY, List.of(EN_US.Boat(EN_US.Chest())));
-		Register("mod_chest_boat", MOD_CHEST_BOAT_ENTITY, List.of(EN_US.Boat(EN_US.Chest())));
-		//</editor-fold>
-		//<editor-fold desc="Minecarts">
-		Register("dispenser_minecart", DISPENSER_MINECART_ENTITY, List.of(EN_US.Dispenser(EN_US.with(EN_US.Minecart()))));
 		Register("dispenser_minecart", DISPENSER_MINECART_ITEM, List.of(EN_US.Dispenser(EN_US.with(EN_US.Minecart()))));
-		DispenserMinecartEntity.OverrideDispenserBehaviors();
-		//</editor-fold>
 		Register("woodcutting", WOODCUTTING_RECIPE_SERIALIZER);
-		//<editor-fold desc="Anvils">
-		Register("summoned_anvil", SUMMONED_ANVIL_ENTITY, List.of(EN_US.Anvil(EN_US.Summoned())));
-		//</editor-fold>
 		//<editor-fold desc="Acacia">
-		Register("minecraft:acacia_hanging_sign", "minecraft:acacia_wall_hanging_sign", ACACIA_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Acacia())));
-		Register("acacia_iron_hanging_sign", "acacia_iron_wall_hanging_sign", ACACIA_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Acacia(), EN_US.Chain(EN_US.Iron(EN_US.with())))));
-		Register("acacia_gold_hanging_sign", "acacia_gold_wall_hanging_sign", ACACIA_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Acacia(), EN_US.Chain(EN_US.Gold(EN_US.with())))));
-		Register("acacia_copper_hanging_sign", "acacia_copper_wall_hanging_sign", ACACIA_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Acacia(), EN_US.Chain(EN_US.Copper(EN_US.with())))));
-		Register("acacia_exposed_copper_hanging_sign", "acacia_exposed_copper_wall_hanging_sign", ACACIA_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Acacia(), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
-		Register("acacia_weathered_copper_hanging_sign", "acacia_weathered_copper_wall_hanging_sign", ACACIA_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Acacia(), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
-		Register("acacia_oxidized_copper_hanging_sign", "acacia_oxidized_copper_wall_hanging_sign", ACACIA_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Acacia(), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
-		Register("acacia_netherite_hanging_sign", "acacia_netherite_wall_hanging_sign", ACACIA_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Acacia(), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
-		Register("acacia_beehive", ACACIA_BEEHIVE, List.of(EN_US.Beehive(EN_US.Acacia())));
-		Register("acacia_bookshelf", ACACIA_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Acacia())));
-		Register("acacia_chiseled_bookshelf", ACACIA_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Acacia()))));
-		Register("acacia_crafting_table", ACACIA_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Acacia()))));
-		Register("acacia_ladder", ACACIA_LADDER, List.of(EN_US.Ladder(EN_US.Acacia())));
-		Register("acacia_woodcutter", ACACIA_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Acacia())));
-		Register("acacia_barrel", ACACIA_BARREL, List.of(EN_US.Barrel(EN_US.Acacia())));
-		Register("acacia_lectern", ACACIA_LECTERN, List.of(EN_US.Lectern(EN_US.Acacia())));
-		Register("acacia_powder_keg", ACACIA_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Acacia()))));
-		Register("acacia_log_slab", ACACIA_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Acacia()))));
-		Register("stripped_acacia_log_slab", STRIPPED_ACACIA_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Acacia(EN_US.Stripped())))));
+		Register("minecraft:acacia_hanging_sign", "minecraft:acacia_wall_hanging_sign", ACACIA_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Acacia)));
+		Register("acacia_iron_hanging_sign", "acacia_iron_wall_hanging_sign", ACACIA_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Acacia, EN_US.Chain(EN_US.Iron(EN_US.with())))));
+		Register("acacia_gold_hanging_sign", "acacia_gold_wall_hanging_sign", ACACIA_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Acacia, EN_US.Chain(EN_US.Gold(EN_US.with())))));
+		Register("acacia_copper_hanging_sign", "acacia_copper_wall_hanging_sign", ACACIA_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Acacia, EN_US.Chain(EN_US.Copper(EN_US.with())))));
+		Register("acacia_exposed_copper_hanging_sign", "acacia_exposed_copper_wall_hanging_sign", ACACIA_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Acacia, EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
+		Register("acacia_weathered_copper_hanging_sign", "acacia_weathered_copper_wall_hanging_sign", ACACIA_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Acacia, EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
+		Register("acacia_oxidized_copper_hanging_sign", "acacia_oxidized_copper_wall_hanging_sign", ACACIA_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Acacia, EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
+		Register("acacia_netherite_hanging_sign", "acacia_netherite_wall_hanging_sign", ACACIA_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Acacia, EN_US.Chain(EN_US.Netherite(EN_US.with())))));
+		Register("acacia_beehive", ACACIA_BEEHIVE, List.of(EN_US.Beehive(Words.Acacia)));
+		Register("acacia_bookshelf", ACACIA_BOOKSHELF, List.of(EN_US.Bookshelf(Words.Acacia)));
+		Register("acacia_chiseled_bookshelf", ACACIA_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(Words.Acacia))));
+		Register("acacia_crafting_table", ACACIA_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(Words.Acacia))));
+		Register("acacia_ladder", ACACIA_LADDER, List.of(EN_US.Ladder(Words.Acacia)));
+		Register("acacia_woodcutter", ACACIA_WOODCUTTER, List.of(EN_US.Woodcutter(Words.Acacia)));
+		Register("acacia_barrel", ACACIA_BARREL, List.of(EN_US.Barrel(Words.Acacia)));
+		Register("acacia_lectern", ACACIA_LECTERN, List.of(EN_US.Lectern(Words.Acacia)));
+		Register("acacia_powder_keg", ACACIA_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(Words.Acacia))));
+		Register("acacia_log_slab", ACACIA_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(Words.Acacia))));
+		Register("stripped_acacia_log_slab", STRIPPED_ACACIA_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Acacia(Words.Stripped)))));
 		StrippedBlockUtil.Register(ACACIA_LOG_SLAB, STRIPPED_ACACIA_LOG_SLAB);
-		Register("acacia_wood_slab", ACACIA_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Acacia()))));
-		Register("stripped_acacia_wood_slab", STRIPPED_ACACIA_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Acacia(EN_US.Stripped())))));
+		Register("acacia_wood_slab", ACACIA_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(Words.Acacia))));
+		Register("stripped_acacia_wood_slab", STRIPPED_ACACIA_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Acacia(Words.Stripped)))));
 		StrippedBlockUtil.Register(ACACIA_WOOD_SLAB, STRIPPED_ACACIA_WOOD_SLAB);
-		Register("light_green_acacia_leaves", LIGHT_GREEN_ACACIA_LEAVES, List.of(EN_US.Leaves(EN_US.Acacia(EN_US.Green(EN_US.Light())))));
-		Register("red_acacia_leaves", RED_ACACIA_LEAVES, List.of(EN_US.Leaves(EN_US.Acacia(EN_US.Red()))));
-		Register("yellow_acacia_leaves", YELLOW_ACACIA_LEAVES, List.of(EN_US.Leaves(EN_US.Acacia(EN_US.Yellow()))));
-		Register("minecraft:acacia_chest_boat", ACACIA_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(EN_US.Acacia()))));
-		Register("acacia_hammer", ACACIA_HAMMER, List.of(EN_US.Hammer(EN_US.Acacia())));
-		Register("acacia_torch", "acacia_wall_torch", ACACIA_TORCH, List.of(EN_US._Torch(EN_US.Acacia())));
-		Register("acacia_soul_torch", "acacia_soul_wall_torch", ACACIA_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Acacia()))));
-		Register("acacia_ender_torch", "acacia_ender_wall_torch", ACACIA_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Acacia()))));
+		Register("light_green_acacia_leaves", LIGHT_GREEN_ACACIA_LEAVES, List.of(EN_US.Leaves(EN_US.Acacia(EN_US.Green(Words.Light)))));
+		Register("red_acacia_leaves", RED_ACACIA_LEAVES, List.of(EN_US.Leaves(EN_US.Acacia(Words.Red))));
+		Register("yellow_acacia_leaves", YELLOW_ACACIA_LEAVES, List.of(EN_US.Leaves(EN_US.Acacia(Words.Yellow))));
+		Register("minecraft:acacia_chest_boat", ACACIA_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(Words.Acacia))));
+		Register("acacia_hammer", ACACIA_HAMMER, List.of(EN_US.Hammer(Words.Acacia)));
+		Register("acacia_torch", "acacia_wall_torch", ACACIA_TORCH, List.of(EN_US._Torch(Words.Acacia)));
+		Register("acacia_soul_torch", "acacia_soul_wall_torch", ACACIA_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(Words.Acacia))));
+		Register("acacia_ender_torch", "acacia_ender_wall_torch", ACACIA_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(Words.Acacia))));
 		Register("underwater_acacia_torch", "underwater_acacia_wall_torch", UNDERWATER_ACACIA_TORCH, List.of(EN_US._Torch(EN_US.Acacia(EN_US.Underwater()))));
-		Register("acacia_campfire", ACACIA_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Acacia())));
-		Register("acacia_soul_campfire", ACACIA_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Acacia()))));
-		Register("acacia_ender_campfire", ACACIA_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Acacia()))));
+		Register("acacia_campfire", ACACIA_CAMPFIRE, List.of(EN_US.Campfire(Words.Acacia)));
+		Register("acacia_soul_campfire", ACACIA_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(Words.Acacia))));
+		Register("acacia_ender_campfire", ACACIA_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(Words.Acacia))));
 		//</editor-fold>
 		//<editor-fold desc="Birch">
 		Register("minecraft:birch_hanging_sign", "minecraft:birch_wall_hanging_sign", BIRCH_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Birch())));
@@ -4307,15 +3963,15 @@ public class ModBase implements ModInitializer {
 		Register("birch_lectern", BIRCH_LECTERN, List.of(EN_US.Lectern(EN_US.Birch())));
 		Register("birch_powder_keg", BIRCH_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Birch()))));
 		Register("birch_log_slab", BIRCH_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Birch()))));
-		Register("stripped_birch_log_slab", STRIPPED_BIRCH_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Birch(EN_US.Stripped())))));
+		Register("stripped_birch_log_slab", STRIPPED_BIRCH_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Birch(Words.Stripped)))));
 		StrippedBlockUtil.Register(BIRCH_LOG_SLAB, STRIPPED_BIRCH_LOG_SLAB);
 		Register("birch_wood_slab", BIRCH_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Birch()))));
-		Register("stripped_birch_wood_slab", STRIPPED_BIRCH_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Birch(EN_US.Stripped())))));
+		Register("stripped_birch_wood_slab", STRIPPED_BIRCH_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Birch(Words.Stripped)))));
 		StrippedBlockUtil.Register(BIRCH_WOOD_SLAB, STRIPPED_BIRCH_WOOD_SLAB);
-		Register("light_green_birch_leaves", LIGHT_GREEN_BIRCH_LEAVES, List.of(EN_US.Leaves(EN_US.Birch(EN_US.Green(EN_US.Light())))));
-		Register("red_birch_leaves", RED_BIRCH_LEAVES, List.of(EN_US.Leaves(EN_US.Birch(EN_US.Red()))));
-		Register("yellow_birch_leaves", YELLOW_BIRCH_LEAVES, List.of(EN_US.Leaves(EN_US.Birch(EN_US.Yellow()))));
-		Register("white_birch_leaves", WHITE_BIRCH_LEAVES, List.of(EN_US.Leaves(EN_US.Birch(EN_US.White()))));
+		Register("light_green_birch_leaves", LIGHT_GREEN_BIRCH_LEAVES, List.of(EN_US.Leaves(EN_US.Birch(EN_US.Green(Words.Light)))));
+		Register("red_birch_leaves", RED_BIRCH_LEAVES, List.of(EN_US.Leaves(EN_US.Birch(Words.Red))));
+		Register("yellow_birch_leaves", YELLOW_BIRCH_LEAVES, List.of(EN_US.Leaves(EN_US.Birch(Words.Yellow))));
+		Register("white_birch_leaves", WHITE_BIRCH_LEAVES, List.of(EN_US.Leaves(EN_US.Birch(Words.White))));
 		Register("minecraft:birch_chest_boat", BIRCH_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(EN_US.Birch()))));
 		Register("birch_hammer", BIRCH_HAMMER, List.of(EN_US.Hammer(EN_US.Birch())));
 		Register("birch_torch", "birch_wall_torch", BIRCH_TORCH, List.of(EN_US._Torch(EN_US.Birch())));
@@ -4345,10 +4001,10 @@ public class ModBase implements ModInitializer {
 		Register("dark_oak_lectern", DARK_OAK_LECTERN, List.of(EN_US.Lectern(EN_US.Oak(EN_US.Dark()))));
 		Register("dark_oak_powder_keg", DARK_OAK_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Oak(EN_US.Dark())))));
 		Register("dark_oak_log_slab", DARK_OAK_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Oak(EN_US.Dark())))));
-		Register("stripped_dark_oak_log_slab", STRIPPED_DARK_OAK_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Oak(EN_US.Dark(EN_US.Stripped()))))));
+		Register("stripped_dark_oak_log_slab", STRIPPED_DARK_OAK_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Oak(EN_US.Dark(Words.Stripped))))));
 		StrippedBlockUtil.Register(DARK_OAK_LOG_SLAB, STRIPPED_DARK_OAK_LOG_SLAB);
 		Register("dark_oak_wood_slab", DARK_OAK_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Oak(EN_US.Dark())))));
-		Register("stripped_dark_oak_wood_slab", STRIPPED_DARK_OAK_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Oak(EN_US.Dark(EN_US.Stripped()))))));
+		Register("stripped_dark_oak_wood_slab", STRIPPED_DARK_OAK_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Oak(EN_US.Dark(Words.Stripped))))));
 		StrippedBlockUtil.Register(DARK_OAK_WOOD_SLAB, STRIPPED_DARK_OAK_WOOD_SLAB);
 		Register("minecraft:dark_oak_chest_boat", DARK_OAK_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(EN_US.Oak(EN_US.Dark())))));
 		Register("dark_oak_hammer", DARK_OAK_HAMMER, List.of(EN_US.Hammer(EN_US.Oak(EN_US.Dark()))));
@@ -4361,65 +4017,65 @@ public class ModBase implements ModInitializer {
 		Register("dark_oak_ender_campfire", DARK_OAK_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Oak(EN_US.Dark())))));
 		//</editor-fold>
 		//<editor-fold desc="Jungle">
-		Register("minecraft:jungle_hanging_sign", "minecraft:jungle_wall_hanging_sign", JUNGLE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Jungle())));
-		Register("jungle_iron_hanging_sign", "jungle_iron_wall_hanging_sign", JUNGLE_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Jungle(), EN_US.Chain(EN_US.Iron(EN_US.with())))));
-		Register("jungle_gold_hanging_sign", "jungle_gold_wall_hanging_sign", JUNGLE_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Jungle(), EN_US.Chain(EN_US.Gold(EN_US.with())))));
-		Register("jungle_copper_hanging_sign", "jungle_copper_wall_hanging_sign", JUNGLE_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Jungle(), EN_US.Chain(EN_US.Copper(EN_US.with())))));
-		Register("jungle_exposed_copper_hanging_sign", "jungle_exposed_copper_wall_hanging_sign", JUNGLE_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Jungle(), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
-		Register("jungle_weathered_copper_hanging_sign", "jungle_weathered_copper_wall_hanging_sign", JUNGLE_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Jungle(), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
-		Register("jungle_oxidized_copper_hanging_sign", "jungle_oxidized_copper_wall_hanging_sign", JUNGLE_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Jungle(), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
-		Register("jungle_netherite_hanging_sign", "jungle_netherite_wall_hanging_sign", JUNGLE_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Jungle(), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
-		Register("jungle_beehive", JUNGLE_BEEHIVE, List.of(EN_US.Beehive(EN_US.Jungle())));
-		Register("jungle_bookshelf", JUNGLE_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Jungle())));
-		Register("jungle_chiseled_bookshelf", JUNGLE_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Jungle()))));
-		Register("jungle_crafting_table", JUNGLE_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Jungle()))));
-		Register("jungle_ladder", JUNGLE_LADDER, List.of(EN_US.Ladder(EN_US.Jungle())));
-		Register("jungle_woodcutter", JUNGLE_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Jungle())));
-		Register("jungle_barrel", JUNGLE_BARREL, List.of(EN_US.Barrel(EN_US.Jungle())));
-		Register("jungle_lectern", JUNGLE_LECTERN, List.of(EN_US.Lectern(EN_US.Jungle())));
-		Register("jungle_powder_keg", JUNGLE_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Jungle()))));
-		Register("jungle_log_slab", JUNGLE_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Jungle()))));
-		Register("stripped_jungle_log_slab", STRIPPED_JUNGLE_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Jungle(EN_US.Stripped())))));
+		Register("minecraft:jungle_hanging_sign", "minecraft:jungle_wall_hanging_sign", JUNGLE_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Jungle)));
+		Register("jungle_iron_hanging_sign", "jungle_iron_wall_hanging_sign", JUNGLE_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Jungle, EN_US.Chain(EN_US.Iron(EN_US.with())))));
+		Register("jungle_gold_hanging_sign", "jungle_gold_wall_hanging_sign", JUNGLE_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Jungle, EN_US.Chain(EN_US.Gold(EN_US.with())))));
+		Register("jungle_copper_hanging_sign", "jungle_copper_wall_hanging_sign", JUNGLE_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Jungle, EN_US.Chain(EN_US.Copper(EN_US.with())))));
+		Register("jungle_exposed_copper_hanging_sign", "jungle_exposed_copper_wall_hanging_sign", JUNGLE_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Jungle, EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
+		Register("jungle_weathered_copper_hanging_sign", "jungle_weathered_copper_wall_hanging_sign", JUNGLE_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Jungle, EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
+		Register("jungle_oxidized_copper_hanging_sign", "jungle_oxidized_copper_wall_hanging_sign", JUNGLE_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Jungle, EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
+		Register("jungle_netherite_hanging_sign", "jungle_netherite_wall_hanging_sign", JUNGLE_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Jungle, EN_US.Chain(EN_US.Netherite(EN_US.with())))));
+		Register("jungle_beehive", JUNGLE_BEEHIVE, List.of(EN_US.Beehive(Words.Jungle)));
+		Register("jungle_bookshelf", JUNGLE_BOOKSHELF, List.of(EN_US.Bookshelf(Words.Jungle)));
+		Register("jungle_chiseled_bookshelf", JUNGLE_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(Words.Jungle))));
+		Register("jungle_crafting_table", JUNGLE_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(Words.Jungle))));
+		Register("jungle_ladder", JUNGLE_LADDER, List.of(EN_US.Ladder(Words.Jungle)));
+		Register("jungle_woodcutter", JUNGLE_WOODCUTTER, List.of(EN_US.Woodcutter(Words.Jungle)));
+		Register("jungle_barrel", JUNGLE_BARREL, List.of(EN_US.Barrel(Words.Jungle)));
+		Register("jungle_lectern", JUNGLE_LECTERN, List.of(EN_US.Lectern(Words.Jungle)));
+		Register("jungle_powder_keg", JUNGLE_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(Words.Jungle))));
+		Register("jungle_log_slab", JUNGLE_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(Words.Jungle))));
+		Register("stripped_jungle_log_slab", STRIPPED_JUNGLE_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Jungle(Words.Stripped)))));
 		StrippedBlockUtil.Register(JUNGLE_LOG_SLAB, STRIPPED_JUNGLE_LOG_SLAB);
-		Register("jungle_wood_slab", JUNGLE_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Jungle()))));
-		Register("stripped_jungle_wood_slab", STRIPPED_JUNGLE_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Jungle(EN_US.Stripped())))));
+		Register("jungle_wood_slab", JUNGLE_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(Words.Jungle))));
+		Register("stripped_jungle_wood_slab", STRIPPED_JUNGLE_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Jungle(Words.Stripped)))));
 		StrippedBlockUtil.Register(JUNGLE_WOOD_SLAB, STRIPPED_JUNGLE_WOOD_SLAB);
-		Register("minecraft:jungle_chest_boat", JUNGLE_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(EN_US.Jungle()))));
-		Register("jungle_hammer", JUNGLE_HAMMER, List.of(EN_US.Hammer(EN_US.Jungle())));
-		Register("jungle_torch", "jungle_wall_torch", JUNGLE_TORCH, List.of(EN_US._Torch(EN_US.Jungle())));
-		Register("jungle_soul_torch", "jungle_soul_wall_torch", JUNGLE_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Jungle()))));
-		Register("jungle_ender_torch", "jungle_ender_wall_torch", JUNGLE_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Jungle()))));
+		Register("minecraft:jungle_chest_boat", JUNGLE_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(Words.Jungle))));
+		Register("jungle_hammer", JUNGLE_HAMMER, List.of(EN_US.Hammer(Words.Jungle)));
+		Register("jungle_torch", "jungle_wall_torch", JUNGLE_TORCH, List.of(EN_US._Torch(Words.Jungle)));
+		Register("jungle_soul_torch", "jungle_soul_wall_torch", JUNGLE_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(Words.Jungle))));
+		Register("jungle_ender_torch", "jungle_ender_wall_torch", JUNGLE_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(Words.Jungle))));
 		Register("underwater_jungle_torch", "underwater_jungle_wall_torch", UNDERWATER_JUNGLE_TORCH, List.of(EN_US._Torch(EN_US.Jungle(EN_US.Underwater()))));
-		Register("jungle_campfire", JUNGLE_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Jungle())));
-		Register("jungle_soul_campfire", JUNGLE_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Jungle()))));
-		Register("jungle_ender_campfire", JUNGLE_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Jungle()))));
+		Register("jungle_campfire", JUNGLE_CAMPFIRE, List.of(EN_US.Campfire(Words.Jungle)));
+		Register("jungle_soul_campfire", JUNGLE_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(Words.Jungle))));
+		Register("jungle_ender_campfire", JUNGLE_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(Words.Jungle))));
 		//</editor-fold>
 		//<editor-fold desc="Oak">
-		Register("minecraft:oak_hanging_sign", "minecraft:oak_wall_hanging_sign", OAK_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Oak())));
-		Register("oak_iron_hanging_sign", "oak_iron_wall_hanging_sign", OAK_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Oak(), EN_US.Chain(EN_US.Iron(EN_US.with())))));
-		Register("oak_gold_hanging_sign", "oak_gold_wall_hanging_sign", OAK_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Oak(), EN_US.Chain(EN_US.Gold(EN_US.with())))));
-		Register("oak_copper_hanging_sign", "oak_copper_wall_hanging_sign", OAK_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Oak(), EN_US.Chain(EN_US.Copper(EN_US.with())))));
-		Register("oak_exposed_copper_hanging_sign", "oak_exposed_copper_wall_hanging_sign", OAK_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Oak(), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
-		Register("oak_weathered_copper_hanging_sign", "oak_weathered_copper_wall_hanging_sign", OAK_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Oak(), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
-		Register("oak_oxidized_copper_hanging_sign", "oak_oxidized_copper_wall_hanging_sign", OAK_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Oak(), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
-		Register("oak_netherite_hanging_sign", "oak_netherite_wall_hanging_sign", OAK_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Oak(), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
-		Register("minecraft:chiseled_bookshelf", CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled())));
-		Register("woodcutter", WOODCUTTER, List.of(EN_US.Woodcutter()));
-		Register("oak_barrel", OAK_BARREL, List.of(EN_US.Barrel(EN_US.Oak())));
-		Register("oak_powder_keg", OAK_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Oak()))));
-		Register("oak_log_slab", OAK_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Oak()))));
-		Register("stripped_oak_log_slab", STRIPPED_OAK_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Oak(EN_US.Stripped())))));
+		Register("minecraft:oak_hanging_sign", "minecraft:oak_wall_hanging_sign", OAK_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Oak)));
+		Register("oak_iron_hanging_sign", "oak_iron_wall_hanging_sign", OAK_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Oak, EN_US.Chain(EN_US.Iron(EN_US.with())))));
+		Register("oak_gold_hanging_sign", "oak_gold_wall_hanging_sign", OAK_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Oak, EN_US.Chain(EN_US.Gold(EN_US.with())))));
+		Register("oak_copper_hanging_sign", "oak_copper_wall_hanging_sign", OAK_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Oak, EN_US.Chain(EN_US.Copper(EN_US.with())))));
+		Register("oak_exposed_copper_hanging_sign", "oak_exposed_copper_wall_hanging_sign", OAK_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Oak, EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
+		Register("oak_weathered_copper_hanging_sign", "oak_weathered_copper_wall_hanging_sign", OAK_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Oak, EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
+		Register("oak_oxidized_copper_hanging_sign", "oak_oxidized_copper_wall_hanging_sign", OAK_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Oak, EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
+		Register("oak_netherite_hanging_sign", "oak_netherite_wall_hanging_sign", OAK_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Oak, EN_US.Chain(EN_US.Netherite(EN_US.with())))));
+		Register("minecraft:chiseled_bookshelf", CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(Words.Chiseled)));
+		Register("woodcutter", WOODCUTTER, List.of(Words.Woodcutter));
+		Register("oak_barrel", OAK_BARREL, List.of(EN_US.Barrel(Words.Oak)));
+		Register("oak_powder_keg", OAK_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(Words.Oak))));
+		Register("oak_log_slab", OAK_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(Words.Oak))));
+		Register("stripped_oak_log_slab", STRIPPED_OAK_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Oak(Words.Stripped)))));
 		StrippedBlockUtil.Register(OAK_LOG_SLAB, STRIPPED_OAK_LOG_SLAB);
-		Register("oak_wood_slab", OAK_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Oak()))));
-		Register("stripped_oak_wood_slab", STRIPPED_OAK_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Oak(EN_US.Stripped())))));
+		Register("oak_wood_slab", OAK_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(Words.Oak))));
+		Register("stripped_oak_wood_slab", STRIPPED_OAK_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Oak(Words.Stripped)))));
 		StrippedBlockUtil.Register(OAK_WOOD_SLAB, STRIPPED_OAK_WOOD_SLAB);
-		Register("blue_green_oak_leaves", BLUE_GREEN_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(EN_US.Green(EN_US.Blue())))));
-		Register("light_green_oak_leaves", LIGHT_GREEN_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(EN_US.Green(EN_US.Light())))));
-		Register("red_oak_leaves", RED_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(EN_US.Red()))));
-		Register("white_oak_leaves", WHITE_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(EN_US.White()))));
-		Register("yellow_oak_leaves", YELLOW_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(EN_US.Yellow()))));
-		Register("minecraft:oak_chest_boat", OAK_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(EN_US.Oak()))));
-		Register("oak_hammer", OAK_HAMMER, List.of(EN_US.Hammer(EN_US.Oak())));
+		Register("blue_green_oak_leaves", BLUE_GREEN_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(EN_US.Green(Words.Blue)))));
+		Register("light_green_oak_leaves", LIGHT_GREEN_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(EN_US.Green(Words.Light)))));
+		Register("red_oak_leaves", RED_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(Words.Red))));
+		Register("white_oak_leaves", WHITE_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(Words.White))));
+		Register("yellow_oak_leaves", YELLOW_OAK_LEAVES, List.of(EN_US.Leaves(EN_US.Oak(Words.Yellow))));
+		Register("minecraft:oak_chest_boat", OAK_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(Words.Oak))));
+		Register("oak_hammer", OAK_HAMMER, List.of(EN_US.Hammer(Words.Oak)));
 		//</editor-fold>
 		//<editor-fold desc="Spruce">
 		Register("minecraft:spruce_hanging_sign", "minecraft:spruce_wall_hanging_sign", SPRUCE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Spruce())));
@@ -4439,12 +4095,12 @@ public class ModBase implements ModInitializer {
 		Register("spruce_lectern", SPRUCE_LECTERN, List.of(EN_US.Lectern(EN_US.Spruce())));
 		Register("spruce_powder_keg", SPRUCE_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Spruce()))));
 		Register("spruce_log_slab", SPRUCE_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Spruce()))));
-		Register("stripped_spruce_log_slab", STRIPPED_SPRUCE_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Spruce(EN_US.Stripped())))));
+		Register("stripped_spruce_log_slab", STRIPPED_SPRUCE_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Spruce(Words.Stripped)))));
 		StrippedBlockUtil.Register(SPRUCE_LOG_SLAB, STRIPPED_SPRUCE_LOG_SLAB);
 		Register("spruce_wood_slab", SPRUCE_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Spruce()))));
-		Register("stripped_spruce_wood_slab", STRIPPED_SPRUCE_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Spruce(EN_US.Stripped())))));
+		Register("stripped_spruce_wood_slab", STRIPPED_SPRUCE_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Spruce(Words.Stripped)))));
 		StrippedBlockUtil.Register(SPRUCE_WOOD_SLAB, STRIPPED_SPRUCE_WOOD_SLAB);
-		Register("white_spruce_leaves", WHITE_SPRUCE_LEAVES, List.of(EN_US.Leaves(EN_US.Spruce(EN_US.White()))));
+		Register("white_spruce_leaves", WHITE_SPRUCE_LEAVES, List.of(EN_US.Leaves(EN_US.Spruce(Words.White))));
 		Register("minecraft:spruce_chest_boat", SPRUCE_CHEST_BOAT, List.of(EN_US.Boat(EN_US.Chest(EN_US.Spruce()))));
 		Register("spruce_hammer", SPRUCE_HAMMER, List.of(EN_US.Hammer(EN_US.Spruce())));
 		Register("spruce_torch", "spruce_wall_torch", SPRUCE_TORCH, List.of(EN_US._Torch(EN_US.Spruce())));
@@ -4474,13 +4130,13 @@ public class ModBase implements ModInitializer {
 		Register("crimson_lectern", CRIMSON_LECTERN, List.of(EN_US.Lectern(EN_US.Crimson())));
 		Register("crimson_powder_keg", CRIMSON_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Crimson()))));
 		Register("crimson_stem_slab", CRIMSON_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Crimson()))));
-		Register("stripped_crimson_stem_slab", STRIPPED_CRIMSON_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Crimson(EN_US.Stripped())))));
+		Register("stripped_crimson_stem_slab", STRIPPED_CRIMSON_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Crimson(Words.Stripped)))));
 		StrippedBlockUtil.Register(CRIMSON_STEM_SLAB, STRIPPED_CRIMSON_STEM_SLAB);
 		Register("crimson_hyphae_slab", CRIMSON_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Crimson()))));
-		Register("stripped_crimson_hyphae_slab", STRIPPED_CRIMSON_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Crimson(EN_US.Stripped())))));
+		Register("stripped_crimson_hyphae_slab", STRIPPED_CRIMSON_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Crimson(Words.Stripped)))));
 		StrippedBlockUtil.Register(CRIMSON_HYPHAE_SLAB, STRIPPED_CRIMSON_HYPHAE_SLAB);
 		Register("crimson_hammer", CRIMSON_HAMMER, List.of(EN_US.Hammer(EN_US.Crimson())));
-		Register("nether_wart_slab", NETHER_WART_SLAB, List.of(EN_US.Slab(EN_US.Wart(EN_US.Nether()))));
+		Register("nether_wart_slab", NETHER_WART_SLAB, List.of(EN_US.Slab(EN_US.Wart(Words.Nether))));
 		Register("crimson_torch", "crimson_wall_torch", CRIMSON_TORCH, List.of(EN_US._Torch(EN_US.Crimson())));
 		Register("crimson_soul_torch", "crimson_soul_wall_torch", CRIMSON_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Crimson()))));
 		Register("crimson_ender_torch", "crimson_ender_wall_torch", CRIMSON_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Crimson()))));
@@ -4508,10 +4164,10 @@ public class ModBase implements ModInitializer {
 		Register("warped_lectern", WARPED_LECTERN, List.of(EN_US.Lectern(EN_US.Warped())));
 		Register("warped_powder_keg", WARPED_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Warped()))));
 		Register("warped_stem_slab", WARPED_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Warped()))));
-		Register("stripped_warped_stem_slab", STRIPPED_WARPED_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Warped(EN_US.Stripped())))));
+		Register("stripped_warped_stem_slab", STRIPPED_WARPED_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Warped(Words.Stripped)))));
 		StrippedBlockUtil.Register(WARPED_STEM_SLAB, STRIPPED_WARPED_STEM_SLAB);
 		Register("warped_hyphae_slab", WARPED_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Warped()))));
-		Register("stripped_warped_hyphae_slab", STRIPPED_WARPED_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Warped(EN_US.Stripped())))));
+		Register("stripped_warped_hyphae_slab", STRIPPED_WARPED_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Warped(Words.Stripped)))));
 		StrippedBlockUtil.Register(WARPED_HYPHAE_SLAB, STRIPPED_WARPED_HYPHAE_SLAB);
 		Register("warped_hammer", WARPED_HAMMER, List.of(EN_US.Hammer(EN_US.Warped())));
 		Register("warped_wart", WARPED_WART, List.of(EN_US.Wart(EN_US.Warped())));
@@ -4544,7 +4200,7 @@ public class ModBase implements ModInitializer {
 		Register("ender_campfire", ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender())));
 		//</editor-fold>
 		//<editor-fold desc="Stone">
-		Register("mossy_chiseled_stone_bricks", MOSSY_CHISELED_STONE_BRICKS, List.of(EN_US.Bricks(EN_US.Stone(EN_US.Chiseled(EN_US.Mossy())))));
+		Register("mossy_chiseled_stone_bricks", MOSSY_CHISELED_STONE_BRICKS, List.of(EN_US.Bricks(EN_US.Stone(EN_US.Chiseled(Words.Mossy)))));
 		Register("stone_tiles", STONE_TILES, List.of(EN_US.Tiles(EN_US.Stone())));
 		Register("stone_tile_stairs", STONE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Stone()))));
 		Register("stone_tile_slab", STONE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Stone()))));
@@ -4558,26 +4214,26 @@ public class ModBase implements ModInitializer {
 		Register("cut_polished_andesite_stairs", CUT_POLISHED_ANDESITE_STAIRS, List.of(EN_US.Stairs(EN_US.Andesite(EN_US.Polished(EN_US.Cut())))));
 		Register("cut_polished_andesite_slab", CUT_POLISHED_ANDESITE_SLAB, List.of(EN_US.Slab(EN_US.Andesite(EN_US.Polished(EN_US.Cut())))));
 		Register("cut_polished_andesite_wall", CUT_POLISHED_ANDESITE_WALL, List.of(EN_US.Wall(EN_US.Andesite(EN_US.Polished(EN_US.Cut())))));
-		Register("andesite_bricks", ANDESITE_BRICKS, List.of(EN_US.Bricks(EN_US.Andesite())));
-		Register("andesite_brick_stairs", ANDESITE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Andesite()))));
-		Register("andesite_brick_slab", ANDESITE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Andesite()))));
-		Register("andesite_brick_wall", ANDESITE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Andesite()))));
-		Register("chiseled_andesite_bricks", CHISELED_ANDESITE_BRICKS, List.of(EN_US.Bricks(EN_US.Andesite(EN_US.Chiseled()))));
-		Register("andesite_tiles", ANDESITE_TILES, List.of(EN_US.Tiles(EN_US.Andesite())));
-		Register("andesite_tile_stairs", ANDESITE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Andesite()))));
-		Register("andesite_tile_slab", ANDESITE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Andesite()))));
-		Register("andesite_tile_wall", ANDESITE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Andesite()))));
+		Register("andesite_bricks", ANDESITE_BRICKS, List.of(EN_US.Bricks(Words.Andesite)));
+		Register("andesite_brick_stairs", ANDESITE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(Words.Andesite))));
+		Register("andesite_brick_slab", ANDESITE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(Words.Andesite))));
+		Register("andesite_brick_wall", ANDESITE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(Words.Andesite))));
+		Register("chiseled_andesite_bricks", CHISELED_ANDESITE_BRICKS, List.of(EN_US.Bricks(EN_US.Andesite(Words.Chiseled))));
+		Register("andesite_tiles", ANDESITE_TILES, List.of(EN_US.Tiles(Words.Andesite)));
+		Register("andesite_tile_stairs", ANDESITE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(Words.Andesite))));
+		Register("andesite_tile_slab", ANDESITE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(Words.Andesite))));
+		Register("andesite_tile_wall", ANDESITE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(Words.Andesite))));
 		//</editor-fold>
 		//<editor-fold desc="Deepslate">
 		Register("minecraft:reinforced_deepslate", REINFORCED_DEEPSLATE, List.of(EN_US.Deepslate(EN_US.Reinforced())));
-		Register("mossy_cobbled_deepslate", MOSSY_COBBLED_DEEPSLATE, List.of(EN_US.Deepslate(EN_US.Cobbled(EN_US.Mossy()))));
-		Register("mossy_cobbled_deepslate_stairs", MOSSY_COBBLED_DEEPSLATE_STAIRS, List.of(EN_US.Stairs(EN_US.Deepslate(EN_US.Cobbled(EN_US.Mossy())))));
-		Register("mossy_cobbled_deepslate_slab", MOSSY_COBBLED_DEEPSLATE_SLAB, List.of(EN_US.Slab(EN_US.Deepslate(EN_US.Cobbled(EN_US.Mossy())))));
-		Register("mossy_cobbled_deepslate_wall", MOSSY_COBBLED_DEEPSLATE_WALL, List.of(EN_US.Wall(EN_US.Deepslate(EN_US.Cobbled(EN_US.Mossy())))));
-		Register("mossy_deepslate_bricks", MOSSY_DEEPSLATE_BRICKS, List.of(EN_US.Bricks(EN_US.Deepslate(EN_US.Mossy()))));
-		Register("mossy_deepslate_brick_stairs", MOSSY_DEEPSLATE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Deepslate(EN_US.Mossy())))));
-		Register("mossy_deepslate_brick_slab", MOSSY_DEEPSLATE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Deepslate(EN_US.Mossy())))));
-		Register("mossy_deepslate_brick_wall", MOSSY_DEEPSLATE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Deepslate(EN_US.Mossy())))));
+		Register("mossy_cobbled_deepslate", MOSSY_COBBLED_DEEPSLATE, List.of(EN_US.Deepslate(EN_US.Cobbled(Words.Mossy))));
+		Register("mossy_cobbled_deepslate_stairs", MOSSY_COBBLED_DEEPSLATE_STAIRS, List.of(EN_US.Stairs(EN_US.Deepslate(EN_US.Cobbled(Words.Mossy)))));
+		Register("mossy_cobbled_deepslate_slab", MOSSY_COBBLED_DEEPSLATE_SLAB, List.of(EN_US.Slab(EN_US.Deepslate(EN_US.Cobbled(Words.Mossy)))));
+		Register("mossy_cobbled_deepslate_wall", MOSSY_COBBLED_DEEPSLATE_WALL, List.of(EN_US.Wall(EN_US.Deepslate(EN_US.Cobbled(Words.Mossy)))));
+		Register("mossy_deepslate_bricks", MOSSY_DEEPSLATE_BRICKS, List.of(EN_US.Bricks(EN_US.Deepslate(Words.Mossy))));
+		Register("mossy_deepslate_brick_stairs", MOSSY_DEEPSLATE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Deepslate(Words.Mossy)))));
+		Register("mossy_deepslate_brick_slab", MOSSY_DEEPSLATE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Deepslate(Words.Mossy)))));
+		Register("mossy_deepslate_brick_wall", MOSSY_DEEPSLATE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Deepslate(Words.Mossy)))));
 		//</editor-fold>
 		//<editor-fold desc="Diorite">
 		Register("polished_diorite_wall", POLISHED_DIORITE_WALL, List.of(EN_US.Wall(EN_US.Diorite(EN_US.Polished()))));
@@ -4585,33 +4241,33 @@ public class ModBase implements ModInitializer {
 		Register("cut_polished_diorite_stairs", CUT_POLISHED_DIORITE_STAIRS, List.of(EN_US.Stairs(EN_US.Diorite(EN_US.Polished(EN_US.Cut())))));
 		Register("cut_polished_diorite_slab", CUT_POLISHED_DIORITE_SLAB, List.of(EN_US.Slab(EN_US.Diorite(EN_US.Polished(EN_US.Cut())))));
 		Register("cut_polished_diorite_wall", CUT_POLISHED_DIORITE_WALL, List.of(EN_US.Wall(EN_US.Diorite(EN_US.Polished(EN_US.Cut())))));
-		Register("diorite_bricks", DIORITE_BRICKS, List.of(EN_US.Bricks(EN_US.Diorite())));
-		Register("diorite_brick_stairs", DIORITE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Diorite()))));
-		Register("diorite_brick_slab", DIORITE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Diorite()))));
-		Register("diorite_brick_wall", DIORITE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Diorite()))));
-		Register("chiseled_diorite_bricks", CHISELED_DIORITE_BRICKS, List.of(EN_US.Bricks(EN_US.Diorite(EN_US.Chiseled()))));
-		Register("diorite_tiles", DIORITE_TILES, List.of(EN_US.Tiles(EN_US.Diorite())));
-		Register("diorite_tile_stairs", DIORITE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Diorite()))));
-		Register("diorite_tile_slab", DIORITE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Diorite()))));
-		Register("diorite_tile_wall", DIORITE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Diorite()))));
+		Register("diorite_bricks", DIORITE_BRICKS, List.of(EN_US.Bricks(Words.Diorite)));
+		Register("diorite_brick_stairs", DIORITE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(Words.Diorite))));
+		Register("diorite_brick_slab", DIORITE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(Words.Diorite))));
+		Register("diorite_brick_wall", DIORITE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(Words.Diorite))));
+		Register("chiseled_diorite_bricks", CHISELED_DIORITE_BRICKS, List.of(EN_US.Bricks(EN_US.Diorite(Words.Chiseled))));
+		Register("diorite_tiles", DIORITE_TILES, List.of(EN_US.Tiles(Words.Diorite)));
+		Register("diorite_tile_stairs", DIORITE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(Words.Diorite))));
+		Register("diorite_tile_slab", DIORITE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(Words.Diorite))));
+		Register("diorite_tile_wall", DIORITE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(Words.Diorite))));
 		//</editor-fold>
 		//<editor-fold desc="Granite">
 		Register("polished_granite_wall", POLISHED_GRANITE_WALL, List.of(EN_US.Wall(EN_US.Granite(EN_US.Polished()))));
-		Register("chiseled_granite", CHISELED_GRANITE, List.of(EN_US.Granite(EN_US.Chiseled())));
-		Register("chiseled_granite_slab", CHISELED_GRANITE_SLAB, List.of(EN_US.Slab(EN_US.Granite(EN_US.Chiseled()))));
+		Register("chiseled_granite", CHISELED_GRANITE, List.of(EN_US.Granite(Words.Chiseled)));
+		Register("chiseled_granite_slab", CHISELED_GRANITE_SLAB, List.of(EN_US.Slab(EN_US.Granite(Words.Chiseled))));
 		Register("cut_polished_granite", CUT_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(EN_US.Cut()))));
 		Register("cut_polished_granite_stairs", CUT_POLISHED_GRANITE_STAIRS, List.of(EN_US.Stairs(EN_US.Granite(EN_US.Polished(EN_US.Cut())))));
 		Register("cut_polished_granite_slab", CUT_POLISHED_GRANITE_SLAB, List.of(EN_US.Slab(EN_US.Granite(EN_US.Polished(EN_US.Cut())))));
 		Register("cut_polished_granite_wall", CUT_POLISHED_GRANITE_WALL, List.of(EN_US.Wall(EN_US.Granite(EN_US.Polished(EN_US.Cut())))));
-		Register("granite_bricks", GRANITE_BRICKS, List.of(EN_US.Bricks(EN_US.Granite())));
-		Register("granite_brick_stairs", GRANITE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Granite()))));
-		Register("granite_brick_slab", GRANITE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Granite()))));
-		Register("granite_brick_wall", GRANITE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Granite()))));
-		Register("chiseled_granite_bricks", CHISELED_GRANITE_BRICKS, List.of(EN_US.Bricks(EN_US.Granite(EN_US.Chiseled()))));
-		Register("granite_tiles", GRANITE_TILES, List.of(EN_US.Tiles(EN_US.Granite())));
-		Register("granite_tile_stairs", GRANITE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Granite()))));
-		Register("granite_tile_slab", GRANITE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Granite()))));
-		Register("granite_tile_wall", GRANITE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Granite()))));
+		Register("granite_bricks", GRANITE_BRICKS, List.of(EN_US.Bricks(Words.Granite)));
+		Register("granite_brick_stairs", GRANITE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(Words.Granite))));
+		Register("granite_brick_slab", GRANITE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(Words.Granite))));
+		Register("granite_brick_wall", GRANITE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(Words.Granite))));
+		Register("chiseled_granite_bricks", CHISELED_GRANITE_BRICKS, List.of(EN_US.Bricks(EN_US.Granite(Words.Chiseled))));
+		Register("granite_tiles", GRANITE_TILES, List.of(EN_US.Tiles(Words.Granite)));
+		Register("granite_tile_stairs", GRANITE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(Words.Granite))));
+		Register("granite_tile_slab", GRANITE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(Words.Granite))));
+		Register("granite_tile_wall", GRANITE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(Words.Granite))));
 		//</editor-fold>
 		//<editor-fold desc="Sandstone">
 		Register("smooth_sandstone_wall", SMOOTH_SANDSTONE_WALL, List.of(EN_US.Wall(EN_US.Sandstone(EN_US.Smooth()))));
@@ -4623,14 +4279,14 @@ public class ModBase implements ModInitializer {
 		Register("prismarine_soul_torch", "prismarine_soul_wall_torch", PRISMARINE_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Prismarine()))));
 		Register("prismarine_ender_torch", "prismarine_ender_wall_torch", PRISMARINE_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Prismarine()))));
 		Register("underwater_prismarine_torch", "underwater_prismarine_wall_torch", UNDERWATER_PRISMARINE_TORCH, List.of(EN_US._Torch(EN_US.Prismarine(EN_US.Underwater()))));
-		Register("chiseled_prismarine_bricks", CHISELED_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Chiseled()))));
+		Register("chiseled_prismarine_bricks", CHISELED_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(Words.Chiseled))));
 		Register("smooth_chiseled_prismarine_bricks", SMOOTH_CHISELED_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Chiseled(EN_US.Smooth())))));
 		Register("cut_prismarine_bricks", CUT_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Cut()))));
 		Register("cut_prismarine_brick_stairs", CUT_PRISMARINE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Prismarine(EN_US.Cut())))));
 		Register("cut_prismarine_brick_slab", CUT_PRISMARINE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Prismarine(EN_US.Cut())))));
-		Register("chiseled_prismarine", CHISELED_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Chiseled())));
-		Register("chiseled_prismarine_brick_stairs", CHISELED_PRISMARINE_STAIRS, List.of(EN_US.Stairs(EN_US.Prismarine(EN_US.Chiseled()))));
-		Register("chiseled_prismarine_brick_slab", CHISELED_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Chiseled()))));
+		Register("chiseled_prismarine", CHISELED_PRISMARINE, List.of(EN_US.Prismarine(Words.Chiseled)));
+		Register("chiseled_prismarine_brick_stairs", CHISELED_PRISMARINE_STAIRS, List.of(EN_US.Stairs(EN_US.Prismarine(Words.Chiseled))));
+		Register("chiseled_prismarine_brick_slab", CHISELED_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(Words.Chiseled))));
 		Register("prismarine_tiles", PRISMARINE_TILES, List.of(EN_US.Tiles(EN_US.Prismarine())));
 		Register("prismarine_tile_stairs", PRISMARINE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Prismarine()))));
 		Register("prismarine_tile_slab", PRISMARINE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Prismarine()))));
@@ -4648,21 +4304,21 @@ public class ModBase implements ModInitializer {
 		Register("smooth_basalt_brick_wall", SMOOTH_BASALT_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Basalt(EN_US.Smooth())))));
 		//</editor-fold>
 		//<editor-fold desc="Calcite">
-		Register("calcite_stairs", CALCITE_STAIRS, List.of(EN_US.Stairs(EN_US.Calcite())));
-		Register("calcite_slab", CALCITE_SLAB, List.of(EN_US.Slab(EN_US.Calcite())));
-		Register("calcite_wall", CALCITE_WALL, List.of(EN_US.Wall(EN_US.Calcite())));
+		Register("calcite_stairs", CALCITE_STAIRS, List.of(EN_US.Stairs(Words.Calcite)));
+		Register("calcite_slab", CALCITE_SLAB, List.of(EN_US.Slab(Words.Calcite)));
+		Register("calcite_wall", CALCITE_WALL, List.of(EN_US.Wall(Words.Calcite)));
 		Register("smooth_calcite", SMOOTH_CALCITE, List.of(EN_US.Calcite(EN_US.Smooth())));
 		Register("smooth_calcite_stairs", SMOOTH_CALCITE_STAIRS, List.of(EN_US.Stairs(EN_US.Calcite(EN_US.Smooth()))));
 		Register("smooth_calcite_slab", SMOOTH_CALCITE_SLAB, List.of(EN_US.Slab(EN_US.Calcite(EN_US.Smooth()))));
 		Register("smooth_calcite_wall", SMOOTH_CALCITE_WALL, List.of(EN_US.Wall(EN_US.Calcite(EN_US.Smooth()))));
-		Register("calcite_bricks", CALCITE_BRICKS, List.of(EN_US.Bricks(EN_US.Calcite())));
-		Register("calcite_brick_stairs", CALCITE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Calcite()))));
-		Register("calcite_brick_slab", CALCITE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Calcite()))));
-		Register("calcite_brick_wall", CALCITE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Calcite()))));
-		Register("calcite_tiles", CALCITE_TILES, List.of(EN_US.Tiles(EN_US.Calcite())));
-		Register("calcite_tile_stairs", CALCITE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Calcite()))));
-		Register("calcite_tile_slab", CALCITE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Calcite()))));
-		Register("calcite_tile_wall", CALCITE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Calcite()))));
+		Register("calcite_bricks", CALCITE_BRICKS, List.of(EN_US.Bricks(Words.Calcite)));
+		Register("calcite_brick_stairs", CALCITE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(Words.Calcite))));
+		Register("calcite_brick_slab", CALCITE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(Words.Calcite))));
+		Register("calcite_brick_wall", CALCITE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(Words.Calcite))));
+		Register("calcite_tiles", CALCITE_TILES, List.of(EN_US.Tiles(Words.Calcite)));
+		Register("calcite_tile_stairs", CALCITE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(Words.Calcite))));
+		Register("calcite_tile_slab", CALCITE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(Words.Calcite))));
+		Register("calcite_tile_wall", CALCITE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(Words.Calcite))));
 		//</editor-fold>
 		//<editor-fold desc="Dripstone">
 		Register("dripstone_stairs", DRIPSTONE_STAIRS, List.of(EN_US.Stairs(EN_US.Dripstone())));
@@ -4676,7 +4332,7 @@ public class ModBase implements ModInitializer {
 		Register("dripstone_brick_stairs", DRIPSTONE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Dripstone()))));
 		Register("dripstone_brick_slab", DRIPSTONE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Dripstone()))));
 		Register("dripstone_brick_wall", DRIPSTONE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Dripstone()))));
-		Register("chiseled_dripstone_bricks", CHISELED_DRIPSTONE_BRICKS, List.of(EN_US.Bricks(EN_US.Dripstone(EN_US.Chiseled()))));
+		Register("chiseled_dripstone_bricks", CHISELED_DRIPSTONE_BRICKS, List.of(EN_US.Bricks(EN_US.Dripstone(Words.Chiseled))));
 		Register("dripstone_tiles", DRIPSTONE_TILES, List.of(EN_US.Tiles(EN_US.Dripstone())));
 		Register("dripstone_tile_stairs", DRIPSTONE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Dripstone()))));
 		Register("dripstone_tile_slab", DRIPSTONE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Dripstone()))));
@@ -4694,8 +4350,8 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:tuff_brick_stairs", TUFF_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Tuff()))));
 		Register("minecraft:tuff_brick_slab", TUFF_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Tuff()))));
 		Register("minecraft:tuff_brick_wall", TUFF_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Tuff()))));
-		Register("minecraft:chiseled_tuff", CHISELED_TUFF, List.of(EN_US.Tuff(EN_US.Chiseled())));
-		Register("minecraft:chiseled_tuff_bricks", CHISELED_TUFF_BRICKS, List.of(EN_US.Bricks(EN_US.Tuff(EN_US.Chiseled()))));
+		Register("minecraft:chiseled_tuff", CHISELED_TUFF, List.of(EN_US.Tuff(Words.Chiseled)));
+		Register("minecraft:chiseled_tuff_bricks", CHISELED_TUFF_BRICKS, List.of(EN_US.Bricks(EN_US.Tuff(Words.Chiseled))));
 		Register("tuff_tiles", TUFF_TILES, List.of(EN_US.Tiles(EN_US.Tuff())));
 		Register("tuff_tile_stairs", TUFF_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Tuff()))));
 		Register("tuff_tile_slab", TUFF_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Tuff()))));
@@ -4721,41 +4377,41 @@ public class ModBase implements ModInitializer {
 		Register("shale_tile_wall", SHALE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Shale()))));
 		//</editor-fold>
 		//<editor-fold desc="End Stone">
-		Register("end_stone_slab", END_STONE_SLAB, List.of(EN_US.Slab(EN_US.Stone(EN_US.End()))));
-		Register("end_stone_pillar", END_STONE_PILLAR, List.of(EN_US.Pillar(EN_US.Stone(EN_US.End()))));
-		Register("end_stone_tiles", END_STONE_TILES, List.of(EN_US.Tiles(EN_US.Stone(EN_US.End()))));
-		Register("end_stone_tile_stairs", END_STONE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Stone(EN_US.End())))));
-		Register("end_stone_tile_slab", END_STONE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Stone(EN_US.End())))));
-		Register("end_stone_tile_wall", END_STONE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Stone(EN_US.End())))));
+		Register("end_stone_slab", END_STONE_SLAB, List.of(EN_US.Slab(EN_US.Stone(Words.End))));
+		Register("end_stone_pillar", END_STONE_PILLAR, List.of(EN_US.Pillar(EN_US.Stone(Words.End))));
+		Register("end_stone_tiles", END_STONE_TILES, List.of(EN_US.Tiles(EN_US.Stone(Words.End))));
+		Register("end_stone_tile_stairs", END_STONE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Stone(Words.End)))));
+		Register("end_stone_tile_slab", END_STONE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Stone(Words.End)))));
+		Register("end_stone_tile_wall", END_STONE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Stone(Words.End)))));
 		//</editor-fold>
 		//<editor-fold desc="End Shale">
-		Register("end_shale", END_SHALE, List.of(EN_US.Shale(EN_US.End())));
+		Register("end_shale", END_SHALE, List.of(EN_US.Shale(Words.End)));
 		Register("cobbled_end_shale", COBBLED_END_SHALE, List.of(EN_US.Shale(EN_US.End(EN_US.Cobbled()))));
 		Register("cobbled_end_shale_stairs", COBBLED_END_SHALE_STAIRS, List.of(EN_US.Stairs(EN_US.Shale(EN_US.End(EN_US.Cobbled())))));
 		Register("cobbled_end_shale_slab", COBBLED_END_SHALE_SLAB, List.of(EN_US.Slab(EN_US.Shale(EN_US.End(EN_US.Cobbled())))));
 		Register("cobbled_end_shale_wall", COBBLED_END_SHALE_WALL, List.of(EN_US.Wall(EN_US.Shale(EN_US.End(EN_US.Cobbled())))));
-		Register("end_shale_bricks", END_SHALE_BRICKS, List.of(EN_US.Bricks(EN_US.Shale(EN_US.End()))));
-		Register("end_shale_brick_stairs", END_SHALE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Shale(EN_US.End())))));
-		Register("end_shale_brick_slab", END_SHALE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Shale(EN_US.End())))));
-		Register("end_shale_brick_wall", END_SHALE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Shale(EN_US.End())))));
-		Register("end_shale_tiles", END_SHALE_TILES, List.of(EN_US.Tiles(EN_US.Shale(EN_US.End()))));
-		Register("end_shale_tile_stairs", END_SHALE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Shale(EN_US.End())))));
-		Register("end_shale_tile_slab", END_SHALE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Shale(EN_US.End())))));
-		Register("end_shale_tile_wall", END_SHALE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Shale(EN_US.End())))));
+		Register("end_shale_bricks", END_SHALE_BRICKS, List.of(EN_US.Bricks(EN_US.Shale(Words.End))));
+		Register("end_shale_brick_stairs", END_SHALE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Shale(Words.End)))));
+		Register("end_shale_brick_slab", END_SHALE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Shale(Words.End)))));
+		Register("end_shale_brick_wall", END_SHALE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Shale(Words.End)))));
+		Register("end_shale_tiles", END_SHALE_TILES, List.of(EN_US.Tiles(EN_US.Shale(Words.End))));
+		Register("end_shale_tile_stairs", END_SHALE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Shale(Words.End)))));
+		Register("end_shale_tile_slab", END_SHALE_TILE_SLAB, List.of(EN_US.Slab(EN_US.Tile(EN_US.Shale(Words.End)))));
+		Register("end_shale_tile_wall", END_SHALE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Shale(Words.End)))));
 		//</editor-fold>
 		//<editor-fold desc="End Rock">
-		Register("end_rock", END_ROCK, List.of(EN_US.Rock(EN_US.End())));
-		Register("end_rock_shale", END_ROCK_SHALE, List.of(EN_US.Shale(EN_US.Rock(EN_US.End()))));
-		Register("end_shale_rock", END_SHALE_ROCK, List.of(EN_US.Rock(EN_US.Shale(EN_US.End()))));
+		Register("end_rock", END_ROCK, List.of(EN_US.Rock(Words.End)));
+		Register("end_rock_shale", END_ROCK_SHALE, List.of(EN_US.Shale(EN_US.Rock(Words.End))));
+		Register("end_shale_rock", END_SHALE_ROCK, List.of(EN_US.Rock(EN_US.Shale(Words.End))));
 		//</editor-fold>
 		//<editor-fold desc="Purpur">
 		Register("purpur_wall", PURPUR_WALL, List.of(EN_US.Wall(EN_US.Purpur())));
 		Register("cracked_purpur_block", CRACKED_PURPUR_BLOCK, List.of(EN_US.Block(EN_US.Purpur(EN_US.Cracked()))));
 		CrackedBlocks.Register(Blocks.PURPUR_BLOCK, CRACKED_PURPUR_BLOCK);
-		Register("chiseled_purpur", CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled())));
-		Register("chiseled_purpur_stairs", CHISELED_PURPUR_STAIRS, List.of(EN_US.Stairs(EN_US.Purpur(EN_US.Chiseled()))));
-		Register("chiseled_purpur_slab", CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled()))));
-		Register("chiseled_purpur_wall", CHISELED_PURPUR_WALL, List.of(EN_US.Wall(EN_US.Purpur(EN_US.Chiseled()))));
+		Register("chiseled_purpur", CHISELED_PURPUR, List.of(EN_US.Purpur(Words.Chiseled)));
+		Register("chiseled_purpur_stairs", CHISELED_PURPUR_STAIRS, List.of(EN_US.Stairs(EN_US.Purpur(Words.Chiseled))));
+		Register("chiseled_purpur_slab", CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(Words.Chiseled))));
+		Register("chiseled_purpur_wall", CHISELED_PURPUR_WALL, List.of(EN_US.Wall(EN_US.Purpur(Words.Chiseled))));
 		Register("purpur_mosaic", PURPUR_MOSAIC, List.of(EN_US.Mosaic(EN_US.Purpur())));
 		Register("purpur_mosaic_stairs", PURPUR_MOSAIC_STAIRS, List.of(EN_US.Stairs(EN_US.Mosaic(EN_US.Purpur()))));
 		Register("purpur_mosaic_slab", PURPUR_MOSAIC_SLAB, List.of(EN_US.Slab(EN_US.Mosaic(EN_US.Purpur()))));
@@ -4768,7 +4424,7 @@ public class ModBase implements ModInitializer {
 		Register("purpur_brick_stairs", PURPUR_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Purpur()))));
 		Register("purpur_brick_slab", PURPUR_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Purpur()))));
 		Register("purpur_brick_wall", PURPUR_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Purpur()))));
-		Register("chiseled_purpur_bricks", CHISELED_PURPUR_BRICKS, List.of(EN_US.Bricks(EN_US.Purpur(EN_US.Chiseled()))));
+		Register("chiseled_purpur_bricks", CHISELED_PURPUR_BRICKS, List.of(EN_US.Bricks(EN_US.Purpur(Words.Chiseled))));
 		Register("smooth_chiseled_purpur_bricks", SMOOTH_CHISELED_PURPUR_BRICKS, List.of(EN_US.Bricks(EN_US.Purpur(EN_US.Chiseled(EN_US.Smooth())))));
 		Register("purpur_tiles", PURPUR_TILES, List.of(EN_US.Tiles(EN_US.Purpur())));
 		Register("purpur_tile_stairs", PURPUR_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Purpur()))));
@@ -4782,9 +4438,8 @@ public class ModBase implements ModInitializer {
 		Register("shulker_boots", SHULKER_BOOTS, List.of(EN_US.Boots(EN_US.Shulker())));
 		//</editor-fold>
 		//<editor-fold desc="Purple Eye of Ender">
-		Register("purple_ender_eye", PURPLE_ENDER_EYE, List.of(EN_US.Eye(EN_US.Ender(EN_US.Purple()))));
-		Register("purple_eye_of_ender", PURPLE_EYE_OF_ENDER_ENTITY, List.of(EN_US.Ender(EN_US.of(EN_US.Eye(EN_US.Purple())))));
-		Register("purple_eye_end_portal_frame", PURPLE_EYE_END_PORTAL_FRAME, List.of(EN_US.Frame(EN_US.Portal(EN_US.End(EN_US.Eye(EN_US.Purple()))))));
+		Register("purple_ender_eye", PURPLE_ENDER_EYE, List.of(EN_US.Eye(EN_US.Ender(Words.Purple))));
+		Register("purple_eye_end_portal_frame", PURPLE_EYE_END_PORTAL_FRAME, List.of(EN_US.Frame(EN_US.Portal(EN_US.End(EN_US.Eye(Words.Purple))))));
 		//</editor-fold>
 		//<editor-fold desc="Obsidian">
 		Register("obsidian_stairs", OBSIDIAN_STAIRS, List.of(EN_US.Stairs(EN_US.Obsidian())));
@@ -4839,29 +4494,29 @@ public class ModBase implements ModInitializer {
 		Register("obsidian_hammer", OBSIDIAN_HAMMER, List.of(EN_US.Hammer(EN_US.Obsidian())));
 		//</editor-fold>
 		//<editor-fold desc="Amethyst">
-		Register("amethyst_stairs", AMETHYST_STAIRS, List.of(EN_US.Stairs(EN_US.Amethyst())));
-		Register("amethyst_slab", AMETHYST_SLAB, List.of(EN_US.Slab(EN_US.Amethyst())));
-		Register("amethyst_wall", AMETHYST_WALL, List.of(EN_US.Wall(EN_US.Amethyst())));
-		Register("amethyst_bricks", AMETHYST_BRICKS, List.of(EN_US.Bricks(EN_US.Amethyst())));
-		Register("amethyst_brick_stairs", AMETHYST_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Amethyst()))));
-		Register("amethyst_brick_slab", AMETHYST_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Amethyst()))));
-		Register("amethyst_brick_wall", AMETHYST_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Amethyst()))));
-		Register("amethyst_crystal_block", AMETHYST_CRYSTAL_BLOCK, List.of(EN_US.Block(EN_US.Crystal(EN_US.Amethyst()))));
-		Register("amethyst_crystal_stairs", AMETHYST_CRYSTAL_STAIRS, List.of(EN_US.Stairs(EN_US.Crystal(EN_US.Amethyst()))));
-		Register("amethyst_crystal_slab", AMETHYST_CRYSTAL_SLAB, List.of(EN_US.Slab(EN_US.Crystal(EN_US.Amethyst()))));
-		Register("amethyst_crystal_wall", AMETHYST_CRYSTAL_WALL, List.of(EN_US.Wall(EN_US.Crystal(EN_US.Amethyst()))));
-		Register("amethyst_shovel", AMETHYST_SHOVEL, List.of(EN_US.Shovel(EN_US.Amethyst())));
-		Register("amethyst_pickaxe", AMETHYST_PICKAXE, List.of(EN_US.Pickaxe(EN_US.Amethyst())));
-		Register("amethyst_axe", AMETHYST_AXE, List.of(EN_US.Axe(EN_US.Amethyst())));
-		Register("amethyst_hoe", AMETHYST_HOE, List.of(EN_US.Hoe(EN_US.Amethyst())));
-		Register("amethyst_sword", AMETHYST_SWORD, List.of(EN_US.Sword(EN_US.Amethyst())));
-		Register("amethyst_knife", AMETHYST_KNIFE, List.of(EN_US.Knife(EN_US.Amethyst())));
-		Register("amethyst_hammer", AMETHYST_HAMMER, List.of(EN_US.Hammer(EN_US.Amethyst())));
-		Register("amethyst_helmet", AMETHYST_HELMET, List.of(EN_US.Helmet(EN_US.Amethyst())));
-		Register("amethyst_chestplate", AMETHYST_CHESTPLATE, List.of(EN_US.Chestplate(EN_US.Amethyst())));
-		Register("amethyst_leggings", AMETHYST_LEGGINGS, List.of(EN_US.Leggings(EN_US.Amethyst())));
-		Register("amethyst_boots", AMETHYST_BOOTS, List.of(EN_US.Boots(EN_US.Amethyst())));
-		Register("amethyst_horse_armor", AMETHYST_HORSE_ARMOR, List.of(EN_US.Armor(EN_US.Horse(EN_US.Amethyst()))));
+		Register("amethyst_stairs", AMETHYST_STAIRS, List.of(EN_US.Stairs(Words.Amethyst)));
+		Register("amethyst_slab", AMETHYST_SLAB, List.of(EN_US.Slab(Words.Amethyst)));
+		Register("amethyst_wall", AMETHYST_WALL, List.of(EN_US.Wall(Words.Amethyst)));
+		Register("amethyst_bricks", AMETHYST_BRICKS, List.of(EN_US.Bricks(Words.Amethyst)));
+		Register("amethyst_brick_stairs", AMETHYST_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(Words.Amethyst))));
+		Register("amethyst_brick_slab", AMETHYST_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(Words.Amethyst))));
+		Register("amethyst_brick_wall", AMETHYST_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(Words.Amethyst))));
+		Register("amethyst_crystal_block", AMETHYST_CRYSTAL_BLOCK, List.of(EN_US.Block(EN_US.Crystal(Words.Amethyst))));
+		Register("amethyst_crystal_stairs", AMETHYST_CRYSTAL_STAIRS, List.of(EN_US.Stairs(EN_US.Crystal(Words.Amethyst))));
+		Register("amethyst_crystal_slab", AMETHYST_CRYSTAL_SLAB, List.of(EN_US.Slab(EN_US.Crystal(Words.Amethyst))));
+		Register("amethyst_crystal_wall", AMETHYST_CRYSTAL_WALL, List.of(EN_US.Wall(EN_US.Crystal(Words.Amethyst))));
+		Register("amethyst_shovel", AMETHYST_SHOVEL, List.of(EN_US.Shovel(Words.Amethyst)));
+		Register("amethyst_pickaxe", AMETHYST_PICKAXE, List.of(EN_US.Pickaxe(Words.Amethyst)));
+		Register("amethyst_axe", AMETHYST_AXE, List.of(EN_US.Axe(Words.Amethyst)));
+		Register("amethyst_hoe", AMETHYST_HOE, List.of(EN_US.Hoe(Words.Amethyst)));
+		Register("amethyst_sword", AMETHYST_SWORD, List.of(EN_US.Sword(Words.Amethyst)));
+		Register("amethyst_knife", AMETHYST_KNIFE, List.of(EN_US.Knife(Words.Amethyst)));
+		Register("amethyst_hammer", AMETHYST_HAMMER, List.of(EN_US.Hammer(Words.Amethyst)));
+		Register("amethyst_helmet", AMETHYST_HELMET, List.of(EN_US.Helmet(Words.Amethyst)));
+		Register("amethyst_chestplate", AMETHYST_CHESTPLATE, List.of(EN_US.Chestplate(Words.Amethyst)));
+		Register("amethyst_leggings", AMETHYST_LEGGINGS, List.of(EN_US.Leggings(Words.Amethyst)));
+		Register("amethyst_boots", AMETHYST_BOOTS, List.of(EN_US.Boots(Words.Amethyst)));
+		Register("amethyst_horse_armor", AMETHYST_HORSE_ARMOR, List.of(EN_US.Armor(EN_US.Horse(Words.Amethyst))));
 		//</editor-fold>
 		//<editor-fold desc="Tinted Glass">
 		Register("tinted_goggles", TINTED_GOGGLES, List.of(EN_US.Goggles(EN_US.Tinted())));
@@ -4952,14 +4607,14 @@ public class ModBase implements ModInitializer {
 		Register("sapphire", SAPPHIRE, List.of(EN_US.Sapphire()));
 		//</editor-fold>
 		//<editor-fold desc="Diamond">
-		Register("diamond_stairs", DIAMOND_STAIRS, List.of(EN_US.Stairs(EN_US.Diamond())));
-		Register("diamond_slab", DIAMOND_SLAB, List.of(EN_US.Slab(EN_US.Diamond())));
-		Register("diamond_wall", DIAMOND_WALL, List.of(EN_US.Wall(EN_US.Diamond())));
-		Register("diamond_bricks", DIAMOND_BRICKS, List.of(EN_US.Bricks(EN_US.Diamond())));
-		Register("diamond_brick_stairs", DIAMOND_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Diamond()))));
-		Register("diamond_brick_slab", DIAMOND_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Diamond()))));
-		Register("diamond_brick_wall", DIAMOND_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Diamond()))));
-		Register("diamond_hammer", DIAMOND_HAMMER, List.of(EN_US.Hammer(EN_US.Diamond())));
+		Register("diamond_stairs", DIAMOND_STAIRS, List.of(EN_US.Stairs(Words.Diamond)));
+		Register("diamond_slab", DIAMOND_SLAB, List.of(EN_US.Slab(Words.Diamond)));
+		Register("diamond_wall", DIAMOND_WALL, List.of(EN_US.Wall(Words.Diamond)));
+		Register("diamond_bricks", DIAMOND_BRICKS, List.of(EN_US.Bricks(Words.Diamond)));
+		Register("diamond_brick_stairs", DIAMOND_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(Words.Diamond))));
+		Register("diamond_brick_slab", DIAMOND_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(Words.Diamond))));
+		Register("diamond_brick_wall", DIAMOND_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(Words.Diamond))));
+		Register("diamond_hammer", DIAMOND_HAMMER, List.of(EN_US.Hammer(Words.Diamond)));
 		//</editor-fold>
 		//<editor-fold desc="Quartz">
 		Register("quartz_ore", QUARTZ_ORE, List.of(EN_US.Ore(EN_US.Quartz())));
@@ -4973,7 +4628,7 @@ public class ModBase implements ModInitializer {
 		Register("quartz_brick_stairs", QUARTZ_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Quartz()))));
 		Register("quartz_brick_slab", QUARTZ_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Quartz()))));
 		Register("quartz_brick_wall", QUARTZ_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Quartz()))));
-		Register("chiseled_quartz_bricks", CHISELED_QUARTZ_BRICKS, List.of(EN_US.Bricks(EN_US.Quartz(EN_US.Chiseled()))));
+		Register("chiseled_quartz_bricks", CHISELED_QUARTZ_BRICKS, List.of(EN_US.Bricks(EN_US.Quartz(Words.Chiseled))));
 		Register("smooth_chiseled_quartz_bricks", SMOOTH_CHISELED_QUARTZ_BRICKS, List.of(EN_US.Bricks(EN_US.Quartz(EN_US.Chiseled(EN_US.Smooth())))));
 		Register("quartz_shovel", QUARTZ_SHOVEL, List.of(EN_US.Shovel(EN_US.Quartz())));
 		Register("quartz_pickaxe", QUARTZ_PICKAXE, List.of(EN_US.Pickaxe(EN_US.Quartz())));
@@ -5066,68 +4721,7 @@ public class ModBase implements ModInitializer {
 		Register("bone_knife", BONE_KNIFE, List.of(EN_US.Knife(EN_US.Bone())));
 		Register("bone_hammer", BONE_HAMMER, List.of(EN_US.Hammer(EN_US.Bone())));
 		//</editor-fold>
-		//<editor-fold desc="Bone Spider">
-		Register("bone_spider", BONE_SPIDER_ENTITY, List.of(EN_US.Spider(EN_US.Bone())));
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.DARK_FOREST),
-				SpawnGroup.MONSTER, BONE_SPIDER_ENTITY, 60, 2, 5);
-		FabricDefaultAttributeRegistry.register(BONE_SPIDER_ENTITY, BoneSpiderEntity.createBoneSpiderAttributes());
-		SpawnRestrictionAccessor.callRegister(BONE_SPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
 		Register("bone_shard", BONE_SHARD, List.of(EN_US.Shard(EN_US.Bone())));
-		Register("bone_shard_projectile", BONE_SHARD_PROJECTILE_ENTITY, List.of(EN_US.Shard(EN_US.Bone())));
-		//</editor-fold>
-		//<editor-fold desc="Icy Spider">
-		Register("icy_spider", ICY_SPIDER_ENTITY, List.of(EN_US.Spider(EN_US.Icy())));
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.ICE_SPIKES, BiomeKeys.SNOWY_PLAINS, BiomeKeys.SNOWY_SLOPES, BiomeKeys.JAGGED_PEAKS, BiomeKeys.FROZEN_PEAKS),
-				SpawnGroup.MONSTER, ICY_SPIDER_ENTITY, 20, 2, 5);
-		FabricDefaultAttributeRegistry.register(ICY_SPIDER_ENTITY, IcySpiderEntity.createIcySpiderAttributes());
-		SpawnRestrictionAccessor.callRegister(ICY_SPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
-		//</editor-fold>
-		//<editor-fold desc="Slime Spider">
-		Register("slime_spider", SLIME_SPIDER_ENTITY, List.of(EN_US.Slider()));
-		FabricDefaultAttributeRegistry.register(SLIME_SPIDER_ENTITY, SlimeSpiderEntity.createSlimeSpiderAttributes());
-		SpawnRestrictionAccessor.callRegister(SLIME_SPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
-		//</editor-fold>
-		//<editor-fold desc="Creepers">
-		Register("slime_creeper", SLIME_CREEPER_ENTITY, List.of(EN_US.Creeper(EN_US.Slime())));
-		FabricDefaultAttributeRegistry.register(SLIME_CREEPER_ENTITY, SlimeCreeperEntity.createCreeperAttributes());
-		SpawnRestrictionAccessor.callRegister(SLIME_CREEPER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
-		//</editor-fold>
-		//<editor-fold desc="Phantoms">
-		Register("red_phantom", RED_PHANTOM_ENTITY, List.of(EN_US.Phantom(EN_US.Red())));
-		FabricDefaultAttributeRegistry.register(RED_PHANTOM_ENTITY, HostileEntity.createHostileAttributes());
-		SpawnRestrictionAccessor.callRegister(RED_PHANTOM_ENTITY, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MobEntity::canMobSpawn);
-		//</editor-fold>
-		//<editor-fold desc="Skeletons">
-		Register("mossy_skeleton", MOSSY_SKELETON_ENTITY, List.of(EN_US.Skeleton(EN_US.Mossy())));
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.JUNGLE, BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.SPARSE_JUNGLE),
-				SpawnGroup.MONSTER, MOSSY_SKELETON_ENTITY, 40, 4, 4);
-		FabricDefaultAttributeRegistry.register(MOSSY_SKELETON_ENTITY, MossySkeletonEntity.createAbstractSkeletonAttributes());
-		SpawnRestrictionAccessor.callRegister(MOSSY_SKELETON_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
-		Register("slimy_skeleton", SLIMY_SKELETON_ENTITY, List.of(EN_US.Skeleton(EN_US.Slimy())));
-		FabricDefaultAttributeRegistry.register(SLIMY_SKELETON_ENTITY, MossySkeletonEntity.createAbstractSkeletonAttributes());
-		SpawnRestrictionAccessor.callRegister(SLIMY_SKELETON_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
-		Register("sunken_skeleton", SUNKEN_SKELETON_ENTITY, List.of(EN_US.Skeleton(EN_US.Sunken())));
-		BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.WARM_OCEANS),
-				SpawnGroup.MONSTER, SUNKEN_SKELETON_ENTITY, 10, 2, 4);
-		FabricDefaultAttributeRegistry.register(SUNKEN_SKELETON_ENTITY, SunkenSkeletonEntity.createAbstractSkeletonAttributes());
-		SpawnRestrictionAccessor.callRegister(SUNKEN_SKELETON_ENTITY, SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SunkenSkeletonEntity::canSpawn);
-		//</editor-fold>
-		//<editor-fold desc="Zombies">
-		Register("slowing_snowball", SLOWING_SNOWBALL_ENTITY, List.of(EN_US.Snowball(EN_US.Slowing())));
-		Register("frozen_zombie", FROZEN_ZOMBIE_ENTITY, List.of(EN_US.Zombie(EN_US.Frozen())));
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.ICE_SPIKES, BiomeKeys.SNOWY_PLAINS),
-				SpawnGroup.MONSTER, FROZEN_ZOMBIE_ENTITY, 40, 4, 4);
-		FabricDefaultAttributeRegistry.register(FROZEN_ZOMBIE_ENTITY, FrozenZombieEntity.createZombieAttributes());
-		SpawnRestrictionAccessor.callRegister(FROZEN_ZOMBIE_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FrozenZombieEntity::canSpawn);
-		Register("jungle_zombie", JUNGLE_ZOMBIE_ENTITY, List.of(EN_US.Zombie(EN_US.Jungle())));
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.JUNGLE, BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.SPARSE_JUNGLE),
-				SpawnGroup.MONSTER, JUNGLE_ZOMBIE_ENTITY, 30, 4, 4);
-		FabricDefaultAttributeRegistry.register(JUNGLE_ZOMBIE_ENTITY, JungleZombieEntity.createZombieAttributes());
-		SpawnRestrictionAccessor.callRegister(JUNGLE_ZOMBIE_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieEntity::canMobSpawn);
-		Register("slime_zombie", SLIME_ZOMBIE_ENTITY, List.of(EN_US.Zombie(EN_US.Slime())));
-		FabricDefaultAttributeRegistry.register(SLIME_ZOMBIE_ENTITY, SlimeZombieEntity.createZombieAttributes());
-		SpawnRestrictionAccessor.callRegister(SLIME_ZOMBIE_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieEntity::canMobSpawn);
-		//</editor-fold>
 		//<editor-fold desc="Blackstone">
 		Register("smooth_chiseled_polished_blackstone", SMOOTH_CHISELED_POLISHED_BLACKSTONE, List.of(EN_US.Blackstone(EN_US.Polished(EN_US.Chiseled(EN_US.Smooth())))));
 		Register("polished_blackstone_tiles", POLISHED_BLACKSTONE_TILES, List.of(EN_US.Tiles(EN_US.Blackstone(EN_US.Polished()))));
@@ -5149,7 +4743,7 @@ public class ModBase implements ModInitializer {
 		Register("polished_gilded_blackstone_brick_wall", POLISHED_GILDED_BLACKSTONE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Blackstone(EN_US.Gilded(EN_US.Polished()))))));
 		Register("cracked_polished_gilded_blackstone_bricks", CRACKED_POLISHED_GILDED_BLACKSTONE_BRICKS, List.of(EN_US.Bricks(EN_US.Blackstone(EN_US.Gilded(EN_US.Polished(EN_US.Cracked()))))));
 		CrackedBlocks.Register(POLISHED_GILDED_BLACKSTONE_BRICKS, CRACKED_POLISHED_GILDED_BLACKSTONE_BRICKS);
-		Register("chiseled_polished_gilded_blackstone", CHISELED_POLISHED_GILDED_BLACKSTONE, List.of(EN_US.Blackstone(EN_US.Gilded(EN_US.Polished(EN_US.Chiseled())))));
+		Register("chiseled_polished_gilded_blackstone", CHISELED_POLISHED_GILDED_BLACKSTONE, List.of(EN_US.Blackstone(EN_US.Gilded(EN_US.Polished(Words.Chiseled)))));
 		Register("smooth_chiseled_polished_gilded_blackstone", SMOOTH_CHISELED_POLISHED_GILDED_BLACKSTONE, List.of(EN_US.Blackstone(EN_US.Gilded(EN_US.Polished(EN_US.Chiseled(EN_US.Smooth()))))));
 		Register("polished_gilded_blackstone_tiles", POLISHED_GILDED_BLACKSTONE_TILES, List.of(EN_US.Tiles(EN_US.Blackstone(EN_US.Gilded(EN_US.Polished())))));
 		Register("polished_gilded_blackstone_tile_stairs", POLISHED_GILDED_BLACKSTONE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Blackstone(EN_US.Gilded(EN_US.Polished()))))));
@@ -5157,7 +4751,7 @@ public class ModBase implements ModInitializer {
 		Register("polished_gilded_blackstone_tile_wall", POLISHED_GILDED_BLACKSTONE_TILE_WALL, List.of(EN_US.Wall(EN_US.Tile(EN_US.Blackstone(EN_US.Gilded(EN_US.Polished()))))));
 		//</editor-fold>
 		//<editor-fold desc="Arrows">
-		Register("amethyst_arrow", AMETHYST_ARROW, List.of(EN_US.Arrow(EN_US.Amethyst())));
+		Register("amethyst_arrow", AMETHYST_ARROW, List.of(EN_US.Arrow(Words.Amethyst)));
 		Register("blinding_arrow", BLINDING_ARROW, List.of(EN_US.Arrow(EN_US.Blinding())));
 		Register("bone_arrow", BONE_ARROW, List.of(EN_US.Arrow(EN_US.Bone())));
 		Register("chorus_arrow", CHORUS_ARROW, List.of(EN_US.Arrow(EN_US.Chorus())));
@@ -5165,9 +4759,6 @@ public class ModBase implements ModInitializer {
 		//<editor-fold desc="Golems and Gourds">
 		Register("soul_jack_o_lantern", SOUL_JACK_O_LANTERN, List.of(EN_US.JackOLantern(EN_US.Soul())));
 		Register("ender_jack_o_lantern", ENDER_JACK_O_LANTERN, List.of(EN_US.JackOLantern(EN_US.Ender())));
-		Register("melon_seeds_projectile", MELON_SEED_PROJECTILE_ENTITY, List.of(EN_US.Seeds(EN_US.Melon())));
-		Register("melon_golem", MELON_GOLEM_ENTITY, List.of(EN_US.Golem(EN_US.Melon())));
-		FabricDefaultAttributeRegistry.register(MELON_GOLEM_ENTITY, MelonGolemEntity.createMelonGolemAttributes());
 		Register("carved_melon", CARVED_MELON, List.of(EN_US.Melon(EN_US.Carved())));
 		DispenserBlock.registerBehavior(CARVED_MELON.asBlock(), new FallibleItemDispenserBehavior() {
 			protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
@@ -5192,18 +4783,18 @@ public class ModBase implements ModInitializer {
 		//Burnt Pumpkin
 		Register("burnt_pumpkin", BURNT_PUMPKIN, List.of(EN_US.Pumpkin(EN_US.Burnt())));
 		//White Pumpkin
-		Register("white_pumpkin", WHITE_PUMPKIN, List.of(EN_US.Pumpkin(EN_US.White())));
-		Register("carved_white_pumpkin", CARVED_WHITE_PUMPKIN, List.of(EN_US.Carved(EN_US.Pumpkin(EN_US.White()))));
+		Register("white_pumpkin", WHITE_PUMPKIN, List.of(EN_US.Pumpkin(Words.White)));
+		Register("carved_white_pumpkin", CARVED_WHITE_PUMPKIN, List.of(EN_US.Carved(EN_US.Pumpkin(Words.White))));
 		DispenserBlock.registerBehavior(CARVED_WHITE_PUMPKIN.asBlock(), new ModCarvedPumpkinBlockDispenserBehavior(CARVED_WHITE_PUMPKIN));
-		Register("white_pumpkin_stem", WHITE_PUMPKIN_STEM, List.of(EN_US.Stem(EN_US.Pumpkin(EN_US.White()))));
+		Register("white_pumpkin_stem", WHITE_PUMPKIN_STEM, List.of(EN_US.Stem(EN_US.Pumpkin(Words.White))));
 		ModDatagen.Cache.Drops.put(WHITE_PUMPKIN_STEM, DropTable.Drops(WHITE_PUMPKIN_SEEDS));
 		Register("attached_white_pumpkin_stem", ATTACHED_WHITE_PUMPKIN_STEM, List.of(EN_US.Stem(EN_US.Pumpkin(EN_US.White(EN_US.Attached())))));
 		ModDatagen.Cache.Drops.put(ATTACHED_WHITE_PUMPKIN_STEM, DropTable.Drops(WHITE_PUMPKIN_SEEDS));
-		Register("white_pumpkin_seeds", WHITE_PUMPKIN_SEEDS, List.of(EN_US.Seeds(EN_US.Pumpkin(EN_US.White()))));
+		Register("white_pumpkin_seeds", WHITE_PUMPKIN_SEEDS, List.of(EN_US.Seeds(EN_US.Pumpkin(Words.White))));
 		CompostingChanceRegistry.INSTANCE.add(WHITE_PUMPKIN_SEEDS, 0.65F);
-		Register("white_jack_o_lantern", WHITE_JACK_O_LANTERN, List.of(EN_US.JackOLantern(EN_US.White())));
-		Register("white_soul_jack_o_lantern", WHITE_SOUL_JACK_O_LANTERN, List.of(EN_US.JackOLantern(EN_US.Soul(EN_US.White()))));
-		Register("white_ender_jack_o_lantern", WHITE_ENDER_JACK_O_LANTERN, List.of(EN_US.JackOLantern(EN_US.Ender(EN_US.White()))));
+		Register("white_jack_o_lantern", WHITE_JACK_O_LANTERN, List.of(EN_US.JackOLantern(Words.White)));
+		Register("white_soul_jack_o_lantern", WHITE_SOUL_JACK_O_LANTERN, List.of(EN_US.JackOLantern(EN_US.Soul(Words.White))));
+		Register("white_ender_jack_o_lantern", WHITE_ENDER_JACK_O_LANTERN, List.of(EN_US.JackOLantern(EN_US.Ender(Words.White))));
 		//Rotten Pumpkin
 		Register("rotten_pumpkin", ROTTEN_PUMPKIN, List.of(EN_US.Pumpkin(EN_US.Rotten())));
 		Register("carved_rotten_pumpkin", CARVED_ROTTEN_PUMPKIN, List.of(EN_US.Pumpkin(EN_US.Rotten(EN_US.Carved()))));
@@ -5216,9 +4807,9 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="Mushrooms">
 		Register("death_cap_mushroom", DEATH_CAP_MUSHROOM, List.of(EN_US._Potted(EN_US.Mushroom(EN_US.Cap(EN_US.Death())))));
-		Register("blue_nethershroom", BLUE_NETHERSHROOM, List.of(EN_US._Potted(EN_US.Nethershroom(EN_US.Blue()))));
-		Register("blue_mushroom", BLUE_MUSHROOM, List.of(EN_US._Potted(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_block", BLUE_MUSHROOM_BLOCK, List.of(EN_US.Block(EN_US.Mushroom(EN_US.Blue()))));
+		Register("blue_nethershroom", BLUE_NETHERSHROOM, List.of(EN_US._Potted(EN_US.Nethershroom(Words.Blue))));
+		Register("blue_mushroom", BLUE_MUSHROOM, List.of(EN_US._Potted(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_block", BLUE_MUSHROOM_BLOCK, List.of(EN_US.Block(EN_US.Mushroom(Words.Blue))));
 		//</editor-fold>
 		RegisterMushroomWood();
 		Register("creeper_anatomy_statue", CREEPER_ANATOMY_STATUE, List.of(EN_US.Statue(EN_US.Anatomy(EN_US.Creeper()))));
@@ -5226,9 +4817,9 @@ public class ModBase implements ModInitializer {
 		RegisterDarkIron();
 		//<editor-fold desc="Gilded Fungus">
 		Register("gilded_stem", GILDED_STEM, List.of(EN_US.Stem(EN_US.Gilded())));
-		Register("stripped_gilded_stem", STRIPPED_GILDED_STEM, List.of(EN_US.Stem(EN_US.Gilded(EN_US.Stripped()))));
+		Register("stripped_gilded_stem", STRIPPED_GILDED_STEM, List.of(EN_US.Stem(EN_US.Gilded(Words.Stripped))));
 		Register("gilded_hyphae", GILDED_HYPHAE, List.of(EN_US.Hyphae(EN_US.Gilded())));
-		Register("stripped_gilded_hyphae", STRIPPED_GILDED_HYPHAE, List.of(EN_US.Hyphae(EN_US.Gilded(EN_US.Stripped()))));
+		Register("stripped_gilded_hyphae", STRIPPED_GILDED_HYPHAE, List.of(EN_US.Hyphae(EN_US.Gilded(Words.Stripped))));
 		Register("gilded_planks", GILDED_PLANKS, List.of(EN_US.Planks(EN_US.Gilded())));
 		Register("gilded_stairs", GILDED_STAIRS, List.of(EN_US.Stairs(EN_US.Gilded())));
 		Register("gilded_slab", GILDED_SLAB, List.of(EN_US.Slab(EN_US.Gilded())));
@@ -5257,9 +4848,9 @@ public class ModBase implements ModInitializer {
 		Register("gilded_lectern", GILDED_LECTERN, List.of(EN_US.Lectern(EN_US.Gilded())));
 		Register("gilded_powder_keg", GILDED_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Gilded()))));
 		Register("gilded_stem_slab", GILDED_STEM_SLAB, List.of(EN_US.Stem(EN_US.Gilded())));
-		Register("stripped_gilded_stem_slab", STRIPPED_GILDED_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Gilded(EN_US.Stripped())))));
+		Register("stripped_gilded_stem_slab", STRIPPED_GILDED_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Gilded(Words.Stripped)))));
 		Register("gilded_hyphae_slab", GILDED_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Gilded()))));
-		Register("stripped_gilded_hyphae_slab", STRIPPED_GILDED_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Gilded(EN_US.Stripped())))));
+		Register("stripped_gilded_hyphae_slab", STRIPPED_GILDED_HYPHAE_SLAB, List.of(EN_US.Slab(EN_US.Hyphae(EN_US.Gilded(Words.Stripped)))));
 		Register("gilded_hammer", GILDED_HAMMER, List.of(EN_US.Hammer(EN_US.Gilded())));
 		//Torches
 		Register("gilded_torch", "gilded_wall_torch", GILDED_TORCH, List.of(EN_US._Torch(EN_US.Gilded())));
@@ -5280,35 +4871,35 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="Nether Bricks">
 		Register("smooth_chiseled_nether_bricks", SMOOTH_CHISELED_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Chiseled(EN_US.Smooth())))));
-		Register("red_nether_brick_fence", RED_NETHER_BRICK_FENCE, List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether(EN_US.Red())))));
-		Register("chiseled_red_nether_bricks", CHISELED_RED_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Red(EN_US.Chiseled())))));
+		Register("red_nether_brick_fence", RED_NETHER_BRICK_FENCE, List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether(Words.Red)))));
+		Register("chiseled_red_nether_bricks", CHISELED_RED_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Red(Words.Chiseled)))));
 		Register("smooth_chiseled_red_nether_bricks", SMOOTH_CHISELED_RED_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Red(EN_US.Chiseled(EN_US.Smooth()))))));
 		Register("cracked_red_nether_bricks", CRACKED_RED_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Red(EN_US.Cracked())))));
 		CrackedBlocks.Register(Blocks.RED_NETHER_BRICKS, CRACKED_RED_NETHER_BRICKS);
-		Register("blue_nether_bricks", BLUE_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Blue()))));
-		Register("blue_nether_brick_stairs", BLUE_NETHER_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Nether(EN_US.Blue())))));
-		Register("blue_nether_brick_slab", BLUE_NETHER_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Nether(EN_US.Blue())))));
-		Register("blue_nether_brick_wall", BLUE_NETHER_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Nether(EN_US.Blue())))));
-		Register("blue_nether_brick_fence", BLUE_NETHER_BRICK_FENCE, List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether(EN_US.Blue())))));
-		Register("chiseled_blue_nether_bricks", CHISELED_BLUE_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Blue(EN_US.Chiseled())))));
+		Register("blue_nether_bricks", BLUE_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(Words.Blue))));
+		Register("blue_nether_brick_stairs", BLUE_NETHER_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Nether(Words.Blue)))));
+		Register("blue_nether_brick_slab", BLUE_NETHER_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Nether(Words.Blue)))));
+		Register("blue_nether_brick_wall", BLUE_NETHER_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Nether(Words.Blue)))));
+		Register("blue_nether_brick_fence", BLUE_NETHER_BRICK_FENCE, List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether(Words.Blue)))));
+		Register("chiseled_blue_nether_bricks", CHISELED_BLUE_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Blue(Words.Chiseled)))));
 		Register("smooth_chiseled_blue_nether_bricks", SMOOTH_CHISELED_BLUE_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Blue(EN_US.Chiseled(EN_US.Smooth()))))));
 		Register("cracked_blue_nether_bricks", CRACKED_BLUE_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Blue(EN_US.Cracked())))));
 		CrackedBlocks.Register(BLUE_NETHER_BRICKS, CRACKED_BLUE_NETHER_BRICKS);
-		Register("yellow_nether_bricks", YELLOW_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Yellow()))));
-		Register("yellow_nether_brick_stairs", YELLOW_NETHER_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Nether(EN_US.Yellow())))));
-		Register("yellow_nether_brick_slab", YELLOW_NETHER_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Nether(EN_US.Yellow())))));
-		Register("yellow_nether_brick_wall", YELLOW_NETHER_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Nether(EN_US.Yellow())))));
-		Register("yellow_nether_brick_fence", YELLOW_NETHER_BRICK_FENCE, List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether(EN_US.Yellow())))));
-		Register("chiseled_yellow_nether_bricks", CHISELED_YELLOW_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Yellow(EN_US.Chiseled())))));
+		Register("yellow_nether_bricks", YELLOW_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(Words.Yellow))));
+		Register("yellow_nether_brick_stairs", YELLOW_NETHER_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Nether(Words.Yellow)))));
+		Register("yellow_nether_brick_slab", YELLOW_NETHER_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Nether(Words.Yellow)))));
+		Register("yellow_nether_brick_wall", YELLOW_NETHER_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Nether(Words.Yellow)))));
+		Register("yellow_nether_brick_fence", YELLOW_NETHER_BRICK_FENCE, List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether(Words.Yellow)))));
+		Register("chiseled_yellow_nether_bricks", CHISELED_YELLOW_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Yellow(Words.Chiseled)))));
 		Register("smooth_chiseled_yellow_nether_bricks", SMOOTH_CHISELED_YELLOW_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Yellow(EN_US.Chiseled(EN_US.Smooth()))))));
 		Register("cracked_yellow_nether_bricks", CRACKED_YELLOW_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Yellow(EN_US.Cracked())))));
 		CrackedBlocks.Register(YELLOW_NETHER_BRICKS, CRACKED_YELLOW_NETHER_BRICKS);
-		Register("black_nether_bricks", BLACK_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Black()))));
-		Register("black_nether_brick_stairs", BLACK_NETHER_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Nether(EN_US.Black())))));
-		Register("black_nether_brick_slab", BLACK_NETHER_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Nether(EN_US.Black())))));
-		Register("black_nether_brick_wall", BLACK_NETHER_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Nether(EN_US.Black())))));
-		Register("black_nether_brick_fence", BLACK_NETHER_BRICK_FENCE, List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether(EN_US.Black())))));
-		Register("chiseled_black_nether_bricks", CHISELED_BLACK_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Black(EN_US.Chiseled())))));
+		Register("black_nether_bricks", BLACK_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(Words.Black))));
+		Register("black_nether_brick_stairs", BLACK_NETHER_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Nether(Words.Black)))));
+		Register("black_nether_brick_slab", BLACK_NETHER_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Nether(Words.Black)))));
+		Register("black_nether_brick_wall", BLACK_NETHER_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Nether(Words.Black)))));
+		Register("black_nether_brick_fence", BLACK_NETHER_BRICK_FENCE, List.of(EN_US.Fence(EN_US.Brick(EN_US.Nether(Words.Black)))));
+		Register("chiseled_black_nether_bricks", CHISELED_BLACK_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Black(Words.Chiseled)))));
 		Register("smooth_chiseled_black_nether_bricks", SMOOTH_CHISELED_BLACK_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Black(EN_US.Chiseled(EN_US.Smooth()))))));
 		Register("cracked_black_nether_bricks", CRACKED_BLACK_NETHER_BRICKS, List.of(EN_US.Bricks(EN_US.Nether(EN_US.Black(EN_US.Cracked())))));
 		CrackedBlocks.Register(BLACK_NETHER_BRICKS, CRACKED_BLACK_NETHER_BRICKS);
@@ -5321,7 +4912,7 @@ public class ModBase implements ModInitializer {
 		Register("charcoal_slab", CHARCOAL_SLAB, List.of(EN_US.Slab(EN_US.Charcoal())));
 		Register("coarse_dirt_slab", COARSE_DIRT_SLAB, List.of(EN_US.Slab(EN_US.Dirt(EN_US.Coarse()))));
 		Register("cocoa_block", COCOA_BLOCK, List.of(EN_US.Block(EN_US.Cocoa())));
-		Register("blue_shroomlight", BLUE_SHROOMLIGHT, List.of(EN_US.Shroomlight(EN_US.Blue())));
+		Register("blue_shroomlight", BLUE_SHROOMLIGHT, List.of(EN_US.Shroomlight(Words.Blue)));
 		Register("flint_block", FLINT_BLOCK, List.of(EN_US.Block(EN_US.Flint())));
 		Register("flint_slab", FLINT_SLAB, List.of(EN_US.Slab(EN_US.Flint())));
 		Register("flint_bricks", FLINT_BRICKS, List.of(EN_US.Bricks(EN_US.Flint())));
@@ -5330,9 +4921,8 @@ public class ModBase implements ModInitializer {
 		Register("flint_brick_wall", FLINT_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Flint()))));
 		Register("gunpowder_block", GUNPOWDER_BLOCK, List.of(EN_US.Block(EN_US.Gunpowder())));
 		Register("gunpowder_fuse", GUNPOWDER_FUSE, List.of(EN_US.Fuse(EN_US.Gunpowder())));
-		Register("powder_keg", POWDER_KEG_ENTITY, List.of(EN_US.Keg(EN_US.Powder())));
 		Register("hedge_block", HEDGE_BLOCK, List.of(EN_US.Block(EN_US.Hedge())));
-		Register("light_blue_target", LIGHT_BLUE_TARGET, List.of(EN_US.Target(EN_US.Blue(EN_US.Light()))));
+		Register("light_blue_target", LIGHT_BLUE_TARGET, List.of(EN_US.Target(EN_US.Blue(Words.Light))));
 		Register("mycelium_roots", MYCELIUM_ROOTS, List.of(EN_US._Potted(EN_US.Roots(EN_US.Mycelium()))));
 		Register("seed_block", SEED_BLOCK, List.of(EN_US.Block(EN_US.Seed())));
 		Register("sugar_block", SUGAR_BLOCK, List.of(EN_US.Block(EN_US.Sugar())));
@@ -5431,22 +5021,9 @@ public class ModBase implements ModInitializer {
 		Register("underwater_hay_torch", "underwater_hay_wall_torch", UNDERWATER_HAY_TORCH, List.of(EN_US._Torch(EN_US.Hay(EN_US.Underwater()))));
 		//</editor-fold>
 		RegisterFood();
-		//<editor-fold desc="Bottled Confetti & Dragon's Breath">
 		Register("bottled_confetti", BOTTLED_CONFETTI_ITEM, List.of(EN_US.Confetti(EN_US.Bottled())));
-		Register("bottled_confetti", BOTTLED_CONFETTI_ENTITY, List.of(EN_US.Confetti(EN_US.Bottled())));
-		Register("dropped_confetti", DROPPED_CONFETTI_ENTITY, List.of(EN_US.Confetti(EN_US.Dropped())));
-		Register("confetti_cloud", CONFETTI_CLOUD_ENTITY, List.of(EN_US.Cloud(EN_US.Confetti())));
-		Register("dropped_dragon_breath", DROPPED_DRAGON_BREATH_ENTITY, List.of(EN_US.Breath(EN_US.Dragon(EN_US.Dropped()))));
-		Register("dragon_breath_cloud", DRAGON_BREATH_CLOUD_ENTITY, List.of(EN_US.Cloud(EN_US.Breath(EN_US.Dragon()))));
-		//</editor-fold>
-		//<editor-fold desc="Bottled Lightning">
 		Register("bottled_lightning", BOTTLED_LIGHTNING_ITEM, List.of(EN_US.Lightning(EN_US.Bottled())));
-		Register("bottled_lightning", BOTTLED_LIGHTNING_ENTITY, List.of(EN_US.Lightning(EN_US.Bottled())));
-		//</editor-fold>
-		//<editor-fold desc="Throwable Tomato">
 		Register("throwable_tomato", THROWABLE_TOMATO_ITEM, List.of(EN_US.Tomato(EN_US.Throwable())));
-		Register("throwable_tomato", THROWABLE_TOMATO_ENTITY, List.of(EN_US.Tomato(EN_US.Throwable())));
-		//</editor-fold>
 		//<editor-fold desc="Poison">
 		Register("poison_vial", POISON_VIAL, List.of(EN_US.Vial(EN_US.Poison())));
 		JuicerBlock.JUICE_MAP.put(() -> Items.POISONOUS_POTATO, POISON_VIAL);
@@ -5488,6 +5065,7 @@ public class ModBase implements ModInitializer {
 		Register("lapis_slab", LAPIS_SLAB, List.of(EN_US.Slab(EN_US.Lapis())));
 		Register("kill_potion", KILL_POTION, List.of(EN_US.Instantly(EN_US.Die(EN_US.of(EN_US.Potion())))));
 		Register("dense_brew", DENSE_BREW, List.of(EN_US.Brew(EN_US.Dense())));
+		Register("oakwood_brew", OAKWOOD_BREW, List.of(EN_US.Brew(EN_US.Oakwood())));
 		Register("sweet_brew", SWEET_BREW, List.of(EN_US.Brew(EN_US.Sweet())));
 		Register("distilled_water_bottle", DISTILLED_WATER_BOTTLE, List.of(EN_US.Bottle(EN_US.Water(EN_US.Distilled()))));
 		JuicerBlock.JUICE_MAP.put(() -> Items.ICE, DISTILLED_WATER_BOTTLE);
@@ -5504,67 +5082,47 @@ public class ModBase implements ModInitializer {
 		Register("pumice", PUMICE, List.of(EN_US.Pumice()));
 		//</editor-fold>
 		//<editor-fold desc="Slime">
-		Register("blue_slime_ball", BLUE_SLIME_BALL, List.of(EN_US.Ball(EN_US.Slime(EN_US.Blue()))));
-		Register("pink_slime_ball", PINK_SLIME_BALL, List.of(EN_US.Ball(EN_US.Slime(EN_US.Pink()))));
+		Register("blue_slime_ball", BLUE_SLIME_BALL, List.of(EN_US.Ball(EN_US.Slime(Words.Blue))));
+		Register("pink_slime_ball", PINK_SLIME_BALL, List.of(EN_US.Ball(EN_US.Slime(Words.Pink))));
 		DispenserBlock.registerBehavior(PINK_SLIME_BALL, new ProjectileDispenserBehavior(){
 			@Override
 			protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
 				return Util.make(new PinkSlimeBallEntity(world, position.getX(), position.getY(), position.getZ()), entity -> entity.setItem(stack));
 			}
 		});
-		Register("slime_bottle", SLIME_BOTTLE, List.of(EN_US.Bottle(EN_US.Slime())));
+		Register("slime_bottle", SLIME_BOTTLE, List.of(EN_US.Bottle(Words.Slime)));
 		JuicerBlock.JUICE_MAP.put(() -> Items.SLIME_BLOCK, SLIME_BOTTLE);
-		Register("blue_slime_bottle", BLUE_SLIME_BOTTLE, List.of(EN_US.Bottle(EN_US.Slime(EN_US.Blue()))));
+		Register("blue_slime_bottle", BLUE_SLIME_BOTTLE, List.of(EN_US.Bottle(EN_US.Slime(Words.Blue))));
 		JuicerBlock.JUICE_MAP.put(BLUE_SLIME_BLOCK::asItem, BLUE_SLIME_BOTTLE);
-		Register("pink_slime_bottle", PINK_SLIME_BOTTLE, List.of(EN_US.Bottle(EN_US.Slime(EN_US.Pink()))));
+		Register("pink_slime_bottle", PINK_SLIME_BOTTLE, List.of(EN_US.Bottle(EN_US.Slime(Words.Pink))));
 		JuicerBlock.JUICE_MAP.put(PINK_SLIME_BLOCK::asItem, PINK_SLIME_BOTTLE);
-		Register("blue_slime_block", BLUE_SLIME_BLOCK, List.of(EN_US.Block(EN_US.Slime(EN_US.Blue()))));
-		Register("pink_slime_block", PINK_SLIME_BLOCK, List.of(EN_US.Block(EN_US.Slime(EN_US.Pink()))));
-		Register("tropical_slime", TROPICAL_SLIME_ENTITY, List.of(EN_US.Slime(EN_US.Tropical())));
-		FabricDefaultAttributeRegistry.register(TROPICAL_SLIME_ENTITY, HostileEntity.createHostileAttributes());
-		BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.WARM_OCEANS).and(BiomeSelectors.includeByKey(BiomeKeys.JUNGLE)),
-				SpawnGroup.MONSTER, TROPICAL_SLIME_ENTITY, 1, 1, 1);
-		SpawnRestrictionAccessor.callRegister(TROPICAL_SLIME_ENTITY, SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, TropicalSlimeEntity::canMobSpawn);
-		Register("pink_slime_ball", PINK_SLIME_BALL_ENTITY, List.of(EN_US.Ball(EN_US.Slime(EN_US.Pink()))));
-		Register("pink_slime", PINK_SLIME_ENTITY, List.of(EN_US.Slime(EN_US.Pink())));
-		FabricDefaultAttributeRegistry.register(PINK_SLIME_ENTITY, HostileEntity.createHostileAttributes());
-		SpawnRestrictionAccessor.callRegister(PINK_SLIME_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SlimeEntity::canMobSpawn);
+		Register("blue_slime_block", BLUE_SLIME_BLOCK, List.of(EN_US.Block(EN_US.Slime(Words.Blue))));
+		Register("pink_slime_block", PINK_SLIME_BLOCK, List.of(EN_US.Block(EN_US.Slime(Words.Pink))));
 		//Other Mobs
-		Register("slime_feather", SLIME_FEATHER, List.of(EN_US.Feather(EN_US.Slime())));
-		Register("slime_chicken", SLIME_CHICKEN_ENTITY, List.of(EN_US.Slicken()));
-		FabricDefaultAttributeRegistry.register(SLIME_CHICKEN_ENTITY, SlimeChickenEntity.createChickenAttributes());
-		SpawnRestrictionAccessor.callRegister(SLIME_CHICKEN_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
-
-		Register("slime_cow", SLIME_COW_ENTITY, List.of(EN_US.Cow(EN_US.Slime())));
-		FabricDefaultAttributeRegistry.register(SLIME_COW_ENTITY, SlimeCowEntity.createCowAttributes());
-		SpawnRestrictionAccessor.callRegister(SLIME_COW_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
-
-		Register("slime_horse", SLIME_HORSE_ENTITY, List.of(EN_US.Slorse()));
-		FabricDefaultAttributeRegistry.register(SLIME_HORSE_ENTITY, SlimeHorseEntity.createSlimeHorseAttributes());
-		SpawnRestrictionAccessor.callRegister(SLIME_HORSE_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
+		Register("slime_feather", SLIME_FEATHER, List.of(EN_US.Feather(Words.Slime)));
 		//Lanterns
 		Register("magma_cube_lantern", MAGMA_CUBE_LANTERN, List.of(EN_US.Lantern(EN_US.Cube(EN_US.Magma()))));
-		Register("slime_lantern", SLIME_LANTERN, List.of(EN_US.Lantern(EN_US.Slime())));
+		Register("slime_lantern", SLIME_LANTERN, List.of(EN_US.Lantern(Words.Slime)));
 		Register("tropical_slime_lantern", TROPICAL_SLIME_LANTERN, List.of(EN_US.Lantern(EN_US.Slime(EN_US.Tropical()))));
-		Register("pink_slime_lantern", PINK_SLIME_LANTERN, List.of(EN_US.Lantern(EN_US.Slime(EN_US.Pink()))));
+		Register("pink_slime_lantern", PINK_SLIME_LANTERN, List.of(EN_US.Lantern(EN_US.Slime(Words.Pink))));
 		//</editor-fold>
 		Register("turtle_chestplate", TURTLE_CHESTPLATE, List.of(EN_US.Chestplate(EN_US.Turtle())));
 		Register("turtle_boots", TURTLE_BOOTS, List.of(EN_US.Boots(EN_US.Turtle())));
 		Register("horn", HORN, List.of(EN_US.Horn()));
 		//<editor-fold desc="Feathers">
 		Register("fancy_feather", FANCY_FEATHER, List.of(EN_US.Feather(EN_US.Fancy())));
-		Register("black_feather", BLACK_FEATHER, List.of(EN_US.Feather(EN_US.Black())));
-		Register("red_feather", RED_FEATHER, List.of(EN_US.Feather(EN_US.Red())));
-		Register("light_feather", LIGHT_FEATHER, List.of(EN_US.Feather(EN_US.Light())));
+		Register("black_feather", BLACK_FEATHER, List.of(EN_US.Feather(Words.Black)));
+		Register("red_feather", RED_FEATHER, List.of(EN_US.Feather(Words.Red)));
+		Register("light_feather", LIGHT_FEATHER, List.of(EN_US.Feather(Words.Light)));
 		//</editor-fold>
 		//<editor-fold desc="Books">
 		Register("unreadable_book", UNREADABLE_BOOK, List.of(EN_US.Book(EN_US.Unreadable())));
-		Register("red_book", RED_BOOK, List.of(EN_US.Book(EN_US.Red())));
-		Register("orange_book", ORANGE_BOOK, List.of(EN_US.Book(EN_US.Orange())));
-		Register("yellow_book", YELLOW_BOOK, List.of(EN_US.Book(EN_US.Yellow())));
-		Register("green_book", GREEN_BOOK, List.of(EN_US.Book(EN_US.Green())));
-		Register("blue_book", BLUE_BOOK, List.of(EN_US.Book(EN_US.Blue())));
-		Register("purple_book", PURPLE_BOOK, List.of(EN_US.Book(EN_US.Purple())));
+		Register("red_book", RED_BOOK, List.of(EN_US.Book(Words.Red)));
+		Register("orange_book", ORANGE_BOOK, List.of(EN_US.Book(Words.Orange)));
+		Register("yellow_book", YELLOW_BOOK, List.of(EN_US.Book(Words.Yellow)));
+		Register("green_book", GREEN_BOOK, List.of(EN_US.Book(Words.Green)));
+		Register("blue_book", BLUE_BOOK, List.of(EN_US.Book(Words.Blue)));
+		Register("purple_book", PURPLE_BOOK, List.of(EN_US.Book(Words.Purple)));
 		Register("gray_book", GRAY_BOOK, List.of(EN_US.Book(EN_US.Gray())));
 		//</editor-fold>
 		//<editor-fold desc="Wood">
@@ -5595,43 +5153,12 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="Wool">
 		for (DyeColor color : DyeColor.values()) Register(color.getName() + "_wool_slab", WOOL_SLABS.get(color), List.of(EN_US.Slab(EN_US.Wool(EN_US.Color(color)))));
-		Register("rainbow_wool", RAINBOW_WOOL, List.of(EN_US.Wool(EN_US.Rainbow())));
-		Register("rainbow_wool_slab", RAINBOW_WOOL_SLAB, List.of(EN_US.Slab(EN_US.Wool(EN_US.Rainbow()))));
-		Register("rainbow_carpet", RAINBOW_CARPET, List.of(EN_US.Carpet(EN_US.Rainbow())));
-//		Register("rainbow_bed", RAINBOW_BED, List.of(EN_US.Bed(EN_US.Rainbow())));
-		Register("rainbow_sheep", RAINBOW_SHEEP_ENTITY, List.of(EN_US.Sheep(EN_US.Rainbow())));
-		FabricDefaultAttributeRegistry.register(RAINBOW_SHEEP_ENTITY, RainbowSheepEntity.createSheepAttributes());
-		SpawnRestrictionAccessor.callRegister(RAINBOW_SHEEP_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
+		Register("rainbow_wool", RAINBOW_WOOL, List.of(EN_US.Wool(Words.Rainbow)));
+		Register("rainbow_wool_slab", RAINBOW_WOOL_SLAB, List.of(EN_US.Slab(EN_US.Wool(Words.Rainbow))));
+		Register("rainbow_carpet", RAINBOW_CARPET, List.of(EN_US.Carpet(Words.Rainbow)));
+//		Register("rainbow_bed", RAINBOW_BED, List.of(EN_US.Bed(Words.Rainbow)));
 		//</editor-fold>
-		//<editor-fold desc="Jolly Llama">
-		Register("jolly_llama", JOLLY_LLAMA_ENTITY, List.of(EN_US.Llama(EN_US.Jolly())));
-		FabricDefaultAttributeRegistry.register(JOLLY_LLAMA_ENTITY, LlamaEntity.createLlamaAttributes());
-		SpawnRestrictionAccessor.callRegister(JOLLY_LLAMA_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
-		//</editor-fold>
-		//<editor-fold desc="Chicken Variants">
-		Register("fancy_chicken", FANCY_CHICKEN_ENTITY, List.of(EN_US.Chicken(EN_US.Fancy())));
-		FabricDefaultAttributeRegistry.register(FANCY_CHICKEN_ENTITY, FancyChickenEntity.createChickenAttributes());
-		SpawnRestrictionAccessor.callRegister(FANCY_CHICKEN_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
-		//</editor-fold>
-		//<editor-fold desc="Cow Variants">
-		Register("blue_mooshroom", BLUE_MOOSHROOM_ENTITY, List.of(EN_US.Mooshroom(EN_US.Blue())));
-		FabricDefaultAttributeRegistry.register(BLUE_MOOSHROOM_ENTITY, BlueMooshroomEntity.createCowAttributes());
-		SpawnRestrictionAccessor.callRegister(BLUE_MOOSHROOM_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, BlueMooshroomEntity::canSpawn);
-		//Nether Mooshroom
-		Register("nether_mooshroom", NETHER_MOOSHROOM_ENTITY, List.of(EN_US.Mooshroom(EN_US.Nether())));
-		FabricDefaultAttributeRegistry.register(NETHER_MOOSHROOM_ENTITY, NetherMooshroomEntity.createCowAttributes());
-		SpawnRestrictionAccessor.callRegister(NETHER_MOOSHROOM_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, NetherMooshroomEntity::canSpawn);
-		//Flower Cows
-		Register("moobloom", MOOBLOOM_ENTITY, List.of(EN_US.Moobloom()));
-		FabricDefaultAttributeRegistry.register(MOOBLOOM_ENTITY, MoobloomEntity.createCowAttributes());
-		SpawnRestrictionAccessor.callRegister(MOOBLOOM_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FlowerCowEntity::canSpawn);
-		Register("moolip", MOOLIP_ENTITY, List.of(EN_US.Moolip()));
-		FabricDefaultAttributeRegistry.register(MOOLIP_ENTITY, MoolipEntity.createCowAttributes());
-		SpawnRestrictionAccessor.callRegister(MOOLIP_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FlowerCowEntity::canSpawn);
-		Register("mooblossom", MOOBLOSSOM_ENTITY, List.of(EN_US.Mooblossom()));
-		FabricDefaultAttributeRegistry.register(MOOBLOSSOM_ENTITY, MooblossomEntity.createCowAttributes());
-		SpawnRestrictionAccessor.callRegister(MOOBLOSSOM_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FlowerCowEntity::canSpawn);
-		//Mooblossom Flowers
+		//<editor-fold desc="Mooblossom Flowers">
 		Register("mooblossom_magenta_tulip", MOOBLOSSOM_MAGENTA_TULIP, List.of(EN_US.Tulip(EN_US.Magenta(EN_US.Mooblossom()))));
 		Register("mooblossom_red_tulip", MOOBLOSSOM_RED_TULIP, List.of(EN_US.Tulip(EN_US.Red(EN_US.Mooblossom()))));
 		Register("mooblossom_orange_tulip", MOOBLOSSOM_ORANGE_TULIP, List.of(EN_US.Tulip(EN_US.Orange(EN_US.Mooblossom()))));
@@ -5641,11 +5168,6 @@ public class ModBase implements ModInitializer {
 		//<editor-fold desc="Moss">
 		Register("moss_slab", MOSS_SLAB, List.of(EN_US.Slab(EN_US.Moss())));
 //		Register("moss_bed", MOSS_BED, List.of(EN_US.Bed(EN_US.Moss())));
-		Register("mossy_sheep", MOSSY_SHEEP_ENTITY, List.of(EN_US.Sheep(EN_US.Mossy())));
-		FabricDefaultAttributeRegistry.register(MOSSY_SHEEP_ENTITY, MossySheepEntity.createSheepAttributes());
-		SpawnRestrictionAccessor.callRegister(MOSSY_SHEEP_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.BAMBOO_JUNGLE),
-				SpawnGroup.CREATURE, MOSSY_SHEEP_ENTITY, 2, 2, 4);
 		//</editor-fold>
 		//<editor-fold desc="Glow Lichen">
 		Register("glow_lichen_block", GLOW_LICHEN_BLOCK, List.of(EN_US.Block(EN_US.Lichen(EN_US.Glow()))));
@@ -5664,9 +5186,9 @@ public class ModBase implements ModInitializer {
 			Register(color.getName() + "_fleece_slab", FLEECE_SLABS.get(color), List.of(EN_US.Slab(EN_US.Fleece(EN_US.Color(color)))));
 			Register(color.getName() + "_fleece_carpet", FLEECE_CARPETS.get(color), List.of(EN_US.Carpet(EN_US.Fleece(EN_US.Color(color)))));
 		}
-		Register("rainbow_fleece", RAINBOW_FLEECE, List.of(EN_US.Fleece(EN_US.Rainbow())));
-		Register("rainbow_fleece_slab", RAINBOW_FLEECE_SLAB, List.of(EN_US.Slab(EN_US.Fleece(EN_US.Rainbow()))));
-		Register("rainbow_fleece_carpet", RAINBOW_FLEECE_CARPET, List.of(EN_US.Carpet(EN_US.Fleece(EN_US.Rainbow()))));
+		Register("rainbow_fleece", RAINBOW_FLEECE, List.of(EN_US.Fleece(Words.Rainbow)));
+		Register("rainbow_fleece_slab", RAINBOW_FLEECE_SLAB, List.of(EN_US.Slab(EN_US.Fleece(Words.Rainbow))));
+		Register("rainbow_fleece_carpet", RAINBOW_FLEECE_CARPET, List.of(EN_US.Carpet(EN_US.Fleece(Words.Rainbow))));
 		Register("fleece_helmet", FLEECE_HELMET, List.of(EN_US.Helmet(EN_US.Fleece())));
 		Register("fleece_chestplate", FLEECE_CHESTPLATE, List.of(EN_US.Chestplate(EN_US.Fleece())));
 		Register("fleece_leggings", FLEECE_LEGGINGS, List.of(EN_US.Leggings(EN_US.Fleece())));
@@ -5683,10 +5205,10 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="Charred Wood">
 		Register("charred_log", CHARRED_LOG, List.of(EN_US.Log(EN_US.Charred())));
-		Register("stripped_charred_log", STRIPPED_CHARRED_LOG, List.of(EN_US.Log(EN_US.Charred(EN_US.Stripped()))));
+		Register("stripped_charred_log", STRIPPED_CHARRED_LOG, List.of(EN_US.Log(EN_US.Charred(Words.Stripped))));
 		StrippedBlockUtil.Register(CHARRED_LOG, STRIPPED_CHARRED_LOG);
 		Register("charred_wood", CHARRED_WOOD, List.of(EN_US.Wood(EN_US.Charred())));
-		Register("stripped_charred_wood", STRIPPED_CHARRED_WOOD, List.of(EN_US.Wood(EN_US.Charred(EN_US.Stripped()))));
+		Register("stripped_charred_wood", STRIPPED_CHARRED_WOOD, List.of(EN_US.Wood(EN_US.Charred(Words.Stripped))));
 		StrippedBlockUtil.Register(CHARRED_WOOD, STRIPPED_CHARRED_WOOD);
 		Register("charred_planks", CHARRED_PLANKS, List.of(EN_US.Planks(EN_US.Charred())));
 		Register("charred_stairs", CHARRED_STAIRS, List.of(EN_US.Stairs(EN_US.Charred())));
@@ -5743,7 +5265,7 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:mud_brick_stairs", MUD_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Mud()))));
 		Register("minecraft:mud_brick_slab", MUD_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Mud()))));
 		Register("minecraft:mud_brick_wall", MUD_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Mud()))));
-		Register("chiseled_mud_bricks", CHISELED_MUD_BRICKS, List.of(EN_US.Bricks(EN_US.Mud(EN_US.Chiseled()))));
+		Register("chiseled_mud_bricks", CHISELED_MUD_BRICKS, List.of(EN_US.Bricks(EN_US.Mud(Words.Chiseled))));
 		Register("smooth_chiseled_mud_bricks", SMOOTH_CHISELED_MUD_BRICKS, List.of(EN_US.Bricks(EN_US.Mud(EN_US.Chiseled(EN_US.Smooth())))));
 		DispenserBlock.registerBehavior(Items.POTION, new ItemDispenserBehavior() {
 			private final ItemDispenserBehavior fallback = new ItemDispenserBehavior();
@@ -5782,10 +5304,10 @@ public class ModBase implements ModInitializer {
 		RegisterBlood();
 		//<editor-fold desc="Mangrove">
 		Register("minecraft:mangrove_log", MANGROVE_LOG, List.of(EN_US.Log(EN_US.Mangrove())));
-		Register("minecraft:stripped_mangrove_log", STRIPPED_MANGROVE_LOG, List.of(EN_US.Log(EN_US.Mangrove(EN_US.Stripped()))));
+		Register("minecraft:stripped_mangrove_log", STRIPPED_MANGROVE_LOG, List.of(EN_US.Log(EN_US.Mangrove(Words.Stripped))));
 		StrippedBlockUtil.Register(MANGROVE_LOG, STRIPPED_MANGROVE_LOG);
 		Register("minecraft:mangrove_wood", MANGROVE_WOOD, List.of(EN_US.Wood(EN_US.Mangrove())));
-		Register("minecraft:stripped_mangrove_wood", STRIPPED_MANGROVE_WOOD, List.of(EN_US.Wood(EN_US.Mangrove(EN_US.Stripped()))));
+		Register("minecraft:stripped_mangrove_wood", STRIPPED_MANGROVE_WOOD, List.of(EN_US.Wood(EN_US.Mangrove(Words.Stripped))));
 		StrippedBlockUtil.Register(MANGROVE_WOOD, STRIPPED_MANGROVE_WOOD);
 		Register("minecraft:mangrove_leaves", MANGROVE_LEAVES, List.of(EN_US.Leaves(EN_US.Mangrove())));
 		Register("minecraft:mangrove_planks", MANGROVE_PLANKS, List.of(EN_US.Planks(EN_US.Mangrove())));
@@ -5836,10 +5358,10 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="Cherry">
 		Register("minecraft:cherry_log", CHERRY_LOG, List.of(EN_US.Log(EN_US.Cherry())));
-		Register("minecraft:stripped_cherry_log", STRIPPED_CHERRY_LOG, List.of(EN_US.Log(EN_US.Cherry(EN_US.Stripped()))));
+		Register("minecraft:stripped_cherry_log", STRIPPED_CHERRY_LOG, List.of(EN_US.Log(EN_US.Cherry(Words.Stripped))));
 		StrippedBlockUtil.Register(CHERRY_LOG, STRIPPED_CHERRY_LOG);
 		Register("minecraft:cherry_wood", CHERRY_WOOD, List.of(EN_US.Wood(EN_US.Cherry())));
-		Register("minecraft:stripped_cherry_wood", STRIPPED_CHERRY_WOOD, List.of(EN_US.Wood(EN_US.Cherry(EN_US.Stripped()))));
+		Register("minecraft:stripped_cherry_wood", STRIPPED_CHERRY_WOOD, List.of(EN_US.Wood(EN_US.Cherry(Words.Stripped))));
 		StrippedBlockUtil.Register(CHERRY_WOOD, STRIPPED_CHERRY_WOOD);
 		Register("minecraft:cherry_leaves", CHERRY_LEAVES, List.of(EN_US.Leaves(EN_US.Cherry())));
 		Register("minecraft:cherry_planks", CHERRY_PLANKS, List.of(EN_US.Planks(EN_US.Cherry())));
@@ -5887,67 +5409,67 @@ public class ModBase implements ModInitializer {
 		Register("cherry_ender_campfire", CHERRY_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Cherry()))));
 		//</editor-fold>
 		//<editor-fold desc="Cassia">
-		Register("cassia_log", CASSIA_LOG, List.of(EN_US.Log(EN_US.Cassia())));
-		Register("stripped_cassia_log", STRIPPED_CASSIA_LOG, List.of(EN_US.Log(EN_US.Cassia(EN_US.Stripped()))));
+		Register("cassia_log", CASSIA_LOG, List.of(EN_US.Log(Words.Cassia)));
+		Register("stripped_cassia_log", STRIPPED_CASSIA_LOG, List.of(EN_US.Log(EN_US.Cassia(Words.Stripped))));
 		StrippedBlockUtil.Register(CASSIA_LOG, STRIPPED_CASSIA_LOG, StrippedBlockUtil.DropStack(new ItemStack(CINNAMON, 4)));
-		Register("cassia_wood", CASSIA_WOOD, List.of(EN_US.Wood(EN_US.Cassia())));
-		Register("stripped_cassia_wood", STRIPPED_CASSIA_WOOD, List.of(EN_US.Wood(EN_US.Cassia(EN_US.Stripped()))));
+		Register("cassia_wood", CASSIA_WOOD, List.of(EN_US.Wood(Words.Cassia)));
+		Register("stripped_cassia_wood", STRIPPED_CASSIA_WOOD, List.of(EN_US.Wood(EN_US.Cassia(Words.Stripped))));
 		StrippedBlockUtil.Register(CASSIA_WOOD, STRIPPED_CASSIA_WOOD, StrippedBlockUtil.DropStack(new ItemStack(CINNAMON, 6)));
-		Register("cassia_leaves", CASSIA_LEAVES, List.of(EN_US.Leaves(EN_US.Cassia())));
+		Register("cassia_leaves", CASSIA_LEAVES, List.of(EN_US.Leaves(Words.Cassia)));
 		Register("flowering_cassia_leaves", FLOWERING_CASSIA_LEAVES, List.of(EN_US.Leaves(EN_US.Cassia(EN_US.Flowering()))));
-		Register("cassia_planks", CASSIA_PLANKS, List.of(EN_US.Planks(EN_US.Cassia())));
-		Register("cassia_stairs", CASSIA_STAIRS, List.of(EN_US.Stairs(EN_US.Cassia())));
-		Register("cassia_slab", CASSIA_SLAB, List.of(EN_US.Slab(EN_US.Cassia())));
-		Register("cassia_fence", CASSIA_FENCE, List.of(EN_US.Fence(EN_US.Cassia())));
-		Register("cassia_fence_gate", CASSIA_FENCE_GATE, List.of(EN_US.Gate(EN_US.Fence(EN_US.Cassia()))));
-		Register("cassia_door", CASSIA_DOOR, List.of(EN_US.Door(EN_US.Cassia())));
-		Register("cassia_trapdoor", CASSIA_TRAPDOOR, List.of(EN_US.Trapdoor(EN_US.Cassia())));
-		Register("cassia_pressure_plate", CASSIA_PRESSURE_PLATE, List.of(EN_US.Plate(EN_US.Pressure(EN_US.Cassia()))));
-		Register("cassia_button", CASSIA_BUTTON, List.of(EN_US.Button(EN_US.Cassia())));
-		Register("cassia", CASSIA_SIGN, List.of(EN_US._Sign(EN_US.Cassia())));
-		Register("cassia_iron_hanging_sign", "cassia_iron_wall_hanging_sign", CASSIA_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Cassia(), EN_US.Chain(EN_US.Iron(EN_US.with())))));
-		Register("cassia_gold_hanging_sign", "cassia_gold_wall_hanging_sign", CASSIA_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Cassia(), EN_US.Chain(EN_US.Gold(EN_US.with())))));
-		Register("cassia_copper_hanging_sign", "cassia_copper_wall_hanging_sign", CASSIA_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Cassia(), EN_US.Chain(EN_US.Copper(EN_US.with())))));
-		Register("cassia_exposed_copper_hanging_sign", "cassia_exposed_copper_wall_hanging_sign", CASSIA_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Cassia(), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
-		Register("cassia_weathered_copper_hanging_sign", "cassia_weathered_copper_wall_hanging_sign", CASSIA_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Cassia(), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
-		Register("cassia_oxidized_copper_hanging_sign", "cassia_oxidized_copper_wall_hanging_sign", CASSIA_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Cassia(), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
-		Register("cassia_netherite_hanging_sign", "cassia_netherite_wall_hanging_sign", CASSIA_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Cassia(), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
-		Register("cassia", CASSIA_BOAT, List.of(EN_US._Boat(EN_US.Cassia())));
-		Register("cassia_sapling", CASSIA_SAPLING, List.of(EN_US._Potted(EN_US.Sapling(EN_US.Cassia()))));
-		Register("cassia_beehive", CASSIA_BEEHIVE, List.of(EN_US.Beehive(EN_US.Cassia())));
-		Register("cassia_bookshelf", CASSIA_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Cassia())));
-		Register("cassia_chiseled_bookshelf", CASSIA_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Cassia()))));
-		Register("cassia_crafting_table", CASSIA_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Cassia()))));
-		Register("cassia_ladder", CASSIA_LADDER, List.of(EN_US.Ladder(EN_US.Cassia())));
-		Register("cassia_woodcutter", CASSIA_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Cassia())));
-		Register("cassia_barrel", CASSIA_BARREL, List.of(EN_US.Barrel(EN_US.Cassia())));
-		Register("cassia_lectern", CASSIA_LECTERN, List.of(EN_US.Lectern(EN_US.Cassia())));
-		Register("cassia_powder_keg", CASSIA_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Cassia()))));
-		Register("cassia_log_slab", CASSIA_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Cassia()))));
-		Register("stripped_cassia_log_slab", STRIPPED_CASSIA_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Stripped(EN_US.Cassia())))));
+		Register("cassia_planks", CASSIA_PLANKS, List.of(EN_US.Planks(Words.Cassia)));
+		Register("cassia_stairs", CASSIA_STAIRS, List.of(EN_US.Stairs(Words.Cassia)));
+		Register("cassia_slab", CASSIA_SLAB, List.of(EN_US.Slab(Words.Cassia)));
+		Register("cassia_fence", CASSIA_FENCE, List.of(EN_US.Fence(Words.Cassia)));
+		Register("cassia_fence_gate", CASSIA_FENCE_GATE, List.of(EN_US.Gate(EN_US.Fence(Words.Cassia))));
+		Register("cassia_door", CASSIA_DOOR, List.of(EN_US.Door(Words.Cassia)));
+		Register("cassia_trapdoor", CASSIA_TRAPDOOR, List.of(EN_US.Trapdoor(Words.Cassia)));
+		Register("cassia_pressure_plate", CASSIA_PRESSURE_PLATE, List.of(EN_US.Plate(EN_US.Pressure(Words.Cassia))));
+		Register("cassia_button", CASSIA_BUTTON, List.of(EN_US.Button(Words.Cassia)));
+		Register("cassia", CASSIA_SIGN, List.of(EN_US._Sign(Words.Cassia)));
+		Register("cassia_iron_hanging_sign", "cassia_iron_wall_hanging_sign", CASSIA_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Cassia, EN_US.Chain(EN_US.Iron(EN_US.with())))));
+		Register("cassia_gold_hanging_sign", "cassia_gold_wall_hanging_sign", CASSIA_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Cassia, EN_US.Chain(EN_US.Gold(EN_US.with())))));
+		Register("cassia_copper_hanging_sign", "cassia_copper_wall_hanging_sign", CASSIA_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Cassia, EN_US.Chain(EN_US.Copper(EN_US.with())))));
+		Register("cassia_exposed_copper_hanging_sign", "cassia_exposed_copper_wall_hanging_sign", CASSIA_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Cassia, EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
+		Register("cassia_weathered_copper_hanging_sign", "cassia_weathered_copper_wall_hanging_sign", CASSIA_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Cassia, EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
+		Register("cassia_oxidized_copper_hanging_sign", "cassia_oxidized_copper_wall_hanging_sign", CASSIA_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Cassia, EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
+		Register("cassia_netherite_hanging_sign", "cassia_netherite_wall_hanging_sign", CASSIA_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(Words.Cassia, EN_US.Chain(EN_US.Netherite(EN_US.with())))));
+		Register("cassia", CASSIA_BOAT, List.of(EN_US._Boat(Words.Cassia)));
+		Register("cassia_sapling", CASSIA_SAPLING, List.of(EN_US._Potted(EN_US.Sapling(Words.Cassia))));
+		Register("cassia_beehive", CASSIA_BEEHIVE, List.of(EN_US.Beehive(Words.Cassia)));
+		Register("cassia_bookshelf", CASSIA_BOOKSHELF, List.of(EN_US.Bookshelf(Words.Cassia)));
+		Register("cassia_chiseled_bookshelf", CASSIA_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(Words.Cassia))));
+		Register("cassia_crafting_table", CASSIA_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(Words.Cassia))));
+		Register("cassia_ladder", CASSIA_LADDER, List.of(EN_US.Ladder(Words.Cassia)));
+		Register("cassia_woodcutter", CASSIA_WOODCUTTER, List.of(EN_US.Woodcutter(Words.Cassia)));
+		Register("cassia_barrel", CASSIA_BARREL, List.of(EN_US.Barrel(Words.Cassia)));
+		Register("cassia_lectern", CASSIA_LECTERN, List.of(EN_US.Lectern(Words.Cassia)));
+		Register("cassia_powder_keg", CASSIA_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(Words.Cassia))));
+		Register("cassia_log_slab", CASSIA_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(Words.Cassia))));
+		Register("stripped_cassia_log_slab", STRIPPED_CASSIA_LOG_SLAB, List.of(EN_US.Slab(EN_US.Log(EN_US.Stripped(Words.Cassia)))));
 		StrippedBlockUtil.Register(CASSIA_LOG_SLAB, STRIPPED_CASSIA_LOG_SLAB, StrippedBlockUtil.DropStack(new ItemStack(CINNAMON, 2)));
-		Register("cassia_wood_slab", CASSIA_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Cassia()))));
-		Register("stripped_cassia_wood_slab", STRIPPED_CASSIA_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Stripped(EN_US.Cassia())))));
+		Register("cassia_wood_slab", CASSIA_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(Words.Cassia))));
+		Register("stripped_cassia_wood_slab", STRIPPED_CASSIA_WOOD_SLAB, List.of(EN_US.Slab(EN_US.Wood(EN_US.Stripped(Words.Cassia)))));
 		StrippedBlockUtil.Register(CASSIA_WOOD_SLAB, STRIPPED_CASSIA_WOOD_SLAB, StrippedBlockUtil.DropStack(new ItemStack(CINNAMON, 3)));
-		Register("cassia_hammer", CASSIA_HAMMER, List.of(EN_US.Hammer(EN_US.Cassia())));
-		Register("cassia_torch", "cassia_wall_torch", CASSIA_TORCH, List.of(EN_US._Torch(EN_US.Cassia())));
-		Register("cassia_soul_torch", "cassia_soul_wall_torch", CASSIA_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Cassia()))));
-		Register("cassia_ender_torch", "cassia_ender_wall_torch", CASSIA_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Cassia()))));
+		Register("cassia_hammer", CASSIA_HAMMER, List.of(EN_US.Hammer(Words.Cassia)));
+		Register("cassia_torch", "cassia_wall_torch", CASSIA_TORCH, List.of(EN_US._Torch(Words.Cassia)));
+		Register("cassia_soul_torch", "cassia_soul_wall_torch", CASSIA_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(Words.Cassia))));
+		Register("cassia_ender_torch", "cassia_ender_wall_torch", CASSIA_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(Words.Cassia))));
 		Register("underwater_cassia_torch", "underwater_cassia_wall_torch", UNDERWATER_CASSIA_TORCH, List.of(EN_US._Torch(EN_US.Cassia(EN_US.Underwater()))));
-		Register("cassia_campfire", CASSIA_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Cassia())));
-		Register("cassia_soul_campfire", CASSIA_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Cassia()))));
-		Register("cassia_ender_campfire", CASSIA_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Cassia()))));
+		Register("cassia_campfire", CASSIA_CAMPFIRE, List.of(EN_US.Campfire(Words.Cassia)));
+		Register("cassia_soul_campfire", CASSIA_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(Words.Cassia))));
+		Register("cassia_ender_campfire", CASSIA_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(Words.Cassia))));
 		//</editor-fold>
 		//<editor-fold desc="Dogwood">
 		Register("dogwood_log", DOGWOOD_LOG, List.of(EN_US.Log(EN_US.Dogwood())));
-		Register("stripped_dogwood_log", STRIPPED_DOGWOOD_LOG, List.of(EN_US.Log(EN_US.Dogwood(EN_US.Stripped()))));
+		Register("stripped_dogwood_log", STRIPPED_DOGWOOD_LOG, List.of(EN_US.Log(EN_US.Dogwood(Words.Stripped))));
 		StrippedBlockUtil.Register(DOGWOOD_LOG, STRIPPED_DOGWOOD_LOG);
 		Register("dogwood_wood", DOGWOOD_WOOD, List.of(EN_US.Wood(EN_US.Dogwood())));
-		Register("stripped_dogwood_wood", STRIPPED_DOGWOOD_WOOD, List.of(EN_US.Wood(EN_US.Dogwood(EN_US.Stripped()))));
+		Register("stripped_dogwood_wood", STRIPPED_DOGWOOD_WOOD, List.of(EN_US.Wood(EN_US.Dogwood(Words.Stripped))));
 		StrippedBlockUtil.Register(DOGWOOD_WOOD, STRIPPED_DOGWOOD_WOOD);
-		Register("pink_dogwood_leaves", PINK_DOGWOOD_LEAVES, List.of(EN_US.Leaves(EN_US.Dogwood(EN_US.Pink()))));
-		Register("pale_dogwood_leaves", PALE_DOGWOOD_LEAVES, List.of(EN_US.Leaves(EN_US.Dogwood(EN_US.Pale()))));
-		Register("white_dogwood_leaves", WHITE_DOGWOOD_LEAVES, List.of(EN_US.Leaves(EN_US.Dogwood(EN_US.White()))));
+		Register("pink_dogwood_leaves", PINK_DOGWOOD_LEAVES, List.of(EN_US.Leaves(EN_US.Dogwood(Words.Pink))));
+		Register("pale_dogwood_leaves", PALE_DOGWOOD_LEAVES, List.of(EN_US.Leaves(EN_US.Dogwood(Words.Pale))));
+		Register("white_dogwood_leaves", WHITE_DOGWOOD_LEAVES, List.of(EN_US.Leaves(EN_US.Dogwood(Words.White))));
 		Register("dogwood_planks", DOGWOOD_PLANKS, List.of(EN_US.Planks(EN_US.Dogwood())));
 		Register("dogwood_stairs", DOGWOOD_STAIRS, List.of(EN_US.Stairs(EN_US.Dogwood())));
 		Register("dogwood_slab", DOGWOOD_SLAB, List.of(EN_US.Slab(EN_US.Dogwood())));
@@ -5997,31 +5519,15 @@ public class ModBase implements ModInitializer {
 		Register("tiki_torch_post", TIKI_TORCH_POST, List.of(EN_US.Post(EN_US.Torch(EN_US.Tiki()))));
 		ModBambooRegistry.RegisterBamboo();
 		Register("javelin", JAVELIN, List.of(EN_US.Javelin()));
-		Register("javelin", JAVELIN_ENTITY, List.of(EN_US.Javelin()));
-		Register("amethyst_trident", AMETHYST_TRIDENT, List.of(EN_US.Trident(EN_US.Amethyst())));
-		Register("amethyst_trident", AMETHYST_TRIDENT_ENTITY, List.of(EN_US.Trident(EN_US.Amethyst())));
+		Register("amethyst_trident", AMETHYST_TRIDENT, List.of(EN_US.Trident(Words.Amethyst)));
 		//Mobs
 		ModActivities.Initialize();
 		ModDataHandlers.Initialize();
-		//<editor-fold desc="Allays">
-		Register("minecraft:allay", ALLAY_ENTITY, List.of(EN_US.Allay()));
-		FabricDefaultAttributeRegistry.register(ALLAY_ENTITY, AllayEntity.createAllayAttributes());
-		//</editor-fold>
 		//<editor-fold desc="Frogs">
 		Register("minecraft:ochre_froglight", OCHRE_FROGLIGHT, List.of(EN_US.Froglight(EN_US.Ochre())));
 		Register("minecraft:verdant_froglight", VERDANT_FROGLIGHT, List.of(EN_US.Froglight(EN_US.Verdant())));
 		Register("minecraft:pearlescent_froglight", PEARLESCENT_FROGLIGHT, List.of(EN_US.Froglight(EN_US.Pearlescent())));
-		FROG_TEMPTATIONS_SENSOR.Initialize();
-		FROG_ATTACKABLES_SENSOR.Initialize();
-		IS_IN_WATER_SENSOR.Initialize();
-		Register("minecraft:frog", FROG_ENTITY, List.of(EN_US.Frog()));
-		FabricDefaultAttributeRegistry.register(FROG_ENTITY, FrogEntity.createFrogAttributes());
-		SpawnRestrictionAccessor.callRegister(FROG_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FrogEntity::canSpawn);
 		Register("minecraft:frogspawn", FROGSPAWN, List.of(EN_US.Frogspawn()));
-		Register("minecraft:tadpole", TADPOLE_ENTITY, List.of(EN_US.Tadpole()));
-		FabricDefaultAttributeRegistry.register(TADPOLE_ENTITY, TadpoleEntity.createTadpoleAttributes());
-		SpawnRestrictionAccessor.callRegister(TADPOLE_ENTITY, SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, TadpoleEntity::canSpawn);
-		Register("minecraft:tadpole_bucket", TADPOLE_BUCKET, List.of(EN_US.Tadpole(EN_US.of(EN_US.Bucket()))));
 		//</editor-fold>
 		//<editor-fold desc="Sculk">
 		Register("minecraft:sculk", SCULK, List.of(EN_US.Sculk()));
@@ -6029,12 +5535,6 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:calibrated_sculk_sensor", CALIBRATED_SCULK_SENSOR, CALIBRATED_SCULK_SENSOR_ENTITY, List.of(EN_US.Sensor(EN_US.Sculk(EN_US.Calibrated()))));
 		Register("minecraft:sculk_catalyst", SCULK_CATALYST, SCULK_CATALYST_ENTITY, List.of(EN_US.Catalyst(EN_US.Sculk())));
 		Register("minecraft:sculk_shrieker", SCULK_SHRIEKER, SCULK_SHRIEKER_ENTITY, List.of(EN_US.Shrieker(EN_US.Sculk())));
-		//</editor-fold>
-		//<editor-fold desc="Wardens">
-		WARDEN_ENTITY_SENSOR.Initialize();
-		Register("minecraft:warden", WARDEN_ENTITY, List.of(EN_US.Warden()));
-		FabricDefaultAttributeRegistry.register(WARDEN_ENTITY, WardenEntity.addAttributes());
-		SpawnRestrictionAccessor.callRegister(WARDEN_ENTITY, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WardenEntity::canMobSpawn);
 		//</editor-fold>
 		Register("minecraft:recovery_compass", RECOVERY_COMPASS, List.of(EN_US.Compass(EN_US.Recovery())));
 		//<editor-fold desc="Echo">
@@ -6078,7 +5578,7 @@ public class ModBase implements ModInitializer {
 		Register("sculk_stone_brick_stairs", SCULK_STONE_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Stone(EN_US.Sculk())))));
 		Register("sculk_stone_brick_slab", SCULK_STONE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Stone(EN_US.Sculk())))));
 		Register("sculk_stone_brick_wall", SCULK_STONE_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Stone(EN_US.Sculk())))));
-		Register("chiseled_sculk_stone_bricks", CHISELED_SCULK_STONE_BRICKS, List.of(EN_US.Bricks(EN_US.Stone(EN_US.Sculk(EN_US.Chiseled())))));
+		Register("chiseled_sculk_stone_bricks", CHISELED_SCULK_STONE_BRICKS, List.of(EN_US.Bricks(EN_US.Stone(EN_US.Sculk(Words.Chiseled)))));
 		Register("smooth_chiseled_sculk_stone_bricks", SMOOTH_CHISELED_SCULK_STONE_BRICKS, List.of(EN_US.Bricks(EN_US.Stone(EN_US.Sculk(EN_US.Chiseled(EN_US.Smooth()))))));
 		Register("sculk_stone_tiles", SCULK_STONE_TILES, List.of(EN_US.Tiles(EN_US.Stone(EN_US.Sculk()))));
 		Register("sculk_stone_tile_stairs", SCULK_STONE_TILE_STAIRS, List.of(EN_US.Stairs(EN_US.Tile(EN_US.Stone(EN_US.Sculk())))));
@@ -6087,36 +5587,29 @@ public class ModBase implements ModInitializer {
 		//Turf
 		Register("chum", CHUM, List.of(EN_US.Chum()));
 		CompostingChanceRegistry.INSTANCE.add(CHUM, 0.75f);
-		Register("andesite_sculk_turf", ANDESITE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Andesite()))));
+		Register("andesite_sculk_turf", ANDESITE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(Words.Andesite))));
 		Register("basalt_sculk_turf", BASALT_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Basalt()))));
-		Register("blackstone_sculk_turf", BLACKSTONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Blackstone()))));
-		Register("calcite_sculk_turf", CALCITE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Calcite()))));
+		Register("blackstone_sculk_turf", BLACKSTONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(Words.Blackstone))));
+		Register("calcite_sculk_turf", CALCITE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(Words.Calcite))));
 		Register("deepslate_sculk_turf", DEEPSLATE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Deepslate()))));
-		Register("diorite_sculk_turf", DIORITE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Diorite()))));
+		Register("diorite_sculk_turf", DIORITE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(Words.Diorite))));
 		Register("dripstone_sculk_turf", DRIPSTONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Dripstone()))));
-		Register("end_shale_sculk_turf", END_SHALE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Shale(EN_US.End())))));
-		Register("end_stone_sculk_turf", END_STONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Stone(EN_US.End())))));
-		Register("end_rock_sculk_turf", END_ROCK_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Rock(EN_US.End())))));
-		Register("end_rock_shale_sculk_turf", END_ROCK_SHALE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Shale(EN_US.Rock(EN_US.End()))))));
-		Register("end_shale_rock_sculk_turf", END_SHALE_ROCK_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Rock(EN_US.Shale(EN_US.End()))))));
-		Register("granite_sculk_turf", GRANITE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Granite()))));
+		Register("end_shale_sculk_turf", END_SHALE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Shale(Words.End)))));
+		Register("end_stone_sculk_turf", END_STONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Stone(Words.End)))));
+		Register("end_rock_sculk_turf", END_ROCK_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Rock(Words.End)))));
+		Register("end_rock_shale_sculk_turf", END_ROCK_SHALE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Shale(EN_US.Rock(Words.End))))));
+		Register("end_shale_rock_sculk_turf", END_SHALE_ROCK_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Rock(EN_US.Shale(Words.End))))));
+		Register("granite_sculk_turf", GRANITE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(Words.Granite))));
 		Register("netherrack_sculk_turf", NETHERRACK_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Netherrack()))));
-		Register("red_sandstone_sculk_turf", RED_SANDSTONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Sandstone(EN_US.Red())))));
+		Register("red_sandstone_sculk_turf", RED_SANDSTONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Sandstone(Words.Red)))));
 		Register("sandstone_sculk_turf", SANDSTONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Sandstone()))));
 		Register("shale_sculk_turf", SHALE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Shale()))));
 		Register("smooth_basalt_sculk_turf", SMOOTH_BASALT_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Basalt(EN_US.Smooth())))));
 		Register("stone_sculk_turf", STONE_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Stone()))));
 		Register("tuff_sculk_turf", TUFF_SCULK_TURF, List.of(EN_US.Turf(EN_US.Sculk(EN_US.Tuff()))));
 		//</editor-fold>
-		//<editor-fold desc="Camel">
-		CAMEL_TEMPTATIONS_SENSOR.Initialize();
-		Register("minecraft:camel", CAMEL_ENTITY, List.of(EN_US.Camel()));
-		FabricDefaultAttributeRegistry.register(CAMEL_ENTITY, CamelEntity.createCamelAttributes());
-		//</editor-fold>
 		Register("broom", BROOM, List.of(EN_US.Broom()));
 		//<editor-fold desc="Sniffer">
-		Register("minecraft:sniffer", SNIFFER_ENTITY, List.of(EN_US.Sniffer()));
-		FabricDefaultAttributeRegistry.register(SNIFFER_ENTITY, SnifferEntity.createSnifferAttributes());
 		Register("minecraft:sniffer_egg", SNIFFER_EGG, List.of(EN_US.Egg(EN_US.Sniffer())));
 		//</editor-fold>
 		RegisterBrushableBlocks();
@@ -6143,32 +5636,6 @@ public class ModBase implements ModInitializer {
 		Register("minecraft:skull_pottery_sherd", SKULL_POTTERY_SHERD, List.of(EN_US.Sherd(EN_US.Pottery(EN_US.Skull()))));
 		Register("minecraft:snort_pottery_sherd", SNORT_POTTERY_SHERD, List.of(EN_US.Sherd(EN_US.Pottery(EN_US.Snort()))));
 		//</editor-fold>
-		//<editor-fold desc="Jumping Spider">
-		Register("jumping_spider", JUMPING_SPIDER_ENTITY, List.of(EN_US.Spider(EN_US.Jumping())));
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.DESERT,
-						BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.BAMBOO_JUNGLE,
-						BiomeKeys.BADLANDS, BiomeKeys.ERODED_BADLANDS, BiomeKeys.WOODED_BADLANDS),
-				SpawnGroup.MONSTER, JUMPING_SPIDER_ENTITY, 40, 1, 2);
-		FabricDefaultAttributeRegistry.register(JUMPING_SPIDER_ENTITY, JumpingSpiderEntity.createJumpingSpiderAttributes());
-		SpawnRestrictionAccessor.callRegister(JUMPING_SPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
-		//</editor-fold>
-		//<editor-fold desc="Hedgehog">
-		Register("hedgehog", HEDGEHOG_ENTITY, List.of(EN_US.Hedgehog()));
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, BiomeKeys.OLD_GROWTH_PINE_TAIGA, BiomeKeys.BAMBOO_JUNGLE),
-				SpawnGroup.MONSTER, HEDGEHOG_ENTITY, 18, 1, 4);
-		FabricDefaultAttributeRegistry.register(HEDGEHOG_ENTITY, HedgehogEntity.createHedgehogAttributes());
-		SpawnRestrictionAccessor.callRegister(HEDGEHOG_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
-		//</editor-fold>
-		//<editor-fold desc="Racoon">
-		Register("raccoon", RACCOON_ENTITY, List.of(EN_US.Raccoon()));
-		FabricDefaultAttributeRegistry.register(RACCOON_ENTITY, RaccoonEntity.createRaccoonAttributes());
-		SpawnRestrictionAccessor.callRegister(RACCOON_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
-		//</editor-fold>
-		//<editor-fold desc="Red Panda">
-		Register("red_panda", RED_PANDA_ENTITY, List.of(EN_US.Panda(EN_US.Red())));
-		FabricDefaultAttributeRegistry.register(RED_PANDA_ENTITY, RedPandaEntity.createRedPandaAttributes());
-		SpawnRestrictionAccessor.callRegister(RED_PANDA_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
-		//</editor-fold>
 		RegisterFlowers();
 		Register("firing_charge", FIRING_CHARGE, List.of(EN_US.Charge(EN_US.Firing())));
 		Register("minecraft:trial_key", TRIAL_KEY, List.of(EN_US.Key(EN_US.Trial())));
@@ -6177,19 +5644,13 @@ public class ModBase implements ModInitializer {
 		Register("trimming_table", TRIMMING_TABLE, List.of(EN_US.Table(EN_US.Trimming())));
 		for (ArmorTrimPattern pattern : ArmorTrimPattern.values()) Register(pattern.getItemPath(), pattern.asItem(), pattern.getTranslations());
 		//<editor-fold desc="Piranhas">
-		Register("piranha", PIRANHA_ENTITY, List.of(EN_US.Piranha()));
-		FabricDefaultAttributeRegistry.register(PIRANHA_ENTITY, PiranhaEntity.createPiranhaAttributes());
-		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.RIVER, BiomeKeys.JUNGLE, BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.SPARSE_JUNGLE, MANGROVE_SWAMP),
-				SpawnGroup.WATER_AMBIENT, PIRANHA_ENTITY, 8, 1, 5);
-		SpawnRestrictionAccessor.callRegister(PIRANHA_ENTITY, SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WaterCreatureEntity::canSpawn);
-		Register("piranha", PIRANHA, List.of(EN_US.Piranha()));
+		Register("piranha", PIRANHA, List.of(Words.Piranha));
 		Register("cooked_piranha", COOKED_PIRANHA, List.of(EN_US.Piranha(EN_US.Cooked())));
 		//</editor-fold>
-		RegisterMobStorage();
+		ModSensorTypes.RegisterAll();
+		ModEntityRegistry.RegisterAll();
 		RegisterInfestedBlocks();
 		RegisterMobSkullsAndRagdolls();
-		RegisterSummoningArrows();
-		RegisterSpawnEggs();
 		ModBannerPatterns.RegisterBannerPatterns();
 		ModPaintingMotives.RegisterPaintings();
 		ModStatusEffects.RegisterEffects();
@@ -6225,10 +5686,10 @@ public class ModBase implements ModInitializer {
 		Register("beige_carrot_candle_cake", CARROT_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(EN_US.Carrot()))))));
 		Register("beige_chocolate_candle_cake", CHOCOLATE_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(EN_US.Chocolate()))))));
 		Register("beige_chorus_candle_cake", CHORUS_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(EN_US.Chorus()))))));
-		Register("beige_coffee_candle_cake", COFFEE_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(EN_US.Coffee()))))));
+		Register("beige_coffee_candle_cake", COFFEE_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(Words.Coffee))))));
 		Register("beige_confetti_candle_cake", CONFETTI_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(EN_US.Confetti()))))));
 		Register("beige_strawberry_candle_cake", STRAWBERRY_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(EN_US.Strawberry()))))));
-		Register("beige_vanilla_candle_cake", VANILLA_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(EN_US.Vanilla()))))));
+		Register("beige_vanilla_candle_cake", VANILLA_CAKE.BEIGE_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Beige(EN_US.with(EN_US.Cake(Words.Vanilla))))));
 		Register("beige_concrete", BEIGE_CONCRETE, List.of(EN_US.Concrete(EN_US.Beige())));
 		Register("beige_concrete_stairs", BEIGE_CONCRETE_STAIRS, List.of(EN_US.Stairs(EN_US.Concrete(EN_US.Beige()))));
 		Register("beige_concrete_slab", BEIGE_CONCRETE_SLAB, List.of(EN_US.Slab(EN_US.Concrete(EN_US.Beige()))));
@@ -6259,10 +5720,10 @@ public class ModBase implements ModInitializer {
 		Register("burgundy_carrot_candle_cake", CARROT_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(EN_US.Carrot()))))));
 		Register("burgundy_chocolate_candle_cake", CHOCOLATE_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(EN_US.Chocolate()))))));
 		Register("burgundy_chorus_candle_cake", CHORUS_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(EN_US.Chorus()))))));
-		Register("burgundy_coffee_candle_cake", COFFEE_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(EN_US.Coffee()))))));
+		Register("burgundy_coffee_candle_cake", COFFEE_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(Words.Coffee))))));
 		Register("burgundy_confetti_candle_cake", CONFETTI_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(EN_US.Confetti()))))));
 		Register("burgundy_strawberry_candle_cake", STRAWBERRY_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(EN_US.Strawberry()))))));
-		Register("burgundy_vanilla_candle_cake", VANILLA_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(EN_US.Vanilla()))))));
+		Register("burgundy_vanilla_candle_cake", VANILLA_CAKE.BURGUNDY_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Burgundy(EN_US.with(EN_US.Cake(Words.Vanilla))))));
 		Register("burgundy_concrete", BURGUNDY_CONCRETE, List.of(EN_US.Concrete(EN_US.Burgundy())));
 		Register("burgundy_concrete_stairs", BURGUNDY_CONCRETE_STAIRS, List.of(EN_US.Stairs(EN_US.Concrete(EN_US.Burgundy()))));
 		Register("burgundy_concrete_slab", BURGUNDY_CONCRETE_SLAB, List.of(EN_US.Slab(EN_US.Concrete(EN_US.Burgundy()))));
@@ -6293,10 +5754,10 @@ public class ModBase implements ModInitializer {
 		Register("lavender_carrot_candle_cake", CARROT_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(EN_US.Carrot()))))));
 		Register("lavender_chocolate_candle_cake", CHOCOLATE_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(EN_US.Chocolate()))))));
 		Register("lavender_chorus_candle_cake", CHORUS_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(EN_US.Chorus()))))));
-		Register("lavender_coffee_candle_cake", COFFEE_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(EN_US.Coffee()))))));
+		Register("lavender_coffee_candle_cake", COFFEE_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(Words.Coffee))))));
 		Register("lavender_confetti_candle_cake", CONFETTI_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(EN_US.Confetti()))))));
 		Register("lavender_strawberry_candle_cake", STRAWBERRY_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(EN_US.Strawberry()))))));
-		Register("lavender_vanilla_candle_cake", VANILLA_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(EN_US.Vanilla()))))));
+		Register("lavender_vanilla_candle_cake", VANILLA_CAKE.LAVENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Lavender(EN_US.with(EN_US.Cake(Words.Vanilla))))));
 		Register("lavender_concrete", LAVENDER_CONCRETE, List.of(EN_US.Concrete(EN_US.Lavender())));
 		Register("lavender_concrete_stairs", LAVENDER_CONCRETE_STAIRS, List.of(EN_US.Stairs(EN_US.Concrete(EN_US.Lavender()))));
 		Register("lavender_concrete_slab", LAVENDER_CONCRETE_SLAB, List.of(EN_US.Slab(EN_US.Concrete(EN_US.Lavender()))));
@@ -6327,10 +5788,10 @@ public class ModBase implements ModInitializer {
 		Register("mint_carrot_candle_cake", CARROT_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(EN_US.Carrot()))))));
 		Register("mint_chocolate_candle_cake", CHOCOLATE_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(EN_US.Chocolate()))))));
 		Register("mint_chorus_candle_cake", CHORUS_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(EN_US.Chorus()))))));
-		Register("mint_coffee_candle_cake", COFFEE_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(EN_US.Coffee()))))));
+		Register("mint_coffee_candle_cake", COFFEE_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(Words.Coffee))))));
 		Register("mint_confetti_candle_cake", CONFETTI_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(EN_US.Confetti()))))));
 		Register("mint_strawberry_candle_cake", STRAWBERRY_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(EN_US.Strawberry()))))));
-		Register("mint_vanilla_candle_cake", VANILLA_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(EN_US.Vanilla()))))));
+		Register("mint_vanilla_candle_cake", VANILLA_CAKE.MINT_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Mint(EN_US.with(EN_US.Cake(Words.Vanilla))))));
 		Register("mint_concrete", MINT_CONCRETE, List.of(EN_US.Concrete(EN_US.Mint())));
 		Register("mint_concrete_stairs", MINT_CONCRETE_STAIRS, List.of(EN_US.Stairs(EN_US.Concrete(EN_US.Mint()))));
 		Register("mint_concrete_slab", MINT_CONCRETE_SLAB, List.of(EN_US.Slab(EN_US.Concrete(EN_US.Mint()))));
@@ -6357,8 +5818,8 @@ public class ModBase implements ModInitializer {
 	private static void RegisterIron() {
 		Register("raw_iron_nugget", RAW_IRON_NUGGET, List.of(EN_US.Nugget(EN_US.Iron(EN_US.Raw()))));
 		Register("iron_rod", IRON_ROD, List.of(EN_US.Rod(EN_US.Iron())));
-		Register("nether_iron_ore", NETHER_IRON_ORE, List.of(EN_US.Ore(EN_US.Iron(EN_US.Nether()))));
-		Register("end_iron_ore", END_IRON_ORE, List.of(EN_US.Ore(EN_US.Iron(EN_US.End()))));
+		Register("nether_iron_ore", NETHER_IRON_ORE, List.of(EN_US.Ore(EN_US.Iron(Words.Nether))));
+		Register("end_iron_ore", END_IRON_ORE, List.of(EN_US.Ore(EN_US.Iron(Words.End))));
 		Register("iron_torch", "iron_wall_torch", IRON_TORCH, List.of(EN_US._Torch(EN_US.Iron())));
 		Register("iron_soul_torch", "iron_soul_wall_torch", IRON_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Iron()))));
 		Register("iron_ender_torch", "iron_ender_wall_torch", IRON_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Iron()))));
@@ -6384,61 +5845,61 @@ public class ModBase implements ModInitializer {
 		Register("iron_hammer", IRON_HAMMER, List.of(EN_US.Hammer(EN_US.Iron())));
 	}
 	private static void RegisterGold() {
-		Register("gold_rod", GOLD_ROD, List.of(EN_US.Rod(EN_US.Gold())));
-		Register("end_gold_ore", END_GOLD_ORE, List.of(EN_US.Ore(EN_US.Gold(EN_US.End()))));
-		Register("gold_torch", "gold_wall_torch", GOLD_TORCH, List.of(EN_US._Torch(EN_US.Gold())));
-		Register("gold_soul_torch", "gold_soul_wall_torch", GOLD_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Gold()))));
-		Register("gold_ender_torch", "gold_ender_wall_torch", GOLD_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Gold()))));
+		Register("gold_rod", GOLD_ROD, List.of(EN_US.Rod(Words.Gold)));
+		Register("end_gold_ore", END_GOLD_ORE, List.of(EN_US.Ore(EN_US.Gold(Words.End))));
+		Register("gold_torch", "gold_wall_torch", GOLD_TORCH, List.of(EN_US._Torch(Words.Gold)));
+		Register("gold_soul_torch", "gold_soul_wall_torch", GOLD_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(Words.Gold))));
+		Register("gold_ender_torch", "gold_ender_wall_torch", GOLD_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(Words.Gold))));
 		Register("underwater_gold_torch", "underwater_gold_wall_torch", UNDERWATER_GOLD_TORCH, List.of(EN_US._Torch(EN_US.Gold(EN_US.Underwater()))));
-		Register("gold_lantern", GOLD_LANTERN, List.of(EN_US.Lantern(EN_US.Gold())));
-		Register("gold_soul_lantern", GOLD_SOUL_LANTERN, List.of(EN_US.Lantern(EN_US.Soul(EN_US.Gold()))));
-		Register("gold_ender_lantern", GOLD_ENDER_LANTERN, List.of(EN_US.Lantern(EN_US.Ender(EN_US.Gold()))));
-		Register("gold_button", GOLD_BUTTON, List.of(EN_US.Button(EN_US.Gold())));
-		Register("gold_chain", GOLD_CHAIN, List.of(EN_US.Chain(EN_US.Gold())));
+		Register("gold_lantern", GOLD_LANTERN, List.of(EN_US.Lantern(Words.Gold)));
+		Register("gold_soul_lantern", GOLD_SOUL_LANTERN, List.of(EN_US.Lantern(EN_US.Soul(Words.Gold))));
+		Register("gold_ender_lantern", GOLD_ENDER_LANTERN, List.of(EN_US.Lantern(EN_US.Ender(Words.Gold))));
+		Register("gold_button", GOLD_BUTTON, List.of(EN_US.Button(Words.Gold)));
+		Register("gold_chain", GOLD_CHAIN, List.of(EN_US.Chain(Words.Gold)));
 		Register("heavy_gold_chain", HEAVY_GOLD_CHAIN, List.of(EN_US.Chain(EN_US.Gold(EN_US.Heavy()))));
-		Register("gold_bars", GOLD_BARS, List.of(EN_US.Bars(EN_US.Gold())));
-		Register("gold_stairs", GOLD_STAIRS, List.of(EN_US.Stairs(EN_US.Gold())));
-		Register("gold_slab", GOLD_SLAB, List.of(EN_US.Slab(EN_US.Gold())));
-		Register("gold_wall", GOLD_WALL, List.of(EN_US.Wall(EN_US.Gold())));
-		Register("gold_bricks", GOLD_BRICKS, List.of(EN_US.Bricks(EN_US.Gold())));
-		Register("gold_brick_stairs", GOLD_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(EN_US.Gold()))));
-		Register("gold_brick_slab", GOLD_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Gold()))));
-		Register("gold_brick_wall", GOLD_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(EN_US.Gold()))));
+		Register("gold_bars", GOLD_BARS, List.of(EN_US.Bars(Words.Gold)));
+		Register("gold_stairs", GOLD_STAIRS, List.of(EN_US.Stairs(Words.Gold)));
+		Register("gold_slab", GOLD_SLAB, List.of(EN_US.Slab(Words.Gold)));
+		Register("gold_wall", GOLD_WALL, List.of(EN_US.Wall(Words.Gold)));
+		Register("gold_bricks", GOLD_BRICKS, List.of(EN_US.Bricks(Words.Gold)));
+		Register("gold_brick_stairs", GOLD_BRICK_STAIRS, List.of(EN_US.Stairs(EN_US.Brick(Words.Gold))));
+		Register("gold_brick_slab", GOLD_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(Words.Gold))));
+		Register("gold_brick_wall", GOLD_BRICK_WALL, List.of(EN_US.Wall(EN_US.Brick(Words.Gold))));
 		Register("cut_gold", CUT_GOLD, List.of(EN_US.Gold(EN_US.Cut())));
 		Register("cut_gold_pillar", CUT_GOLD_PILLAR, List.of(EN_US.Pillar(EN_US.Gold(EN_US.Cut()))));
 		Register("cut_gold_stairs", CUT_GOLD_STAIRS, List.of(EN_US.Stairs(EN_US.Gold(EN_US.Cut()))));
 		Register("cut_gold_slab", CUT_GOLD_SLAB, List.of(EN_US.Slab(EN_US.Gold(EN_US.Cut()))));
 		Register("cut_gold_wall", CUT_GOLD_WALL, List.of(EN_US.Wall(EN_US.Gold(EN_US.Cut()))));
-		Register("gold_door", GOLD_DOOR, List.of(EN_US.Door(EN_US.Gold())));
-		Register("gold_trapdoor", GOLD_TRAPDOOR, List.of(EN_US.Trapdoor(EN_US.Gold())));
-		Register("golden_hammer", GOLDEN_HAMMER, List.of(EN_US.Hammer(EN_US.Golden())));
-		Register("golden_shears", GOLDEN_SHEARS, List.of(EN_US.Shears(EN_US.Golden())));
+		Register("gold_door", GOLD_DOOR, List.of(EN_US.Door(Words.Gold)));
+		Register("gold_trapdoor", GOLD_TRAPDOOR, List.of(EN_US.Trapdoor(Words.Gold)));
+		Register("golden_hammer", GOLDEN_HAMMER, List.of(EN_US.Hammer(Words.Golden)));
+		Register("golden_shears", GOLDEN_SHEARS, List.of(EN_US.Shears(Words.Golden)));
 		//Bucket
-		Register("golden_bucket", GOLDEN_BUCKET, List.of(EN_US.Bucket(EN_US.Golden())));
+		Register("golden_bucket", GOLDEN_BUCKET, List.of(EN_US.Bucket(Words.Golden)));
 		DispenserBlock.registerBehavior(GOLDEN_BUCKET, new BucketDispenserBehavior(GOLDEN_BUCKET_PROVIDER));
-		Register("golden_water_bucket", GOLDEN_WATER_BUCKET, List.of(EN_US.Bucket(EN_US.Water(EN_US.Golden()))));
+		Register("golden_water_bucket", GOLDEN_WATER_BUCKET, List.of(EN_US.Bucket(EN_US.Water(Words.Golden))));
 		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(GOLDEN_WATER_BUCKET, (state, world, pos, player, hand, stack) -> BucketUtil.fillCauldron(world, pos, player, hand, stack,
 				Blocks.WATER_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3),
 				SoundEvents.ITEM_BUCKET_EMPTY, GOLDEN_BUCKET));
 		CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(GOLDEN_BUCKET, (state, world, pos, player, hand, stack) -> CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(GOLDEN_WATER_BUCKET),
 				(statex) -> statex.get(LeveledCauldronBlock.LEVEL) == 3, SoundEvents.ITEM_BUCKET_FILL));
-		Register("golden_lava_bucket", GOLDEN_LAVA_BUCKET, List.of(EN_US.Bucket(EN_US.Lava(EN_US.Golden()))));
-		Register("golden_powder_snow_bucket", GOLDEN_POWDER_SNOW_BUCKET, List.of(EN_US.Bucket(EN_US.Snow(EN_US.Powder(EN_US.Golden())))));
+		Register("golden_lava_bucket", GOLDEN_LAVA_BUCKET, List.of(EN_US.Bucket(EN_US.Lava(Words.Golden))));
+		Register("golden_powder_snow_bucket", GOLDEN_POWDER_SNOW_BUCKET, List.of(EN_US.Bucket(EN_US.Snow(EN_US.Powder(Words.Golden)))));
 		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(GOLDEN_POWDER_SNOW_BUCKET, (state, world, pos, player, hand, stack) -> BucketUtil.fillCauldron(world, pos, player, hand, stack,
 				Blocks.POWDER_SNOW_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3),
 				SoundEvents.ITEM_BUCKET_EMPTY_POWDER_SNOW, GOLDEN_BUCKET));
 		CauldronBehavior.POWDER_SNOW_CAULDRON_BEHAVIOR.put(GOLDEN_BUCKET, (state, world, pos, player, hand, stack) -> CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(GOLDEN_POWDER_SNOW_BUCKET),
 				(statex) -> statex.get(LeveledCauldronBlock.LEVEL) == 3, SoundEvents.ITEM_BUCKET_FILL_POWDER_SNOW));
-		Register("golden_blood_bucket", GOLDEN_BLOOD_BUCKET, List.of(EN_US.Bucket(EN_US.Blood(EN_US.Golden()))));
+		Register("golden_blood_bucket", GOLDEN_BLOOD_BUCKET, List.of(EN_US.Bucket(EN_US.Blood(Words.Golden))));
 		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(GOLDEN_BLOOD_BUCKET, BloodCauldronBlock.FillFromBucket(GOLDEN_BUCKET));
-		Register("golden_mud_bucket", GOLDEN_MUD_BUCKET, List.of(EN_US.Bucket(EN_US.Mud(EN_US.Golden()))));
+		Register("golden_mud_bucket", GOLDEN_MUD_BUCKET, List.of(EN_US.Bucket(EN_US.Mud(Words.Golden))));
 		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(GOLDEN_MUD_BUCKET, MudCauldronBlock.FillFromBucket(GOLDEN_BUCKET));
-		Register("golden_milk_bucket", GOLDEN_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Golden()))));
+		Register("golden_milk_bucket", GOLDEN_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(Words.Golden))));
 		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(GOLDEN_MILK_BUCKET, MilkCauldronBlock.FillFromBucket(GOLDEN_BUCKET));
-		Register("golden_chocolate_milk_bucket", GOLDEN_CHOCOLATE_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Chocolate(EN_US.Golden())))));
-		Register("golden_coffee_milk_bucket", GOLDEN_COFFEE_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Coffee(EN_US.Golden())))));
-		Register("golden_strawberry_milk_bucket", GOLDEN_STRAWBERRY_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Strawberry(EN_US.Golden())))));
-		Register("golden_vanilla_milk_bucket", GOLDEN_VANILLA_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Vanilla(EN_US.Golden())))));
+		Register("golden_chocolate_milk_bucket", GOLDEN_CHOCOLATE_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Chocolate(Words.Golden)))));
+		Register("golden_coffee_milk_bucket", GOLDEN_COFFEE_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Coffee(Words.Golden)))));
+		Register("golden_strawberry_milk_bucket", GOLDEN_STRAWBERRY_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Strawberry(Words.Golden)))));
+		Register("golden_vanilla_milk_bucket", GOLDEN_VANILLA_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Vanilla(Words.Golden)))));
 	}
 	private static void RegisterBlood() {
 		//<editor-fold desc="Blood">
@@ -6460,12 +5921,12 @@ public class ModBase implements ModInitializer {
 		Register("blood_stairs", BLOOD_STAIRS, List.of(EN_US.Stairs(EN_US.Blood())));
 		Register("blood_slab", BLOOD_SLAB, List.of(EN_US.Slab(EN_US.Blood())));
 		Register("blood_wall", BLOOD_WALL, List.of(EN_US.Wall(EN_US.Blood())));
-		Register("dried_blood_block", DRIED_BLOOD_BLOCK, List.of(EN_US.Block(EN_US.Blood(EN_US.Dried()))));
-		Register("dried_blood_fence", DRIED_BLOOD_FENCE, List.of(EN_US.Fence(EN_US.Blood(EN_US.Dried()))));
-		Register("dried_blood_pane", DRIED_BLOOD_PANE, List.of(EN_US.Pane(EN_US.Blood(EN_US.Dried()))));
-		Register("dried_blood_stairs", DRIED_BLOOD_STAIRS, List.of(EN_US.Stairs(EN_US.Blood(EN_US.Dried()))));
-		Register("dried_blood_slab", DRIED_BLOOD_SLAB, List.of(EN_US.Slab(EN_US.Blood(EN_US.Dried()))));
-		Register("dried_blood_wall", DRIED_BLOOD_WALL, List.of(EN_US.Wall(EN_US.Blood(EN_US.Dried()))));
+		Register("dried_blood_block", DRIED_BLOOD_BLOCK, List.of(EN_US.Block(EN_US.Blood(Words.Dried))));
+		Register("dried_blood_fence", DRIED_BLOOD_FENCE, List.of(EN_US.Fence(EN_US.Blood(Words.Dried))));
+		Register("dried_blood_pane", DRIED_BLOOD_PANE, List.of(EN_US.Pane(EN_US.Blood(Words.Dried))));
+		Register("dried_blood_stairs", DRIED_BLOOD_STAIRS, List.of(EN_US.Stairs(EN_US.Blood(Words.Dried))));
+		Register("dried_blood_slab", DRIED_BLOOD_SLAB, List.of(EN_US.Slab(EN_US.Blood(Words.Dried))));
+		Register("dried_blood_wall", DRIED_BLOOD_WALL, List.of(EN_US.Wall(EN_US.Blood(Words.Dried))));
 		//</editor-fold>
 		//<editor-fold desc="Syringe">
 		Register("syringe", SYRINGE, List.of(EN_US.Syringe()));
@@ -6484,139 +5945,139 @@ public class ModBase implements ModInitializer {
 		BloodType.RegisterBloodType(BloodType.MUD, MUD_SYRINGE);
 		Register("sap_syringe", SAP_SYRINGE, List.of(EN_US.Syringe(EN_US.Sap())));
 		BloodType.RegisterBloodType(BloodType.SAP, SAP_SYRINGE);
-		Register("slime_syringe", SLIME_SYRINGE, List.of(EN_US.Syringe(EN_US.Slime())));
+		Register("slime_syringe", SLIME_SYRINGE, List.of(EN_US.Syringe(Words.Slime)));
 		BloodType.RegisterBloodType(SLIME_BLOOD_TYPE, SLIME_SYRINGE);
-		Register("blue_slime_syringe", BLUE_SLIME_SYRINGE, List.of(EN_US.Syringe(EN_US.Slime(EN_US.Blue()))));
+		Register("blue_slime_syringe", BLUE_SLIME_SYRINGE, List.of(EN_US.Syringe(EN_US.Slime(Words.Blue))));
 		BloodType.RegisterBloodType(BLUE_SLIME_BLOOD_TYPE, BLUE_SLIME_SYRINGE);
-		Register("pink_slime_syringe", PINK_SLIME_SYRINGE, List.of(EN_US.Syringe(EN_US.Slime(EN_US.Pink()))));
+		Register("pink_slime_syringe", PINK_SLIME_SYRINGE, List.of(EN_US.Syringe(EN_US.Slime(Words.Pink))));
 		BloodType.RegisterBloodType(PINK_SLIME_BLOOD_TYPE, PINK_SLIME_SYRINGE);
-		Register("water_syringe", WATER_SYRINGE, List.of(EN_US.Syringe(EN_US.Water())));
+		Register("water_syringe", WATER_SYRINGE, List.of(EN_US.Syringe(Words.Water)));
 		//Special Blood Types
-		Register("nephal_blood_syringe", NEPHAL_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(EN_US.Nephal()))));
+		Register("nephal_blood_syringe", NEPHAL_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(Words.Nephal))));
 		BloodType.RegisterBloodType(NEPHAL_BLOOD_TYPE, NEPHAL_BLOOD_SYRINGE);
-		Register("vampire_blood_syringe", VAMPIRE_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(EN_US.Vampire()))));
+		Register("vampire_blood_syringe", VAMPIRE_BLOOD_SYRINGE, List.of(EN_US.Syringe(EN_US.Blood(Words.Vampire))));
 		BloodType.RegisterBloodType(VAMPIRE_BLOOD_TYPE, VAMPIRE_BLOOD_SYRINGE);
 		//</editor-fold>
 	}
 	private static void RegisterFlowers() {
-		Register("minecraft:pink_petals", PINK_PETALS, List.of(EN_US.Petals(EN_US.Pink())));
+		Register("minecraft:pink_petals", PINK_PETALS, List.of(EN_US.Petals(Words.Pink)));
 		//<editor-fold desc="Torchflower">
-		Register("minecraft:torchflower_crop", TORCHFLOWER_CROP.asBlock(), List.of(EN_US.Crop(EN_US.Torchflower())));
-		Register("minecraft:torchflower_seeds", TORCHFLOWER_CROP.asItem(), List.of(EN_US.Seeds(EN_US.Torchflower())));
+		Register("minecraft:torchflower_crop", TORCHFLOWER_CROP.asBlock(), List.of(EN_US.Crop(Words.Torchflower)));
+		Register("minecraft:torchflower_seeds", TORCHFLOWER_CROP.asItem(), List.of(EN_US.Seeds(Words.Torchflower)));
 		Register("minecraft:torchflower", TORCHFLOWER, List.of(EN_US._Potted(EN_US.Torchflower())));
 		//</editor-fold>
 		//<editor-fold desc="Pitcher Plant">
-		Register("minecraft:pitcher_crop", PITCHER_CROP.asBlock(), List.of(EN_US.Crop(EN_US.Pitcher())));
-		Register("minecraft:pitcher_pod", PITCHER_CROP.asItem(), List.of(EN_US.Pod(EN_US.Pitcher())));
-		Register("minecraft:pitcher_plant", PITCHER_PLANT, List.of(EN_US.Plant(EN_US.Pitcher())));
+		Register("minecraft:pitcher_crop", PITCHER_CROP.asBlock(), List.of(EN_US.Crop(Words.Pitcher)));
+		Register("minecraft:pitcher_pod", PITCHER_CROP.asItem(), List.of(EN_US.Pod(Words.Pitcher)));
+		Register("minecraft:pitcher_plant", PITCHER_PLANT, List.of(EN_US.Plant(Words.Pitcher)));
 		//</editor-fold>
 		//<editor-fold desc="Flowers">
 		//<editor-fold desc="Minecraft Earth">
 		Register("buttercup", BUTTERCUP, List.of(EN_US._Potted(EN_US.Buttercup())));
-		Register("pink_daisy", PINK_DAISY, List.of(EN_US._Potted(EN_US.Daisy(EN_US.Pink()))));
+		Register("pink_daisy", PINK_DAISY, List.of(EN_US._Potted(EN_US.Daisy(Words.Pink))));
 		//</editor-fold>
 		Register("rose", ROSE, List.of(EN_US._Potted(EN_US.Rose())));
-		Register("blue_rose", BLUE_ROSE, List.of(EN_US._Potted(EN_US.Rose(EN_US.Blue()))));
-		Register("magenta_tulip", MAGENTA_TULIP, List.of(EN_US._Potted(EN_US.Tulip(EN_US.Magenta()))));
+		Register("blue_rose", BLUE_ROSE, List.of(EN_US._Potted(EN_US.Rose(Words.Blue))));
+		Register("magenta_tulip", MAGENTA_TULIP, List.of(EN_US._Potted(EN_US.Tulip(Words.Magenta))));
 		Register("marigold", MARIGOLD, List.of(EN_US._Potted(EN_US.Marigold())));
-		Register("pink_allium", PINK_ALLIUM, List.of(EN_US._Potted(EN_US.Allium(EN_US.Pink()))));
+		Register("pink_allium", PINK_ALLIUM, List.of(EN_US._Potted(EN_US.Allium(Words.Pink))));
 		Register("lavender", LAVENDER, List.of(EN_US._Potted(EN_US.Lavender())));
 		Register("hydrangea", HYDRANGEA, List.of(EN_US._Potted(EN_US.Hydrangea())));
 		//<editor-fold desc="Orchids">
-		Register("indigo_orchid", INDIGO_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(EN_US.Indigo()))));
-		Register("magenta_orchid", MAGENTA_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(EN_US.Magenta()))));
-		Register("orange_orchid", ORANGE_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(EN_US.Orange()))));
-		Register("purple_orchid", PURPLE_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(EN_US.Purple()))));
-		Register("red_orchid", RED_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(EN_US.Red()))));
-		Register("white_orchid", WHITE_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(EN_US.White()))));
-		Register("yellow_orchid", YELLOW_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(EN_US.Yellow()))));
+		Register("indigo_orchid", INDIGO_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(Words.Indigo))));
+		Register("magenta_orchid", MAGENTA_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(Words.Magenta))));
+		Register("orange_orchid", ORANGE_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(Words.Orange))));
+		Register("purple_orchid", PURPLE_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(Words.Purple))));
+		Register("red_orchid", RED_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(Words.Red))));
+		Register("white_orchid", WHITE_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(Words.White))));
+		Register("yellow_orchid", YELLOW_ORCHID, List.of(EN_US._Potted(EN_US.Orchid(Words.Yellow))));
 		//</editor-fold>
 		Register("paeonia", PAEONIA, List.of(EN_US._Potted(EN_US.Paeonia())));
-		Register("aster", ASTER, List.of(EN_US._Potted(EN_US.Aster())));
+		Register("aster", ASTER, List.of(EN_US._Potted(Words.Aster)));
 		//<editor-fold desc="Tall Flowers">
-		Register("amaranth", AMARANTH, List.of(EN_US.Amaranth()));
-		Register("blue_rose_bush", BLUE_ROSE_BUSH, List.of(EN_US.Bush(EN_US.Rose(EN_US.Blue()))));
-		Register("tall_allium", TALL_ALLIUM, List.of(EN_US.Allium(EN_US.Tall())));
-		Register("tall_pink_allium", TALL_PINK_ALLIUM, List.of(EN_US.Allium(EN_US.Pink(EN_US.Tall()))));
+		Register("amaranth", AMARANTH, List.of(Words.Amaranth));
+		Register("blue_rose_bush", BLUE_ROSE_BUSH, List.of(EN_US.Bush(EN_US.Rose(Words.Blue))));
+		Register("tall_allium", TALL_ALLIUM, List.of(EN_US.Allium(Words.Tall)));
+		Register("tall_pink_allium", TALL_PINK_ALLIUM, List.of(EN_US.Allium(EN_US.Pink(Words.Tall))));
 		//</editor-fold>
-		Register("vanilla_flower", VANILLA_FLOWER, List.of(EN_US._Potted(EN_US.Flower(EN_US.Vanilla()))));
-		Register("tall_vanilla", TALL_VANILLA, List.of(EN_US.Flower(EN_US.Vanilla(EN_US.Tall()))));
-		Register("vanilla", VANILLA, List.of(EN_US.Vanilla()));
+		Register("vanilla_flower", VANILLA_FLOWER, List.of(EN_US._Potted(EN_US.Flower(Words.Vanilla))));
+		Register("tall_vanilla", TALL_VANILLA, List.of(EN_US.Flower(EN_US.Vanilla(Words.Tall))));
+		Register("vanilla", VANILLA, List.of(Words.Vanilla));
 		CompostingChanceRegistry.INSTANCE.add(VANILLA, 0.2f);
 		//</editor-fold>
 		//<editor-fold desc="Flower Parts">
 		//<editor-fold desc="Minecraft Earth">
-		Register("buttercup", BUTTERCUP_PARTS, List.of(EN_US._FlowerParts(EN_US.Buttercup())));
-		Register("pink_daisy", PINK_DAISY_PARTS, List.of(EN_US._FlowerParts(EN_US.Daisy(EN_US.Pink()))));
+		Register("buttercup", BUTTERCUP_PARTS, List.of(EN_US._FlowerParts(Words.Buttercup)));
+		Register("pink_daisy", PINK_DAISY_PARTS, List.of(EN_US._FlowerParts(EN_US.Daisy(Words.Pink))));
 		//</editor-fold>
-		Register("rose", ROSE_PARTS, List.of(EN_US._FlowerParts(EN_US.Rose())));
-		Register("blue_rose", BLUE_ROSE_PARTS, List.of(EN_US._FlowerParts(EN_US.Rose(EN_US.Blue()))));
-		Register("magenta_tulip", MAGENTA_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(EN_US.Magenta()))));
-		Register("marigold", MARIGOLD_PARTS, List.of(EN_US._FlowerParts(EN_US.Marigold())));
-		Register("pink_allium", PINK_ALLIUM_PARTS, List.of(EN_US._FlowerParts(EN_US.Allium(EN_US.Pink()))));
-		Register("lavender", LAVENDER_PARTS, List.of(EN_US._FlowerParts(EN_US.Lavender())));
-		Register("hydrangea", HYDRANGEA_PARTS, List.of(EN_US._FlowerParts(EN_US.Hydrangea())));
+		Register("rose", ROSE_PARTS, List.of(EN_US._FlowerParts(Words.Rose)));
+		Register("blue_rose", BLUE_ROSE_PARTS, List.of(EN_US._FlowerParts(EN_US.Rose(Words.Blue))));
+		Register("magenta_tulip", MAGENTA_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(Words.Magenta))));
+		Register("marigold", MARIGOLD_PARTS, List.of(EN_US._FlowerParts(Words.Marigold)));
+		Register("pink_allium", PINK_ALLIUM_PARTS, List.of(EN_US._FlowerParts(EN_US.Allium(Words.Pink))));
+		Register("lavender", LAVENDER_PARTS, List.of(EN_US._FlowerParts(Words.Lavender)));
+		Register("hydrangea", HYDRANGEA_PARTS, List.of(EN_US._FlowerParts(Words.Hydrangea)));
 		//<editor-fold desc="Orchids">
-		Register("indigo_orchid", INDIGO_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(EN_US.Indigo()))));
-		Register("magenta_orchid", MAGENTA_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(EN_US.Magenta()))));
-		Register("orange_orchid", ORANGE_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(EN_US.Orange()))));
-		Register("purple_orchid", PURPLE_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(EN_US.Purple()))));
-		Register("red_orchid", RED_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(EN_US.Red()))));
-		Register("white_orchid", WHITE_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(EN_US.White()))));
-		Register("yellow_orchid", YELLOW_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(EN_US.Yellow()))));
+		Register("indigo_orchid", INDIGO_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(Words.Indigo))));
+		Register("magenta_orchid", MAGENTA_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(Words.Magenta))));
+		Register("orange_orchid", ORANGE_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(Words.Orange))));
+		Register("purple_orchid", PURPLE_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(Words.Purple))));
+		Register("red_orchid", RED_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(Words.Red))));
+		Register("white_orchid", WHITE_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(Words.White))));
+		Register("yellow_orchid", YELLOW_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(Words.Yellow))));
 		//</editor-fold>
-		Register("paeonia", PAEONIA_PARTS, List.of(EN_US._FlowerParts(EN_US.Paeonia())));
-		Register("aster", ASTER_PARTS, List.of(EN_US._FlowerParts(EN_US.Aster())));
+		Register("paeonia", PAEONIA_PARTS, List.of(EN_US._FlowerParts(Words.Paeonia)));
+		Register("aster", ASTER_PARTS, List.of(EN_US._FlowerParts(Words.Aster)));
 		//<editor-fold desc="Tall Flowers">
-		Register("amaranth", AMARANTH_PARTS, List.of(EN_US._FlowerParts(EN_US.Amaranth())));
+		Register("amaranth", AMARANTH_PARTS, List.of(EN_US._FlowerParts(Words.Amaranth)));
 		//</editor-fold>
-		Register("vanilla", VANILLA_PARTS, List.of(EN_US._FlowerParts(EN_US.Vanilla())));
+		Register("vanilla", VANILLA_PARTS, List.of(EN_US._FlowerParts(Words.Vanilla)));
 		//<editor-fold desc="Vanilla Minecraft">
-		Register("allium", ALLIUM_PARTS, List.of(EN_US._FlowerParts(EN_US.Allium())));
-		Register("azure_bluet", AZURE_BLUET_PARTS, List.of(EN_US._FlowerParts(EN_US.Bluet(EN_US.Azure()))));
-		Register("blue_orchid", BLUE_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(EN_US.Blue()))));
-		Register("cornflower", CORNFLOWER_PARTS, List.of(EN_US._FlowerParts(EN_US.Cornflower())));
-		Register("dandelion", DANDELION_PARTS, List.of(EN_US._FlowerParts(EN_US.Dandelion())));
-		Register("lilac", LILAC_PARTS, List.of(EN_US._FlowerParts(EN_US.Lilac())));
-		Register("lily_of_the_valley", LILY_OF_THE_VALLEY_PARTS, List.of(EN_US._FlowerParts(EN_US.Valley(EN_US.the(EN_US.of(EN_US.Lily()))))));
-		Register("orange_tulip", ORANGE_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(EN_US.Orange()))));
-		Register("oxeye_daisy", OXEYE_DAISY_PARTS, List.of(EN_US._FlowerParts(EN_US.Daisy(EN_US.Oxeye()))));
-		Register("peony", PEONY_PARTS, List.of(EN_US._FlowerParts(EN_US.Peony())));
-		Register("pink_tulip", PINK_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(EN_US.Pink()))));
-		Register("poppy", POPPY_PARTS, List.of(EN_US._FlowerParts(EN_US.Poppy())));
-		Register("red_tulip", RED_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(EN_US.Red()))));
-		Register("sunflower", SUNFLOWER_PARTS, List.of(EN_US._FlowerParts(EN_US.Sunflower())));
-		Register("white_tulip", WHITE_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(EN_US.White()))));
-		Register("wither_rose", WITHER_ROSE_PARTS, List.of(EN_US._FlowerParts(EN_US.Rose(EN_US.Wither()))));
+		Register("allium", ALLIUM_PARTS, List.of(EN_US._FlowerParts(Words.Allium)));
+		Register("azure_bluet", AZURE_BLUET_PARTS, List.of(EN_US._FlowerParts(EN_US.Bluet(Words.Azure))));
+		Register("blue_orchid", BLUE_ORCHID_PARTS, List.of(EN_US._FlowerParts(EN_US.Orchid(Words.Blue))));
+		Register("cornflower", CORNFLOWER_PARTS, List.of(EN_US._FlowerParts(Words.Cornflower)));
+		Register("dandelion", DANDELION_PARTS, List.of(EN_US._FlowerParts(Words.Dandelion)));
+		Register("lilac", LILAC_PARTS, List.of(EN_US._FlowerParts(Words.Lilac)));
+		Register("lily_of_the_valley", LILY_OF_THE_VALLEY_PARTS, List.of(EN_US._FlowerParts(EN_US.Valley(EN_US.the(EN_US.of(Words.Lily))))));
+		Register("orange_tulip", ORANGE_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(Words.Orange))));
+		Register("oxeye_daisy", OXEYE_DAISY_PARTS, List.of(EN_US._FlowerParts(EN_US.Daisy(Words.Oxeye))));
+		Register("peony", PEONY_PARTS, List.of(EN_US._FlowerParts(Words.Peony)));
+		Register("pink_tulip", PINK_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(Words.Pink))));
+		Register("poppy", POPPY_PARTS, List.of(EN_US._FlowerParts(Words.Poppy)));
+		Register("red_tulip", RED_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(Words.Red))));
+		Register("sunflower", SUNFLOWER_PARTS, List.of(EN_US._FlowerParts(Words.Sunflower)));
+		Register("white_tulip", WHITE_TULIP_PARTS, List.of(EN_US._FlowerParts(EN_US.Tulip(Words.White))));
+		Register("wither_rose", WITHER_ROSE_PARTS, List.of(EN_US._FlowerParts(EN_US.Rose(Words.Wither))));
 		//</editor-fold>
 		//Special Flower Petals
-		Register("azalea_petals", AZALEA_PETALS, List.of(EN_US.Petals(EN_US.Azalea())));
+		Register("azalea_petals", AZALEA_PETALS, List.of(EN_US.Petals(Words.Azalea)));
 		CompostingChanceRegistry.INSTANCE.add(AZALEA_PETALS, 0.325F);
-		Register("spore_blossom_petal", SPORE_BLOSSOM_PETAL, List.of(EN_US.Petal(EN_US.Blossom(EN_US.Spore()))));
+		Register("spore_blossom_petal", SPORE_BLOSSOM_PETAL, List.of(EN_US.Petal(EN_US.Blossom(Words.Spore))));
 		CompostingChanceRegistry.INSTANCE.add(SPORE_BLOSSOM_PETAL, 0.1625F);
-		Register("cassia_petals", CASSIA_PETALS, List.of(EN_US.Petals(EN_US.Cassia())));
+		Register("cassia_petals", CASSIA_PETALS, List.of(EN_US.Petals(Words.Cassia)));
 		CompostingChanceRegistry.INSTANCE.add(CASSIA_PETALS, 0.325F);
-		Register("pink_dogwood_petals", PINK_DOGWOOD_PETALS, List.of(EN_US.Petals(EN_US.Dogwood(EN_US.Pink()))));
+		Register("pink_dogwood_petals", PINK_DOGWOOD_PETALS, List.of(EN_US.Petals(EN_US.Dogwood(Words.Pink))));
 		CompostingChanceRegistry.INSTANCE.add(PINK_DOGWOOD_PETALS, 0.325F);
-		Register("pale_dogwood_petals", PALE_DOGWOOD_PETALS, List.of(EN_US.Petals(EN_US.Dogwood(EN_US.Pale()))));
+		Register("pale_dogwood_petals", PALE_DOGWOOD_PETALS, List.of(EN_US.Petals(EN_US.Dogwood(Words.Pale))));
 		CompostingChanceRegistry.INSTANCE.add(PALE_DOGWOOD_PETALS, 0.325F);
-		Register("white_dogwood_petals", WHITE_DOGWOOD_PETALS, List.of(EN_US.Petals(EN_US.Dogwood(EN_US.White()))));
+		Register("white_dogwood_petals", WHITE_DOGWOOD_PETALS, List.of(EN_US.Petals(EN_US.Dogwood(Words.White))));
 		CompostingChanceRegistry.INSTANCE.add(WHITE_DOGWOOD_PETALS, 0.325F);
 		//</editor-fold>
 	}
 	private static void RegisterFood() {
 		//<editor-fold desc="Food">
-		Register("coffee_plant", COFFEE_PLANT.asBlock(), List.of(EN_US.Plant(EN_US.Coffee())));
-		Register("coffee_cherry", COFFEE_PLANT.asItem(), List.of(EN_US.Cherry(EN_US.Coffee())));
-		Register("coffee_beans", COFFEE_BEANS, List.of(EN_US.Beans(EN_US.Coffee())));
+		Register("coffee_plant", COFFEE_PLANT.asBlock(), List.of(EN_US.Plant(Words.Coffee)));
+		Register("coffee_cherry", COFFEE_PLANT.asItem(), List.of(EN_US.Cherry(Words.Coffee)));
+		Register("coffee_beans", COFFEE_BEANS, List.of(EN_US.Beans(Words.Coffee)));
 		CompostingChanceRegistry.INSTANCE.add(COFFEE_BEANS, 0.65F);
-		Register("coffee", COFFEE, List.of(EN_US.Coffee()));
-		Register("black_coffee", BLACK_COFFEE, List.of(EN_US.Coffee(EN_US.Black())));
+		Register("coffee", COFFEE, List.of(Words.Coffee));
+		Register("black_coffee", BLACK_COFFEE, List.of(EN_US.Coffee(Words.Black)));
 		Register("cinnamon", CINNAMON, List.of(EN_US.Cinnamon()));
 		CompostingChanceRegistry.INSTANCE.add(CINNAMON, 0.2f);
 		Register("cherry", CHERRY, List.of(EN_US.Cherry()));
 		CompostingChanceRegistry.INSTANCE.add(CHERRY, 0.45F);
-		Register("green_apple", GREEN_APPLE, List.of(EN_US.Apple(EN_US.Green())));
+		Register("green_apple", GREEN_APPLE, List.of(EN_US.Apple(Words.Green)));
 		CompostingChanceRegistry.INSTANCE.add(GREEN_APPLE, 0.65F);
 		Register("strawberry_bush", STRAWBERRY_BUSH, List.of(EN_US.Bush(EN_US.Strawberry())));
 		FlammableBlockRegistry.getDefaultInstance().add(STRAWBERRY_BUSH, 60, 100);
@@ -6644,20 +6105,20 @@ public class ModBase implements ModInitializer {
 		Register("egg_nog", EGG_NOG, List.of(EN_US.Nog(EN_US.Egg())));
 		Register("milkshake", MILKSHAKE, List.of(EN_US.Milkshake()));
 		Register("chocolate_milkshake", CHOCOLATE_MILKSHAKE, List.of(EN_US.Milkshake(EN_US.Chocolate())));
-		Register("coffee_milkshake", COFFEE_MILKSHAKE, List.of(EN_US.Milkshake(EN_US.Coffee())));
+		Register("coffee_milkshake", COFFEE_MILKSHAKE, List.of(EN_US.Milkshake(Words.Coffee)));
 		Register("strawberry_milkshake", STRAWBERRY_MILKSHAKE, List.of(EN_US.Milkshake(EN_US.Strawberry())));
-		Register("vanilla_milkshake", VANILLA_MILKSHAKE, List.of(EN_US.Milkshake(EN_US.Vanilla())));
+		Register("vanilla_milkshake", VANILLA_MILKSHAKE, List.of(EN_US.Milkshake(Words.Vanilla)));
 		Register("chocolate_chip_milkshake", CHOCOLATE_CHIP_MILKSHAKE, List.of(EN_US.Milkshake(EN_US.Chip(EN_US.Chocolate()))));
-		Register("ice_cream", ICE_CREAM, List.of(EN_US.Cream(EN_US.Ice())));
+		Register("ice_cream", ICE_CREAM, List.of(EN_US.Cream(Words.Ice)));
 		Register("chocolate_ice_cream", CHOCOLATE_ICE_CREAM, List.of(EN_US.Cream(EN_US.Ice(EN_US.Chocolate()))));
-		Register("coffee_ice_cream", COFFEE_ICE_CREAM, List.of(EN_US.Cream(EN_US.Ice(EN_US.Coffee()))));
+		Register("coffee_ice_cream", COFFEE_ICE_CREAM, List.of(EN_US.Cream(EN_US.Ice(Words.Coffee))));
 		Register("strawberry_ice_cream", STRAWBERRY_ICE_CREAM, List.of(EN_US.Cream(EN_US.Ice(EN_US.Strawberry()))));
-		Register("vanilla_ice_cream", VANILLA_ICE_CREAM, List.of(EN_US.Cream(EN_US.Ice(EN_US.Vanilla()))));
+		Register("vanilla_ice_cream", VANILLA_ICE_CREAM, List.of(EN_US.Cream(EN_US.Ice(Words.Vanilla))));
 		Register("chocolate_chip_ice_cream", CHOCOLATE_CHIP_ICE_CREAM, List.of(EN_US.Cream(EN_US.Ice(EN_US.Chip(EN_US.Chocolate())))));
 		//Candy
 		Register("cinnamon_bean", CINNAMON_BEAN, List.of(EN_US.Bean(EN_US.Cinnamon())));
-		Register("pink_cotton_candy", PINK_COTTON_CANDY, List.of(EN_US.Candy(EN_US.Cotton(EN_US.Pink()))));
-		Register("blue_cotton_candy", BLUE_COTTON_CANDY, List.of(EN_US.Candy(EN_US.Cotton(EN_US.Blue()))));
+		Register("pink_cotton_candy", PINK_COTTON_CANDY, List.of(EN_US.Candy(EN_US.Cotton(Words.Pink))));
+		Register("blue_cotton_candy", BLUE_COTTON_CANDY, List.of(EN_US.Candy(EN_US.Cotton(Words.Blue))));
 		Register("candy_cane", CANDY_CANE, List.of(EN_US.Cane(EN_US.Candy())));
 		Register("candy_corn", CANDY_CORN, List.of(EN_US.Corn(EN_US.Candy())));
 		Register("caramel", CARAMEL, List.of(EN_US.Caramel()));
@@ -6665,7 +6126,7 @@ public class ModBase implements ModInitializer {
 		Register("lollipop", LOLLIPOP, List.of(EN_US.Lollipop()));
 		Register("milk_chocolate", MILK_CHOCOLATE, List.of(EN_US.Chocolate(EN_US.Milk())));
 		Register("dark_chocolate", DARK_CHOCOLATE, List.of(EN_US.Chocolate(EN_US.Dark())));
-		Register("white_chocolate", WHITE_CHOCOLATE, List.of(EN_US.Chocolate(EN_US.White())));
+		Register("white_chocolate", WHITE_CHOCOLATE, List.of(EN_US.Chocolate(Words.White)));
 		Register("marshmallow", MARSHMALLOW, List.of(EN_US.Marshmallow()));
 		Register("roast_marshmallow", ROAST_MARSHMALLOW, List.of(EN_US.Marshmallow(EN_US.Roast())));
 		Register("marshmallow_on_stick", MARSHMALLOW_ON_STICK, List.of(EN_US.Stick(EN_US.a(EN_US.on(EN_US.Marshmallow())))));
@@ -6687,13 +6148,13 @@ public class ModBase implements ModInitializer {
 		CompostingChanceRegistry.INSTANCE.add(GRAPES, 0.3F);
 		//</editor-fold>
 		//<editor-fold desc="Golden">
-		Register("golden_potato", GOLDEN_POTATO, List.of(EN_US.Potato(EN_US.Golden())));
-		Register("golden_baked_potato", GOLDEN_BAKED_POTATO, List.of(EN_US.Potato(EN_US.Baked(EN_US.Golden()))));
-		Register("golden_beetroot", GOLDEN_BEETROOT, List.of(EN_US.Beetroot(EN_US.Golden())));
-		Register("golden_chorus_fruit", GOLDEN_CHORUS_FRUIT, List.of(EN_US.Fruit(EN_US.Chorus(EN_US.Golden()))));
-		Register("golden_tomato", GOLDEN_TOMATO, List.of(EN_US.Tomato(EN_US.Golden())));
-		Register("golden_onion", GOLDEN_ONION, List.of(EN_US.Onion(EN_US.Golden())));
-		Register("golden_egg", GOLDEN_EGG, List.of(EN_US.Egg(EN_US.Golden())));
+		Register("golden_potato", GOLDEN_POTATO, List.of(EN_US.Potato(Words.Golden)));
+		Register("golden_baked_potato", GOLDEN_BAKED_POTATO, List.of(EN_US.Potato(EN_US.Baked(Words.Golden))));
+		Register("golden_beetroot", GOLDEN_BEETROOT, List.of(EN_US.Beetroot(Words.Golden)));
+		Register("golden_chorus_fruit", GOLDEN_CHORUS_FRUIT, List.of(EN_US.Fruit(EN_US.Chorus(Words.Golden))));
+		Register("golden_tomato", GOLDEN_TOMATO, List.of(EN_US.Tomato(Words.Golden)));
+		Register("golden_onion", GOLDEN_ONION, List.of(EN_US.Onion(Words.Golden)));
+		Register("golden_egg", GOLDEN_EGG, List.of(EN_US.Egg(Words.Golden)));
 		//</editor-fold>
 		//<editor-fold desc="Rotten">
 		Register("poisonous_carrot", POISONOUS_CARROT, List.of(EN_US.Carrot(EN_US.Poisonous())));
@@ -6719,27 +6180,27 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="Juices">
 		Register("apple_cider", APPLE_CIDER, List.of(EN_US.Cider(EN_US.Apple())));
-		Register("golden_apple_cider", GOLDEN_APPLE_CIDER, List.of(EN_US.Cider(EN_US.Apple(EN_US.Golden()))));
+		Register("golden_apple_cider", GOLDEN_APPLE_CIDER, List.of(EN_US.Cider(EN_US.Apple(Words.Golden))));
 		Register("juicer", JUICER, List.of(EN_US.Juicer()));
 		RegisterJuice("apple_juice", APPLE_JUICE, Items.APPLE, List.of(EN_US.Juice(EN_US.Apple())));
 		JuicerBlock.JUICE_MAP.put(() -> GREEN_APPLE, APPLE_JUICE);
 		RegisterJuice("beetroot_juice", BEETROOT_JUICE, Items.BEETROOT, List.of(EN_US.Juice(EN_US.Beetroot())));
 		//TODO: Hook into better nether explicitly
-		RegisterJuice("black_apple_juice", BLACK_APPLE_JUICE, () -> Registry.ITEM.get(new Identifier("betternether:black_apple")), List.of(EN_US.Juice(EN_US.Apple(EN_US.Black()))));
+		RegisterJuice("black_apple_juice", BLACK_APPLE_JUICE, () -> Registry.ITEM.get(new Identifier("betternether:black_apple")), List.of(EN_US.Juice(EN_US.Apple(Words.Black))));
 		RegisterJuice("cabbage_juice", CABBAGE_JUICE, ItemsRegistry.CABBAGE.get(), List.of(EN_US.Juice(EN_US.Cabbage())));
 		RegisterJuice("cactus_juice", CACTUS_JUICE, Items.CACTUS, List.of(EN_US.Juice(EN_US.Cactus())));
 		RegisterJuice("carrot_juice", CARROT_JUICE, Items.CARROT, List.of(EN_US.Juice(EN_US.Carrot())));
 		RegisterJuice("cherry_juice", CHERRY_JUICE, CHERRY, List.of(EN_US.Juice(EN_US.Cherry())));
 		RegisterJuice("chorus_juice", CHORUS_JUICE, Items.CHORUS_FRUIT, List.of(EN_US.Juice(EN_US.Chorus())));
 		RegisterJuice("glow_berry_juice", GLOW_BERRY_JUICE, Items.GLOW_BERRIES, List.of(EN_US.Juice(EN_US.Berry(EN_US.Glow()))));
-		RegisterJuice("golden_apple_juice", GOLDEN_APPLE_JUICE, Items.GOLDEN_APPLE, List.of(EN_US.Juice(EN_US.Apple(EN_US.Golden()))));
+		RegisterJuice("golden_apple_juice", GOLDEN_APPLE_JUICE, Items.GOLDEN_APPLE, List.of(EN_US.Juice(EN_US.Apple(Words.Golden))));
 		RegisterJuice("enchanted_golden_apple_juice", ENCHANTED_GOLDEN_APPLE_JUICE, Items.ENCHANTED_GOLDEN_APPLE, List.of(EN_US.Juice(EN_US.Apple(EN_US.Golden(EN_US.Enchanted())))));
-		RegisterJuice("golden_beetroot_juice", GOLDEN_BEETROOT_JUICE, GOLDEN_BEETROOT, List.of(EN_US.Juice(EN_US.Beetroot(EN_US.Golden()))));
-		RegisterJuice("golden_carrot_juice", GOLDEN_CARROT_JUICE, Items.GOLDEN_CARROT, List.of(EN_US.Juice(EN_US.Carrot(EN_US.Golden()))));
-		RegisterJuice("golden_chorus_juice", GOLDEN_CHORUS_JUICE, GOLDEN_CHORUS_FRUIT, List.of(EN_US.Juice(EN_US.Chorus(EN_US.Golden()))));
-		RegisterJuice("golden_onion_juice", GOLDEN_ONION_JUICE, GOLDEN_ONION, List.of(EN_US.Juice(EN_US.Onion(EN_US.Golden()))));
-		RegisterJuice("golden_potato_juice", GOLDEN_POTATO_JUICE, GOLDEN_POTATO, List.of(EN_US.Juice(EN_US.Potato(EN_US.Golden()))));
-		RegisterJuice("golden_tomato_juice", GOLDEN_TOMATO_JUICE, GOLDEN_TOMATO, List.of(EN_US.Juice(EN_US.Tomato(EN_US.Golden()))));
+		RegisterJuice("golden_beetroot_juice", GOLDEN_BEETROOT_JUICE, GOLDEN_BEETROOT, List.of(EN_US.Juice(EN_US.Beetroot(Words.Golden))));
+		RegisterJuice("golden_carrot_juice", GOLDEN_CARROT_JUICE, Items.GOLDEN_CARROT, List.of(EN_US.Juice(EN_US.Carrot(Words.Golden))));
+		RegisterJuice("golden_chorus_juice", GOLDEN_CHORUS_JUICE, GOLDEN_CHORUS_FRUIT, List.of(EN_US.Juice(EN_US.Chorus(Words.Golden))));
+		RegisterJuice("golden_onion_juice", GOLDEN_ONION_JUICE, GOLDEN_ONION, List.of(EN_US.Juice(EN_US.Onion(Words.Golden))));
+		RegisterJuice("golden_potato_juice", GOLDEN_POTATO_JUICE, GOLDEN_POTATO, List.of(EN_US.Juice(EN_US.Potato(Words.Golden))));
+		RegisterJuice("golden_tomato_juice", GOLDEN_TOMATO_JUICE, GOLDEN_TOMATO, List.of(EN_US.Juice(EN_US.Tomato(Words.Golden))));
 		RegisterJuice("grape_juice", GRAPE_JUICE, GRAPES, List.of(EN_US.Juice(EN_US.Grape())));
 		RegisterJuice("kelp_juice", KELP_JUICE, Items.KELP, List.of(EN_US.Juice(EN_US.Kelp())));
 		RegisterJuice("melon_juice", MELON_JUICE, Items.MELON_SLICE, List.of(EN_US.Juice(EN_US.Melon())));
@@ -6754,21 +6215,21 @@ public class ModBase implements ModInitializer {
 		//Smoothies
 		Register("apple_smoothie", APPLE_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Apple())));
 		Register("beetroot_smoothie", BEETROOT_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Beetroot())));
-		Register("black_apple_smoothie", BLACK_APPLE_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Apple(EN_US.Black()))));
+		Register("black_apple_smoothie", BLACK_APPLE_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Apple(Words.Black))));
 		Register("cabbage_smoothie", CABBAGE_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Cabbage())));
 		Register("cactus_smoothie", CACTUS_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Cactus())));
 		Register("carrot_smoothie", CARROT_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Carrot())));
 		Register("cherry_smoothie", CHERRY_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Cherry())));
 		Register("chorus_smoothie", CHORUS_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Chorus())));
 		Register("glow_berry_smoothie", GLOW_BERRY_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Berry(EN_US.Glow()))));
-		Register("golden_apple_smoothie", GOLDEN_APPLE_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Apple(EN_US.Golden()))));
+		Register("golden_apple_smoothie", GOLDEN_APPLE_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Apple(Words.Golden))));
 		Register("enchanted_golden_apple_smoothie", ENCHANTED_GOLDEN_APPLE_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Apple(EN_US.Golden(EN_US.Enchanted())))));
-		Register("golden_beetroot_smoothie", GOLDEN_BEETROOT_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Beetroot(EN_US.Golden()))));
-		Register("golden_carrot_smoothie", GOLDEN_CARROT_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Carrot(EN_US.Golden()))));
-		Register("golden_chorus_smoothie", GOLDEN_CHORUS_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Chorus(EN_US.Golden()))));
-		Register("golden_onion_smoothie", GOLDEN_ONION_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Onion(EN_US.Golden()))));
-		Register("golden_potato_smoothie", GOLDEN_POTATO_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Potato(EN_US.Golden()))));
-		Register("golden_tomato_smoothie", GOLDEN_TOMATO_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Tomato(EN_US.Golden()))));
+		Register("golden_beetroot_smoothie", GOLDEN_BEETROOT_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Beetroot(Words.Golden))));
+		Register("golden_carrot_smoothie", GOLDEN_CARROT_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Carrot(Words.Golden))));
+		Register("golden_chorus_smoothie", GOLDEN_CHORUS_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Chorus(Words.Golden))));
+		Register("golden_onion_smoothie", GOLDEN_ONION_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Onion(Words.Golden))));
+		Register("golden_potato_smoothie", GOLDEN_POTATO_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Potato(Words.Golden))));
+		Register("golden_tomato_smoothie", GOLDEN_TOMATO_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Tomato(Words.Golden))));
 		Register("grape_smoothie", GRAPE_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Grape())));
 		Register("kelp_smoothie", KELP_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Kelp())));
 		Register("melon_smoothie", MELON_SMOOTHIE, List.of(EN_US.Smoothie(EN_US.Melon())));
@@ -6807,13 +6268,13 @@ public class ModBase implements ModInitializer {
 		for (DyeColor color : DyeColor.values()) {
 			Register(color + "_chorus_candle_cake", CHORUS_CAKE.CANDLE_CAKES.get(color), List.of(EN_US.Candle(EN_US.Color(color, EN_US.with(EN_US.Cake(EN_US.Chorus()))))));
 		}
-		Register("coffee_cake", COFFEE_CAKE.CAKE, List.of(EN_US.Cake(EN_US.Coffee())));
-		Register("coffee_candle_cake", COFFEE_CAKE.CANDLE_CAKE, List.of(EN_US.Candle(EN_US.with(EN_US.Cake(EN_US.Coffee())))));
-		Register("coffee_soul_candle_cake", COFFEE_CAKE.SOUL_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Soul(EN_US.with(EN_US.Cake(EN_US.Coffee()))))));
-		Register("coffee_ender_candle_cake", COFFEE_CAKE.ENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Ender(EN_US.with(EN_US.Cake(EN_US.Coffee()))))));
-		Register("coffee_netherrack_candle_cake", COFFEE_CAKE.NETHERRACK_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Netherrack(EN_US.with(EN_US.Cake(EN_US.Coffee()))))));
+		Register("coffee_cake", COFFEE_CAKE.CAKE, List.of(EN_US.Cake(Words.Coffee)));
+		Register("coffee_candle_cake", COFFEE_CAKE.CANDLE_CAKE, List.of(EN_US.Candle(EN_US.with(EN_US.Cake(Words.Coffee)))));
+		Register("coffee_soul_candle_cake", COFFEE_CAKE.SOUL_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Soul(EN_US.with(EN_US.Cake(Words.Coffee))))));
+		Register("coffee_ender_candle_cake", COFFEE_CAKE.ENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Ender(EN_US.with(EN_US.Cake(Words.Coffee))))));
+		Register("coffee_netherrack_candle_cake", COFFEE_CAKE.NETHERRACK_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Netherrack(EN_US.with(EN_US.Cake(Words.Coffee))))));
 		for (DyeColor color : DyeColor.values()) {
-			Register(color + "_coffee_candle_cake", COFFEE_CAKE.CANDLE_CAKES.get(color), List.of(EN_US.Candle(EN_US.Color(color, EN_US.with(EN_US.Cake(EN_US.Coffee()))))));
+			Register(color + "_coffee_candle_cake", COFFEE_CAKE.CANDLE_CAKES.get(color), List.of(EN_US.Candle(EN_US.Color(color, EN_US.with(EN_US.Cake(Words.Coffee))))));
 		}
 		Register("confetti_cake", CONFETTI_CAKE.CAKE, List.of(EN_US.Cake(EN_US.Confetti())));
 		Register("confetti_candle_cake", CONFETTI_CAKE.CANDLE_CAKE, List.of(EN_US.Candle(EN_US.with(EN_US.Cake(EN_US.Confetti())))));
@@ -6831,33 +6292,33 @@ public class ModBase implements ModInitializer {
 		for (DyeColor color : DyeColor.values()) {
 			Register(color + "_strawberry_candle_cake", STRAWBERRY_CAKE.CANDLE_CAKES.get(color), List.of(EN_US.Candle(EN_US.Color(color, EN_US.with(EN_US.Cake(EN_US.Strawberry()))))));
 		}
-		Register("vanilla_cake", VANILLA_CAKE.CAKE, List.of(EN_US.Cake(EN_US.Vanilla())));
-		Register("vanilla_candle_cake", VANILLA_CAKE.CANDLE_CAKE, List.of(EN_US.Candle(EN_US.with(EN_US.Cake(EN_US.Vanilla())))));
-		Register("vanilla_soul_candle_cake", VANILLA_CAKE.SOUL_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Soul(EN_US.with(EN_US.Cake(EN_US.Vanilla()))))));
-		Register("vanilla_ender_candle_cake", VANILLA_CAKE.ENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Ender(EN_US.with(EN_US.Cake(EN_US.Vanilla()))))));
-		Register("vanilla_netherrack_candle_cake", VANILLA_CAKE.NETHERRACK_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Netherrack(EN_US.with(EN_US.Cake(EN_US.Vanilla()))))));
+		Register("vanilla_cake", VANILLA_CAKE.CAKE, List.of(EN_US.Cake(Words.Vanilla)));
+		Register("vanilla_candle_cake", VANILLA_CAKE.CANDLE_CAKE, List.of(EN_US.Candle(EN_US.with(EN_US.Cake(Words.Vanilla)))));
+		Register("vanilla_soul_candle_cake", VANILLA_CAKE.SOUL_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Soul(EN_US.with(EN_US.Cake(Words.Vanilla))))));
+		Register("vanilla_ender_candle_cake", VANILLA_CAKE.ENDER_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Ender(EN_US.with(EN_US.Cake(Words.Vanilla))))));
+		Register("vanilla_netherrack_candle_cake", VANILLA_CAKE.NETHERRACK_CANDLE_CAKE, List.of(EN_US.Candle(EN_US.Netherrack(EN_US.with(EN_US.Cake(Words.Vanilla))))));
 		for (DyeColor color : DyeColor.values()) {
-			Register(color + "_vanilla_candle_cake", VANILLA_CAKE.CANDLE_CAKES.get(color), List.of(EN_US.Candle(EN_US.Color(color, EN_US.with(EN_US.Cake(EN_US.Vanilla()))))));
+			Register(color + "_vanilla_candle_cake", VANILLA_CAKE.CANDLE_CAKES.get(color), List.of(EN_US.Candle(EN_US.Color(color, EN_US.with(EN_US.Cake(Words.Vanilla))))));
 		}
 		//</editor-fold>
 		//<editor-fold desc="Milk & Cheese">
 		Register("milk_bowl", MILK_BOWL, List.of(EN_US.Bowl(EN_US.Milk())));
 		Register("chocolate_milk_bowl", CHOCOLATE_MILK_BOWL, List.of(EN_US.Bowl(EN_US.Milk(EN_US.Chocolate()))));
-		Register("coffee_milk_bowl", COFFEE_MILK_BOWL, List.of(EN_US.Bowl(EN_US.Milk(EN_US.Coffee()))));
+		Register("coffee_milk_bowl", COFFEE_MILK_BOWL, List.of(EN_US.Bowl(EN_US.Milk(Words.Coffee))));
 		Register("strawberry_milk_bowl", STRAWBERRY_MILK_BOWL, List.of(EN_US.Bowl(EN_US.Milk(EN_US.Strawberry()))));
-		Register("vanilla_milk_bowl", VANILLA_MILK_BOWL, List.of(EN_US.Bowl(EN_US.Milk(EN_US.Vanilla()))));
+		Register("vanilla_milk_bowl", VANILLA_MILK_BOWL, List.of(EN_US.Bowl(EN_US.Milk(Words.Vanilla))));
 		Register("chocolate_milk_bottle", CHOCOLATE_MILK_BOTTLE, List.of(EN_US.Bottle(EN_US.Milk(EN_US.Chocolate()))));
-		Register("coffee_milk_bottle", COFFEE_MILK_BOTTLE, List.of(EN_US.Bottle(EN_US.Milk(EN_US.Coffee()))));
+		Register("coffee_milk_bottle", COFFEE_MILK_BOTTLE, List.of(EN_US.Bottle(EN_US.Milk(Words.Coffee))));
 		Register("strawberry_milk_bottle", STRAWBERRY_MILK_BOTTLE, List.of(EN_US.Bottle(EN_US.Milk(EN_US.Strawberry()))));
-		Register("vanilla_milk_bottle", VANILLA_MILK_BOTTLE, List.of(EN_US.Bottle(EN_US.Milk(EN_US.Vanilla()))));
+		Register("vanilla_milk_bottle", VANILLA_MILK_BOTTLE, List.of(EN_US.Bottle(EN_US.Milk(Words.Vanilla))));
 		Register("milk_cauldron", MILK_CAULDRON, List.of(EN_US.Cauldron(EN_US.Milk())));
 		Register("cottage_cheese_cauldron", COTTAGE_CHEESE_CAULDRON, List.of(EN_US.Cauldron(EN_US.Cheese(EN_US.Cottage()))));
 		Register("cheese_cauldron", CHEESE_CAULDRON, List.of(EN_US.Cauldron(EN_US.Cheese())));
 		CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(Items.MILK_BUCKET, MilkCauldronBlock.FillFromBucket(Items.BUCKET));
 		Register("chocolate_milk_bucket", CHOCOLATE_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Chocolate()))));
-		Register("coffee_milk_bucket", COFFEE_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Coffee()))));
+		Register("coffee_milk_bucket", COFFEE_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(Words.Coffee))));
 		Register("strawberry_milk_bucket", STRAWBERRY_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Strawberry()))));
-		Register("vanilla_milk_bucket", VANILLA_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(EN_US.Vanilla()))));
+		Register("vanilla_milk_bucket", VANILLA_MILK_BUCKET, List.of(EN_US.Bucket(EN_US.Milk(Words.Vanilla))));
 		Register("cheese_block", CHEESE_BLOCK, List.of(EN_US.Block(EN_US.Cheese())));
 		//</editor-fold>
 	}
@@ -7006,121 +6467,121 @@ public class ModBase implements ModInitializer {
 	}
 	private static void RegisterMushroomWood() {
 		//<editor-fold desc="Blue Mushroom">
-		Register("blue_mushroom_planks", BLUE_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_stairs", BLUE_MUSHROOM_STAIRS, List.of(EN_US.Stairs(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_slab", BLUE_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_fence", BLUE_MUSHROOM_FENCE, List.of(EN_US.Fence(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_fence_gate", BLUE_MUSHROOM_FENCE_GATE, List.of(EN_US.Gate(EN_US.Fence(EN_US.Mushroom(EN_US.Blue())))));
-		Register("blue_mushroom_door", BLUE_MUSHROOM_DOOR, List.of(EN_US.Door(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_trapdoor", BLUE_MUSHROOM_TRAPDOOR, List.of(EN_US.Trapdoor(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_pressure_plate", BLUE_MUSHROOM_PRESSURE_PLATE, List.of(EN_US.Plate(EN_US.Pressure(EN_US.Mushroom(EN_US.Blue())))));
-		Register("blue_mushroom_button", BLUE_MUSHROOM_BUTTON, List.of(EN_US.Button(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom", BLUE_MUSHROOM_SIGN, List.of(EN_US._Sign(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_iron_hanging_sign", "blue_mushroom_iron_wall_hanging_sign", BLUE_MUSHROOM_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Blue()), EN_US.Chain(EN_US.Iron(EN_US.with())))));
-		Register("blue_mushroom_gold_hanging_sign", "blue_mushroom_gold_wall_hanging_sign", BLUE_MUSHROOM_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Blue()), EN_US.Chain(EN_US.Gold(EN_US.with())))));
-		Register("blue_mushroom_copper_hanging_sign", "blue_mushroom_copper_wall_hanging_sign", BLUE_MUSHROOM_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Blue()), EN_US.Chain(EN_US.Copper(EN_US.with())))));
-		Register("blue_mushroom_exposed_copper_hanging_sign", "blue_mushroom_exposed_copper_wall_hanging_sign", BLUE_MUSHROOM_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Blue()), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
-		Register("blue_mushroom_weathered_copper_hanging_sign", "blue_mushroom_weathered_copper_wall_hanging_sign", BLUE_MUSHROOM_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Blue()), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
-		Register("blue_mushroom_oxidized_copper_hanging_sign", "blue_mushroom_oxidized_copper_wall_hanging_sign", BLUE_MUSHROOM_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Blue()), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
-		Register("blue_mushroom_netherite_hanging_sign", "blue_mushroom_netherite_wall_hanging_sign", BLUE_MUSHROOM_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Blue()), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
-		Register("blue_mushroom", BLUE_MUSHROOM_BOAT, List.of(EN_US._Boat(EN_US.Mushroom(EN_US.Blue()))));
+		Register("blue_mushroom_planks", BLUE_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_stairs", BLUE_MUSHROOM_STAIRS, List.of(EN_US.Stairs(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_slab", BLUE_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_fence", BLUE_MUSHROOM_FENCE, List.of(EN_US.Fence(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_fence_gate", BLUE_MUSHROOM_FENCE_GATE, List.of(EN_US.Gate(EN_US.Fence(EN_US.Mushroom(Words.Blue)))));
+		Register("blue_mushroom_door", BLUE_MUSHROOM_DOOR, List.of(EN_US.Door(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_trapdoor", BLUE_MUSHROOM_TRAPDOOR, List.of(EN_US.Trapdoor(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_pressure_plate", BLUE_MUSHROOM_PRESSURE_PLATE, List.of(EN_US.Plate(EN_US.Pressure(EN_US.Mushroom(Words.Blue)))));
+		Register("blue_mushroom_button", BLUE_MUSHROOM_BUTTON, List.of(EN_US.Button(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom", BLUE_MUSHROOM_SIGN, List.of(EN_US._Sign(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_iron_hanging_sign", "blue_mushroom_iron_wall_hanging_sign", BLUE_MUSHROOM_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Blue), EN_US.Chain(EN_US.Iron(EN_US.with())))));
+		Register("blue_mushroom_gold_hanging_sign", "blue_mushroom_gold_wall_hanging_sign", BLUE_MUSHROOM_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Blue), EN_US.Chain(EN_US.Gold(EN_US.with())))));
+		Register("blue_mushroom_copper_hanging_sign", "blue_mushroom_copper_wall_hanging_sign", BLUE_MUSHROOM_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Blue), EN_US.Chain(EN_US.Copper(EN_US.with())))));
+		Register("blue_mushroom_exposed_copper_hanging_sign", "blue_mushroom_exposed_copper_wall_hanging_sign", BLUE_MUSHROOM_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Blue), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
+		Register("blue_mushroom_weathered_copper_hanging_sign", "blue_mushroom_weathered_copper_wall_hanging_sign", BLUE_MUSHROOM_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Blue), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
+		Register("blue_mushroom_oxidized_copper_hanging_sign", "blue_mushroom_oxidized_copper_wall_hanging_sign", BLUE_MUSHROOM_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Blue), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
+		Register("blue_mushroom_netherite_hanging_sign", "blue_mushroom_netherite_wall_hanging_sign", BLUE_MUSHROOM_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Blue), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
+		Register("blue_mushroom", BLUE_MUSHROOM_BOAT, List.of(EN_US._Boat(EN_US.Mushroom(Words.Blue))));
 		//Extended
-		Register("blue_mushroom_beehive", BLUE_MUSHROOM_BEEHIVE, List.of(EN_US.Beehive(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_bookshelf", BLUE_MUSHROOM_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_chiseled_bookshelf", BLUE_MUSHROOM_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Mushroom(EN_US.Blue())))));
-		Register("blue_mushroom_crafting_table", BLUE_MUSHROOM_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Mushroom(EN_US.Blue())))));
-		Register("blue_mushroom_ladder", BLUE_MUSHROOM_LADDER, List.of(EN_US.Ladder(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_woodcutter", BLUE_MUSHROOM_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_barrel", BLUE_MUSHROOM_BARREL, List.of(EN_US.Barrel(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_lectern", BLUE_MUSHROOM_LECTERN, List.of(EN_US.Lectern(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_powder_keg", BLUE_MUSHROOM_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Mushroom(EN_US.Blue())))));
+		Register("blue_mushroom_beehive", BLUE_MUSHROOM_BEEHIVE, List.of(EN_US.Beehive(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_bookshelf", BLUE_MUSHROOM_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_chiseled_bookshelf", BLUE_MUSHROOM_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Mushroom(Words.Blue)))));
+		Register("blue_mushroom_crafting_table", BLUE_MUSHROOM_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Mushroom(Words.Blue)))));
+		Register("blue_mushroom_ladder", BLUE_MUSHROOM_LADDER, List.of(EN_US.Ladder(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_woodcutter", BLUE_MUSHROOM_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_barrel", BLUE_MUSHROOM_BARREL, List.of(EN_US.Barrel(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_lectern", BLUE_MUSHROOM_LECTERN, List.of(EN_US.Lectern(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_powder_keg", BLUE_MUSHROOM_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Mushroom(Words.Blue)))));
 		//Torches
-		Register("blue_mushroom_torch", "blue_mushroom_wall_torch", BLUE_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_soul_torch", "blue_mushroom_soul_wall_torch", BLUE_MUSHROOM_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Mushroom(EN_US.Blue())))));
-		Register("blue_mushroom_ender_torch", "blue_mushroom_ender_wall_torch", BLUE_MUSHROOM_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Mushroom(EN_US.Blue())))));
+		Register("blue_mushroom_torch", "blue_mushroom_wall_torch", BLUE_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_soul_torch", "blue_mushroom_soul_wall_torch", BLUE_MUSHROOM_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Mushroom(Words.Blue)))));
+		Register("blue_mushroom_ender_torch", "blue_mushroom_ender_wall_torch", BLUE_MUSHROOM_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Mushroom(Words.Blue)))));
 		Register("underwater_blue_mushroom_torch", "underwater_blue_mushroom_wall_torch", UNDERWATER_BLUE_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(EN_US.Blue(EN_US.Underwater())))));
 		//Campfires
-		Register("blue_mushroom_campfire", BLUE_MUSHROOM_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Mushroom(EN_US.Blue()))));
-		Register("blue_mushroom_soul_campfire", BLUE_MUSHROOM_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Mushroom(EN_US.Blue())))));
-		Register("blue_mushroom_ender_campfire", BLUE_MUSHROOM_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Mushroom(EN_US.Blue())))));
+		Register("blue_mushroom_campfire", BLUE_MUSHROOM_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Mushroom(Words.Blue))));
+		Register("blue_mushroom_soul_campfire", BLUE_MUSHROOM_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Mushroom(Words.Blue)))));
+		Register("blue_mushroom_ender_campfire", BLUE_MUSHROOM_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Mushroom(Words.Blue)))));
 		//</editor-fold>
 		//<editor-fold desc="Brown Mushroom">
-		Register("brown_mushroom_planks", BROWN_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_stairs", BROWN_MUSHROOM_STAIRS, List.of(EN_US.Stairs(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_slab", BROWN_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_fence", BROWN_MUSHROOM_FENCE, List.of(EN_US.Fence(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_fence_gate", BROWN_MUSHROOM_FENCE_GATE, List.of(EN_US.Gate(EN_US.Fence(EN_US.Mushroom(EN_US.Brown())))));
-		Register("brown_mushroom_door", BROWN_MUSHROOM_DOOR, List.of(EN_US.Door(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_trapdoor", BROWN_MUSHROOM_TRAPDOOR, List.of(EN_US.Trapdoor(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_pressure_plate", BROWN_MUSHROOM_PRESSURE_PLATE, List.of(EN_US.Plate(EN_US.Pressure(EN_US.Mushroom(EN_US.Brown())))));
-		Register("brown_mushroom_button", BROWN_MUSHROOM_BUTTON, List.of(EN_US.Button(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom", BROWN_MUSHROOM_SIGN, List.of(EN_US._Sign(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_iron_hanging_sign", "brown_mushroom_iron_wall_hanging_sign", BROWN_MUSHROOM_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Brown()), EN_US.Chain(EN_US.Iron(EN_US.with())))));
-		Register("brown_mushroom_gold_hanging_sign", "brown_mushroom_gold_wall_hanging_sign", BROWN_MUSHROOM_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Brown()), EN_US.Chain(EN_US.Gold(EN_US.with())))));
-		Register("brown_mushroom_copper_hanging_sign", "brown_mushroom_copper_wall_hanging_sign", BROWN_MUSHROOM_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Brown()), EN_US.Chain(EN_US.Copper(EN_US.with())))));
-		Register("brown_mushroom_exposed_copper_hanging_sign", "brown_mushroom_exposed_copper_wall_hanging_sign", BROWN_MUSHROOM_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Brown()), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
-		Register("brown_mushroom_weathered_copper_hanging_sign", "brown_mushroom_weathered_copper_wall_hanging_sign", BROWN_MUSHROOM_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Brown()), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
-		Register("brown_mushroom_oxidized_copper_hanging_sign", "brown_mushroom_oxidized_copper_wall_hanging_sign", BROWN_MUSHROOM_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Brown()), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
-		Register("brown_mushroom_netherite_hanging_sign", "brown_mushroom_netherite_wall_hanging_sign", BROWN_MUSHROOM_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Brown()), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
-		Register("brown_mushroom", BROWN_MUSHROOM_BOAT, List.of(EN_US._Boat(EN_US.Mushroom(EN_US.Brown()))));
+		Register("brown_mushroom_planks", BROWN_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_stairs", BROWN_MUSHROOM_STAIRS, List.of(EN_US.Stairs(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_slab", BROWN_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_fence", BROWN_MUSHROOM_FENCE, List.of(EN_US.Fence(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_fence_gate", BROWN_MUSHROOM_FENCE_GATE, List.of(EN_US.Gate(EN_US.Fence(EN_US.Mushroom(Words.Brown)))));
+		Register("brown_mushroom_door", BROWN_MUSHROOM_DOOR, List.of(EN_US.Door(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_trapdoor", BROWN_MUSHROOM_TRAPDOOR, List.of(EN_US.Trapdoor(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_pressure_plate", BROWN_MUSHROOM_PRESSURE_PLATE, List.of(EN_US.Plate(EN_US.Pressure(EN_US.Mushroom(Words.Brown)))));
+		Register("brown_mushroom_button", BROWN_MUSHROOM_BUTTON, List.of(EN_US.Button(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom", BROWN_MUSHROOM_SIGN, List.of(EN_US._Sign(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_iron_hanging_sign", "brown_mushroom_iron_wall_hanging_sign", BROWN_MUSHROOM_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Brown), EN_US.Chain(EN_US.Iron(EN_US.with())))));
+		Register("brown_mushroom_gold_hanging_sign", "brown_mushroom_gold_wall_hanging_sign", BROWN_MUSHROOM_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Brown), EN_US.Chain(EN_US.Gold(EN_US.with())))));
+		Register("brown_mushroom_copper_hanging_sign", "brown_mushroom_copper_wall_hanging_sign", BROWN_MUSHROOM_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Brown), EN_US.Chain(EN_US.Copper(EN_US.with())))));
+		Register("brown_mushroom_exposed_copper_hanging_sign", "brown_mushroom_exposed_copper_wall_hanging_sign", BROWN_MUSHROOM_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Brown), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
+		Register("brown_mushroom_weathered_copper_hanging_sign", "brown_mushroom_weathered_copper_wall_hanging_sign", BROWN_MUSHROOM_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Brown), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
+		Register("brown_mushroom_oxidized_copper_hanging_sign", "brown_mushroom_oxidized_copper_wall_hanging_sign", BROWN_MUSHROOM_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Brown), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
+		Register("brown_mushroom_netherite_hanging_sign", "brown_mushroom_netherite_wall_hanging_sign", BROWN_MUSHROOM_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Brown), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
+		Register("brown_mushroom", BROWN_MUSHROOM_BOAT, List.of(EN_US._Boat(EN_US.Mushroom(Words.Brown))));
 		//Extended
-		Register("brown_mushroom_beehive", BROWN_MUSHROOM_BEEHIVE, List.of(EN_US.Beehive(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_bookshelf", BROWN_MUSHROOM_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_chiseled_bookshelf", BROWN_MUSHROOM_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Mushroom(EN_US.Brown())))));
-		Register("brown_mushroom_crafting_table", BROWN_MUSHROOM_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Mushroom(EN_US.Brown())))));
-		Register("brown_mushroom_ladder", BROWN_MUSHROOM_LADDER, List.of(EN_US.Ladder(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_woodcutter", BROWN_MUSHROOM_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_barrel", BROWN_MUSHROOM_BARREL, List.of(EN_US.Barrel(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_lectern", BROWN_MUSHROOM_LECTERN, List.of(EN_US.Lectern(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_powder_keg", BROWN_MUSHROOM_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Mushroom(EN_US.Brown())))));
+		Register("brown_mushroom_beehive", BROWN_MUSHROOM_BEEHIVE, List.of(EN_US.Beehive(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_bookshelf", BROWN_MUSHROOM_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_chiseled_bookshelf", BROWN_MUSHROOM_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Mushroom(Words.Brown)))));
+		Register("brown_mushroom_crafting_table", BROWN_MUSHROOM_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Mushroom(Words.Brown)))));
+		Register("brown_mushroom_ladder", BROWN_MUSHROOM_LADDER, List.of(EN_US.Ladder(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_woodcutter", BROWN_MUSHROOM_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_barrel", BROWN_MUSHROOM_BARREL, List.of(EN_US.Barrel(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_lectern", BROWN_MUSHROOM_LECTERN, List.of(EN_US.Lectern(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_powder_keg", BROWN_MUSHROOM_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Mushroom(Words.Brown)))));
 		//Torches
-		Register("brown_mushroom_torch", "brown_mushroom_wall_torch", BROWN_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_soul_torch", "brown_mushroom_soul_wall_torch", BROWN_MUSHROOM_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Mushroom(EN_US.Brown())))));
-		Register("brown_mushroom_ender_torch", "brown_mushroom_ender_wall_torch", BROWN_MUSHROOM_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Mushroom(EN_US.Brown())))));
+		Register("brown_mushroom_torch", "brown_mushroom_wall_torch", BROWN_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_soul_torch", "brown_mushroom_soul_wall_torch", BROWN_MUSHROOM_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Mushroom(Words.Brown)))));
+		Register("brown_mushroom_ender_torch", "brown_mushroom_ender_wall_torch", BROWN_MUSHROOM_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Mushroom(Words.Brown)))));
 		Register("underwater_brown_mushroom_torch", "underwater_brown_mushroom_wall_torch", UNDERWATER_BROWN_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(EN_US.Brown(EN_US.Underwater())))));
 		//Campfires
-		Register("brown_mushroom_campfire", BROWN_MUSHROOM_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Mushroom(EN_US.Brown()))));
-		Register("brown_mushroom_soul_campfire", BROWN_MUSHROOM_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Mushroom(EN_US.Brown())))));
-		Register("brown_mushroom_ender_campfire", BROWN_MUSHROOM_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Mushroom(EN_US.Brown())))));
+		Register("brown_mushroom_campfire", BROWN_MUSHROOM_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Mushroom(Words.Brown))));
+		Register("brown_mushroom_soul_campfire", BROWN_MUSHROOM_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Mushroom(Words.Brown)))));
+		Register("brown_mushroom_ender_campfire", BROWN_MUSHROOM_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Mushroom(Words.Brown)))));
 		//</editor-fold>
 		//<editor-fold desc="Red Mushroom">
-		Register("red_mushroom_planks", RED_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_stairs", RED_MUSHROOM_STAIRS, List.of(EN_US.Stairs(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_slab", RED_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_fence", RED_MUSHROOM_FENCE, List.of(EN_US.Fence(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_fence_gate", RED_MUSHROOM_FENCE_GATE, List.of(EN_US.Gate(EN_US.Fence(EN_US.Mushroom(EN_US.Red())))));
-		Register("red_mushroom_door", RED_MUSHROOM_DOOR, List.of(EN_US.Door(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_trapdoor", RED_MUSHROOM_TRAPDOOR, List.of(EN_US.Trapdoor(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_pressure_plate", RED_MUSHROOM_PRESSURE_PLATE, List.of(EN_US.Plate(EN_US.Pressure(EN_US.Mushroom(EN_US.Red())))));
-		Register("red_mushroom_button", RED_MUSHROOM_BUTTON, List.of(EN_US.Button(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom", RED_MUSHROOM_SIGN, List.of(EN_US._Sign(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_iron_hanging_sign", "red_mushroom_iron_wall_hanging_sign", RED_MUSHROOM_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Red()), EN_US.Chain(EN_US.Iron(EN_US.with())))));
-		Register("red_mushroom_gold_hanging_sign", "red_mushroom_gold_wall_hanging_sign", RED_MUSHROOM_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Red()), EN_US.Chain(EN_US.Gold(EN_US.with())))));
-		Register("red_mushroom_copper_hanging_sign", "red_mushroom_copper_wall_hanging_sign", RED_MUSHROOM_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Red()), EN_US.Chain(EN_US.Copper(EN_US.with())))));
-		Register("red_mushroom_exposed_copper_hanging_sign", "red_mushroom_exposed_copper_wall_hanging_sign", RED_MUSHROOM_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Red()), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
-		Register("red_mushroom_weathered_copper_hanging_sign", "red_mushroom_weathered_copper_wall_hanging_sign", RED_MUSHROOM_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Red()), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
-		Register("red_mushroom_oxidized_copper_hanging_sign", "red_mushroom_oxidized_copper_wall_hanging_sign", RED_MUSHROOM_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Red()), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
-		Register("red_mushroom_netherite_hanging_sign", "red_mushroom_netherite_wall_hanging_sign", RED_MUSHROOM_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(EN_US.Red()), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
-		Register("red_mushroom", RED_MUSHROOM_BOAT, List.of(EN_US._Boat(EN_US.Mushroom(EN_US.Red()))));
+		Register("red_mushroom_planks", RED_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_stairs", RED_MUSHROOM_STAIRS, List.of(EN_US.Stairs(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_slab", RED_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_fence", RED_MUSHROOM_FENCE, List.of(EN_US.Fence(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_fence_gate", RED_MUSHROOM_FENCE_GATE, List.of(EN_US.Gate(EN_US.Fence(EN_US.Mushroom(Words.Red)))));
+		Register("red_mushroom_door", RED_MUSHROOM_DOOR, List.of(EN_US.Door(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_trapdoor", RED_MUSHROOM_TRAPDOOR, List.of(EN_US.Trapdoor(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_pressure_plate", RED_MUSHROOM_PRESSURE_PLATE, List.of(EN_US.Plate(EN_US.Pressure(EN_US.Mushroom(Words.Red)))));
+		Register("red_mushroom_button", RED_MUSHROOM_BUTTON, List.of(EN_US.Button(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom", RED_MUSHROOM_SIGN, List.of(EN_US._Sign(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_iron_hanging_sign", "red_mushroom_iron_wall_hanging_sign", RED_MUSHROOM_IRON_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Red), EN_US.Chain(EN_US.Iron(EN_US.with())))));
+		Register("red_mushroom_gold_hanging_sign", "red_mushroom_gold_wall_hanging_sign", RED_MUSHROOM_GOLD_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Red), EN_US.Chain(EN_US.Gold(EN_US.with())))));
+		Register("red_mushroom_copper_hanging_sign", "red_mushroom_copper_wall_hanging_sign", RED_MUSHROOM_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Red), EN_US.Chain(EN_US.Copper(EN_US.with())))));
+		Register("red_mushroom_exposed_copper_hanging_sign", "red_mushroom_exposed_copper_wall_hanging_sign", RED_MUSHROOM_EXPOSED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Red), EN_US.Chain(EN_US.Copper(EN_US.Exposed(EN_US.with()))))));
+		Register("red_mushroom_weathered_copper_hanging_sign", "red_mushroom_weathered_copper_wall_hanging_sign", RED_MUSHROOM_WEATHERED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Red), EN_US.Chain(EN_US.Copper(EN_US.Weathered(EN_US.with()))))));
+		Register("red_mushroom_oxidized_copper_hanging_sign", "red_mushroom_oxidized_copper_wall_hanging_sign", RED_MUSHROOM_OXIDIZED_COPPER_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Red), EN_US.Chain(EN_US.Copper(EN_US.Oxidized(EN_US.with()))))));
+		Register("red_mushroom_netherite_hanging_sign", "red_mushroom_netherite_wall_hanging_sign", RED_MUSHROOM_NETHERITE_HANGING_SIGN, List.of(EN_US._HangingSign(EN_US.Mushroom(Words.Red), EN_US.Chain(EN_US.Netherite(EN_US.with())))));
+		Register("red_mushroom", RED_MUSHROOM_BOAT, List.of(EN_US._Boat(EN_US.Mushroom(Words.Red))));
 		//Extended
-		Register("red_mushroom_beehive", RED_MUSHROOM_BEEHIVE, List.of(EN_US.Beehive(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_bookshelf", RED_MUSHROOM_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_chiseled_bookshelf", RED_MUSHROOM_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Mushroom(EN_US.Red())))));
-		Register("red_mushroom_crafting_table", RED_MUSHROOM_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Mushroom(EN_US.Red())))));
-		Register("red_mushroom_ladder", RED_MUSHROOM_LADDER, List.of(EN_US.Ladder(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_woodcutter", RED_MUSHROOM_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_barrel", RED_MUSHROOM_BARREL, List.of(EN_US.Barrel(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_lectern", RED_MUSHROOM_LECTERN, List.of(EN_US.Lectern(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_powder_keg", RED_MUSHROOM_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Mushroom(EN_US.Red())))));
+		Register("red_mushroom_beehive", RED_MUSHROOM_BEEHIVE, List.of(EN_US.Beehive(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_bookshelf", RED_MUSHROOM_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_chiseled_bookshelf", RED_MUSHROOM_CHISELED_BOOKSHELF, List.of(EN_US.Bookshelf(EN_US.Chiseled(EN_US.Mushroom(Words.Red)))));
+		Register("red_mushroom_crafting_table", RED_MUSHROOM_CRAFTING_TABLE, List.of(EN_US.Table(EN_US.Crafting(EN_US.Mushroom(Words.Red)))));
+		Register("red_mushroom_ladder", RED_MUSHROOM_LADDER, List.of(EN_US.Ladder(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_woodcutter", RED_MUSHROOM_WOODCUTTER, List.of(EN_US.Woodcutter(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_barrel", RED_MUSHROOM_BARREL, List.of(EN_US.Barrel(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_lectern", RED_MUSHROOM_LECTERN, List.of(EN_US.Lectern(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_powder_keg", RED_MUSHROOM_POWDER_KEG, List.of(EN_US.Keg(EN_US.Powder(EN_US.Mushroom(Words.Red)))));
 		//Torches
-		Register("red_mushroom_torch", "red_mushroom_wall_torch", RED_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_soul_torch", "red_mushroom_soul_wall_torch", RED_MUSHROOM_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Mushroom(EN_US.Red())))));
-		Register("red_mushroom_ender_torch", "red_mushroom_ender_wall_torch", RED_MUSHROOM_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Mushroom(EN_US.Red())))));
+		Register("red_mushroom_torch", "red_mushroom_wall_torch", RED_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_soul_torch", "red_mushroom_soul_wall_torch", RED_MUSHROOM_SOUL_TORCH, List.of(EN_US._Torch(EN_US.Soul(EN_US.Mushroom(Words.Red)))));
+		Register("red_mushroom_ender_torch", "red_mushroom_ender_wall_torch", RED_MUSHROOM_ENDER_TORCH, List.of(EN_US._Torch(EN_US.Ender(EN_US.Mushroom(Words.Red)))));
 		Register("underwater_red_mushroom_torch", "underwater_red_mushroom_wall_torch", UNDERWATER_RED_MUSHROOM_TORCH, List.of(EN_US._Torch(EN_US.Mushroom(EN_US.Red(EN_US.Underwater())))));
 		//Campfires
-		Register("red_mushroom_campfire", RED_MUSHROOM_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Mushroom(EN_US.Red()))));
-		Register("red_mushroom_soul_campfire", RED_MUSHROOM_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Mushroom(EN_US.Red())))));
-		Register("red_mushroom_ender_campfire", RED_MUSHROOM_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Mushroom(EN_US.Red())))));
+		Register("red_mushroom_campfire", RED_MUSHROOM_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Mushroom(Words.Red))));
+		Register("red_mushroom_soul_campfire", RED_MUSHROOM_SOUL_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Soul(EN_US.Mushroom(Words.Red)))));
+		Register("red_mushroom_ender_campfire", RED_MUSHROOM_ENDER_CAMPFIRE, List.of(EN_US.Campfire(EN_US.Ender(EN_US.Mushroom(Words.Red)))));
 		//</editor-fold>
 		//<editor-fold desc="Mushroom Stem">
 		Register("mushroom_stem_planks", MUSHROOM_STEM_PLANKS, List.of(EN_US.Planks(EN_US.Stem(EN_US.Mushroom()))));
@@ -7164,17 +6625,17 @@ public class ModBase implements ModInitializer {
 	}
 	private static void RegisterPlushies() {
 		//<editor-fold desc="Allays & Vexes">
-		Register("allay_plushie", ALLAY_PLUSHIE, List.of(EN_US.Plushie(EN_US.Allay())));
+		Register("allay_plushie", ALLAY_PLUSHIE, List.of(EN_US.Plushie(Words.Allay)));
 		Register("vex_plushie", VEX_PLUSHIE, List.of(EN_US.Plushie(EN_US.Vex())));
 		//</editor-fold>
 		//<editor-fold desc="Axolotls">
-		Register("blue_axolotl_plushie", BLUE_AXOLOTL_PLUSHIE, List.of(EN_US.Plushie(EN_US.Axolotl(EN_US.Blue()))));
+		Register("blue_axolotl_plushie", BLUE_AXOLOTL_PLUSHIE, List.of(EN_US.Plushie(EN_US.Axolotl(Words.Blue))));
 		Register("cyan_axolotl_plushie", CYAN_AXOLOTL_PLUSHIE, List.of(EN_US.Plushie(EN_US.Axolotl(EN_US.Cyan()))));
-		Register("gold_axolotl_plushie", GOLD_AXOLOTL_PLUSHIE, List.of(EN_US.Plushie(EN_US.Axolotl(EN_US.Gold()))));
+		Register("gold_axolotl_plushie", GOLD_AXOLOTL_PLUSHIE, List.of(EN_US.Plushie(EN_US.Axolotl(Words.Gold))));
 		Register("lucy_axolotl_plushie", LUCY_AXOLOTL_PLUSHIE, List.of(EN_US.Plushie(EN_US.Axolotl(EN_US.Lucy()))));
 		Register("wild_axolotl_plushie", WILD_AXOLOTL_PLUSHIE, List.of(EN_US.Plushie(EN_US.Axolotl(EN_US.Wild()))));
 		//</editor-fold>
-		Register("bat_plushie", BAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Bat())));
+		Register("bat_plushie", BAT_PLUSHIE, List.of(EN_US.Plushie(Words.Bat)));
 		Register("bee_plushie", BEE_PLUSHIE, List.of(EN_US.Plushie(EN_US.Bee())));
 		//<editor-fold desc="Camel">
 		Register("camel_plushie", CAMEL_PLUSHIE, List.of(EN_US.Plushie(EN_US.Camel())));
@@ -7182,63 +6643,63 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		//<editor-fold desc="Cat">
 		Register("ocelot_plushie", OCELOT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Ocelot())));
-		Register("all_black_cat_plushie", ALL_BLACK_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Black(EN_US.All())))));
-		Register("black_cat_plushie", BLACK_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Black()))));
-		Register("british_shorthair_cat_plushie", BRITISH_SHORTHAIR_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Shorthair(EN_US.British())))));
+		Register("all_black_cat_plushie", ALL_BLACK_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Black(Words.All)))));
+		Register("black_cat_plushie", BLACK_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(Words.Black))));
+		Register("british_shorthair_cat_plushie", BRITISH_SHORTHAIR_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Shorthair(Words.British)))));
 		Register("calico_cat_plushie", CALICO_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Calico()))));
 		Register("jellie_cat_plushie", JELLIE_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Jellie()))));
 		Register("persian_cat_plushie", PERSIAN_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Persian()))));
 		Register("ragdoll_cat_plushie", RAGDOLL_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Ragdoll()))));
-		Register("red_cat_plushie", RED_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Red()))));
+		Register("red_cat_plushie", RED_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(Words.Red))));
 		Register("siamese_cat_plushie", SIAMESE_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Siamese()))));
 		Register("tabby_cat_plushie", TABBY_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.Tabby()))));
-		Register("white_cat_plushie", WHITE_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(EN_US.White()))));
+		Register("white_cat_plushie", WHITE_CAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cat(Words.White))));
 		//</editor-fold>
 		//<editor-fold desc="Chickens">
-		Register("chicken_plushie", CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken())));
-		Register("fancy_chicken_plushie", FANCY_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(EN_US.Fancy()))));
-		Register("amber_chicken_plushie", AMBER_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(EN_US.Amber()))));
-		Register("bronzed_chicken_plushie", BRONZED_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(EN_US.Bronzed()))));
-		Register("gold_crested_chicken_plushie", GOLD_CRESTED_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(EN_US.Crested(EN_US.Gold())))));
+		Register("chicken_plushie", CHICKEN_PLUSHIE, List.of(EN_US.Plushie(Words.Chicken)));
+		Register("fancy_chicken_plushie", FANCY_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(Words.Fancy))));
+		Register("amber_chicken_plushie", AMBER_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(Words.Amber))));
+		Register("bronzed_chicken_plushie", BRONZED_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(Words.Bronzed))));
+		Register("gold_crested_chicken_plushie", GOLD_CRESTED_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(EN_US.Crested(Words.Gold)))));
 		Register("midnight_chicken_plushie", MIDNIGHT_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(EN_US.Midnight()))));
 		Register("skewbald_chicken_plushie", SKEWBALD_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(EN_US.Skewbald()))));
 		Register("stormy_chicken_plushie", STORMY_CHICKEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Chicken(EN_US.Stormy()))));
 		//</editor-fold>
 		//<editor-fold desc="Cows">
-		Register("cow_plushie", COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow())));
-		Register("albino_cow_plushie", ALBINO_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Albino()))));
-		Register("ashen_cow_plushie", ASHEN_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Ashen()))));
-		Register("cookie_cow_plushie", COOKIE_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Cookie()))));
-		Register("cream_cow_plushie", CREAM_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Cream()))));
-		Register("dairy_cow_plushie", DAIRY_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Dairy()))));
-		Register("pinto_cow_plushie", PINTO_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Pinto()))));
-		Register("sunset_cow_plushie", SUNSET_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Sunset()))));
-		Register("umbra_cow_plushie", UMBRA_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Umbra()))));
-		Register("sheared_umbra_cow_plushie", SHEARED_UMBRA_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Umbra(EN_US.Sheared())))));
+		Register("cow_plushie", COW_PLUSHIE, List.of(EN_US.Plushie(Words.Cow)));
+		Register("albino_cow_plushie", ALBINO_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(Words.Albino))));
+		Register("ashen_cow_plushie", ASHEN_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(Words.Ashen))));
+		Register("cookie_cow_plushie", COOKIE_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(Words.Cookie))));
+		Register("cream_cow_plushie", CREAM_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(Words.Cream))));
+		Register("dairy_cow_plushie", DAIRY_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(Words.Dairy))));
+		Register("pinto_cow_plushie", PINTO_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(Words.Pinto))));
+		Register("sunset_cow_plushie", SUNSET_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(Words.Sunset))));
+		Register("umbra_cow_plushie", UMBRA_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(Words.Umbra))));
+		Register("sheared_umbra_cow_plushie", SHEARED_UMBRA_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Umbra(Words.Sheared)))));
 		PlushieBlock.Register(UMBRA_COW_PLUSHIE, SHEARED_UMBRA_COW_PLUSHIE, () -> new ItemStack(Items.BLACK_CARPET));
 		Register("wooly_cow_plushie", WOOLY_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Wooly()))));
-		Register("sheared_wooly_cow_plushie", SHEARED_WOOLY_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Wooly(EN_US.Sheared())))));
+		Register("sheared_wooly_cow_plushie", SHEARED_WOOLY_COW_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cow(EN_US.Wooly(Words.Sheared)))));
 		PlushieBlock.Register(WOOLY_COW_PLUSHIE, SHEARED_WOOLY_COW_PLUSHIE, () -> new ItemStack(Items.ORANGE_CARPET));
 		Register("mooshroom_plushie", MOOSHROOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooshroom())));
-		Register("brown_mooshroom_plushie", BROWN_MOOSHROOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooshroom(EN_US.Brown()))));
-		Register("blue_mooshroom_plushie", BLUE_MOOSHROOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooshroom(EN_US.Blue()))));
+		Register("brown_mooshroom_plushie", BROWN_MOOSHROOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooshroom(Words.Brown))));
+		Register("blue_mooshroom_plushie", BLUE_MOOSHROOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooshroom(Words.Blue))));
 		Register("crimson_mooshroom_plushie", CRIMSON_MOOSHROOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooshroom(EN_US.Crimson()))));
 		Register("gilded_mooshroom_plushie", WARPED_MOOSHROOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooshroom(EN_US.Warped()))));
 		Register("warped_mooshroom_plushie", GILDED_MOOSHROOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooshroom(EN_US.Gilded()))));
 		Register("moobloom_plushie", MOOBLOOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Moobloom())));
 		Register("moolip_plushie", MOOLIP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Moolip())));
-		Register("magenta_tulip_mooblossom_plushie", MAGENTA_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(EN_US.Magenta())))));
-		Register("red_tulip_mooblossom_plushie", RED_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(EN_US.Red())))));
-		Register("orange_tulip_mooblossom_plushie", ORANGE_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(EN_US.Orange())))));
-		Register("white_tulip_mooblossom_plushie", WHITE_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(EN_US.White())))));
-		Register("pink_tulip_mooblossom_plushie", PINK_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(EN_US.Pink())))));
+		Register("magenta_tulip_mooblossom_plushie", MAGENTA_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(Words.Magenta)))));
+		Register("red_tulip_mooblossom_plushie", RED_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(Words.Red)))));
+		Register("orange_tulip_mooblossom_plushie", ORANGE_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(Words.Orange)))));
+		Register("white_tulip_mooblossom_plushie", WHITE_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(Words.White)))));
+		Register("pink_tulip_mooblossom_plushie", PINK_TULIP_MOOBLOSSOM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Mooblossom(EN_US.Tulip(Words.Pink)))));
 		//</editor-fold>
 		Register("creeper_plushie", CREEPER_PLUSHIE, List.of(EN_US.Plushie(EN_US.Creeper())));
 		Register("dolphin_plushie", DOLPHIN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Dolphin())));
 		Register("ender_dragon_plushie", ENDER_DRAGON_PLUSHIE, List.of(EN_US.Plushie(EN_US.Dragon(EN_US.Ender()))));
 		//<editor-fold desc="Enderman">
 		Register("enderman_plushie", ENDERMAN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Enderman())));
-		Register("white_enderman_plushie", WHITE_ENDERMAN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Enderman(EN_US.White()))));
+		Register("white_enderman_plushie", WHITE_ENDERMAN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Enderman(Words.White))));
 		//</editor-fold>
 		//<editor-fold desc="Fox">
 		Register("fox_plushie", FOX_PLUSHIE, List.of(EN_US.Plushie(EN_US.Fox())));
@@ -7254,10 +6715,10 @@ public class ModBase implements ModInitializer {
 		Register("dark_goat_plushie", DARK_GOAT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Goat(EN_US.Dark()))));
 		//</editor-fold>
 		//<editor-fold desc="Llama">
-		Register("brown_llama_plushie", BROWN_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Brown()))));
-		Register("brown_trader_llama_plushie", BROWN_TRADER_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Trader(EN_US.Brown())))));
-		Register("brown_jolly_llama_plushie", BROWN_JOLLY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Jolly(EN_US.Brown())))));
-		Register("rainbow_carpeted_brown_llama_plushie", RAINBOW_CARPETED_BROWN_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Brown(EN_US.Carpeted(EN_US.Rainbow()))))));
+		Register("brown_llama_plushie", BROWN_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(Words.Brown))));
+		Register("brown_trader_llama_plushie", BROWN_TRADER_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Trader(Words.Brown)))));
+		Register("brown_jolly_llama_plushie", BROWN_JOLLY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Jolly(Words.Brown)))));
+		Register("rainbow_carpeted_brown_llama_plushie", RAINBOW_CARPETED_BROWN_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Brown(EN_US.Carpeted(Words.Rainbow))))));
 		Register("moss_carpeted_brown_llama_plushie", MOSS_CARPETED_BROWN_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Brown(EN_US.Carpeted(EN_US.Moss()))))));
 		Register("glow_lichen_carpeted_brown_llama_plushie", GLOW_LICHEN_CARPETED_BROWN_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Brown(EN_US.Carpeted(EN_US.Lichen(EN_US.Glow())))))));
 		Register("beige_carpeted_brown_llama_plushie", BEIGE_CARPETED_BROWN_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Brown(EN_US.Carpeted(EN_US.Beige()))))));
@@ -7270,7 +6731,7 @@ public class ModBase implements ModInitializer {
 		Register("creamy_llama_plushie", CREAMY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Creamy()))));
 		Register("creamy_trader_llama_plushie", CREAMY_TRADER_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Trader(EN_US.Creamy())))));
 		Register("creamy_jolly_llama_plushie", CREAMY_JOLLY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Jolly(EN_US.Creamy())))));
-		Register("rainbow_carpeted_creamy_llama_plushie", RAINBOW_CARPETED_CREAMY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Creamy(EN_US.Carpeted(EN_US.Rainbow()))))));
+		Register("rainbow_carpeted_creamy_llama_plushie", RAINBOW_CARPETED_CREAMY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Creamy(EN_US.Carpeted(Words.Rainbow))))));
 		Register("moss_carpeted_creamy_llama_plushie", MOSS_CARPETED_CREAMY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Creamy(EN_US.Carpeted(EN_US.Moss()))))));
 		Register("glow_lichen_carpeted_creamy_llama_plushie", GLOW_LICHEN_CARPETED_CREAMY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Creamy(EN_US.Carpeted(EN_US.Lichen(EN_US.Glow())))))));
 		Register("beige_carpeted_creamy_llama_plushie", BEIGE_CARPETED_CREAMY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Creamy(EN_US.Carpeted(EN_US.Beige()))))));
@@ -7283,7 +6744,7 @@ public class ModBase implements ModInitializer {
 		Register("gray_llama_plushie", GRAY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Gray()))));
 		Register("gray_trader_llama_plushie", GRAY_TRADER_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Trader(EN_US.Gray())))));
 		Register("gray_jolly_llama_plushie", GRAY_JOLLY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Jolly(EN_US.Gray())))));
-		Register("rainbow_carpeted_gray_llama_plushie", RAINBOW_CARPETED_GRAY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Gray(EN_US.Carpeted(EN_US.Rainbow()))))));
+		Register("rainbow_carpeted_gray_llama_plushie", RAINBOW_CARPETED_GRAY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Gray(EN_US.Carpeted(Words.Rainbow))))));
 		Register("moss_carpeted_gray_llama_plushie", MOSS_CARPETED_GRAY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Gray(EN_US.Carpeted(EN_US.Moss()))))));
 		Register("glow_lichen_carpeted_gray_llama_plushie", GLOW_LICHEN_CARPETED_GRAY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Gray(EN_US.Carpeted(EN_US.Lichen(EN_US.Glow())))))));
 		Register("beige_carpeted_gray_llama_plushie", BEIGE_CARPETED_GRAY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Gray(EN_US.Carpeted(EN_US.Beige()))))));
@@ -7293,10 +6754,10 @@ public class ModBase implements ModInitializer {
 		for (DyeColor color : DyeColor.values()) {
 			Register(color.getName() + "_carpeted_gray_llama_plushie", CARPETED_GRAY_LLAMA_PLUSHIES.get(color), List.of(EN_US.Plushie(EN_US.Llama(EN_US.Gray(EN_US.Carpeted(EN_US.Color(color)))))));
 		}
-		Register("white_llama_plushie", WHITE_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.White()))));
-		Register("white_trader_llama_plushie", WHITE_TRADER_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Trader(EN_US.White())))));
-		Register("white_jolly_llama_plushie", WHITE_JOLLY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Jolly(EN_US.White())))));
-		Register("rainbow_carpeted_white_llama_plushie", RAINBOW_CARPETED_WHITE_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.White(EN_US.Carpeted(EN_US.Rainbow()))))));
+		Register("white_llama_plushie", WHITE_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(Words.White))));
+		Register("white_trader_llama_plushie", WHITE_TRADER_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Trader(Words.White)))));
+		Register("white_jolly_llama_plushie", WHITE_JOLLY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Jolly(Words.White)))));
+		Register("rainbow_carpeted_white_llama_plushie", RAINBOW_CARPETED_WHITE_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.White(EN_US.Carpeted(Words.Rainbow))))));
 		Register("moss_carpeted_white_llama_plushie", MOSS_CARPETED_WHITE_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.White(EN_US.Carpeted(EN_US.Moss()))))));
 		Register("glow_lichen_carpeted_white_llama_plushie", GLOW_LICHEN_CARPETED_WHITE_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.White(EN_US.Carpeted(EN_US.Lichen(EN_US.Glow())))))));
 		Register("beige_carpeted_white_llama_plushie", BEIGE_CARPETED_WHITE_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.White(EN_US.Carpeted(EN_US.Beige()))))));
@@ -7309,7 +6770,7 @@ public class ModBase implements ModInitializer {
 		Register("mocha_llama_plushie", MOCHA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Mocha()))));
 		Register("mocha_trader_llama_plushie", MOCHA_TRADER_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Trader(EN_US.Mocha())))));
 		Register("mocha_jolly_llama_plushie", MOCHA_JOLLY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Jolly(EN_US.Mocha())))));
-		Register("rainbow_carpeted_mocha_llama_plushie", RAINBOW_CARPETED_MOCHA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Mocha(EN_US.Carpeted(EN_US.Rainbow()))))));
+		Register("rainbow_carpeted_mocha_llama_plushie", RAINBOW_CARPETED_MOCHA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Mocha(EN_US.Carpeted(Words.Rainbow))))));
 		Register("moss_carpeted_mocha_llama_plushie", MOSS_CARPETED_MOCHA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Mocha(EN_US.Carpeted(EN_US.Moss()))))));
 		Register("glow_lichen_carpeted_mocha_llama_plushie", GLOW_LICHEN_CARPETED_MOCHA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Mocha(EN_US.Carpeted(EN_US.Lichen(EN_US.Glow())))))));
 		Register("beige_carpeted_mocha_llama_plushie", BEIGE_CARPETED_MOCHA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Mocha(EN_US.Carpeted(EN_US.Beige()))))));
@@ -7322,7 +6783,7 @@ public class ModBase implements ModInitializer {
 		Register("cocoa_llama_plushie", COCOA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Cocoa()))));
 		Register("cocoa_trader_llama_plushie", COCOA_TRADER_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Trader(EN_US.Cocoa())))));
 		Register("cocoa_jolly_llama_plushie", COCOA_JOLLY_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Jolly(EN_US.Cocoa())))));
-		Register("rainbow_carpeted_cocoa_llama_plushie", RAINBOW_CARPETED_COCOA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Cocoa(EN_US.Carpeted(EN_US.Rainbow()))))));
+		Register("rainbow_carpeted_cocoa_llama_plushie", RAINBOW_CARPETED_COCOA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Cocoa(EN_US.Carpeted(Words.Rainbow))))));
 		Register("moss_carpeted_cocoa_llama_plushie", MOSS_CARPETED_COCOA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Cocoa(EN_US.Carpeted(EN_US.Moss()))))));
 		Register("glow_lichen_carpeted_cocoa_llama_plushie", GLOW_LICHEN_CARPETED_COCOA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Cocoa(EN_US.Carpeted(EN_US.Lichen(EN_US.Glow())))))));
 		Register("beige_carpeted_cocoa_llama_plushie", BEIGE_CARPETED_COCOA_LLAMA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Llama(EN_US.Cocoa(EN_US.Carpeted(EN_US.Beige()))))));
@@ -7334,84 +6795,84 @@ public class ModBase implements ModInitializer {
 		}
 		//</editor-fold>
 		//<editor-fold desc="Panda">
-		Register("panda_plushie", PANDA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Panda())));
-		Register("brown_panda_plushie", BROWN_PANDA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Panda(EN_US.Brown()))));
+		Register("panda_plushie", PANDA_PLUSHIE, List.of(EN_US.Plushie(Words.Panda)));
+		Register("brown_panda_plushie", BROWN_PANDA_PLUSHIE, List.of(EN_US.Plushie(EN_US.Panda(Words.Brown))));
 		//</editor-fold>
 		//<editor-fold desc="Parrot">
-		Register("blue_parrot_plushie", BLUE_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(EN_US.Blue()))));
-		Register("green_parrot_plushie", GREEN_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(EN_US.Green()))));
-		Register("grey_parrot_plushie", GREY_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(EN_US.Grey()))));
-		Register("red_parrot_plushie", RED_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(EN_US.Red()))));
-		Register("yellow_blue_parrot_plushie", YELLOW_BLUE_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(EN_US.Blue(EN_US.Yellow())))));
-		Register("golden_parrot_plushie", GOLDEN_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(EN_US.Golden()))));
+		Register("blue_parrot_plushie", BLUE_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(Words.Blue))));
+		Register("green_parrot_plushie", GREEN_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(Words.Green))));
+		Register("grey_parrot_plushie", GREY_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(Words.Grey))));
+		Register("red_parrot_plushie", RED_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(Words.Red))));
+		Register("yellow_blue_parrot_plushie", YELLOW_BLUE_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(EN_US.Blue(Words.Yellow)))));
+		Register("golden_parrot_plushie", GOLDEN_PARROT_PLUSHIE, List.of(EN_US.Plushie(EN_US.Parrot(Words.Golden))));
 		//</editor-fold>
 		//<editor-fold desc="Pigs">
-		Register("pig_plushie", PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig())));
-		Register("saddled_pig_plushie", SADDLED_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Saddled()))));
-		Register("mottled_pig_plushie", MOTTLED_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Mottled()))));
-		Register("muddy_pig_plushie", MUDDY_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Muddy()))));
-		Register("dried_muddy_pig_plushie", DRIED_MUDDY_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Muddy(EN_US.Dried())))));
-		Register("pale_pig_plushie", PALE_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Pale()))));
-		Register("piebald_pig_plushie", PIEBALD_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Piebald()))));
-		Register("pink_footed_pig_plushie", PINK_FOOTED_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Footed(EN_US.Pink())))));
-		Register("sooty_pig_plushie", SOOTY_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Sooty()))));
-		Register("spotted_pig_plushie", SPOTTED_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Spotted()))));
+		Register("pig_plushie", PIG_PLUSHIE, List.of(EN_US.Plushie(Words.Pig)));
+		Register("saddled_pig_plushie", SADDLED_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(Words.Saddled))));
+		Register("mottled_pig_plushie", MOTTLED_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(Words.Mottled))));
+		Register("muddy_pig_plushie", MUDDY_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(Words.Muddy))));
+		Register("dried_muddy_pig_plushie", DRIED_MUDDY_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Muddy(Words.Dried)))));
+		Register("pale_pig_plushie", PALE_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(Words.Pale))));
+		Register("piebald_pig_plushie", PIEBALD_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(Words.Piebald))));
+		Register("pink_footed_pig_plushie", PINK_FOOTED_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(EN_US.Footed(Words.Pink)))));
+		Register("sooty_pig_plushie", SOOTY_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(Words.Sooty))));
+		Register("spotted_pig_plushie", SPOTTED_PIG_PLUSHIE, List.of(EN_US.Plushie(EN_US.Pig(Words.Spotted))));
 		//</editor-fold>
-		Register("polar_bear_plushie", POLAR_BEAR_PLUSHIE, List.of(EN_US.Plushie(EN_US.Bear(EN_US.Polar()))));
+		Register("polar_bear_plushie", POLAR_BEAR_PLUSHIE, List.of(EN_US.Plushie(EN_US.Bear(Words.Polar))));
 		//<editor-fold desc="Sheep">
 		for (DyeColor color : DyeColor.values()) {
 			Register(color.getName() + "_sheep_plushie", SHEEP_PLUSHIES.get(color), List.of(EN_US.Plushie(EN_US.Plushie(EN_US.Sheep(EN_US.Color(color))))));
 		}
-		Register("golden_sheep_plushie", GOLDEN_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Golden()))));
+		Register("golden_sheep_plushie", GOLDEN_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(Words.Golden))));
 		Register("flecked_sheep_plushie", FLECKED_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Flecked()))));
 		Register("fuzzy_sheep_plushie", FUZZY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Fuzzy()))));
 		Register("inky_sheep_plushie", INKY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Inky()))));
 		Register("long_nose_sheep_plushie", LONG_NOSE_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Nose(EN_US.Long())))));
 		Register("patched_sheep_plushie", PATCHED_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Patched()))));
 		Register("rocky_sheep_plushie", ROCKY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Rocky()))));
-		Register("rainbow_sheep_plushie", RAINBOW_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Rainbow()))));
-		Register("mossy_sheep_plushie", MOSSY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Mossy()))));
+		Register("rainbow_sheep_plushie", RAINBOW_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(Words.Rainbow))));
+		Register("mossy_sheep_plushie", MOSSY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(Words.Mossy))));
 		//</editor-fold>
 		//<editor-fold desc="Sheep (Sheared)">'
-		Register("sheared_sheep_plushie", SHEARED_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Sheared()))));
+		Register("sheared_sheep_plushie", SHEARED_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(Words.Sheared))));
 		for (Map.Entry<DyeColor, BlockContainer> entry : SHEEP_PLUSHIES.entrySet()) {
 			PlushieBlock.Register(entry.getValue(), SHEARED_SHEEP_PLUSHIE, () -> new ItemStack(ColorUtil.GetWoolCarpetItem(entry.getKey())));
 		}
-		Register("sheared_flecked_sheep_plushie", SHEARED_FLECKED_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Flecked(EN_US.Sheared())))));
+		Register("sheared_flecked_sheep_plushie", SHEARED_FLECKED_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Flecked(Words.Sheared)))));
 		PlushieBlock.Register(FLECKED_SHEEP_PLUSHIE, SHEARED_FLECKED_SHEEP_PLUSHIE, () -> new ItemStack(Items.BROWN_CARPET));
-		Register("sheared_fuzzy_sheep_plushie", SHEARED_FUZZY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Fuzzy(EN_US.Sheared())))));
+		Register("sheared_fuzzy_sheep_plushie", SHEARED_FUZZY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Fuzzy(Words.Sheared)))));
 		PlushieBlock.Register(FUZZY_SHEEP_PLUSHIE, SHEARED_FUZZY_SHEEP_PLUSHIE, () -> new ItemStack(Items.WHITE_CARPET));
-		Register("sheared_inky_sheep_plushie", SHEARED_INKY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Inky(EN_US.Sheared())))));
+		Register("sheared_inky_sheep_plushie", SHEARED_INKY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Inky(Words.Sheared)))));
 		PlushieBlock.Register(INKY_SHEEP_PLUSHIE, SHEARED_INKY_SHEEP_PLUSHIE, () -> new ItemStack(Items.BLACK_CARPET));
-		Register("sheared_long_nose_sheep_plushie", SHEARED_LONG_NOSE_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Nose(EN_US.Long(EN_US.Sheared()))))));
+		Register("sheared_long_nose_sheep_plushie", SHEARED_LONG_NOSE_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Nose(EN_US.Long(Words.Sheared))))));
 		PlushieBlock.Register(LONG_NOSE_SHEEP_PLUSHIE, SHEARED_LONG_NOSE_SHEEP_PLUSHIE, () -> new ItemStack(Items.BROWN_CARPET));
-		Register("sheared_patched_sheep_plushie", SHEARED_PATCHED_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Patched(EN_US.Sheared())))));
+		Register("sheared_patched_sheep_plushie", SHEARED_PATCHED_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Patched(Words.Sheared)))));
 		PlushieBlock.Register(PATCHED_SHEEP_PLUSHIE, SHEARED_PATCHED_SHEEP_PLUSHIE, () -> new ItemStack(Items.WHITE_CARPET));
-		Register("sheared_rocky_sheep_plushie", SHEARED_ROCKY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Rocky(EN_US.Sheared())))));
+		Register("sheared_rocky_sheep_plushie", SHEARED_ROCKY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Rocky(Words.Sheared)))));
 		PlushieBlock.Register(ROCKY_SHEEP_PLUSHIE, SHEARED_ROCKY_SHEEP_PLUSHIE, () -> new ItemStack(Items.GRAY_CARPET));
-		Register("sheared_rainbow_sheep_plushie", SHEARED_RAINBOW_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Rainbow(EN_US.Sheared())))));
+		Register("sheared_rainbow_sheep_plushie", SHEARED_RAINBOW_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Rainbow(Words.Sheared)))));
 		PlushieBlock.Register(RAINBOW_SHEEP_PLUSHIE, SHEARED_RAINBOW_SHEEP_PLUSHIE, () -> new ItemStack(RAINBOW_CARPET));
-		Register("sheared_mossy_sheep_plushie", SHEARED_MOSSY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Mossy(EN_US.Sheared())))));
+		Register("sheared_mossy_sheep_plushie", SHEARED_MOSSY_SHEEP_PLUSHIE, List.of(EN_US.Plushie(EN_US.Sheep(EN_US.Mossy(Words.Sheared)))));
 		PlushieBlock.Register(MOSSY_SHEEP_PLUSHIE, SHEARED_MOSSY_SHEEP_PLUSHIE, () -> new ItemStack(Items.MOSS_CARPET));
 		//</editor-fold>
 		//<editor-fold desc="Slime">
 		Register("magma_cube_plushie", MAGMA_CUBE_PLUSHIE, List.of(EN_US.Plushie(EN_US.Cube(EN_US.Magma()))));
-		Register("slime_plushie", SLIME_PLUSHIE, List.of(EN_US.Plushie(EN_US.Slime())));
+		Register("slime_plushie", SLIME_PLUSHIE, List.of(EN_US.Plushie(Words.Slime)));
 		Register("tropical_slime_plushie", TROPICAL_SLIME_PLUSHIE, List.of(EN_US.Plushie(EN_US.Slime(EN_US.Tropical()))));
-		Register("pink_slime_plushie", PINK_SLIME_PLUSHIE, List.of(EN_US.Plushie(EN_US.Slime(EN_US.Pink()))));
+		Register("pink_slime_plushie", PINK_SLIME_PLUSHIE, List.of(EN_US.Plushie(EN_US.Slime(Words.Pink))));
 		//</editor-fold>
 		//<editor-fold desc="Snow Golems">
 		Register("snow_golem_plushie", SNOW_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Snow()))));
-		Register("white_snow_golem_plushie", WHITE_SNOW_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Snow(EN_US.White())))));
+		Register("white_snow_golem_plushie", WHITE_SNOW_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Snow(Words.White)))));
 		Register("rotten_snow_golem_plushie", ROTTEN_SNOW_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Snow(EN_US.Rotten())))));
 		Register("melon_golem_plushie", MELON_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Melon()))));
 		//</editor-fold>
 		//<editor-fold desc="Snow Golems (Sheared)">
-		Register("sheared_snow_golem_plushie", SHEARED_SNOW_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Snow(EN_US.Sheared())))));
+		Register("sheared_snow_golem_plushie", SHEARED_SNOW_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Snow(Words.Sheared)))));
 		PlushieBlock.Register(SNOW_GOLEM_PLUSHIE, SHEARED_SNOW_GOLEM_PLUSHIE, () -> new ItemStack(Items.CARVED_PUMPKIN));
 		PlushieBlock.Register(WHITE_SNOW_GOLEM_PLUSHIE, SHEARED_SNOW_GOLEM_PLUSHIE, () -> new ItemStack(CARVED_WHITE_PUMPKIN));
 		PlushieBlock.Register(ROTTEN_SNOW_GOLEM_PLUSHIE, SHEARED_SNOW_GOLEM_PLUSHIE, () -> new ItemStack(CARVED_ROTTEN_PUMPKIN));
-		Register("sheared_melon_golem_plushie", SHEARED_MELON_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Melon(EN_US.Sheared())))));
+		Register("sheared_melon_golem_plushie", SHEARED_MELON_GOLEM_PLUSHIE, List.of(EN_US.Plushie(EN_US.Golem(EN_US.Melon(Words.Sheared)))));
 		PlushieBlock.Register(MELON_GOLEM_PLUSHIE, SHEARED_MELON_GOLEM_PLUSHIE, () -> new ItemStack(CARVED_MELON));
 		//</editor-fold>
 		Register("tadpole_plushie", TADPOLE_PLUSHIE, List.of(EN_US.Plushie(EN_US.Tadpole())));
@@ -7421,202 +6882,202 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		Register("warden_plushie", WARDEN_PLUSHIE, List.of(EN_US.Plushie(EN_US.Warden())));
 		//<editor-fold desc="Wolf">
-		Register("wolf_plushie", WOLF_PLUSHIE, List.of(EN_US.Plushie(EN_US.Wolf())));
+		Register("wolf_plushie", WOLF_PLUSHIE, List.of(EN_US.Plushie(Words.Wolf)));
 		Register("gray_wolf_plushie", GRAY_WOLF_PLUSHIE, List.of(EN_US.Plushie(EN_US.Wolf(EN_US.Gray()))));
-		Register("black_wolf_plushie", BLACK_WOLF_PLUSHIE, List.of(EN_US.Plushie(EN_US.Wolf(EN_US.Black()))));
-		Register("brown_wolf_plushie", BROWN_WOLF_PLUSHIE, List.of(EN_US.Plushie(EN_US.Wolf(EN_US.Brown()))));
+		Register("black_wolf_plushie", BLACK_WOLF_PLUSHIE, List.of(EN_US.Plushie(EN_US.Wolf(Words.Black))));
+		Register("brown_wolf_plushie", BROWN_WOLF_PLUSHIE, List.of(EN_US.Plushie(EN_US.Wolf(Words.Brown))));
 		//</editor-fold>
 	}
 	private static void RegisterBrushableBlocks() {
-		Register("minecraft:brush", BRUSH, List.of(EN_US.Brush()));
-		Register("minecraft:suspicious_sand", SUSPICIOUS_SAND, List.of(EN_US.Sand(EN_US.Suspicious())));
-		Register("minecraft:suspicious_gravel", SUSPICIOUS_GRAVEL, List.of(EN_US.Gravel(EN_US.Suspicious())));
+		Register("minecraft:brush", BRUSH, List.of(Words.Brush));
+		Register("minecraft:suspicious_sand", SUSPICIOUS_SAND, List.of(EN_US.Sand(Words.Suspicious)));
+		Register("minecraft:suspicious_gravel", SUSPICIOUS_GRAVEL, List.of(EN_US.Gravel(Words.Suspicious)));
 		Register("minecraft:brushable_block", SUSPICIOUS_BLOCK_ENTITY);
 		//<editor-fold desc="Sandy Blocks">
-		Register("sandy_cobblestone", SANDY_COBBLESTONE, List.of(EN_US.Cobblestone(EN_US.Sandy())));
-		Register("sandy_cobblestone_slab", SANDY_COBBLESTONE_SLAB, List.of(EN_US.Slab(EN_US.Cobblestone(EN_US.Sandy()))));
+		Register("sandy_cobblestone", SANDY_COBBLESTONE, List.of(EN_US.Cobblestone(Words.Sandy)));
+		Register("sandy_cobblestone_slab", SANDY_COBBLESTONE_SLAB, List.of(EN_US.Slab(EN_US.Cobblestone(Words.Sandy))));
 		//<editor-fold desc="Andesite">
-		Register("sandy_polished_andesite", SANDY_POLISHED_ANDESITE, List.of(EN_US.Andesite(EN_US.Polished(EN_US.Sandy()))));
-		Register("sandy_polished_andesite_slab", SANDY_POLISHED_ANDESITE_SLAB, List.of(EN_US.Andesite(EN_US.Slab(EN_US.Polished(EN_US.Sandy())))));
-		Register("sandy_andesite_bricks", SANDY_ANDESITE_BRICKS, List.of(EN_US.Bricks(EN_US.Andesite(EN_US.Sandy()))));
-		Register("sandy_andesite_brick_slab", SANDY_ANDESITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Andesite(EN_US.Sandy())))));
-		Register("sandy_cut_polished_andesite", SANDY_CUT_POLISHED_ANDESITE, List.of(EN_US.Andesite(EN_US.Polished(EN_US.Cut(EN_US.Sandy())))));
-		Register("sandy_cut_polished_andesite_slab", SANDY_CUT_POLISHED_ANDESITE_SLAB, List.of(EN_US.Slab(EN_US.Andesite(EN_US.Polished(EN_US.Cut(EN_US.Sandy()))))));
+		Register("sandy_polished_andesite", SANDY_POLISHED_ANDESITE, List.of(EN_US.Andesite(EN_US.Polished(Words.Sandy))));
+		Register("sandy_polished_andesite_slab", SANDY_POLISHED_ANDESITE_SLAB, List.of(EN_US.Andesite(EN_US.Slab(EN_US.Polished(Words.Sandy)))));
+		Register("sandy_andesite_bricks", SANDY_ANDESITE_BRICKS, List.of(EN_US.Bricks(EN_US.Andesite(Words.Sandy))));
+		Register("sandy_andesite_brick_slab", SANDY_ANDESITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Andesite(Words.Sandy)))));
+		Register("sandy_cut_polished_andesite", SANDY_CUT_POLISHED_ANDESITE, List.of(EN_US.Andesite(EN_US.Polished(EN_US.Cut(Words.Sandy)))));
+		Register("sandy_cut_polished_andesite_slab", SANDY_CUT_POLISHED_ANDESITE_SLAB, List.of(EN_US.Slab(EN_US.Andesite(EN_US.Polished(EN_US.Cut(Words.Sandy))))));
 		//</editor-fold>
 		//<editor-fold desc="Diorite">
-		Register("sandy_polished_diorite", SANDY_POLISHED_DIORITE, List.of(EN_US.Diorite(EN_US.Polished(EN_US.Sandy()))));
-		Register("sandy_polished_diorite_slab", SANDY_POLISHED_DIORITE_SLAB, List.of(EN_US.Diorite(EN_US.Slab(EN_US.Polished(EN_US.Sandy())))));
-		Register("sandy_diorite_bricks", SANDY_DIORITE_BRICKS, List.of(EN_US.Bricks(EN_US.Diorite(EN_US.Sandy()))));
-		Register("sandy_diorite_brick_slab", SANDY_DIORITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Diorite(EN_US.Sandy())))));
-		Register("sandy_cut_polished_diorite", SANDY_CUT_POLISHED_DIORITE, List.of(EN_US.Diorite(EN_US.Polished(EN_US.Cut(EN_US.Sandy())))));
-		Register("sandy_cut_polished_diorite_slab", SANDY_CUT_POLISHED_DIORITE_SLAB, List.of(EN_US.Slab(EN_US.Diorite(EN_US.Polished(EN_US.Cut(EN_US.Sandy()))))));
+		Register("sandy_polished_diorite", SANDY_POLISHED_DIORITE, List.of(EN_US.Diorite(EN_US.Polished(Words.Sandy))));
+		Register("sandy_polished_diorite_slab", SANDY_POLISHED_DIORITE_SLAB, List.of(EN_US.Diorite(EN_US.Slab(EN_US.Polished(Words.Sandy)))));
+		Register("sandy_diorite_bricks", SANDY_DIORITE_BRICKS, List.of(EN_US.Bricks(EN_US.Diorite(Words.Sandy))));
+		Register("sandy_diorite_brick_slab", SANDY_DIORITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Diorite(Words.Sandy)))));
+		Register("sandy_cut_polished_diorite", SANDY_CUT_POLISHED_DIORITE, List.of(EN_US.Diorite(EN_US.Polished(EN_US.Cut(Words.Sandy)))));
+		Register("sandy_cut_polished_diorite_slab", SANDY_CUT_POLISHED_DIORITE_SLAB, List.of(EN_US.Slab(EN_US.Diorite(EN_US.Polished(EN_US.Cut(Words.Sandy))))));
 		//</editor-fold>
 		//<editor-fold desc="Granite">
-		Register("sandy_polished_granite", SANDY_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(EN_US.Sandy()))));
-		Register("sandy_polished_granite_slab", SANDY_POLISHED_GRANITE_SLAB, List.of(EN_US.Granite(EN_US.Slab(EN_US.Polished(EN_US.Sandy())))));
-		Register("sandy_granite_bricks", SANDY_GRANITE_BRICKS, List.of(EN_US.Bricks(EN_US.Granite(EN_US.Sandy()))));
-		Register("sandy_granite_brick_slab", SANDY_GRANITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Granite(EN_US.Sandy())))));
-		Register("sandy_cut_polished_granite", SANDY_CUT_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(EN_US.Cut(EN_US.Sandy())))));
-		Register("sandy_cut_polished_granite_slab", SANDY_CUT_POLISHED_GRANITE_SLAB, List.of(EN_US.Slab(EN_US.Granite(EN_US.Polished(EN_US.Cut(EN_US.Sandy()))))));
+		Register("sandy_polished_granite", SANDY_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(Words.Sandy))));
+		Register("sandy_polished_granite_slab", SANDY_POLISHED_GRANITE_SLAB, List.of(EN_US.Granite(EN_US.Slab(EN_US.Polished(Words.Sandy)))));
+		Register("sandy_granite_bricks", SANDY_GRANITE_BRICKS, List.of(EN_US.Bricks(EN_US.Granite(Words.Sandy))));
+		Register("sandy_granite_brick_slab", SANDY_GRANITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Granite(Words.Sandy)))));
+		Register("sandy_cut_polished_granite", SANDY_CUT_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(EN_US.Cut(Words.Sandy)))));
+		Register("sandy_cut_polished_granite_slab", SANDY_CUT_POLISHED_GRANITE_SLAB, List.of(EN_US.Slab(EN_US.Granite(EN_US.Polished(EN_US.Cut(Words.Sandy))))));
 		//</editor-fold>
 		//<editor-fold desc="Planks">
-		Register("sandy_acacia_planks", SANDY_ACACIA_PLANKS, List.of(EN_US.Planks(EN_US.Acacia(EN_US.Sandy()))));
-		Register("sandy_acacia_slab", SANDY_ACACIA_SLAB, List.of(EN_US.Slab(EN_US.Acacia(EN_US.Sandy()))));
-		Register("sandy_birch_planks", SANDY_BIRCH_PLANKS, List.of(EN_US.Planks(EN_US.Birch(EN_US.Sandy()))));
-		Register("sandy_birch_slab", SANDY_BIRCH_SLAB, List.of(EN_US.Slab(EN_US.Birch(EN_US.Sandy()))));
-		Register("sandy_dark_oak_planks", SANDY_DARK_OAK_PLANKS, List.of(EN_US.Planks(EN_US.Oak(EN_US.Dark(EN_US.Sandy())))));
-		Register("sandy_dark_oak_slab", SANDY_DARK_OAK_SLAB, List.of(EN_US.Slab(EN_US.Oak(EN_US.Dark(EN_US.Sandy())))));
-		Register("sandy_jungle_planks", SANDY_JUNGLE_PLANKS, List.of(EN_US.Planks(EN_US.Jungle(EN_US.Sandy()))));
-		Register("sandy_jungle_slab", SANDY_JUNGLE_SLAB, List.of(EN_US.Slab(EN_US.Jungle(EN_US.Sandy()))));
-		Register("sandy_oak_planks", SANDY_OAK_PLANKS, List.of(EN_US.Planks(EN_US.Oak(EN_US.Sandy()))));
-		Register("sandy_oak_slab", SANDY_OAK_SLAB, List.of(EN_US.Slab(EN_US.Oak(EN_US.Sandy()))));
-		Register("sandy_spruce_planks", SANDY_SPRUCE_PLANKS, List.of(EN_US.Planks(EN_US.Spruce(EN_US.Sandy()))));
-		Register("sandy_spruce_slab", SANDY_SPRUCE_SLAB, List.of(EN_US.Slab(EN_US.Spruce(EN_US.Sandy()))));
-		Register("sandy_crimson_planks", SANDY_CRIMSON_PLANKS, List.of(EN_US.Planks(EN_US.Crimson(EN_US.Sandy()))));
-		Register("sandy_crimson_slab", SANDY_CRIMSON_SLAB, List.of(EN_US.Slab(EN_US.Crimson(EN_US.Sandy()))));
-		Register("sandy_warped_planks", SANDY_WARPED_PLANKS, List.of(EN_US.Planks(EN_US.Warped(EN_US.Sandy()))));
-		Register("sandy_warped_slab", SANDY_WARPED_SLAB, List.of(EN_US.Slab(EN_US.Warped(EN_US.Sandy()))));
-		Register("sandy_mangrove_planks", SANDY_MANGROVE_PLANKS, List.of(EN_US.Planks(EN_US.Mangrove(EN_US.Sandy()))));
-		Register("sandy_mangrove_slab", SANDY_MANGROVE_SLAB, List.of(EN_US.Slab(EN_US.Mangrove(EN_US.Sandy()))));
-		Register("sandy_cherry_planks", SANDY_CHERRY_PLANKS, List.of(EN_US.Planks(EN_US.Cherry(EN_US.Sandy()))));
-		Register("sandy_cherry_slab", SANDY_CHERRY_SLAB, List.of(EN_US.Slab(EN_US.Cherry(EN_US.Sandy()))));
-		Register("sandy_cassia_planks", SANDY_CASSIA_PLANKS, List.of(EN_US.Planks(EN_US.Cassia(EN_US.Sandy()))));
-		Register("sandy_cassia_slab", SANDY_CASSIA_SLAB, List.of(EN_US.Slab(EN_US.Cassia(EN_US.Sandy()))));
-		Register("sandy_charred_planks", SANDY_CHARRED_PLANKS, List.of(EN_US.Planks(EN_US.Charred(EN_US.Sandy()))));
-		Register("sandy_charred_slab", SANDY_CHARRED_SLAB, List.of(EN_US.Slab(EN_US.Charred(EN_US.Sandy()))));
-		Register("sandy_dogwood_planks", SANDY_DOGWOOD_PLANKS, List.of(EN_US.Planks(EN_US.Dogwood(EN_US.Sandy()))));
-		Register("sandy_dogwood_slab", SANDY_DOGWOOD_SLAB, List.of(EN_US.Slab(EN_US.Dogwood(EN_US.Sandy()))));
-		Register("sandy_gilded_planks", SANDY_GILDED_PLANKS, List.of(EN_US.Planks(EN_US.Gilded(EN_US.Sandy()))));
-		Register("sandy_gilded_slab", SANDY_GILDED_SLAB, List.of(EN_US.Slab(EN_US.Gilded(EN_US.Sandy()))));
-		Register("sandy_hay_planks", SANDY_HAY_PLANKS, List.of(EN_US.Planks(EN_US.Hay(EN_US.Sandy()))));
-		Register("sandy_hay_slab", SANDY_HAY_SLAB, List.of(EN_US.Slab(EN_US.Hay(EN_US.Sandy()))));
-		Register("sandy_blue_mushroom_planks", SANDY_BLUE_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Blue(EN_US.Sandy())))));
-		Register("sandy_blue_mushroom_slab", SANDY_BLUE_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Blue(EN_US.Sandy())))));
-		Register("sandy_brown_mushroom_planks", SANDY_BROWN_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Brown(EN_US.Sandy())))));
-		Register("sandy_brown_mushroom_slab", SANDY_BROWN_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Brown(EN_US.Sandy())))));
-		Register("sandy_red_mushroom_planks", SANDY_RED_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Red(EN_US.Sandy())))));
-		Register("sandy_red_mushroom_slab", SANDY_RED_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Red(EN_US.Sandy())))));
-		Register("sandy_mushroom_stem_planks", SANDY_MUSHROOM_STEM_PLANKS, List.of(EN_US.Planks(EN_US.Stem(EN_US.Mushroom(EN_US.Sandy())))));
-		Register("sandy_mushroom_stem_slab", SANDY_MUSHROOM_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Mushroom(EN_US.Sandy())))));
+		Register("sandy_acacia_planks", SANDY_ACACIA_PLANKS, List.of(EN_US.Planks(EN_US.Acacia(Words.Sandy))));
+		Register("sandy_acacia_slab", SANDY_ACACIA_SLAB, List.of(EN_US.Slab(EN_US.Acacia(Words.Sandy))));
+		Register("sandy_birch_planks", SANDY_BIRCH_PLANKS, List.of(EN_US.Planks(EN_US.Birch(Words.Sandy))));
+		Register("sandy_birch_slab", SANDY_BIRCH_SLAB, List.of(EN_US.Slab(EN_US.Birch(Words.Sandy))));
+		Register("sandy_dark_oak_planks", SANDY_DARK_OAK_PLANKS, List.of(EN_US.Planks(EN_US.Oak(EN_US.Dark(Words.Sandy)))));
+		Register("sandy_dark_oak_slab", SANDY_DARK_OAK_SLAB, List.of(EN_US.Slab(EN_US.Oak(EN_US.Dark(Words.Sandy)))));
+		Register("sandy_jungle_planks", SANDY_JUNGLE_PLANKS, List.of(EN_US.Planks(EN_US.Jungle(Words.Sandy))));
+		Register("sandy_jungle_slab", SANDY_JUNGLE_SLAB, List.of(EN_US.Slab(EN_US.Jungle(Words.Sandy))));
+		Register("sandy_oak_planks", SANDY_OAK_PLANKS, List.of(EN_US.Planks(EN_US.Oak(Words.Sandy))));
+		Register("sandy_oak_slab", SANDY_OAK_SLAB, List.of(EN_US.Slab(EN_US.Oak(Words.Sandy))));
+		Register("sandy_spruce_planks", SANDY_SPRUCE_PLANKS, List.of(EN_US.Planks(EN_US.Spruce(Words.Sandy))));
+		Register("sandy_spruce_slab", SANDY_SPRUCE_SLAB, List.of(EN_US.Slab(EN_US.Spruce(Words.Sandy))));
+		Register("sandy_crimson_planks", SANDY_CRIMSON_PLANKS, List.of(EN_US.Planks(EN_US.Crimson(Words.Sandy))));
+		Register("sandy_crimson_slab", SANDY_CRIMSON_SLAB, List.of(EN_US.Slab(EN_US.Crimson(Words.Sandy))));
+		Register("sandy_warped_planks", SANDY_WARPED_PLANKS, List.of(EN_US.Planks(EN_US.Warped(Words.Sandy))));
+		Register("sandy_warped_slab", SANDY_WARPED_SLAB, List.of(EN_US.Slab(EN_US.Warped(Words.Sandy))));
+		Register("sandy_mangrove_planks", SANDY_MANGROVE_PLANKS, List.of(EN_US.Planks(EN_US.Mangrove(Words.Sandy))));
+		Register("sandy_mangrove_slab", SANDY_MANGROVE_SLAB, List.of(EN_US.Slab(EN_US.Mangrove(Words.Sandy))));
+		Register("sandy_cherry_planks", SANDY_CHERRY_PLANKS, List.of(EN_US.Planks(EN_US.Cherry(Words.Sandy))));
+		Register("sandy_cherry_slab", SANDY_CHERRY_SLAB, List.of(EN_US.Slab(EN_US.Cherry(Words.Sandy))));
+		Register("sandy_cassia_planks", SANDY_CASSIA_PLANKS, List.of(EN_US.Planks(EN_US.Cassia(Words.Sandy))));
+		Register("sandy_cassia_slab", SANDY_CASSIA_SLAB, List.of(EN_US.Slab(EN_US.Cassia(Words.Sandy))));
+		Register("sandy_charred_planks", SANDY_CHARRED_PLANKS, List.of(EN_US.Planks(EN_US.Charred(Words.Sandy))));
+		Register("sandy_charred_slab", SANDY_CHARRED_SLAB, List.of(EN_US.Slab(EN_US.Charred(Words.Sandy))));
+		Register("sandy_dogwood_planks", SANDY_DOGWOOD_PLANKS, List.of(EN_US.Planks(EN_US.Dogwood(Words.Sandy))));
+		Register("sandy_dogwood_slab", SANDY_DOGWOOD_SLAB, List.of(EN_US.Slab(EN_US.Dogwood(Words.Sandy))));
+		Register("sandy_gilded_planks", SANDY_GILDED_PLANKS, List.of(EN_US.Planks(EN_US.Gilded(Words.Sandy))));
+		Register("sandy_gilded_slab", SANDY_GILDED_SLAB, List.of(EN_US.Slab(EN_US.Gilded(Words.Sandy))));
+		Register("sandy_hay_planks", SANDY_HAY_PLANKS, List.of(EN_US.Planks(EN_US.Hay(Words.Sandy))));
+		Register("sandy_hay_slab", SANDY_HAY_SLAB, List.of(EN_US.Slab(EN_US.Hay(Words.Sandy))));
+		Register("sandy_blue_mushroom_planks", SANDY_BLUE_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Blue(Words.Sandy)))));
+		Register("sandy_blue_mushroom_slab", SANDY_BLUE_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Blue(Words.Sandy)))));
+		Register("sandy_brown_mushroom_planks", SANDY_BROWN_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Brown(Words.Sandy)))));
+		Register("sandy_brown_mushroom_slab", SANDY_BROWN_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Brown(Words.Sandy)))));
+		Register("sandy_red_mushroom_planks", SANDY_RED_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Red(Words.Sandy)))));
+		Register("sandy_red_mushroom_slab", SANDY_RED_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Red(Words.Sandy)))));
+		Register("sandy_mushroom_stem_planks", SANDY_MUSHROOM_STEM_PLANKS, List.of(EN_US.Planks(EN_US.Stem(EN_US.Mushroom(Words.Sandy)))));
+		Register("sandy_mushroom_stem_slab", SANDY_MUSHROOM_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Mushroom(Words.Sandy)))));
 		//</editor-fold>
 		//<editor-fold desc="Prismarine">
-		Register("sandy_prismarine", SANDY_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Sandy())));
-		Register("sandy_prismarine_slab", SANDY_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Sandy()))));
-		Register("sandy_sandy_prismarine", SANDY_SANDY_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Sandy(EN_US.Sandy()))));
-		Register("sandy_sandy_prismarine_slab", SANDY_SANDY_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Sandy(EN_US.Sandy())))));
-		Register("sandy_prismarine_bricks", SANDY_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Sandy()))));
-		Register("sandy_prismarine_brick_slab", SANDY_PRISMARINE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Prismarine(EN_US.Sandy())))));
-		Register("sandy_chiseled_prismarine_bricks", SANDY_CHISELED_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Chiseled(EN_US.Sandy())))));
-		Register("sandy_dark_prismarine", SANDY_DARK_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy()))));
-		Register("sandy_dark_prismarine_slab", SANDY_DARK_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy())))));
-		Register("sandy_sandy_dark_prismarine", SANDY_SANDY_DARK_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(EN_US.Sandy())))));
-		Register("sandy_sandy_dark_prismarine_slab", SANDY_SANDY_DARK_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(EN_US.Sandy()))))));
+		Register("sandy_prismarine", SANDY_PRISMARINE, List.of(EN_US.Prismarine(Words.Sandy)));
+		Register("sandy_prismarine_slab", SANDY_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(Words.Sandy))));
+		Register("sandy_sandy_prismarine", SANDY_SANDY_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Sandy(Words.Sandy))));
+		Register("sandy_sandy_prismarine_slab", SANDY_SANDY_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Sandy(Words.Sandy)))));
+		Register("sandy_prismarine_bricks", SANDY_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(Words.Sandy))));
+		Register("sandy_prismarine_brick_slab", SANDY_PRISMARINE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Prismarine(Words.Sandy)))));
+		Register("sandy_chiseled_prismarine_bricks", SANDY_CHISELED_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Chiseled(Words.Sandy)))));
+		Register("sandy_dark_prismarine", SANDY_DARK_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Dark(Words.Sandy))));
+		Register("sandy_dark_prismarine_slab", SANDY_DARK_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Dark(Words.Sandy)))));
+		Register("sandy_sandy_dark_prismarine", SANDY_SANDY_DARK_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(Words.Sandy)))));
+		Register("sandy_sandy_dark_prismarine_slab", SANDY_SANDY_DARK_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(Words.Sandy))))));
 		//</editor-fold>
 		//<editor-fold desc="Purpur">
-		Register("sandy_purpur_block", SANDY_PURPUR_BLOCK, List.of(EN_US.Block(EN_US.Purpur(EN_US.Sandy()))));
-		Register("sandy_purpur_block_slab", SANDY_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Block(EN_US.Purpur(EN_US.Sandy())))));
-		Register("sandy_purpur_bricks", SANDY_PURPUR_BRICKS, List.of(EN_US.Bricks(EN_US.Purpur(EN_US.Sandy()))));
-		Register("sandy_purpur_brick_slab", SANDY_PURPUR_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Purpur(EN_US.Sandy())))));
-		Register("sandy_smooth_purpur", SANDY_SMOOTH_PURPUR, List.of(EN_US.Purpur(EN_US.Smooth(EN_US.Sandy()))));
-		Register("sandy_smooth_purpur_slab", SANDY_SMOOTH_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Smooth(EN_US.Sandy())))));
-		Register("sandy_chiseled_purpur", SANDY_CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy()))));
-		Register("sandy_chiseled_purpur_slab", SANDY_CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy())))));
-		Register("sandy_sandy_chiseled_purpur", SANDY_SANDY_CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(EN_US.Sandy())))));
-		Register("sandy_sandy_chiseled_purpur_slab", SANDY_SANDY_CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(EN_US.Sandy()))))));
+		Register("sandy_purpur_block", SANDY_PURPUR_BLOCK, List.of(EN_US.Block(EN_US.Purpur(Words.Sandy))));
+		Register("sandy_purpur_block_slab", SANDY_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Block(EN_US.Purpur(Words.Sandy)))));
+		Register("sandy_purpur_bricks", SANDY_PURPUR_BRICKS, List.of(EN_US.Bricks(EN_US.Purpur(Words.Sandy))));
+		Register("sandy_purpur_brick_slab", SANDY_PURPUR_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Purpur(Words.Sandy)))));
+		Register("sandy_smooth_purpur", SANDY_SMOOTH_PURPUR, List.of(EN_US.Purpur(EN_US.Smooth(Words.Sandy))));
+		Register("sandy_smooth_purpur_slab", SANDY_SMOOTH_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Smooth(Words.Sandy)))));
+		Register("sandy_chiseled_purpur", SANDY_CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled(Words.Sandy))));
+		Register("sandy_chiseled_purpur_slab", SANDY_CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled(Words.Sandy)))));
+		Register("sandy_sandy_chiseled_purpur", SANDY_SANDY_CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(Words.Sandy)))));
+		Register("sandy_sandy_chiseled_purpur_slab", SANDY_SANDY_CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(Words.Sandy))))));
 		//</editor-fold>
 		Register("sandy_block", SANDY_BLOCK_ENTITY);
 		//</editor-fold>
 		//<editor-fold desc="Sandy Blocks (Red)">
-		Register("red_sandy_cobblestone", RED_SANDY_COBBLESTONE, List.of(EN_US.Cobblestone(EN_US.Sandy(EN_US.Red()))));
-		Register("red_sandy_cobblestone_slab", RED_SANDY_COBBLESTONE_SLAB, List.of(EN_US.Slab(EN_US.Cobblestone(EN_US.Sandy(EN_US.Red())))));
+		Register("red_sandy_cobblestone", RED_SANDY_COBBLESTONE, List.of(EN_US.Cobblestone(EN_US.Sandy(Words.Red))));
+		Register("red_sandy_cobblestone_slab", RED_SANDY_COBBLESTONE_SLAB, List.of(EN_US.Slab(EN_US.Cobblestone(EN_US.Sandy(Words.Red)))));
 		//<editor-fold desc="Andesite">
-		Register("red_sandy_polished_andesite", RED_SANDY_POLISHED_ANDESITE, List.of(EN_US.Andesite(EN_US.Polished(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_polished_andesite_slab", RED_SANDY_POLISHED_ANDESITE_SLAB, List.of(EN_US.Andesite(EN_US.Slab(EN_US.Polished(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_andesite_bricks", RED_SANDY_ANDESITE_BRICKS, List.of(EN_US.Bricks(EN_US.Andesite(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_andesite_brick_slab", RED_SANDY_ANDESITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Andesite(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_cut_polished_andesite", RED_SANDY_CUT_POLISHED_ANDESITE, List.of(EN_US.Andesite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_cut_polished_andesite_slab", RED_SANDY_CUT_POLISHED_ANDESITE_SLAB, List.of(EN_US.Slab(EN_US.Andesite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(EN_US.Red())))))));
+		Register("red_sandy_polished_andesite", RED_SANDY_POLISHED_ANDESITE, List.of(EN_US.Andesite(EN_US.Polished(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_polished_andesite_slab", RED_SANDY_POLISHED_ANDESITE_SLAB, List.of(EN_US.Andesite(EN_US.Slab(EN_US.Polished(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_andesite_bricks", RED_SANDY_ANDESITE_BRICKS, List.of(EN_US.Bricks(EN_US.Andesite(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_andesite_brick_slab", RED_SANDY_ANDESITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Andesite(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_cut_polished_andesite", RED_SANDY_CUT_POLISHED_ANDESITE, List.of(EN_US.Andesite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_cut_polished_andesite_slab", RED_SANDY_CUT_POLISHED_ANDESITE_SLAB, List.of(EN_US.Slab(EN_US.Andesite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(Words.Red)))))));
 		//</editor-fold>
 		//<editor-fold desc="Diorite">
-		Register("red_sandy_polished_diorite", RED_SANDY_POLISHED_DIORITE, List.of(EN_US.Diorite(EN_US.Polished(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_polished_diorite_slab", RED_SANDY_POLISHED_DIORITE_SLAB, List.of(EN_US.Diorite(EN_US.Slab(EN_US.Polished(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_diorite_bricks", RED_SANDY_DIORITE_BRICKS, List.of(EN_US.Bricks(EN_US.Diorite(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_diorite_brick_slab", RED_SANDY_DIORITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Diorite(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_cut_polished_diorite", RED_SANDY_CUT_POLISHED_DIORITE, List.of(EN_US.Diorite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_cut_polished_diorite_slab", RED_SANDY_CUT_POLISHED_DIORITE_SLAB, List.of(EN_US.Slab(EN_US.Diorite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(EN_US.Red())))))));
+		Register("red_sandy_polished_diorite", RED_SANDY_POLISHED_DIORITE, List.of(EN_US.Diorite(EN_US.Polished(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_polished_diorite_slab", RED_SANDY_POLISHED_DIORITE_SLAB, List.of(EN_US.Diorite(EN_US.Slab(EN_US.Polished(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_diorite_bricks", RED_SANDY_DIORITE_BRICKS, List.of(EN_US.Bricks(EN_US.Diorite(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_diorite_brick_slab", RED_SANDY_DIORITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Diorite(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_cut_polished_diorite", RED_SANDY_CUT_POLISHED_DIORITE, List.of(EN_US.Diorite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_cut_polished_diorite_slab", RED_SANDY_CUT_POLISHED_DIORITE_SLAB, List.of(EN_US.Slab(EN_US.Diorite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(Words.Red)))))));
 		//</editor-fold>
 		//<editor-fold desc="Granite">
-		Register("red_sandy_polished_granite", RED_SANDY_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_polished_granite_slab", RED_SANDY_POLISHED_GRANITE_SLAB, List.of(EN_US.Granite(EN_US.Slab(EN_US.Polished(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_granite_bricks", RED_SANDY_GRANITE_BRICKS, List.of(EN_US.Bricks(EN_US.Granite(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_granite_brick_slab", RED_SANDY_GRANITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Granite(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_cut_polished_granite", RED_SANDY_CUT_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_cut_polished_granite_slab", RED_SANDY_CUT_POLISHED_GRANITE_SLAB, List.of(EN_US.Slab(EN_US.Granite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(EN_US.Red())))))));
+		Register("red_sandy_polished_granite", RED_SANDY_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_polished_granite_slab", RED_SANDY_POLISHED_GRANITE_SLAB, List.of(EN_US.Granite(EN_US.Slab(EN_US.Polished(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_granite_bricks", RED_SANDY_GRANITE_BRICKS, List.of(EN_US.Bricks(EN_US.Granite(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_granite_brick_slab", RED_SANDY_GRANITE_BRICK_SLAB, List.of(EN_US.Bricks(EN_US.Slab(EN_US.Granite(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_cut_polished_granite", RED_SANDY_CUT_POLISHED_GRANITE, List.of(EN_US.Granite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_cut_polished_granite_slab", RED_SANDY_CUT_POLISHED_GRANITE_SLAB, List.of(EN_US.Slab(EN_US.Granite(EN_US.Polished(EN_US.Cut(EN_US.Sandy(Words.Red)))))));
 		//</editor-fold>
 		//<editor-fold desc="Planks">
-		Register("red_sandy_acacia_planks", RED_SANDY_ACACIA_PLANKS, List.of(EN_US.Planks(EN_US.Acacia(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_acacia_slab", RED_SANDY_ACACIA_SLAB, List.of(EN_US.Slab(EN_US.Acacia(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_birch_planks", RED_SANDY_BIRCH_PLANKS, List.of(EN_US.Planks(EN_US.Birch(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_birch_slab", RED_SANDY_BIRCH_SLAB, List.of(EN_US.Slab(EN_US.Birch(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_dark_oak_planks", RED_SANDY_DARK_OAK_PLANKS, List.of(EN_US.Planks(EN_US.Oak(EN_US.Dark(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_dark_oak_slab", RED_SANDY_DARK_OAK_SLAB, List.of(EN_US.Slab(EN_US.Oak(EN_US.Dark(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_jungle_planks", RED_SANDY_JUNGLE_PLANKS, List.of(EN_US.Planks(EN_US.Jungle(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_jungle_slab", RED_SANDY_JUNGLE_SLAB, List.of(EN_US.Slab(EN_US.Jungle(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_oak_planks", RED_SANDY_OAK_PLANKS, List.of(EN_US.Planks(EN_US.Oak(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_oak_slab", RED_SANDY_OAK_SLAB, List.of(EN_US.Slab(EN_US.Oak(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_spruce_planks", RED_SANDY_SPRUCE_PLANKS, List.of(EN_US.Planks(EN_US.Spruce(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_spruce_slab", RED_SANDY_SPRUCE_SLAB, List.of(EN_US.Slab(EN_US.Spruce(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_crimson_planks", RED_SANDY_CRIMSON_PLANKS, List.of(EN_US.Planks(EN_US.Crimson(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_crimson_slab", RED_SANDY_CRIMSON_SLAB, List.of(EN_US.Slab(EN_US.Crimson(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_warped_planks", RED_SANDY_WARPED_PLANKS, List.of(EN_US.Planks(EN_US.Warped(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_warped_slab", RED_SANDY_WARPED_SLAB, List.of(EN_US.Slab(EN_US.Warped(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_mangrove_planks", RED_SANDY_MANGROVE_PLANKS, List.of(EN_US.Planks(EN_US.Mangrove(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_mangrove_slab", RED_SANDY_MANGROVE_SLAB, List.of(EN_US.Slab(EN_US.Mangrove(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_cherry_planks", RED_SANDY_CHERRY_PLANKS, List.of(EN_US.Planks(EN_US.Cherry(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_cherry_slab", RED_SANDY_CHERRY_SLAB, List.of(EN_US.Slab(EN_US.Cherry(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_cassia_planks", RED_SANDY_CASSIA_PLANKS, List.of(EN_US.Planks(EN_US.Cassia(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_cassia_slab", RED_SANDY_CASSIA_SLAB, List.of(EN_US.Slab(EN_US.Cassia(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_charred_planks", RED_SANDY_CHARRED_PLANKS, List.of(EN_US.Planks(EN_US.Charred(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_charred_slab", RED_SANDY_CHARRED_SLAB, List.of(EN_US.Slab(EN_US.Charred(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_dogwood_planks", RED_SANDY_DOGWOOD_PLANKS, List.of(EN_US.Planks(EN_US.Dogwood(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_dogwood_slab", RED_SANDY_DOGWOOD_SLAB, List.of(EN_US.Slab(EN_US.Dogwood(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_gilded_planks", RED_SANDY_GILDED_PLANKS, List.of(EN_US.Planks(EN_US.Gilded(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_gilded_slab", RED_SANDY_GILDED_SLAB, List.of(EN_US.Slab(EN_US.Gilded(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_hay_planks", RED_SANDY_HAY_PLANKS, List.of(EN_US.Planks(EN_US.Hay(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_hay_slab", RED_SANDY_HAY_SLAB, List.of(EN_US.Slab(EN_US.Hay(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_blue_mushroom_planks", RED_SANDY_BLUE_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Blue(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_blue_mushroom_slab", RED_SANDY_BLUE_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Blue(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_brown_mushroom_planks", RED_SANDY_BROWN_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Brown(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_brown_mushroom_slab", RED_SANDY_BROWN_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Brown(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_red_mushroom_planks", RED_SANDY_RED_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Red(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_red_mushroom_slab", RED_SANDY_RED_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Red(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_mushroom_stem_planks", RED_SANDY_MUSHROOM_STEM_PLANKS, List.of(EN_US.Planks(EN_US.Stem(EN_US.Mushroom(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_mushroom_stem_slab", RED_SANDY_MUSHROOM_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Mushroom(EN_US.Sandy(EN_US.Red()))))));
+		Register("red_sandy_acacia_planks", RED_SANDY_ACACIA_PLANKS, List.of(EN_US.Planks(EN_US.Acacia(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_acacia_slab", RED_SANDY_ACACIA_SLAB, List.of(EN_US.Slab(EN_US.Acacia(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_birch_planks", RED_SANDY_BIRCH_PLANKS, List.of(EN_US.Planks(EN_US.Birch(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_birch_slab", RED_SANDY_BIRCH_SLAB, List.of(EN_US.Slab(EN_US.Birch(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_dark_oak_planks", RED_SANDY_DARK_OAK_PLANKS, List.of(EN_US.Planks(EN_US.Oak(EN_US.Dark(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_dark_oak_slab", RED_SANDY_DARK_OAK_SLAB, List.of(EN_US.Slab(EN_US.Oak(EN_US.Dark(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_jungle_planks", RED_SANDY_JUNGLE_PLANKS, List.of(EN_US.Planks(EN_US.Jungle(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_jungle_slab", RED_SANDY_JUNGLE_SLAB, List.of(EN_US.Slab(EN_US.Jungle(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_oak_planks", RED_SANDY_OAK_PLANKS, List.of(EN_US.Planks(EN_US.Oak(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_oak_slab", RED_SANDY_OAK_SLAB, List.of(EN_US.Slab(EN_US.Oak(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_spruce_planks", RED_SANDY_SPRUCE_PLANKS, List.of(EN_US.Planks(EN_US.Spruce(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_spruce_slab", RED_SANDY_SPRUCE_SLAB, List.of(EN_US.Slab(EN_US.Spruce(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_crimson_planks", RED_SANDY_CRIMSON_PLANKS, List.of(EN_US.Planks(EN_US.Crimson(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_crimson_slab", RED_SANDY_CRIMSON_SLAB, List.of(EN_US.Slab(EN_US.Crimson(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_warped_planks", RED_SANDY_WARPED_PLANKS, List.of(EN_US.Planks(EN_US.Warped(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_warped_slab", RED_SANDY_WARPED_SLAB, List.of(EN_US.Slab(EN_US.Warped(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_mangrove_planks", RED_SANDY_MANGROVE_PLANKS, List.of(EN_US.Planks(EN_US.Mangrove(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_mangrove_slab", RED_SANDY_MANGROVE_SLAB, List.of(EN_US.Slab(EN_US.Mangrove(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_cherry_planks", RED_SANDY_CHERRY_PLANKS, List.of(EN_US.Planks(EN_US.Cherry(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_cherry_slab", RED_SANDY_CHERRY_SLAB, List.of(EN_US.Slab(EN_US.Cherry(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_cassia_planks", RED_SANDY_CASSIA_PLANKS, List.of(EN_US.Planks(EN_US.Cassia(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_cassia_slab", RED_SANDY_CASSIA_SLAB, List.of(EN_US.Slab(EN_US.Cassia(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_charred_planks", RED_SANDY_CHARRED_PLANKS, List.of(EN_US.Planks(EN_US.Charred(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_charred_slab", RED_SANDY_CHARRED_SLAB, List.of(EN_US.Slab(EN_US.Charred(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_dogwood_planks", RED_SANDY_DOGWOOD_PLANKS, List.of(EN_US.Planks(EN_US.Dogwood(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_dogwood_slab", RED_SANDY_DOGWOOD_SLAB, List.of(EN_US.Slab(EN_US.Dogwood(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_gilded_planks", RED_SANDY_GILDED_PLANKS, List.of(EN_US.Planks(EN_US.Gilded(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_gilded_slab", RED_SANDY_GILDED_SLAB, List.of(EN_US.Slab(EN_US.Gilded(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_hay_planks", RED_SANDY_HAY_PLANKS, List.of(EN_US.Planks(EN_US.Hay(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_hay_slab", RED_SANDY_HAY_SLAB, List.of(EN_US.Slab(EN_US.Hay(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_blue_mushroom_planks", RED_SANDY_BLUE_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Blue(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_blue_mushroom_slab", RED_SANDY_BLUE_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Blue(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_brown_mushroom_planks", RED_SANDY_BROWN_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Brown(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_brown_mushroom_slab", RED_SANDY_BROWN_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Brown(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_red_mushroom_planks", RED_SANDY_RED_MUSHROOM_PLANKS, List.of(EN_US.Planks(EN_US.Mushroom(EN_US.Red(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_red_mushroom_slab", RED_SANDY_RED_MUSHROOM_SLAB, List.of(EN_US.Slab(EN_US.Mushroom(EN_US.Red(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_mushroom_stem_planks", RED_SANDY_MUSHROOM_STEM_PLANKS, List.of(EN_US.Planks(EN_US.Stem(EN_US.Mushroom(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_mushroom_stem_slab", RED_SANDY_MUSHROOM_STEM_SLAB, List.of(EN_US.Slab(EN_US.Stem(EN_US.Mushroom(EN_US.Sandy(Words.Red))))));
 		//</editor-fold>
 		//<editor-fold desc="Prismarine">
-		Register("red_sandy_prismarine", RED_SANDY_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Sandy(EN_US.Red()))));
-		Register("red_sandy_prismarine_slab", RED_SANDY_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_sandy_prismarine", RED_SANDY_SANDY_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Sandy(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_sandy_prismarine_slab", RED_SANDY_SANDY_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Sandy(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_prismarine_bricks", RED_SANDY_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_prismarine_brick_slab", RED_SANDY_PRISMARINE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Prismarine(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_chiseled_prismarine_bricks", RED_SANDY_CHISELED_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Chiseled(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_dark_prismarine", RED_SANDY_DARK_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_dark_prismarine_slab", RED_SANDY_DARK_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_sandy_dark_prismarine", RED_SANDY_SANDY_DARK_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_sandy_dark_prismarine_slab", RED_SANDY_SANDY_DARK_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(EN_US.Sandy(EN_US.Red())))))));
+		Register("red_sandy_prismarine", RED_SANDY_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Sandy(Words.Red))));
+		Register("red_sandy_prismarine_slab", RED_SANDY_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_sandy_prismarine", RED_SANDY_SANDY_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Sandy(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_sandy_prismarine_slab", RED_SANDY_SANDY_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Sandy(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_prismarine_bricks", RED_SANDY_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_prismarine_brick_slab", RED_SANDY_PRISMARINE_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Prismarine(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_chiseled_prismarine_bricks", RED_SANDY_CHISELED_PRISMARINE_BRICKS, List.of(EN_US.Bricks(EN_US.Prismarine(EN_US.Chiseled(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_dark_prismarine", RED_SANDY_DARK_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_dark_prismarine_slab", RED_SANDY_DARK_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_sandy_dark_prismarine", RED_SANDY_SANDY_DARK_PRISMARINE, List.of(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_sandy_dark_prismarine_slab", RED_SANDY_SANDY_DARK_PRISMARINE_SLAB, List.of(EN_US.Slab(EN_US.Prismarine(EN_US.Dark(EN_US.Sandy(EN_US.Sandy(Words.Red)))))));
 		//</editor-fold>
 		//<editor-fold desc="Purpur">
-		Register("red_sandy_purpur_block", RED_SANDY_PURPUR_BLOCK, List.of(EN_US.Block(EN_US.Purpur(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_purpur_block_slab", RED_SANDY_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Block(EN_US.Purpur(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_purpur_bricks", RED_SANDY_PURPUR_BRICKS, List.of(EN_US.Bricks(EN_US.Purpur(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_purpur_brick_slab", RED_SANDY_PURPUR_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Purpur(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_smooth_purpur", RED_SANDY_SMOOTH_PURPUR, List.of(EN_US.Purpur(EN_US.Smooth(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_smooth_purpur_slab", RED_SANDY_SMOOTH_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Smooth(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_chiseled_purpur", RED_SANDY_CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(EN_US.Red())))));
-		Register("red_sandy_chiseled_purpur_slab", RED_SANDY_CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_sandy_chiseled_purpur", RED_SANDY_SANDY_CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(EN_US.Sandy(EN_US.Red()))))));
-		Register("red_sandy_sandy_chiseled_purpur_slab", RED_SANDY_SANDY_CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(EN_US.Sandy(EN_US.Red())))))));
+		Register("red_sandy_purpur_block", RED_SANDY_PURPUR_BLOCK, List.of(EN_US.Block(EN_US.Purpur(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_purpur_block_slab", RED_SANDY_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Block(EN_US.Purpur(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_purpur_bricks", RED_SANDY_PURPUR_BRICKS, List.of(EN_US.Bricks(EN_US.Purpur(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_purpur_brick_slab", RED_SANDY_PURPUR_BRICK_SLAB, List.of(EN_US.Slab(EN_US.Brick(EN_US.Purpur(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_smooth_purpur", RED_SANDY_SMOOTH_PURPUR, List.of(EN_US.Purpur(EN_US.Smooth(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_smooth_purpur_slab", RED_SANDY_SMOOTH_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Smooth(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_chiseled_purpur", RED_SANDY_CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(Words.Red)))));
+		Register("red_sandy_chiseled_purpur_slab", RED_SANDY_CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_sandy_chiseled_purpur", RED_SANDY_SANDY_CHISELED_PURPUR, List.of(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(EN_US.Sandy(Words.Red))))));
+		Register("red_sandy_sandy_chiseled_purpur_slab", RED_SANDY_SANDY_CHISELED_PURPUR_SLAB, List.of(EN_US.Slab(EN_US.Purpur(EN_US.Chiseled(EN_US.Sandy(EN_US.Sandy(Words.Red)))))));
 		//</editor-fold>
 		Register("red_sandy_block", RED_SANDY_BLOCK_ENTITY);
 		//</editor-fold>
@@ -7636,20 +7097,6 @@ public class ModBase implements ModInitializer {
 		Register("infested_chiseled_granite_bricks", INFESTED_CHISELED_GRANITE_BRICKS, List.of(EN_US.Bricks(EN_US.Granite(EN_US.Chiseled(EN_US.Infested())))));
 		Register("infested_tuff", INFESTED_TUFF, List.of(EN_US.Tuff(EN_US.Infested())));
 	}
-	private static void RegisterMobStorage() {
-		//<editor-fold desc="Buckets">
-		Register("piranha_bucket", PIRANHA_BUCKET, List.of(EN_US.Piranha(EN_US.of(EN_US.Bucket()))));
-		//</editor-fold>
-		//<editor-fold desc="Pouches">
-		Register("pouch", POUCH, List.of(EN_US.Pouch()));
-		Register("chicken_pouch", CHICKEN_POUCH, List.of(EN_US.Chicken(EN_US.of(EN_US.Pouch()))));
-		Register("rabbit_pouch", RABBIT_POUCH, List.of(EN_US.Rabbit(EN_US.of(EN_US.Pouch()))));
-		Register("parrot_pouch", PARROT_POUCH, List.of(EN_US.Parrot(EN_US.of(EN_US.Pouch()))));
-		Register("endermite_pouch", ENDERMITE_POUCH, List.of(EN_US.Endermite(EN_US.of(EN_US.Pouch()))));
-		Register("silverfish_pouch", SILVERFISH_POUCH, List.of(EN_US.Silverfish(EN_US.of(EN_US.Pouch()))));
-		Register("hedgehog_pouch", HEDGEHOG_POUCH, List.of(EN_US.Hedgehog(EN_US.of(EN_US.Pouch()))));
-		//</editor-fold>
-	}
 	private static void RegisterMobSkullsAndRagdolls() {
 		//<editor-fold desc="Piglin & Zombie Piglin">
 		Register("minecraft:piglin_head", PIGLIN_HEAD_BLOCK_ENTITY);
@@ -7660,187 +7107,6 @@ public class ModBase implements ModInitializer {
 		//</editor-fold>
 		Register("ragdoll", RAGDOLL_BLOCK_ENTITY);
 		Register("ragdoll", RAGDOLL, List.of(EN_US.Ragdoll()));
-	}
-	private static void RegisterSummoningArrows() {
-		//<editor-fold desc="Summoning Arrows">
-		Register("allay_summoning_arrow", ALLAY_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Allay()))));
-		Register("axolotl_summoning_arrow", AXOLOTL_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Axolotl()))));
-		Register("bat_summoning_arrow", BAT_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Bat()))));
-		Register("bee_summoning_arrow", BEE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Bee()))));
-		Register("blaze_summoning_arrow", BLAZE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Blaze()))));
-		Register("camel_summoning_arrow", CAMEL_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Camel()))));
-		Register("cat_summoning_arrow", CAT_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Cat()))));
-		Register("cave_spider_summoning_arrow", CAVE_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(EN_US.Cave())))));
-		Register("chicken_summoning_arrow", CHICKEN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Chicken()))));
-		Register("cod_summoning_arrow", COD_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Cod()))));
-		Register("cow_summoning_arrow", COW_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Cow()))));
-		Register("creeper_summoning_arrow", CREEPER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Creeper()))));
-		Register("dolphin_summoning_arrow", DOLPHIN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Dolphin()))));
-		Register("donkey_summoning_arrow", DONKEY_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Donkey()))));
-		Register("drowned_summoning_arrow", DROWNED_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Drowned()))));
-		Register("elder_guardian_summoning_arrow", ELDER_GUARDIAN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Guardian(EN_US.Elder())))));
-		Register("enderman_summoning_arrow", ENDERMAN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Enderman()))));
-		Register("endermite_summoning_arrow", ENDERMITE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Endermite()))));
-		Register("evoker_summoning_arrow", EVOKER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Evoker()))));
-		Register("fox_summoning_arrow", FOX_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Fox()))));
-		Register("frog_summoning_arrow", FROG_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Frog()))));
-		Register("ghast_summoning_arrow", GHAST_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Ghast()))));
-		Register("giant_summoning_arrow", GIANT_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Giant()))));
-		Register("glow_squid_summoning_arrow", GLOW_SQUID_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Squid(EN_US.Glow())))));
-		Register("goat_summoning_arrow", GOAT_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Goat()))));
-		Register("guardian_summoning_arrow", GUARDIAN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Guardian()))));
-		Register("hoglin_summoning_arrow", HOGLIN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Hoglin()))));
-		Register("horse_summoning_arrow", HORSE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Horse()))));
-		Register("husk_summoning_arrow", HUSK_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Husk()))));
-		Register("iron_golem_summoning_arrow", IRON_GOLEM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Golem(EN_US.Iron())))));
-		Register("llama_summoning_arrow", LLAMA_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Llama()))));
-		Register("magma_cube_summoning_arrow", MAGMA_CUBE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Cube(EN_US.Magma())))));
-		Register("mooshroom_summoning_arrow", MOOSHROOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mooshroom()))));
-		Register("mule_summoning_arrow", MULE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mule()))));
-		Register("ocelot_summoning_arrow", OCELOT_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Ocelot()))));
-		Register("panda_summoning_arrow", PANDA_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Panda()))));
-		Register("parrot_summoning_arrow", PARROT_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Parrot()))));
-		Register("phantom_summoning_arrow", PHANTOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Phantom()))));
-		Register("pig_summoning_arrow", PIG_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Pig()))));
-		Register("piglin_summoning_arrow", PIGLIN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Piglin()))));
-		Register("piglin_brute_summoning_arrow", PIGLIN_BRUTE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Brute(EN_US.Piglin())))));
-		Register("pillager_summoning_arrow", PILLAGER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Pillager()))));
-		Register("polar_bear_summoning_arrow", POLAR_BEAR_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Bear(EN_US.Polar())))));
-		Register("pufferfish_summoning_arrow", PUFFERFISH_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Pufferfish()))));
-		Register("rabbit_summoning_arrow", RABBIT_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Rabbit()))));
-		Register("ravager_summoning_arrow", RAVAGER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Ravager()))));
-		Register("salmon_summoning_arrow", SALMON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Salmon()))));
-		Register("sheep_summoning_arrow", SHEEP_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Sheep()))));
-		Register("shulker_summoning_arrow", SHULKER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Shulker()))));
-		Register("silverfish_summoning_arrow", SILVERFISH_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Silverfish()))));
-		Register("skeleton_summoning_arrow", SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton()))));
-		Register("skeleton_horse_summoning_arrow", SKELETON_HORSE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Horse(EN_US.Skeleton())))));
-		Register("slime_summoning_arrow", SLIME_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slime()))));
-		Register("sniffer_summoning_arrow", SNIFFER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Sniffer()))));
-		Register("snow_golem_summoning_arrow", SNOW_GOLEM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Golem(EN_US.Snow())))));
-		Register("spider_summoning_arrow", SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider()))));
-		Register("squid_summoning_arrow", SQUID_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Squid()))));
-		Register("stray_summoning_arrow", STRAY_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Stray()))));
-		Register("strider_summoning_arrow", STRIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Strider()))));
-		Register("tadpole_summoning_arrow", TADPOLE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Tadpole()))));
-		Register("trader_llama_summoning_arrow", TRADER_LLAMA_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Llama(EN_US.Trader())))));
-		Register("tropical_fish_summoning_arrow", TROPICAL_FISH_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Fish(EN_US.Tropical())))));
-		Register("turtle_summoning_arrow", TURTLE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Turtle()))));
-		Register("vex_summoning_arrow", VEX_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Vex()))));
-		Register("villager_summoning_arrow", VILLAGER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Villager()))));
-		Register("vindicator_summoning_arrow", VINDICATOR_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Vindicator()))));
-		Register("wandering_trader_summoning_arrow", WANDERING_TRADER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Trader(EN_US.Wandering())))));
-		Register("warden_summoning_arrow", WARDEN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Warden()))));
-		Register("witch_summoning_arrow", WITCH_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Witch()))));
-		Register("wither_summoning_arrow", WITHER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Wither()))));
-		Register("wither_skeleton_summoning_arrow", WITHER_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(EN_US.Wither())))));
-		Register("wolf_summoning_arrow", WOLF_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Wolf()))));
-		Register("zoglin_summoning_arrow", ZOGLIN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zoglin()))));
-		Register("zombie_summoning_arrow", ZOMBIE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zombie()))));
-		Register("zombie_horse_summoning_arrow", ZOMBIE_HORSE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Horse(EN_US.Zombie())))));
-		Register("zombie_villager_summoning_arrow", ZOMBIE_VILLAGER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Villager(EN_US.Zombie())))));
-		Register("zombie_piglin_summoning_arrow", ZOMBIFIED_PIGLIN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Piglin(EN_US.Zombified())))));
-		//</editor-fold>
-		//<editor-fold desc="Mod Mob Summoning Arrows">
-		Register("melon_golem_summoning_arrow", MELON_GOLEM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Golem(EN_US.Melon())))));
-		Register("bone_spider_summoning_arrow", BONE_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(EN_US.Bone())))));
-		Register("icy_spider_summoning_arrow", ICY_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(EN_US.Icy())))));
-		Register("slime_spider_summoning_arrow", SLIME_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slider()))));
-		Register("hedgehog_summoning_arrow", HEDGEHOG_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Hedgehog()))));
-		Register("raccoon_summoning_arrow", RACCOON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Raccoon()))));
-		Register("red_panda_summoning_arrow", RED_PANDA_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Panda(EN_US.Red())))));
-		Register("jumping_spider_summoning_arrow", JUMPING_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(EN_US.Jumping())))));
-		Register("red_phantom_summoning_arrow", RED_PHANTOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Phantom(EN_US.Red())))));
-		Register("piranha_summoning_arrow", PIRANHA_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Piranha()))));
-		Register("fancy_chicken_summoning_arrow", FANCY_CHICKEN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Chicken(EN_US.Fancy())))));
-		Register("blue_mooshroom_summoning_arrow", BLUE_MOOSHROOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mooshroom(EN_US.Blue())))));
-		Register("nether_mooshroom_summoning_arrow", NETHER_MOOSHROOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mooshroom(EN_US.Nether())))));
-		Register("moobloom_summoning_arrow", MOOBLOOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Moobloom()))));
-		Register("moolip_summoning_arrow", MOOLIP_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Moolip()))));
-		Register("mooblossom_summoning_arrow", MOOBLOSSOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mooblossom()))));
-		Register("mossy_sheep_summoning_arrow", MOSSY_SHEEP_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Sheep(EN_US.Mossy())))));
-		Register("rainbow_sheep_summoning_arrow", RAINBOW_SHEEP_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Sheep(EN_US.Rainbow())))));
-		Register("slime_creeper_summoning_arrow", SLIME_CREEPER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Creeper(EN_US.Slime())))));
-		Register("mossy_skeleton_summoning_arrow", MOSSY_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(EN_US.Mossy())))));
-		Register("slimy_skeleton_summoning_arrow", SLIMY_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(EN_US.Slimy())))));
-		Register("sunken_skeleton_summoning_arrow", SUNKEN_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(EN_US.Sunken())))));
-		Register("tropical_slime_summoning_arrow", TROPICAL_SLIME_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slime(EN_US.Tropical())))));
-		Register("pink_slime_summoning_arrow", PINK_SLIME_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slime(EN_US.Pink())))));
-		Register("slime_chicken_summoning_arrow", SLIME_CHICKEN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slicken()))));
-		Register("slime_cow_summoning_arrow", SLIME_COW_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Cow(EN_US.Slime())))));
-		Register("slime_horse_summoning_arrow", SLIME_HORSE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slorse()))));
-		Register("frozen_zombie_summoning_arrow", FROZEN_ZOMBIE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zombie(EN_US.Frozen())))));
-		Register("jungle_zombie_summoning_arrow", JUNGLE_ZOMBIE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zombie(EN_US.Jungle())))));
-		Register("slime_zombie_summoning_arrow", SLIME_ZOMBIE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zombie(EN_US.Slime())))));
-		Register("iceologer_summoning_arrow", ICEOLOGER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Iceologer()))));
-		Register("mage_summoning_arrow", MAGE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mage()))));
-		Register("jolly_llama_summoning_arrow", JOLLY_LLAMA_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Llama(EN_US.Jolly())))));
-		//</editor-fold>
-	}
-	private static void RegisterSpawnEggs() {
-		//<editor-fold desc="Spawn Eggs">
-		Register("minecraft:allay_spawn_egg", ALLAY_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Allay()))));
-		Register("minecraft:frog_spawn_egg", FROG_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Frog()))));
-		Register("minecraft:tadpole_spawn_egg", TADPOLE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Tadpole()))));
-		Register("minecraft:warden_spawn_egg", WARDEN_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Warden()))));
-		Register("minecraft:camel_spawn_egg", CAMEL_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Camel()))));
-		Register("minecraft:sniffer_spawn_egg", SNIFFER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Sniffer()))));
-		//</editor-fold>
-		//<editor-fold desc="Mod Mob Spawn Eggs">
-		Register("bone_spider_spawn_egg", BONE_SPIDER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Spider(EN_US.Bone())))));
-		Register("icy_spider_spawn_egg", ICY_SPIDER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Spider(EN_US.Icy())))));
-		Register("slime_spider_spawn_egg", SLIME_SPIDER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slider()))));
-		Register("hedgehog_spawn_egg", HEDGEHOG_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Hedgehog()))));
-		Register("raccoon_spawn_egg", RACCOON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Raccoon()))));
-		Register("red_panda_spawn_egg", RED_PANDA_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Panda(EN_US.Red())))));
-		Register("jumping_spider_spawn_egg", JUMPING_SPIDER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Spider(EN_US.Jumping())))));
-		Register("red_phantom_spawn_egg", RED_PHANTOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Phantom(EN_US.Red())))));
-		Register("piranha_spawn_egg", PIRANHA_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Piranha()))));
-		Register("fancy_chicken_spawn_egg", FANCY_CHICKEN_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Chicken(EN_US.Fancy())))));
-		Register("blue_mooshroom_spawn_egg", BLUE_MOOSHROOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Mooshroom(EN_US.Blue())))));
-		Register("nether_mooshroom_spawn_egg", NETHER_MOOSHROOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Mooshroom(EN_US.Nether())))));
-		Register("moobloom_spawn_egg", MOOBLOOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Moobloom()))));
-		Register("moolip_spawn_egg", MOOLIP_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Moolip()))));
-		Register("mooblossom_spawn_egg", MOOBLOSSOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Mooblossom()))));
-		Register("mossy_sheep_spawn_egg", MOSSY_SHEEP_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Sheep(EN_US.Mossy())))));
-		Register("rainbow_sheep_spawn_egg", RAINBOW_SHEEP_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Sheep(EN_US.Rainbow())))));
-		Register("slime_creeper_spawn_egg", SLIME_CREEPER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Creeper(EN_US.Slime())))));
-		Register("mossy_skeleton_spawn_egg", MOSSY_SKELETON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Skeleton(EN_US.Mossy())))));
-		Register("slimy_skeleton_spawn_egg", SLIMY_SKELETON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Skeleton(EN_US.Slimy())))));
-		Register("sunken_skeleton_spawn_egg", SUNKEN_SKELETON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Skeleton(EN_US.Sunken())))));
-		Register("tropical_slime_spawn_egg", TROPICAL_SLIME_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slime(EN_US.Tropical())))));
-		Register("pink_slime_spawn_egg", PINK_SLIME_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slime(EN_US.Pink())))));
-		Register("slime_chicken_spawn_egg", SLIME_CHICKEN_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slicken()))));
-		Register("slime_cow_spawn_egg", SLIME_COW_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Cow(EN_US.Slime())))));
-		Register("slime_horse_spawn_egg", SLIME_HORSE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slorse()))));
-		Register("frozen_zombie_spawn_egg", FROZEN_ZOMBIE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Zombie(EN_US.Frozen())))));
-		Register("jungle_zombie_spawn_egg", JUNGLE_ZOMBIE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Zombie(EN_US.Jungle())))));
-		Register("slime_zombie_spawn_egg", SLIME_ZOMBIE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Zombie(EN_US.Slime())))));
-		Register("iceologer_spawn_egg", ICEOLOGER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Iceologer()))));
-		Register("mage_spawn_egg", MAGE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Mage()))));
-		Register("jolly_llama_spawn_egg", JOLLY_LLAMA_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Llama(EN_US.Jolly())))));
-		//</editor-fold>
-		//Add dispenser behavior (will override existing spawn egg behaviors but those really shouldn't be different anyway????
-		ItemDispenserBehavior itemDispenserBehavior = new ItemDispenserBehavior() {
-			@Override
-			public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-				Direction direction = pointer.getBlockState().get(DispenserBlock.FACING);
-				EntityType<?> entityType = ((SpawnEggItem)stack.getItem()).getEntityType(stack.getNbt());
-				try {
-					entityType.spawnFromItemStack(pointer.getWorld(), stack, null, pointer.getPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
-				}
-				catch (Exception exception) {
-					//LOGGER.error("Error while dispensing spawn egg from dispenser at {}", pointer.getPos(), exception);
-					return ItemStack.EMPTY;
-				}
-				stack.decrement(1);
-				pointer.getWorld().emitGameEvent(GameEvent.ENTITY_PLACE, pointer.getPos());
-				return stack;
-			}
-		};
-		for (SpawnEggItem spawnEggItem : SpawnEggItem.getAll()) {
-			DispenserBlock.registerBehavior(spawnEggItem, itemDispenserBehavior);
-		}
 	}
 
 	//public static final Set<BedContainer> BEDS = new HashSet<>(Set.of( MOSS_BED, RAINBOW_BED ));

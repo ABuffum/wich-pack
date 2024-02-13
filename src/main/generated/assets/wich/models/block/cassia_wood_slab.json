@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "wich:block/cassia_log",
-    "top": "wich:block/cassia_log",
-    "side": "wich:block/cassia_log"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "wich:block/_template_bone_torch_wall",
-  "textures": {
-    "torch": "wich:block/bone_soul_torch"
-  }
-}

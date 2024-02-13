@@ -1,6 +1,7 @@
 package fun.wich.entity.passive;
 
 import fun.wich.ModBase;
+import fun.wich.entity.ModEntityType;
 import fun.wich.entity.blood.BloodType;
 import fun.wich.entity.blood.EntityWithBloodType;
 import fun.wich.origins.power.ScareMobPower;
@@ -29,7 +30,7 @@ public class RaccoonEntity extends AnimalEntity implements EntityWithBloodType {
 		this.goalSelector.add(1, new EscapeDangerGoal(this, 1.4D));
 		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
 		this.goalSelector.add(3, new TemptGoal(this, 1.0D, BREEDING_INGREDIENT, false));
-		this.goalSelector.add(4, ScareMobPower.makeFleeGoal(this, 8, 1.6, 1.4, ModBase.RACCOON_ENTITY));
+		this.goalSelector.add(4, ScareMobPower.makeFleeGoal(this, 8, 1.6, 1.4, ModEntityType.RACCOON_ENTITY));
 		this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
 		this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -44,7 +45,7 @@ public class RaccoonEntity extends AnimalEntity implements EntityWithBloodType {
 	@Nullable
 	@Override
 	public RaccoonEntity createChild(ServerWorld serverWorld, PassiveEntity passiveEntity) {
-		return ModBase.RACCOON_ENTITY.create(serverWorld);
+		return ModEntityType.RACCOON_ENTITY.create(serverWorld);
 	}
 	public boolean isBreedingItem(ItemStack stack) { return BREEDING_INGREDIENT.test(stack); }
 

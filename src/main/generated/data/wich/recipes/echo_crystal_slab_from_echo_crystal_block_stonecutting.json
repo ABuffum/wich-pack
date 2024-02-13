@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:echo_crystal_block"
-  },
-  "result": "wich:echo_crystal_slab",
-  "count": 2
-}

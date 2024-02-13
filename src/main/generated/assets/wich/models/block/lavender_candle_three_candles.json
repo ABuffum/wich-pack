@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_three_candles",
-  "textures": {
-    "all": "wich:block/lavender_candle",
-    "particle": "wich:block/lavender_candle"
-  }
-}

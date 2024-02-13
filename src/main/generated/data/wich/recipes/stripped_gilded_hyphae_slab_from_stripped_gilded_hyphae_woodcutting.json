@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "wich:stripped_gilded_hyphae"
-  },
-  "result": "wich:stripped_gilded_hyphae_slab",
-  "count": 2
-}

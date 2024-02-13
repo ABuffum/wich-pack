@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "minecraft:crimson_hyphae"
-  },
-  "result": "wich:crimson_hyphae_slab",
-  "count": 2
-}

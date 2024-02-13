@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "minecraft:stripped_jungle_wood"
-  },
-  "result": "wich:stripped_jungle_wood_slab",
-  "count": 2
-}

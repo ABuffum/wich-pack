@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "wich:block/sugar_cane_powder_keg_top",
-    "bottom": "wich:block/sugar_cane_barrel_bottom",
-    "side": "wich:block/sugar_cane_powder_keg_side"
-  }
-}

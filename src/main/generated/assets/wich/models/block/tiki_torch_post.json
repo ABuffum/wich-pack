@@ -1,6 +1,0 @@
-{
-  "parent": "wich:block/_template_post",
-  "textures": {
-    "all": "wich:block/tiki_torch_post"
-  }
-}

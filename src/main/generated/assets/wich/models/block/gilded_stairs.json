@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "wich:block/gilded_planks",
-    "top": "wich:block/gilded_planks",
-    "side": "wich:block/gilded_planks"
-  }
-}

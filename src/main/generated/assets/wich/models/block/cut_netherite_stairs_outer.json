@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "wich:block/cut_netherite",
-    "top": "wich:block/cut_netherite",
-    "side": "wich:block/cut_netherite"
-  }
-}

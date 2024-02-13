@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "wich:block/polished_bleeding_obsidian_bricks",
-    "top": "wich:block/polished_bleeding_obsidian_bricks",
-    "side": "wich:block/polished_bleeding_obsidian_bricks"
-  }
-}

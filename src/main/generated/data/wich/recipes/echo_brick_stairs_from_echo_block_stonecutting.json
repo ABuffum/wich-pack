@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:echo_block"
-  },
-  "result": "wich:echo_brick_stairs",
-  "count": 1
-}

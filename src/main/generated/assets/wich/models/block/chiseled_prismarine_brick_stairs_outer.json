@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "wich:block/chiseled_prismarine",
-    "top": "wich:block/chiseled_prismarine",
-    "side": "wich:block/chiseled_prismarine"
-  }
-}

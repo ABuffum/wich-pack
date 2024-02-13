@@ -3,13 +3,11 @@ package fun.wich.gen.data.language;
 import fun.wich.ModConfig;
 import fun.wich.ModGameRules;
 import fun.wich.ModId;
-import fun.wich.entity.blood.BloodType;
 import fun.wich.gen.data.fabric.FabricLanguageProvider;
 import fun.wich.registry.ModBannerPatterns;
 import fun.wich.util.dye.ModDyeColor;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
 
 import java.util.Map;
 
@@ -27,18 +25,18 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("itemGroup." + ModId.NAMESPACE + ".decorative_blocks", "Wich Pack Decoration-Only Blocks");
 		builder.add("itemGroup." + ModId.NAMESPACE + ".plushies", "Wich Pack Plushies & Statues");
 		//Game Rules
-		builder.add(ModGameRules.DO_RED_PHANTOM_SPAWNING, EN_US.Phantoms(EN_US.Red(EN_US.Spawn())));
-		builder.add(ModGameRules.DO_VINES_SPREAD, EN_US.Vines() + " spread", "Controls whether or not the " + EN_US.Vines() + " block spreads randomly to adjacent blocks. Does not affect other type of vine blocks such as Weeping Vines, Twisting Vines, etc.");
-		builder.add(ModGameRules.DO_WARDEN_BLINDNESS, "Apply " + EN_US.Blindness() + " effect around " + EN_US.Wardens(), "Controls whether or not " + EN_US.Wardens() + " apply the " + EN_US.Blindness() + " effect to nearby players. This is a temporary fix while this mod's developer figures out how to stop shader packs from disabling the " + EN_US.Darkness() + " Effect.");
-		builder.add(ModGameRules.DO_WARDEN_DARKNESS, "Apply " + EN_US.Darkness() + " effect around " + EN_US.Wardens(), "Controls whether or not " + EN_US.Wardens() + " apply the " + EN_US.Darkness() + " effect to nearby players.");
-		builder.add(ModGameRules.DO_WARDEN_SPAWNING, EN_US.Wardens(EN_US.Spawn()));
+		builder.add(ModGameRules.DO_RED_PHANTOM_SPAWNING, EN_US.Phantoms(EN_US.Red(Words.Spawn)));
+		builder.add(ModGameRules.DO_VINES_SPREAD, Words.Vines + " spread", "Controls whether or not the " + Words.Vines + " block spreads randomly to adjacent blocks. Does not affect other type of vine blocks such as Weeping Vines, Twisting Vines, etc.");
+		builder.add(ModGameRules.DO_WARDEN_BLINDNESS, "Apply " + Words.Blindness + " effect around " + Words.Wardens, "Controls whether or not " + Words.Wardens + " apply the " + Words.Blindness + " effect to nearby players. This is a temporary fix while this mod's developer figures out how to stop shader packs from disabling the " + Words.Darkness + " Effect.");
+		builder.add(ModGameRules.DO_WARDEN_DARKNESS, "Apply " + Words.Darkness + " effect around " + Words.Wardens, "Controls whether or not " + Words.Wardens + " apply the " + Words.Darkness + " effect to nearby players.");
+		builder.add(ModGameRules.DO_WARDEN_SPAWNING, EN_US.Wardens(Words.Spawn));
 		//Containers
-		builder.add("container.woodcutter", EN_US.Woodcutter());
-		builder.add("container.trimming", EN_US.Trimming());
-		builder.add("container.upgrade.missing_template_tooltip", EN_US.here(EN_US.Template(EN_US.Smithing(EN_US.a(EN_US.Put())))));
+		builder.add("container.woodcutter", Words.Woodcutter);
+		builder.add("container.trimming", Words.Trimming);
+		builder.add("container.upgrade.missing_template_tooltip", EN_US.here(EN_US.Template(EN_US.Smithing(EN_US.a(Words.Put)))));
 		//Stats
-		builder.add("stat." + ModId.NAMESPACE + ".interact_with_trimming_table", EN_US.Table(EN_US.Trimming(EN_US.with(EN_US.Interactions()))));
-		builder.add("stat." + ModId.NAMESPACE + ".interact_with_faceting_table", EN_US.Table(EN_US.Faceting(EN_US.with(EN_US.Interactions()))));
+		builder.add("stat." + ModId.NAMESPACE + ".interact_with_trimming_table", EN_US.Table(EN_US.Trimming(EN_US.with(Words.Interactions))));
+		builder.add("stat." + ModId.NAMESPACE + ".interact_with_faceting_table", EN_US.Table(EN_US.Faceting(EN_US.with(Words.Interactions))));
 		//<editor-fold desc="Advancements">
 		builder.addAdvancement("advancements.husbandry.tadpole_in_a_bucket", "Bukkit Bukkit", "Catch a Tadpole in a Bucket");
 		builder.addAdvancement("advancements.husbandry.froglights", "With Our Powers Combined!", "Have all Froglights in your inventory");
@@ -55,10 +53,10 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("item.minecraft.music_disc_relic.desc", "Aaron Cherof - Relic");
 		//</editor-fold>
 		//<editor-fold desc="Custom Banner Patterns">
-		builder.add("item." + ModId.NAMESPACE + ".club_banner_pattern.desc", EN_US.Club());
-		builder.add("item." + ModId.NAMESPACE + ".diamond_banner_pattern.desc", EN_US.Diamond());
-		builder.add("item." + ModId.NAMESPACE + ".heart_banner_pattern.desc", EN_US.Heart());
-		builder.add("item." + ModId.NAMESPACE + ".spade_banner_pattern.desc", EN_US.Spade());
+		builder.add("item." + ModId.NAMESPACE + ".club_banner_pattern.desc", Words.Club);
+		builder.add("item." + ModId.NAMESPACE + ".diamond_banner_pattern.desc", Words.Diamond);
+		builder.add("item." + ModId.NAMESPACE + ".heart_banner_pattern.desc", Words.Heart);
+		builder.add("item." + ModId.NAMESPACE + ".spade_banner_pattern.desc", Words.Spade);
 		for (DyeColor color : DyeColor.values()) {
 			builder.add("block." + ModId.NAMESPACE + ".banner." + ModBannerPatterns.CLUB.getName() + "." + color.getName(), EN_US.Club(EN_US.Color(color)));
 			builder.add("block." + ModId.NAMESPACE + ".banner." + ModBannerPatterns.DIAMOND.getName() + "." + color.getName(), EN_US.Diamond(EN_US.Color(color)));
@@ -67,15 +65,15 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		}
 		//</editor-fold>
 		//<editor-fold desc="Goat Horn">
-		builder.add("instrument.minecraft.ponder_goat_horn", EN_US.Ponder());
-		builder.add("instrument.minecraft.sing_goat_horn", "Sing");
-		builder.add("instrument.minecraft.seek_goat_horn", "Seek");
-		builder.add("instrument.minecraft.feel_goat_horn", "Feel");
-		builder.add("instrument.minecraft.admire_goat_horn", EN_US.Admire());
-		builder.add("instrument.minecraft.call_goat_horn", EN_US.Call());
-		builder.add("instrument.minecraft.yearn_goat_horn", "Yearn");
-		builder.add("instrument.minecraft.dream_goat_horn", EN_US.Dream());
-		builder.add("subtitles.item.goat_horn.play", EN_US.plays(EN_US.Horn(EN_US.Goat())));
+		builder.add("instrument.minecraft.ponder_goat_horn", Words.Ponder);
+		builder.add("instrument.minecraft.sing_goat_horn", Words.Sing);
+		builder.add("instrument.minecraft.seek_goat_horn", Words.Seek);
+		builder.add("instrument.minecraft.feel_goat_horn", Words.Feel);
+		builder.add("instrument.minecraft.admire_goat_horn", Words.Admire);
+		builder.add("instrument.minecraft.call_goat_horn", Words.Call);
+		builder.add("instrument.minecraft.yearn_goat_horn", Words.Yearn);
+		builder.add("instrument.minecraft.dream_goat_horn", Words.Dream);
+		builder.add("subtitles.item.goat_horn.play", EN_US.plays(EN_US.Horn(Words.Goat)));
 		//</editor-fold>
 		//<editor-fold desc="Smithing Templates">
 		builder.add("item.minecraft.smithing_template", EN_US.Template(EN_US.Smithing()));
@@ -85,35 +83,31 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("item.minecraft.smithing_template.armor_trim.base_slot_description", "Add a piece of armor");
 		builder.add("item.minecraft.smithing_template.armor_trim.ingredients", "Ingots & Crystals");
 		builder.add("item.minecraft.smithing_template.ingredients", "Ingredients:");
-		builder.add("item.minecraft.smithing_template.netherite_upgrade.additions_slot_description", EN_US.Ingot(EN_US.Netherite(EN_US.Add())));
-		builder.add("item.minecraft.smithing_template.netherite_upgrade.applies_to", EN_US.Equipment(EN_US.Diamond()));
+		builder.add("item.minecraft.smithing_template.netherite_upgrade.additions_slot_description", EN_US.Ingot(EN_US.Netherite(Words.Add)));
+		builder.add("item.minecraft.smithing_template.netherite_upgrade.applies_to", EN_US.Equipment(Words.Diamond));
 		builder.add("item.minecraft.smithing_template.netherite_upgrade.base_slot_description", "Add diamond armor, weapon or tool");
-		builder.add("item.minecraft.smithing_template.netherite_upgrade.ingredients", EN_US.Ingot(EN_US.Netherite()));
+		builder.add("item.minecraft.smithing_template.netherite_upgrade.ingredients", EN_US.Ingot(Words.Netherite));
 		builder.add("item.minecraft.smithing_template.upgrade", "Upgrade: ");
 		//</editor-fold>
 		//<editor-fold desc="Trim Patterns">
-		builder.add("trim_pattern.minecraft.coast", EN_US.Trim(EN_US.Armor(EN_US.Coast())));
-		builder.add("trim_pattern.minecraft.dune", EN_US.Trim(EN_US.Armor(EN_US.Dune())));
-		builder.add("trim_pattern.minecraft.eye", EN_US.Trim(EN_US.Armor(EN_US.Eye())));
-		builder.add("trim_pattern.minecraft.rib", EN_US.Trim(EN_US.Armor(EN_US.Rib())));
-		builder.add("trim_pattern.minecraft.sentry", EN_US.Trim(EN_US.Armor(EN_US.Sentry())));
-		builder.add("trim_pattern.minecraft.snout", EN_US.Trim(EN_US.Armor(EN_US.Snout())));
-		builder.add("trim_pattern.minecraft.spire", EN_US.Trim(EN_US.Armor(EN_US.Spire())));
-		builder.add("trim_pattern.minecraft.tide", EN_US.Trim(EN_US.Armor(EN_US.Tide())));
-		builder.add("trim_pattern.minecraft.vex", EN_US.Trim(EN_US.Armor(EN_US.Vex())));
-		builder.add("trim_pattern.minecraft.ward", EN_US.Trim(EN_US.Armor(EN_US.Ward())));
-		builder.add("trim_pattern.minecraft.wild", EN_US.Trim(EN_US.Armor(EN_US.Wild())));
+		builder.add("trim_pattern.minecraft.coast", EN_US.Trim(EN_US.Armor(Words.Coast)));
+		builder.add("trim_pattern.minecraft.dune", EN_US.Trim(EN_US.Armor(Words.Dune)));
+		builder.add("trim_pattern.minecraft.eye", EN_US.Trim(EN_US.Armor(Words.Eye)));
+		builder.add("trim_pattern.minecraft.rib", EN_US.Trim(EN_US.Armor(Words.Rib)));
+		builder.add("trim_pattern.minecraft.sentry", EN_US.Trim(EN_US.Armor(Words.Sentry)));
+		builder.add("trim_pattern.minecraft.snout", EN_US.Trim(EN_US.Armor(Words.Snout)));
+		builder.add("trim_pattern.minecraft.spire", EN_US.Trim(EN_US.Armor(Words.Spire)));
+		builder.add("trim_pattern.minecraft.tide", EN_US.Trim(EN_US.Armor(Words.Tide)));
+		builder.add("trim_pattern.minecraft.vex", EN_US.Trim(EN_US.Armor(Words.Vex)));
+		builder.add("trim_pattern.minecraft.ward", EN_US.Trim(EN_US.Armor(Words.Ward)));
+		builder.add("trim_pattern.minecraft.wild", EN_US.Trim(EN_US.Armor(Words.Wild)));
 		//</editor-fold>
 		//Mod Dye Colors
 		for (ModDyeColor color : ModDyeColor.ALL_VALUES) {
 			builder.add("item." + ModId.NAMESPACE + ".firework_star." + color.getName(), EN_US.Color(color));
 		}
-		//Blood Types
-		for (Map.Entry<Identifier, BloodType> entry : BloodType.BLOOD_TYPES.entrySet()) {
-
-		}
 		//Wind Horn
-		builder.add("subtitles.item.wind_horn.play", EN_US.plays(EN_US.Horn(EN_US.Wind())));
+		builder.add("subtitles.item.wind_horn.play", EN_US.plays(EN_US.Horn(Words.Wind)));
 		//Keybinds
 		builder.add("key." + ModId.NAMESPACE + ".tertiary_active", "Active Origins Power (3rd)");
 		builder.add("key." + ModId.NAMESPACE + ".quaternary_active", "Active Origins Power (4th)");
@@ -268,148 +262,148 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 	
 	public void provideSubtitles(TranslationBuilder builder) {
 		//<editor-fold desc="Allay">
-		builder.add("subtitles.entity.allay.death", EN_US.dies(EN_US.Allay()));
-		builder.add("subtitles.entity.allay.hurt", EN_US.hurts(EN_US.Allay()));
-		builder.add("subtitles.entity.allay.ambient_with_item", EN_US.seeks(EN_US.Allay()));
-		builder.add("subtitles.entity.allay.ambient_without_item", EN_US.yearns(EN_US.Allay()));
-		builder.add("subtitles.entity.allay.item_given", EN_US.chortles(EN_US.Allay()));
-		builder.add("subtitles.entity.allay.item_taken", EN_US.allays(EN_US.Allay()));
-		builder.add("subtitles.entity.allay.item_thrown", EN_US.tosses(EN_US.Allay()));
+		builder.add("subtitles.entity.allay.death", EN_US.dies(Words.Allay));
+		builder.add("subtitles.entity.allay.hurt", EN_US.hurts(Words.Allay));
+		builder.add("subtitles.entity.allay.ambient_with_item", EN_US.seeks(Words.Allay));
+		builder.add("subtitles.entity.allay.ambient_without_item", EN_US.yearns(Words.Allay));
+		builder.add("subtitles.entity.allay.item_given", EN_US.chortles(Words.Allay));
+		builder.add("subtitles.entity.allay.item_taken", EN_US.allays(Words.Allay));
+		builder.add("subtitles.entity.allay.item_thrown", EN_US.tosses(Words.Allay));
 		//</editor-fold>
 		//<editor-fold desc="Camel">
-		builder.add("subtitles.entity.camel.ambient", EN_US.grunts(EN_US.Camel()));
-		builder.add("subtitles.entity.camel.dash", EN_US.yeets(EN_US.Camel()));
-		builder.add("subtitles.entity.camel.dash_ready", EN_US.recovers(EN_US.Camel()));
-		builder.add("subtitles.entity.camel.death", EN_US.dies(EN_US.Camel()));
-		builder.add("subtitles.entity.camel.eat", EN_US.eats(EN_US.Camel()));
-		builder.add("subtitles.entity.camel.hurt", EN_US.hurts(EN_US.Camel()));
-		builder.add("subtitles.entity.camel.saddle", EN_US.equips(EN_US.Saddle()));
-		builder.add("subtitles.entity.camel.sit", EN_US.down(EN_US.sits(EN_US.Camel())));
-		builder.add("subtitles.entity.camel.stand", EN_US.up(EN_US.stands(EN_US.Camel())));
-		builder.add("subtitles.entity.camel.step", EN_US.steps(EN_US.Camel()));
-		builder.add("subtitles.entity.camel.step_sand", EN_US.steps(EN_US.Camel()));
+		builder.add("subtitles.entity.camel.ambient", EN_US.grunts(Words.Camel));
+		builder.add("subtitles.entity.camel.dash", EN_US.yeets(Words.Camel));
+		builder.add("subtitles.entity.camel.dash_ready", EN_US.recovers(Words.Camel));
+		builder.add("subtitles.entity.camel.death", EN_US.dies(Words.Camel));
+		builder.add("subtitles.entity.camel.eat", EN_US.eats(Words.Camel));
+		builder.add("subtitles.entity.camel.hurt", EN_US.hurts(Words.Camel));
+		builder.add("subtitles.entity.camel.saddle", EN_US.equips(Words.Saddle));
+		builder.add("subtitles.entity.camel.sit", EN_US.down(EN_US.sits(Words.Camel)));
+		builder.add("subtitles.entity.camel.stand", EN_US.up(EN_US.stands(Words.Camel)));
+		builder.add("subtitles.entity.camel.step", EN_US.steps(Words.Camel));
+		builder.add("subtitles.entity.camel.step_sand", EN_US.steps(Words.Camel));
 		//</editor-fold>
 		//<editor-fold desc="Chiseled Bookshelf">
-		builder.add("subtitles.chiseled_bookshelf.insert", EN_US.placed(EN_US.Book()));
-		builder.add("subtitles.chiseled_bookshelf.insert_enchanted", EN_US.placed(EN_US.book(EN_US.Enchanted())));
-		builder.add("subtitles.chiseled_bookshelf.take", EN_US.taken(EN_US.Book()));
-		builder.add("subtitles.chiseled_bookshelf.take_enchanted", EN_US.taken(EN_US.book(EN_US.Enchanted())));
+		builder.add("subtitles.chiseled_bookshelf.insert", EN_US.placed(Words.Book));
+		builder.add("subtitles.chiseled_bookshelf.insert_enchanted", EN_US.placed(EN_US.book(Words.Enchanted)));
+		builder.add("subtitles.chiseled_bookshelf.take", EN_US.taken(Words.Book));
+		builder.add("subtitles.chiseled_bookshelf.take_enchanted", EN_US.taken(EN_US.book(Words.Enchanted)));
 		//</editor-fold>
 		//<editor-fold desc="Frog & Tadpole">
-		builder.add("subtitles.entity.frog.ambient", EN_US.croaks(EN_US.Frog()));
-		builder.add("subtitles.entity.frog.death", EN_US.dies(EN_US.Frog()));
-		builder.add("subtitles.entity.frog.eat", EN_US.eats(EN_US.Frog()));
-		builder.add("subtitles.entity.frog.hurt", EN_US.hurts(EN_US.Frog()));
-		builder.add("subtitles.entity.frog.lay_spawn", EN_US.spawn(EN_US.lays(EN_US.Frog())));
-		builder.add("subtitles.entity.frog.long_jump", EN_US.jumps(EN_US.Frog()));
-		builder.add("subtitles.entity.tadpole.death", EN_US.dies(EN_US.Tadpole()));
-		builder.add("subtitles.entity.tadpole.flop", EN_US.flops(EN_US.Tadpole()));
-		builder.add("subtitles.entity.tadpole.hurt", EN_US.hurts(EN_US.Tadpole()));
+		builder.add("subtitles.entity.frog.ambient", EN_US.croaks(Words.Frog));
+		builder.add("subtitles.entity.frog.death", EN_US.dies(Words.Frog));
+		builder.add("subtitles.entity.frog.eat", EN_US.eats(Words.Frog));
+		builder.add("subtitles.entity.frog.hurt", EN_US.hurts(Words.Frog));
+		builder.add("subtitles.entity.frog.lay_spawn", EN_US.spawn(EN_US.lays(Words.Frog)));
+		builder.add("subtitles.entity.frog.long_jump", EN_US.jumps(Words.Frog));
+		builder.add("subtitles.entity.tadpole.death", EN_US.dies(Words.Tadpole));
+		builder.add("subtitles.entity.tadpole.flop", EN_US.flops(Words.Tadpole));
+		builder.add("subtitles.entity.tadpole.hurt", EN_US.hurts(Words.Tadpole));
 		//</editor-fold>
 		//<editor-fold desc="Sculk">
-		builder.add("subtitles.block.sculk.charge", EN_US.bubbles(EN_US.Sculk()));
-		builder.add("subtitles.block.sculk.spread", EN_US.spreads(EN_US.Sculk()));
-		builder.add("subtitles.block.sculk_catalyst.bloom", EN_US.blooms(EN_US.Catalyst(EN_US.Sculk())));
-		builder.add("subtitles.block.sculk_sensor.clicking", EN_US.clicking(EN_US.starts(EN_US.Sensor(EN_US.Sculk()))));
-		builder.add("subtitles.block.sculk_sensor.clicking_stop", EN_US.clicking(EN_US.stops(EN_US.Sensor(EN_US.Sculk()))));
-		builder.add("subtitles.block.sculk_shrieker.shriek", EN_US.shrieks(EN_US.Shrieker(EN_US.Sculk())));
+		builder.add("subtitles.block.sculk.charge", EN_US.bubbles(Words.Sculk));
+		builder.add("subtitles.block.sculk.spread", EN_US.spreads(Words.Sculk));
+		builder.add("subtitles.block.sculk_catalyst.bloom", EN_US.blooms(EN_US.Catalyst(Words.Sculk)));
+		builder.add("subtitles.block.sculk_sensor.clicking", EN_US.clicking(EN_US.starts(EN_US.Sensor(Words.Sculk))));
+		builder.add("subtitles.block.sculk_sensor.clicking_stop", EN_US.clicking(EN_US.stops(EN_US.Sensor(Words.Sculk))));
+		builder.add("subtitles.block.sculk_shrieker.shriek", EN_US.shrieks(EN_US.Shrieker(Words.Sculk)));
 		//</editor-fold>
 		//<editor-fold desc="Sniffer">
-		builder.add("subtitles.entity.sniffer.death", EN_US.dies(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.digging", EN_US.digs(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.digging_stop", EN_US.up(EN_US.stands(EN_US.Sniffer())));
-		builder.add("subtitles.entity.sniffer.drop_seed", EN_US.seed(EN_US.drops(EN_US.Sniffer())));
-		builder.add("subtitles.entity.sniffer.eat", EN_US.eats(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.happy", EN_US.delights(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.hurt", EN_US.hurts(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.idle", EN_US.grunts(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.scenting", EN_US.scents(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.searching", EN_US.searches(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.sniffing", EN_US.sniffs(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.step", EN_US.steps(EN_US.Sniffer()));
-		builder.add("subtitles.entity.sniffer.egg_crack", EN_US.cracks(EN_US.Egg(EN_US.Sniffer())));
-		builder.add("subtitles.entity.sniffer.egg_hatch", EN_US.hatches(EN_US.Egg(EN_US.Sniffer())));
+		builder.add("subtitles.entity.sniffer.death", EN_US.dies(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.digging", EN_US.digs(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.digging_stop", EN_US.up(EN_US.stands(Words.Sniffer)));
+		builder.add("subtitles.entity.sniffer.drop_seed", EN_US.seed(EN_US.drops(Words.Sniffer)));
+		builder.add("subtitles.entity.sniffer.eat", EN_US.eats(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.happy", EN_US.delights(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.hurt", EN_US.hurts(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.idle", EN_US.grunts(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.scenting", EN_US.scents(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.searching", EN_US.searches(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.sniffing", EN_US.sniffs(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.step", EN_US.steps(Words.Sniffer));
+		builder.add("subtitles.entity.sniffer.egg_crack", EN_US.cracks(EN_US.Egg(Words.Sniffer)));
+		builder.add("subtitles.entity.sniffer.egg_hatch", EN_US.hatches(EN_US.Egg(Words.Sniffer)));
 		//</editor-fold>
-		builder.add("subtitles.block.decorated_pot.shatter", EN_US.shatters(EN_US.Pot()));
+		builder.add("subtitles.block.decorated_pot.shatter", EN_US.shatters(Words.Pot));
 		//<editor-fold desc="Warden">
-		builder.add("subtitles.entity.parrot.imitate.warden", EN_US.whines(EN_US.Parrot()));
-		builder.add("subtitles.entity.warden.roar", EN_US.roars(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.sniff", EN_US.sniffs(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.emerge", EN_US.emerges(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.dig", EN_US.digs(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.hurt", EN_US.hurts(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.death", EN_US.dies(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.step", EN_US.steps(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.listening", EN_US.notice(EN_US.takes(EN_US.Warden())));
-		builder.add("subtitles.entity.warden.listening_angry", EN_US.angrily(EN_US.notice(EN_US.takes(EN_US.Warden()))));
-		builder.add("subtitles.entity.warden.heartbeat", EN_US.beats(EN_US.heart(EN_US.Warden() + "'s")));
-		builder.add("subtitles.entity.warden.attack_impact", EN_US.hit(EN_US.lands(EN_US.Warden())));
-		builder.add("subtitles.entity.warden.tendril_clicks", EN_US.click(EN_US.tendrils(EN_US.Warden())));
-		builder.add("subtitles.entity.warden.angry", EN_US.rages(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.agitated", EN_US.angrily(EN_US.groans(EN_US.Warden())));
-		builder.add("subtitles.entity.warden.ambient", EN_US.whines(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.nearby_close", EN_US.approaches(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.nearby_closer", EN_US.advances(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.nearby_closest", EN_US.close(EN_US.draws(EN_US.Warden())));
-		builder.add("subtitles.entity.warden.sonic_charge", EN_US.charges(EN_US.Warden()));
-		builder.add("subtitles.entity.warden.sonic_boom", EN_US.booms(EN_US.Warden()));
+		builder.add("subtitles.entity.parrot.imitate.warden", Lang.join(Words.Parrot, Words.whines));
+		builder.add("subtitles.entity.warden.roar", Lang.join(Words.Warden, Words.roars));
+		builder.add("subtitles.entity.warden.sniff", Lang.join(Words.Warden, Words.sniffs));
+		builder.add("subtitles.entity.warden.emerge", Lang.join(Words.Warden, Words.emerges));
+		builder.add("subtitles.entity.warden.dig", Lang.join(Words.Warden, Words.digs));
+		builder.add("subtitles.entity.warden.hurt", Lang.join(Words.Warden, Words.hurts));
+		builder.add("subtitles.entity.warden.death", Lang.join(Words.Warden, Words.dies));
+		builder.add("subtitles.entity.warden.step", Lang.join(Words.Warden, Words.steps));
+		builder.add("subtitles.entity.warden.listening", EN_US.notice(EN_US.takes(Words.Warden)));
+		builder.add("subtitles.entity.warden.listening_angry", EN_US.angrily(EN_US.notice(EN_US.takes(Words.Warden))));
+		builder.add("subtitles.entity.warden.heartbeat", EN_US.beats(EN_US.heart(Words.Warden + "'s")));
+		builder.add("subtitles.entity.warden.attack_impact", EN_US.hit(EN_US.lands(Words.Warden)));
+		builder.add("subtitles.entity.warden.tendril_clicks", EN_US.click(EN_US.tendrils(Words.Warden)));
+		builder.add("subtitles.entity.warden.angry", Lang.join(Words.Warden, Words.rages));
+		builder.add("subtitles.entity.warden.agitated", EN_US.angrily(EN_US.groans(Words.Warden)));
+		builder.add("subtitles.entity.warden.ambient", Lang.join(Words.Warden, Words.whines));
+		builder.add("subtitles.entity.warden.nearby_close", Lang.join(Words.Warden, Words.approaches));
+		builder.add("subtitles.entity.warden.nearby_closer", Lang.join(Words.Warden, Words.advances));
+		builder.add("subtitles.entity.warden.nearby_closest", Lang.join(Words.Warden, Words.draws, Words.close));
+		builder.add("subtitles.entity.warden.sonic_charge", Lang.join(Words.Warden, Words.charges));
+		builder.add("subtitles.entity.warden.sonic_boom", Lang.join(Words.Warden, Words.booms));
 		//</editor-fold>
 		//<editor-fold desc="Evoker">
-		builder.add("subtitles.entity.evoker.yes", EN_US.agrees(EN_US.Evoker()));
-		builder.add("subtitles.entity.evoker.no", EN_US.disagrees(EN_US.Evoker()));
+		builder.add("subtitles.entity.evoker.yes", EN_US.agrees(Words.Evoker));
+		builder.add("subtitles.entity.evoker.no", EN_US.disagrees(Words.Evoker));
 		//</editor-fold>
 		//<editor-fold desc="Iceologer">
-		builder.add("subtitles.entity.iceologer.ambient", EN_US.murmurs(EN_US.Iceologer()));
-		builder.add("subtitles.entity.iceologer.attack", EN_US.attacks(EN_US.Iceologer()));
-		builder.add("subtitles.entity.iceologer.cast_spell", EN_US.spell(EN_US.casts(EN_US.Iceologer())));
-		builder.add("subtitles.entity.iceologer.celebrate", EN_US.cheers(EN_US.Iceologer()));
-		builder.add("subtitles.entity.iceologer.death", EN_US.dies(EN_US.Iceologer()));
-		builder.add("subtitles.entity.iceologer.hurt", EN_US.hurts(EN_US.Iceologer()));
-		builder.add("subtitles.entity.iceologer.prepare_summon", EN_US.summoning(EN_US.prepares(EN_US.Iceologer())));
-		builder.add("subtitles.entity.iceologer.yes", EN_US.agrees(EN_US.Iceologer()));
-		builder.add("subtitles.entity.iceologer.no", EN_US.disagrees(EN_US.Iceologer()));
-		builder.add("subtitles.entity.iceologer.ice_fall_small", EN_US.fell(EN_US.Ice()));
-		builder.add("subtitles.entity.iceologer.ice_fall_big", EN_US.hard(EN_US.fell(EN_US.Ice())));
+		builder.add("subtitles.entity.iceologer.ambient", EN_US.murmurs(Words.Iceologer));
+		builder.add("subtitles.entity.iceologer.attack", EN_US.attacks(Words.Iceologer));
+		builder.add("subtitles.entity.iceologer.cast_spell", EN_US.spell(EN_US.casts(Words.Iceologer)));
+		builder.add("subtitles.entity.iceologer.celebrate", EN_US.cheers(Words.Iceologer));
+		builder.add("subtitles.entity.iceologer.death", EN_US.dies(Words.Iceologer));
+		builder.add("subtitles.entity.iceologer.hurt", EN_US.hurts(Words.Iceologer));
+		builder.add("subtitles.entity.iceologer.prepare_summon", EN_US.summoning(EN_US.prepares(Words.Iceologer)));
+		builder.add("subtitles.entity.iceologer.yes", EN_US.agrees(Words.Iceologer));
+		builder.add("subtitles.entity.iceologer.no", EN_US.disagrees(Words.Iceologer));
+		builder.add("subtitles.entity.iceologer.ice_fall_small", EN_US.fell(Words.Ice));
+		builder.add("subtitles.entity.iceologer.ice_fall_big", EN_US.hard(EN_US.fell(Words.Ice)));
 		//</editor-fold>
 		//<editor-fold desc="Illusioner">
-		builder.add("subtitles.entity.illusioner.yes", EN_US.agrees(EN_US.Illusioner()));
-		builder.add("subtitles.entity.illusioner.no", EN_US.disagrees(EN_US.Illusioner()));
+		builder.add("subtitles.entity.illusioner.yes", EN_US.agrees(Words.Illusioner));
+		builder.add("subtitles.entity.illusioner.no", EN_US.disagrees(Words.Illusioner));
 		//</editor-fold>
 		//<editor-fold desc="Mage">
-		builder.add("subtitles.entity.mage.ambient", EN_US.murmurs(EN_US.Mage()));
-		builder.add("subtitles.entity.mage.attack", EN_US.attacks(EN_US.Mage()));
-		builder.add("subtitles.entity.mage.cast_spell", EN_US.spell(EN_US.casts(EN_US.Mage())));
-		builder.add("subtitles.entity.mage.celebrate", EN_US.cheers(EN_US.Mage()));
-		builder.add("subtitles.entity.mage.death", EN_US.dies(EN_US.Mage()));
-		builder.add("subtitles.entity.mage.hurt", EN_US.hurts(EN_US.Mage()));
-		builder.add("subtitles.entity.mage.prepare_spell", EN_US.spell(EN_US.prepares(EN_US.Mage())));
-		builder.add("subtitles.entity.mage.yes", EN_US.agrees(EN_US.Mage()));
-		builder.add("subtitles.entity.mage.no", EN_US.disagrees(EN_US.Mage()));
+		builder.add("subtitles.entity.mage.ambient", EN_US.murmurs(Words.Mage));
+		builder.add("subtitles.entity.mage.attack", EN_US.attacks(Words.Mage));
+		builder.add("subtitles.entity.mage.cast_spell", EN_US.spell(EN_US.casts(Words.Mage)));
+		builder.add("subtitles.entity.mage.celebrate", EN_US.cheers(Words.Mage));
+		builder.add("subtitles.entity.mage.death", EN_US.dies(Words.Mage));
+		builder.add("subtitles.entity.mage.hurt", EN_US.hurts(Words.Mage));
+		builder.add("subtitles.entity.mage.prepare_spell", EN_US.spell(EN_US.prepares(Words.Mage)));
+		builder.add("subtitles.entity.mage.yes", EN_US.agrees(Words.Mage));
+		builder.add("subtitles.entity.mage.no", EN_US.disagrees(Words.Mage));
 		//</editor-fold>
 		//<editor-fold desc="Pillager">
-		builder.add("subtitles.entity.pillager.yes", EN_US.agrees(EN_US.Pillager()));
-		builder.add("subtitles.entity.pillager.no", EN_US.disagrees(EN_US.Pillager()));
+		builder.add("subtitles.entity.pillager.yes", EN_US.agrees(Words.Pillager));
+		builder.add("subtitles.entity.pillager.no", EN_US.disagrees(Words.Pillager));
 		//</editor-fold>
 		//<editor-fold desc="Vindicator">
-		builder.add("subtitles.entity.vindicator.yes", EN_US.agrees(EN_US.Vindicator()));
-		builder.add("subtitles.entity.vindicator.no", EN_US.disagrees(EN_US.Vindicator()));
+		builder.add("subtitles.entity.vindicator.yes", EN_US.agrees(Words.Vindicator));
+		builder.add("subtitles.entity.vindicator.no", EN_US.disagrees(Words.Vindicator));
 		//</editor-fold>
 		//<editor-fold desc="Witch">
-		builder.add("subtitles.entity.witch.yes", EN_US.agrees(EN_US.Witch()));
-		builder.add("subtitles.entity.witch.no", EN_US.disagrees(EN_US.Witch()));
+		builder.add("subtitles.entity.witch.yes", EN_US.agrees(Words.Witch));
+		builder.add("subtitles.entity.witch.no", EN_US.disagrees(Words.Witch));
 		//</editor-fold>
 		//<editor-fold desc="Villager">
-		builder.add("entity.minecraft.villager.lapidary", EN_US.Lapidary());
-		builder.add("subtitles.entity.villager.work_lapidary", EN_US.works(EN_US.Lapidary()));
+		builder.add("entity.minecraft.villager.lapidary", Words.Lapidary);
+		builder.add("subtitles.entity.villager.work_lapidary", EN_US.works(Words.Lapidary));
 		//</editor-fold>
 		//<editor-fold desc="Brush">
-		builder.add("subtitles.item.brush.brushing.generic", EN_US.Brushing());
-		builder.add("subtitles.item.brush.brushing.sand", EN_US.Sand(EN_US.Brushing()));
-		builder.add("subtitles.item.brush.brushing.gravel", EN_US.Gravel(EN_US.Brushing()));
-		builder.add("subtitles.item.brush.brushing.sand.complete", EN_US.completed(EN_US.Sand(EN_US.Brushing())));
-		builder.add("subtitles.item.brush.brushing.gravel.complete", EN_US.completed(EN_US.Gravel(EN_US.Brushing())));
+		builder.add("subtitles.item.brush.brushing.generic", Words.Brushing);
+		builder.add("subtitles.item.brush.brushing.sand", EN_US.Sand(Words.Brushing));
+		builder.add("subtitles.item.brush.brushing.gravel", EN_US.Gravel(Words.Brushing));
+		builder.add("subtitles.item.brush.brushing.sand.complete", EN_US.completed(EN_US.Sand(Words.Brushing)));
+		builder.add("subtitles.item.brush.brushing.gravel.complete", EN_US.completed(EN_US.Gravel(Words.Brushing)));
 		//</editor-fold>
-		builder.add("subtitles.block.amethyst_block.resonate", EN_US.resonates(EN_US.Amethyst()));
+		builder.add("subtitles.block.amethyst_block.resonate", EN_US.resonates(Words.Amethyst));
 		//<editor-fold desc="Jolly LLama">
 		builder.add("subtitles.entity.jolly_llama.bell", EN_US.jingles(EN_US.Llama(EN_US.Jolly())));
 		builder.add("subtitles.entity.jolly_llama.eat_fern", EN_US.Fern(EN_US.eats(EN_US.Llama(EN_US.Jolly()))));
@@ -440,63 +434,63 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("subtitles.item.pouch.empty_silverfish", EN_US.released(EN_US.Silverfish()));
 		builder.add("subtitles.item.pouch.fill_silverfish", EN_US.bagged(EN_US.Silverfish()));
 
-		builder.add("subtitles.block.coins.drop", EN_US.dropped(EN_US.Coins()));
+		builder.add("subtitles.block.coins.drop", EN_US.dropped(Words.Coins));
 
 		//Bone Spider
-		builder.add("subtitles.entity.bone_spider.attack", EN_US.attacks(EN_US.Spider(EN_US.Bone())));
-		builder.add("subtitles.entity.bone_spider.spit", EN_US.spits(EN_US.Spider(EN_US.Bone())));
+		builder.add("subtitles.entity.bone_spider.attack", EN_US.attacks(EN_US.Spider(Words.Bone)));
+		builder.add("subtitles.entity.bone_spider.spit", EN_US.spits(EN_US.Spider(Words.Bone)));
 		//Jumping Spider
-		builder.add("subtitles.entity.jumping_spider.jump", EN_US.jumps(EN_US.Spider(EN_US.Spider(EN_US.Jumping()))));
+		builder.add("subtitles.entity.jumping_spider.jump", EN_US.jumps(EN_US.Spider(EN_US.Spider(Words.Jumping))));
 		//Slime Cow
-		builder.add("subtitles.entity.slime_cow.ambient", EN_US.goos(EN_US.Cow(EN_US.Slime())));
+		builder.add("subtitles.entity.slime_cow.ambient", EN_US.goos(EN_US.Cow(Words.Slime)));
 		//<editor-fold desc="Hedgehog">
-		builder.add("subtitles.entity.hedgehog.ambient", EN_US.grunts(EN_US.Hedgehog()));
-		builder.add("subtitles.entity.hedgehog.death", EN_US.dies(EN_US.Hedgehog()));
-		builder.add("subtitles.entity.hedgehog.hurt", EN_US.hurts(EN_US.Hedgehog()));
-		builder.add("subtitles.entity.hedgehog.sniff", EN_US.sniffs(EN_US.Hedgehog()));
-		builder.add("subtitles.item.pouch.empty_hedgehog", EN_US.deployed(EN_US.Hedgehog()));
-		builder.add("subtitles.item.pouch.fill_hedgehog", EN_US.scooped(EN_US.Hedgehog()));
+		builder.add("subtitles.entity.hedgehog.ambient", EN_US.grunts(Words.Hedgehog));
+		builder.add("subtitles.entity.hedgehog.death", EN_US.dies(Words.Hedgehog));
+		builder.add("subtitles.entity.hedgehog.hurt", EN_US.hurts(Words.Hedgehog));
+		builder.add("subtitles.entity.hedgehog.sniff", EN_US.sniffs(Words.Hedgehog));
+		builder.add("subtitles.item.pouch.empty_hedgehog", EN_US.deployed(Words.Hedgehog));
+		builder.add("subtitles.item.pouch.fill_hedgehog", EN_US.scooped(Words.Hedgehog));
 		//</editor-fold>
 		//<editor-fold desc="Mossy Skeleton">
-		builder.add("subtitles.entity.mossy_skeleton.ambient", EN_US.rattles(EN_US.Skeleton(EN_US.Mossy())));
-		builder.add("subtitles.entity.mossy_skeleton.death", EN_US.dies(EN_US.Skeleton(EN_US.Mossy())));
-		builder.add("subtitles.entity.mossy_skeleton.hurt", EN_US.hurts(EN_US.Skeleton(EN_US.Mossy())));
+		builder.add("subtitles.entity.mossy_skeleton.ambient", EN_US.rattles(EN_US.Skeleton(Words.Mossy)));
+		builder.add("subtitles.entity.mossy_skeleton.death", EN_US.dies(EN_US.Skeleton(Words.Mossy)));
+		builder.add("subtitles.entity.mossy_skeleton.hurt", EN_US.hurts(EN_US.Skeleton(Words.Mossy)));
 		//</editor-fold>
 		//<editor-fold desc="Sunken Skeleton">
-		builder.add("subtitles.entity.skeleton.converted_to_sunken_skeleton", EN_US.Skeleton(EN_US.Sunken(EN_US.to(EN_US.converts(EN_US.Skeleton())))));
-		builder.add("subtitles.entity.stray.converted_to_skeleton", EN_US.Skeleton(EN_US.into(EN_US.melts(EN_US.Stray()))));
-		builder.add("subtitles.entity.sunken_skeleton.ambient", EN_US.rattles(EN_US.Skeleton(EN_US.Sunken())));
-		builder.add("subtitles.entity.sunken_skeleton.death", EN_US.dies(EN_US.Skeleton(EN_US.Sunken())));
-		builder.add("subtitles.entity.sunken_skeleton.hurt", EN_US.hurts(EN_US.Skeleton(EN_US.Sunken())));
+		builder.add("subtitles.entity.skeleton.converted_to_sunken_skeleton", EN_US.Skeleton(EN_US.Sunken(EN_US.to(EN_US.converts(Words.Skeleton)))));
+		builder.add("subtitles.entity.stray.converted_to_skeleton", EN_US.Skeleton(EN_US.into(EN_US.melts(Words.Stray))));
+		builder.add("subtitles.entity.sunken_skeleton.ambient", EN_US.rattles(EN_US.Skeleton(Words.Sunken)));
+		builder.add("subtitles.entity.sunken_skeleton.death", EN_US.dies(EN_US.Skeleton(Words.Sunken)));
+		builder.add("subtitles.entity.sunken_skeleton.hurt", EN_US.hurts(EN_US.Skeleton(Words.Sunken)));
 		//</editor-fold>
 		//<editor-fold desc="Piranha">
-		builder.add("subtitles.entity.piranha.death", EN_US.dies(EN_US.Piranha()));
-		builder.add("subtitles.entity.piranha.flop", EN_US.flops(EN_US.Piranha()));
-		builder.add("subtitles.entity.piranha.hurt", EN_US.hurts(EN_US.Piranha()));
+		builder.add("subtitles.entity.piranha.death", EN_US.dies(Words.Piranha));
+		builder.add("subtitles.entity.piranha.flop", EN_US.flops(Words.Piranha));
+		builder.add("subtitles.entity.piranha.hurt", EN_US.hurts(Words.Piranha));
 		//</editor-fold>
 		//Copper Trapdoor
-		builder.add("subtitles.block.copper_door.toggle", EN_US.creaks(EN_US.Door()));
-		builder.add("subtitles.block.copper_trapdoor.open", EN_US.opens(EN_US.Trapdoor()));
-		builder.add("subtitles.block.copper_trapdoor.close", EN_US.closes(EN_US.Trapdoor()));
+		builder.add("subtitles.block.copper_door.toggle", Lang.join(Words.Door, Words.creaks));
+		builder.add("subtitles.block.copper_trapdoor.open", Lang.join(Words.Trapdoor, Words.opens));
+		builder.add("subtitles.block.copper_trapdoor.close", Lang.join(Words.Trapdoor, Words.closes));
 		//Mod Blocks
-		builder.add("subtitles.block.echo_block.chime", EN_US.chimes(EN_US.Crystal(EN_US.Echo())));
-		builder.add("subtitles.block.echo_block.resonate", EN_US.resonates(EN_US.Crystal(EN_US.Echo())));
-		builder.add("subtitles.block.juicer.loaded", EN_US.loaded(EN_US.Juicer()));
-		builder.add("subtitles.block.juicer.juiced", EN_US.juiced(EN_US.Juicer()));
-		builder.add("subtitles.block.trimming_table.use", EN_US.used(EN_US.Table(EN_US.Trimming())));
+		builder.add("subtitles.block.echo_block.chime", EN_US.chimes(EN_US.Crystal(Words.Echo)));
+		builder.add("subtitles.block.echo_block.resonate", EN_US.resonates(EN_US.Crystal(Words.Echo)));
+		builder.add("subtitles.block.juicer.loaded", EN_US.loaded(Words.Juicer));
+		builder.add("subtitles.block.juicer.juiced", EN_US.juiced(Words.Juicer));
+		builder.add("subtitles.block.trimming_table.use", EN_US.used(EN_US.Table(Words.Trimming)));
 		//Mod Items
-		builder.add("subtitles.item.chum.used", EN_US.squelches(EN_US.Chum()));
-		builder.add("subtitles.item.salve.apply", EN_US.applied(EN_US.Salve()));
-		builder.add("subtitles.item.syringe.inject", EN_US.injected(EN_US.Syringe()));
+		builder.add("subtitles.item.chum.used", EN_US.squelches(Words.Chum));
+		builder.add("subtitles.item.salve.apply", Lang.join(Words.Salve, Words.applied));
+		builder.add("subtitles.item.syringe.inject", EN_US.injected(Words.Syringe));
 
 		if (ModConfig.REGISTER_HAVEN_MOD) {
 			//TNT Variants
-			builder.add("subtitles.entity.sharp_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Sharp())));
-			builder.add("subtitles.entity.chunkeater_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Chunkeater())));
-			builder.add("subtitles.entity.violent_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Violent())));
-			builder.add("subtitles.entity.devouring_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Devouring())));
-			builder.add("subtitles.entity.catalyzing_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Catalyzing())));
-			builder.add("subtitles.entity.soft_tnt.primed", EN_US.fizzes(EN_US.TNT(EN_US.Soft())));
+			builder.add("subtitles.entity.sharp_tnt.primed", EN_US.fizzes(EN_US.TNT(Words.Sharp)));
+			builder.add("subtitles.entity.chunkeater_tnt.primed", EN_US.fizzes(EN_US.TNT(Words.Chunkeater)));
+			builder.add("subtitles.entity.violent_tnt.primed", EN_US.fizzes(EN_US.TNT(Words.Violent)));
+			builder.add("subtitles.entity.devouring_tnt.primed", EN_US.fizzes(EN_US.TNT(Words.Devouring)));
+			builder.add("subtitles.entity.catalyzing_tnt.primed", EN_US.fizzes(EN_US.TNT(Words.Catalyzing)));
+			builder.add("subtitles.entity.soft_tnt.primed", EN_US.fizzes(EN_US.TNT(Words.Soft)));
 			//Misc
 			builder.add("subtitles.ambient.miasma_coming", "She's coming");
 		}

@@ -3,7 +3,7 @@ package fun.wich.entity.passive.allay;
 import com.google.common.collect.ImmutableList;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Dynamic;
-import fun.wich.ModBase;
+import fun.wich.entity.ModEntityType;
 import fun.wich.entity.ModNbtKeys;
 import fun.wich.entity.ai.ModMemoryModules;
 import fun.wich.event.ModEntityGameEventHandler;
@@ -385,7 +385,7 @@ public class AllayEntity extends PathAwareEntity implements InventoryOwner {
 	}
 	private boolean matchesDuplicationIngredient(ItemStack stack) { return DUPLICATION_INGREDIENT.test(stack); }
 	private void duplicate() {
-		AllayEntity allayEntity = ModBase.ALLAY_ENTITY.create(this.world);
+		AllayEntity allayEntity = ModEntityType.ALLAY_ENTITY.create(this.world);
 		if (allayEntity != null) {
 			allayEntity.refreshPositionAfterTeleport(this.getPos());
 			allayEntity.setPersistent();

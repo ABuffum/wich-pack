@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "wich:block/devouring_tnt_top",
-    "bottom": "wich:block/devouring_tnt_bottom",
-    "side": "wich:block/devouring_tnt_side"
-  }
-}

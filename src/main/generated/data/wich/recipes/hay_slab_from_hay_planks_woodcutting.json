@@ -1,8 +1,0 @@
-{
-  "type": "wich:woodcutting",
-  "ingredient": {
-    "item": "wich:hay_planks"
-  },
-  "result": "wich:hay_slab",
-  "count": 2
-}

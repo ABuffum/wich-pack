@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:cut_polished_diorite"
-  },
-  "result": "wich:cut_polished_diorite_stairs",
-  "count": 1
-}

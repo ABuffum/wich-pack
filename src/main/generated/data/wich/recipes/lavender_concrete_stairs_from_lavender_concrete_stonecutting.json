@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "wich:lavender_concrete"
-  },
-  "result": "wich:lavender_concrete_stairs",
-  "count": 1
-}

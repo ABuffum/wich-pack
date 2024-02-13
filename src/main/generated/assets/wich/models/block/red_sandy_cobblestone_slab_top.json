@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "wich:block/red_sandy_cobblestone",
-    "top": "wich:block/red_sandy_cobblestone",
-    "side": "wich:block/red_sandy_cobblestone"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "wich:block/mushroom_stem_planks",
-    "side": "wich:block/mushroom_stem_bookshelf"
-  }
-}

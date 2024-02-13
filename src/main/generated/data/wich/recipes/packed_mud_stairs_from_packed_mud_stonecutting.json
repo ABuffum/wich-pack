@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:packed_mud"
-  },
-  "result": "wich:packed_mud_stairs",
-  "count": 1
-}

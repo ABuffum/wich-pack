@@ -1,9 +1,0 @@
-{
-  "parent": "wich:block/_template_cake",
-  "textures": {
-    "bottom": "wich:block/chocolate_cake_bottom",
-    "side": "wich:block/chocolate_cake_side",
-    "top": "wich:block/chocolate_cake_top",
-    "particle": "wich:block/chocolate_cake_side"
-  }
-}

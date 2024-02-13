@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "wich:blood_fence"
-  },
-  "result": "wich:dried_blood_fence",
-  "experience": 0.1,
-  "cookingtime": 200
-}
