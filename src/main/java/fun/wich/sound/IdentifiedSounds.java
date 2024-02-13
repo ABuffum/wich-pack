@@ -358,7 +358,7 @@ public class IdentifiedSounds {
 //				/* Mod */ SMOOTH_CHISELED_POLISHED_BLACKSTONE.asBlock());
 		Register("blackstone_tiles", List.of(EN_US.Tiles(Words.Blackstone)), /* Mod */ POLISHED_BLACKSTONE_TILES.asBlock(),
 				POLISHED_BLACKSTONE_TILE_STAIRS.asBlock(), POLISHED_BLACKSTONE_TILE_SLAB.asBlock(), POLISHED_BLACKSTONE_TILE_WALL.asBlock());
-		Register("blast_furnace", List.of(EN_US.Furnace(Words.Blast)), Blocks.SMOKER);
+		Register("blast_furnace", List.of(EN_US.Furnace(Words.Blast)), Blocks.BLAST_FURNACE);
 		Register("bone_ladder", List.of(EN_US.Ladder(Words.Bone)), /* Mod */ BONE_LADDER.asBlock());
 		Register("bookshelf", List.of(Words.Bookshelf), Blocks.BOOKSHELF, /* Mod */ ACACIA_BOOKSHELF.asBlock(), BIRCH_BOOKSHELF.asBlock(),
 				DARK_OAK_BOOKSHELF.asBlock(), JUNGLE_BOOKSHELF.asBlock(), SPRUCE_BOOKSHELF.asBlock(),
@@ -461,16 +461,16 @@ public class IdentifiedSounds {
 				Blocks.DEAD_BRAIN_CORAL_FAN, Blocks.DEAD_BUBBLE_CORAL_FAN, Blocks.DEAD_FIRE_CORAL_FAN, Blocks.DEAD_HORN_CORAL_FAN, Blocks.DEAD_TUBE_CORAL_FAN,
 				Blocks.DEAD_BRAIN_CORAL_WALL_FAN, Blocks.DEAD_BUBBLE_CORAL_WALL_FAN, Blocks.DEAD_FIRE_CORAL_WALL_FAN, Blocks.DEAD_HORN_CORAL_WALL_FAN, Blocks.DEAD_TUBE_CORAL_WALL_FAN,
 				Blocks.DEAD_BRAIN_CORAL_BLOCK, Blocks.DEAD_BUBBLE_CORAL_BLOCK, Blocks.DEAD_FIRE_CORAL_BLOCK, Blocks.DEAD_HORN_CORAL_BLOCK, Blocks.DEAD_TUBE_CORAL_BLOCK);
-		Register("deepslate_coal_ore", List.of(EN_US.Ore(EN_US.Coal(EN_US.Deepslate()))), Blocks.DEEPSLATE_COAL_ORE);
-		Register("deepslate_copper_ore", List.of(EN_US.Ore(EN_US.Copper(EN_US.Deepslate()))), Blocks.DEEPSLATE_COPPER_ORE);
-		Register("deepslate_diamond_ore", List.of(EN_US.Ore(EN_US.Diamond(EN_US.Deepslate()))), Blocks.DEEPSLATE_DIAMOND_ORE);
-		Register("deepslate_emerald_ore", List.of(EN_US.Ore(EN_US.Emerald(EN_US.Deepslate()))), Blocks.DEEPSLATE_EMERALD_ORE);
-		Register("deepslate_gold_ore", List.of(EN_US.Ore(EN_US.Gold(EN_US.Deepslate()))), Blocks.DEEPSLATE_GOLD_ORE);
-		Register("deepslate_iron_ore", List.of(EN_US.Ore(EN_US.Iron(EN_US.Deepslate()))), Blocks.DEEPSLATE_IRON_ORE);
-		Register("deepslate_lapis_ore", List.of(EN_US.Ore(EN_US.Lapis(EN_US.Deepslate()))), Blocks.DEEPSLATE_LAPIS_ORE);
-		Register("deepslate_redstone_ore", List.of(EN_US.Ore(EN_US.Redstone(EN_US.Deepslate()))), Blocks.DEEPSLATE_REDSTONE_ORE);
-		Register("deepslate_ruby_ore", List.of(EN_US.Ore(EN_US.Ruby(EN_US.Deepslate()))), DEEPSLATE_RUBY_ORE.asBlock());
-		Register("deepslate_sapphire_ore", List.of(EN_US.Ore(EN_US.Sapphire(EN_US.Deepslate()))), DEEPSLATE_SAPPHIRE_ORE.asBlock());
+		Register("deepslate_coal_ore", List.of(EN_US.Ore(EN_US.Coal(Words.Deepslate))), Blocks.DEEPSLATE_COAL_ORE);
+		Register("deepslate_copper_ore", List.of(EN_US.Ore(EN_US.Copper(Words.Deepslate))), Blocks.DEEPSLATE_COPPER_ORE);
+		Register("deepslate_diamond_ore", List.of(EN_US.Ore(EN_US.Diamond(Words.Deepslate))), Blocks.DEEPSLATE_DIAMOND_ORE);
+		Register("deepslate_emerald_ore", List.of(EN_US.Ore(EN_US.Emerald(Words.Deepslate))), Blocks.DEEPSLATE_EMERALD_ORE);
+		Register("deepslate_gold_ore", List.of(EN_US.Ore(EN_US.Gold(Words.Deepslate))), Blocks.DEEPSLATE_GOLD_ORE);
+		Register("deepslate_iron_ore", List.of(EN_US.Ore(EN_US.Iron(Words.Deepslate))), Blocks.DEEPSLATE_IRON_ORE);
+		Register("deepslate_lapis_ore", List.of(EN_US.Ore(EN_US.Lapis(Words.Deepslate))), Blocks.DEEPSLATE_LAPIS_ORE);
+		Register("deepslate_redstone_ore", List.of(EN_US.Ore(EN_US.Redstone(Words.Deepslate))), Blocks.DEEPSLATE_REDSTONE_ORE);
+		Register("deepslate_ruby_ore", List.of(EN_US.Ore(EN_US.Ruby(Words.Deepslate))), DEEPSLATE_RUBY_ORE.asBlock());
+		Register("deepslate_sapphire_ore", List.of(EN_US.Ore(EN_US.Sapphire(Words.Deepslate))), DEEPSLATE_SAPPHIRE_ORE.asBlock());
 		Register("diamond", List.of(Words.Diamond), Blocks.DIAMOND_BLOCK,
 				/* Mod */ DIAMOND_STAIRS.asBlock(), DIAMOND_SLAB.asBlock(), DIAMOND_WALL.asBlock(),
 				DIAMOND_BRICKS.asBlock(), DIAMOND_BRICK_STAIRS.asBlock(), DIAMOND_BRICK_SLAB.asBlock(), DIAMOND_BRICK_WALL.asBlock());
@@ -486,13 +486,13 @@ public class IdentifiedSounds {
 				RED_SANDY_POLISHED_DIORITE.asBlock(), RED_SANDY_POLISHED_DIORITE_SLAB.asBlock(),
 				RED_SANDY_DIORITE_BRICKS.asBlock(), RED_SANDY_DIORITE_BRICK_SLAB.asBlock(),
 				RED_SANDY_CUT_POLISHED_DIORITE.asBlock(), RED_SANDY_CUT_POLISHED_DIORITE_SLAB.asBlock());
-		Register("dirt", List.of(EN_US.Dirt()), Blocks.DIRT);
-		Register("dirt_path", List.of(EN_US.Path(EN_US.Dirt())), Blocks.DIRT_PATH);
-		Register("dispenser", List.of(EN_US.Dispenser()), Blocks.DISPENSER);
-		Register("dragon_egg", List.of(EN_US.Egg(EN_US.Dragon())), Blocks.DRAGON_EGG);
-		Register("dragon_head", List.of(EN_US.Head(EN_US.Dragon())), Blocks.DRAGON_HEAD, Blocks.DRAGON_WALL_HEAD);
-		Register("dried_kelp", List.of(EN_US.Kelp(EN_US.Dried())), Blocks.DRIED_KELP_BLOCK);
-		BlockSounds dye_block = new BlockSounds("dye_block", List.of(EN_US.Block(EN_US.Dye())));
+		Register("dirt", List.of(Words.Dirt), Blocks.DIRT);
+		Register("dirt_path", List.of(EN_US.Path(Words.Dirt)), Blocks.DIRT_PATH);
+		Register("dispenser", List.of(Words.Dispenser), Blocks.DISPENSER);
+		Register("dragon_egg", List.of(EN_US.Egg(Words.Dragon)), Blocks.DRAGON_EGG);
+		Register("dragon_head", List.of(EN_US.Head(Words.Dragon)), Blocks.DRAGON_HEAD, Blocks.DRAGON_WALL_HEAD);
+		Register("dried_kelp", List.of(EN_US.Kelp(Words.Dried)), Blocks.DRIED_KELP_BLOCK);
+		BlockSounds dye_block = new BlockSounds("dye_block", List.of(EN_US.Block(Words.Dye)));
 		Register(dye_block, DYE_BLOCKS.values().stream().map(BlockContainer::asBlock).toArray(Block[]::new));
 		Register(dye_block, BEIGE_DYE_BLOCK.asBlock(), BURGUNDY_DYE_BLOCK.asBlock(), LAVENDER_DYE_BLOCK.asBlock(), MINT_DYE_BLOCK.asBlock());
 		Register("dropper", List.of(Words.Dropper), Blocks.DROPPER);
@@ -542,8 +542,8 @@ public class IdentifiedSounds {
 				PURPLE_ORCHID.asBlock(), RED_ORCHID.asBlock(), WHITE_ORCHID.asBlock(), YELLOW_ORCHID.asBlock(),
 				PINK_ALLIUM.asBlock(), LAVENDER.asBlock(), HYDRANGEA.asBlock(), PAEONIA.asBlock(), ASTER.asBlock(),
 				VANILLA_FLOWER.asBlock(), TALL_VANILLA.asBlock());
-		Register("furnace", List.of(EN_US.Furnace()), Blocks.FURNACE);
-		Register("glass_pane", List.of(EN_US.Pane(EN_US.Glass())), Blocks.BLACK_STAINED_GLASS_PANE, Blocks.BLUE_STAINED_GLASS_PANE, Blocks.BROWN_STAINED_GLASS_PANE, Blocks.CYAN_STAINED_GLASS_PANE,
+		Register("furnace", List.of(Words.Furnace), Blocks.FURNACE);
+		Register("glass_pane", List.of(EN_US.Pane(Words.Glass)), Blocks.BLACK_STAINED_GLASS_PANE, Blocks.BLUE_STAINED_GLASS_PANE, Blocks.BROWN_STAINED_GLASS_PANE, Blocks.CYAN_STAINED_GLASS_PANE,
 				Blocks.GRAY_STAINED_GLASS_PANE, Blocks.GREEN_STAINED_GLASS_PANE, Blocks.LIGHT_BLUE_STAINED_GLASS_PANE, Blocks.LIGHT_GRAY_STAINED_GLASS_PANE,
 				Blocks.LIME_STAINED_GLASS_PANE, Blocks.MAGENTA_STAINED_GLASS_PANE, Blocks.ORANGE_STAINED_GLASS_PANE, Blocks.PINK_STAINED_GLASS_PANE,
 				Blocks.PURPLE_STAINED_GLASS_PANE, Blocks.RED_STAINED_GLASS_PANE, Blocks.WHITE_STAINED_GLASS_PANE, Blocks.YELLOW_STAINED_GLASS_PANE,
@@ -560,22 +560,22 @@ public class IdentifiedSounds {
 				BURGUNDY_GLAZED_TERRACOTTA.asBlock(), BURGUNDY_GLAZED_TERRACOTTA_SLAB.asBlock(),
 				LAVENDER_GLAZED_TERRACOTTA.asBlock(), LAVENDER_GLAZED_TERRACOTTA_SLAB.asBlock(),
 				MINT_GLAZED_TERRACOTTA.asBlock(), MINT_GLAZED_TERRACOTTA_SLAB.asBlock());
-		Register("glow_lichen", List.of(EN_US.Lichen(EN_US.Glow())), Blocks.GLOW_LICHEN, /* Mod */ GLOW_LICHEN_BLOCK.asBlock(), GLOW_LICHEN_SLAB.asBlock());
+		Register("glow_lichen", List.of(EN_US.Lichen(Words.Glow)), Blocks.GLOW_LICHEN, /* Mod */ GLOW_LICHEN_BLOCK.asBlock(), GLOW_LICHEN_SLAB.asBlock());
 //		Register("glow_lichen_bed", List.of(EN_US.Bed(EN_US.Lichen(EN_US.Glow()))), /* Mod */ GLOW_LICHEN_BED.asBlock());
-		Register("glow_lichen_carpet", List.of(EN_US.Carpet(EN_US.Lichen(EN_US.Glow()))), /* Mod */ GLOW_LICHEN_CARPET.asBlock());
-		Register("glowstone", List.of(EN_US.Glowstone()), Blocks.GLOWSTONE);
-		Register("gold", List.of(EN_US.Gold()), Blocks.GOLD_BLOCK, Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE,
+		Register("glow_lichen_carpet", List.of(EN_US.Carpet(EN_US.Lichen(Words.Glow))), /* Mod */ GLOW_LICHEN_CARPET.asBlock());
+		Register("glowstone", List.of(Words.Glowstone), Blocks.GLOWSTONE);
+		Register("gold", List.of(Words.Gold), Blocks.GOLD_BLOCK, Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE,
 				/* Mod */ GOLD_TORCH.asBlock(), GOLD_SOUL_TORCH.asBlock(), GOLD_ENDER_TORCH.asBlock(), UNDERWATER_GOLD_TORCH.asBlock(),
 				GOLD_LANTERN.asBlock(), GOLD_SOUL_LANTERN.asBlock(), GOLD_ENDER_LANTERN.asBlock(),
 				GOLD_BUTTON.asBlock(), GOLD_STAIRS.asBlock(), GOLD_SLAB.asBlock(), GOLD_WALL.asBlock(),
 				GOLD_BRICKS.asBlock(), GOLD_BRICK_STAIRS.asBlock(), GOLD_BRICK_SLAB.asBlock(), GOLD_BRICK_WALL.asBlock(),
 				CUT_GOLD.asBlock(), CUT_GOLD_PILLAR.asBlock(), CUT_GOLD_STAIRS.asBlock(), CUT_GOLD_SLAB.asBlock(), CUT_GOLD_WALL.asBlock());
-		Register("gold_bars", List.of(EN_US.Bars(EN_US.Gold())), /* Mod */ GOLD_BARS.asBlock());
-		Register("gold_chain", List.of(EN_US.Chain(EN_US.Gold())), /* Mod */ GOLD_CHAIN.asBlock());
-		Register("gold_door", List.of(EN_US.Door(EN_US.Gold())), /* Mod */ GOLD_DOOR.asBlock());
-		Register("gold_lantern", List.of(EN_US.Lantern(EN_US.Gold())), /* Mod */ GOLD_LANTERN.asBlock(), GOLD_SOUL_LANTERN.asBlock(), GOLD_ENDER_LANTERN.asBlock());
-		Register("gold_trapdoor", List.of(EN_US.Trapdoor(EN_US.Gold())), /* Mod */ GOLD_TRAPDOOR.asBlock());
-		Register("granite", List.of(EN_US.Granite()), Blocks.GRANITE, Blocks.GRANITE_STAIRS, Blocks.GRANITE_SLAB, Blocks.GRANITE_WALL,
+		Register("gold_bars", List.of(EN_US.Bars(Words.Gold)), /* Mod */ GOLD_BARS.asBlock());
+		Register("gold_chain", List.of(EN_US.Chain(Words.Gold)), /* Mod */ GOLD_CHAIN.asBlock());
+		Register("gold_door", List.of(EN_US.Door(Words.Gold)), /* Mod */ GOLD_DOOR.asBlock());
+		Register("gold_lantern", List.of(EN_US.Lantern(Words.Gold)), /* Mod */ GOLD_LANTERN.asBlock(), GOLD_SOUL_LANTERN.asBlock(), GOLD_ENDER_LANTERN.asBlock());
+		Register("gold_trapdoor", List.of(EN_US.Trapdoor(Words.Gold)), /* Mod */ GOLD_TRAPDOOR.asBlock());
+		Register("granite", List.of(Words.Granite), Blocks.GRANITE, Blocks.GRANITE_STAIRS, Blocks.GRANITE_SLAB, Blocks.GRANITE_WALL,
 				Blocks.POLISHED_GRANITE, Blocks.POLISHED_GRANITE_STAIRS, Blocks.POLISHED_GRANITE_SLAB, /* Mod */ POLISHED_GRANITE_WALL.asBlock(), CHISELED_GRANITE.asBlock(),
 				GRANITE_BRICKS.asBlock(), GRANITE_BRICK_STAIRS.asBlock(), GRANITE_BRICK_SLAB.asBlock(), GRANITE_BRICK_WALL.asBlock(), CHISELED_GRANITE_BRICKS.asBlock(),
 				GRANITE_TILES.asBlock(), GRANITE_TILE_STAIRS.asBlock(), GRANITE_TILE_SLAB.asBlock(), GRANITE_TILE_WALL.asBlock(),
@@ -888,7 +888,7 @@ public class IdentifiedSounds {
 				JUNGLE_WOODCUTTER.asBlock(), MANGROVE_WOODCUTTER.asBlock(), WOODCUTTER.asBlock(),
 				SPRUCE_WOODCUTTER.asBlock(), WARPED_WOODCUTTER.asBlock(), CHARRED_WOODCUTTER.asBlock());
 	}
-	private static final BlockSounds BARK_BLOCK = new BlockSounds("bark", List.of(EN_US.Bark()));
+	private static final BlockSounds BARK_BLOCK = new BlockSounds("bark", List.of(Words.Bark));
 	private static final BlockSounds NETHER_BARK_BLOCK = new BlockSounds("nether_bark", List.of(EN_US.Bark(Words.Nether)));
 	private static final BlockSounds NETHER_WOOD_BLOCK = new BlockSounds(ModBlockSoundGroups.NETHER_WOOD);
 	private static BlockSounds getSounds(Block block) {

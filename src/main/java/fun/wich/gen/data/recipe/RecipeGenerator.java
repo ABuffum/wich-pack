@@ -2744,7 +2744,6 @@ public class RecipeGenerator extends FabricRecipeProvider {
 		Recipes.MakeShapeless(ONION_SMOOTHIE, ONION_JUICE).input(Items.ICE).offerTo(exporter);
 		Recipes.MakeShapeless(POTATO_SMOOTHIE, POTATO_JUICE).input(Items.ICE).offerTo(exporter);
 		Recipes.MakeShapeless(PUMPKIN_SMOOTHIE, PUMPKIN_JUICE).input(Items.ICE).offerTo(exporter);
-		Recipes.MakeShapeless(SEA_PICKLE_SMOOTHIE, SEA_PICKLE_JUICE).input(Items.ICE).offerTo(exporter);
 		Recipes.MakeShapeless(STRAWBERRY_SMOOTHIE, STRAWBERRY_JUICE).input(Items.ICE).offerTo(exporter);
 		Recipes.MakeShapeless(SWEET_BERRY_SMOOTHIE, SWEET_BERRY_JUICE).input(Items.ICE).offerTo(exporter);
 		Recipes.MakeShapeless(TOMATO_SMOOTHIE, TOMATO_JUICE).input(Items.ICE).offerTo(exporter);

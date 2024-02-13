@@ -244,56 +244,56 @@ public class ModEntityRegistry {
 		RegisterEntities();
 		RegisterMobs();
 		//<editor-fold desc="Buckets">
-		Register("minecraft:tadpole_bucket", TADPOLE_BUCKET, List.of(EN_US.Tadpole(EN_US.of(EN_US.Bucket()))));
-		Register("piranha_bucket", PIRANHA_BUCKET, List.of(EN_US.Piranha(EN_US.of(EN_US.Bucket()))));
+		Register("minecraft:tadpole_bucket", TADPOLE_BUCKET, List.of(EN_US.Tadpole(EN_US.of(Words.Bucket))));
+		Register("piranha_bucket", PIRANHA_BUCKET, List.of(EN_US.Piranha(EN_US.of(Words.Bucket))));
 		//</editor-fold>
 		//<editor-fold desc="Pouches">
-		Register("pouch", POUCH, List.of(EN_US.Pouch()));
-		Register("chicken_pouch", CHICKEN_POUCH, List.of(EN_US.Chicken(EN_US.of(EN_US.Pouch()))));
-		Register("rabbit_pouch", RABBIT_POUCH, List.of(EN_US.Rabbit(EN_US.of(EN_US.Pouch()))));
-		Register("parrot_pouch", PARROT_POUCH, List.of(EN_US.Parrot(EN_US.of(EN_US.Pouch()))));
-		Register("endermite_pouch", ENDERMITE_POUCH, List.of(EN_US.Endermite(EN_US.of(EN_US.Pouch()))));
-		Register("silverfish_pouch", SILVERFISH_POUCH, List.of(EN_US.Silverfish(EN_US.of(EN_US.Pouch()))));
-		Register("hedgehog_pouch", HEDGEHOG_POUCH, List.of(EN_US.Hedgehog(EN_US.of(EN_US.Pouch()))));
+		Register("pouch", POUCH, List.of(Words.Pouch));
+		Register("chicken_pouch", CHICKEN_POUCH, List.of(EN_US.Chicken(EN_US.of(Words.Pouch))));
+		Register("rabbit_pouch", RABBIT_POUCH, List.of(EN_US.Rabbit(EN_US.of(Words.Pouch))));
+		Register("parrot_pouch", PARROT_POUCH, List.of(EN_US.Parrot(EN_US.of(Words.Pouch))));
+		Register("endermite_pouch", ENDERMITE_POUCH, List.of(EN_US.Endermite(EN_US.of(Words.Pouch))));
+		Register("silverfish_pouch", SILVERFISH_POUCH, List.of(EN_US.Silverfish(EN_US.of(Words.Pouch))));
+		Register("hedgehog_pouch", HEDGEHOG_POUCH, List.of(EN_US.Hedgehog(EN_US.of(Words.Pouch))));
 		//</editor-fold>
 		RegisterSummoningArrows();
 		RegisterSpawnEggs();
 	}
 	public static void RegisterEntities() {
 		//Vehicles
-		Register("mod_boat", MOD_BOAT_ENTITY, List.of(EN_US.Boat()));
-		Register("minecraft:chest_boat", CHEST_BOAT_ENTITY, List.of(EN_US.Boat(EN_US.Chest())));
-		Register("mod_chest_boat", MOD_CHEST_BOAT_ENTITY, List.of(EN_US.Boat(EN_US.Chest())));
-		Register("dispenser_minecart", DISPENSER_MINECART_ENTITY, List.of(EN_US.Dispenser(EN_US.with(EN_US.Minecart()))));
+		Register("mod_boat", MOD_BOAT_ENTITY, List.of(Words.Boat));
+		Register("minecraft:chest_boat", CHEST_BOAT_ENTITY, List.of(EN_US.Boat(Words.Chest)));
+		Register("mod_chest_boat", MOD_CHEST_BOAT_ENTITY, List.of(EN_US.Boat(Words.Chest)));
+		Register("dispenser_minecart", DISPENSER_MINECART_ENTITY, List.of(EN_US.Dispenser(EN_US.with(Words.Minecart))));
 		DispenserMinecartEntity.OverrideDispenserBehaviors();
 		//Mod Entities
 		Register("ice_chunk", ICE_CHUNK_ENTITY, List.of(EN_US.Chunk(Words.Ice)));
-		Register("powder_keg", POWDER_KEG_ENTITY, List.of(EN_US.Keg(EN_US.Powder())));
-		Register("summoned_anvil", SUMMONED_ANVIL_ENTITY, List.of(EN_US.Anvil(EN_US.Summoned())));
+		Register("powder_keg", POWDER_KEG_ENTITY, List.of(EN_US.Keg(Words.Powder)));
+		Register("summoned_anvil", SUMMONED_ANVIL_ENTITY, List.of(EN_US.Anvil(Words.Summoned)));
 		//Projectile
-		Register("bone_shard_projectile", BONE_SHARD_PROJECTILE_ENTITY, List.of(EN_US.Shard(EN_US.Bone())));
-		Register("bottled_confetti", BOTTLED_CONFETTI_ENTITY, List.of(EN_US.Confetti(EN_US.Bottled())));
-		Register("bottled_lightning", BOTTLED_LIGHTNING_ENTITY, List.of(EN_US.Lightning(EN_US.Bottled())));
-		Register("dropped_confetti", DROPPED_CONFETTI_ENTITY, List.of(EN_US.Confetti(EN_US.Dropped())));
-		Register("dropped_dragon_breath", DROPPED_DRAGON_BREATH_ENTITY, List.of(EN_US.Breath(EN_US.Dragon(EN_US.Dropped()))));
-		Register("melon_seeds_projectile", MELON_SEED_PROJECTILE_ENTITY, List.of(EN_US.Seeds(EN_US.Melon())));
+		Register("bone_shard_projectile", BONE_SHARD_PROJECTILE_ENTITY, List.of(EN_US.Shard(Words.Bone)));
+		Register("bottled_confetti", BOTTLED_CONFETTI_ENTITY, List.of(EN_US.Confetti(Words.Bottled)));
+		Register("bottled_lightning", BOTTLED_LIGHTNING_ENTITY, List.of(EN_US.Lightning(Words.Bottled)));
+		Register("dropped_confetti", DROPPED_CONFETTI_ENTITY, List.of(EN_US.Confetti(Words.Dropped)));
+		Register("dropped_dragon_breath", DROPPED_DRAGON_BREATH_ENTITY, List.of(EN_US.Breath(EN_US.Dragon(Words.Dropped))));
+		Register("melon_seeds_projectile", MELON_SEED_PROJECTILE_ENTITY, List.of(EN_US.Seeds(Words.Melon)));
 		Register("pink_slime_ball", PINK_SLIME_BALL_ENTITY, List.of(EN_US.Ball(EN_US.Slime(Words.Pink))));
 		Register("purple_eye_of_ender", PURPLE_EYE_OF_ENDER_ENTITY, List.of(EN_US.Ender(EN_US.of(EN_US.Eye(Words.Purple)))));
-		Register("slowing_snowball", SLOWING_SNOWBALL_ENTITY, List.of(EN_US.Snowball(EN_US.Slowing())));
-		Register("throwable_tomato", THROWABLE_TOMATO_ENTITY, List.of(EN_US.Tomato(EN_US.Throwable())));
+		Register("slowing_snowball", SLOWING_SNOWBALL_ENTITY, List.of(EN_US.Snowball(Words.Slowing)));
+		Register("throwable_tomato", THROWABLE_TOMATO_ENTITY, List.of(EN_US.Tomato(Words.Throwable)));
 		//Tridents
-		Register("javelin", JAVELIN_ENTITY, List.of(EN_US.Javelin()));
+		Register("javelin", JAVELIN_ENTITY, List.of(Words.Javelin));
 		Register("amethyst_trident", AMETHYST_TRIDENT_ENTITY, List.of(EN_US.Trident(Words.Amethyst)));
 		//Cloud
-		Register("confetti_cloud", CONFETTI_CLOUD_ENTITY, List.of(EN_US.Cloud(EN_US.Confetti())));
-		Register("dragon_breath_cloud", DRAGON_BREATH_CLOUD_ENTITY, List.of(EN_US.Cloud(EN_US.Breath(EN_US.Dragon()))));
+		Register("confetti_cloud", CONFETTI_CLOUD_ENTITY, List.of(EN_US.Cloud(Words.Confetti)));
+		Register("dragon_breath_cloud", DRAGON_BREATH_CLOUD_ENTITY, List.of(EN_US.Cloud(EN_US.Breath(Words.Dragon))));
 	}
 	public static void RegisterMobs() {
 		//<editor-fold desc="Backport">
 		Register("minecraft:allay", ALLAY_ENTITY, List.of(Words.Allay));
 		FabricDefaultAttributeRegistry.register(ALLAY_ENTITY, AllayEntity.createAllayAttributes());
 
-		Register("minecraft:camel", CAMEL_ENTITY, List.of(EN_US.Camel()));
+		Register("minecraft:camel", CAMEL_ENTITY, List.of(Words.Camel));
 		FabricDefaultAttributeRegistry.register(CAMEL_ENTITY, CamelEntity.createCamelAttributes());
 
 		Register("minecraft:frog", FROG_ENTITY, List.of(Words.Frog));
@@ -303,20 +303,20 @@ public class ModEntityRegistry {
 		FabricDefaultAttributeRegistry.register(TADPOLE_ENTITY, TadpoleEntity.createTadpoleAttributes());
 		SpawnRestrictionAccessor.callRegister(TADPOLE_ENTITY, SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, TadpoleEntity::canSpawn);
 
-		Register("minecraft:sniffer", SNIFFER_ENTITY, List.of(EN_US.Sniffer()));
+		Register("minecraft:sniffer", SNIFFER_ENTITY, List.of(Words.Sniffer));
 		FabricDefaultAttributeRegistry.register(SNIFFER_ENTITY, SnifferEntity.createSnifferAttributes());
 
-		Register("minecraft:warden", WARDEN_ENTITY, List.of(EN_US.Warden()));
+		Register("minecraft:warden", WARDEN_ENTITY, List.of(Words.Warden));
 		FabricDefaultAttributeRegistry.register(WARDEN_ENTITY, WardenEntity.addAttributes());
 		SpawnRestrictionAccessor.callRegister(WARDEN_ENTITY, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WardenEntity::canMobSpawn);
 		//</editor-fold>
 
 		//<editor-fold desc="Chicken Variants">
-		Register("fancy_chicken", FANCY_CHICKEN_ENTITY, List.of(EN_US.Chicken(EN_US.Fancy())));
+		Register("fancy_chicken", FANCY_CHICKEN_ENTITY, List.of(EN_US.Chicken(Words.Fancy)));
 		FabricDefaultAttributeRegistry.register(FANCY_CHICKEN_ENTITY, FancyChickenEntity.createChickenAttributes());
 		SpawnRestrictionAccessor.callRegister(FANCY_CHICKEN_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
 
-		Register("slime_chicken", SLIME_CHICKEN_ENTITY, List.of(EN_US.Slicken()));
+		Register("slime_chicken", SLIME_CHICKEN_ENTITY, List.of(Words.Slicken));
 		FabricDefaultAttributeRegistry.register(SLIME_CHICKEN_ENTITY, SlimeChickenEntity.createChickenAttributes());
 		SpawnRestrictionAccessor.callRegister(SLIME_CHICKEN_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
 		//</editor-fold>
@@ -329,13 +329,13 @@ public class ModEntityRegistry {
 		FabricDefaultAttributeRegistry.register(NETHER_MOOSHROOM_ENTITY, NetherMooshroomEntity.createCowAttributes());
 		SpawnRestrictionAccessor.callRegister(NETHER_MOOSHROOM_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, NetherMooshroomEntity::canSpawn);
 		//Flower Cows
-		Register("moobloom", MOOBLOOM_ENTITY, List.of(EN_US.Moobloom()));
+		Register("moobloom", MOOBLOOM_ENTITY, List.of(Words.Moobloom));
 		FabricDefaultAttributeRegistry.register(MOOBLOOM_ENTITY, MoobloomEntity.createCowAttributes());
 		SpawnRestrictionAccessor.callRegister(MOOBLOOM_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FlowerCowEntity::canSpawn);
-		Register("moolip", MOOLIP_ENTITY, List.of(EN_US.Moolip()));
+		Register("moolip", MOOLIP_ENTITY, List.of(Words.Moolip));
 		FabricDefaultAttributeRegistry.register(MOOLIP_ENTITY, MoolipEntity.createCowAttributes());
 		SpawnRestrictionAccessor.callRegister(MOOLIP_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FlowerCowEntity::canSpawn);
-		Register("mooblossom", MOOBLOSSOM_ENTITY, List.of(EN_US.Mooblossom()));
+		Register("mooblossom", MOOBLOSSOM_ENTITY, List.of(Words.Mooblossom));
 		FabricDefaultAttributeRegistry.register(MOOBLOSSOM_ENTITY, MooblossomEntity.createCowAttributes());
 		SpawnRestrictionAccessor.callRegister(MOOBLOSSOM_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FlowerCowEntity::canSpawn);
 		//Slime
@@ -349,11 +349,11 @@ public class ModEntityRegistry {
 		SpawnRestrictionAccessor.callRegister(SLIME_CREEPER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
 		//</editor-fold>
 		//<editor-fold desc="Golem Variants">
-		Register("melon_golem", MELON_GOLEM_ENTITY, List.of(EN_US.Golem(EN_US.Melon())));
+		Register("melon_golem", MELON_GOLEM_ENTITY, List.of(EN_US.Golem(Words.Melon)));
 		FabricDefaultAttributeRegistry.register(MELON_GOLEM_ENTITY, MelonGolemEntity.createMelonGolemAttributes());
 		//</editor-fold>
 		//<editor-fold desc="Horse Variants">
-		Register("slime_horse", SLIME_HORSE_ENTITY, List.of(EN_US.Slorse()));
+		Register("slime_horse", SLIME_HORSE_ENTITY, List.of(Words.Slorse));
 		FabricDefaultAttributeRegistry.register(SLIME_HORSE_ENTITY, SlimeHorseEntity.createSlimeHorseAttributes());
 		SpawnRestrictionAccessor.callRegister(SLIME_HORSE_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
 		//</editor-fold>
@@ -399,18 +399,18 @@ public class ModEntityRegistry {
 		FabricDefaultAttributeRegistry.register(MOSSY_SKELETON_ENTITY, MossySkeletonEntity.createAbstractSkeletonAttributes());
 		SpawnRestrictionAccessor.callRegister(MOSSY_SKELETON_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
 
-		Register("slimy_skeleton", SLIMY_SKELETON_ENTITY, List.of(EN_US.Skeleton(EN_US.Slimy())));
+		Register("slimy_skeleton", SLIMY_SKELETON_ENTITY, List.of(EN_US.Skeleton(Words.Slimy)));
 		FabricDefaultAttributeRegistry.register(SLIMY_SKELETON_ENTITY, MossySkeletonEntity.createAbstractSkeletonAttributes());
 		SpawnRestrictionAccessor.callRegister(SLIMY_SKELETON_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
 
-		Register("sunken_skeleton", SUNKEN_SKELETON_ENTITY, List.of(EN_US.Skeleton(EN_US.Sunken())));
+		Register("sunken_skeleton", SUNKEN_SKELETON_ENTITY, List.of(EN_US.Skeleton(Words.Sunken)));
 		BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.WARM_OCEANS),
 				SpawnGroup.MONSTER, SUNKEN_SKELETON_ENTITY, 10, 2, 4);
 		FabricDefaultAttributeRegistry.register(SUNKEN_SKELETON_ENTITY, SunkenSkeletonEntity.createAbstractSkeletonAttributes());
 		SpawnRestrictionAccessor.callRegister(SUNKEN_SKELETON_ENTITY, SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SunkenSkeletonEntity::canSpawn);
 		//</editor-fold>
 		//<editor-fold desc="Slime Variants">
-		Register("tropical_slime", TROPICAL_SLIME_ENTITY, List.of(EN_US.Slime(EN_US.Tropical())));
+		Register("tropical_slime", TROPICAL_SLIME_ENTITY, List.of(EN_US.Slime(Words.Tropical)));
 		FabricDefaultAttributeRegistry.register(TROPICAL_SLIME_ENTITY, HostileEntity.createHostileAttributes());
 		BiomeModifications.addSpawn(BiomeSelectors.tag(ModBiomeTags.WARM_OCEANS).and(BiomeSelectors.includeByKey(BiomeKeys.JUNGLE)),
 				SpawnGroup.MONSTER, TROPICAL_SLIME_ENTITY, 1, 1, 1);
@@ -421,19 +421,19 @@ public class ModEntityRegistry {
 		SpawnRestrictionAccessor.callRegister(PINK_SLIME_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SlimeEntity::canMobSpawn);
 		//</editor-fold
 		//<editor-fold desc="Spider Variants">
-		Register("bone_spider", BONE_SPIDER_ENTITY, List.of(EN_US.Spider(EN_US.Bone())));
+		Register("bone_spider", BONE_SPIDER_ENTITY, List.of(EN_US.Spider(Words.Bone)));
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.DARK_FOREST),
 				SpawnGroup.MONSTER, BONE_SPIDER_ENTITY, 60, 2, 5);
 		FabricDefaultAttributeRegistry.register(BONE_SPIDER_ENTITY, BoneSpiderEntity.createBoneSpiderAttributes());
 		SpawnRestrictionAccessor.callRegister(BONE_SPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
 
-		Register("icy_spider", ICY_SPIDER_ENTITY, List.of(EN_US.Spider(EN_US.Icy())));
+		Register("icy_spider", ICY_SPIDER_ENTITY, List.of(EN_US.Spider(Words.Icy)));
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.ICE_SPIKES, BiomeKeys.SNOWY_PLAINS, BiomeKeys.SNOWY_SLOPES, BiomeKeys.JAGGED_PEAKS, BiomeKeys.FROZEN_PEAKS),
 				SpawnGroup.MONSTER, ICY_SPIDER_ENTITY, 20, 2, 5);
 		FabricDefaultAttributeRegistry.register(ICY_SPIDER_ENTITY, IcySpiderEntity.createIcySpiderAttributes());
 		SpawnRestrictionAccessor.callRegister(ICY_SPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
 
-		Register("jumping_spider", JUMPING_SPIDER_ENTITY, List.of(EN_US.Spider(EN_US.Jumping())));
+		Register("jumping_spider", JUMPING_SPIDER_ENTITY, List.of(EN_US.Spider(Words.Jumping)));
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.DESERT,
 						BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.BAMBOO_JUNGLE,
 						BiomeKeys.BADLANDS, BiomeKeys.ERODED_BADLANDS, BiomeKeys.WOODED_BADLANDS),
@@ -441,12 +441,12 @@ public class ModEntityRegistry {
 		FabricDefaultAttributeRegistry.register(JUMPING_SPIDER_ENTITY, JumpingSpiderEntity.createJumpingSpiderAttributes());
 		SpawnRestrictionAccessor.callRegister(JUMPING_SPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
 
-		Register("slime_spider", SLIME_SPIDER_ENTITY, List.of(EN_US.Slider()));
+		Register("slime_spider", SLIME_SPIDER_ENTITY, List.of(Words.Slider));
 		FabricDefaultAttributeRegistry.register(SLIME_SPIDER_ENTITY, SlimeSpiderEntity.createSlimeSpiderAttributes());
 		SpawnRestrictionAccessor.callRegister(SLIME_SPIDER_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
 		//</editor-fold>
 		//<editor-fold desc="Zombie Variants">
-		Register("frozen_zombie", FROZEN_ZOMBIE_ENTITY, List.of(EN_US.Zombie(EN_US.Frozen())));
+		Register("frozen_zombie", FROZEN_ZOMBIE_ENTITY, List.of(EN_US.Zombie(Words.Frozen)));
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.ICE_SPIKES, BiomeKeys.SNOWY_PLAINS),
 				SpawnGroup.MONSTER, FROZEN_ZOMBIE_ENTITY, 40, 4, 4);
 		FabricDefaultAttributeRegistry.register(FROZEN_ZOMBIE_ENTITY, FrozenZombieEntity.createZombieAttributes());
@@ -464,7 +464,7 @@ public class ModEntityRegistry {
 		//</editor-fold>
 
 		//<editor-fold desc="Hedgehog">
-		Register("hedgehog", HEDGEHOG_ENTITY, List.of(EN_US.Hedgehog()));
+		Register("hedgehog", HEDGEHOG_ENTITY, List.of(Words.Hedgehog));
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA, BiomeKeys.OLD_GROWTH_PINE_TAIGA, BiomeKeys.BAMBOO_JUNGLE),
 				SpawnGroup.MONSTER, HEDGEHOG_ENTITY, 18, 1, 4);
 		FabricDefaultAttributeRegistry.register(HEDGEHOG_ENTITY, HedgehogEntity.createHedgehogAttributes());
@@ -478,7 +478,7 @@ public class ModEntityRegistry {
 		SpawnRestrictionAccessor.callRegister(PIRANHA_ENTITY, SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WaterCreatureEntity::canSpawn);
 		//</editor-fold>
 		//<editor-fold desc="Racoon">
-		Register("raccoon", RACCOON_ENTITY, List.of(EN_US.Raccoon()));
+		Register("raccoon", RACCOON_ENTITY, List.of(Words.Raccoon));
 		FabricDefaultAttributeRegistry.register(RACCOON_ENTITY, RaccoonEntity.createRaccoonAttributes());
 		SpawnRestrictionAccessor.callRegister(RACCOON_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
 		//</editor-fold>
@@ -569,34 +569,34 @@ public class ModEntityRegistry {
 		Register("zombie_piglin_summoning_arrow", ZOMBIFIED_PIGLIN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Piglin(Words.Zombified)))));
 		//</editor-fold>
 		//<editor-fold desc="Mod Mob Summoning Arrows">
-		Register("melon_golem_summoning_arrow", MELON_GOLEM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Golem(EN_US.Melon())))));
-		Register("bone_spider_summoning_arrow", BONE_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(EN_US.Bone())))));
-		Register("icy_spider_summoning_arrow", ICY_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(EN_US.Icy())))));
-		Register("slime_spider_summoning_arrow", SLIME_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slider()))));
-		Register("hedgehog_summoning_arrow", HEDGEHOG_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Hedgehog()))));
-		Register("raccoon_summoning_arrow", RACCOON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Raccoon()))));
+		Register("melon_golem_summoning_arrow", MELON_GOLEM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Golem(Words.Melon)))));
+		Register("bone_spider_summoning_arrow", BONE_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(Words.Bone)))));
+		Register("icy_spider_summoning_arrow", ICY_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(Words.Icy)))));
+		Register("slime_spider_summoning_arrow", SLIME_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Slider))));
+		Register("hedgehog_summoning_arrow", HEDGEHOG_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Hedgehog))));
+		Register("raccoon_summoning_arrow", RACCOON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Raccoon))));
 		Register("red_panda_summoning_arrow", RED_PANDA_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Panda(Words.Red)))));
-		Register("jumping_spider_summoning_arrow", JUMPING_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(EN_US.Jumping())))));
+		Register("jumping_spider_summoning_arrow", JUMPING_SPIDER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Spider(Words.Jumping)))));
 		Register("red_phantom_summoning_arrow", RED_PHANTOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Phantom(Words.Red)))));
 		Register("piranha_summoning_arrow", PIRANHA_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Piranha))));
-		Register("fancy_chicken_summoning_arrow", FANCY_CHICKEN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Chicken(EN_US.Fancy())))));
+		Register("fancy_chicken_summoning_arrow", FANCY_CHICKEN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Chicken(Words.Fancy)))));
 		Register("blue_mooshroom_summoning_arrow", BLUE_MOOSHROOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mooshroom(Words.Blue)))));
 		Register("nether_mooshroom_summoning_arrow", NETHER_MOOSHROOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mooshroom(Words.Nether)))));
-		Register("moobloom_summoning_arrow", MOOBLOOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Moobloom()))));
-		Register("moolip_summoning_arrow", MOOLIP_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Moolip()))));
-		Register("mooblossom_summoning_arrow", MOOBLOSSOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Mooblossom()))));
+		Register("moobloom_summoning_arrow", MOOBLOOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Moobloom))));
+		Register("moolip_summoning_arrow", MOOLIP_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Moolip))));
+		Register("mooblossom_summoning_arrow", MOOBLOSSOM_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Mooblossom))));
 		Register("mossy_sheep_summoning_arrow", MOSSY_SHEEP_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Sheep(Words.Mossy)))));
 		Register("rainbow_sheep_summoning_arrow", RAINBOW_SHEEP_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Sheep(Words.Rainbow)))));
 		Register("slime_creeper_summoning_arrow", SLIME_CREEPER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Creeper(Words.Slime)))));
 		Register("mossy_skeleton_summoning_arrow", MOSSY_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(Words.Mossy)))));
-		Register("slimy_skeleton_summoning_arrow", SLIMY_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(EN_US.Slimy())))));
-		Register("sunken_skeleton_summoning_arrow", SUNKEN_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(EN_US.Sunken())))));
-		Register("tropical_slime_summoning_arrow", TROPICAL_SLIME_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slime(EN_US.Tropical())))));
+		Register("slimy_skeleton_summoning_arrow", SLIMY_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(Words.Slimy)))));
+		Register("sunken_skeleton_summoning_arrow", SUNKEN_SKELETON_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Skeleton(Words.Sunken)))));
+		Register("tropical_slime_summoning_arrow", TROPICAL_SLIME_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slime(Words.Tropical)))));
 		Register("pink_slime_summoning_arrow", PINK_SLIME_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slime(Words.Pink)))));
-		Register("slime_chicken_summoning_arrow", SLIME_CHICKEN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slicken()))));
+		Register("slime_chicken_summoning_arrow", SLIME_CHICKEN_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Slicken))));
 		Register("slime_cow_summoning_arrow", SLIME_COW_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Cow(Words.Slime)))));
-		Register("slime_horse_summoning_arrow", SLIME_HORSE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Slorse()))));
-		Register("frozen_zombie_summoning_arrow", FROZEN_ZOMBIE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zombie(EN_US.Frozen())))));
+		Register("slime_horse_summoning_arrow", SLIME_HORSE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Slorse))));
+		Register("frozen_zombie_summoning_arrow", FROZEN_ZOMBIE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zombie(Words.Frozen)))));
 		Register("jungle_zombie_summoning_arrow", JUNGLE_ZOMBIE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zombie(Words.Jungle)))));
 		Register("slime_zombie_summoning_arrow", SLIME_ZOMBIE_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(EN_US.Zombie(Words.Slime)))));
 		Register("iceologer_summoning_arrow", ICEOLOGER_SUMMONING_ARROW, List.of(EN_US.Arrow(EN_US.Summoning(Words.Iceologer))));
@@ -609,10 +609,10 @@ public class ModEntityRegistry {
 		//<editor-fold desc="Spawn Eggs">
 		Register("minecraft:allay_spawn_egg", ALLAY_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Allay))));
 		Register("minecraft:frog_spawn_egg", FROG_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Frog))));
-		Register("minecraft:tadpole_spawn_egg", TADPOLE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Tadpole()))));
-		Register("minecraft:warden_spawn_egg", WARDEN_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Warden()))));
-		Register("minecraft:camel_spawn_egg", CAMEL_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Camel()))));
-		Register("minecraft:sniffer_spawn_egg", SNIFFER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Sniffer()))));
+		Register("minecraft:tadpole_spawn_egg", TADPOLE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Tadpole))));
+		Register("minecraft:warden_spawn_egg", WARDEN_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Warden))));
+		Register("minecraft:camel_spawn_egg", CAMEL_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Camel))));
+		Register("minecraft:sniffer_spawn_egg", SNIFFER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Sniffer))));
 		//</editor-fold>
 		//<editor-fold desc="Mod Mob Spawn Eggs">
 		Register("bone_spider_spawn_egg", BONE_SPIDER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Spider(Words.Bone)))));
@@ -627,18 +627,18 @@ public class ModEntityRegistry {
 		Register("fancy_chicken_spawn_egg", FANCY_CHICKEN_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Chicken(Words.Fancy)))));
 		Register("blue_mooshroom_spawn_egg", BLUE_MOOSHROOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Mooshroom(Words.Blue)))));
 		Register("nether_mooshroom_spawn_egg", NETHER_MOOSHROOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Mooshroom(Words.Nether)))));
-		Register("moobloom_spawn_egg", MOOBLOOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Moobloom()))));
-		Register("moolip_spawn_egg", MOOLIP_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Moolip()))));
-		Register("mooblossom_spawn_egg", MOOBLOSSOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Mooblossom()))));
+		Register("moobloom_spawn_egg", MOOBLOOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Moobloom))));
+		Register("moolip_spawn_egg", MOOLIP_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Moolip))));
+		Register("mooblossom_spawn_egg", MOOBLOSSOM_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Mooblossom))));
 		Register("mossy_sheep_spawn_egg", MOSSY_SHEEP_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Sheep(Words.Mossy)))));
 		Register("rainbow_sheep_spawn_egg", RAINBOW_SHEEP_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Sheep(Words.Rainbow)))));
 		Register("slime_creeper_spawn_egg", SLIME_CREEPER_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Creeper(Words.Slime)))));
 		Register("mossy_skeleton_spawn_egg", MOSSY_SKELETON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Skeleton(Words.Mossy)))));
-		Register("slimy_skeleton_spawn_egg", SLIMY_SKELETON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Skeleton(EN_US.Slimy())))));
-		Register("sunken_skeleton_spawn_egg", SUNKEN_SKELETON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Skeleton(EN_US.Sunken())))));
-		Register("tropical_slime_spawn_egg", TROPICAL_SLIME_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slime(EN_US.Tropical())))));
+		Register("slimy_skeleton_spawn_egg", SLIMY_SKELETON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Skeleton(Words.Slimy)))));
+		Register("sunken_skeleton_spawn_egg", SUNKEN_SKELETON_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Skeleton(Words.Sunken)))));
+		Register("tropical_slime_spawn_egg", TROPICAL_SLIME_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slime(Words.Tropical)))));
 		Register("pink_slime_spawn_egg", PINK_SLIME_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slime(Words.Pink)))));
-		Register("slime_chicken_spawn_egg", SLIME_CHICKEN_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Slicken()))));
+		Register("slime_chicken_spawn_egg", SLIME_CHICKEN_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Slicken))));
 		Register("slime_cow_spawn_egg", SLIME_COW_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Cow(Words.Slime)))));
 		Register("slime_horse_spawn_egg", SLIME_HORSE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(Words.Slorse))));
 		Register("frozen_zombie_spawn_egg", FROZEN_ZOMBIE_SPAWN_EGG, List.of(EN_US.Egg(EN_US.Spawn(EN_US.Zombie(Words.Frozen)))));

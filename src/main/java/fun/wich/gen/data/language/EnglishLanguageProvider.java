@@ -29,7 +29,7 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add(ModGameRules.DO_VINES_SPREAD, Words.Vines + " spread", "Controls whether or not the " + Words.Vines + " block spreads randomly to adjacent blocks. Does not affect other type of vine blocks such as Weeping Vines, Twisting Vines, etc.");
 		builder.add(ModGameRules.DO_WARDEN_BLINDNESS, "Apply " + Words.Blindness + " effect around " + Words.Wardens, "Controls whether or not " + Words.Wardens + " apply the " + Words.Blindness + " effect to nearby players. This is a temporary fix while this mod's developer figures out how to stop shader packs from disabling the " + Words.Darkness + " Effect.");
 		builder.add(ModGameRules.DO_WARDEN_DARKNESS, "Apply " + Words.Darkness + " effect around " + Words.Wardens, "Controls whether or not " + Words.Wardens + " apply the " + Words.Darkness + " effect to nearby players.");
-		builder.add(ModGameRules.DO_WARDEN_SPAWNING, EN_US.Wardens(Words.Spawn));
+		builder.add(ModGameRules.DO_WARDEN_SPAWNING, Lang.join(Words.Spawn, Words.Wardens));
 		//Containers
 		builder.add("container.woodcutter", Words.Woodcutter);
 		builder.add("container.trimming", Words.Trimming);
@@ -284,10 +284,10 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("subtitles.entity.camel.step_sand", EN_US.steps(Words.Camel));
 		//</editor-fold>
 		//<editor-fold desc="Chiseled Bookshelf">
-		builder.add("subtitles.chiseled_bookshelf.insert", EN_US.placed(Words.Book));
-		builder.add("subtitles.chiseled_bookshelf.insert_enchanted", EN_US.placed(EN_US.book(Words.Enchanted)));
-		builder.add("subtitles.chiseled_bookshelf.take", EN_US.taken(Words.Book));
-		builder.add("subtitles.chiseled_bookshelf.take_enchanted", EN_US.taken(EN_US.book(Words.Enchanted)));
+		builder.add("subtitles.chiseled_bookshelf.insert", Lang.join(Words.Book, Words.placed));
+		builder.add("subtitles.chiseled_bookshelf.insert_enchanted", Lang.join(Words.Enchanted, Words.Book, Words.placed));
+		builder.add("subtitles.chiseled_bookshelf.take", Lang.join(Words.Book, Words.taken));
+		builder.add("subtitles.chiseled_bookshelf.take_enchanted", Lang.join(Words.Enchanted, Words.Book, Words.taken));
 		//</editor-fold>
 		//<editor-fold desc="Frog & Tadpole">
 		builder.add("subtitles.entity.frog.ambient", EN_US.croaks(Words.Frog));
@@ -405,34 +405,34 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		//</editor-fold>
 		builder.add("subtitles.block.amethyst_block.resonate", EN_US.resonates(Words.Amethyst));
 		//<editor-fold desc="Jolly LLama">
-		builder.add("subtitles.entity.jolly_llama.bell", EN_US.jingles(EN_US.Llama(EN_US.Jolly())));
-		builder.add("subtitles.entity.jolly_llama.eat_fern", EN_US.Fern(EN_US.eats(EN_US.Llama(EN_US.Jolly()))));
-		builder.add("subtitles.entity.jolly_llama.prance", EN_US.prances(EN_US.Llama(EN_US.Jolly())));
+		builder.add("subtitles.entity.jolly_llama.bell", EN_US.jingles(EN_US.Llama(Words.Jolly)));
+		builder.add("subtitles.entity.jolly_llama.eat_fern", EN_US.Fern(EN_US.eats(EN_US.Llama(Words.Jolly))));
+		builder.add("subtitles.entity.jolly_llama.prance", EN_US.prances(EN_US.Llama(Words.Jolly)));
 		//</editor-fold>
 
 		//Nethershroom
-		builder.add("subtitles.block.nethershroom.explode", EN_US.explodes(EN_US.Nethershroom()));
-		builder.add("subtitles.block.nethershroom.squeeze", EN_US.squeezed(EN_US.Nethershroom()));
+		builder.add("subtitles.block.nethershroom.explode", EN_US.explodes(Words.Nethershroom));
+		builder.add("subtitles.block.nethershroom.squeeze", EN_US.squeezed(Words.Nethershroom));
 
 		//Thrown Items
 		builder.add("subtitles.entity.slime.throw", EN_US.flies(EN_US.Slime()));
 		//Pouch
-		builder.add("subtitles.item.pouch.empty", EN_US.empties(EN_US.Pouch()));
-		builder.add("subtitles.item.pouch.fill", EN_US.fills(EN_US.Pouch()));
+		builder.add("subtitles.item.pouch.empty", EN_US.empties(Words.Pouch));
+		builder.add("subtitles.item.pouch.fill", EN_US.fills(Words.Pouch));
 
-		builder.add("item." + ModId.NAMESPACE + ".chicken_pouch.greg", EN_US.Greg(EN_US.of(EN_US.Pouch())));
-		builder.add("subtitles.item.pouch.empty_chicken", EN_US.released(EN_US.Chicken()));
-		builder.add("subtitles.item.pouch.fill_chicken", EN_US.bagged(EN_US.Chicken()));
-		builder.add("subtitles.item.pouch.empty_chicken.greg", EN_US.deployed(EN_US.Greg()));
-		builder.add("subtitles.item.pouch.fill_chicken.greg", EN_US.collected(EN_US.Greg()));
-		builder.add("subtitles.item.pouch.empty_rabbit", EN_US.released(EN_US.Rabbit()));
-		builder.add("subtitles.item.pouch.fill_rabbit", EN_US.bagged(EN_US.Rabbit()));
-		builder.add("subtitles.item.pouch.empty_parrot", EN_US.released(EN_US.Parrot()));
-		builder.add("subtitles.item.pouch.fill_parrot", EN_US.bagged(EN_US.Parrot()));
-		builder.add("subtitles.item.pouch.empty_endermite", EN_US.released(EN_US.Endermite()));
-		builder.add("subtitles.item.pouch.fill_endermite", EN_US.bagged(EN_US.Endermite()));
-		builder.add("subtitles.item.pouch.empty_silverfish", EN_US.released(EN_US.Silverfish()));
-		builder.add("subtitles.item.pouch.fill_silverfish", EN_US.bagged(EN_US.Silverfish()));
+		builder.add("item." + ModId.NAMESPACE + ".chicken_pouch.greg", Lang.join(Words.Pouch, Words.of, Words.Greg));
+		builder.add("subtitles.item.pouch.empty_chicken", EN_US.released(Words.Chicken));
+		builder.add("subtitles.item.pouch.fill_chicken", EN_US.bagged(Words.Chicken));
+		builder.add("subtitles.item.pouch.empty_chicken.greg", EN_US.deployed(Words.Greg));
+		builder.add("subtitles.item.pouch.fill_chicken.greg", EN_US.collected(Words.Greg));
+		builder.add("subtitles.item.pouch.empty_rabbit", EN_US.released(Words.Rabbit));
+		builder.add("subtitles.item.pouch.fill_rabbit", EN_US.bagged(Words.Rabbit));
+		builder.add("subtitles.item.pouch.empty_parrot", EN_US.released(Words.Parrot));
+		builder.add("subtitles.item.pouch.fill_parrot", EN_US.bagged(Words.Parrot));
+		builder.add("subtitles.item.pouch.empty_endermite", EN_US.released(Words.Endermite));
+		builder.add("subtitles.item.pouch.fill_endermite", EN_US.bagged(Words.Endermite));
+		builder.add("subtitles.item.pouch.empty_silverfish", EN_US.released(Words.Silverfish));
+		builder.add("subtitles.item.pouch.fill_silverfish", EN_US.bagged(Words.Silverfish));
 
 		builder.add("subtitles.block.coins.drop", EN_US.dropped(Words.Coins));
 
@@ -479,9 +479,9 @@ public class EnglishLanguageProvider extends FabricLanguageProvider {
 		builder.add("subtitles.block.juicer.juiced", EN_US.juiced(Words.Juicer));
 		builder.add("subtitles.block.trimming_table.use", EN_US.used(EN_US.Table(Words.Trimming)));
 		//Mod Items
-		builder.add("subtitles.item.chum.used", EN_US.squelches(Words.Chum));
+		builder.add("subtitles.item.chum.used", Lang.join(Words.Chum, Words.squelches));
 		builder.add("subtitles.item.salve.apply", Lang.join(Words.Salve, Words.applied));
-		builder.add("subtitles.item.syringe.inject", EN_US.injected(Words.Syringe));
+		builder.add("subtitles.item.syringe.inject", Lang.join(Words.Syringe, Words.injected));
 
 		if (ModConfig.REGISTER_HAVEN_MOD) {
 			//TNT Variants

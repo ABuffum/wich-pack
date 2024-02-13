@@ -476,7 +476,7 @@ public class HavenMod {
 		//</editor-fold>
 		//<editor-fold desc="Dakota">
 		Register("pteror", PTEROR, List.of("Pteror"));
-		Register("locket", LOCKET, List.of(EN_US.Locket()));
+		Register("locket", LOCKET, List.of(Words.Locket));
 		Register("emerald_locket", EMERALD_LOCKET, List.of(EN_US.Locket(Words.Emerald)));
 		//</editor-fold>
 		//<editor-fold desc="Deepest Sleep">
@@ -534,13 +534,13 @@ public class HavenMod {
 		BloodType.RegisterBloodType(NETHER_ROYALTY_BLOOD_TYPE, NETHER_ROYALTY_BLOOD_SYRINGE);
 		//</editor-fold>
 		//<editor-fold desc="Miasma">
-		Register("catalyzing_tnt", CATALYZING_TNT, List.of(EN_US.TNT(EN_US.Catalyzing())));
-		Register("catalyzing_tnt", CATALYZING_TNT_ENTITY, List.of(EN_US.TNT(EN_US.Catalyzing())));
+		Register("catalyzing_tnt", CATALYZING_TNT, List.of(EN_US.TNT(Words.Catalyzing)));
+		Register("catalyzing_tnt", CATALYZING_TNT_ENTITY, List.of(EN_US.TNT(Words.Catalyzing)));
 		DispenserBlock.registerBehavior(CATALYZING_TNT.asBlock(), ModTntBlock.DispenserBehavior(CatalyzingTntEntity::new));
 		//</editor-fold>
 		//<editor-fold desc="Soleil">
-		Register("soft_tnt", SOFT_TNT, List.of(EN_US.TNT(EN_US.Soft())));
-		Register("soft_tnt", SOFT_TNT_ENTITY, List.of(EN_US.TNT(EN_US.Soft())));
+		Register("soft_tnt", SOFT_TNT, List.of(EN_US.TNT(Words.Soft)));
+		Register("soft_tnt", SOFT_TNT_ENTITY, List.of(EN_US.TNT(Words.Soft)));
 		DispenserBlock.registerBehavior(SOFT_TNT.asBlock(), ModTntBlock.DispenserBehavior(SoftTntEntity::new));
 		//Confetti Syringe
 		BloodType.RegisterBloodType(HavenMod.CONFETTI_BLOOD_TYPE, CONFETTI_SYRINGE);
@@ -569,7 +569,7 @@ public class HavenMod {
 		//</editor-fold>
 		//</editor-fold>
 		//<editor-fold desc="STARS">
-		Register("tinker_toy", TINKER_TOY, List.of(EN_US.Toy(Words.Tinker)));
+		Register("tinker_toy", TINKER_TOY, List.of(Lang.join(Words.Tinker, Words.Toy)));
 		Register("amethyst_candy", AMETHYST_CANDY, List.of(EN_US.Candy(Words.Amethyst)));
 		Register("broken_stars", BROKEN_STARS, List.of("The remnants of STARS"));
 		//</editor-fold>
